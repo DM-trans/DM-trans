@@ -1,0 +1,1560 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/13/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第13章 挖掘文本数据 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#13" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第13章 挖掘文本数据
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第13章 挖掘文本数据
+      </label>
+    
+    <a href="./" title="第13章 挖掘文本数据" class="md-nav__link md-nav__link--active">
+      第13章 挖掘文本数据
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#131" title="13.1 介绍" class="md-nav__link">
+    13.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132" title="13.2 文档准备和相似性计算" class="md-nav__link">
+    13.2 文档准备和相似性计算
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1321" title="13.2.1文件标准化和相似度计算" class="md-nav__link">
+    13.2.1文件标准化和相似度计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1322" title="13.2.2针对网页文档的专门预处理" class="md-nav__link">
+    13.2.2针对网页文档的专门预处理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133" title="13.3 文本的专门聚类方法" class="md-nav__link">
+    13.3 文本的专门聚类方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1331" title="13.3.1 代表性的算法" class="md-nav__link">
+    13.3.1 代表性的算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13311" title="13.3.1.1 分散/收集方法" class="md-nav__link">
+    13.3.1.1 分散/收集方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1332" title="13.3.2 概率算法" class="md-nav__link">
+    13.3.2 概率算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1333" title="13.3.3 寻找相似文档和单词蔟" class="md-nav__link">
+    13.3.3 寻找相似文档和单词蔟
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13331" title="13.3.3.1 协同聚类" class="md-nav__link">
+    13.3.3.1 协同聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134" title="13.4 主题建模" class="md-nav__link">
+    13.4 主题建模
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341" title="13.4.1 用于降维和与潜在语义分析的比较" class="md-nav__link">
+    13.4.1 用于降维和与潜在语义分析的比较
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1342" title="13.4.2 用于聚类和比较概率聚类" class="md-nav__link">
+    13.4.2 用于聚类和比较概率聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1343-plsa" title="13.4.3 PLSA的限制" class="md-nav__link">
+    13.4.3 PLSA的限制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135" title="13.5 文本的专门分类方法" class="md-nav__link">
+    13.5 文本的专门分类方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1351" title="13.5.1 基于实例的分类器" class="md-nav__link">
+    13.5.1 基于实例的分类器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13511" title="13.5.1.1 利用潜在的语义分析" class="md-nav__link">
+    13.5.1.1 利用潜在的语义分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13512" title="13.5.1.2 基于质心的分类" class="md-nav__link">
+    13.5.1.2 基于质心的分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13513" title="13.5.1.3 罗基奥分类" class="md-nav__link">
+    13.5.1.3 罗基奥分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1352" title="13.5.2 贝叶斯分类器" class="md-nav__link">
+    13.5.2 贝叶斯分类器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13521" title="13.5.2.1 多项式贝叶斯模型" class="md-nav__link">
+    13.5.2.1 多项式贝叶斯模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1353-svm" title="13.5.3 用于高维和稀疏数据的SVM分类器" class="md-nav__link">
+    13.5.3 用于高维和稀疏数据的SVM分类器
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136" title="13.6 新颖性和第一个故事检测" class="md-nav__link">
+    13.6 新颖性和第一个故事检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1361" title="13.6.1 微聚类方法" class="md-nav__link">
+    13.6.1 微聚类方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#137" title="13.7 小结" class="md-nav__link">
+    13.7 小结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#138" title="13.8 书目注释" class="md-nav__link">
+    13.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#139" title="13.9 练习" class="md-nav__link">
+    13.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#131" title="13.1 介绍" class="md-nav__link">
+    13.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132" title="13.2 文档准备和相似性计算" class="md-nav__link">
+    13.2 文档准备和相似性计算
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1321" title="13.2.1文件标准化和相似度计算" class="md-nav__link">
+    13.2.1文件标准化和相似度计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1322" title="13.2.2针对网页文档的专门预处理" class="md-nav__link">
+    13.2.2针对网页文档的专门预处理
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133" title="13.3 文本的专门聚类方法" class="md-nav__link">
+    13.3 文本的专门聚类方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1331" title="13.3.1 代表性的算法" class="md-nav__link">
+    13.3.1 代表性的算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13311" title="13.3.1.1 分散/收集方法" class="md-nav__link">
+    13.3.1.1 分散/收集方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1332" title="13.3.2 概率算法" class="md-nav__link">
+    13.3.2 概率算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1333" title="13.3.3 寻找相似文档和单词蔟" class="md-nav__link">
+    13.3.3 寻找相似文档和单词蔟
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13331" title="13.3.3.1 协同聚类" class="md-nav__link">
+    13.3.3.1 协同聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134" title="13.4 主题建模" class="md-nav__link">
+    13.4 主题建模
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341" title="13.4.1 用于降维和与潜在语义分析的比较" class="md-nav__link">
+    13.4.1 用于降维和与潜在语义分析的比较
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1342" title="13.4.2 用于聚类和比较概率聚类" class="md-nav__link">
+    13.4.2 用于聚类和比较概率聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1343-plsa" title="13.4.3 PLSA的限制" class="md-nav__link">
+    13.4.3 PLSA的限制
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135" title="13.5 文本的专门分类方法" class="md-nav__link">
+    13.5 文本的专门分类方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1351" title="13.5.1 基于实例的分类器" class="md-nav__link">
+    13.5.1 基于实例的分类器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13511" title="13.5.1.1 利用潜在的语义分析" class="md-nav__link">
+    13.5.1.1 利用潜在的语义分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13512" title="13.5.1.2 基于质心的分类" class="md-nav__link">
+    13.5.1.2 基于质心的分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13513" title="13.5.1.3 罗基奥分类" class="md-nav__link">
+    13.5.1.3 罗基奥分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1352" title="13.5.2 贝叶斯分类器" class="md-nav__link">
+    13.5.2 贝叶斯分类器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13521" title="13.5.2.1 多项式贝叶斯模型" class="md-nav__link">
+    13.5.2.1 多项式贝叶斯模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1353-svm" title="13.5.3 用于高维和稀疏数据的SVM分类器" class="md-nav__link">
+    13.5.3 用于高维和稀疏数据的SVM分类器
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136" title="13.6 新颖性和第一个故事检测" class="md-nav__link">
+    13.6 新颖性和第一个故事检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1361" title="13.6.1 微聚类方法" class="md-nav__link">
+    13.6.1 微聚类方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#137" title="13.7 小结" class="md-nav__link">
+    13.7 小结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#138" title="13.8 书目注释" class="md-nav__link">
+    13.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#139" title="13.9 练习" class="md-nav__link">
+    13.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/13.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="13">13 挖掘文本数据</h1>
+<!--本章由李建鹏翻译 -->
+
+<blockquote>
+<p>“生命的头四十年给了我们文字; 接下来的三十年提供了验证。” - 亚瑟 叔本华</p>
+</blockquote>
+<h2 id="131">13.1 介绍</h2>
+<p>文本数据在诸如网页，社交媒体，新闻专线服务和图书馆等许多领域都有丰富的发现。随着人类言语和表达档案的日益便利，文本数据量将只会随着时间的推移而增加。随着图书馆日益数字化以及网络和社交网络的普及，这一趋势得到加强。相关领域的一些例子如下：<br />
+1.数字图书馆：文章和图书制作的最近趋势是依赖于数字化版本，而不是硬拷贝。这导致数字图书馆的激增，其中有效的文件管理变得至关重要。此外，挖掘工具也被用于某些领域，如生物医学文献，以收集有用的见解。<br />
+2.网网络和网页应用程序：网络是一个庞大的文档存储库，它进一步充实了链接和其他类型的辅助信息。 网络文档也被称为超文本。超文本提供的附加信息可用于知识发现过程。此外，许多支持Web的应用程序（如社交网络，聊天板和公告板）都是分析文本的重要来源。<br />
+3.新闻通讯服务：近年来增长的趋势是报纸印刷量的减少和电子新闻传播。这一趋势产生了大量的新闻文件，可以用来分析重要事件和见解。<br />
+文本的一组特征（或维度）也被称为词典。一组文档被称为一个语料库。文档可以被视为序列或多维记录。文本文档毕竟是一个不连续的单词序列，也被称为一个字符串。因此，第15章中讨论的许多序列挖掘方法在在理论上适用于文本。然而，这种序列挖掘方法在文本域中很少使用。这部分是因为序列挖掘方法在序列长度和可能的令牌数都相对适中时最有效。另一方面，文件通常可以是长达数十万字的词汇的长序列。
+文本的一组特征（或维度）也被称为词典。一组文档被称为一个语料库。文档可以被视为序列或多维记录。文本文档毕竟是一个不连续的单词序列，也被称为一个字符串。因此，许多序列挖掘方法在第3章讨论。 15在理论上适用于文本。然而，这种序列挖掘方法在文本域中很少使用。这部分是因为序列挖掘方法在序列长度和可能的令牌数都相对适中时最有效。另一方面，文件通常可以是长达数十万字的词汇的长序列。<br />
+实际上，文本通常以频率注释的书包形式表示为多维数据。单词也被称为术语。虽然这种表示会丢失单词之间的排序信息，但它也可以使用更多类别的多维技术。典型地，应用预处理方法，其中删除非常常见的单词，并且合并相同单词的变体。然后将处理过的文档表示为一组无序的单词，其中规格化的频率与单个单词相关联。结果表示也被称为文本的向量空间表示。文档的向量空间表示是一个多维向量，它包含与文档中每个单词（维度）相关的频率。这个数据集的总体维度等于词典中不同单词的数量。词典中不存在于文档中的单词被指定为0的频率。因此，文本与前面章节已经研究过的多维数据类型没有多大区别。<br />
+由于文本的多维特性，上述章节中研究的技术也可以适用于文本域，并进行适度的修改。这些修改是什么，为什么他们需要这些修改？要理解这些修改，需要了解文本数据特有的许多特定特征：   </p>
+<ol>
+<li>
+<p>“零”属性的数量：虽然文本数据的基本维度可能是几十万字的量级，但单个文档可能只包含几百个词。如果词典中的每个词都被视为一个属性，并且文档词的频率被视为属性值，那么大多数属性值都是0.这种现象被称为高维稀疏。不同文档中非零值的数量也可能有很大差异。这对文本挖掘的许多基本方面具有许多含义，例如距离计算。例如，尽管理论上可以使用欧几里得函数来测量距离，但从实际角度来看，结果通常不是非常有效。这是因为欧几里德距离对不同的文档长度（非零属性的数量）非常敏感。欧几里德距离函数无法以两种长文件之间的距离来计算两个短文件之间的距离，因为前者通常会较大。  </p>
+</li>
+<li>
+<p>非负性：单词的频率取非负值。结合高维度稀疏性时，非负性属性可以使用专门的方法进行文档分析。一般来说，所有数据挖掘算法都必须认识到，文档中出现的单词在统计上比其不存在更重要。与传统的多维技术不同，在成对距离计算中引入数据集的全局统计特性对于良好的距离函数设计至关重要。  </p>
+</li>
+<li>
+<p>辅助信息：在某些领域，如网络中，可以使用附加的辅助信息。示例包括超链接或与文档关联的其他元数据。这些附加属性可以用来进一步增强挖掘过程。本章将讨论许多传统数据挖掘技术对文本域的适应性。还将讨论与文件预处理有关的问题。 </p>
+</li>
+</ol>
+<p>本章安排如下：第13.2节：讨论文件准备和相似度计算的问题。 13.3节：讨论了聚类方法。13.4节：主题建模算法解决方案。13.5节:讨论分类方法13.6节:讨论第一个实例检测问题。13.7节:总结并提交摘要。</p>
+<h2 id="132">13.2 文档准备和相似性计算</h2>
+<p>由于文本不能直接在多维表示中使用，因此第一步是将原始文本文档转换为多维格式。 在从Web中检索文档的情况下，需要执行附加操作。 本节将讨论这些不同的操作：  </p>
+<ol>
+<li>
+<p>停止单词移除：停止单词是一种语言中经常出现的单词，对于挖掘应用程序来说，这些单词不是很有区别。例如，单词“a”，“an”和“the”是经常出现的单词，它们仅提供有关文档实际内容的很少信息。通常，文章中的介词和连词是停用词。代词有时也被认为是停用词。标准化的停用词表可用于不同语言的文本挖掘。关键是要了解几乎所有的文档都会包含这些词汇，而且它们通常不会指示主题或语义内容。因此，这些词语会增加分析中的噪音，并且谨慎地删除它们。</p>
+</li>
+<li>
+<p>词干：同一个词的变体需要合并。例如，同一单词的单数和复数表示以及同一单词的不同时态被合并。在很多情况下，词干是指从词汇中提取共同词根，而提取的词根本身可能不是一个单词。例如，hoping 和 hope 的共同之处就是hop。当然，糟糕的是单词hop具有不同的含义和用法。因此，虽然干扰通常会提高文档检索中的回忆，但有时会使精度稍微恶化。尽管如此，干扰通常能够在采矿应用中实现更高质量的结果。  </p>
+</li>
+<li>
+<p>标点符号：执行词干分析后，标点符号（如逗号和分号）将被删除。此外，数字被删除。如果移除导致不同且有意义的单词，则连字符将被删除。通常，基本字典可能可用于这些操作。此外，连字符的不同部分可以被视为单独的单词，也可以合并成一个单词。<br />
+  在上述步骤之后，生成的文档可能只包含语义相关的词。这个文件被视为一个词袋，其中相对顺序是不相关的。尽管在这种表示中有明显的订购信息丢失，但是文字袋表示的效果却是惊人的。文档标准化问题与相似性计算问题密切相关。</p>
+</li>
+</ol>
+<h3 id="1321">13.2.1文件标准化和相似度计算</h3>
+<p>尽管文本相似性的问题在第三章中讨论过。这里也是为了完整而讨论的。归档的两种主要类型适用于文档：<br />
+<strong>1.逆文档频率</strong>：较高频率的词语往往会对数据挖掘操作（如相似度计算）产生噪音。停止词的删除是由这方面的动机。逆文档频率的概念以较为柔和的方式概括了这一原理，即较高频率的词的权重较小。<br />
+<strong>2.频率阻尼</strong>：文档中单词的重复出现通常会显着地偏离相似性计算。为了给相似性计算提供更大的稳定性，将阻尼函数应用于词频，使得不同词的频率变得更相似。应该指出的是，频率阻尼是可选的，并且效果随着手头的应用而变化。某些应用程序（如群集）在没有阻尼的情况下显示出可比或更好的性能。如果底层数据集相对干净且垃圾邮件文档较少，则情况尤其如此。<br />
+在下文中，将讨论这些不同类型的标准化。第i项的逆文档频率<span><span class="MathJax_Preview">id_i</span><script type="math/tex">id_i</script></span>是其出现的文档数<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>的递减函数：</p>
+<p>$$ id_i=log(\frac{n}{n_i}) \tag{13.1}$$</p>
+<p>这里，集合中的文档数量用n表示。虽然对相似函数的影响通常是有限的, 但是计算逆文档频率的其他方法也是可能实现的。</p>
+<p>接下来，讨论频率阻尼的概念。 这种规范化确保了单个词的过度存在不会影响相似度计算。 考虑具有词频向量<span><span class="MathJax_Preview">\bar{X} =({x_1}\ldots{x_d})</span><script type="math/tex">\bar{X} =({x_1}\ldots{x_d})</script></span>的文档，其中d是词典的大小。 在相似性计算之前，可以选择将诸如平方根或对数之类的阻尼函数应<span><span class="MathJax_Preview">f(*)</span><script type="math/tex">f(*)</script></span>用于频率：  </p>
+<p>​                                                                <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">f(x_i)=\sqrt{x_i}</span><script type="math/tex">f(x_i)=\sqrt{x_i}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">f(x_i)=\sqrt{x_i}</span><script type="math/tex">f(x_i)=\sqrt{x_i}</script></span></script></span></p>
+<p>​                                                               <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">f(x_i)=log(x_i)</span><script type="math/tex">f(x_i)=log(x_i)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">f(x_i)=log(x_i)</span><script type="math/tex">f(x_i)=log(x_i)</script></span></script></span></p>
+<p>频率阻尼是可选的，通常省略。 这相当于将<span><span class="MathJax_Preview">f(x_i)</span><script type="math/tex">f(x_i)</script></span>设置为<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>。 第i个字的归一化频率<span><span class="MathJax_Preview">h(x_1)</span><script type="math/tex">h(x_1)</script></span>可以定义如下：</p>
+<p>​                                                      <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">h(x_1)=f(x_i)id_i\tag{13.2}</span><script type="math/tex">h(x_1)=f(x_i)id_i\tag{13.2}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">h(x_1)=f(x_i)id_i\tag{13.2}</span><script type="math/tex">h(x_1)=f(x_i)id_i\tag{13.2}</script></span></script></span></p>
+<p>该模型通常被称为<span><span class="MathJax_Preview">tf-idf</span><script type="math/tex">tf-idf</script></span>模型，其中<span><span class="MathJax_Preview">tf</span><script type="math/tex">tf</script></span>表示术语频率，<span><span class="MathJax_Preview">idf</span><script type="math/tex">idf</script></span>表示逆文档频率。文档的规范化表示用于数据挖掘算法。 一种常用的测量方法是余弦测量。 具有原始频率<span><span class="MathJax_Preview">\bar{X} =({x_1}\ldots{x_d})</span><script type="math/tex">\bar{X} =({x_1}\ldots{x_d})</script></span>和<span><span class="MathJax_Preview">\bar{Y} =({y_1}\ldots{y_d})</span><script type="math/tex">\bar{Y} =({y_1}\ldots{y_d})</script></span>的两个文档之间的余弦测量使用其归一化来定义来陈述：</p>
+<div>
+<div class="MathJax_Preview">cos(\bar{X},\bar{Y})=\frac{\sum_{i=1}^d h(x_i)h(y_i)}{\sqrt(\sum_{d=1}^n h(x_i)^2)\sqrt(\sum_{i=d}^n h(y_i)^2)}\tag{13.3}</div>
+<script type="math/tex; mode=display">cos(\bar{X},\bar{Y})=\frac{\sum_{i=1}^d h(x_i)h(y_i)}{\sqrt(\sum_{d=1}^n h(x_i)^2)\sqrt(\sum_{i=d}^n h(y_i)^2)}\tag{13.3}</script>
+</div>
+<p>雅克卡尔系数<span><span class="MathJax_Preview">J(\bar{X},\bar{Y})</span><script type="math/tex">J(\bar{X},\bar{Y})</script></span>是另一种不常用于文本的方法：</p>
+<div>
+<div class="MathJax_Preview">J(\bar{X},\bar{Y})=\frac{\sum_{i=1}^d h(x_i)h(y_i)}{\sum_{i=d}^n h(X_i)^2+\sum_{i=d}^n h(y_i)^2-\sum_{i=d}^nh(x_i)h(y_i}\tag{13.4}</div>
+<script type="math/tex; mode=display">J(\bar{X},\bar{Y})=\frac{\sum_{i=1}^d h(x_i)h(y_i)}{\sum_{i=d}^n h(X_i)^2+\sum_{i=d}^n h(y_i)^2-\sum_{i=d}^nh(x_i)h(y_i}\tag{13.4}</script>
+</div>
+<p>雅克卡尔系数很少用于文本域，但它通常用于稀疏二进制数据以及集合。 许多交易形式和市场购物篮数据都使用雅克卡尔系数。 需要指出的是，交易和市场篮子数据由于其稀疏和非负特性而与文本具有许多相似之处。 本章中讨论的大多数文本挖掘技术也可以稍作修改应用于这些领域:</p>
+<h2 id="1322">13.2.2针对网页文档的专门预处理</h2>
+<p>Web文档需要专门的预处理技术，因为它们结构的一些共同属性以及它们内部链接的丰富性。 Web文档预处理的两个主要方面包括删除无用的文档的特定部分（例如标签），以及利用文档的实际结构。大多数预处理技术通常会删除HTML标签。
+**HTML**文档中有许多字段，如标题，元数据和文档正文。通常，分析算法以不同重要程度处理这些领域，因此对它们进行不同的权衡。例如，文档的标题被认为比主体更重要，并且权重更大。另一个例子是Web文档中的锚文本。锚文本包含对链接指向的网页的描述。由于其描述性，它被认为是重要的，但它有时与页面本身的主题不相关。因此，它通常会从文档的文本中删除。在某些情况下，如有可能，锚文本甚至可以添加到它指向的文档文本中。这是因为锚文本通常是它指向的文档的摘要描述。
+通常可以将网页组织到与页面的主要主题无关的内容块中。一个典型的网页将有许多不相关的块，例如广告，免责声明或通知，这些对于挖掘没有多大帮助。已经证明，只有使用主块中的文本时，挖掘结果的质量会得到改善。然而，从网络级集合中自动确定主块本身就是一个值得关注的数据挖掘问题。虽然将网页分解成块相对容易，但有时难以识别主块。大多数用于确定主块的自动化方法都依赖于特定站点通常会对站点上的文档使用类似的布局。因此，如果网站提供了一组文档，则可以使用两种类型的自动方法：
+1.<em>分块标记作为分类问题</em>：这种情况下的想法是创建一个新的训练数据集，使用Web浏览器（如IE浏览器）为训练数据中的每个块提取视觉渲染特征。许多浏览器都提供了一个可用于提取每个块的坐标的API。然后手动标记主要部分的一些示例。这会产生一个训练数据集。最终的训练数据集用于构建分类模型。该模型用于识别网站剩余（未标记）文档中的主要区块。
+2.<em>树匹配方法</em>：大多数网站使用固定模板生成文档。因此，如果可以提取模板，则可以相对容易地识别主模块。第一步是从HTML页面提取标记树。这些代表了网站中频繁的树形模式。在书目部分讨论的树匹配算法可以用来从这些标签树中确定这样的模板。在找到模板之后，确定在提取的模板中哪个块是主块。许多外围块通常在不同的页面上具有相似的内容，因此可以被消除。</p>
+<h2 id="133">13.3 文本的专门聚类方法</h2>
+<p>在第6章中讨论的大多数算法可以扩展到文本数据。 这是因为文本的向量空间表示也是一个多维数据点。 本章的讨论首先将重点放在对多维聚类算法的一般修改上，然后在这些第六章中讨论的具体的算法中的一些聚类方法。 在文本域中比其他用途更普遍。 利用文本域的非负，稀疏和高维特征的算法通常优于那些没有的特征。 许多聚类算法需要进行重大调整以解决文本数据的特殊结构。 在下文中，将详细讨论对一些重要算法的必要修改。</p>
+<h3 id="1331">13.3.1 代表性的算法</h3>
+<p>这些对应于诸如k均值，k模式和k中值算法之类的算法族。其中，k均值算法是最常用于文本数据的算法。有效地将这些算法应用于文本数据需要进行两项主要修改。
+1.第一种修改是相似性函数的选择。使用余弦相似函数代替欧几里德距离。
+2.修改集群质心的计算。质心中的所有单词都不保留。群集中的低频词汇被投射出去。通常，每个质心最多保留200到400个字。这也被称为群集摘要，它为群集提供了一组有代表性的话题。已显示基于投影的文档聚类具有显着的有效性优势。质心中较少的单词也加快了相似度计算。本节将讨论使用层次聚类概念的文本k均值的专门变体。分层方法可以很容易地推广到文本，因为它们基于相似性和距离的一般概念。此外，将它们与k均值算法相结合可以获得稳定性和效率。</p>
+<h4 id="13311">13.3.1.1 分散/收集方法</h4>
+<p>严格地说，分散/聚集术语不是指聚类算法本身，而是指聚类所启用的浏览能力。但是，本节将重点介绍聚类算法。该算法使用k均值聚类和分层分区的组合。尽管分层分区算法非常强大，但它们的规模通常比<span><span class="MathJax_Preview">\Omega(n^2)</span><script type="math/tex">\Omega(n^2)</script></span>要差，其中n是集合中文档的数量。另一方面，k-均值算法的比例尺为<span><span class="MathJax_Preview">O(kn)</span><script type="math/tex">O(kn)</script></span>，其中k是簇的数量。虽然k-means算法更高效，但它有时可能对种子的选择很敏感。对于其中每个文档仅包含该词典的一小部分的文本数据尤其如此。例如，考虑将文档集划分为五个集群的情况。一个vanilla k-均值算法将从原始数据中选择五个文件作为初始种子。这五个文档中不同单词的数量通常是整个词典的一个非常小的子集。因此，当k-均值的前几个迭代不包含来自这个小词典子集的大量单词时，可能无法将许多文档有意义地分配给聚类。</p>
+<p>初始一致性有时可能会在后面的迭代中继承，结果导致最终结果的质量很差。为了解决这个问题，分散/聚集方法在两阶段方法中使用分层分区和k均值聚类的组合。对语料库的样本应用层次聚类的高效和简化形式，以在第一阶段产生鲁棒的种子集合。这是通过使用两种可能的程序中的任意一种来实现的，这两种程序分别被称为buckshot和fractionation。这两个程序都是不同类型的分层程序。在第二阶段，第一阶段生成的鲁棒种子被用作适应文本数据的k均值算法的起始点。仔细选择第一阶段样品的大小以平衡第一阶段和第二阶段所需的时间。因此，总体方法可以描述如下：
+1.应用buckshot或fractionation程序来创建一组强大的初始种子。
+2.对所得到的种子集应用k均值方法来生成最终的聚类。可以使用其他改进来提高聚类质量。</p>
+<p>接下来，将描述bu and和分馏程序。这是第一阶段的两种选择，运行时间相似。分馏方法是更稳健的方法，但在许多实际设置中，方法更快。</p>
+<p><strong>•Buckshot</strong>：设k是要找到的聚类数量，n是语料库中文档的数量。 buckshot方法选择大小为√k·n的种子超集，然后将它们聚集成k个种子。简单的凝聚层次聚类算法（需要1个二次时间）应用于这个初始的<span><span class="MathJax_Preview">\sqrt(k·n)</span><script type="math/tex">\sqrt(k·n)</script></span>种子样本。由于我们在这个阶段使用了二次可伸缩算法，这种方法需要<span><span class="MathJax_Preview">O(k·n)</span><script type="math/tex">O(k·n)</script></span>时间。这个种子集比k个种子的朴素数据样本更稳健，因为它代表了一个更大的语料库样本的汇总。 </p>
+<p>•<strong>分馏</strong>：与使用<span><span class="MathJax_Preview">\sqrt(k·n)</span><script type="math/tex">\sqrt(k·n)</script></span>个文档样本的buckshot方法不同，分割方法适用于语料库中的所有文档。分割算法最初将语料库分成n / m个桶，每个桶大小为m&gt; k个文档。将凝聚算法应用于这些桶中的每一个桶以将其减少因子ν∈（0,1）。这一步在每个桶中创建了v·m个聚集文档，因此v·n在所有桶上聚集文档。 “聚集文档”被定义为集群中文档的连接。 通过将这些聚集文档中的每一个作为单个文档来重复该过程。 当剩下k个种子时，该方法终止。</p>
+<p>还有待解释的是文件是如何分成桶的。 一种可能性是使用文档的随机分区。 但是，更精心设计的程序可以取得更有效的结果。 一种这样的程序是通过文档中第j个最常见单词的索引对文档进行分类。 这里，j被选择为与文档中的中频词对应的小数字，例如3。 以这种排序顺序的m个文档的连续组被映射到集群。 这种方法可以确保所得到的组中至少有几个常用单词，因此不是完全随机的。 这有时可以帮助提高中心的质量。</p>
+<p>在分割算法的第一次迭代中m个文档的聚集聚类需要每个组的<span><span class="MathJax_Preview">O(m^2)</span><script type="math/tex">O(m^2)</script></span>时间，并且在n / m个不同的组上需要<span><span class="MathJax_Preview">O(m·n)</span><script type="math/tex">O(m·n)</script></span>。 由于在每次迭代中个体的数量减少了几何因子ν，所有迭代的总运行时间为<span><span class="MathJax_Preview">O（n·m·（1 +ν+ν^2+ ...））</span><script type="math/tex">O（n·m·（1 +ν+ν^2+ ...））</script></span>。 对于ν&lt;1，所有迭代的运行时间仍然是<span><span class="MathJax_Preview">O(m·n)</span><script type="math/tex">O(m·n)</script></span>。 通过选择<span><span class="MathJax_Preview">m = O（k）</span><script type="math/tex">m = O（k）</script></span>，仍然保证初始化过程的运行时间<span><span class="MathJax_Preview">O(k·n)</span><script type="math/tex">O(k·n)</script></span>.  </p>
+<p>Buckshot和分馏过程需要<span><span class="MathJax_Preview">O(k·n)</span><script type="math/tex">O(k·n)</script></span>时间。这相当于k-means算法的单次迭代的运行时间。如下所述，这对于（渐进地）平衡算法两个阶段的运行时间非常重要。
+当使用buckshot或fractionation算法确定初始聚类中心时，可以将k-means算法与第一步中获得的种子一起应用。每个文档都分配给k个聚类中心中最近的一个。每个这样的集群的质心被确定为该集群中文档的连接。此外，每个质心的较不频繁的单词被删除。这些质心取代了之前迭代的种子。这个过程可以迭代重复来优化聚类中心。通常，只需要少量不变的迭代次数，因为最大的改进只发生在前几次迭代中。这确保了每个第一和第二阶段的整体运行时间是<span><span class="MathJax_Preview">O(k·n)</span><script type="math/tex">O(k·n)</script></span>。
+在第二个聚类阶段之后还可以使用一些增强功能。这些增强功能如下所示：</p>
+<p>•拆分操作：可以使用拆分过程将集群进一步细化为更好粒度的组。这可以通过使用k = 2对集群中的单个文档应用buckshot过程，然后在这些中心周围重新聚集来实现。整个过程对于包含ni文档的簇需要<span><span class="MathJax_Preview">O(k·n_i)</span><script type="math/tex">O(k·n_i)</script></span>时间，因此分割所有组需要<span><span class="MathJax_Preview">O(k·n)</span><script type="math/tex">O(k·n)</script></span>时间。但是，没有必要拆分所有的组。相反，只能分组的一个子集。这些组织不是非常一致的组织，并且包含不同性质的文件。为了测量一个组的一致性，计算该组中文档的自相似性。这种自我相似性提供了对基本一致性的理解。这个数量可以用群集中的文档与其质心的平均相似性或者群集文档相互之间的平均相似性来计算。然后可以选择性地将分解准则应用于具有低自相似性的那些聚类。这有助于创建更连贯的群集。</p>
+<p>•连接操作：连接操作将类似的集群合并到一个集群中。 为了执行合并，计算每个聚类的热门词作为聚类质心中最频繁的词。 如果两个聚类的话题词之间存在显着重叠，则认为两个聚类相似。
+•分散/收集方法是有效的，因为它能够组合分层和k均值算法。</p>
+<h3 id="1332">13.3.2 概率算法</h3>
+<p>概率文本聚类可以被认为是在第10章，10.5.1中讨论的朴素贝叶斯分类方法的无监督版本。 假定需要将文件分配给k个群集<span><span class="MathJax_Preview">G_1。。。G_K</span><script type="math/tex">G_1。。。G_K</script></span>中的一个。 基本思想是使用以下生成过程：</p>
+<p>1.选择一个簇<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>，其中m∈{1。。。ķ}。
+2.基于生成模型生成<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的期限分布。 这种文本模型的例子包括伯努利模型或多项模型。</p>
+<p>观察到的数据然后用于估计生成过程中伯努利或多项分布的参数。本节将讨论伯努利模型。</p>
+<p>使用EM算法以迭代方式进行聚类，其中使用贝叶斯规则从E-步骤中的条件词分布确定文档的聚类分配，并且从M步骤中的聚类分配推断条件词分布。对于初始化，文档被随机分配到群集。根据该随机分配的统计分布来估计初始先验概率<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>和条件特征分布<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>。贝叶斯分类器用于估计E步骤中的后验概率<span><span class="MathJax_Preview">P（G_m | \bar{X}）</span><script type="math/tex">P（G_m | \bar{X}）</script></span>。贝叶斯分类器通常使用伯努利模型或本章后面讨论的多项模型。贝叶斯分类器的后验概率<span><span class="MathJax_Preview">P（G_m | \bar{X}）</span><script type="math/tex">P（G_m | \bar{X}）</script></span>可以被看作是文档X对第m个混合分量<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的软分配概率。单词<span><span class="MathJax_Preview">w_j</span><script type="math/tex">w_j</script></span>的条件特征分布<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>根据M步骤中的这些后验概率估计如下：</p>
+<div>
+<div class="MathJax_Preview">P（w_j | G_m）=\frac{\sum_{\bar{X}} P（G_m | \bar{X}）I（ \bar{X} |,w_j）}{\sum_{\bar{X}} P（G_m | \bar{X}）}\tag{13.5}</div>
+<script type="math/tex; mode=display">P（w_j | G_m）=\frac{\sum_{\bar{X}} P（G_m | \bar{X}）I（ \bar{X} |,w_j）}{\sum_{\bar{X}} P（G_m | \bar{X}）}\tag{13.5}</script>
+</div>
+<p>这里，<span><span class="MathJax_Preview">I（ \bar{X} |,w_j）</span><script type="math/tex">I（ \bar{X} |,w_j）</script></span>是一个指标变量，如果单词<span><span class="MathJax_Preview">w_j</span><script type="math/tex">w_j</script></span>存在于X中，则值为1，否则为0。 如在贝叶斯分类方法中一样，可以结合相同的拉普拉斯平滑方法来减少过拟合。 也可以通过计算所有文档到<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的平均分配概率来估计每个簇的先验概率<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>。 这完成了对EM算法的M步骤的描述。 下一个E步骤使用<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>的这些修改值和先验概率与标准贝叶斯分类器一起导出后验贝叶斯概率。 因此，以下两个迭代步骤重复收敛：</p>
+<p>1.（E_步骤）使用贝叶斯法则估计文档隶属于群集的后验概率：</p>
+<div>
+<div class="MathJax_Preview">P（ G_m |\bar(X)）=P（G_m）\prod_{w_j=\bar{X}}P（w_j | G_m）\prod_{w_j!=\bar{X}}(1-P（w_j | G_m）)\tag{13.6}</div>
+<script type="math/tex; mode=display">P（ G_m |\bar(X)）=P（G_m）\prod_{w_j=\bar{X}}P（w_j | G_m）\prod_{w_j!=\bar{X}}(1-P（w_j | G_m）)\tag{13.6}</script>
+</div>
+<p>前述的贝叶斯规则假定了伯努利生成模型。 请注意公式13.6与用于分类的朴素贝叶斯后验概率估计相同。 本章后面讨论的多项式模型也可以使用。 在这种情况下，上述的13.6式被多项式贝叶斯分类器取代。</p>
+<p>2.（M-step）使用Estep中的估计概率估计不同群集的单词（等式13.5）和先验概率<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>的条件分布<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span></p>
+<p>在该过程结束时，<span><span class="MathJax_Preview">P（G_m | \bar{X}）</span><script type="math/tex">P（G_m | \bar{X}）</script></span>的估计值提供了聚类分配概率，并且<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>的估计值提供了每个聚类的项分布。 这可以被看作是前面讨论过的集群摘要概念的概率变体。 因此，概率方法提供了有关群集成员资格和与每个群集相关的单词的双重见解</p>
+<h3 id="1333">13.3.3 寻找相似文档和单词蔟</h3>
+<p>前一节讨论的概率算法可以同时发现文档和词组。 正如在第七章7.4部分中，在高维聚类方法中，这在高维情况下是重要的，因为聚类最好同时在行和列方面表征。 在文本域中，这种方法的另一个优点是集群的话题词能够提供关于该集群的语义见解。 另一个例子是非负矩阵分解方法，在第六章6.8部分这种方法在文本域中非常流行，因为分解矩阵对文本数据有自然的解释。 这种方法可以同时发现由两个因式分解矩阵的列表示的单词聚类和文档聚类。 这也与联合聚类的概念密切相关。</p>
+<h4 id="13331">13.3.3.1 协同聚类</h4>
+<p>对于许多条目具有零值的非负矩阵，协同聚类最为有效。换句话说，矩阵稀疏。文本数据就是这种情况。 Coclustering方法也可以推广到稠密矩阵，尽管这些技术与文本域无关。由于同时使用“模式”（单词和文档），协同聚类有时也被称为双聚类或双模聚类。尽管这里在文本数据的背景下提出了联合聚类方法，但是更广泛的方法也在生物学领域中进行了一些修改。
+联合聚类的想法是重新排列数据矩阵中的行和列，以便大部分非零项被排列成块。在文本数据的上下文中，这个矩阵是n×d的文档项矩阵D，其中行对应于文档并且列对应于词。因此，第i个集群与一组行<span><span class="MathJax_Preview">R_i</span><script type="math/tex">R_i</script></span>（文档）和一组列<span><span class="MathJax_Preview">V_i</span><script type="math/tex">V_i</script></span>（词）相关联。行<span><span class="MathJax_Preview">R_i</span><script type="math/tex">R_i</script></span>在i的不同值上彼此不相交，并且列<span><span class="MathJax_Preview">V_i</span><script type="math/tex">V_i</script></span>也在i的不同值上彼此不相交。因此，协同聚类方法同时导致文档聚类和文字聚类。从直观的角度来看，表示<span><span class="MathJax_Preview">V_i</span><script type="math/tex">V_i</script></span>的列的词是集群<span><span class="MathJax_Preview">R_i</span><script type="math/tex">R_i</script></span>的最相关（或主题）词。集合<span><span class="MathJax_Preview">V_i</span><script type="math/tex">V_i</script></span>因此定义<span><span class="MathJax_Preview">R_i</span><script type="math/tex">R_i</script></span>的集群摘要。
+在文本数据的背景下，单词集群与文档集群一样重要，因为它们提供了有关基础集合主题的见解。本书中讨论的用于文档聚类的大多数方法（例如分散/聚集方法，概率方法和非负矩阵分解方法（请参见第6章的第6.8节）除了文档聚类外还生成了单词聚类（或聚类摘要） 。但是，这些算法中不同群集中的单词是重叠的，而文档聚类在除了概率（软）EM方法之外的所有算法中都是不重叠的，在coclustering中，单词聚类和文档聚类不重叠。并且词与特定的聚类密切相关联合聚类的一个很好的特征是它明确地探索了词聚类和文档聚类之间的对偶性相干词聚类可以显示出诱导连贯的文档聚类反之亦然例如if有意义的词组已经可用，那么可以通过将每个文档分配给与其相关的词组来聚类文档它有最多的共同点。在联合聚类中，目标是同时做到这一点，以便词汇聚类和文档聚类以最佳方式相互赖。</p>
+<p><center>
+<img alt="13.1" src="http://p6atp7tts.bkt.clouddn.com/13.1.png" /></p>
+<p>图13.1：说明联合聚类中的行和列重新排序（a)文档术语矩阵（b）重新定义的矩阵</center></p>
+<p>为了说明这一点，在图13.1a中已经说明了一个6×6文档字矩阵的实例2。矩阵中的条目对应于由<span><span class="MathJax_Preview">D_1</span><script type="math/tex">D_1</script></span>。。。<span><span class="MathJax_Preview">D_6</span><script type="math/tex">D_6</script></span>表示的六个文档中的词频。这种情况下的六个词是冠军，电子，奖杯，相对论，量子和锦标赛。很容易看出，一些单词来源于体育相关话题，而其他单词来自与科学有关的话题。请注意，图13.1a矩阵中的非零项似乎是随机排列的。应该指出，文件{<span><span class="MathJax_Preview">D_1</span><script type="math/tex">D_1</script></span>，<span><span class="MathJax_Preview">D_4</span><script type="math/tex">D_4</script></span>，<span><span class="MathJax_Preview">D_6</span><script type="math/tex">D_6</script></span>}似乎6包含与体育话题相关的词语，而文档{<span><span class="MathJax_Preview">D_2</span><script type="math/tex">D_2</script></span>，<span><span class="MathJax_Preview">D_3</span><script type="math/tex">D_3</script></span>，<span><span class="MathJax_Preview">D_5</span><script type="math/tex">D_5</script></span>}似乎包含与科学主题相关的词语。但是，从图13.1a中条目的随机分布情况来看，这并不明显。另一方面，如果行和列被置换，以便所有与运动有关的行/列比所有科学相关的行/列早出现，则所得到的矩阵如图13.1b所示。在这种情况下，条目有一个清晰的块结构，其中不相交的矩形块包含大部分非零条目。这些矩形块在图13.1b中有阴影。目标是最小化这些阴影块之外的非零条目的权重。</p>
+<p>那么，如何解决共聚类问题呢？最简单的解决方案是将问题转换为二分图分区问题，以便非阴影区域中非零项的聚合权重等于分区间边的聚合权重。创建节点集<span><span class="MathJax_Preview">N_d</span><script type="math/tex">N_d</script></span>，其中每个节点表示集合中的文档。创建节点集<span><span class="MathJax_Preview">N_w</span><script type="math/tex">N_w</script></span>，其中每个节点表示集合中的单词。创建一个无向二部图<span><span class="MathJax_Preview">G =（Nd∪Nw，A）</span><script type="math/tex">G =（Nd∪Nw，A）</script></span>，使得A中的边<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>对应于矩阵中的非零项，其中<span><span class="MathJax_Preview">i∈N_d</span><script type="math/tex">i∈N_d</script></span>且<span><span class="MathJax_Preview">j∈N_w</span><script type="math/tex">j∈N_w</script></span>。边的权重等于文档中术语的频率。图13.2给出了图13.1共集群的二部图。此图的分区表示同时对行和列进行分区。在这种情况下，为了简单起见，已经说明了双向分区，尽管通常可以构建k路分区。请注意，每个分区包含一组文档和一组
+<center>
+<img alt="13.2" src="http://p6atp7tts.bkt.clouddn.com/13.2.png" /></p>
+<p>图13.2：共聚类的图分区</center></p>
+<p>相应的单词。很容易看出，图13.2中每个图分区中的相应文档和单词表示图13.1b中的阴影区域。也很容易看到分区边缘的权重代表图13.1b中非零项的权重。因此，k路联合聚类问题可以转化为k路图分区问题。整体联合聚类方法可以描述如下：</p>
+<ol>
+<li>创建一个图<span><span class="MathJax_Preview">G =（N_d∪N_w，A）</span><script type="math/tex">G =（N_d∪N_w，A）</script></span>，其中<span><span class="MathJax_Preview">N_d</span><script type="math/tex">N_d</script></span>表示文档中的节点，<span><span class="MathJax_Preview">N_w</span><script type="math/tex">N_w</script></span>中的节点表示单词，A中的边表示矩阵D中非零项的权重。</li>
+<li>使用k路图分区算法将<span><span class="MathJax_Preview">N_d∪N_w</span><script type="math/tex">N_d∪N_w</script></span>中的节点分成k组。</li>
+<li>行列对<span><span class="MathJax_Preview">（R_iV_i）</span><script type="math/tex">（R_iV_i）</script></span>i∈{1。。。ķ}。 这里<span><span class="MathJax_Preview">R_i</span><script type="math/tex">R_i</script></span>表示与第i个群集的<span><span class="MathJax_Preview">N_d</span><script type="math/tex">N_d</script></span>中的节点相对应的行，并且<span><span class="MathJax_Preview">V_i</span><script type="math/tex">V_i</script></span>表示与第i个群集中的<span><span class="MathJax_Preview">N_w</span><script type="math/tex">N_w</script></span>中的节点相对应的列。  </li>
+</ol>
+<p>它仍然有待解释，如何执行k路图分区。图表分区的问题在Sect中解决。 Chap 19.3。 19.可以利用这些算法中的任何一种来确定所需的图分区。在书目注释中也讨论了专门的二分图分区方法。</p>
+<h2 id="134">13.4 主题建模</h2>
+<p>主题建模可以被看作潜在语义分析（LSA）方法的概率版本，该方法的最基本版本被称为概率潜在语义分析（PLSA）。它为执行降维提供了一种替代方法，并且与传统LSA相比具有几个优势。概率潜在语义分析是一种基于期望最大化的混合建模算法。然而，使用EM算法的方式与本书中EM算法的其他例子不同。这是因为潜在的生成过程是不同的，并且被优化以发现单词的相关结构而不是文档的聚类结构。</p>
+<p><center>
+<img alt="13.3" src="http://p6atp7tts.bkt.clouddn.com/13.3.png" />
+图13.3：改变EM聚类和PLSA的生成过程  (a)EM聚类（第13.3.2节）(b)PLSA </center></p>
+<p>这是因为这种方法可以被看作是SVD和LSA的概率变体，而不是聚类的概率变体。尽管如此，使用这种方法也可以生成软簇。还有很多其他降维方法，如非负矩阵分解，这些都与聚类密切相关。事实上，PLSA是具有最大似然目标函数的非负矩阵分解方法。</p>
+<p>在本书的大多数EM集群算法中，选择一个混合组件（集群），然后根据该组件的特定分布形式生成数据记录。 Bernoulli聚类模型就是一个例子，在第13.3.2节讨论。 在PLSA中，生成过程3本质上是为降维而不是聚类而设计的，同一文档的不同部分可以由不同的混合成分生成。 假设有<span><span class="MathJax_Preview">G_1</span><script type="math/tex">G_1</script></span>表示有k个方面（或潜在主题）表示为<span><span class="MathJax_Preview">G_1。。。G_k</span><script type="math/tex">G_1。。。G_k</script></span>。 生成过程如下构建文档项矩阵：</p>
+<p>1.以概率<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>选择一个潜在分量估计（方面）<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>。
+2.分别用概率<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>生成文档 - 词对<span><span class="MathJax_Preview">（X_i，w_j）</span><script type="math/tex">（X_i，w_j）</script></span>的索引<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>。将&emsp;文档项矩阵中的条目<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>的频率增加1.文档和词索引以概率独立的方式生成。
+这个生成过程的所有参数，如<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>，<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>都需要根据<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>文档项矩阵中观察到的频率进行估计。
+虽然<span><span class="MathJax_Preview">G_1。。。G_k</span><script type="math/tex">G_1。。。G_k</script></span>方面类似于13.3.2部分的集群。但是它们不一样。请注意13.3.2节的生成过程的每次迭代，创建文档项矩阵整行的最终频率向量。在PLSA中，即使是单个矩阵条目也可能具有来自各种混合组分的频率贡献。事实上，即使在确定性的潜在语义分析中，文档也被表达为不同潜在方向的线性组合。因此，将每个混合物组分解释为一个簇的方法更直接。 这些模型之间的生成差异如图13.3所示。尽管如此，PLSA也可以用于聚类，因为潜在的潜在因子分析具有高度可解释性和非负性。后面将讨论与聚类的关系和适用性。  </p>
+<p>PLSA中的一个重要假设是，选定的文档和单词在修复潜在的主题组件<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>后是条件独立的。换句话说，假设如下：</p>
+<div>
+<div class="MathJax_Preview">P（\bar{X}，w_j |G_m）=P（\bar{X}|G_m）*P(w_j|G_m)\tag{13.7}</div>
+<script type="math/tex; mode=display">P（\bar{X}，w_j |G_m）=P（\bar{X}|G_m）*P(w_j|G_m)\tag{13.7}</script>
+</div>
+<p>这意味着用于选择文档字对的联合概率<span><span class="MathJax_Preview">P（X_i，w_j）</span><script type="math/tex">P（X_i，w_j）</script></span>可以用以下方式表示：</p>
+<div>
+<div class="MathJax_Preview">P（ \bar{X}|w_j ）=\sum_{m=1}^kP（\bar{X}，w_j |G_m）=\sum_{m=1}^kP(G_m)*P（\bar{X}|G_m）*P(w_j|G_m)\tag{13.8}</div>
+<script type="math/tex; mode=display">P（ \bar{X}|w_j ）=\sum_{m=1}^kP（\bar{X}，w_j |G_m）=\sum_{m=1}^kP(G_m)*P（\bar{X}|G_m）*P(w_j|G_m)\tag{13.8}</script>
+</div>
+<p>值得注意的是，潜在组件中文档和单词之间的局部独立并不意味着整个语料库中同一对之间的全局独立性。局部独立性假设在推导EM算法中很有用。
+在PLSA中，估计与特定文件字对相关的潜在成分的后验概率<span><span class="MathJax_Preview">P（G_m | X_i，w_j）</span><script type="math/tex">P（G_m | X_i，w_j）</script></span>。 EM算法首先将<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>，<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>分别初始化为<span><span class="MathJax_Preview">1 / k</span><script type="math/tex">1 / k</script></span>，<span><span class="MathJax_Preview">1 / n</span><script type="math/tex">1 / n</script></span>和<span><span class="MathJax_Preview">1 / d</span><script type="math/tex">1 / d</script></span>。这里，k，n和d分别表示簇的数量，文档的数量和字的数量。该算法迭代地执行以下E和M步骤来收敛：
+&emsp;1.（E步骤）以<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>，<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>为单位估计后验概率<span><span class="MathJax_Preview">P（G_m | X_i，w_j）</span><script type="math/tex">P（G_m | X_i，w_j）</script></span>。
+&emsp;2.（M-step）根据后验概率<span><span class="MathJax_Preview">P（G_m | X_i，w_j）</span><script type="math/tex">P（G_m | X_i，w_j）</script></span>和关于单词文档协作的观察数据估计<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>，<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>使用对数似然最大化的条件。</p>
+<p>这些步骤迭代重复以收敛。现在要讨论E-step和M-step的细节。首先，讨论E步骤。在E步骤中估计的后验概率可以使用贝叶斯规则来扩展：</p>
+<div>
+<div class="MathJax_Preview">P（G_m| \bar{X_i},w_j）=\frac{ P（G_m）P（ \bar{X} ,w_j|G_m）}{ P（ \bar{X} ,w_j)）}\tag{13.9}</div>
+<script type="math/tex; mode=display">P（G_m| \bar{X_i},w_j）=\frac{ P（G_m）P（ \bar{X} ,w_j|G_m）}{ P（ \bar{X} ,w_j)）}\tag{13.9}</script>
+</div>
+<p>上述方程右边的分子可以使用方程13.7，分母可以用公式13.8：</p>
+<div>
+<div class="MathJax_Preview">P（G_m| \bar{X_i},w_j）=\frac{ P（G_m）P（ \bar{X}|G_m）P（ w_j|G_m）}{ \sum_{r=1}^kP(G_r)P（ \bar{X} ,G_r)P（ w_j ,G_r)）}\tag{13.10}</div>
+<script type="math/tex; mode=display">P（G_m| \bar{X_i},w_j）=\frac{ P（G_m）P（ \bar{X}|G_m）P（ w_j|G_m）}{ \sum_{r=1}^kP(G_r)P（ \bar{X} ,G_r)P（ w_j ,G_r)）}\tag{13.10}</script>
+</div>
+<p>这表明可以用估计值<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>，<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>来实现E步骤。
+它仍然展示如何使用M步骤中观察到的单词文档共现来估计这些值。后验概率<span><span class="MathJax_Preview">P（G_m | X_i，w_j）</span><script type="math/tex">P（G_m | X_i，w_j）</script></span>可以被看作是对每个方面<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>附加了单词 - 文档共现对的权重。利用这些权重可以利用对数似然函数的最大化来估计每个方面的值<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>，<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>。这里不讨论对数似然函数的细节和与最大化过程相关的微分算子。相反，最终估计值将直接呈现。设<span><span class="MathJax_Preview">f（X_i，w_j）</span><script type="math/tex">f（X_i，w_j）</script></span>表示 文档<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>中词<span><span class="MathJax_Preview">w_j</span><script type="math/tex">w_j</script></span>出现的观察频率。 然后，M步骤中的估计如下：</p>
+<div>
+<div class="MathJax_Preview">P(\bar{X_i}|G_m)∝\sum_{w_j}f(\bar{X_i,w_j})*P（G_m| \bar{X_i},w_j）    i\in{1...n},m\in1...k\tag{13.11}</div>
+<script type="math/tex; mode=display">P(\bar{X_i}|G_m)∝\sum_{w_j}f(\bar{X_i,w_j})*P（G_m| \bar{X_i},w_j）    i\in{1...n},m\in1...k\tag{13.11}</script>
+</div>
+<div>
+<div class="MathJax_Preview">P(w_j|G_m)∝\sum_{\bar{X_i}}f(\bar{X_i,w_j})*P（G_m| \bar{X_i},w_j）    i\in{1...d},m\in1...k\tag{13.12}</div>
+<script type="math/tex; mode=display">P(w_j|G_m)∝\sum_{\bar{X_i}}f(\bar{X_i,w_j})*P（G_m| \bar{X_i},w_j）    i\in{1...d},m\in1...k\tag{13.12}</script>
+</div>
+<div>
+<div class="MathJax_Preview">P(G_m)∝\sum_{\bar{X_i}}\sum_{w_j}f(\bar{X_i,w_j})*P（G_m| \bar{X_i},w_j）    m\in1...k\tag{13.13}</div>
+<script type="math/tex; mode=display">P(G_m)∝\sum_{\bar{X_i}}\sum_{w_j}f(\bar{X_i,w_j})*P（G_m| \bar{X_i},w_j）    m\in1...k\tag{13.13}</script>
+</div>
+<p>通过确保它们在该随机变量的所有结果中总和为1，这些估计中的每一个可以被缩放为概率。 该缩放对应于与上述方程中的“<span><span class="MathJax_Preview">∝</span><script type="math/tex">∝</script></span>”符号相关的比例常数。 此外，这些估计可用于将原始文档项矩阵分解为三个矩阵的乘积，这与SVD / LSA非常相似。 这种关系将在下一节探讨。</p>
+<h3 id="1341">13.4.1 用于降维和与潜在语义分析的比较</h3>
+<p>在M步估计的三组关键参数分别是<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>，<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>。这些参数集提供了<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>文档项矩阵D的SVD类似的矩阵分解。假设文档项矩阵D被一个常数缩放，以总和为1的概率值。因此，D中第<span><span class="MathJax_Preview">（i ，j）</span><script type="math/tex">（i ，j）</script></span>的元素可以看作概率量<span><span class="MathJax_Preview">P（X_i，w_j）</span><script type="math/tex">P（X_i，w_j）</script></span>的观察实例。令<span><span class="MathJax_Preview">Q_k</span><script type="math/tex">Q_k</script></span>为第<span><span class="MathJax_Preview">（i，m）</span><script type="math/tex">（i，m）</script></span>个条目为<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>的<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵，令<span><span class="MathJax_Preview">\sum_{k}</span><script type="math/tex">\sum_{k}</script></span>为第m个对角条目为<span><span class="MathJax_Preview">P（G_m）</span><script type="math/tex">P（G_m）</script></span>的<span><span class="MathJax_Preview">k×k</span><script type="math/tex">k×k</script></span>对角线矩阵，$ P_k<span><span class="MathJax_Preview">是第</span><script type="math/tex">是第</script></span>（j，m）<span><span class="MathJax_Preview">个条目是</span><script type="math/tex">个条目是</script></span>P（w_j | G_m）<span><span class="MathJax_Preview">的</span><script type="math/tex">的</script></span>d×k<span><span class="MathJax_Preview">矩阵。然后，通过13.8式，矩阵D的第</span><script type="math/tex">矩阵。然后，通过13.8式，矩阵D的第</script></span>（i，j）<span><span class="MathJax_Preview">项</span><script type="math/tex">项</script></span>P（X_i，w_j）$可以按照上述矩阵D的条目来表示。这里复制：</p>
+<div>
+<div class="MathJax_Preview">P{\bar{X_i},w_j}=\sum_{m=1}^kP（G_m）P(\bar{X_i}| G_m）P（w_j | G_m）\tag{13.14}</div>
+<script type="math/tex; mode=display">P{\bar{X_i},w_j}=\sum_{m=1}^kP（G_m）P(\bar{X_i}| G_m）P（w_j | G_m）\tag{13.14}</script>
+</div>
+<p>该方程的LHS等于D的第<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>个条目，而方程的RHS是矩阵积<span><span class="MathJax_Preview">Q_k\sum_{k}P_k^T</span><script type="math/tex">Q_k\sum_{k}P_k^T</script></span>的第<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>个条目。根据分量k的数量，LHS只能逼近由Dk表示的矩阵D.通过叠加方程的n×d条件， 13.14，获得以下矩阵条件：  </p>
+<div>
+<div class="MathJax_Preview">D_k=Q_k\sum_{k}P_k^T\tag{13.15}</div>
+<script type="math/tex; mode=display">D_k=Q_k\sum_{k}P_k^T\tag{13.15}</script>
+</div>
+<p>注意到式 13.15中的矩阵分解是有益的,与SVD / LSA类似（参见第2章的2.12）。因此，如在LSA中一样，<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>是文档项矩阵D的近似值，并且k维空间中的变换表示由<span><span class="MathJax_Preview">Q_k\sum_{k}</span><script type="math/tex">Q_k\sum_{k}</script></span>给出。但是，PLSA和LSA中的转换表示方式会有所不同。这是因为在这两种情况下不同的目标函数得到了优化。 LSA最小化近似的均方误差，而PLSA最大化对数似然拟合概率生成模型。 PLSA的一个优点是<span><span class="MathJax_Preview">Q_k</span><script type="math/tex">Q_k</script></span>和<span><span class="MathJax_Preview">P_k</span><script type="math/tex">P_k</script></span>的条目和变换后的坐标值是非负的并且清晰。</p>
+<p><center>
+<img alt="13.4" src="http://p6atp7tts.bkt.clouddn.com/13.4.png" /></p>
+<p>图13.4：PLSA的矩阵分解</p>
+<p><img alt="13.5" src="http://p6atp7tts.bkt.clouddn.com/13.5.png" />
+图13.5：PLSA的一个例子（重新审视第6章的图6.22）</center></p>
+<p>概率可解释性。通过检查每个Pk列中的概率值，可以立即推断相应方面的主题词。这在LSA中是不可能的，其中对应矩阵Pk中的条目不具有明确的概率显着性，甚至可能是负面的。 LSA的一个优点是可以根据正交轴系的旋转来解释变换。在LSA中，Pk的列是代表这个旋转基的一组正交向量。 PLSA不是这种情况。 LSA中基础系统的正交性使得能够直接投影样本外文档（即，不包含在D中的文档）到新的旋转轴系统上。</p>
+<p>有趣的是，和SVD / LSA一样，PLSA揭示了文档矩阵转置的潜在特性。$ P_k\sum_{k}<span><span class="MathJax_Preview">的每一行可以被看作是由</span><script type="math/tex">的每一行可以被看作是由</script></span>Q_k$列定义的基空间中的文档矩阵D的垂直或倒置列表表示（转置的行）的变换坐标。这些互补特性如图13.4所示。 PLSA也可以看作是一种非负矩阵分解方法（参见第6章第6.8节），其中矩阵元素被解释为概率，生成模型的最大似然估计被最大化，而不是最小化Frobenius范数的错误矩阵。</p>
+<p>图13.5给出了一个具有6个文档和6个单词的玩具6×6例子的近似最优PLSA矩阵分解的例子。这个例子在第六章中用于非负矩阵分解（NMF）的例子相同（见图6.22）。注意，两种情况下的因式分解非常相似，只是PLSA中的所有基向量都归一化为1，并且基向量的优势反映在包含先验概率的单独对角矩阵中。虽然这里提出的PLSA的因子分解与NMF的因子分解直观地理解相同，但因为两种情况下目标函数的差异，因子分解通常会略有不同4。此外，在一个实例中，因式分解矩阵中的大多数条目不会完全为0，但其中许多条目可能非常小。</p>
+<p>与LSA一样，PLSA也解决同义词和多义词的问题。例如，如果一个方面<span><span class="MathJax_Preview">G_1</span><script type="math/tex">G_1</script></span>解释了猫的主题，则分别包含单词“cat”和“kitten”的两个文档X和Y将具有方面<span><span class="MathJax_Preview">G_1</span><script type="math/tex">G_1</script></span>的变换后的坐标的正值。因此，这些文档之间的相似度计算将在转换后的空间中得到改善。具有多重含义的单词（多义词）在不同方面可能具有积极的成分。例如，“捷豹”这个词可以是猫或汽车。如果<span><span class="MathJax_Preview">G_1</span><script type="math/tex">G_1</script></span>是解释猫话题的一个方面，G2是解释汽车话题的一个方面，那么<span><span class="MathJax_Preview">P（“jaguar”| G_1）</span><script type="math/tex">P（“jaguar”| G_1）</script></span>和<span><span class="MathJax_Preview">P（“jaguar”| G_2）</span><script type="math/tex">P（“jaguar”| G_2）</script></span>可能是高度肯定的。但是，文件中的其他词语将为强化这两个方面中的一个提供必要的背景。一个主要关于猫的文档X将具有较高的<span><span class="MathJax_Preview">P（X | G_1）</span><script type="math/tex">P（X | G_1）</script></span>值，而主要关于汽车的文档Y将具有较高的<span><span class="MathJax_Preview">P（Y | G_2）</span><script type="math/tex">P（Y | G_2）</script></span>值。这将反映在矩阵<span><span class="MathJax_Preview">Q_k = [P（X_i | G_m）] n×k</span><script type="math/tex">Q_k = [P（X_i | G_m）] n×k</script></span>和新变换的坐标表示$ Q_k\sum_{k}<span><span class="MathJax_Preview">中。因此，就多义效应的调整而言，计算也是稳健的。通常，语义概念将在变换表示</span><script type="math/tex">中。因此，就多义效应的调整而言，计算也是稳健的。通常，语义概念将在变换表示</script></span> Q_k\sum_{k}<span><span class="MathJax_Preview">中被放大。因此，许多数据挖掘应用程序将在</span><script type="math/tex">中被放大。因此，许多数据挖掘应用程序将在</script></span>n×k<span><span class="MathJax_Preview">变换表示</span><script type="math/tex">变换表示</script></span> Q_k\sum_{k}<span><span class="MathJax_Preview">方面执行得更稳健，而不是原始</span><script type="math/tex">方面执行得更稳健，而不是原始</script></span>n×d$文档项矩阵。</p>
+<h3 id="1342">13.4.2 用于聚类和比较概率聚类</h3>
+<p>估计的参数在聚类方面有直观的解释。在用于聚类的贝叶斯模型（图13.3a）中，生成过程被优化以聚类文档，而主题建模中的生成过程（图13.3b）被优化以发现潜在语义成分。后者可以显示集群文档字对，这与集群文档不同。因此，尽管在两种情况下估计了相同的参数集<span><span class="MathJax_Preview">P(\bar{X_i}| G_m）</span><script type="math/tex">P(\bar{X_i}| G_m）</script></span>和<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>，但是会得到定性不同的结果。图13.3a的模型根据独特的隐藏组件（簇）生成文档，最终的软聚类是观测数据估计不确定性的结果。另一方面，在概率潜在语义模型中，同一文档的不同部分可以由不同的方面生成，即使在生成性建模级别也是如此。因此，文档不是由单独的混合组件生成的，而是由混合组件组合而成。从这个意义上说，PLSA提供了一个更现实的模型，因为讨论猫和汽车的不同文字（见图13.5）可以由不同方面产生。在贝叶斯聚类中，即使这样的文档是由混合成分之一完全生成的，但由于估计的不确定性，它可能具有相对于两个或多个聚类的相似的分配（后验）概率。这种差异是因为PLSA最初的目的是作为一种数据转换和降维方法，而不是一种聚类方法。尽管如此，良好的文档集群通常也可以从PLSA中派生出来。值<span><span class="MathJax_Preview">P（G_m | X_i）</span><script type="math/tex">P（G_m | X_i）</script></span>提供文档Xi到aspect（或“cluster”）<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的分配概率，并且可以根据如下使用Bayes规则在M步骤中估计的参数导出：  </p>
+<div>
+<div class="MathJax_Preview">P（G_m| \bar{X_i}）=\frac{ P（G_m）P（ \bar{X}|G_m）}{ \sum_{r=1}^kP(G_r)P（ \bar{X} ,G_r)）}\tag{13.16}</div>
+<script type="math/tex; mode=display">P（G_m| \bar{X_i}）=\frac{ P（G_m）P（ \bar{X}|G_m）}{ \sum_{r=1}^kP(G_r)P（ \bar{X} ,G_r)）}\tag{13.16}</script>
+</div>
+<p>因此，PLSA方法也可以被看作一种软聚类方法，该方法提供了文档对聚类的分配概率。 此外，在M步估计的数量<span><span class="MathJax_Preview">P（w_j | G_m）</span><script type="math/tex">P（w_j | G_m）</script></span>提供了关于不同词汇与方面（或主题）的概率相关性的概率信息。 对于特定方面<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>而言具有最高概率值的术语可以被视为该主题的群集摘要。</p>
+<p>由于PLSA方法还提供文档的多维n×k坐标表示$ Q_k\sum_{k}$，执行聚类的不同方式是在这个新空间中表示文档，并在转换后的语料库上使用k-均值算法。 由于同义词和多义词对噪音的影响已被PLSA消除，因此k均值方法通常在减少表示方面比原始语料库更有效。</p>
+<h3 id="1343-plsa">13.4.3 PLSA的限制</h3>
+<p>尽管PLSA方法是概率建模的直观声音模型，但它确实存在一些实际缺陷。 参数的数量随文档数量呈线性增长。 因此，由于大量的估计参数，这种方法可能很慢并且可能过度训练数据。 此外，虽然PLSA在训练数据中提供了文档词对的生成模型，但它不能轻易地将概率分配给先前未见过的文档。 本书中讨论的大多数其他EM混合模型（如概率贝叶斯模型）在将概率分配给以前未见过的文档时要好得多。 为了解决这些问题，定义了潜在狄利克雷分配（LDA）。 该模型在主题上使用了Dirichlet先验，并且相对容易地推广到新文档。 从这个意义上说，LDA是一个完全生成的模型。 书目注释包含了这个模型的指针。</p>
+<h2 id="135">13.5 文本的专门分类方法</h2>
+<p>与聚类相同，分类算法受文本数据的非负，稀疏和高维特性的影响。稀疏性的一个重要影响是文档中出现的单词比缺少单词更有价值。这一观察结果对分类方法有影响，例如用于贝叶斯分类的伯努利模型，它以对称方式处理单词的存在和不存在。
+文本域中常用的技术包括基于实例的方法，贝叶斯分类器和SVM分类器。贝叶斯分类器非常受欢迎，因为Web文本经常与其他类型的功能（如URL或辅助信息）结合使用。将这些特征并入Bayes分类器相对容易。文本的稀疏高维本质也需要为文本域设计更精确的多项式贝叶斯模型。 SVM分类器因其高度的准确性而在文本数据中也非常流行。使用SVM分类器的主要问题是文本的高维性质使得这些分类器的性能得到提高。在下文中，将讨论这些算法中的一些。</p>
+<h3 id="1351">13.5.1 基于实例的分类器</h3>
+<p>基于实例的分类器对于文本非常有效，特别是在执行聚类或降维预处理阶段时。 最近邻分类器的最简单形式返回具有余弦相似性的前k个最近邻居的主导类标签。 使用余弦相似度值对投票进行加权通常会提供更稳健的结果。 然而，由于文本集合的稀疏性和高维性，可以通过两种方式修改这个基本过程，以提高效率和效果。 第一种方法是以潜在语义索引的形式使用降维。 第二种方法使用细粒度聚类来执行基于质心的分类。</p>
+<h4 id="13511">13.5.1.1 利用潜在的语义分析</h4>
+<p>实例分类中的主要错误来源是文本集合中固有的噪音。这种噪音往往是同义词和多义词的结果。例如，滑稽和热闹的话意味着大致相同的事情。多义性是指这个事实，即同一个词可能意味着两个不同的东西。例如，捷豹这个词可以指一辆汽车或一只猫。通常，一个词的重要性只能在文档中的其他词的上下文中理解。文本的这些特征为分类算法带来了挑战，因为计算与使用词频的相似性可能不完全准确。例如，由于同义词的影响，两个分别含有滑稽词和滑稽词的文档可能不会被认为足够相似。在潜在的语义索引中，将降维应用于集合以减少这些影响。</p>
+<p>潜在语义分析（LSA）是一种依赖奇异值分解（SVD）为文本集合创建简化表示的方法。建议读者参考章节2.4.3.3 2，了解SVD和LSA的细节。潜在语义分析（LSA）方法是将SVD方法应用于n×d文档项矩阵D，其中d是词典的大小，n是文档数。具有矩形d×d矩阵DT D的最大特征值的特征向量用于数据表示。数据集的稀疏性导致了低固有维数。因此，在文本领域，由LSA引起的维度降低相当剧烈。例如，能够表示在尺寸小于300的尺寸100,000的词典上绘制的语料库并不少见。用小特征值去除尺寸通常导致同义词和多义词的噪音效应减小。此数据表示形式不再稀疏，并且与多维数字数据类似。在这个变换的语料库上可以使用具有余弦相似性的常规k-最近邻分类器。 LSA方法确实需要额外的努力来创建特征向量。</p>
+<h4 id="13512">13.5.1.2 基于质心的分类</h4>
+<p>基于质心的分类是k-最近邻分类器的快速替代。其基本思想是使用现成的聚类算法将每个类的文档划分为簇。从每个类的文档派生的类的数量与该类中的文档的数量成比例。这确保了每个类中的簇大致具有相同的粒度。类标签与单个集群相关联，而不是实际的文档。
+通过仅保留该质心中最频繁的单词来提取来自质心的群集摘要。通常，每个质心保留大约200至400个字。每个质心中的词汇提供了每个班级中对象的稳定和专题表述。与“商学院”和“法学院”标签相对应的两个类的（加权）单词向量的例子可以如下：
+&emsp;1.商学院：商业35，管理31，学校22，大学11，校园15，介绍12，学生17，市场11。 。 。
+&emsp;2.法学院：法律（22），大学（11），学校（13），考试（15），司法（17），校园（10），法院（15），检察官（22），学生（15） 。 。 。
+通常，大部分嘈杂的单词已从集群摘要中截断。类似的单词在同一个质心中表示，具有多重意义的单词可以用上下文不同的质心表示。因此，这种方法还间接地解决了同义词和多义词的问题，另外的优点是可以用更少数量的质心更有效地执行k-近邻分类。据报道基于余弦相似性的来自top-k匹配质心的主导标签。在许多情况下，这种方法可以提供与香草k-最近邻分类器相当或更好的准确性。</p>
+<h4 id="13513">13.5.1.3 罗基奥分类</h4>
+<p>Rocchio方法可以被看作上述描述基于质心的分类器的特例。在这种情况下，属于同一类的所有文档都会聚合成一个质心。对于给定的文档，报告最接近质心的类别标签。这种方法显然非常快，因为它需要少量不变的相似性计算，这取决于数据中类的数量。另一方面，缺点是准确性取决于类邻接的假设。如[377]中所述，类邻接假设如下：</p>
+<p>“同一类别中的文件形成一个连续区域，不同类别的区域不重叠。”</p>
+<p>因此，如果同一类别的文件被分成不同的群集，Rocchio的方法就不会奏效。在这种情况下，一类文档的质心甚至可能不在该类的其中一个簇中。 Rocchio方法的一个不好的例子如图13.6所示，其中描述了两个类和四个集群。每个类都与两个不同的集群相关联。在这种情况下，每个类的质心大致相同。因此，Rocchio方法难以区分类别。另一方面，k值较小的k最近邻分类器或基于质心的分类器在这种情况下表现相当好。正如在第十一章所示，k-最近邻分类器的k值的增加增加了它的偏差。 Rocchio分类器可以看作k值最高的k最近邻分类器。</p>
+<h3 id="1352">13.5.2 贝叶斯分类器</h3>
+<p>贝叶斯分类器在第十章10.5.1节中有描述。所描述的特定分类器是二元（或伯努利）模型，其中属于特定类别的文档的后验概率仅使用单词的存在或不存在来计算。 这种特殊情况对应于每个特征（词）取值为0或1，这取决于它是否存在于文档中。 但是，这种方法没有考虑文件中文字的频率。
+<center>
+<img alt="13.6" src="http://p6atp7tts.bkt.clouddn.com/13.6.png" /></p>
+<p>图13.6：一个糟糕的Rocchio方法例子</center></p>
+<h4 id="13521">13.5.2.1 多项式贝叶斯模型</h4>
+<p>更一般的方法是使用多项式贝叶斯模型，其中明确地使用单词的频率。伯努利模型主要用于文档较短的情况，并且绘制在小尺寸的词典上。在大型词典的较大尺寸文件的一般情况下，多项式模型更有效。在讨论多项式模型之前，伯努利模型（参见第10章第10.5.1节）将在文本分类的背景下重新讨论。
+设C是代表未看到的测试实例的类变量的随机变量，其具有d维特征值<span><span class="MathJax_Preview">\bar{X} =（a_1 ... a_d）</span><script type="math/tex">\bar{X} =（a_1 ... a_d）</script></span>。对于文本数据上的伯努利模型，取决于文献X中是否存在词典的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个词，<span><span class="MathJax_Preview">a_i</span><script type="math/tex">a_i</script></span>的每个值是1或0。目标是估计后验概率<span><span class="MathJax_Preview">P(C=c|X=(a_1 ... a_d))</span><script type="math/tex">P(C=c|X=(a_1 ... a_d))</script></span>。令X的各个维度的随机变量表示为<span><span class="MathJax_Preview">X =（x_1 ... x_d）</span><script type="math/tex">X =（x_1 ... x_d）</script></span>。然后，期望估计条件概率<span><span class="MathJax_Preview">P(C=c|x_1=a_1，...，x_d = a_d)</span><script type="math/tex">P(C=c|x_1=a_1，...，x_d = a_d)</script></span>。然后，通过使用贝叶斯定理，可以推导出以下等价。</p>
+<div>
+<div class="MathJax_Preview">P（C=c| x_1=a_1...x_d=a_d）=\frac{ P（C=c）P（x_1=a_1...x_d=a_d）|C=c}{ P（x_1=a_1...x_d=a_d）}\tag{13.17}$$    $$∝P（C=c）=P（x_1=a_1...x_d=a_d|C=c)\tag{13.18}$$    $$P（C=c）=\prod_{i=1}^dP(x_i=a_i|C=c)\tag{13.19}</div>
+<script type="math/tex; mode=display">P（C=c| x_1=a_1...x_d=a_d）=\frac{ P（C=c）P（x_1=a_1...x_d=a_d）|C=c}{ P（x_1=a_1...x_d=a_d）}\tag{13.17}$$    $$∝P（C=c）=P（x_1=a_1...x_d=a_d|C=c)\tag{13.18}$$    $$P（C=c）=\prod_{i=1}^dP(x_i=a_i|C=c)\tag{13.19}</script>
+</div>
+<p>上述关系中的最后一项是基于条件独立的天真假设。在第二章讨论的二元模型中。在图10中，根据单词的存在或不存在，每个属性值<span><span class="MathJax_Preview">a_i</span><script type="math/tex">a_i</script></span>取值1或0。因此，如果包含单词i的类c中的文档的部分由<span><span class="MathJax_Preview">p（i，c）</span><script type="math/tex">p（i，c）</script></span>表示，那么<span><span class="MathJax_Preview">P（i = a_i | C = c）)</span><script type="math/tex">P（i = a_i | C = c）)</script></span>的值估计为<span><span class="MathJax_Preview">p（i，c）</span><script type="math/tex">p（i，c）</script></span>或1 -$ p（i，c）<span><span class="MathJax_Preview">分别取决于</span><script type="math/tex">分别取决于</script></span>a_i$是1还是0。请注意，这种方法显然会惩罚文档中的字词不存在。较大的词典大小会导致文档中缺少许多单词。因此，伯努利模型可能会以缺席而非词存在为主。字缺失通常与班级标签弱相关。这会导致评估中出现更大的噪音。此外，这种方法忽略了单词的差异频率。更长的文件更可能有重复的单词。多项模型旨在解决这些问题。</p>
+<p>在多项式模型中，文档中的L项被视为来自多项分布的样本。文档中的术语总数（或文档长度）由<span><span class="MathJax_Preview">L=\sum_{j=1}^da_1</span><script type="math/tex">L=\sum_{j=1}^da_1</script></span>表示。在这种情况下，<span><span class="MathJax_Preview">a_i</span><script type="math/tex">a_i</script></span>的值被假定为文档中术语的原始频率。具有频率向量<span><span class="MathJax_Preview">（a_1 ... a_d）</span><script type="math/tex">（a_1 ... a_d）</script></span>的测试文档的后验概率使用以下生成方法来定义和估计：</p>
+<ol>
+<li>
+<p>用类别特定的先验概率对类别c进行抽样。</p>
+</li>
+<li>
+<p>从所选类别的术语分布中取样L条款。 术语分布使用多项式模型来定义。 采样过程产生频率矢量<span><span class="MathJax_Preview">（a_1 ... a_d）</span><script type="math/tex">（a_1 ... a_d）</script></span>。 所有培训和测试文件被假定为这个生成过程的观察样本。 因此，生成过程的所有模型参数都是从训练数据中估计出来的。</p>
+</li>
+<li>
+<p>测试实例分类：根据测试文档中观察到的词频<span><span class="MathJax_Preview">（a_1 ... a_d）</span><script type="math/tex">（a_1 ... a_d）</script></span>，在第一生成步骤中选择类别c的后验概率是多少？</p>
+</li>
+</ol>
+<p>当考虑L个不同样本的顺序排序时，对不同样本进行取样以产生表示<span><span class="MathJax_Preview">（a_1 ... a_d）</span><script type="math/tex">（a_1 ... a_d）</script></span>的可能方式的数量由下式给出：<span><span class="MathJax_Preview">\frac{L!}{\prod_{i:a_i&gt;0}a_i!}</span><script type="math/tex">\frac{L!}{\prod_{i:a_i>0}a_i!}</script></span>通过使用朴素独立性假设，这些序列中每一个的概率由<span><span class="MathJax_Preview">\prod_{i:a_i&gt;0}a_i!P(i,c)^{a_i}</span><script type="math/tex">\prod_{i:a_i>0}a_i!P(i,c)^{a_i}</script></span>给出。 在这种情况下，<span><span class="MathJax_Preview">p（i，c)</span><script type="math/tex">p（i，c)</script></span>被估计为包括重复在内的类c中词i出现的分数。 因此，与伯努利模型不同，在属于类c的文档中重复出现单词i将增加<span><span class="MathJax_Preview">p（i，c）</span><script type="math/tex">p（i，c）</script></span>。 如果<span><span class="MathJax_Preview">n（i，c）</span><script type="math/tex">n（i，c）</script></span>是属于类c的所有文档中词i的出现次数，则<span><span class="MathJax_Preview">p（i，c）=\frac{n(i,c)}{\sum(n(i,c))}</span><script type="math/tex">p（i，c）=\frac{n(i,c)}{\sum(n(i,c))}</script></span>。 然后，类别条件特征分布估计如下：  </p>
+<div>
+<div class="MathJax_Preview">P（ x_1=a_1...x_d=a_d|C=c）=\frac{L!}{\prod_{i:a_i&gt;0}a_i!}\prod_{i:a_i&gt;0}p(i,c)^{a_i}\tag{13.20}</div>
+<script type="math/tex; mode=display">P（ x_1=a_1...x_d=a_d|C=c）=\frac{L!}{\prod_{i:a_i>0}a_i!}\prod_{i:a_i>0}p(i,c)^{a_i}\tag{13.20}</script>
+</div>
+<p>使用贝叶斯规则，多项式贝叶斯模型计算测试文档的后验概率如下：</p>
+<div>
+<div class="MathJax_Preview">P（C=c| x_1=a_1...x_d=a_d）=\frac{ P（C=c）P（x_1=a_1...x_d=a_d）|C=c}{ P（x_1=a_1...x_d=a_d）}\tag{13.21}</div>
+<script type="math/tex; mode=display">P（C=c| x_1=a_1...x_d=a_d）=\frac{ P（C=c）P（x_1=a_1...x_d=a_d）|C=c}{ P（x_1=a_1...x_d=a_d）}\tag{13.21}</script>
+</div>
+<div>
+<div class="MathJax_Preview">P（C=c）\tag{13.22}\frac{L!}{\prod_{i:a_i&gt;0}a_i!}\prod_{i:a_i&gt;0}p(i,c)^{a_i}$$     $$∝P（C=c）\tag{13.22}\prod_{i:a_i&gt;0}p(i,c)^{a_i}</div>
+<script type="math/tex; mode=display">P（C=c）\tag{13.22}\frac{L!}{\prod_{i:a_i>0}a_i!}\prod_{i:a_i>0}p(i,c)^{a_i}$$     $$∝P（C=c）\tag{13.22}\prod_{i:a_i>0}p(i,c)^{a_i}</script>
+</div>
+<p>恒定的因素<span><span class="MathJax_Preview">\frac{L!}{\prod_{i:a_i&gt;0}a_i!}</span><script type="math/tex">\frac{L!}{\prod_{i:a_i>0}a_i!}</script></span>已从最后一个条件中删除，因为它在所有类中都是相同的。 请注意，在这种情况下，右侧的产品仅使用那些词i，因为<span><span class="MathJax_Preview">a_i</span><script type="math/tex">a_i</script></span>严格大于0.因此，忽略单词的发生。 在这种情况下，我们假设每个ai是一个单词的原始频率，它是一个整数。 也可以使用具有词的tf-idf频率的多项式贝叶斯模型，其中频率<span><span class="MathJax_Preview">a_i</span><script type="math/tex">a_i</script></span>可以是分数。 然而，在这种情况下，生成性解释变得不太直观。</p>
+<h3 id="1353-svm">13.5.3 用于高维和稀疏数据的SVM分类器</h3>
+<p>SVM公式的拉格朗日对偶中的项数与尺寸数的平方成比例。建议读者参考第十章10.6节。第十一章11.4.2节进行相关讨论。而中的SVMLight方法。 11章11.4.2通过修改算法来解决这个问题，它不会对SVM公式本身进行修改。最重要的是，该方法没有做出任何修改来解决文本数据的高维度和稀疏性质。
+文本域是高维和稀疏的。对于给定的文本文档，只有一小部分维度取非零值。此外，线性分类器对于文本域往往工作得相当好，通常不需要使用分类器的核心化版本。因此，关注线性分类器是很自然的，并且通过使用文本的特定领域特定特征来询问是否有可能进一步提高SVM分类的复杂性。 SVMPerf是为文本分类设计的线性时间算法。其训练复杂度为<span><span class="MathJax_Preview">O（n·s）</span><script type="math/tex">O（n·s）</script></span>，其中s是集合中每个训练文档的非零属性的平均数。
+为了解释这种方法，我们首先简要回顾一下在第二部分介绍的基于软件罚函数的SVM公式。10章10.6节问题定义被称为优化公式（OP1），如下所示：</p>
+<div>
+<div class="MathJax_Preview">(OP1):Minimize\frac{||\bar{W}||}{2}+C\frac{\sum_{i=1}^n\varepsilon_i}{n}</div>
+<script type="math/tex; mode=display">(OP1):Minimize\frac{||\bar{W}||}{2}+C\frac{\sum_{i=1}^n\varepsilon_i}{n}</script>
+</div>
+<p>受限于：</p>
+<div>
+<div class="MathJax_Preview">y_i\bar{W}*\bar{X_i}&gt;=1-\varepsilon_i,\varepsilon_i&gt;=0</div>
+<script type="math/tex; mode=display">y_i\bar{W}*\bar{X_i}>=1-\varepsilon_i,\varepsilon_i>=0</script>
+</div>
+<p>与第十章的常规SVM公式的一个不同之处在于是常数项b缺失。传统的SVM公式使用约束<span><span class="MathJax_Preview">y_i（\bar{W}·\bar{X_i} + b）≥1 -\varepsilon_i</span><script type="math/tex">y_i（\bar{W}·\bar{X_i} + b）≥1 -\varepsilon_i</script></span>。然而，这两个公式是等价的，因为可以证明在每个训练实例中添加一个具有恒定值1的虚拟特征具有相同的效果。该特征的W系数将等于b。与常规公式的另一个细微差别是目标函数中的松弛分量被缩放n倍。这不是一个重要的差别，因为常数C可以相应地调整。符号中的这些细微变化是为了简化代数而不失一般性的。</p>
+<p>SVMPerf方法用单个松弛变量ξ和通过对（OP1）中的n个约束的随机子集进行求和而生成的2n个约束来重新表达这个问题。令U =（u1 ... un）∈{0,1} n表示约束的指标向量，这些约束被加总以创建这个新的合成约束。 SVM模型的另一个公式如下：</p>
+<div>
+<div class="MathJax_Preview">(OP2):Minimize\frac{||\bar{W}||}{2}+C\varepsilon</div>
+<script type="math/tex; mode=display">(OP2):Minimize\frac{||\bar{W}||}{2}+C\varepsilon</script>
+</div>
+<p>受限于：</p>
+<div>
+<div class="MathJax_Preview">\frac{1}{n}\sum_{i=1}{n}u_iy_i\bar{W}*\bar{X_i}&gt;=\frac{\sum_{i=1}^{n}}{n}-\varepsilon_i,\varepsilon_i&gt;=0</div>
+<script type="math/tex; mode=display">\frac{1}{n}\sum_{i=1}{n}u_iy_i\bar{W}*\bar{X_i}>=\frac{\sum_{i=1}^{n}}{n}-\varepsilon_i,\varepsilon_i>=0</script>
+</div>
+<p>优化公式（OP2）与（OP1）的不同之处在于它只有一个松弛变量<span><span class="MathJax_Preview">ξ</span><script type="math/tex">ξ</script></span>，但<span><span class="MathJax_Preview">2^n</span><script type="math/tex">2^n</script></span>个约束表示（OP1）中每个约束子集的总和。 可以看出，（OP1）和（OP2）的解之间存在一对一的对应关系。
+<strong>引理13.5.1</strong>（OP1）和（OP2）的解之间存在一对一的对应关系，在两个模型中<span><span class="MathJax_Preview">\bar{W} =\bar{W^*}</span><script type="math/tex">\bar{W} =\bar{W^*}</script></span>  的值相等，并且<span><span class="MathJax_Preview">ξ* =\frac{\sum_{i=1}^n{ξ^*}}{n}</span><script type="math/tex">ξ* =\frac{\sum_{i=1}^n{ξ^*}}{n}</script></span>.
+**证明：**我们将证明，如果（OP1）和（OP2）的<span><span class="MathJax_Preview">\bar{W}</span><script type="math/tex">\bar{W}</script></span>值相同，则它将导致相同的目标函数值。 第一步是根据（OP1）和（OP2）的这个W值导出松弛变量。 对于问题（OP1），它可以从松弛约束导出，为了最小化松弛惩罚，ξi的最优值可以达到<span><span class="MathJax_Preview">ξ_i= max ({0,1 - y_i\bar{W}·bar{X_i}})</span><script type="math/tex">ξ_i= max ({0,1 - y_i\bar{W}·bar{X_i}})</script></span>。 对于问题OP2，<span><span class="MathJax_Preview">ξ</span><script type="math/tex">ξ</script></span>的相似结果可以得到：</p>
+<div>
+<div class="MathJax_Preview">ξ=max_{u_1...u_n}(\frac{\sum_{i=1}^nu_i}{n}-\frac{1}{n}\sum_{i=1}^nu_iy_i\bar{W}\bar{X_i})\tag{13.24}</div>
+<script type="math/tex; mode=display">ξ=max_{u_1...u_n}(\frac{\sum_{i=1}^nu_i}{n}-\frac{1}{n}\sum_{i=1}^nu_iy_i\bar{W}\bar{X_i})\tag{13.24}</script>
+</div>
+<p>因为这个函数在<span><span class="MathJax_Preview">u_i</span><script type="math/tex">u_i</script></span>中是线性可分的，所以可以推动求和内的最大值，并为每个<span><span class="MathJax_Preview">u_i</span><script type="math/tex">u_i</script></span>独立地进行优化：</p>
+<div>
+<div class="MathJax_Preview">ξ=\sum_{i=1}^nmax_{u_i}u_i(\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i})\tag{13.25}</div>
+<script type="math/tex; mode=display">ξ=\sum_{i=1}^nmax_{u_i}u_i(\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i})\tag{13.25}</script>
+</div>
+<p>为了最优化，<span><span class="MathJax_Preview">u_i</span><script type="math/tex">u_i</script></span>的值应该被选为1，否则只有<span><span class="MathJax_Preview">\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i}</span><script type="math/tex">\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i}</script></span>和0的正值。 因此，可以显示以下内容：</p>
+<div>
+<div class="MathJax_Preview">ξ=\sum_{i=1}^nmax_{u_i}u_i(0,\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i})\tag{13.26}</div>
+<script type="math/tex; mode=display">ξ=\sum_{i=1}^nmax_{u_i}u_i(0,\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i})\tag{13.26}</script>
+</div>
+<div>
+<div class="MathJax_Preview">=\frac{1}{n}\sum_{i=1}^nmax_{u_i}u_i(\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i})=\frac{\sum_{i=1}^n{ξ_i}}{n}\tag{13.27}</div>
+<script type="math/tex; mode=display">=\frac{1}{n}\sum_{i=1}^nmax_{u_i}u_i(\frac{1}{n}-\frac{1}{n}\sum_{i=1}^ny_i\bar{W}\bar{X_i})=\frac{\sum_{i=1}^n{ξ_i}}{n}\tag{13.27}</script>
+</div>
+<p>（OP1）和（OP2）中W的最优值之间的这种一一对应意味着两个优化问题是等价的。
+因此，通过确定问题的最优解（OP2），也有可能确定（OP1）的最优解。当然，现在还不清楚，为什么（OP2）比（OP1）更好。毕竟，问题（OP2）包含指数数量的约束，并且似乎甚至难以枚举约束，更不用说解决它们了。
+即便如此，优化公式（OP2）确实比（OP1）有一些优势。首先，一个单一的松弛变量衡量所有约束的可行性。这意味着所有约束条件都可以用<span><span class="MathJax_Preview">（\bar{W}，ξ）</span><script type="math/tex">（\bar{W}，ξ）</script></span>表示。因此，如果一个人只用2n个约束的一个子集来解决优化问题，其余的都满足精度为由<span><span class="MathJax_Preview">（\bar{W}，ξ）</span><script type="math/tex">（\bar{W}，ξ）</script></span>确定，那么保证<span><span class="MathJax_Preview">（\bar{W}，ξ+\varepsilon）</span><script type="math/tex">（\bar{W}，ξ+\varepsilon）</script></span>对于全部约束是可行的。
+关键是不要明确使用所有的约束。相反，<span><span class="MathJax_Preview">2^n</span><script type="math/tex">2^n</script></span>约束的小子集WS用作工作集。我们从一个空的工作集WS开始。解决了相应的优化问题，并且将不在WS中的约束条件中违反约束最多的约束条件添加到工作集中。对于受到最严重约束的矢量U相对容易找到。如果<span><span class="MathJax_Preview">y_i\bar{W}·\bar{X_i} &lt;1</span><script type="math/tex">y_i\bar{W}·\bar{X_i} <1</script></span>，则将<span><span class="MathJax_Preview">u_i</span><script type="math/tex">u_i</script></span>设置为1，否则为0。因此，添加到工作集WS的迭代步骤如下所示：</p>
+<p>&emsp;1.仅使用工作集合WS中的约束确定（OP2）的目标函数的最优解<span><span class="MathJax_Preview">（\bar{W}，ξ）</span><script type="math/tex">（\bar{W}，ξ）</script></span>。
+&emsp;2.如果<span><span class="MathJax_Preview">y_i\bar{W}·\bar{X_i} &lt;1</span><script type="math/tex">y_i\bar{W}·\bar{X_i} <1</script></span>，则通过将u1设置为1来确定（OP2）的2n个约束条件中的最违反约束条件，否则为0。
+&emsp;3.将最违反的约束添加到WS。
+终止标准是当最违反的约束违反了不超过<span><span class="MathJax_Preview">\varepsilon</span><script type="math/tex">\varepsilon</script></span>的情况。这提供了一个近似解决问题的方法，取决于所需的精度水平？
+这个算法有几个理想的属性。可以证明，解决恒定大小工作集WS的问题所需的时间是<span><span class="MathJax_Preview">O（n·s）</span><script type="math/tex">O（n·s）</script></span>，其中n是训练样本的数量，s是每个示例的非零属性的数量。这对于文本域非常重要，其中非零属性的数量很小。此外，该算法通常以少量不变的迭代结束。因此，工作集WS永远不会超过一个常量大小，并且整个算法终止于<span><span class="MathJax_Preview">O（n·s）</span><script type="math/tex">O（n·s）</script></span>时间.</p>
+<h2 id="136">13.6 新颖性和第一个故事检测</h2>
+<p>在时间文本流挖掘应用的背景下，首要故事检测问题是一种流行的问题。目标是根据流中以前的文本文档的历史记录来确定来自基础文本流的新颖性。这个问题在新闻文件流的情况下尤为重要，新闻文件的第一个故事需要尽快报告。
+一个简单的方法是计算当前文档与所有以前的文档的最大相似度，并将具有非常低的最大相似度值的文档报告为新颖文档。或者，最大相似度值的倒数可连续报告为流式新颖性分数或报警级别。这种方法的主要问题是流的大小会随着时间的推移而不断增加，并且必须计算与以前所有文档的相似度。一种可能性是使用油藏采样来保持文件的不变样本。文档与任何传入文档的最大相似度的倒数被报告为新颖性分数。这种方法的主要缺点是，单个文档对之间的相似性往往不是稳定的总体趋势表示。文本文件稀少，成对相似性往往不能捕捉同义词和多义词的影响</p>
+<h3 id="1361">13.6.1 微聚类方法</h3>
+<p>微聚类方法可用于维护文本文档的在线聚类。这个想法是，微聚类同时决定了底层文本流的聚类和新颖性。基本的微聚类方法在12章12.4节.该方法维护k个不同的集群质心或集群摘要。对于传入文档，计算其与所有质心的相似度。如果此相似度大于用户定义的阈值，则文档将被添加到群集中。通过将文档中的单词的频率添加到相应质心中的单词的频率被更新。对于每个文档，只保留质心中r个最频繁的单词。 r的典型值在200到400之间变化。另一方面，当传入文档与其中一个质心不够相似时，则将其报告为新颖事物或作为第一个故事。创建一个包含单例文档的新集群。为了为新质心腾出空间，需要删除其中一个旧质心。这是通过保持每个群集的最后更新时间来实现的。最陈旧的群集被删除。该算法提供在线能力来报告文本流中的新奇事物。书目注释包含指向该方法的更详细版本的指针。</p>
+<h2 id="137">13.7 小结</h2>
+<p>由于文本域的稀疏性和高维性，文本域有时对采矿目的具有挑战性。因此，需要设计专门的算法。
+第一步是为文本数据构建一个袋装词表示。需要应用几个预处理步骤，如停止词的删除，词干和从表示中删除数字。对于Web文档，还需要预处理技术来移除锚点文本并从页面的主要块中提取文本。
+例如，聚类和分类等问题的算法也需要修改。例如，基于密度的方法很少用于聚类文本。 k表示方法，分层方法和概率方法可以适当地修改以用于文本数据。两种流行的方法包括分散/收集方法和概率EM算法。共聚类方法也常用于文本数据。主题建模可以被看作是共享降维和集群特征的概率建模方法。新颖性检测的问题与文本聚类密切相关。流式文本聚类算法可用于新颖性检测。不适合任何群集的数据点被报告为新奇事物。
+在分类方法中，决策树对于文本数据并不特别流行。另一方面，基于实例的方法，贝叶斯方法和SVM方法更常用。基于实例的方法需要修改以解释同义词和多义词的噪音影响。多项式贝叶斯模型在长文件的文本分类中特别流行。最后，SVMPerf方法通常用于支持向量机的高效文本分类。</p>
+<h2 id="138">13.8 书目注释</h2>
+<p>有关文本挖掘的优秀书籍可以在[377]中找到。本书涵盖了信息检索和挖掘问题。因此，本书很好地解决了预处理和相似度计算等问题。关于文本挖掘的详细调查可以在[31]中找到。树匹配算法的讨论可以在[357,542]中找到。
+本章讨论的分散/收集方法在[168]中提出。 [452]中讨论了为有效文档聚类预测不常用词语的重要性。霍夫曼[271]的论文采纳了PLSA的讨论。 LDA方法是进一步的推广，在[98]中提出。主题建模的调查可以在[99]中找到。 [171，172，437]讨论了文本的联合聚类方法。在生物学数据的背景下，集群问题也被更广泛地研究。关于双聚类方法的一般调查可以在[374]中找到。关于文本聚类的一般调查可以在[31,32]中找到。
+文本分类问题已在文献中广泛探讨。 LSA方法在[184]中进行了讨论。 [249]中讨论了基于质心的文本分类。贝叶斯模型的不同变化的详细描述可以在[31,33]中找到。SVMPerf和SVMLight分类器分别在[291]和[292]中进行了介绍。 有关SVM分类的调查可参见[124]。 文本分类的一般调查可[31,33,453]中找到。
+首先在主题检测和跟踪工作的背景下提出了第一层检测问题[557]。 本章描述的基于微群的新颖性检测方法是根据[48]改编的。 新颖性检测的概率模型可参见[545]。 在[5]中可以找到关于首要检测主题的一般性讨论。</p>
+<h2 id="139">13.9 练习</h2>
+<p>1.实现一个解析一组文本的计算机程序，并将其转换为向量空间表示。使用tf-idf标准化。在创建向量空间表示之前，从http://<a href="http://www.ranks.nl/resources/stopwords.html">www.ranks.nl/resources/stopwords.html</a> 下载停用词表并将其从文档中删除。
+2.讨论应用于文本数据时k-medoids算法的弱点。
+3.假设您将共享最近邻居相似度函数（参见第2章）与余弦相似度配对以实现文本的k均值聚类算法。与直接使用余弦相似度有什么优势？
+4.设计分层和k-means算法的组合，其中合并操作与分配操作交错。讨论其在合并严格在分配之前的分散/聚集聚类算法的优缺点。
+假设你有大量来自Twitter的短消息。设计一个贝叶斯分类器，它使用身份以及推文中前十个单词中每个单词的确切位置来执行分类。你将如何处理包含少于10个单词的推文？
+6.设计一个单链接文本聚类算法的修改，它可以避免过多的链接。
+7.讨论为什么多项式贝叶斯分类模型在比贝努利贝叶斯模型大的词汇更长的文档上效果更好。
+8.假设你有与文档相关的类标签。描述简单的监督降维方法，该方法在文档项矩阵的导数上使用PLSA来产生每个偏向一个或多个类的基向量。你应该能够用参数λ控制监督水平。
+9.设计一个用于聚类文本数据的EM算法，其中文档是从多项分布而不是伯努利分布生成的。在什么情况下，你会喜欢伯努利模型中的聚类算法？
+10.对于二元类的情况，证明Rocchio方法定义了一个线性决策边界。您如何描述多类案件中的决策边界？
+11.设计一种使用EM算法发现异常文档的方法。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../12/" title="第12章 数据流挖掘" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第12章 数据流挖掘
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../14/" title="第14章 挖掘时间序列数据" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第14章 挖掘时间序列数据
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

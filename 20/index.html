@@ -1,0 +1,1303 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/20/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第20章 数据挖掘中的隐私保护 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#20" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第20章 数据挖掘中的隐私保护
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第20章 数据挖掘中的隐私保护
+      </label>
+    
+    <a href="./" title="第20章 数据挖掘中的隐私保护" class="md-nav__link md-nav__link--active">
+      第20章 数据挖掘中的隐私保护
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201" title="20.1 简介" class="md-nav__link">
+    20.1 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202" title="20.2 数据收集期间的隐私" class="md-nav__link">
+    20.2 数据收集期间的隐私
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2021" title="20.2.1 重构总分布" class="md-nav__link">
+    20.2.1 重构总分布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2022" title="20.2.2 利用聚合分布进行数据挖掘" class="md-nav__link">
+    20.2.2 利用聚合分布进行数据挖掘
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203" title="20.3 隐私保护数据发布" class="md-nav__link">
+    20.3 隐私保护数据发布
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2031-k-anonymityk-anonymity" title="20.3.1 k-anonymityk-anonymity模型" class="md-nav__link">
+    20.3.1 k-anonymityk-anonymity模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#20311-samaratisamarati" title="20.3.1.1 SamaratiSamarati的算法" class="md-nav__link">
+    20.3.1.1 SamaratiSamarati的算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20312-incognitoincognito" title="20.3.1.2 IncognitoIncognito" class="md-nav__link">
+    20.3.1.2 IncognitoIncognito
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20313-mondrianmondriank-anonymitk-anonymit" title="20.3.1.3 MondrianMondrian多维k-Anonymitk-Anonymit" class="md-nav__link">
+    20.3.1.3 MondrianMondrian多维k-Anonymitk-Anonymit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20314" title="20.3.1.4 合成数据生成：基于缩合的方法" class="md-nav__link">
+    20.3.1.4 合成数据生成：基于缩合的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2032-ell-diversityell-diversity" title="20.3.2 \ell -diversity\ell -diversity模型" class="md-nav__link">
+    20.3.2 \ell -diversity\ell -diversity模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2033-t-closenesst-closeness" title="20.3.3  t-closenesst-closeness 模型" class="md-nav__link">
+    20.3.3  t-closenesst-closeness 模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2034" title="20.3.4 维度惩罚" class="md-nav__link">
+    20.3.4 维度惩罚
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#204" title="20.4 输出保密" class="md-nav__link">
+    20.4 输出保密
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#205" title="20.5 分布式隐私" class="md-nav__link">
+    20.5 分布式隐私
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#206" title="20.6 总结" class="md-nav__link">
+    20.6 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#207" title="20.7 书目注释" class="md-nav__link">
+    20.7 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#208" title="20.8 习题" class="md-nav__link">
+    20.8 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201" title="20.1 简介" class="md-nav__link">
+    20.1 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202" title="20.2 数据收集期间的隐私" class="md-nav__link">
+    20.2 数据收集期间的隐私
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2021" title="20.2.1 重构总分布" class="md-nav__link">
+    20.2.1 重构总分布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2022" title="20.2.2 利用聚合分布进行数据挖掘" class="md-nav__link">
+    20.2.2 利用聚合分布进行数据挖掘
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203" title="20.3 隐私保护数据发布" class="md-nav__link">
+    20.3 隐私保护数据发布
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2031-k-anonymityk-anonymity" title="20.3.1 k-anonymityk-anonymity模型" class="md-nav__link">
+    20.3.1 k-anonymityk-anonymity模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#20311-samaratisamarati" title="20.3.1.1 SamaratiSamarati的算法" class="md-nav__link">
+    20.3.1.1 SamaratiSamarati的算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20312-incognitoincognito" title="20.3.1.2 IncognitoIncognito" class="md-nav__link">
+    20.3.1.2 IncognitoIncognito
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20313-mondrianmondriank-anonymitk-anonymit" title="20.3.1.3 MondrianMondrian多维k-Anonymitk-Anonymit" class="md-nav__link">
+    20.3.1.3 MondrianMondrian多维k-Anonymitk-Anonymit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20314" title="20.3.1.4 合成数据生成：基于缩合的方法" class="md-nav__link">
+    20.3.1.4 合成数据生成：基于缩合的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2032-ell-diversityell-diversity" title="20.3.2 \ell -diversity\ell -diversity模型" class="md-nav__link">
+    20.3.2 \ell -diversity\ell -diversity模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2033-t-closenesst-closeness" title="20.3.3  t-closenesst-closeness 模型" class="md-nav__link">
+    20.3.3  t-closenesst-closeness 模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2034" title="20.3.4 维度惩罚" class="md-nav__link">
+    20.3.4 维度惩罚
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#204" title="20.4 输出保密" class="md-nav__link">
+    20.4 输出保密
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#205" title="20.5 分布式隐私" class="md-nav__link">
+    20.5 分布式隐私
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#206" title="20.6 总结" class="md-nav__link">
+    20.6 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#207" title="20.7 书目注释" class="md-nav__link">
+    20.7 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#208" title="20.8 习题" class="md-nav__link">
+    20.8 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/20.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="20">第20章 数据挖掘中的隐私保护</h1>
+<!--本章由宋宇翻译-->
+
+<blockquote>
+<p>“文明是一个隐私社会的进步。野蛮人的整个存在是公开的，由他的部落的法律来统治。文明是让男人摆脱男人的过程。“ - Ayn Rand</p>
+</blockquote>
+<h2 id="201">20.1 简介</h2>
+<p>大量的应用数据属于个人性质。这些数据集可能包含有关个人的敏感信息，例如他或她的财务状况，政治信仰，性取向和病史。有关此类个人信息的知识可能会危及个人的隐私。 因此，设计数据收集，传播和挖掘技术至关重要，以确保个人隐私。隐私保护方法通常可以在数据挖掘过程的不同步骤中执行：</p>
+<ol>
+<li>数据收集和发布：数据集的隐私驱动修改可以在数据收集时间或数据发布时间完成。在匿名数据收集中，使用收集平台内的软件插件收集数据的修改版本。因此，数据的贡献者确信他们的数据甚至不可用于收集数据的实体。面向集合的模型中的隐含假设是数据收集器不可信，因此必须在收集时保留隐私。在匿名数据发布中，整个数据集可供可信实体使用，该实体通常在正常业务过程中收集数据。一个例子是收集有关患者数据的医院。最终，实体可能希望将数据发布或发布给更多的第三方之一进行数据分析。例如，医院可能希望使用这些数据来研究各种治疗方案的长期影响。一个真实世界的例子是Netflix奖金数据集[559]，其中发布了用户的匿名电影评级，以推进关于协作过滤算法的研究。在数据发布期间，识别或敏感的属性值需要被删除或被指定为大约以保护隐私。通常，这些发布算法可以比收集算法更好地控制隐私级别，因为它们可以访问可信服务器上的整个数据集。</li>
+<li>数据挖掘算法的输出隐私：数据挖掘算法的输出也可能违反隐私。 例如，考虑允许用户确定关联模式或通过Web服务查询数据但不提供对数据集访问权限的情况。 在这种情况下，数据挖掘和查询处理算法的输出提供了有价值的信息，其中一些可能是私有的。</li>
+</ol>
+<p>在某些应用程序中，组织可能希望以私人方式共享其数据，以便只能共享数据中的模式，但本地数据库的统计数据不会泄露给参与者。这个问题被称为分布式隐私保护。</p>
+<p>一般来说，大多数形式的隐私保护数据挖掘降低了数据的表示准确性，以保护隐私。这种精度降低以各种方式执行，例如数据失真，近似（概括），抑制，属性值交换或微聚集。显然，由于数据不再精确确定，这将对数据挖掘结果的质量产生不利影响。发布的数据对挖掘应用程序的有效性通常会被明确量化，并被称为它的效用。隐私和效用之间存在自然的折衷。例如，在数据值被抑制的情况下，可以简单地选择抑制所有条目。虽然这样的解决方案提供了完美的隐私，但它不提供实用性这种观察也适用于将噪声添加到数据中的隐私保护发布算法。当增加更多的噪音时，隐私得到更高的保护，但效用降低。隐私保护方法的目标是在固定隐私水平上最大化效用。</p>
+<p>本章安排如下。 隐私保护数据收集的方法请参见20.2节。第20.3节解决了隐私保护数据发布的问题。 本节包括几个模型，例如<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型，<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>模型和<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>模型。 产出隐私问题在20.4节中得到解决。 有关分发和加密隐私的方法，请参见20.5节，总结在20.6节中给出。</p>
+<h2 id="202">20.2 数据收集期间的隐私</h2>
+<p>随机化方法是为数据收集时的隐私保护而设计的。隐含的假设是数据收集器不可信，因此必须在数据收集时保留隐私。该方法的基本思想是允许用户通过软件平台输入数据，该软件平台可以为数据添加随机扰动。这种方法是确保数据隐私的最保守的模型之一，因为原始数据记录永远不会存储在任何单个服务器上。随机扰动是使用公开可用的分布添加的。常用扰动分布的例子包括均匀分布和高斯分布。换句话说，如果当数据收集器发布数据供公众使用时，用于干扰数据的概率分布与数据集一起指定。为了在数据挖掘算法的上下文中有效地使用数据，需要此额外的分发信息。基本思想是通过“减去”噪音分布来重建原始数据的分布。这个总计分配然后用于采矿目的。总体方法如下：</p>
+<ol>
+<li>隐私保护数据收集：在这一步骤中，随机噪声被添加到数据中，同时使用软件插件收集用户的数据。 收集到的数据与用于添加随机噪声的概率分布函数（和参数）一起公开发布。</li>
+<li>分布重构：通过“减去”噪声重建原始数据的总体分布。 因此，在这个步骤结束时，我们将有一个直方图来表示数据值的近似概率分布。</li>
+<li>数据挖掘：将数据挖掘方法应用于重构的分布。</li>
+</ol>
+<p>需要注意的是，该过程的最后一步需要设计数据挖掘算法，该算法可以处理数据记录集合的概率分布，而不是单个记录。 因此，这种方法的一个缺点是需要重新设计数据挖掘算法。 尽管如此，可以使该方法起作用，因为诸如聚类和分类的许多数据挖掘问题仅需要对整个数据集或数据段（例如，不同类别）的概率分布建模。</p>
+<h3 id="2021">20.2.1 重构总分布</h3>
+<p>原始数据总体分布的重构是随机化方法的关键步骤。 考虑从概率分布X绘制原始数据值<span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span> ... <span><span class="MathJax_Preview">x_n</span><script type="math/tex">x_n</script></span>的情况。对于每个原始数据值<span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span>，通过软件数据收集工具添加扰动<span><span class="MathJax_Preview">y_1</span><script type="math/tex">y_1</script></span>以产生扰动值<span><span class="MathJax_Preview">z_1</span><script type="math/tex">z_1</script></span>。 扰动<span><span class="MathJax_Preview">y_1</span><script type="math/tex">y_1</script></span>是从概率分布Y中抽取的，并且与X无关。假设这种分布是公开已知的。 此外，假设最终的扰动值集合的概率分布为Z.因此，原始分布X，附加扰动Y和最终集合分布Z关联如下：</p>
+<p>​                                                                                    <span><span class="MathJax_Preview">Z = X + Y</span><script type="math/tex">Z = X + Y</script></span>
+                                                                                    <span><span class="MathJax_Preview">X = Z – Y</span><script type="math/tex">X = Z – Y</script></span></p>
+<p>因此，如果明确知道<span><span class="MathJax_Preview">Y和Z</span><script type="math/tex">Y和Z</script></span>的分布，则可以重构<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的概率分布。 假设Y的概率分布是公开可用的，而<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的离散样本可用<span><span class="MathJax_Preview">z_1</span><script type="math/tex">z_1</script></span> ... <span><span class="MathJax_Preview">z_n</span><script type="math/tex">z_n</script></span>表示。 这些离散样本足以使用各种方法重建<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>，例如核密度估计。 然后，可以使用上面所示的关系重构<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的分布。 当扰动Y的概率分布具有大的方差并且<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的离散样本的数量<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>很小时，这种方法的主要问题出现了。 在这种情况下，<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的分布也具有很大的方差，并且不能用少量样本准确地估计。 因此，第二种方法是直接估计<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的离散样本中<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的分布和<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的已知分布。</p>
+<p>令<span><span class="MathJax_Preview">f_{X}</span><script type="math/tex">f_{X}</script></span>和<span><span class="MathJax_Preview">F_{X}</span><script type="math/tex">F_{X}</script></span>为<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的概率密度函数和累积分布函数。这些函数需要用观测值<span><span class="MathJax_Preview">z_1</span><script type="math/tex">z_1</script></span> ... <span><span class="MathJax_Preview">z_n</span><script type="math/tex">z_n</script></span>来估计。 令<span><span class="MathJax_Preview">\hat{f_{X}}</span><script type="math/tex">\hat{f_{X}}</script></span>和<span><span class="MathJax_Preview">\hat{F_{X}}</span><script type="math/tex">\hat{F_{X}}</script></span>为X的相应的估计概率密度和累积分布函数。这里的关键是使用<span><span class="MathJax_Preview">Bayes</span><script type="math/tex">Bayes</script></span>公式并使用Z的观测值。考虑简化的情况，其中只有单个观测值<span><span class="MathJax_Preview">z_1</span><script type="math/tex">z_1</script></span> 可用。 这可以用来估计随机变量<span><span class="MathJax_Preview">X = a</span><script type="math/tex">X = a</script></span>的任何值的累积分布函数<span><span class="MathJax_Preview">\hat{F_{(a)}}</span><script type="math/tex">\hat{F_{(a)}}</script></span>。 贝叶斯定理产生以下结果：</p>
+<p><span><span class="MathJax_Preview">\hat{F_{X}}=\frac{\int_{w=-\infty }^{w=a} f_X(w|X+Y=z_1)dw}{\int_{w=-\infty }^{w=\infty} f_X(w|X+Y=z_1)dw }\tag{20.1}</span><script type="math/tex">\hat{F_{X}}=\frac{\int_{w=-\infty }^{w=a} f_X(w|X+Y=z_1)dw}{\int_{w=-\infty }^{w=\infty} f_X(w|X+Y=z_1)dw }\tag{20.1}</script></span>  </p>
+<p>该表达式使用扰动<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>与<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>无关的事实。通过代替前述表达式在等式的右边的 <span><span class="MathJax_Preview">f_x(w|X+Y=z_1)</span><script type="math/tex">f_x(w|X+Y=z_1)</script></span>。 对于<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的累积密度获得以下表达式：</p>
+<p><span><span class="MathJax_Preview">f_x(w|X+Y=z_1)dw=f_Y(w|z_1-w)* f_X(w) dw      \tag{20.2}</span><script type="math/tex">f_x(w|X+Y=z_1)dw=f_Y(w|z_1-w)* f_X(w) dw      \tag{20.2}</script></span></p>
+<p>该表达式使用摄动<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>与<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>无关的事实。通过将上述表达式代入式右边的<span><span class="MathJax_Preview">f_x(w|X+Y=z_1)</span><script type="math/tex">f_x(w|X+Y=z_1)</script></span>，对于<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的累积密度获得以下表达式：</p>
+<p><span><span class="MathJax_Preview">\hat{F_{X}(a)}=\frac{\int_{w=-\infty }^{w=a} f_Y(w|z_1-w)* f_X(w) dw}{\int_{w=-\infty }^{w=\infty} f_Y(w|z_1-w)* f_X(w)dw }            \tag{20.3}</span><script type="math/tex">\hat{F_{X}(a)}=\frac{\int_{w=-\infty }^{w=a} f_Y(w|z_1-w)* f_X(w) dw}{\int_{w=-\infty }^{w=\infty} f_Y(w|z_1-w)* f_X(w)dw }            \tag{20.3}</script></span></p>
+<p><span><span class="MathJax_Preview">\hat{F_{(a)}}</span><script type="math/tex">\hat{F_{(a)}}</script></span>的表达式是使用单个观测<span><span class="MathJax_Preview">z _1</span><script type="math/tex">z _1</script></span>导出的，需要推广到n个不同观测值<span><span class="MathJax_Preview">z_1</span><script type="math/tex">z_1</script></span> ... <span><span class="MathJax_Preview">z_n</span><script type="math/tex">z_n</script></span>的情况。 这可以通过将以前的表达式平均到n个不同的值来实现：</p>
+<p><span><span class="MathJax_Preview">\hat{F_{X}(a)}=\frac{1}{N}  \sum_{i=1}^n \frac{\int_{w=-\infty }^{w=a} f_Y(w|z_1-w)* f_X(w) dw}{\int_{w=-\infty }^{w=\infty} f_Y(w|z_1-w)* f_X(w)dw }                          \tag{20.4}</span><script type="math/tex">\hat{F_{X}(a)}=\frac{1}{N}  \sum_{i=1}^n \frac{\int_{w=-\infty }^{w=a} f_Y(w|z_1-w)* f_X(w) dw}{\int_{w=-\infty }^{w=\infty} f_Y(w|z_1-w)* f_X(w)dw }                          \tag{20.4}</script></span></p>
+<p>通过区分<span><span class="MathJax_Preview">\hat{F_{(a)}}</span><script type="math/tex">\hat{F_{(a)}}</script></span>可以获得相应的密度分布。 这种区分导致从分子中去除积分符号，并将<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>的相应实例化为<span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>。 由于分母是一个常数，因此它不受分化的影响。 因此，以下是推导而来的：</p>
+<p><span><span class="MathJax_Preview">\hat{F_{X}(a)}=\frac{1}{N}  \sum_{i=1}^n \frac{f_Y(z_i-a)* f_X(a)}{\int_{w=-\infty }^{w=\infty} f_Y(z_i-w)* f_X(w)dw }              \tag{20.5}</span><script type="math/tex">\hat{F_{X}(a)}=\frac{1}{N}  \sum_{i=1}^n \frac{f_Y(z_i-a)* f_X(a)}{\int_{w=-\infty }^{w=\infty} f_Y(z_i-w)* f_X(w)dw }              \tag{20.5}</script></span></p>
+<p>上述方程包含两侧的密度函数<span><span class="MathJax_Preview">f _X(·)</span><script type="math/tex">f _X(·)</script></span>。 这种循环性可以使用迭代方法自然解决。 迭代方法将分布<span><span class="MathJax_Preview">f _X(·)</span><script type="math/tex">f _X(·)</script></span>的估计值初始化为均匀分布。 随后，这种分配的估计值不断更新如下：</p>
+<ul>
+<li>将<span><span class="MathJax_Preview">f _X(·)</span><script type="math/tex">f _X(·)</script></span>设为均匀分布;</li>
+<li>重复</li>
+<li>更新  <span><span class="MathJax_Preview">\hat{F_{X}(a)}=\frac{1}{N}  \sum_{i=1}^n \frac{f_Y(z_i-a)·\hat{ f_X}(a)}{\int_{w=-\infty }^{w=\infty} f_Y(z_i-w)·\hat{ f_X}(w)dw }</span><script type="math/tex">\hat{F_{X}(a)}=\frac{1}{N}  \sum_{i=1}^n \frac{f_Y(z_i-a)·\hat{ f_X}(a)}{\int_{w=-\infty }^{w=\infty} f_Y(z_i-w)·\hat{ f_X}(w)dw }</script></span></li>
+<li>直到收敛</li>
+</ul>
+<p>到目前为止，已经描述过如何计算<span><span class="MathJax_Preview">f_{X}(a)</span><script type="math/tex">f_{X}(a)</script></span>的某个特定值。为了推广这种方法，其思想是将随机变量X的范围离散成k个区间，用<span><span class="MathJax_Preview">[l _1，u _1] ... [l_ k，u_ k]</span><script type="math/tex">[l _1，u _1] ... [l_ k，u_ k]</script></span>表示。假定密度分布在离散化间隔上是均匀的。对于每个这样的区间<span><span class="MathJax_Preview">[l_ i，u_i]</span><script type="math/tex">[l_ i，u_i]</script></span>，在该区间的中点<span><span class="MathJax_Preview">a =（l _i + u_ i）/ 2</span><script type="math/tex">a =（l _i + u_ i）/ 2</script></span>处评估密度分布。因此，在每次迭代中，使用k个不同的a值。当分布在算法的连续步骤中没有显着变化时，算法终止。多种方法可用于比较两种分布，如<span><span class="MathJax_Preview">χ2</span><script type="math/tex">χ2</script></span>检验。最简单的方法是在连续迭代的密度分布中点检查密度值的平均变化。虽然已知该算法在实践中有效地执行，但它并未被证明是最佳收敛解决方案。期望最大化<span><span class="MathJax_Preview">（EM）</span><script type="math/tex">（EM）</script></span>方法在后来的工作[28]中被提出，该方法可被证明收敛于最优解。</p>
+<h3 id="2022">20.2.2 利用聚合分布进行数据挖掘</h3>
+<p>该算法确定的总体分布可用于各种数据挖掘问题，如聚类，分类和协作过滤。这是因为每个这些数据挖掘问题都可以通过数据的统计数据来实现，而不是原始的数据记录。在分类问题的情况下，每个类别的概率分布可以从数据重建。然后，这些分布可以直接用于朴素贝叶斯分类器的环境中，如Chap.10中的其他分类器（如决策树）也可以修改为使用总体分布。关键是要使用总体分布来设计决策树的分割标准。书目注释包含指向使用随机化方法的数据挖掘算法的指针。该方法不能有效用于数据挖掘问题，例如依赖于单个数据记录值而非聚合值的异常值检测。一般来说，对于大多数私人数据集而言，异常值分析是一个困难的问题，因为异常值倾向于揭示私人信息。</p>
+<h2 id="203">20.3 隐私保护数据发布</h2>
+<p>隐私保护数据发布与保护隐私的数据收集不同，因为假定所有记录已经可用于可信任方，其可能是数据的当前所有者。 然后该方想要发布（或发布）这些数据以供分析。 例如，医院可能希望发布关于患者的匿名记录以研究各种治疗方案的有效性。 这种形式的数据发布非常有用，因为几乎可以在发布的数据上使用任何数据挖掘算法。 要确定有关个人的敏感信息，攻击者（或攻击者）必须拥有两条主要信息。</p>
+<ol>
+<li>这个数据记录与谁有关？ 尽管直接确定身份的方法是使用识别属性（例如，社会安全号码），但这些属性通常在发布之前从数据中剥离。 正如后面将讨论的，这些简单的消毒方法通常是不够的，因为攻击者可能会使用其他属性（例如年龄和邮政编码）进行联合攻击。</li>
+<li>除了识别属性之外，数据记录还包含大多数人不希望与他人分享的敏感属性。 例如，医院发布医疗数据时，记录可能包含敏感的疾病相关属性。</li>
+</ol>
+<p>数据集中的不同属性可能在促进识别或促进敏感信息发布方面发挥不同的作用。 有三种主要类型的属性：
+<center>                                                                    表 20.1 数据表格的例子
+![20.1 T](<a href="http://p6atp7tts.bkt.clouddn.com/20.1">http://p6atp7tts.bkt.clouddn.com/20.1</a> T.PNG)
+</center></p>
+<ol>
+<li>显式标识符：这些是明确标识个人的属性。例如，个人的社会安全号码<span><span class="MathJax_Preview">（SSN）</span><script type="math/tex">（SSN）</script></span>可被视为明确的标识符。由于该属性在数据清理过程中几乎总是被删除，因此与隐私算法的研究无关。</li>
+<li>伪标识符或准标识符<span><span class="MathJax_Preview">（QID）</span><script type="math/tex">（QID）</script></span>：这些属性并未单独明确标识个人，但可以组合使用以通过将其与公共可用信息（如选民登记名册。这种攻击被称为联动攻击。这些属性的例子包括年龄和邮政编码。严格地说，准标识符是指用于进行链接攻击的特定属性组合，而不是单个属性。</li>
+<li>敏感属性：这些属性被大多数人认为是私密的。例如，在医疗数据集中，个人不喜欢公开的疾病信息。事实上，美国的许多法律（如健康保险流通与责任法案<span><span class="MathJax_Preview">（HIPAA）</span><script type="math/tex">（HIPAA）</script></span>）明确禁止发布此类信息，特别是当敏感属性可以与特定个人联系起来时。</li>
+</ol>
+<p>本章中的大部分讨论将限于准标识符和敏感属性。为了说明这些属性类型的重要性，将使用一个示例。在表20.1中，说明了一组个人的医疗记录。$ SSN$属性是可用于直接识别个体的明确标识符。这些直接识别信息几乎总是在发布之前从数据集中移除。然而，年龄和邮政编码等属性对识别的影响相当重要。虽然这些属性不能直接识别个人，但与其他公开信息结合使用时，它们会提供非常有用的提示。例如，一个小的地理区域（例如邮政编码）可能只包含特定性别，种族和出生日期的一个人。当与公共可用的选民登记名册结合使用时，可以从这些属性中识别出一个人。公共可用属性的这种组合被称为准标识符。</p>
+<p>要理解准标识符的强大功能，请考虑表20.2中所示的选民登记名单快照。即使在发布之前将<span><span class="MathJax_Preview">SSN</span><script type="math/tex">SSN</script></span>从表20.1中删除的情况下，也可以使用年龄和邮政编码属性来加入这两个表。这将提供每个数据记录的可能匹配列表。例如，<span><span class="MathJax_Preview">Joy</span><script type="math/tex">Joy</script></span>和<span><span class="MathJax_Preview">Sue</span><script type="math/tex">Sue</script></span>是表20.1医疗版本中与艾滋病病毒感染者相匹配的选民登记名册中唯一的两个人。因此，人们可以以<span><span class="MathJax_Preview">50％</span><script type="math/tex">50％</script></span>的把握确定<span><span class="MathJax_Preview">Joy</span><script type="math/tex">Joy</script></span>和<span><span class="MathJax_Preview">Sue</span><script type="math/tex">Sue</script></span>患有<span><span class="MathJax_Preview">HIV</span><script type="math/tex">HIV</script></span>。这是不可取的，特别是当对手具有关于<span><span class="MathJax_Preview">Joy</span><script type="math/tex">Joy</script></span>或<span><span class="MathJax_Preview">Sue</span><script type="math/tex">Sue</script></span>的其他背景医学信息以进一步缩小可能性时。同样，威廉是选民登记名册中唯一的一个人，他在医疗发布中与丙型肝炎个体相匹配。如果选民登记名册中只有一个数据记录与年龄和邮政编码的特定组合相匹配，那么有关该个人的敏感医疗状况可能会完全受到影响。这种方法被称为联动攻击。大多数匿名算法的重点在于防止身份泄露，而不是明确隐藏敏感属性。因此，只有那些可以组合起来才能构建准标识符的属性在数据发布中大致被改变或指定，而敏感属性则以其确切形式发布。
+<center>
+​表20.2 虚构投票人登记名单快照的例子
+![20.2 T](<a href="http://p6atp7tts.bkt.clouddn.com/20.2">http://p6atp7tts.bkt.clouddn.com/20.2</a> T.PNG)
+</center></p>
+<p>许多保护隐私的数据发布算法假定准标识符是从一组不敏感的属性中提取出来的，因为它们只能由对手使用（非敏感）公开可用信息进行连接来使用。然而，当对手拥有关于手头目标的（敏感）背景信息时，这种假设可能并不总是合理的。对手通常熟悉他们的目标，并且可以假定他们具有至少一部分敏感属性的背景知识。在具有多种疾病属性的医疗应用中，关于这些属性的子集的知识可以揭示记录的主题的身份。类似地，在电影协作过滤应用程序中，匿名评级被释放，通过个人交互或其他评级来源可能获得关于特定用户对电影子集的评级的信息。如果这种组合对个人来说是独一无二的，那么个人的其他评分也会受到影响。因此，当背景知识可用时，敏感属性也需要被扰乱。隐私文献中的大部分工作假定公共可用属性（构建准标识符）的角色与敏感属性的角色之间存在严格区分。换句话说，敏感属性不会受到干扰，因为假定揭示这些敏感属性不会导致利用公开可用信息进行链接攻击的风险。然而，有一些算法没有做出这种区分。这些算法通常在背景信息存在的情况下提供更好的隐私保护。</p>
+<p>在本节中，将介绍几种基于群组的匿名化模型，如<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>, <span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>, 和<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>。 尽管最近的模型（如多样性）比<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型具有一定的优势，但在隐私保护数据发布的研究中，对<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的良好理解是至关重要的。 这是因为大多数基于群组的匿名化模型的基本框架首先是在<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型的背景下提出的。 此外，其他模型的许多算法（例如<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>）基于<span><span class="MathJax_Preview">k-anonymization</span><script type="math/tex">k-anonymization</script></span>。</p>
+<h3 id="2031-k-anonymityk-anonymity">20.3.1 <span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型</h3>
+<p><span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型是数据匿名化历史最悠久的模型之一，它对准标识符概念的理解及其对数据隐私的影响而得到肯定。 k-匿名化方法的基本思想是允许释放敏感属性，同时仅扭曲可通过公共信息源获得的属性。 因此，即使敏感属性已经发布，它们也不能通过公开可用的记录链接到个人。 在讨论匿名算法之前，我们将讨论一些最常见的数据失真技术。</p>
+<ol>
+<li>抑制：在这种方法中，一些属性值被抑制。取决于所使用的算法，抑制可以以各种方式完成。例如，可以从表20.1中的几个选定数据记录中省略一些年龄或邮政编码属性值。或者，可以完全忽略特定个体的全部记录（行抑制）或所有个体的年龄属性（列抑制）。行压制通常用于删除异常记录，因为这些记录难以匿名。列抑制通常用于删除高度识别的属性或显式标识符，如<span><span class="MathJax_Preview">SSN</span><script type="math/tex">SSN</script></span>。</li>
+<li>概括：在泛化的情况下，属性是根据特定范围近似指定的。例如，对于表20.1中的一个条目，不是指定Age = 26和Location（ZIP Code）= 10547，而是将其推广到Age∈[25,30]和Location（State）= New York。通过大致指定属性，攻击者变得更难执行联动攻击。虽然数字数据可以推广到特定的范围，但分类数据的泛化要稍微复杂一些。通常，需要提供分类属性值的泛化层次结构，以用于匿名化过程。例如，一个邮政编码可能会推广到一个城市，而这个城市又可能被推广到一个州，等等。没有指定域层次结构的唯一方式。通常，它需要在语义上有意义，并且由域专家将其指定为匿名化过程的输入的一部分。图20.1提供了表20.1的位置属性的分类属性的通用分类法的一个例子。属性值的层次结构具有树结构，并被称为值泛化层次结构。图20.1中的符号<span><span class="MathJax_Preview">A_ 0 ... A_ 3</span><script type="math/tex">A_ 0 ... A_ 3</script></span>和<span><span class="MathJax_Preview">Z_ 0 ... Z _4</span><script type="math/tex">Z_ 0 ... Z _4</script></span>表示不同粒度级别的域概括。在图20.1中也通过<span><span class="MathJax_Preview">Z_ 0 ... Z_ 4</span><script type="math/tex">Z_ 0 ... Z_ 4</script></span>和<span><span class="MathJax_Preview">A _0 ... A _4</span><script type="math/tex">A _0 ... A _4</script></span>之间的单个路径来说明相应的域概括层次.</li>
+<li>合成数据生成：在这种情况下，将生成一个模拟原始数据的统计特性的合成数据集。这种方法可以提供更好的隐私性，因为将合成数据记录映射到特定的记录组更为困难。另一方面，数据记录不再是真实的，因为它们是合成生成的。</li>
+<li>作为概率性和不确定性数据库的规范：在这种情况下，可以将单个数据记录指定为概率分布函数。这与上述方法中的不同之处在于，泛化和抑制方法最常用于匿名化。因此，本节中的大部分讨论将集中在这些方法上。首先，将定义<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的概念。</li>
+</ol>
+<p><center>
+![20.1 T](<a href="http://p6atp7tts.bkt.clouddn.com/20.1">http://p6atp7tts.bkt.clouddn.com/20.1</a> T.PNG)</p>
+<p>​图 20.1  年龄和邮政编码属性的值和相应的域泛化层次结构</p>
+<p>​表 20.3  表20.1的3个匿名版本的示例</p>
+<p>![20.3 T](<a href="http://p6atp7tts.bkt.clouddn.com/20.3">http://p6atp7tts.bkt.clouddn.com/20.3</a> T.PNG)
+</center></p>
+<p>随机化的总体分布方法，因为概率分布是特定于数据记录的，并且旨在确保<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>。 虽然这种方法尚未深入研究，但它有可能允许使用概率数据库匿名化领域的最新进展。</p>
+<p>**定义20.3.1（<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>）**如果匿名数据集中每个记录的属性至少与<span><span class="MathJax_Preview">（k-1）</span><script type="math/tex">（k-1）</script></span>个其他属性不能区分，则称该数据集是匿名化的.</p>
+<p>这组不可区分的数据记录也称为等价类。要了解泛化和抑制如何用于匿名化，请考虑表20.1中的数据集。表20.3给出了该表的3个匿名版本的一个例子。 <span><span class="MathJax_Preview">SSN</span><script type="math/tex">SSN</script></span>已被列式抑制完全抑制，并被匿名行索引取代。这些显式标识符在匿名化过程中几乎总是被完全抑制。与年龄和邮政编码相对应的两个公开可用属性现在被概括并且近似指定。行索引1,3和6的主题不能再通过使用链接攻击来区分，因为它们的公开可用属性是相同的。类似地，行索引2,4和5的公共可用属性是相同的。因此，该表包含两个等价类，每个类包含三个记录，并且这些等价类中的数据记录不能相互区分。换句话说，对手无法再将个人数据记录的标识与选民登记名单完全匹配。如果发现任何匹配，则保证数据集中至少有<span><span class="MathJax_Preview">k = 3</span><script type="math/tex">k = 3</script></span>条记录将与选民登记名单中的任何特定个人匹配。</p>
+<p><center>
+![20.2 F](<a href="http://p6atp7tts.bkt.clouddn.com/20.2">http://p6atp7tts.bkt.clouddn.com/20.2</a> F.PNG)</p>
+<p>​   图 20.2  邮政编码属性的替代值和相应的域通用化层次结构
+​   </center></p>
+<p>邮政编码通过使用图20.1的预先指定的价值泛化层次来推广。为分类属性生成域泛化层次结构可以通过多种方式完成，并取决于负责隐私修改的分析师的技能。图20.2说明了邮政编码属性的域通用化层次结构的另一个例子。连续属性的值泛化层次结构不需要任何特殊的领域知识，因为它可以由分析师直接创建，使用基础数据中连续值的实际分布。这需要对连续属性进行简单的等级离散化。
+隐私保护算法的目标是用数据（数字或离散）中的原始值替换图20.1分类树中所示的离散值之一。因此，数据按照一组新的离散值重新编码。在大多数情况下，数字属性保留其排序，因为相应的范围是有序的。不同的算法在重新编码过程中使用不同的规则。这些不同的重新编码属性的方式可以区分如下：</p>
+<ul>
+<li>全局与本地重新编码：在全局重新编码中，给定属性值始终由域遍历层次结构中与所有数据记录相同的离散对象替换。考虑图20.1的上述例子，其中邮政编码可以概括为状态或区域。在全球重新编码中，特定邮政编码值10547需要在所有数据记录中始终由美国东北部或纽约取代。但是，对于诸如90210的不同邮政编码，只要对所有数据记录中的特定数据值（例如，10547或90210）一致地完成，就可以选择与10547值不同的层级。在本地重新编码中，不同的数据记录可能对同一数据值使用不同的概括。例如，一个数据记录可能使用美国东北部，而另一个数据记录可能使用纽约的10547.虽然本地记录看起来更好，但由于其更大的灵活性，它确实丢失了不同类型的信息。特别是，因为相同的邮政编码可能映射到不同的值，如纽约和美国东北部，所得数据记录之间的相似性计算可能不太准确。目前大多数隐私方案都使用全局重新编码。</li>
+<li>全域泛化：全域泛化是全局记录的特例。在这种方法中，特定属性的所有值都被推广到分类的同一级别。例如，一个邮政编码可能被推广到其属性的所有实例的状态。换句话说，如果邮政编码10547被推广到纽约，那么邮政编码90210必须推广到加利福尼亚州。年龄属性的全域泛化的各种分层替代在图20.1中由<span><span class="MathJax_Preview">A_ 0，A _1，A_ 2和A_ 3</span><script type="math/tex">A_ 0，A _1，A_ 2和A_ 3</script></span>表示。邮政编码可能的全域通用化级别由<span><span class="MathJax_Preview">Z _0，Z_ 1，Z_ 2</span><script type="math/tex">Z _0，Z_ 1，Z_ 2</script></span>和<span><span class="MathJax_Preview">Z_ 3</span><script type="math/tex">Z_ 3</script></span>表示。在这种情况下，<span><span class="MathJax_Preview">Z 3</span><script type="math/tex">Z 3</script></span>代表最高级别的泛化（列抑制），并且<span><span class="MathJax_Preview">Z _0</span><script type="math/tex">Z _0</script></span>代表邮政编码属性的原始值。因此，一旦确定匿名化算法应该使用Z 2作为邮政编码属性，则数据集中的每个邮政编码属性<span><span class="MathJax_Preview">（Z _0）</span><script type="math/tex">（Z _0）</script></span>的实例将被其<span><span class="MathJax_Preview">Z _2</span><script type="math/tex">Z _2</script></span>中的广义值替换。这就是该方法被称为全域泛化的原因，因为特定属性的整个数据值域被推广到相同层次的层次结构。全域通用化是隐私保护数据发布中最常用的方法。</li>
+</ul>
+<p>全域泛化直观地吸引人，因为它确保了属性的不同值在整个数据集中具有相同的粒度级别。 最早的方法，如<span><span class="MathJax_Preview">Samarati</span><script type="math/tex">Samarati</script></span>​的原始算法和<span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>，都是全域泛化算法。</p>
+<h4 id="20311-samaratisamarati">20.3.1.1 <span><span class="MathJax_Preview">Samarati</span><script type="math/tex">Samarati</script></span>的算法</h4>
+<p><span><span class="MathJax_Preview">Samarati</span><script type="math/tex">Samarati</script></span>的算法最初是在k-匿名定义的背景下提出的。 <span><span class="MathJax_Preview">Samarati</span><script type="math/tex">Samarati</script></span>最初的用于<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的<span><span class="MathJax_Preview">AG-TS</span><script type="math/tex">AG-TS</script></span>（属性泛化和元组抑制）算法提供了基本的域泛化框架，这是基于组的匿名化的基础。已经讨论过，单个属性的域泛化如何表示为路径。例如，图20.1中从<span><span class="MathJax_Preview">Z _0</span><script type="math/tex">Z _0</script></span>到<span><span class="MathJax_Preview">Z _3</span><script type="math/tex">Z _3</script></span>的路径表示邮政编码属性的一般化。域泛化的概念也可以为属性组合定义。然而，在属性组合的情况下，关系不再被表示为路径，而是作为一种特殊的有向无环图，被称为格。在这种情况下，每个节点为不同的属性指定一个（全域）泛化级别。例如，<span><span class="MathJax_Preview">&lt;A _1，Z_ 2&gt;</span><script type="math/tex"><A _1，Z_ 2></script></span>表示年龄为<span><span class="MathJax_Preview">A _1</span><script type="math/tex">A _1</script></span>的域泛化级别，而邮政编码为<span><span class="MathJax_Preview">Z_ 2</span><script type="math/tex">Z_ 2</script></span>。换句话说，每个数据记录被推广到<span><span class="MathJax_Preview">&lt;A_ 1，Z_ 2&gt;</span><script type="math/tex"><A_ 1，Z_ 2></script></span>的级别。请注意，<span><span class="MathJax_Preview">&lt;A_ 1，Z_ 2&gt;</span><script type="math/tex"><A_ 1，Z_ 2></script></span>也表示基于图20.1中指定的域泛化层次结构的（匿名）表20.3的泛化级别。</p>
+<p>因此，网格中的每个节点都指定了可能的全域泛化水平，就原始数据的表示而言。该图的边代表这些元组域之间的直接泛化关系。格子中的有向路径从低层到高层表示一系列的概括。相反，较低级别的节点是较高级别节点的专长。例如，节点<span><span class="MathJax_Preview">&lt;A _1，Z_ 1&gt;是&lt;A_ 1，Z_ 2&gt;或&lt;A_ 2，Z_ 1&gt;</span><script type="math/tex"><A _1，Z_ 1>是<A_ 1，Z_ 2>或<A_ 2，Z_ 1></script></span>的直接专用化，因为任何一个中的单个属性都可以专用一次以立即产生<span><span class="MathJax_Preview">&lt;A_ 1 ，Z_ 1&gt;</span><script type="math/tex"><A_ 1 ，Z_ 1></script></span>。图20.3a举例说明了年龄和邮政编码组合的域泛化层次。全域匿名化算法的目标是在这个基于元组的域泛化层次结构中发现节点<span><span class="MathJax_Preview">&lt;A_ i，Z_ j&gt;</span><script type="math/tex"><A_ i，Z_ j></script></span>，以最少的泛化保留$ k-anonymity<span><span class="MathJax_Preview">。在发现这样的节点</span><script type="math/tex">。在发现这样的节点</script></span><A_ i，Z_ j><span><span class="MathJax_Preview">之后，隐私算法将所有年龄段推广到级别</span><script type="math/tex">之后，隐私算法将所有年龄段推广到级别</script></span>A <em>i<span><span class="MathJax_Preview">，并将所有邮政编码推广到级别</span><script type="math/tex">，并将所有邮政编码推广到级别</script></span>Z</em> j$。
+<center>
+![20.3 F](<a href="http://p6atp7tts.bkt.clouddn.com/20.3">http://p6atp7tts.bkt.clouddn.com/20.3</a> F.PNG)
+​图 20.3  属性组合上的域泛化层次结构
+​</center></p>
+<p>实际上，可能需要抑制一些元组以便防止不合需要的高度概括。这是因为这些可能代表异常元组，如果不显着增加泛化级别，则这些元组不能并入任何组。例如，年龄为125岁的个体可能需要被抑制，因为此属性的异常值。因此，该算法的参数之一是阈值<span><span class="MathJax_Preview">MaxSup</span><script type="math/tex">MaxSup</script></span>，它指定了可以抑制的元组的最大数量。因此，我们的目标是发现一个尽可能低的节点，如图20.3a所示，使得在抑制至多<span><span class="MathJax_Preview">MaxSup</span><script type="math/tex">MaxSup</script></span>元组之后 <span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>被满足。网格中节点的高度被定义为网格中距最具体表示水平的路径距离。在图20.3的例子中，节点<span><span class="MathJax_Preview">&lt;Z_ i，A_ j&gt;</span><script type="math/tex"><Z_ i，A_ j></script></span>的高度为<span><span class="MathJax_Preview">（i + j）</span><script type="math/tex">（i + j）</script></span>。最小泛化节点可以被定义为节点，其高度尽可能小。因此，在这个例子中，确定最小泛化的一种方法是发现$ k-anonymizable<span><span class="MathJax_Preview">节点</span><script type="math/tex">节点</script></span><Z_ i，A_ j><span><span class="MathJax_Preview">，使得高度</span><script type="math/tex">，使得高度</script></span>（i + j）$尽可能小。</p>
+<p>当有<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个属性<span><span class="MathJax_Preview">&lt;{Q_ i} _1 ...{Q_ i} _d&gt;</span><script type="math/tex"><{Q_ i} _1 ...{Q_ i} _d></script></span>时，所有属性上的和$ \sum_{i=1}^n i_k<span><span class="MathJax_Preview">表示该特定组合的高度。很容易看出，不满足 <span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的节点的的节点的</span><script type="math/tex">表示该特定组合的高度。很容易看出，不满足 <span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的节点的的节点的</script></span>&lt;{Q_ i} <em>1 ...{Q</em> i} _d&gt;<span><span class="MathJax_Preview">任何专业化也不会满足</span><script type="math/tex">任何专业化也不会满足</script></span>k-anonymity<span><span class="MathJax_Preview">。同样，任何满足</span><script type="math/tex">。同样，任何满足</script></span>k-anonymity<span><span class="MathJax_Preview">的节点的推广也将满足</span><script type="math/tex">的节点的推广也将满足</script></span>k-anonymity<span><span class="MathJax_Preview">。因此，满足</span><script type="math/tex">。因此，满足</script></span>k-anonymity<span><span class="MathJax_Preview">的格的子图和违背</span><script type="math/tex">的格的子图和违背</script></span>k-anonymity<span><span class="MathJax_Preview">的子图都是连通的子图，并且它们之间可以建立边界。在图20.3b中示出了这种边界1的示例，并且在相同的图中示出了相应的最小概括。请注意，最小泛化不是唯一的，在此示例中有两个可能的最小泛化</span><script type="math/tex">的子图都是连通的子图，并且它们之间可以建立边界。在图20.3b中示出了这种边界1的示例，并且在相同的图中示出了相应的最小概括。请注意，最小泛化不是唯一的，在此示例中有两个可能的最小泛化</script></span><Z_2，A_ 2>和<Z_ 1，A_ 3>$都是有可能的。使用最小泛化节点的原因是为了使分析算法的数据效用最大化。其他更精细的定义可用于量化更明确地使用属性值分布的效用。书目注释包含了一些这些定义的标示。</p>
+<p><span><span class="MathJax_Preview">Samarati</span><script type="math/tex">Samarati</script></span>的算法在域泛化元组的格上使用简单的二元搜索。 设<span><span class="MathJax_Preview">[0，h _{max}]</span><script type="math/tex">[0，h _{max}]</script></span>表示格子的高度范围。 然后检查<span><span class="MathJax_Preview">h_max/ 2</span><script type="math/tex">h_max/ 2</script></span>级的任何一般化是否满足 <span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>约束。 如果确实如此，则检查高度<span><span class="MathJax_Preview">h _{max} / 4</span><script type="math/tex">h _{max} / 4</script></span>。 否则，检查高度<span><span class="MathJax_Preview">3•h _{max }/ 4</span><script type="math/tex">3•h _{max }/ 4</script></span>。 重复这种方法，直到找到k-匿名方法存在的最低高度。 所有相应的域概括都会被报告，并且其中的任何一个都可以用于转换数据。 萨马拉蒂算法中的一个重要步骤是使用原始数据库来检查晶格中的特定节点是否满足k-匿名的过程。 但是，这里省略了对这一步骤的讨论，因为在隐身算法的上下文中讨论了类似的步骤。</p>
+<h4 id="20312-incognitoincognito">20.3.1.2 <span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span></h4>
+<p>正如第4章所讨论的，图20.3的格与频繁项目集挖掘算法的格有许多概念的相似之处。因此，一些用于发现全域泛化的匿名算法也具有与频繁项目集挖掘算法类似的特征。隐身算法利用了频繁模式挖掘的一些原理，以有效地发现网格的$ k-anonymous$部分。</p>
+<p>一个重要的观察结果是，格子的大小与准标识符的数量呈指数关系。这可能会导致在许多实际情况下增加计算复杂性。虽然<span><span class="MathJax_Preview">Meyerson</span><script type="math/tex">Meyerson</script></span>和<span><span class="MathJax_Preview">Williams</span><script type="math/tex">Williams</script></span> [385]已经证明最优k-匿名化是<span><span class="MathJax_Preview">NP</span><script type="math/tex">NP</script></span>难的，但通过仔细研究晶格可以减少计算负担。隐身算法基于以下观察：广义属性的子集的k-匿名性是具有匹配的普通元素的概括水平的属性的超集的<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的必要（但不足）的条件。此后，此属性将被称为属性子集闭包。这个属性是泛化属性的一个特例，它指出格中 $ k-anonymous<span><span class="MathJax_Preview">节点的任何泛化总是</span><script type="math/tex">节点的任何泛化总是</script></span> k-anonymous$的。</p>
+<p>这些属性可用于生成候选项，并以类似于用于频繁项集挖掘的<span><span class="MathJax_Preview">Apriori</span><script type="math/tex">Apriori</script></span>算法的方式修剪搜索过程。因此，关于一组属性的非$ k-anonymous<span><span class="MathJax_Preview">节点可以被丢弃，连同它们在格子层次结构中的专门化。此外，满足</span><script type="math/tex">节点可以被丢弃，连同它们在格子层次结构中的专门化。此外，满足</script></span>k-anonymity<span><span class="MathJax_Preview">约束的属性子集的概括不需要被检查，因为它们被保证是</span><script type="math/tex">约束的属性子集的概括不需要被检查，因为它们被保证是</script></span> k-anonymous$的。</p>
+<p><span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>使用逐级方法，其中迭代地重复以下步骤，直到构建了包含所有d属性的k-匿名子晶格。集合<span><span class="MathJax_Preview">F _i</span><script type="math/tex">F _i</script></span>表示<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个属性上满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的所有子格的集合。该算法首先将<span><span class="MathJax_Preview">F _1</span><script type="math/tex">F _1</script></span>初始化为满足 <span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的单属性域泛化层次的部分。这很简单，因为单个属性层次结构是路径。因此，<span><span class="MathJax_Preview">F_ 1</span><script type="math/tex">F_ 1</script></span>仅仅是路径的顶部，使得每个广义属性值至少包含k个元组。随后，与在频繁模式挖掘中一样，该算法通过连接具有<span><span class="MathJax_Preview">（i-1）</span><script type="math/tex">（i-1）</script></span>个属性的F i中的子格，共同地在<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>中重复生成候选子格。加入两个子格的过程将在后面描述。注意<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>是<span><span class="MathJax_Preview">（i + 1）</span><script type="math/tex">（i + 1）</script></span>属性上的一组候选子格。然后使用<span><span class="MathJax_Preview">Apriori-style</span><script type="math/tex">Apriori-style</script></span>的方法对这些子格中的每一个子格进行修剪。具体而言，可以修剪在<span><span class="MathJax_Preview">F _i</span><script type="math/tex">F _i</script></span>中其泛化不是<span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>的<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>中子格的节点。这一步也将在后面详细介绍。</p>
+<p>候选生成和修剪之后，通过检查基本数据记录中的组成节点来保留满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的每个子格的部分。因此，<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>中的每个子格的尺寸进一步减小。此时，集合<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>已被变换为集合<span><span class="MathJax_Preview">F_{ i + 1}</span><script type="math/tex">F_{ i + 1}</script></span>。因此，重复以下步骤来增加索引<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的值：</p>
+<ol>
+<li>生成<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>，即<span><span class="MathJax_Preview">（i + 1）</span><script type="math/tex">（i + 1）</script></span>属性上的候选子点集。 这是通过连接<span><span class="MathJax_Preview">F _i</span><script type="math/tex">F _i</script></span>中所有共享<span><span class="MathJax_Preview">（i-1）</span><script type="math/tex">（i-1）</script></span>属性的 <span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>子晶格对来实现的。 稍后将描述一对子晶格之间的连接的细节。</li>
+<li>通过使用关于<span><span class="MathJax_Preview">F _i</span><script type="math/tex">F _i</script></span>中的 <span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>组合的集合的属性子集闭包属性，修剪<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>中的每个子晶格中不可能满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的节点。 稍后将描述节点如何从子点修剪的细节。</li>
+<li>根据基础数据检查<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>的每个（已修剪的）子格中的每个节点，并删除那些不满足 <span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的节点。 如果某个节点的某个专业已经满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>，则不需要检查该节点。 该步骤通过移除违反匿名的子格，将候选子格的集合<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>转换为<span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>子格<span><span class="MathJax_Preview">F_{ i + 1}</span><script type="math/tex">F_{ i + 1}</script></span>的集合。</li>
+</ol>
+<p>如果总共有<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个属性，则集合<span><span class="MathJax_Preview">F _d</span><script type="math/tex">F _d</script></span>将包含满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的单个子节点。报告此子格中具有最小高度的节点。请注意，隐身算法的详细实现使用了一种稍微不同的方法来实际跟踪子点阵，方法是跟踪单独表格中的点阵节点和边缘。包含<span><span class="MathJax_Preview">F _i</span><script type="math/tex">F _i</script></span>晶格节点泛化级别的i维表格在它们的<span><span class="MathJax_Preview">（i-1）</span><script type="math/tex">（i-1）</script></span>共同属性上进行连接，以创建包含<span><span class="MathJax_Preview">C_{ i + 1}</span><script type="math/tex">C_{ i + 1}</script></span>节点的<span><span class="MathJax_Preview">（i + 1）</span><script type="math/tex">（i + 1）</script></span>维表格。随后，基于层次关系在所生成的节点之间添加网格边缘。尽管如此，这里提供的更简单的逻辑描述与<span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>算法相匹配。</p>
+<p>接下来，将使用示例讨论连接和修剪操作的细节。在这种情况下，三个属性将用于更清晰。正如前面所讨论的，让<span><span class="MathJax_Preview">A_ r和Z_ r</span><script type="math/tex">A_ r和Z_ r</script></span>代表年龄和邮政编码属性的不同的一般化水平，对于变化的索引值<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>。设<span><span class="MathJax_Preview">P _r</span><script type="math/tex">P _r</script></span>代表与职业相对应的附加属性的概括水平。指数r的较高值表明泛化程度更高。考虑这种情况，其中这三个属性上的所有三个 <span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>两属性子格已经在<span><span class="MathJax_Preview">F_2</span><script type="math/tex">F_2</script></span>中可用。为了执行连接，可以使用这三种可能性中的任何一对子格。这将在所有三个属性上产生候选子晶格。</p>
+<p>考虑这种情况，其中（邮政编码，年龄）和（邮政编码，职业）上的子格连接在一起。现在，新候选子晶格中的节点将具有三个属性（邮政编码，职业，年龄）而不是两个。新候选子晶格的节点通过连接两个<span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>子晶格的节点来构造。当且仅当<span><span class="MathJax_Preview">r = s</span><script type="math/tex">r = s</script></span>时，一对节点<span><span class="MathJax_Preview">&lt;Z_r，A_j&gt;和&lt;Z_s，P_l&gt;</span><script type="math/tex"><Z_r，A_j>和<Z_s，P_l></script></span>才会加入。换句话说，两种情况下邮政编码属性的一般化水平都需要相同。这将导致新节点<span><span class="MathJax_Preview">&lt;Z_r，P_l，A_j&gt;</span><script type="math/tex"><Z_r，P_l，A_j></script></span>。通常，对于具有<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个属性的节点对，当且仅当<span><span class="MathJax_Preview">（a）</span><script type="math/tex">（a）</script></span>它们共享<span><span class="MathJax_Preview">（k-1）</span><script type="math/tex">（k-1）</script></span>个属性，以及<span><span class="MathJax_Preview">（b）（k-1）</span><script type="math/tex">（b）（k-1）</script></span>个公共属性的泛化级别是相同的。图<span><span class="MathJax_Preview">20.4a</span><script type="math/tex">20.4a</script></span>展示了一个具有两个$ k-anonymous$子格的连接的例子。</p>
+<p><center>
+![20.4 F](<a href="http://p6atp7tts.bkt.clouddn.com/20.4">http://p6atp7tts.bkt.clouddn.com/20.4</a> F.PNG)
+图 20.4  <span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>加入和修剪
+​</center></p>
+<p>在前面的例子中，职业-年龄组合的子格不用于连接。但是，它对修剪仍然有用。这是因为，如果一个节点<span><span class="MathJax_Preview">&lt;P_ i，A_ j&gt;</span><script type="math/tex"><P_ i，A_ j></script></span>不存在于这个子格中，那么<span><span class="MathJax_Preview">&lt;Z_ m，P_ i，A_ j&gt;</span><script type="math/tex"><Z_ m，P_ i，A_ j></script></span>形式的节点也不会是 <span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>的。因此，可以将这些节点连同其专业化一起从构建的候选子晶格中移除。图20.4b说明了候选子晶格上修剪步骤的一个例子。这种修剪基于属性子集闭包属性，它让人联想到频繁项集挖掘中的<span><span class="MathJax_Preview">Apriori</span><script type="math/tex">Apriori</script></span>修剪。与频繁项集挖掘的情况一样，需要检查<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中每个候选<span><span class="MathJax_Preview">（k + 1）</span><script type="math/tex">（k + 1）</script></span>子格的所有<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>属性子集。如果某个节点在任何这些检查中违反了闭包属性，则会对其进行修剪。</p>
+<p>最后，<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中生成的节点需要与原始数据库进行核对以确定它们是否满足k-匿名性。例如，为了基于图20.1中的值泛化来确定<span><span class="MathJax_Preview">&lt;Z _1，A_ 1&gt;</span><script type="math/tex"><Z _1，A_ 1></script></span>是否满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>，需要确定满足每对条件的个体的数量，例如（邮编∈ NY，0 &lt;年龄≤10），（邮政编码∈NY，10 &lt;年龄≤20），（邮政编码MA，0 &lt;年龄≤10）等等。因此，对于格中的每个节点，需要计算频率值的向量。这个矢量也被称为频率矢量或频率集合。频率向量计算的过程可能是昂贵的，因为可能需要扫描原始数据库以确定满足这些条件的元组的数量。但是，可以使用几种策略来减轻计算负担。例如，如果已经计算了<span><span class="MathJax_Preview">&lt;Z_ 1，A_ 1&gt;</span><script type="math/tex"><Z_ 1，A_ 1></script></span>的频率向量，则可以使用累积来直接计算泛化<span><span class="MathJax_Preview">&lt;Z_ 2，A_ 1&gt;</span><script type="math/tex"><Z_ 2，A_ 1></script></span>的频率向量而不实际扫描数据库。这是因为该集合（邮政编码∈东北美国，0 &lt;年龄≤10）的频率是（邮政编码∈NY，0 &lt;年龄≤10），（邮政编码∈NJ，0 &lt;年龄≤10），（邮政编码∈MA，0 &lt;年龄≤10）等等。最简单的方法是在每个<span><span class="MathJax_Preview">（k + 1）</span><script type="math/tex">（k + 1）</script></span>个属性集的网格上使用宽度优先策略，方法是在确定更一般的频率向量之前确定网格中特定（较低级别）节点的频率向量更高级别）节点。上层节点的频率矢量可以通过使用上滚属性从较低层节点的频率矢量中有效地计算出来。</p>
+<p>请注意，需要对<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中的<span><span class="MathJax_Preview">（k + 1）</span><script type="math/tex">（k + 1）</script></span>个属性的每个子集执行单独的广度优先搜索以计算其频率向量。 此外，一旦节点被广度优先搜索识别为<span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>，则其在格中的一般化保证是$ k-anonymous<span><span class="MathJax_Preview">的。 因此，它们会自动标记为</span><script type="math/tex">的。 因此，它们会自动标记为</script></span> k-anonymous$并且不会被明确检查。 原始算法还支持许多其他优化，称为隐身超级根和自下而上预计算。 书目注释包含了这些方法的要点。</p>
+<h4 id="20313-mondrianmondriank-anonymitk-anonymit">20.3.1.3 <span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>多维<span><span class="MathJax_Preview">k-Anonymit</span><script type="math/tex">k-Anonymit</script></span></h4>
+<p>到目前为止讨论的方法的缺点之一是各个属性的域泛化层次被独立构建为预处理步骤。因此，在预处理步骤已经固定了数字属性的等级离散化（域概括）之后，其被匿名化算法利用。当各种数据属性在多维空间中相关时，匿名化过程中的这种刚性会导致数据表示效率低下。例如，年长个人的工资分配可能与年轻人的不同。预处理的域通用化层次结构无法适应数据集中的这些属性相关性。通常，隐私和效用之间的最佳平衡是在匿名化过程中利用数据点之间的多维关系时实现的。换句话说，数据点<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>中每个属性的属性范围应根据<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的具体多维局部性以动态方式生成。</p>
+<p><span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>方法生成包含至少k个数据点的多维矩形区域。这是通过用轴平行切割递归地划分边界框来实现的，直到每个区域包含不超过k个数据点。这种方法与许多传统索引结构（如<span><span class="MathJax_Preview">kd</span><script type="math/tex">kd</script></span>树）所使用的方法并无太大区别。图20.5说明了由<span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>算法引起的划分的一个例子。在这种情况下，存在$ 5-anonymous <span><span class="MathJax_Preview">分区。因此，每个组至少包含五个数据点。很容易看出，相同的属性值在数据的不同部分由不同范围表示，以便说明不同区域的变化密度。正是这种灵活性让</span><script type="math/tex">分区。因此，每个组至少包含五个数据点。很容易看出，相同的属性值在数据的不同部分由不同范围表示，以便说明不同区域的变化密度。正是这种灵活性让</script></span>Mondrian$成为比其他方法更加紧凑的匿名团体代表。</p>
+<p><center>
+![20.5 F](<a href="http://p6atp7tts.bkt.clouddn.com/20.5">http://p6atp7tts.bkt.clouddn.com/20.5</a> F.png)
+图 20.5  样本 5-anonymous <span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>多维分区
+</center></p>
+<p><span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>算法动态地维护满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>性并涵盖数据集的多维广义集合<span><span class="MathJax_Preview">B。Mondrian</span><script type="math/tex">B。Mondrian</script></span>算法从所有数据点的矩形框<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>开始。 这表示将整个数据集推广到单个多维区域，因此很正常的就满足<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>。 因此该算法通过初始化<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> ={<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>}开始。 该算法重复使用以下步骤：</p>
+<ol>
+<li>选择包含至少<span><span class="MathJax_Preview">2K</span><script type="math/tex">2K</script></span>个数据点的矩形区域<span><span class="MathJax_Preview">R∈B</span><script type="math/tex">R∈B</script></span>，使得有效分裂为一对<span><span class="MathJax_Preview">k-anonymous</span><script type="math/tex">k-anonymous</script></span>子集。</li>
+<li>通过轴平行分割将矩形区域R沿任意维度分割，以便每个<span><span class="MathJax_Preview">R_ 1和R_ 2</span><script type="math/tex">R_ 1和R_ 2</script></span>至少包含<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据点</li>
+<li>更新<span><span class="MathJax_Preview">B⇐B∪{R _1，R _2} – R</span><script type="math/tex">B⇐B∪{R _1，R _2} – R</script></span></li>
+</ol>
+<p>重复这个迭代过程，直到矩形区域不能在不违反<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的情况下进一步分割。选择用于执行拆分的维度具有一定的灵活性。一种自然的启发式方法是拆分所选矩形区域的最长维度。在选择了维度之后，应该执行拆分，以便尽可能均匀地分割数据点。在没有属性值关联的情况下，数据点可以几乎平分为两个区域。</p>
+<p><span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>中的矩形区域定义了用于<span><span class="MathJax_Preview">k-anonymization</span><script type="math/tex">k-anonymization</script></span>的等价类。如果每个数字属性值都是唯一的，则可以知道每个区域最多将包含<span><span class="MathJax_Preview">2•k-1</span><script type="math/tex">2•k-1</script></span>个数据点。但是，如果属性值之间存在关系，并且需要将绑定值分配在相同的分区，则可以在每个分区中的数据点的数量有<span><span class="MathJax_Preview">m + 2d•（k-1）</span><script type="math/tex">m + 2d•（k-1）</script></span>的上限。这里<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>是任何数据记录的相同拷贝数。另一方面，如果属性值上的关系可以灵活地分配给任何分区，则任何矩形分区中的最大点数在过程结束时将为<span><span class="MathJax_Preview">2•k-1</span><script type="math/tex">2•k-1</script></span>。读者可以参考参考书目的注释来找到这个界限的证明。在将数据分成矩形区域后，可以使用以下方法报告匿名数据点：</p>
+<ol>
+<li>可以针对每个匿名等价集合报告每个维度的平均值。</li>
+<li>可能会报告数据点的多维边界框</li>
+</ol>
+<p><span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>算法已被证明比<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span></script></span>算法更有效，因为多维分区方法提供了更大的灵活性。 <span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>方法自然是为数值属性设计的，并且对数值进行排序。 然而，通过为属性设计合适的分割规则，该方法也可以推广到分类属性。</p>
+<h4 id="20314">20.3.1.4 合成数据生成：基于缩合的方法</h4>
+<p>基于缩合的方法生成与原始数据分布相匹配的合成数据，同时保持<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>。这意味着通过使用该组的统计数据为每组k个记录生成<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个合成记录。整体缩合方法可以描述如下：</p>
+<ol>
+<li>使用任何聚类方法将数据划分为数据记录组，以便每个组至少包含<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据记录。用<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>表示创建的组的数量。</li>
+<li>计算每组数据记录的均值和协方差矩阵。对于<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维数据集，一个组的协方差矩阵表示属性对之间的<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>协方差。</li>
+<li>计算每个协方差矩阵的特征向量和特征值。从Chap. 2的主成分分析<span><span class="MathJax_Preview">（PCA）</span><script type="math/tex">（PCA）</script></span>的讨论可以明显看出。特征向量定义了一个特定于组的轴系统，数据记录与之不相关。每个特征向量的数据的方差等于相应的特征值。将要生成的合成数据集建模为m个簇的混合，其中每个簇的平均值是相应原始数据记录组的平均值。</li>
+<li>为<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>簇中的每个生成合成数据记录。对于每个簇，合成记录的数量和平均值与其基本群组相匹配。 数据记录伴随着特征向量独立生成，方差等于对应的特征值。均匀分布通常用于合成数据生成，因为我们假定在组定义的小方面内数据分布没有显著变化。虽然均匀分布是局部近似，但生成记录的全局分布通常与原始数据相当吻合。 </li>
+</ol>
+<p>通过增量维护组统计特征，该方法也可以推广到数据流。 这里的想法是，组的大小允许在<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>和<span><span class="MathJax_Preview">2•k -1</span><script type="math/tex">2•k -1</script></span>之间变化。 每当一个小组达到<span><span class="MathJax_Preview">2•k</span><script type="math/tex">2•k</script></span>的大小时，它们被分成两组。 分组细节的细节将在后面讨论。</p>
+<p>为了在流场景中增量维护协方差统计量，使用了类似于<span><span class="MathJax_Preview">CluStream</span><script type="math/tex">CluStream</script></span>的簇特征向量的方法（参见Chap. 7）。 唯一的区别是产品明智<span><span class="MathJax_Preview">product-wise</span><script type="math/tex">product-wise</script></span>的总和统计数据也是增量维护的。对于任意一对属性<span><span class="MathJax_Preview">i和j，Sum（i,j）</span><script type="math/tex">i和j，Sum（i,j）</script></span>的值等于不同数据点上属性值i和j的乘积之和。 这可以在数据流中以增量方式轻松维护。 那么，对于集合中的一组属于<span><span class="MathJax_Preview">r∈（k，2•k-1）</span><script type="math/tex">r∈（k，2•k-1）</script></span>数据点，属性i和j之间的协方差可估计如下：</p>
+<p><span><span class="MathJax_Preview">Covariance(i,j) = Sum(i,j)/r − Mean(i) • Mean(j)                 \tag{20.6}</span><script type="math/tex">Covariance(i,j) = Sum(i,j)/r − Mean(i) • Mean(j)                 \tag{20.6}</script></span>
+<span><span class="MathJax_Preview">Covariance(i,j) = Sum(i,j)/r − Sum(i) • Sum(j)/r^2               \tag{20.7}</span><script type="math/tex">Covariance(i,j) = Sum(i,j)/r − Sum(i) • Sum(j)/r^2               \tag{20.7}</script></span></p>
+<p>上述公式中的所有统计数据都是累加的，并且可以在数据流设置中以增量方式轻松维护。</p>
+<p>一旦群组规模达到<span><span class="MathJax_Preview">2•k​</span><script type="math/tex">2•k​</script></span>，这些团体如何分裂还有待解释。假设每个大小为<span><span class="MathJax_Preview">2•k​</span><script type="math/tex">2•k​</script></span>的小组根据最长的特征向量被分成两大小为k的小组。选择最长特征向量的原因是为了确保新创建的组的紧凑性。群组的分组可能是一个挑战，因为原始数据记录在流式场景中难以再次获得，也就不能重新计算每个拆分组的统计信息。因此，我们需要使用近似的方法（即建模假设）。缩合方法适用于建模假设，即组的数据记录分布独立根据每个特征向量满足均匀分布。对于小于数据集点数大小的组，这不是一个不合理的假设。这是因为密度分布在数据的小部分区域不会发生剧烈变化。</p>
+<p>这种均匀分布的建模假设用于重新计算每个相同大小为k的子组的新方法。 这是因为根据建模假设，沿着最长特征向量的均匀分布的范围可以从其方差（特征值）近似。 请注意，均匀分布的方差是其范围平方的十二分之一。 因此，如果<span><span class="MathJax_Preview">λ_{max}</span><script type="math/tex">λ_{max}</script></span>是最大的特征值，那么均匀分布的范围<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>计算如下：</p>
+<p><span><span class="MathJax_Preview">R=\sqrt{12λ_{max}}                \tag{20.8}</span><script type="math/tex">R=\sqrt{12λ_{max}}                \tag{20.8}</script></span></p>
+<p>这个范围<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>然后被分成两个相等的部分以创建两个新的组。 因此，这两个新组沿着最长的特征向量在相反的方向上与旧的组平均距离为<span><span class="MathJax_Preview">R / 4</span><script type="math/tex">R / 4</script></span>。 假设新创建的组具有与父组相同的特征向量，因为分裂是沿着不相关的方向执行的。 因此，相关的方向不会在分裂后被改变。 原始（父母）组的最大特征值由每个子组中的特征值替换，这是原始值的四分之一。 因此，如果P是具有包含特征向量的正交列的<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>矩阵，并且Σ是特征值的对角矩阵（在调整最大特征值之后），则新创建的分裂组的协方差矩阵可以计算如下：</p>
+<p><span><span class="MathJax_Preview">C = PΣP^T                             \tag{20.9}</span><script type="math/tex">C = PΣP^T                             \tag{20.9}</script></span></p>
+<p>这种关系是基于Chap. 2讨论的标准<span><span class="MathJax_Preview">PCA</span><script type="math/tex">PCA</script></span>对角化。请注意，两个拆分组的协方差矩阵是相同的。根据公式20.6，协方差矩阵和新生成的组均值可以用来根据方程式计算每个组的成对属性乘积之和。因此，随着更多数据点的到达，这些乘积值可以继续逐步更新。</p>
+<p>由于其使用合成数据的方法，基于缩合的方法是可应用于数据流的少数几种方法之一，泄露风险相对较低。对手通常很难知道k个合成记录中的哪一组是从特定的原始记录的基础组中产生的。在基于泛化的匿名化的情况下，识别代表等价类的相关数据记录组相对容易。因此，合成数据集提供了一些额外的隐私保护方法。请注意，如果需要，可以使用此方法生成更大的数据集。例如，对于每组k个记录，可以生成<span><span class="MathJax_Preview">α•k</span><script type="math/tex">α•k</script></span>个合成数据记录，使用该组的统计数据。这可以用α因子来放大数据的大小，并进一步减少生成的数据与原始数据之间的映射。此外，在合成数据生成过程中可能会引入额外的噪音，以提供更好的保护。</p>
+<p>这些额外的选择确实是有代价的。公布的数据的真实性丢失了。已发布的数据记录是合成的，因此不会映射到任何特定的个人。在许多基于聚合或基于建模的应用程序中，这不一定是个问题，因为数据的聚合属性会保留下来。在一些医疗数据处理场景中，即使在群组级别，当个人和数据记录之间存在直接映射时，法律限制可能会禁止发布降级数据。缩合方法在这些场景中提供了解决方案，因为发布的数据记录是合成的，并且通常很难映射到特定的组。
+缩合方法与<span><span class="MathJax_Preview">Monroan</span><script type="math/tex">Monroan</script></span>方法有许多概念相似之处，只是它允许使用任何约束聚类算法，而不是使用单维切割构建的矩形分区。由此产生的匿名效用取决于聚类的有效性。单维切割将无法构建维数增加的高质量集群。此外，与<span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>不同，合成数据的产生是为了获得更高的匿名性。</p>
+<p>缩合方法不区分公共可用属性（用于组合以构建准标识符）和敏感属性，并将方法应用于所有属性。正如随后关于20.3.4第三节中维度惩罚的讨论所表明的那样。准标识符和敏感属性之间的区别比数据隐私文献中经常假设的更加流畅。因为不可能知道敌手对敏感属性的背景知识水平，所以所有属性都应该进行干扰。当敏感属性在没有任何干扰的情况下被释放时，只要背景知识可用，它们就会立即被用于识别攻击。例如，对数据集（如<span><span class="MathJax_Preview">Netflix</span><script type="math/tex">Netflix</script></span>数据集[402]）的许多隐私攻击使用了那些通常情况下被认为不是可以公开可用的属性。这项工作[402]也表明，在公众可获得的数据和背景知识持续增加的现实世界环境中，公开可用属性和敏感属性之间的这种强烈区分是非常危险的。</p>
+<h3 id="2032-ell-diversityell-diversity">20.3.2 <span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>模型</h3>
+<p>虽然<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型提供了保护隐私的数据发布的基本框架，但有些情况会导致无意中敏感的属性泄露。考虑表20.3所示的3个匿名表。在这种情况下，行索引1,3和6处于相同的匿名组中，并且不能相互区分。然而，这三个人在敏感属性上都具有“<span><span class="MathJax_Preview">HIV</span><script type="math/tex">HIV</script></span>”的值。因此，即使无法推断来自该组的特定个体的身份，可以推断该组中的任何个体都具有<span><span class="MathJax_Preview">HIV</span><script type="math/tex">HIV</script></span>。因此，如果使用选民登记名册将这个群体加入三个独特的个体，那么可以推断他们三个都有HIV。这结果违反了这三个人中每一个的敏感属性信息。换句话说，尽管<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型可以防止身份泄露，但并不妨碍属性泄露。</p>
+<p>这种违规的主要原因是敏感信息在匿名群体中不够多样化。由于隐私保护数据发布的目的是为了防止敏感信息的泄露，所以一个模型在形成群组的过程中如果不使用敏感属性值，是无法实现这一目标。<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>旨在确保在等价类内的敏感属性足够多样化。</p>
+<p>**定义20.3.2（<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>原则）**一个等价类被认为是<span><span class="MathJax_Preview">\ell-diverse</span><script type="math/tex">\ell-diverse</script></span>，如果它包含<span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> “良好表示”值的敏感属性。 如果一个匿名表格被认为是<span><span class="MathJax_Preview">\ell-diverse</span><script type="math/tex">\ell-diverse</script></span>的，如果其中的每个等价类是<span><span class="MathJax_Preview">\ell-diverse</span><script type="math/tex">\ell-diverse</script></span>的。 值得注意的是，“良好表现”的概念可以通过几种不同的方式进行实例化。因此，上述定义提供了这种方法背后的基本原则，但不能被认为是一个严格的定义。有几种方式可以实现“良好表现”的概念。这些对应于熵多样性和递归多样性的概念。这些定义如下所述。</p>
+<p>**定义20.3.3（熵<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>）**令<span><span class="MathJax_Preview">p_1 ... p_ r</span><script type="math/tex">p_1 ... p_ r</script></span>是属于等价类中敏感属性不同值的数据记录的一部分。 如果等价类的敏感属性值分布的熵至少为<span><span class="MathJax_Preview">log（l）</span><script type="math/tex">log（l）</script></span>，则称该等价类为熵多样性。</p>
+<p>$-\sum_{i=1}^r p_i·log(p_i)&gt;=log(l)        \tag {20.10} $</p>
+<p>如果一个匿名表格满足熵<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>，如果它中的每个等价类满足熵<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>。</p>
+<p>可以证明，等价类中的敏感属性必须至少具有<span><span class="MathJax_Preview">\ell</span><script type="math/tex">\ell</script></span>个不同的值以使表格变得不同（参见练习7）。因此，任何不同的群体都至少有l个元素，并且也是<span><span class="MathJax_Preview">\ell-anonymous</span><script type="math/tex">\ell-anonymous</script></span>的。</p>
+<p>这种<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>定义的一个问题是它在许多环境中可能过于严格，特别是当敏感属性值的分布不均匀时。表格的熵可以表示为至少等于它所分割的组成等价类别的最小熵（参见习题8）。所以要保证每个等价类的<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>，整个表中的敏感属性分布也必须是多样的。这在许多情况下都是一个限制性假设，因为大多数敏感属性的实际分布都是非常偏离的。例如，在医学应用中，敏感（疾病）属性在正常个体和各种疾病之间可能具有不均匀的频率。更大的属性倾斜减少了整个表中敏感属性分布的（全局）熵<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>。当这个全局<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>小于时，不可<span><span class="MathJax_Preview">\ell</span><script type="math/tex">\ell</script></span>能在不抑制许多数据记录的情况下创建全局的l-diverse分区。</p>
+<p>因此，已经提出了一个更为宽松的递归<span><span class="MathJax_Preview">(c,\ell)-diversity</span><script type="math/tex">(c,\ell)-diversity</script></span>概念。定义的基本目标是确保等价类中最频繁的属性值不会支配其中较不频繁的敏感值。额外的参数<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>用于控制等价类内敏感属性的不同值的相对频率。</p>
+<p>**定义20.3.4（递归(c,\ell)-diversity）**令<span><span class="MathJax_Preview">p_1 ... p_r</span><script type="math/tex">p_1 ... p_r</script></span>是属于等价类中敏感属性的r个不同值的数据记录的分数，使得<span><span class="MathJax_Preview">p 1≥p 2 ≥...≥pr</span><script type="math/tex">p 1≥p 2 ≥...≥pr</script></span>。 如果满足下列条件，则等价类满足递归<span><span class="MathJax_Preview">(c,\ell)-diversity</span><script type="math/tex">(c,\ell)-diversity</script></span>：</p>
+<p><span><span class="MathJax_Preview">p_1 &lt; c·\sum _{i=l}^r p_i             \tag{20.11}</span><script type="math/tex">p_1 < c·\sum _{i=l}^r p_i             \tag{20.11}</script></span></p>
+<p>一个匿名表满足递归<span><span class="MathJax_Preview">(c,\ell)-diversity</span><script type="math/tex">(c,\ell)-diversity</script></span>，如果其中的每个等价类满足熵<span><span class="MathJax_Preview">(c,\ell)-diversity</span><script type="math/tex">(c,\ell)-diversity</script></span>。 </p>
+<p>这个想法是敏感属性值的最不频繁的尾部与最频繁的敏感属性值相比必须包含足够的累积频率。 r的值必须至少为<span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>，因为上述关系的右侧不为零。<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>的一个关键特性是l-diverse表的任何概括也是多样的。 对于<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>的两个定义都是如此。</p>
+<p>**引理20.3.1（熵<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span></script></span>单调性）**如果一张表是熵l-diverse的，那么表的任何推广也是熵<span><span class="MathJax_Preview">\ell-diverse</span><script type="math/tex">\ell-diverse</script></span>的。 
+**引理20.3.2（递归<span><span class="MathJax_Preview">(c,\ell)-diversity</span><script type="math/tex">(c,\ell)-diversity</script></span>单调性）**如果一个表是递归<span><span class="MathJax_Preview">的(c,\ell)-diversity</span><script type="math/tex">的(c,\ell)-diversity</script></span>的，那么表的任何泛化都是递归的也是<span><span class="MathJax_Preview">(c,\ell)-diversity</span><script type="math/tex">(c,\ell)-diversity</script></span>的。</p>
+<p>建议读者完成与这些结果相关的练习<span><span class="MathJax_Preview">9（a）和（b）</span><script type="math/tex">9（a）和（b）</script></span>。 因此，<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>表现出<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>算法所表现的相同的单调性。 这意味着<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的算法可以通过稍作修改而简单地推广到<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>。 例如，<span><span class="MathJax_Preview">Samarati</span><script type="math/tex">Samarati</script></span>的算法和<span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>算法都可以适用于<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>定义。 任何<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>算法的唯一变化如下。 每次对一个表进行<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>测试时，它现在都会代替地进行<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>测试。 因此，l-diverse匿名化方法的算法开发通常通过简单地适应现有的<span><span class="MathJax_Preview">k-anonymization</span><script type="math/tex">k-anonymization</script></span>算法来执行。</p>
+<h3 id="2033-t-closenesst-closeness">20.3.3  <span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span> 模型</h3>
+<p>尽管l -diversity模型有效地防止了敏感属性的直接推断，但它并不能完全阻止攻击者获得某些知识。主要原因是l -diversity不能解释原始表中敏感属性值的分布。例如，当<span><span class="MathJax_Preview">p_ 1 = p_ 2 = ... = p_ r = 1 / r</span><script type="math/tex">p_ 1 = p_ 2 = ... = p_ r = 1 / r</script></span>时，具有相对频率<span><span class="MathJax_Preview">p _1 ... p_ r</span><script type="math/tex">p _1 ... p_ r</script></span>的一组敏感属性值的熵将取最大值。不幸的是，当敏感属性值的原始分布存在明显偏差时，这通常可能会严重违反隐私。考虑一个艾滋病检测医学数据库的例子，其中敏感值呈现“HIV”或“正常”两个值，相对比例为1：99。在这种情况下，根据<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>定义，艾滋病病毒感染者和普通患者平均分布的组将具有最高的熵。 </p>
+<p>不幸的是，当考虑到原始数据中敏感值的分布时，这种分布非常显著。在大多数实际数据集中，敏感值通常以偏斜的方式分布。在上面讨论的医学例子中，已经知道整个数据集中只有1％的患者患有<span><span class="MathJax_Preview">HIV</span><script type="math/tex">HIV</script></span>。因此，艾滋病病毒感染者和正常患者的分布，为对手提供了显著的信息获益。对手现在知道，这一小部分患者的预期感染艾滋病毒的机会比基础人群要高得多。</p>
+<p>在这种情况下，存在贝叶斯最优隐私的概念，它确保了信息发布后获得的附加后验信息尽可能小。不幸的是，贝叶斯优化隐私的概念在实际和计算上难以实现。<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>模型可以被看作是试图实现与贝叶斯最优隐私概念类似的目标的实用和启发式方法。这是通过使用分布之间的距离函数来实现的。非正式地，目标是创建匿名化，使得每个匿名组的敏感属性分布与基础数据之间的距离由用户定义的阈值限定。</p>
+<p>**定义20.3.5（<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>原则）**假设<span><span class="MathJax_Preview">P =（p_ 1 ... p_ r）</span><script type="math/tex">P =（p_ 1 ... p_ r）</script></span>是一个向量，表示属于等价类中敏感属性的r个不同值的一部分数据记录。 假设<span><span class="MathJax_Preview">Q =（q _1 ... q_ r）</span><script type="math/tex">Q =（q _1 ... q_ r）</script></span>是完整数据集中的对应部分的分布。 然后，如果以下情况属实，那么等价类被认为满足<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>，对于适当选择的距离函数<span><span class="MathJax_Preview">Dist（•，•）</span><script type="math/tex">Dist（•，•）</script></span>：</p>
+<p><span><span class="MathJax_Preview">Dist(\bar{P},\bar{Q})&lt;=t   \tag{20.12}</span><script type="math/tex">Dist(\bar{P},\bar{Q})<=t   \tag{20.12}</script></span></p>
+<p>可证明匿名表格满足<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>，如果其中的所有等价类满足<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>。 </p>
+<p>前面的定义没有指定任何特定的距离函数。 实例化距离函数的方法有很多种，具体取决于特定于应用程序的目标。距离函数的两个常见实例如下所示：</p>
+<ol>
+<li>变分距离：这简直等于两个分布向量之间曼哈顿距离的一半：</li>
+</ol>
+<p><span><span class="MathJax_Preview">Dist(\bar{P},\bar{Q}) = \frac {\sum_{i=1}^r |p_i-q_i|}{2}      \tag{20.13}</span><script type="math/tex">Dist(\bar{P},\bar{Q}) = \frac {\sum_{i=1}^r |p_i-q_i|}{2}      \tag{20.13}</script></span></p>
+<ol>
+<li><span><span class="MathJax_Preview">Kullback-Leibler（KL）</span><script type="math/tex">Kullback-Leibler（KL）</script></span>距离：这是一个计算<span><span class="MathJax_Preview">（P，Q）</span><script type="math/tex">（P，Q）</script></span>的交叉熵与<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的熵之间差异的信息论测度。</li>
+</ol>
+<p><span><span class="MathJax_Preview">Dist(\bar{P},\bar{Q}) =  \sum_{i=l}^r (p_i*log(p_i)-p_i*log(q_i))       \tag{20.14}</span><script type="math/tex">Dist(\bar{P},\bar{Q}) =  \sum_{i=l}^r (p_i*log(p_i)-p_i*log(q_i))       \tag{20.14}</script></span></p>
+<p>请注意，第一个分布的熵是<span><span class="MathJax_Preview">- \sum_{i=l}^r (p_i*log(p_i)</span><script type="math/tex">- \sum_{i=l}^r (p_i*log(p_i)</script></span>，而交叉熵是 $-\sum_{i=l}^r (p_i*log(q_i)) $</p>
+<p>虽然这些是所使用的两种最常见的距离度量，但是可以在不同的应用特定目标的情况下使用其他距离度量。例如，可能希望防止一个特定等价类包含语义相关的敏感属性值的情况。考虑这种情况，其中特定的等价类别包含诸如胃溃疡，胃炎和胃癌等疾病。在这种情况下，如果一个小组仅包含这些疾病，然后它提供了关于该小组的敏感属性的重要信息。<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>方法通过改变距离度量来防止这种情况，并且在距离计算过程中考虑到敏感属性的不同值之间的距离。特别是，在这种情况下，使用<span><span class="MathJax_Preview">Earth \, Mover \,Distance</span><script type="math/tex">Earth \, Mover \,Distance</script></span>可以十分有效。</p>
+<p>如果我们允许原始数据中的敏感属性值被翻转，则根据将一个分布转换为另一个分布所需的“工作”（或成本）来定义<span><span class="MathJax_Preview">earth \,mover’s\, distance（EMD）</span><script type="math/tex">earth \,mover’s\, distance（EMD）</script></span>。显然，它需要较少的“工作”来将敏感值转换为语义上相似的值。形式上，令d ij为将第i个敏感值转换为第j个敏感值所需的“工作量”，并且令<span><span class="MathJax_Preview">f _{ij}</span><script type="math/tex">f _{ij}</script></span>为从属性值i翻转到属性值j的那部分数据记录。 <span><span class="MathJax_Preview">d _{ij}</span><script type="math/tex">d _{ij}</script></span>的值由领域专家提供。请注意，将分布<span><span class="MathJax_Preview">（p_ 1 ... p_r）</span><script type="math/tex">（p_ 1 ... p_r）</script></span>翻转为分布<span><span class="MathJax_Preview">（q_ 1 ... q_r）</span><script type="math/tex">（q_ 1 ... q_r）</script></span>有很多不同的方法，并且希望使用最少成本的翻转序列来计算<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>和<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>。例如，人们倾向于将“胃溃疡”翻转为“胃炎”，而不是将“<span><span class="MathJax_Preview">HIV</span><script type="math/tex">HIV</script></span>”翻转为“胃炎”，因为前者可能成本较低。因此，<span><span class="MathJax_Preview">f _{ij}</span><script type="math/tex">f _{ij}</script></span>是线性规划优化问题中的变量，其被构造为最小化翻转的总体成本。对于具有r个不同敏感属性值的表格，翻转成本由<span><span class="MathJax_Preview">\sum_{i=1}^r \sum_{j=1}^r f_{ij}·d_{ij}</span><script type="math/tex">\sum_{i=1}^r \sum_{j=1}^r f_{ij}·d_{ij}</script></span>给出。<span><span class="MathJax_Preview">earth\, mover’s \,distance</span><script type="math/tex">earth\, mover’s \,distance</script></span>可能被认为是一个优化问题，它使得这个目标函数最小化，并受限于涉及每个敏感属性值的聚合翻转。约束条件确保聚合翻转将分布<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>转换为<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>。</p>
+<p>​                                                   $Dist(\bar{P},\bar{Q}) =  Minimize \sum_{i=1}^r \sum_{j=1}^r f_{ij}·d_{ij} $</p>
+<p>受限于：</p>
+<p>$p_i- \sum_{j=1}^r f_{ij}+\sum_{j=1}^rf_{ij}=q_i    \qquad  \qquad  \forall i\in{1....r}  $</p>
+<p><span><span class="MathJax_Preview">f_{ij}&gt;=0  \qquad   \qquad \forall i,j\in{1....r}</span><script type="math/tex">f_{ij}>=0  \qquad   \qquad \forall i,j\in{1....r}</script></span></p>
+<p>$ earth mover’s distance<span><span class="MathJax_Preview">距离具有某些性质，可以简化满足</span><script type="math/tex">距离具有某些性质，可以简化满足</script></span>t-closeness$的泛化计算。</p>
+<p><strong>引理20.3.3</strong> 令<span><span class="MathJax_Preview">E _1和E_ 2</span><script type="math/tex">E _1和E_ 2</script></span>为两个等价类，并且令<span><span class="MathJax_Preview">\bar P _1，\bar P_ 2</span><script type="math/tex">\bar P _1，\bar P_ 2</script></span>为它们的敏感属性分布。 令<span><span class="MathJax_Preview">P为E _1∪E_2</span><script type="math/tex">P为E _1∪E_2</script></span>的分布，<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>为全数据集的全局分布。 然后，可以表明：</p>
+<p><span><span class="MathJax_Preview">Dist(\bar{P},\bar{Q})  \leq \frac{|E_1|}{|E_1|+|E_2|}·Dist(\bar{P_1},\bar{Q}) +\frac{|E_2|}{|E_1|+|E_2|}·Dist(\bar{P_2},\bar{Q}) \tag{20.15}</span><script type="math/tex">Dist(\bar{P},\bar{Q})  \leq \frac{|E_1|}{|E_1|+|E_2|}·Dist(\bar{P_1},\bar{Q}) +\frac{|E_2|}{|E_1|+|E_2|}·Dist(\bar{P_2},\bar{Q}) \tag{20.15}</script></span></p>
+<p>这个引理是由于线性规划公式的最优目标函数是凸的，并且P可以表示为<span><span class="MathJax_Preview">P _1和P _2</span><script type="math/tex">P _1和P _2</script></span>的凸线性组合，其系数<span><span class="MathJax_Preview">\frac{|E_1|}{|E_1|+|E_2|}</span><script type="math/tex">\frac{|E_1|}{|E_1|+|E_2|}</script></span> 和<span><span class="MathJax_Preview">\frac{|E_2|}{|E_1|+|E_2|}</span><script type="math/tex">\frac{|E_2|}{|E_1|+|E_2|}</script></span> ， 分别。 这种凸性结果也意味着以下内容：</p>
+<p>​                                                 $Dist(\bar{P},\bar{Q})  \leq max (Dist(\bar{P_1},\bar{Q}) ,Dist(\bar{P_2},\bar{Q}))   $</p>
+<p>因此，当两个满足<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>的等价类被合并时，合并的等价类也将满足<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>。 这意味着<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>的单调性。</p>
+<h3 id="2034">20.3.4 维度惩罚</h3>
+<p>正如本书中的各个地方所讨论的那样，维度惩罚给许多数据挖掘问题带来了挑战。隐私保护也是受维度诅咒影响的问题之一。维度惩罚影响匿名算法的有效性主要有两种方式：</p>
+<ol>
+<li>计算挑战：已经表明[385]，最优的 <span><span class="MathJax_Preview">k-anonymization</span><script type="math/tex">k-anonymization</script></span>是NP难的。这意味着随着维度的增加，隐私保护变得更加困难。 NP难结果也适用于<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>和<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>模型，使用非常类似的论点。</li>
+<li>质量挑战：保护隐私的质量挑战更为重要。最近，已经表明，在不失去匿名数据记录的效用的情况下执行有效的隐私保护可能是困难的。这是一个更加根本的挑战，因为它使隐私保护过程变得不实用。本节的讨论将集中在这个问题上。</li>
+</ol>
+<p>在下文中，将提供关于维度惩罚对基于群组的匿名方法的定性影响的讨论。虽然形式化的数学证明[10]超出了本书的范围，但提出了一个直观的论证。为了理解为什么维度惩罚增加了违规的可能性，只需要了解众所周知的高维数据稀疏概念。为了便于理解，请考虑数字属性的情况。一个表的广义表示可以被认为是<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维空间中的矩形区域，其中d是准标识符的数量。设<span><span class="MathJax_Preview">F_i∈（0,1）</span><script type="math/tex">F_i∈（0,1）</script></span>为特定泛化所涵盖的尺寸范围<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的一部分。对于匿名数据集是有用的，<span><span class="MathJax_Preview">F_ i</span><script type="math/tex">F_ i</script></span>的值应尽可能小。然而，由具有<span><span class="MathJax_Preview">F_1 ... F_d</span><script type="math/tex">F_1 ... F_d</script></span>的分数域范围的泛化覆盖的空间的部分体积由<span><span class="MathJax_Preview">\prod_{i=1}^d F_i</span><script type="math/tex">\prod_{i=1}^d F_i</script></span>累积给出。该部分随着维数d的增加而快速收敛到0。因此，体积内的数据点部分也会迅速减少，特别是如果不同维度之间的相关性较弱。对于足够大的d值，除非F i的值选择为接近1，否则难以创建至少包含k个数据点的d维区域。在这种情况下，任何属性值都会推广到几乎是整个数值的范围。这种高度概括的数据集因此失去了其用于数据挖掘目的的效用。对于其他隐私模型，例如<span><span class="MathJax_Preview">perturbation</span><script type="math/tex">perturbation</script></span>,和 <span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>，这个一般原则也被证明是正确的。书目注释包含了一些这些理论结果的推导。</p>
+<p>这种情况的一个真实例子是Netflix Prize数据集，其中Netflix发布了针对电影的个人评分[559]，以促进协作过滤算法的研究。可以找到许多其他数据源，例如互联网电影数据库（<span><span class="MathJax_Preview">IMDb</span><script type="math/tex">IMDb</script></span>），从中可以将收视率信息与<span><span class="MathJax_Preview">Netflix</span><script type="math/tex">Netflix</script></span>奖品数据集匹配。结果表明，随着评级数量（指定维度）的增加[402]，用户的身份可能会以非常高的准确性被破坏。最终，Netflix收回了数据集。</p>
+<h2 id="204">20.4 输出保密</h2>
+<p>隐私保护过程可以在数据挖掘管道中的任何位置应用，从数据收集，发布开始，最后是数据挖掘过程的实际应用。数据挖掘算法的输出对于对手来说可能非常有用。特别是，具有大量输出和详尽数据描述的数据挖掘算法在公开的上下文中具有尤其大风险。例如，考虑关联规则挖掘算法，其中以高置信度生成以下规则：</p>
+<p>​                                                          <span><span class="MathJax_Preview">(Age = 26,ZIP Code = 10562) ⇒ HIV</span><script type="math/tex">(Age = 26,ZIP Code = 10562) ⇒ HIV</script></span></p>
+<p>这种关联规则对满足上述规则左侧条件的个人的隐私是有害的。因此，这一规则的发现可能会导致对个人隐私信息的不公开披露。通常，由于属性值之间的约束和强大的统计关系，许多数据库可能会在属性的子集之间显示出关系。关联规则隐藏的问题可被认为是统计公开控制或数据库推理控制问题的变体。</p>
+<p>在这些问题中，目标是防止从其他相关值推断数据库中的敏感值。然而，数据库推理控制和关联规则隐藏之间确实存在着一个重要的区别。在数据库推理控制中，重点是隐藏一些条目，以便保留其他条目的隐私。在关联规则隐藏中，重点在于隐藏规则本身，而不是条目。因此，隐私保存过程作用于数据挖掘算法的输出，而不是基础数据。</p>
+<p>在关联规则挖掘中，系统管理员会指定一组敏感规则。其任务是挖掘所有关联规则，以便不会发现任何敏感规则，但会发现所有不敏感的规则。关联规则隐藏方法是启发式方法，基于边界的方法或精确方法。在第一类方法中，事务的一个子集从数据中被移除。关联规则在一组已经进行了消除的交易中被发现。一般来说，如果删除了太多事务，那么发现的其余不敏感规则将不会反映真正的规则集。这可能会导致发现不能反映底层数据真实模式的规则。在基于边界的方法中，调整频繁模式挖掘算法的边界，使得仅发现不敏感的规则。请注意，当调整频繁项集的边界时，它将导致排除非敏感性规则以及敏感规则。最后一类问题将隐藏过程转换为约束满足问题。这个公式可以用整数规划来解决。虽然这些方法提供了确切的解决方案，但它们要慢得多，而且它们的使用仅限于较小尺寸的问题。
+输出隐私中的相关问题是查询审计。在查询审计中，假定用户可以向数据库发出一系列查询。 但是，对一个或多个查询的响应有时可能会导致对较小个人数据集的敏感信息的损害。因此，对某些查询的回复会被拦截（或审计）以防止不必要的泄露。书目笔记包含特定的有关各种查询审计和关联规则隐藏算法的标示。</p>
+<p><center>
+![20.6 F](<a href="http://p6atp7tts.bkt.clouddn.com/20.6">http://p6atp7tts.bkt.clouddn.com/20.6</a> F.PNG)
+图 20.6  水平和垂直分区数据的示例
+</center></p>
+<h2 id="205">20.5 分布式隐私</h2>
+<p>在分布式隐私保护数据挖掘中，目标是挖掘拥有数据不同部分的多位参与者的共同见解，而不会影响本地统计数据或数据记录的隐私性。关键是要了解不同参与者可能是部分或完全对手/竞争对手，并且可能不希望提供彼此的本地数据和统计信息的完整访问权限。但是，他们可能会发现，对他们拥有的所有数据提取全局分析是相互有益的。</p>
+<p>数据可以在不同的参与者之间水平或垂直分割。在水平分割中，不同对手拥有的数据记录具有相同的属性，但不同的对手拥有数据库的不同部分。例如，一组超市连锁店可能拥有与顾客购买行为有关的类似数据，但由于特定于其特定业务的因素，不同商店可能在其交易中显示出不同的模式。在垂直分区中，不同的站点可能包含同一个人的不同属性。例如，考虑数据库包含各种客户的交易的情况。特定顾客可以在包含诸如珠宝，服饰，化妆品等辅助产品的商店中购买不同种类的物品。在这种情况下，跨不同参与者的聚合关联分析可以提供分析，这不能从任何特定数据库推断。水平和垂直分割数据的例子在图<span><span class="MathJax_Preview">20.6a</span><script type="math/tex">20.6a</script></span>和<span><span class="MathJax_Preview">20.6b</span><script type="math/tex">20.6b</script></span>分别显示。</p>
+<p>在最原始的层面上，分布式隐私保护数据挖掘问题与加密领域密切相关，以确定安全的多方计算。在这个领域中，函数是通过多个接收者提供的输入进行计算的，而不是实际上相互共享输入。例如，在双方设置中，<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>可能分别有两个输入<span><span class="MathJax_Preview">x和y</span><script type="math/tex">x和y</script></span>，并且可能希望计算函数<span><span class="MathJax_Preview">f（x，y）</span><script type="math/tex">f（x，y）</script></span>而不会相互泄露<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>或<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>。这个问题也可以在k个参与者之间推广以计算<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个参数函数<span><span class="MathJax_Preview">h（x _1 ... x_ k）</span><script type="math/tex">h（x _1 ... x_ k）</script></span>。许多数据挖掘算法可以在原始函数的重复计算的背景下进行查看，例如标量点积，安全总和，安全集合联合等。例如，项目集和事务的二进制表示的标量点积可以用于确定该项目集是否受该交易支持。同样，标量点积可用于聚类中的相似度计算。为了计算函数<span><span class="MathJax_Preview">f（x，y）或h（x_ 1 ...，x_ k）</span><script type="math/tex">f（x，y）或h（x_ 1 ...，x_ k）</script></span>，需要设计一个协议用于交换信息，以便在不影响隐私的情况下计算函数。</p>
+<p>对于多种安全功能评估来说，一个关键的构建块是2分之一的遗忘传输协议。该协议涉及两方：发送方和接收方。发送者的输入是一对<span><span class="MathJax_Preview">（x _0，x_ 1）</span><script type="math/tex">（x _0，x_ 1）</script></span>，并且接收者的输入是比特值<span><span class="MathJax_Preview">σ∈{0,1}</span><script type="math/tex">σ∈{0,1}</script></span>。在这个过程结束时，接收者只学习<span><span class="MathJax_Preview">x_σ</span><script type="math/tex">x_σ</script></span>，发送者什么都不学习。换句话说，发送者不知道<span><span class="MathJax_Preview">σ</span><script type="math/tex">σ</script></span>的值。</p>
+<p>在遗忘传输协议中，发送方生成两个加密密钥K 0和K 1，但该协议能够确保接收方只知道<span><span class="MathJax_Preview">Kσ</span><script type="math/tex">Kσ</script></span>的解密密钥。发送者能够通过使用来自编码σ的接收器的加密输入来生成这些密钥。该编码输入不会向发送者显露σ的值，但足以生成<span><span class="MathJax_Preview">K_ 0和K _1</span><script type="math/tex">K_ 0和K _1</script></span>。发送者用<span><span class="MathJax_Preview">K _0加密x_ 0</span><script type="math/tex">K _0加密x_ 0</script></span>，用<span><span class="MathJax_Preview">K _1加密x_ 1</span><script type="math/tex">K _1加密x_ 1</script></span>，并将加密的数据发送回接收器。此时，接收者只能解密<span><span class="MathJax_Preview">x_σ</span><script type="math/tex">x_σ</script></span>，因为这是他或她拥有解密密钥的唯一输入。2分之一的遗忘传输协议已经推广到<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>个参与者中有<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个的情况。</p>
+<p>遗忘传输协议是一个基本的构建模块，可用于计算与矢量距离有关的多个数据挖掘原语。频繁模式挖掘算法使用的另一个重要协议是安全集合联合协议。该协议允许以分布方式计算集合的联合，而不显露组成元素的实际来源。这在频繁模式挖掘算法中特别有用，因为在不同站点上的本地大型项目集需要进行汇总。这些方法的关键在于伪装每个站点的频繁模式，以便伪造足够数量的伪项目集，以掩饰每个站点上真正的本地大项目集。此外，可以表明，该协议可以推广到计算水平和垂直划分数据上的各种数据挖掘问题的不同类型函数。书目注释包含对这些技术进行调查的标示。</p>
+<h2 id="206">20.6 总结</h2>
+<p>隐私保护数据挖掘可以在信息处理流水线的不同阶段执行，例如数据收集，数据发布，输出发布或分布式数据共享。数据收集中唯一已知的隐私保护方法是随机化方法。在这种方法中，数据采集时加入了噪声。数据总体重建后用于挖掘。</p>
+<p>隐私保持数据发布通常使用基于组的方法执行。在这种情况下，敏感属性的处理方式与用于组合构造准标识符的属性不同。只有后一类属性才会受到干扰，以防止识别数据记录的主题。许多模型，如<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>, <span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>, 和<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>用于匿名。所有这些方法的最终目标是防止发布有关个人的敏感信息。当数据的维度增加时，隐私保护变得非常困难，而不会完全损失效用。</p>
+<p>在某些情况下，数据挖掘应用程序（如关联规则挖掘和查询处理）的输出可能导致敏感信息的泄露。因此，在很多情况下，可能需要限制这些应用程序的输出，以防止泄露敏感信息。两种这样众所周知的技术是关联规则隐藏和查询审计。</p>
+<p>在分布式隐私中，目标是让对手或半对手在共享数据方面进行协作，以获得全局分析。数据可以在列上垂直划分，也可以在行之间水平划分。密码协议通常用于实现这一目标。其中最着名的是遗忘传输协议。通常，这些协议用于实现原始数据挖掘操作，如点积。这些基本操作然后在数据挖掘算法中得到利用。</p>
+<h2 id="207">20.7 书目注释</h2>
+<p>统计公开控制和安全社区已经广泛研究了隐私保护数据挖掘问题[1,512]。在传统的统计公开控制文献中已经提出了许多方法，例如交换[181]，微聚集[186]和抑制[179]。</p>
+<p>保护隐私的数据挖掘问题在[60]中正式引入更广泛的数据挖掘社区。[28]中的工作建立了隐私保护数据挖掘算法量化模型。有关隐私保护数据挖掘的调查可参见[29]。随机化方法被推广到其他问题，如关联规则挖掘[200]。在隐私保护数据挖掘的情况下，乘法扰动也被证明是非常有效的[140]。尽管如此，已经设计了许多攻击方法来推断扰动数据记录的值[11,367]。</p>
+<p><span><span class="MathJax_Preview">Samarati</span><script type="math/tex">Samarati</script></span>提出<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>模型[442]。二进制搜索算法也在本文中讨论。本文还建立了基于群组的匿名化的基本框架，并随后被所有不同的隐私方法使用。<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>问题的NP难在[385]中被正式证明。可以在[153]中找到$ k-anonymous<span><span class="MathJax_Preview">数据挖掘的调查。 [83]中显示了</span><script type="math/tex">数据挖掘的调查。 [83]中显示了</script></span>k-anonymity<span><span class="MathJax_Preview">问题和频繁模式挖掘问题之间的关系。在[83]中提出了一种枚举方法，它类似于在频繁模式挖掘中常用的集合枚举方法。本章讨论的隐身和Mondrian算法在[335]和[336]中提出。在[8]中提出了隐私保护数据挖掘的缩合方法。一些最近的方法对数据执行</span><script type="math/tex">问题和频繁模式挖掘问题之间的关系。在[83]中提出了一种枚举方法，它类似于在频繁模式挖掘中常用的集合枚举方法。本章讨论的隐身和Mondrian算法在[335]和[336]中提出。在[8]中提出了隐私保护数据挖掘的缩合方法。一些最近的方法对数据执行</script></span>k-anonymity$概率版本，以便匿名化的输出是概率分布[9]。因此，这种方法允许在转换的数据上使用概率数据库方法。许多度量标准也被提出用于基于效用的私人表格评估，而不是简单地使用最小泛化高度[29,315]。</p>
+<p>在[348]和[372]中分别提出了<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span> 和<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>模型，重点关注敏感属性泄露。 [91]中提出了一种解决敏感属性的不同方法。 [218]中可以找到许多隐私保护数据发布技术的详细调查。与基于群组的匿名化密切相关的模型是差别隐私，其中数据记录对数据库中其他数据记录隐私的不同影响用于执行隐私操作[190,191]。尽管差分隐私提供了比许多基于群组的模型更理想的结果，但其实际效用尚未实现。在[10]中首次观察到匿名问题背景下的维度惩罚。随后，它表明，惩罚扩展到其他隐私模型，如perturbation 和<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span> [11,12,372]。关于如何使用高维数据进行隐私攻击的实例[402]是基于Netflix数据集[559]。有趣的是，这种攻击使用敏感的评级属性和背景知识来进行识别攻击。最近，有人提出了几种方法[514,533]，以有限的方式解决维度惩罚。</p>
+<p>输出隐私问题与统计数据库中的推理控制和审计问题密切相关[150]。这个领域最常见的问题是关联规则隐藏[497]和查询审计[399]。分布式方法将数据挖掘问题转化为安全的多方计算原语[188]。通常，这些方法取决于使用遗忘传输协议[199,401]。大多数这些方法对水平划分数据[297]或垂直划分数据[495]执行分布式隐私保护。 [154]中可以找到关于分布式信息共享的各种隐私工具的概述。</p>
+<h2 id="208">20.8 习题</h2>
+<ol>
+<li>
+<p>假设您有一个一维数据集均匀分布在<span><span class="MathJax_Preview">（0,1）</span><script type="math/tex">（0,1）</script></span>中。数据中添加了范围<span><span class="MathJax_Preview">（0,1）</span><script type="math/tex">（0,1）</script></span>的均匀噪声。推导出扰动分布的最终形状。</p>
+</li>
+<li>
+<p>假设你的扰动数据均匀分布在<span><span class="MathJax_Preview">（0,1）</span><script type="math/tex">（0,1）</script></span>中，并且你的扰动分布也均匀分布在<span><span class="MathJax_Preview">（0,1）</span><script type="math/tex">（0,1）</script></span>中。推导原始数据分布。对于有限的数据集，这种分布在实践中是否会被准确重构？</p>
+</li>
+<li>
+<p>实现随机化方法的贝叶斯分布重构算法。</p>
+</li>
+<li>
+<p>实现（a）<span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>和（b）<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的<span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>算法。</p>
+</li>
+<li>
+<p>实现<span><span class="MathJax_Preview">k-anonymity</span><script type="math/tex">k-anonymity</script></span>的缩合方法。</p>
+</li>
+<li>
+<p>在动态缩合中，其中一个步骤是沿着最长的特征向量将一个组分成两个相等的组。设λ是原始组的最大特征值，<span><span class="MathJax_Preview">μ​</span><script type="math/tex">μ​</script></span>是原始的<span><span class="MathJax_Preview">d​</span><script type="math/tex">d​</script></span>维均值，<span><span class="MathJax_Preview">V​</span><script type="math/tex">V​</script></span>是最长的特征向量，将其归一化为单位范数。在均匀分布假设下计算两个分裂组的平均值的代数表达式。</p>
+</li>
+<li>
+<p>证明熵-和递归- <span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>模型中的敏感属性必须至少有l不同的值。</p>
+</li>
+<li>
+<p>证明敏感属性分布的全局熵至少等于其中等价类的最小熵。 [提示：使用熵的凸性]</p>
+</li>
+<li>
+<p>许多<span><span class="MathJax_Preview">k-anonymization</span><script type="math/tex">k-anonymization</script></span>算法，如<span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>取决于单调性。证明（a）熵<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>,和（b）递归<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>满足单调性。</p>
+</li>
+<li>
+<p>通过修改练习4中的代码，实现（a）<span><span class="MathJax_Preview">Incognito</span><script type="math/tex">Incognito</script></span>，（b）熵和递归<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>的<span><span class="MathJax_Preview">Mondrian</span><script type="math/tex">Mondrian</script></span>算法。</p>
+</li>
+<li>
+<p>证明<span><span class="MathJax_Preview">（a）</span><script type="math/tex">（a）</script></span>具有变分距离的<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>和<span><span class="MathJax_Preview">（b）KL-measure</span><script type="math/tex">（b）KL-measure</script></span>的<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>满足单调性。</p>
+</li>
+<li>
+<p>考虑任何基于群体的匿名量化度量<span><span class="MathJax_Preview">f（\bar P）</span><script type="math/tex">f（\bar P）</script></span>，其中匿名性条件的形式为<span><span class="MathJax_Preview">f(\bar P）≥thresh</span><script type="math/tex">f(\bar P）≥thresh</script></span>。 （这种度量的一个例子是<span><span class="MathJax_Preview">\ell -diversity</span><script type="math/tex">\ell -diversity</script></span>中的熵。）这里，<span><span class="MathJax_Preview">\bar P =（p _1 ... p_ r）</span><script type="math/tex">\bar P =（p _1 ... p_ r）</script></span>是敏感属性分布向量。证明如果<span><span class="MathJax_Preview">f(\bar P）</span><script type="math/tex">f(\bar P）</script></span>是凹的，那么匿名定义将满足关于泛化的单调性。同时也表明凸性确保了在形式<span><span class="MathJax_Preview">f（\bar P）≤thresh</span><script type="math/tex">f（\bar P）≤thresh</script></span>的匿名条件下的单调性。</p>
+</li>
+<li>
+<p>通过对练习4的代码进行修改，实现<span><span class="MathJax_Preview">（a）Incognito</span><script type="math/tex">（a）Incognito</script></span>，和<span><span class="MathJax_Preview">（b）</span><script type="math/tex">（b）</script></span>基于变化距离和<span><span class="MathJax_Preview">KL</span><script type="math/tex">KL</script></span>距离的<span><span class="MathJax_Preview">t-closeness</span><script type="math/tex">t-closeness</script></span>的Mondrian算法。</p>
+</li>
+<li>
+<p>假设你有一个匿名的二进制交易数据库，其中包含不同客户在某一天购买的物品。假设您知道您的家人朋友的交易包含特定的子项目B，但您不知道她购买的其他项目。如果每一件商品都是以0.5的概率独立购买的，则表明其他n个客户中至少有一个购买了完全相同的商品模式的概率至多为<span><span class="MathJax_Preview">n / 2 ^B</span><script type="math/tex">n / 2 ^B</script></span>。评估<span><span class="MathJax_Preview">n = 10 ^4和B = 20</span><script type="math/tex">n = 10 ^4和B = 20</script></span>的表达式。这暗示着她的其他购买模式的隐私是什么？</p>
+</li>
+<li>
+<p>重复练习14以获得电影评级，取其中一个<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>可能值代替2.假设每个评分可能性具有<span><span class="MathJax_Preview">1 / R</span><script type="math/tex">1 / R</script></span>的相同概率，并且不同电影的评分是独立且相同分布的。重新识别<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>类已知评级的相应概率是多少，以及<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个不同的个体？</p>
+</li>
+<li>
+<p>编写一个计算机程序，用<span><span class="MathJax_Preview">B​</span><script type="math/tex">B​</script></span>已知的敏感属性重新识别数据库的主题。</p>
+</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../19/" title="第19章 社交网络分析" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第19章 社交网络分析
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

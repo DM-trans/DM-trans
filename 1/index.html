@@ -1,0 +1,1621 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/1/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第1章 绪论 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第1章 绪论
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第1章 绪论
+      </label>
+    
+    <a href="./" title="第1章 绪论" class="md-nav__link md-nav__link--active">
+      第1章 绪论
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" title="1.1 介绍" class="md-nav__link">
+    1.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="1.2 数据挖掘过程" class="md-nav__link">
+    1.2 数据挖掘过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" title="1.2.1 数据预处理阶段" class="md-nav__link">
+    1.2.1 数据预处理阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" title="1.2.2 分析阶段" class="md-nav__link">
+    1.2.2 分析阶段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="1.3 基本数据类型" class="md-nav__link">
+    1.3 基本数据类型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" title="1.3.1 无依赖性的数据" class="md-nav__link">
+    1.3.1 无依赖性的数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1311" title="1.3.1.1 定量多维数据" class="md-nav__link">
+    1.3.1.1 定量多维数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1312" title="1.3.1.2 分类和混合属性数据" class="md-nav__link">
+    1.3.1.2 分类和混合属性数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1313" title="1.3.1.3 二进制和设置数据" class="md-nav__link">
+    1.3.1.3 二进制和设置数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1314" title="1.3.1.4 文本数据" class="md-nav__link">
+    1.3.1.4 文本数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" title="1.3.2 有依赖性的数据" class="md-nav__link">
+    1.3.2 有依赖性的数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1321" title="1.3.2.1 时间序列数据" class="md-nav__link">
+    1.3.2.1 时间序列数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1322" title="1.3.2.2 离散序列和字符串" class="md-nav__link">
+    1.3.2.2 离散序列和字符串
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1324" title="1.3.2.4 网络和图数据" class="md-nav__link">
+    1.3.2.4 网络和图数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" title="1.4 主要构件：鸟瞰图" class="md-nav__link">
+    1.4 主要构件：鸟瞰图
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" title="1.4.1 关联模式挖掘" class="md-nav__link">
+    1.4.1 关联模式挖掘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" title="1.4.2 数据聚类" class="md-nav__link">
+    1.4.2 数据聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143" title="1.4.3 离群值检测" class="md-nav__link">
+    1.4.3 离群值检测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144" title="1.4.4 数据分类" class="md-nav__link">
+    1.4.4 数据分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145" title="1.4.5 复杂数据类型对问题定义的影响" class="md-nav__link">
+    1.4.5 复杂数据类型对问题定义的影响
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1451" title="1.4.5.1 复杂数据类型的模式挖掘" class="md-nav__link">
+    1.4.5.1 复杂数据类型的模式挖掘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1452" title="1.4.5.2 复杂数据类型的聚类" class="md-nav__link">
+    1.4.5.2 复杂数据类型的聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1453" title="1.4.5.3 复杂数据类型的异常值检测" class="md-nav__link">
+    1.4.5.3 复杂数据类型的异常值检测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1454" title="1.4.5.4 复杂诗句类型的分类" class="md-nav__link">
+    1.4.5.4 复杂诗句类型的分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" title="1.5 可伸缩性问题和流式场景" class="md-nav__link">
+    1.5 可伸缩性问题和流式场景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" title="1.6 典型应用场景介绍" class="md-nav__link">
+    1.6 典型应用场景介绍
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161" title="1.6.1 产品放置位置" class="md-nav__link">
+    1.6.1 产品放置位置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162" title="1.6.2 用户推荐" class="md-nav__link">
+    1.6.2 用户推荐
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163" title="1.6.3 医疗诊断" class="md-nav__link">
+    1.6.3 医疗诊断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-web" title="1.6.4 Web日志异常" class="md-nav__link">
+    1.6.4 Web日志异常
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" title="1.7 总结" class="md-nav__link">
+    1.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" title="1.8 书目注释" class="md-nav__link">
+    1.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" title="1.9 习题" class="md-nav__link">
+    1.9 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11" title="1.1 介绍" class="md-nav__link">
+    1.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="1.2 数据挖掘过程" class="md-nav__link">
+    1.2 数据挖掘过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" title="1.2.1 数据预处理阶段" class="md-nav__link">
+    1.2.1 数据预处理阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" title="1.2.2 分析阶段" class="md-nav__link">
+    1.2.2 分析阶段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="1.3 基本数据类型" class="md-nav__link">
+    1.3 基本数据类型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" title="1.3.1 无依赖性的数据" class="md-nav__link">
+    1.3.1 无依赖性的数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1311" title="1.3.1.1 定量多维数据" class="md-nav__link">
+    1.3.1.1 定量多维数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1312" title="1.3.1.2 分类和混合属性数据" class="md-nav__link">
+    1.3.1.2 分类和混合属性数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1313" title="1.3.1.3 二进制和设置数据" class="md-nav__link">
+    1.3.1.3 二进制和设置数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1314" title="1.3.1.4 文本数据" class="md-nav__link">
+    1.3.1.4 文本数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" title="1.3.2 有依赖性的数据" class="md-nav__link">
+    1.3.2 有依赖性的数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1321" title="1.3.2.1 时间序列数据" class="md-nav__link">
+    1.3.2.1 时间序列数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1322" title="1.3.2.2 离散序列和字符串" class="md-nav__link">
+    1.3.2.2 离散序列和字符串
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1324" title="1.3.2.4 网络和图数据" class="md-nav__link">
+    1.3.2.4 网络和图数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" title="1.4 主要构件：鸟瞰图" class="md-nav__link">
+    1.4 主要构件：鸟瞰图
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" title="1.4.1 关联模式挖掘" class="md-nav__link">
+    1.4.1 关联模式挖掘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" title="1.4.2 数据聚类" class="md-nav__link">
+    1.4.2 数据聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143" title="1.4.3 离群值检测" class="md-nav__link">
+    1.4.3 离群值检测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144" title="1.4.4 数据分类" class="md-nav__link">
+    1.4.4 数据分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#145" title="1.4.5 复杂数据类型对问题定义的影响" class="md-nav__link">
+    1.4.5 复杂数据类型对问题定义的影响
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1451" title="1.4.5.1 复杂数据类型的模式挖掘" class="md-nav__link">
+    1.4.5.1 复杂数据类型的模式挖掘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1452" title="1.4.5.2 复杂数据类型的聚类" class="md-nav__link">
+    1.4.5.2 复杂数据类型的聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1453" title="1.4.5.3 复杂数据类型的异常值检测" class="md-nav__link">
+    1.4.5.3 复杂数据类型的异常值检测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1454" title="1.4.5.4 复杂诗句类型的分类" class="md-nav__link">
+    1.4.5.4 复杂诗句类型的分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" title="1.5 可伸缩性问题和流式场景" class="md-nav__link">
+    1.5 可伸缩性问题和流式场景
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" title="1.6 典型应用场景介绍" class="md-nav__link">
+    1.6 典型应用场景介绍
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161" title="1.6.1 产品放置位置" class="md-nav__link">
+    1.6.1 产品放置位置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162" title="1.6.2 用户推荐" class="md-nav__link">
+    1.6.2 用户推荐
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163" title="1.6.3 医疗诊断" class="md-nav__link">
+    1.6.3 医疗诊断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164-web" title="1.6.4 Web日志异常" class="md-nav__link">
+    1.6.4 Web日志异常
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" title="1.7 总结" class="md-nav__link">
+    1.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" title="1.8 书目注释" class="md-nav__link">
+    1.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" title="1.9 习题" class="md-nav__link">
+    1.9 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/1.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="1">1 绪论</h1>
+<blockquote>
+<p>“教育不是学习，信息，数据，事实，技能或能力的堆砌,这是培训或教学。教育是让隐藏的种子变得可见。” - Thomas More</p>
+</blockquote>
+<h2 id="11">1.1 介绍</h2>
+<p>数据挖掘是收集，清理，处理，分析和从数据中获得有用见解的研究。 在实际应用中遇到的问题域，应用，公式和数据表示方面存在很大差异。 因此，“数据挖掘”是一个广泛的术语，用于描述数据处理的这些不同方面。</p>
+<p>在现代，几乎所有的自动化系统都会生成某种形式的数据，用于诊断或分析目的。 这导致了大量的数据，这些数据已达到PB或EB的数量级。 不同类型数据的一些例子如下：</p>
+<ul>
+<li>万维网：编入搜索引擎索引的网站已经超过十亿，而不可见的网络要大得多。 用户访问这些文档可以在服务器上创建Web访问日志，并在商业网站上创建客户行为文档。 此外，Web的链接结构被称为Web图，它本身就是一种数据。 这些不同类型的数据在各种应用中很有用。 例如，可以挖掘Web文档和链接结构来确定Web上不同话题之间的关联。 另一方面，可以挖掘用户访问日志以确定频繁的访问模式或可能不必要的行为的不寻常模式。</li>
+<li>财务交互：日常生活中最常见的交易，例如使用自动取款机（ATM）卡或信用卡，可以自动创建数据。 这种交易可以挖掘许多有用的见解，例如欺诈或其他不寻常的活动。</li>
+<li>传感器技术和物联网：最近的趋势是开发低成本的可穿戴传感器，智能手机和其他可相互通信的智能设备。 据估计，2008年这类设备的数量超过了这个星球上的人数。这种海量数据收集的影响对于挖掘算法是非常重要的。</li>
+</ul>
+<p>数据的泛滥是科技进步和现代生活各个方面电脑化的直接结果。 因此，检查一个人是否可以从可用数据中为特定应用目标提取简明而可行的见解是自然而然的。 这就是数据挖掘任务的来源。原始数据可能是任意的，非结构化的，甚至是不适合自动处理的格式。 例如，手动收集的数据可能来自不同格式的异构数据源，但不知何故需要通过自动化计算机程序进行处理以获取见解。</p>
+<p>为了解决这个问题，数据挖掘分析人员使用一系列处理流程，将原始数据收集，清理并转换为标准格式。 数据可以存储在商业数据库系统中，并通过使用分析方法进行最终处理。 实际上，尽管数据挖掘经常让人联想到分析算法的概念，但事实是绝大多数工作都与流程的数据准备部分有关。 这种处理流程在概念上类似于从矿石到最终产品的实际采矿过程。 “采矿”一词源于此类推。</p>
+<p>从分析的角度来看，数据挖掘具有挑战性，因为遇到的问题和数据类型存在很大差异。例如，即使在输入数据格式或问题定义层面，商业产品推荐问题与入侵检测应用程序的差异也很大。即使在相关的问题类别中，这些差异也是非常重要的。例如，由于底层数据类型的差异，多维数据库中的产品推荐问题与社交推荐问题差异很大。然而，尽管存在这些差异，数据挖掘应用通常与数据挖掘中的四个“超级问题”之一紧密相关：关联模式挖掘，聚类，分类和异常值检测。这些问题非常重要，因为它们在大多数应用程序中以间接形式或其他形式用作构建块。这是一个有用的抽象概念，因为它有助于我们更有效地概念化和构建数据挖掘领域。</p>
+<p>数据可能有不同的格式或类型。 类型可以是定量的（例如年龄），分类的（例如种族），文本，空间的，时间的或面向图的。 虽然最常见的数据形式是多维的，但是越来越多的数据属于更复杂的数据类型。 尽管很多数据类型之间的算法在概念上具有很高的可移植性，但从实际角度来看并非如此。 现实情况是，精确的数据类型可能会显着影响特定算法的行为。 因此，可能需要为多维数据设计基本方法的精确变化，以便它可以有效地用于不同的数据类型。 因此，本书将为各种数据类型分配不同的章节，以更好地理解处理方法受基础数据类型影响的方式。</p>
+<p>由于数据量的增加，近年来出现了一个重大挑战。 连续收集的数据流行使人们对数据流领域的兴趣日益增加。 例如，互联网传输会产生大量的数据流，除非将大量资源用于存储，否则无法有效存储。 从处理和分析的角度来看，这导致了独特的挑战。 在无法明确存储数据的情况下，所有处理都需要实时执行。</p>
+<p>本章将对预处理和分析不同类型数据所涉及的不同技术进行全面概述。 目标是从经常遇到的不同问题抽象和数据类型的角度研究数据挖掘。 许多重要的应用程序可以转换为这些抽象。</p>
+<p>本章安排如下。 第1.2节讨论数据挖掘过程，特别关注本节中的数据预处理阶段。不同的数据类型及其正式的定义在第1.3节讨论。数据挖掘中的主要问题在第1.4节中有深入的讨论。 本部分还讨论了数据类型对问题定义的影响。 可扩展性问题在第1.5节里讨论。 第1.6节，提供了一些应用程序的例子。第1.7节给出了一个总结。</p>
+<h2 id="12">1.2 数据挖掘过程</h2>
+<p>如前所述，数据挖掘过程是一个包含许多阶段的管道，如数据清理，特征提取和算法设计。 在本节中，我们将研究这些不同阶段。 典型数据挖掘应用程序的工作流程包含以下阶段：</p>
+<ol>
+<li>
+<p>数据收集：数据收集可能需要使用专用硬件，如传感器网络，手工劳动（如收集用户调查）或软件工具（如Web文档抓取引擎）来收集文档。 虽然这个阶段的应用程序具有高度特异性，并且常常超出数据挖掘分析师的范畴，但这一点至关重要，因为在此阶段的良好选择可能会显着影响数据挖掘过程。 收集阶段之后，数据通常存储在数据库中，或者更一般地存储在数据仓库中进行处理。</p>
+</li>
+<li>
+<p>特征提取和数据清洗：收集数据时，通常不会采用适合处理的形式。例如，数据可能以复杂日志或自由格式文档编码。在许多情况下，不同类型的数据可以任意混合在一起形成自由格式的文件。为了使数据适合处理，必须将它们转换为对数据挖掘算法（如多维，时间序列或半结构化格式）友好的格式。多维格式是最常见的格式，其中数据的不同字段与被称为特征，属性或维度的不同测量属性相对应。为采矿过程提取相关特征至关重要。特征提取阶段通常与数据清理并行执行，其中估计或校正缺失和错误的数据部分。在很多情况下，数据可能从多个来源提取，需要整合到一个统一的格式中进行处理。这个过程的最终结果是一个很好的结构化数据集，它可以被计算机程序有效地使用。在特征提取阶段之后，数据可以再次被存储在数据库中以供处理。</p>
+</li>
+<li>
+<p>分析过程与算法： 数据挖掘的最后一步是从处理过的数据中设计出有效的分析方法。在很多情况下，可能无法直接使用标准的数据挖掘问题，例如前面讨论的四个“超级问题”，以用于手头的应用程序。 但是，这四个问题的覆盖范围很广，许多应用程序可以分解为使用这些不同构建模块的组件。 这本书将提供这个过程的例子。
+<img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249000172922.jpg" />
+<center>图1.1 数据处理流程</center></p>
+</li>
+</ol>
+<p>整个数据挖掘过程如图1.1所示。 请注意，图1.1中的分析块显示了代表特定应用解决方案设计的多个构建块。 算法设计的这一部分取决于分析师的技能，并经常将四个主要问题中的一个或多个作为构建块。 当然，情况并非总是如此，但在本书中，对这四个问题进行特殊处理已经足够频繁了。 为了解释数据挖掘过程，我们将使用推荐场景中的一个示例。</p>
+<p><strong>例1.2.1</strong>  <em>考虑一个零售商拥有与客户访问其网站上的网页相对应的Web日志的情景。 这些网页中的每一个都与产品相对应，因此客户访问页面通常可能表明对该特定产品感兴趣。 零售商还为不同的顾客存储人口统计资料。 零售商希望使用客户人口统计和购买行为向客户提供有针对性的产品推荐。</em></p>
+<p><strong>解决方案</strong> 在这种情况下，分析师的第一步是收集来自两个不同来源的相关数据。 第一个来源是该网站上的一组Web日志。 第二个是零售商数据库中的人口统计信息，这些信息是在客户的Web注册期间收集的。 不幸的是，这些数据集的格式非常不同，不能一起用于处理。 例如，请考虑以下表单的示例日志条目：</p>
+<div class="highlight"><pre><span></span>98.206.207.157 - - [31/Jul/2013:18:09:38 -0700] &quot;GET /productA.htm HTTP/1.1&quot; 200 328177 &quot;-&quot; &quot;Mozilla/5.0 (Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B329 Safari/8536.25&quot; &quot;retailer.net&quot;
+</pre></div>
+
+<p>日志可能包含数十万个这样的条目。 在此，IP地址为98.206.207.157的客户已访问productA.htm。 IP地址的客户可以使用以前的登录信息，Cookie或IP地址本身进行识别，但这可能是一个嘈杂的过程，并不一定会产生准确的结果。 分析师需要设计算法来决定如何过滤不同的日志条目，并只使用那些提供准确结果的算法作为清理和提取过程的一部分。此外，原始的日志中包含很多附加信息，这些信息对零售商不一定有用。在特征提取过程中，零售商决定为每个客户创建一条记录，并从网页访问中提取特征的特定选择。 对于每个记录，属性对应于每个产品说明的访问次数。 因此，需要处理原始日志，并且在此特征提取阶段需要对访问进行汇总。 在数据集成阶段，零售商的数据库中的属性被添加到这些包含人口统计信息的记录中。 需要估计人口统计记录中缺少的条目以进一步清理数据。 这导致包含客户人口统计和客户访问属性的单个数据集。</p>
+<p>在这一点上，分析师必须决定如何使用这个清理过的数据集来提出建议。 他或她决定确定类似的顾客群，并根据这些类似群体的购买行为提出建议。 特别是，聚类的构建块用于确定类似的组。 对于给定的客户，推荐该组中的客户访问的频率最高的项目。 这提供了整个数据挖掘管道的一个例子。 我们将在第18章讨论，有很多优雅的方法来执行这些建议，其中一些比其他方法更有效，具体取决于问题的具体定义。 因此，整个数据挖掘过程是一种艺术形式，它基于分析师的技能，无法通过单一技术或构建块完全捕获。 在实践中，只有通过针对不同场景和数据类型的各种应用程序才能学习此技能。</p>
+<h3 id="121">1.2.1 数据预处理阶段</h3>
+<p>数据预处理阶段可能是数据挖掘过程中最关键的阶段。 然而，由于大部分重点都放在数据挖掘的分析方面，所以很少进行探讨。 这个阶段在收集数据之后开始，它由以下步骤组成：</p>
+<ol>
+<li>
+<p>特征提取：分析人员可能面临大量的原始文档，系统日志或商业事务，而很少有关于如何将这些原始数据转换为有意义的数据库特征进行处理的指导。 此阶段高度依赖于分析师能够抽象出与特定应用程序最相关的功能。 例如，在信用卡欺诈检测应用程序中，收费金额，重复频率和地点往往是欺诈的良好指标。 但是，许多其他功能可能是较差的欺诈指标。 因此，提取正确的特征通常是需要了解特定应用领域的技巧。</p>
+</li>
+<li>
+<p>数据清理：提取的数据可能有错误或缺失的条目。 因此，可能需要删除一些记录，或者可能需要估计缺失的条目。 不一致可能需要删除。</p>
+</li>
+<li>
+<p>特征选择和转换：当数据维度非常高时，许多数据挖掘算法无法有效地发挥作用。 此外，许多高维特征都很嘈杂，可能会给数据挖掘过程增加错误。 因此，使用各种方法来删除不相关的功能或将当前功能集转换为更适合分析的新数据空间。 另一个相关的方面是数据转换，其中具有一组特定属性的数据集可以被转换为具有相同或不同类型的另一组属性的数据集。 例如，可以将诸如年龄之类的属性划分为范围以创建离散值以用于分析便利。</p>
+</li>
+</ol>
+<p>数据清理过程需要通常用于缺失数据估计的统计方法。 另外，通常会删除错误的数据条目以确保更准确的挖掘结果。关于数据清洗的部分在第2章数据预处理部分会再涉及。</p>
+<p>特征选择和转换不应被视为数据预处理的一部分，因为特征选择阶段往往高度依赖于正在解决的特定分析问题。 在某些情况下，特征选择过程甚至可以以包装模型或嵌入模型的形式与所使用的特定算法或方法紧密集成。 尽管如此，特征选择阶段通常在应用特定算法之前执行。</p>
+<h3 id="122">1.2.2 分析阶段</h3>
+<p>本书的绝大多数内容将专注于挖掘过程的分析阶段。 一个主要的挑战是每个数据挖掘应用程序都是独一无二的，因此很难在不同的应用程序中创建通用和可重用的技术。 尽管如此，许多数据挖掘配方在不同的应用环境中被重复使用。 这些对应于数据挖掘过程的主要“超级问题”或构件。 这取决于分析人员的技能和经验，以确定如何在特定的数据挖掘应用环境中使用这些不同的公式。 尽管本书可以对基础数据挖掘模型提供一个很好的概述，但是将它们应用于实际应用程序的能力只能通过实践经验来学习。</p>
+<h2 id="13">1.3 基本数据类型</h2>
+<p>数据挖掘过程的一个有趣的方面是可用于分析的各种数据类型。 对于数据挖掘过程，有两种广泛类型的数据，具有不同的复杂性：</p>
+<ol>
+<li>
+<p>无依赖性的数据：这通常指的是简单的数据类型，如多维数据或文本数据。 这些数据类型是最简单和最常遇到的。 在这些情况下，数据记录在数据项或属性之间没有任何特定的依赖关系。 一个例子是关于包含年龄，性别和邮政编码的个人的一组人口统计记录。</p>
+</li>
+<li>
+<p>依赖于数据的数据：在这些情况下，数据项之间可能存在隐式或显式关系。 例如，社交网络数据集包含通过一组边（关系）连接在一起的一组顶点（数据项）。 另一方面，时间序列包含隐式依赖关系。 例如，从传感器采集的两个连续值可能彼此相关。 因此，时间属性隐含指定了连续读数之间的依赖关系。</p>
+</li>
+</ol>
+<p>一般而言，由于数据项之间已有的关系所产生的复杂性，依赖性数据更具挑战性。 数据项之间的这种依赖关系需要直接纳入分析过程，以获得具有上下文意义的结果。</p>
+<p><center>表1.1 多维数据集的一个例子</center>
+<img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249001649310.jpg" /></p>
+<h3 id="131">1.3.1 无依赖性的数据</h3>
+<p>这是最简单的数据形式，通常指的是多维数据。 这些数据通常包含一组记录。 根据手头的应用程序，记录也被称为数据点，实例，示例，事务，实体，元组，对象或特征向量。 每条记录都包含一组字段，这些字段也称为属性，维度和功能。 这些术语在本书中将互换使用。 这些字段描述了该记录的不同属性。 关系数据库系统传统上被设计为处理这种数据，即使是最早的形式。 例如，考虑表1.1中所示的人口统计数据集。 在此，说明了个人的人口统计特征，例如年龄，性别和邮政编码。 多维数据集定义如下：</p>
+<p><strong>定义 1.3.1（多维数据）</strong>  <em>一个多维数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>，包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个记录，<span><span class="MathJax_Preview">\overline{X_1}...\overline{X_n}</span><script type="math/tex">\overline{X_1}...\overline{X_n}</script></span>，其中每个记录<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>包含一系列特征记作<span><span class="MathJax_Preview">(x^1_i...x^d_i)</span><script type="math/tex">(x^1_i...x^d_i)</script></span></em>。</p>
+<p>在本书的前几章中，我们将使用多维数据，因为它是最简单的数据形式，并建立了可以处理更复杂的数据类型的更广泛的原则。 本书后面的章节将讨论更复杂的数据类型，并明确讨论依赖关系对挖掘过程的影响。</p>
+<h4 id="1311">1.3.1.1 定量多维数据</h4>
+<p>表1.1中的属性有两个不同的类型。年龄字段具有数值，因为它们具有自然顺序。这些属性被称为连续的，数字的或定量的。所有字段都是定量的数据也称为定量数据或数字数据。因此，当定义1.3.1中的<span><span class="MathJax_Preview">x^j_i</span><script type="math/tex">x^j_i</script></span>的每一个值都是定量的时候，相应的数据集被称为定量多维数据集。在数据挖掘文献中，这种特定的数据子类型被认为是最常见的，本书讨论的许多算法都适用于这种数据子类型。这个子类型对于分析处理特别方便，因为从统计的角度来看，处理定量数据要容易得多。 例如，一组定量记录的平均值可以表示为这些值的简单平均值，而此类计算在其他数据类型中变得更加复杂。 在可能和有效的情况下，许多数据挖掘算法因此试图在处理之前将不同类型的数据转换为定量值。 这也是这个（或者几乎任何其他）数据挖掘教科书中讨论的许多算法假设定量多维表示的原因。 尽管如此，在实际应用中，数据可能更加复杂，可能包含不同数据类型的混合。</p>
+<h4 id="1312">1.3.1.2 分类和混合属性数据</h4>
+<p>实际应用中的许多数据集可能包含采用离散无序值的分类属性。例如，在表1.1中，诸如性别，种族和邮政编码等属性具有离散值，其中没有自然顺序。如果定义1.3.1中<span><span class="MathJax_Preview">x^j_i</span><script type="math/tex">x^j_i</script></span>的每个值都是分类的，那么这些数据被称为无序离散值或分类。在混合属性数据的情况下，存在分类属性和数字属性的组合。表1.1中的完整数据被视为混合属性数据，因为它们包含数字属性和分类属性。</p>
+<p>与性别相对应的属性是特殊的，因为它是分类的，但只有两个可能的值。在这种情况下，可以在这些值之间施加人工排序，并使用针对此类数字数据设计的算法。这被称为二进制数据，它可以被认为是数字或分类数据的特例。第一章。 2将解释二进制数据如何形成“桥梁”以将数字或分类属性转换为适合在许多情况下处理的通用格式</p>
+<h4 id="1313">1.3.1.3 二进制和设置数据</h4>
+<p>二元数据可以被认为是多维分类数据或多维定量数据的特例。 它是多维分类数据的一个特例，其中每个分类属性可以采用最多两个离散值中的一个。 这也是多维定量数据的特例，因为两个值之间存在排序。 此外，二进制数据也是setwise数据的表示形式，其中每个属性都被视为集合元素指示符。 值为1表示该元素应该包含在集合中。 这些数据在市场购物篮应用中很常见。在第4章和第5章，将详细讨论这个话题。</p>
+<h4 id="1314">1.3.1.4 文本数据</h4>
+<p>文本数据可以视为字符串，也可以视为多维数据，具体取决于它们的表示方式。 在其原始形式中，文本文档对应于一个字符串。 这是一个面向依赖性的数据类型，将在本章后面介绍。 每个字符串都是与文档对应的一系列字符（或字）。 但是，文本文档很少以字符串表示。 这是因为直接使用大规模应用程序中有效方式的单词之间的排序是很困难的，并且利用排序的其他优势在文本域中经常受到限制。</p>
+<p>实际上，使用矢量空间表示法，文档中单词的频率用于分析。 单词有时也被称为术语。 因此，在这种表示中，单词的精确排序是丢失的。 这些频率通常用诸如文档长度或集合中单个单词的频率之类的统计数据标准化。这些关于文本数据的事件将在第13中有较详细的讨论。具有<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个文档和<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>项的文本集合对应的<span><span class="MathJax_Preview">n \times d</span><script type="math/tex">n \times d</script></span>数据矩阵被称为文档项矩阵。</p>
+<p>当以向量空间形式表示时，文本数据可以被认为是多维定量数据，其中属性对应于这些词，并且这些值对应于这些属性的频率。 然而，这种量化数据是特殊的，因为大多数属性都取零值，只有少数属性具有非零值。 这是因为单个文档可能只包含大小为<span><span class="MathJax_Preview">10^5</span><script type="math/tex">10^5</script></span>的字典中的相对少量的单词。 这种现象被称为数据稀疏性，它显着影响数据挖掘过程。如果没有采取合适的适配措施，直接采用定量数据的挖掘算法在稀疏数据上可能达不到想要的效果。同时，稀疏性还影响着数据的表现方式。比如，例如，虽然可以使用定义1.3.1中提出的表示法，但这不是一种实际的方法。对于文本数据，定义1.3.1中的大多数<span><span class="MathJax_Preview">x^i_j</span><script type="math/tex">x^i_j</script></span>值都是0。对于文本数据，定义1.3.1中的大多数<span><span class="MathJax_Preview">x^i_j</span><script type="math/tex">x^i_j</script></span>值都是0。使用包含词语的表示仅包含文档中的词语。 另外，这些词的频率被明确地保持。 这种方法通常更有效。 由于数据稀疏性问题，文本数据通常使用专门的方法进行处理。因此，文本挖掘通常作为数据挖掘中的一个单独的子主题进行研究。 文本挖掘方法在第13章讨论。</p>
+<h3 id="132">1.3.2 有依赖性的数据</h3>
+<p>本章中大多数前面讨论的内容都是关于多维场景，其中假定可以独立处理数据记录。 实际上，不同的数据值可能（隐含地）在时间上，空间上或者通过数据项之间的显式网络关系链接彼此相关。 关于先前存在的依赖关系的知识大大改变了数据挖掘过程，因为数据挖掘都是关于发现数据项之间的关系。 因此，先前存在的依赖关系会改变数据中的预期关系，并从这些预期关系的角度来看可能会引起人们的兴趣。 可能存在几种可能是隐式或显式的依赖关系：</p>
+<ol>
+<li>
+<p>隐式依赖关系：在这种情况下，数据项之间的依赖关系没有明确指定，但已知“典型”存在于该域中。 例如，由传感器收集的连续温度值可能彼此非常相似。 因此，如果传感器在特定时间记录的温度值与下一时刻记录的温度值显着不同，那么这非常不寻常，可能对数据挖掘过程有意义。 这与多维数据集不同，其中每个数据记录都被视为一个独立的实体。</p>
+</li>
+<li>
+<p>显式依赖关系：这通常指的是使用边来指定显式关系的图或网络数据。 图是非常强大的抽象，通常用作中间表示来解决其他数据类型环境中的数据挖掘问题。</p>
+</li>
+</ol>
+<p>在本节中，将详细讨论不同的依赖性数据类型。</p>
+<h4 id="1321">1.3.2.1 时间序列数据</h4>
+<p>时间序列数据包含通常通过连续测量随时间推移而生成的值。 例如，环境传感器将连续测量温度，而心电图（ECG）将测量受试者心律的参数。 这样的数据通常具有隐含的依赖性，这些隐含的依赖性随着时间的推移被接收到。 例如，温度传感器记录的相邻值通常会随着时间的推移而平稳变化，这个因素需要在数据挖掘过程中明确使用。</p>
+<p>时间依赖性的性质可能与应用程序显着不同。 例如，某些形式的传感器读数可能会随时间显示测量属性的周期性模式。时间序列挖掘的一个重要方面是提取数据中的这种依赖关系。 为了形式化由时间相关引起的依赖问题，属性被分为两类：</p>
+<ol>
+<li>
+<p>上下文属性：这些属性用于定义隐式依赖关系发生在数据上的上下文。 例如，在传感器数据的情况下，测量读数的时间戳可以被认为是上下文属性。 有时，时间戳未被明确使用，但是使用位置索引。 虽然时间序列数据类型只包含一个上下文属性，但其他数据类型可能具有多个上下文属性。 一个具体的例子是空间数据，这将在本章后面讨论。</p>
+</li>
+<li>
+<p>行为属性：它们表示在特定上下文中衡量的值。 在传感器示例中，温度是行为属性值。 可能有多个行为属性。 例如，如果多个传感器在同步时间戳上记录读数，则它会产生多维时间序列数据集。</p>
+</li>
+</ol>
+<p>上下文属性通常会对数据中行为属性值之间的依赖关系产生强烈影响。 形式上，时间序列数据定义如下：</p>
+<p><strong>定义 1.3.2（多元时间序列数据）</strong> <em>一个长度为<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>，维度为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>的时间长度序列包含<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个数字特征，每个数字特征中包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个时间戳<span><span class="MathJax_Preview">t_1..t_n</span><script type="math/tex">t_1..t_n</script></span>。每个时间戳包含每个<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>系列的组件。因此，<span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span>时刻对应的数据集是<span><span class="MathJax_Preview">\overline{Y_i}=(y^1_i...y^d_i)</span><script type="math/tex">\overline{Y_i}=(y^1_i...y^d_i)</script></span>。在<span><span class="MathJax_Preview">t_i</span><script type="math/tex">t_i</script></span>时刻的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个序列是<span><span class="MathJax_Preview">y^j_i</span><script type="math/tex">y^j_i</script></span>。</em></p>
+<p>例如，考虑一个特定位置的两个传感器每分钟监测一次温度和压力的情况。这对应于一个<span><span class="MathJax_Preview">d=2</span><script type="math/tex">d=2</script></span>，<span><span class="MathJax_Preview">n=60</span><script type="math/tex">n=60</script></span>的一个多维序列。在一些情况下，时间戳<span><span class="MathJax_Preview">t_1...t_n</span><script type="math/tex">t_1...t_n</script></span>可能会被序列值1到<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>代替，特别是当时间戳的值等距离间隔时（比如本例子中每秒取一个）。</p>
+<p>时间序列数据在许多传感器应用，预测和金融市场分析中都比较常见。 分析时间序列的方法在第14章中讨论。</p>
+<h4 id="1322">1.3.2.2 离散序列和字符串</h4>
+<p>离散序列可以被认为是时间序列数据的分类模拟。 就时间序列数据而言，上下文属性是排序中的时间戳或位置索引。 行为属性是一个分类值。 因此，离散序列数据的定义与时间序列数据类似。</p>
+<p><strong>定义 1.3.3（多元离散序列数据）</strong> <em>一个长度为<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>，维度为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>的离散序列包含<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个离散特征，每个离散特征中包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个时间戳<span><span class="MathJax_Preview">t_1..t_n</span><script type="math/tex">t_1..t_n</script></span>。<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个部分中的每个<span><span class="MathJax_Preview">\overline{Y_i}</span><script type="math/tex">\overline{Y_i}</script></span>包含<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个离散行为属性，在第i个时间戳时，这d个行为属性表示为<span><span class="MathJax_Preview">\overline{Y_i}=(y^1_i...y^d_i)</span><script type="math/tex">\overline{Y_i}=(y^1_i...y^d_i)</script></span></em></p>
+<p>例如，考虑一系列Web访问，其中收集100个不同访问的Web页面地址和请求的源IP地址。 这表示长度n = 100和维度d = 2的离散序列。序列数据中特别常见的情况是单变量方案，其中d的值是1.这样的序列数据也称为字符串。</p>
+<p>应该指出的是，上述定义与时间序列情况几乎相同，主要差异在于离散序列包含分类属性。 从理论上讲，有可能在分类和数字数据之间混合使用一系列数据。 另一个重要的变体是一个序列不包含分类属性的情况，而是一组任意数量的无序分类值。 例如，超市交易可能包含一系列项目。 每套可能包含任何数量的项目。 这种序列序列并不是真正的多变量序列，而是单变量序列，其中序列的每个元素都是一个集合，而不是单位元素。 因此，与时间序列数据相比，离散序列可以以更多种方式定义，因为能够定义离散元素上的集合。</p>
+<p>在某些情况下，上下文属性可能不会明确地指明时间，但它可能是基于物理位置的位置。 生物序列数据就是这种情况。 在这种情况下，时间戳可以用表示字符串中值的位置的索引代替，将最左边的位置计为1.可能出现序列数据的常见情景的一些示例如下：</p>
+<ul>
+<li>
+<p>事件日志：各种计算机系统，Web服务器和Web应用程序根据用户活动创建事件日志。 事件日志的一个例子是金融网站上的一系列用户操作：
+    <div class="highlight"><pre><span></span>Login Password Login Password Login Password ....
+</pre></div>
+这个特定的序列可能代表用户试图进入密码保护系统的场景，从异常检测的角度来看，这可能很有趣。</p>
+</li>
+<li>
+<p>生物学数据：在这种情况下，序列可对应于核苷酸或氨基酸的串。 这些单位的排序提供了有关蛋白质功能特征的信息。 因此，数据挖掘过程可以用来确定有趣的模式，反映不同的生物特性。</p>
+</li>
+</ul>
+<p>离散序列对于挖掘算法通常更具挑战性，因为它们没有时间序列数据的平滑值连续性。关于序列挖掘的方法，将在第15章有更详细的讨论。</p>
+<p>1.3.2.3 空间数据
+在空间数据中，在空间位置处测量许多非空间属性（例如，温度，压力，图像像素颜色强度）。 例如，气象学家经常收集海面温度来预测飓风的发生。 在这种情况下，空间坐标对应于上下文属性，而诸如温度的属性对应于行为属性。 通常，有两个空间属性。 就时间序列数据而言，也可以具有多个行为属性。 例如，在海面温度应用中，人们也可以测量其他行为属性，如压力。</p>
+<p><strong>定义 1.3.4（空间数据）</strong> <em><span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维空间数据记录包含d个行为属性和一个或多个包含空间位置的上下文属性。因此，一个<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维空间数据集应该包含一个<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维记录集<span><span class="MathJax_Preview">\overline{X_1}...\overline{X_n}</span><script type="math/tex">\overline{X_1}...\overline{X_n}</script></span>，同时还包含一个位置的集合<span><span class="MathJax_Preview">L_1...L_n</span><script type="math/tex">L_1...L_n</script></span>，并且记录<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>和位置<span><span class="MathJax_Preview">L_i</span><script type="math/tex">L_i</script></span>是关联在一起的。</em></p>
+<p>上述定义在如何定义记录<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>和位置<span><span class="MathJax_Preview">L_i</span><script type="math/tex">L_i</script></span>方面提供了广泛的灵活性。 例如，记录<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>中的行为属性可能是数字或分类的，或者是两者的混合。在气象应用中，<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>可能包含位置<span><span class="MathJax_Preview">L_i</span><script type="math/tex">L_i</script></span>处的温度和压力属性。此外，可以根据精确的空间坐标（如纬度和经度）或逻辑位置（如城市或州）来指定<span><span class="MathJax_Preview">L_i</span><script type="math/tex">L_i</script></span>。</p>
+<p>空间数据挖掘与时间序列数据挖掘密切相关，因为大多数研究空间应用程序中的行为属性是连续的，尽管一些应用程序也可能使用分类属性。 因此，在连续的空间位置观察到价值连续性，就像在时间序列数据中连续的时间戳中观察到的价值连续性一样。</p>
+<p><strong>时空数据</strong>
+空间数据的一种特殊形式是空间时间数据，其包含空间和时间属性。 数据的确切性质还取决于哪些属性是上下文的，哪些属性是行为的。 两种时空数据是最常见的：</p>
+<ol>
+<li>
+<p>空间属性和时间属性都是上下文的：这种数据可以被看作是空间数据和时间数据的直接推广。 当同时测量特定行为属性的空间和时间动态时，这种数据特别有用。 例如，考虑需要随时间测量海面温度变化的情况。 在这种情况下，温度是行为属性，而空间和时间属性是上下文相关的。</p>
+</li>
+<li>
+<p>时间属性是上下文的，而空间属性是行为的：严格地说，这种数据也可以被认为是时间序列数据。 然而，行为属性的空间性质在许多情况下也提供了更好的解释性和更集中的分析。 这些数据的最常见形式来自轨迹分析。</p>
+</li>
+</ol>
+<p>应该指出的是，任何2维或3维时间序列数据都可以映射到轨迹上。 这是一个有用的转换，因为它意味着轨迹挖掘算法也可以用于2维或3维时间序列数据。 例如，英特尔研究伯克利数据集[556]包含来自各种传感器的读数。 图1和图2中示出了来自温度和电压传感器的一对读数的示例。 1.2a和b，分别。 相应的温度 - 电压轨迹如图1.2c所示。 有关空间和时空数据挖掘的方法将在第7章讨论。16。</p>
+<h4 id="1324">1.3.2.4 网络和图数据</h4>
+<p>在网络和图形数据中，数据值可以对应于网络中的节点，而数据值之间的关系可以对应于网络中的边缘。 在某些情况下，属性可能与网络中的节点相关联。 虽然也可以将属性与网络中的边相关联，但这样做通常要少得多。</p>
+<p><strong>定义 1.3.5（网路数据）</strong> <em>一个网络<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>包含一系列节点<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>和一系列边<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>，<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>中的边代表了节点之间的关系。在某些情况下，一个属性集<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>可能和节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>联系在一起，同理一个属性集<span><span class="MathJax_Preview">\overline{Y_{ij}}</span><script type="math/tex">\overline{Y_{ij}}</script></span>可能和边<span><span class="MathJax_Preview">(i,j)</span><script type="math/tex">(i,j)</script></span>联系在一起。</em></p>
+<p>边<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>可以是有向或无向的，这取决于当前的应用。 例如，Web图可能包含与页面之间的超链接方向相对应的有向边，而Facebook社交网络中的好友关系不受引导。</p>
+<p>第二类图挖掘问题是包含许多小图的数据库，例如化合物。 这两类问题的挑战是非常不同的。 以图形表示的数据的一些示例如下所示：</p>
+<ul>
+<li>
+<p>网络图：节点对应于网页，边对应于超链接。 节点具有与页面中的内容相对应的文本属性。</p>
+</li>
+<li>
+<p>社交网络：在这种情况下，节点对应于社交网络参与者，而边缘对应于友谊链接。 节点可以具有对应于社交页面内容的属性。在一些特殊形式的社交网络中，例如电子邮件或聊天信使网络，边缘可能有与其相关的内容。 该内容对应于不同节点之间的通信。</p>
+</li>
+<li>
+<p>化合物数据库：在这种情况下，节点对应于元素，边对应于元素之间的化学键。 这些化合物中的结构对于鉴定这些化合物的重要反应性和药理学性质非常有用。</p>
+</li>
+</ul>
+<p>网络数据是一种非常普遍的表示形式，可用于解决其他数据类型上的许多基于相似性的应用程序。 例如，可以通过为数据库中的每个记录创建一个节点并通过边表示节点之间的相似性，将多维数据转换为网络数据。 这种表示经常用于许多基于相似性的数据挖掘应用程序，例如聚类。可以使用社区检测算法来确定网络数据中的群集，然后将其映射回多维数据。 第19章讨论的一些谱聚类方法基于这个原理。 网络数据的这种普遍性是有代价的。 网络数据挖掘算法的开发通常比较困难。 第17章，第18章和第19章讨论了挖掘网络数据的方法。</p>
+<h2 id="14">1.4 主要构件：鸟瞰图</h2>
+<p>正如引言第1.1节所述，数据挖掘中的四个问题被认为是挖掘过程的基础。 这些问题对应于聚类，分类，关联模式挖掘和异常值检测，并且它们在许多数据挖掘应用程序的环境中反复遇到。 是什么让这些问题如此特别？ 他们为什么重复遭遇？ 要回答这些问题，必须了解数据科学家经常试图从数据中提取的典型关系的性质。</p>
+<p>考虑具有<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个记录和<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个属性的多维数据库<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>. 这样的数据库<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>可以被表示为<span><span class="MathJax_Preview">n \times d</span><script type="math/tex">n \times d</script></span>矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>，其中每行对应于一条记录，并且每列对应于一个维度。 我们通常将这个矩阵称为数据矩阵。 本书将交替使用数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>和数据库<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的符号。 一般来说，数据挖掘都是关于发现数据矩阵中条目之间的总结关系，这些关系要么非常频繁，要么非常罕见。 数据项之间的关系是两种类型之一：</p>
+<ul>
+<li>
+<p>列之间的关系：在这种情况下，确定特定行中值之间的频繁关系或不频繁关系。 这映射到正面或负面的关联模式挖掘问题，尽管前者更常被研究。 在某些情况下，矩阵的一个特定列被认为比其他列更重要，因为它表示数据挖掘分析师的目标属性。 在这种情况下，我们试图确定其他列中的关系如何与此特殊列关联。 当特殊列的值未知时，可以使用这种关系来预测此特殊列的值。 这个问题被称为数据分类。 当挖掘过程基于将特定属性视为特殊属性并对其进行预测时，它被称为受监督的。</p>
+</li>
+<li>
+<p>行之间的关系：在这些情况下，目标是确定行的子集，其中相应列中的值是相关的。 在这些子集相似的情况下，相应的问题被称为聚类。另一方面，当一行中的条目与其他行中的相应条目非常不同时，那么相应的行就会变成有趣的异常数据点或异常。这个问题被称为异常值分析。有趣的是，聚类问题与分类密切相关，因为后者可以被认为是前者的监督版本。数据中特殊列的离散值对应于数据中不同期望或监督的应用程序特定相似记录组的组标识符。例如，当专栏对应于客户是否对某一特定产品感兴趣时，这代表了在有兴趣学习的数据中使用监督的两个小组。术语“监督”指的是这样一个事实，即专门专栏用于以特定应用程序的方式指导数据挖掘过程，就像教师可以监督他或她的学生实现特定目标一样。</p>
+</li>
+</ul>
+<p>因此，这四个问题很重要，因为它们似乎涵盖了表示数据矩阵条目之间不同种类的正面，负面，监督或无监督关系的详尽情景。 这些问题也以各种方式相互关联。 例如，关联模式可以被认为是（重叠的）簇的间接表示，其中每个模式对应于它是其子集的数据点的簇。</p>
+<p>应该指出，上述讨论假定（最常遇到的）多维数据类型，尽管这些问题继续保留它们对于更复杂数据类型的相对重要性。 但是，更复杂的数据类型由于其更复杂而具有更多种与其相关的问题表达式。 这个问题将在本节后面详细讨论。</p>
+<p>一直观察到，许多应用场景确定数据矩阵的行和列之间的这种关系作为中间步骤。 这就是理解这些构件块问题对数据挖掘过程如此重要的原因。 因此，本书的第一部分将在将其推广到复杂场景之前将重点详细讨论这些问题。</p>
+<h3 id="141">1.4.1 关联模式挖掘</h3>
+<p>在其最原始的形式中，关联模式挖掘问题被定义在稀疏二进制数据库的上下文中，其中数据矩阵仅包含<span><span class="MathJax_Preview">0/1</span><script type="math/tex">0/1</script></span>条目，并且大多数条目的值为0。大多数客户事务数据库是这种类型的。 例如，如果数据矩阵中的每列对应一个项目，并且客户交易表示一行，则第<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>项为1，如果客户交易i包含项目j作为购买的项目之一。 这个问题特别常见的研究版本是频繁模式挖掘问题，或者更一般地说，关联模式挖掘问题。 就二进制数据矩阵而言，频繁模式挖掘问题可以正式定义如下：</p>
+<p><strong>定义 1.4.1（频率模式挖掘）</strong> <em>给定一个二元<span><span class="MathJax_Preview">n \times d</span><script type="math/tex">n \times d</script></span>数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>，确定列的所有子集，使得这些列中的所有值对于矩阵中的至少一小部分行取值1。 模式的相对频率被称为它的支持。分数<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>被称为最小支持。</em></p>
+<p>满足最低支持要求的模式通常被称为频繁模式或频繁项目集。 频繁模式代表了一类重要的关联模式。许多其他相关关联模式的定义可能不使用绝对频率，但使用其他统计量化，如<span><span class="MathJax_Preview">X^2</span><script type="math/tex">X^2</script></span>度量。这些措施往往导致从统计角度产生更有趣的规则。 尽管如此，关联模式挖掘的这种特殊定义已经成为文献中最流行的定义，因为它易于开发算法。 因此，本书将此问题称为关联模式挖掘，而不是频繁模式挖掘。</p>
+<p>例如，如果对应于面包，黄油和牛奶的数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的列在客户交易数据库中经常一起取值1，则这意味着这些项目经常被一起购买。 从商店内商品的实物放置角度或从产品促销的角度来看，这对商家来说非常有用。 关联模式挖掘不限于二进制数据的情况，并且可以通过使用适当的数据转换容易地推广到定量和数字属性，这将在第4章中讨论。</p>
+<p>关联模式挖掘最初是在关联规则挖掘的背景下提出的，其中包含一个额外的步骤，基于一种被称为规则置信度的措施。 例如，考虑两组项目A和B.规则A⇒B的置信度被定义为包含A的事务比例，其中也包含B.换言之，置信度是通过将支持的模式 <span><span class="MathJax_Preview">A∪B</span><script type="math/tex">A∪B</script></span>支持模式A.支持和置信的组合用于定义关联规则。</p>
+<p><strong>定义 1.4.2（关联规则）</strong> <em>设<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>分别为两个元素集。如果满足下面两个条件，则规则<span><span class="MathJax_Preview">A \Rightarrow B</span><script type="math/tex">A \Rightarrow B</script></span>被认为在支持度<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>和置信度<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>上是有效的：
+1. 项目集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>的支持至少为<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>。
+2. 规则<span><span class="MathJax_Preview">A \Rightarrow B</span><script type="math/tex">A \Rightarrow B</script></span>的置信度至少为<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>。</em></p>
+<p>通过在关联规则挖掘算法中引入监督，可以为分类问题提供解决方案。 关联模式挖掘的许多变体也与聚类和异常值分析有关。 这是数据矩阵的水平和垂直分析经常彼此相关的事实的自然结果。 事实上，关联模式挖掘问题的许多变体被用作解决聚类，离群分析和分类问题的子程序。 这些问题将在第4章和第5章讨论。</p>
+<h3 id="142">1.4.2 数据聚类</h3>
+<p>聚类问题的一个相当广泛和非正式的定义如下：</p>
+<p><strong>定义 1.4.3（数据聚类）</strong> <em>给定数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>（数据库<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>），将其行（记录）划分为集合<span><span class="MathJax_Preview">C_1…C_k</span><script type="math/tex">C_1…C_k</script></span>，使得每个群集中的行（记录）彼此“相似”。</em></p>
+<p>我们故意在这里提供了一个非正式的定义，因为聚类允许有各种各样的相似性定义，其中有些不是通过相似函数以封闭形式完全定义的。 聚类问题通常可以定义为一个优化问题，其中优化问题的变量代表数据点的集群成员，而目标函数最大化这些变量的组内相似性的具体数学量化。</p>
+<p>聚类过程的一个重要部分是为计算过程设计适当的相似度函数。 显然，相似度的计算在很大程度上取决于底层数据类型。 相似性计算的问题将在第3章中详细讨论。相关应用的一些例子如下：</p>
+<ul>
+<li>
+<p>客户细分：在许多应用程序中，需要在各种产品促销任务的背景下确定彼此类似的客户。 分割阶段在这个过程中起着重要的作用。</p>
+</li>
+<li>
+<p>数据汇总：由于可以将群集视为相似的记录组，因此可以使用这些相似的群组创建数据摘要。</p>
+</li>
+<li>
+<p>应用于其他数据挖掘问题：因为聚类被认为是无监督的分类版本，所以它通常被用作解决后者的构建块。 此外，这个问题也用于异常值分析问题的背景下，如下所述。</p>
+</li>
+</ul>
+<p>数据聚类问题将在第6章和第7章中详细讨论。</p>
+<h3 id="143">1.4.3 离群值检测</h3>
+<p>异常值是一个与其余数据显着不同的数据点。 霍金斯正式定义了异常值的概念如下：</p>
+<blockquote>
+<p>“异常值是一种观察结果，与其他观察结果有很大差异，引起人们怀疑它是由不同机制产生的。”</p>
+</blockquote>
+<p>数据挖掘和统计学文献中异常值也被称为异常，不一致，异常或异常。 在大多数应用中，数据由一个或多个生成过程创建，这些生成过程既可以反映系统中的活动，也可以收集有关实体的观察结果。 当生成过程以不寻常的方式运行时，会导致创建异常值。 因此，异常常常包含有关影响数据生成过程的系统和实体的异常特征的有用信息。 对这种不寻常特性的认识提供了有用的应用特定见解。 异常值检测问题根据数据矩阵非正式地定义如下：</p>
+<p><strong>定义1.4.4（离群值检测）</strong> <em>给定一个数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>，确定与矩阵中其余行非常不同的数据矩阵的行。</em></p>
+<p>异常值检测问题与互补性的聚类问题有关。 这是因为异常值对应于数据中主要组的不同数据点。 另一方面，数据中的主要群体是群集。 实际上，确定异常值的简单方法使用群集作为中间步骤。 相关应用的一些例子如下：</p>
+<ul>
+<li>
+<p>入侵检测系统：在很多联网的计算机系统中，收集关于操作系统调用，网络流量或系统中其他活动的不同类型的数据。 由于恶意行为，这些数据可能会显示异常行为。 这种活动的检测被称为入侵检测。</p>
+</li>
+<li>
+<p>信用卡欺诈：未经授权使用信用卡可能会显示不同的模式，例如来自地理位置不明的地点的抢购。 这种模式可能会在信用卡交易数据中显示为异常值。</p>
+</li>
+<li>
+<p>有趣的传感器事件：传感器通常用于追踪许多实际应用中的各种环境和位置参数。 潜在模式的突然变化可能代表感兴趣的事件。 事件检测是传感器网络领域的主要激励应用之一。</p>
+</li>
+<li>
+<p>医学诊断：在许多医学应用中，数据来自各种设备，如磁共振成像（MRI），正电子发射断层扫描（PET）扫描或心电图（ECG）时间序列。 这些数据中的不寻常模式通常会反映疾病状况。</p>
+</li>
+<li>
+<p>执法：异常值检测可以在执法中找到许多应用，尤其是在通过实体的多种行为才能发现异常模式的情况下。 在金融交易，交易活动或保险索赔中识别欺诈行为通常需要确定由犯罪实体的行为产生的数据中的不寻常模式。</p>
+</li>
+<li>
+<p>地球科学：通过卫星或遥感等多种机制收集大量有关天气模式，气候变化或土地覆盖格局的时空数据。 这些数据的异常提供了关于可能导致这种异常的隐藏的人类或环境趋势的重要见解。</p>
+</li>
+</ul>
+<p>第8章和第9章详细研究了异常值检测问题。</p>
+<h3 id="144">1.4.4 数据分类</h3>
+<p>许多数据挖掘问题都是针对一个专门的目标，有时由数据中特定功能的价值来表示。 这个特殊的功能被称为类标签。 因此，监督这些问题，其中关于该特殊特征的数据中的其余特征的关系被学习。 用来学习这些关系的数据被称为训练数据。 然后可以使用所学习的模型来确定缺少标签的记录的估计分类标签。</p>
+<p>例如，在目标市场营销应用中，每个记录可以由表示客户对特定产品的兴趣（或缺乏）的特定标签标记。 与客户相关的标签可能源自客户以前的购买行为。 另外，也可以提供对应于客户人口统计的一组特征。 目标是通过将人口特征与类别标签相关联来预测其购买行为未知的客户是否对特定产品感兴趣。 因此，建立了一个训练模型，然后用它来预测班级标签。 分类问题非正式地定义如下：</p>
+<p><strong>定义 1.4.5（数据分类）</strong> <em>给定一个<span><span class="MathJax_Preview">n \times d</span><script type="math/tex">n \times d</script></span>训练数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>（数据库<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>）和一个类标签值<span><span class="MathJax_Preview">\{1...k\}</span><script type="math/tex">\{1...k\}</script></span>与D中的n行（D中的记录）中的每一行相关联，创建训练模型<span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span>，其可用于预测<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维记录<span><span class="MathJax_Preview">\overline{Y}\not\in D</span><script type="math/tex">\overline{Y}\not\in D</script></span>。</em></p>
+<p>类别标签未知的记录被称为测试记录。 研究聚类和分类问题之间的关系是很有趣的。 在聚类问题的情况下，根据相似性将数据分成k个组。 在分类问题的情况下，（测试）记录也被分为k组中的一组，除了这是通过从训练数据库D中学习模型而不是基于相似性来实现的。 换句话说，训练数据的监督重新定义了一组“相似”记录的概念。因此，从学习的角度来看，聚类通常被称为无监督学习（因为缺乏一个专门的训练数据库来“教”关于合适分组概念的模型），而分类问题被称为监督学习。</p>
+<p>分类问题与关联模式挖掘有关，后者常常用于解决前者。 这是因为如果整个训练数据库（包括类标签）被视为一个$n \times (d+1) $矩阵，则包含该矩阵中的类标签的频繁模式提供了有关其他特征与类标签相关性的有用提示。 事实上，许多形式的分类器（称为基于规则的分类器）都基于这个更广泛的原则。</p>
+<p>分类问题可以通过在后者中引入监督来映射到异常值检测问题的特定版本。 尽管假设缺失检测问题在默认情况下是无人监督的，但是可以部分或完全监督该问题的多种变化。 在受监督的异常值检测中，可以使用一些异常值的例子。 因此，这些数据记录被标记为属于一个罕见的类别，而其余的数据记录属于正常的类别。 因此，监督异常值检测问题映射到二元分类问题，同时警告类别标签高度不平衡。</p>
+<p>由于使用了特定于应用程序的类别标签，监督的结合使得分类问题在其直接应用程序特定方面是独一无二的。 与其他主要数据挖掘问题相比，分类问题相对独立。 例如，聚类和频繁模式挖掘问题更常用作大型应用程序框架的中间步骤。 即使是异常值分析问题有时也是以探索的方式使用。 另一方面，分类问题通常直接作为许多应用中的独立工具使用。 使用分类问题的应用示例如下：</p>
+<ul>
+<li>目标营销：通过使用培训模式，关于顾客的特征与他们的购买行为有关。</li>
+<li>入侵检测：计算机系统中的客户活动序列可用于预测入侵的可能性。</li>
+<li>监督异常检测：当以前的异常值的例子可用时，罕见的类可能会从正常类中区分开来。</li>
+</ul>
+<p>数据分类问题将在第10和11章进行详细讨论。</p>
+<h3 id="145">1.4.5 复杂数据类型对问题定义的影响</h3>
+<p>特定的数据类型对可能定义的问题类型有着深远的影响。 特别是在依赖于数据类型的数据类型中，依赖关系通常在问题定义，解决方案或两者中起着关键作用。 这是因为上下文属性和依赖关系对于如何评估数据通常很重要。 此外，由于复杂的数据类型更丰富，它们允许制定新的问题定义，甚至可能不存在于多维数据的背景下。 表1.2提供了面向依赖数据类型的数据挖掘问题的不同变化的表格摘要。 下面将简要回顾一下数据类型如何影响不同的问题定义。</p>
+<p><center>表1.2 用数据类型定义问题变化的一些例子</center>
+<img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249065611953.jpg" /></p>
+<h4 id="1451">1.4.5.1 复杂数据类型的模式挖掘</h4>
+<p>关联模式挖掘问题通常以集合的形式从基础数据中确定模式; 但是，当数据中存在依赖关系时情况并非如此。 这是因为依赖关系和关系经常会在数据项之间进行排序，直接使用频繁模式挖掘方法无法识别不同数据值之间的关系。 例如，当大量的时间序列可用时，它们可以用来确定不同种类的时间频繁模式，其中时间顺序被强加在模式中的项目上。 此外，由于存在表示时间的附加上下文属性，所以时间模式可以以与基于集合的模式相比更加丰富的方式定义，如在关联模式挖掘中那样。 这些模式可能在时间上是连续的，如在时间序列图案中，或者它们可能是周期性的，如在周期性模式中。这些时间模式挖掘方法中的一些将在第14章中讨论。对于离散序列挖掘的情况存在类似的类比，除了个别模式成分是分类的，而不是连续的。 也可以为空间场景定义二维图案，这种公式对图像处理很有用。 最后，结构模式通常在与数据中频繁子图相对应的网络中定义。 因此，节点之间的依赖包含在模式的定义中。</p>
+<h4 id="1452">1.4.5.2 复杂数据类型的聚类</h4>
+<p>用于聚类的技术也受到基础数据类型的显着影响。 最重要的是，相似性函数显着受数据类型影响。 例如，在时间序列，顺序或图形数据的情况下，一对时间序列之间的相似性不能通过使用直接的度量（如欧几里德度量）来轻松定义。 相反，有必要使用其他种类的指标，例如编辑距离或结构相似性。 在空间数据的背景下，轨迹聚类对于发现移动数据或多变量时间序列的相关模式特别有用。 对于网络数据，聚类问题发现密集连接的节点组，也称为社区检测。</p>
+<h4 id="1453">1.4.5.3 复杂数据类型的异常值检测</h4>
+<p>依赖关系可以用来定义数据项的期望值。 这些预期值的偏差是异常值。 例如，时间序列值的突然跳跃会导致跳跃发生的特定点的位置异常。 这些方法的想法是使用基于预测的技术来预测该位置的价值。 据报道，与预测有显着差异的位置异常。 这种异常值可以在时间序列，空间和时序数据的背景下定义，其中可以使用自回归，马尔可夫或其他模型检测与相应邻域的显着偏差。 在图数据的上下文中，异常值可能对应于节点，边或整个子图的不寻常特性。 因此，复杂的数据类型在可以定义异常值的方面表现出显着的丰富性。</p>
+<h4 id="1454">1.4.5.4 复杂诗句类型的分类</h4>
+<p>分类问题还显示了不同复杂数据类型的显着变化量。例如，班级标签可以附加到一系列的特定位置，也可以附加到整个系列。当类别标签附加到系列中的特定位置时，可用于执行监督式事件检测，其中第一次出现特定事件标签（例如，由基础温度和压力提示的机器故障传感器）表示事件的发生。对于网络数据的情况，标签可以连接到非常大的网络中的单个节点，或者连接到多个图形集合中的整个图形。前一种情况对应于社会网络中节点的分类，也被称为集体分类。后一种情况对应于化合物分类问题，其中标签基于其化学性质附着于化合物。</p>
+<h2 id="15">1.5 可伸缩性问题和流式场景</h2>
+<p>可扩展性是许多数据挖掘应用中的一个重要问题，因为现代应用中数据的规模越来越大。 广义而言，可扩展性有两个重要场景：</p>
+<ol>
+<li>
+<p>数据存储在一台或多台机器上，但数量太大，无法高效处理。 例如，在整个数据可以保存在主内存中的情况下，设计高效的算法很容易。 当数据存储在磁盘上时，设计算法以使对磁盘的随机访问最小化非常重要。 对于非常大的数据集，可能需要使用大数据框架，例如MapReduce。 本书将在需要的地方介绍磁盘驻留处理级别的这种可扩展性。</p>
+</li>
+<li>
+<p>这些数据会随着时间的推移而连续生成，并且完全无法存储。 这种情况是数据流的情况，数据需要使用在线方式进行处理。</p>
+</li>
+</ol>
+<p>后一种情况需要进一步阐述。 由于数据收集技术的进步，随着时间的推移可以收集大量数据，流式场景变得越来越流行。 例如，日常生活中的简单交易（例如使用信用卡或电话）可能会导致自动收集数据。 在这种情况下，数据量太大，直接存储可能不切实际。 相反，所有算法必须在数据上一次执行。 在数据流处理方面出现的主要挑战如下：</p>
+<ol>
+<li>
+<p>单通约束：算法需要一次处理整个数据集。 换句话说，在处理完数据项目并收集了相关的总结见解后，原始项目将被丢弃并且不再可用于处理。 在给定时间可以处理的数据量取决于可用于保留数据段的存储空间。</p>
+</li>
+<li>
+<p>概念漂移：在大多数应用中，数据分布随时间而变化。 例如，一天中某一小时的销售模式可能与一天中另一小时的销售模式不同。 这也导致了挖掘算法的输出变化。</p>
+</li>
+</ol>
+<p>由于数据模式随时间而变化的速率以及基础数据中不断演变的模式，因此设计这些场景的算法通常很具挑战性。 对于流挖掘方法在第12章中得到解决。</p>
+<h2 id="16">1.6 典型应用场景介绍</h2>
+<p>在本节中，将讨论一些常见的应用场景。 目标是说明问题和应用的广泛多样性，以及它们如何映射到本章讨论的某些构件块。</p>
+<h3 id="161">1.6.1 产品放置位置</h3>
+<p>应用场景可以表述如下：
+<strong>应用 1.6.1（产品放置位置）</strong> <em>商家拥有一套<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>产品，以及来自顾客的以前交易，其中包含一起购买的物品篮。 商家希望知道如何将产品放置在货架上，以增加经常一起购买的商品被放置在相邻货架上的可能性。</em> </p>
+<p>此问题与频繁模式挖掘密切相关，因为分析师可以使用频繁模式挖掘问题来确定在特定支持级别经常一起购买的项目组。这里需要注意的一点是，在提供有用见解的同时，确定频繁模式并不能为商家提供关于如何将产品放置在不同货架上的准确指导。这种情况在数据挖掘中很常见。积木问题往往不能直接解决手头的问题。在这种特殊情况下，商家可以从各种启发式的想法中选择产品如何储存在不同的货架上。例如，商家可能已经拥有现有的展示位置，并且可能会使用频繁模式为展示位置的质量创建一个数字分数。通过对当前展示位置进行增量更改，可以连续优化此展示位置。使用适当的初始化方法，频繁模式挖掘方法可以作为该问题非常有用的子程序。数据挖掘的这些部分通常是特定于应用程序的，并且在不同领域显示出如此大的差异，因此只能通过实践经验来学习。</p>
+<h3 id="162">1.6.2 用户推荐</h3>
+<p>这是数据挖掘文献中经常遇到的问题。 这个问题存在许多变化，取决于该应用程序可用的输入数据的类型。 在下文中，我们将研究推荐问题的具体实例并提供一个解决方案。</p>
+<p><strong>应用 1.6.2(用户推荐)</strong> <em>商家有一个<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>的二元矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>，表示<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个客户在<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个项目上的购买行为。 假定矩阵是稀疏的，因此每个客户可能只购买了几件商品。 最好使用产品关联向顾客提供建议。</em></p>
+<p>这个问题是在数据挖掘和推荐文献中广泛研究的协作过滤问题的简单版本。 实际上，这个问题的数以千计的解决方案都是针对这个问题的，我们提供了三个不同的复杂度示例：</p>
+<ol>
+<li>
+<p>这个问题是在数据挖掘和推荐文献中广泛研究的协作过滤问题的简单版本。 实际上，这个问题的数以千计的解决方案都是针对这个问题的，我们提供了三个不同的复杂度示例：</p>
+</li>
+<li>
+<p>以前的解决方案不使用不同客户之间的相似性来提出建议。 第二种解决方案是确定与目标客户最相似的行，然后推荐发生在这些相似行中的最常见的项目。</p>
+</li>
+<li>
+<p>最终的解决方案是使用群集来创建类似客户的细分。 在每个类似的部分中，关联模式挖掘可用于提出建议。</p>
+</li>
+</ol>
+<p>因此，可以有多种方法来解决与不同分析路径相对应的特定问题。 这些不同的路径可能使用不同的构建块，这些构建块在数据挖掘过程的不同部分都是有用的。</p>
+<h3 id="163">1.6.3 医疗诊断</h3>
+<p>医疗诊断已成为数据挖掘背景下的常见应用。 医疗诊断中的数据类型往往比较复杂，可能与图像，时间序列或离散序列数据相对应。 因此，依赖性导向的数据类型在医疗诊断应用中往往是相当普遍的。 一个特殊情况是来自心脏病人的心电图读数。</p>
+<p><strong>应用 1.6.3（医用心电图诊断）</strong> <em>考虑从不同患者收集的一组ECG时间序列。 从该组中确定异常系列是可取的。</em></p>
+<p>这个应用程序可以映射到不同的问题，这取决于可用输入数据的性质。 例如，考虑以前没有可用的异常ECG系列的例子。 在这种情况下，问题可以映射到异常值检测问题。 时间序列与数据中剩余序列的差异可能被认为是异常值。 但是，如果以前的正常和异常系列的例子可用，解决方法的方法会发生显着变化。 在这种情况下，问题会映射到时间序列数据的分类问题。 此外，由于异常系列的数量通常远少于正常系列的数量，因此类别标签可能会失衡。</p>
+<h3 id="164-web">1.6.4 Web日志异常</h3>
+<p>网络日志通常收集在不同网站的主机上。 这些日志可用于检测该网站的异常，可疑或恶意活动。 金融机构定期分析其现场的日志以检测入侵企图。</p>
+<p><strong>应用 1.6.4（Web日志异常）</strong> <em>一组Web日志可用。 希望从Web日志中确定异常序列。</em></p>
+<p>由于数据通常以原始日志的形式提供，因此需要大量的数据清理。 首先，原始日志需要转换为符号序列。 然后可能需要将这些序列分解成更小的窗口以分析特定粒度水平的序列。 可以通过使用序列聚类算法来确定异常序列，然后确定不在这些聚类中的序列。 如果希望发现与异常相对应的特定位置，则可以使用更复杂的方法（如马尔可夫模型）来确定异常。</p>
+<p>和前面的情况一样，这个问题的分析阶段可以建模得很不同，这取决于Web日志异常的例子是否可用。 如果以前没有Web日志异常的例子可用，那么这个问题映射到无监督的时间异常值检测问题。 参考文献[5]中介绍了很多用于解决时间异常值检测问题的无监督情况的方法。 本书第14章和第15章也简要讨论了这个话题。 另一方面，当以前的异常情况可用时，则问题映射到罕见的类别检测问题。 这个问题也在参考文献[5]以及本书的第11章中讨论。</p>
+<h2 id="17">1.7 总结</h2>
+<p>数据挖掘是一个复杂的多阶段过程。 这些不同的阶段是数据收集，预处理和分析。 数据预处理阶段具有很高的应用特定性，因为数据的不同格式需要应用不同的算法。 处理阶段可能包括数据集成，清理和特征提取。 在某些情况下，特征选择也可能用于锐化数据表示。 数据转换成方便的格式后，可以使用各种分析算法。</p>
+<p>许多数据挖掘构建块经常在各种应用场景中重复使用。 这些分别对应于频繁模式挖掘，聚类，异常值分析和分类问题。 针对特定数据挖掘问题的解决方案的最终设计取决于分析师将应用程序映射到不同构建块的技能，或者针对特定应用程序使用新算法。 本书将介绍获得这些分析技能所需的基础知识。</p>
+<h2 id="18">1.8 书目注释</h2>
+<p>数据挖掘问题通常由与统计，数据挖掘和机器学习相对应的多个研究团体进行研究。 这些社区高度重叠，并且经常与许多共同的研究人员共享。 机器学习和统计社区通常从理论和统计的角度来看待数据挖掘。 在这方面写的一些好书可以在[95,256,389]中找到。 但是，由于机器学习社区通常侧重于监督学习方法，因此这些书大多集中在分类场景。 [250,485,536]中可以找到更广泛的数据挖掘书籍，这些书籍是从更广泛的角度编写的。 由于数据挖掘过程通常需要与数据库进行交互，许多相关的数据库教科书[434,194]提供了有关数据表示和集成问题的知识。</p>
+<p>在数据挖掘的各个主要领域也编写了许多书籍。 [34]中详细介绍了频繁模式挖掘问题及其变化。关于数据聚类的主题已经写了很多书。众所周知的数据聚类书[284]讨论了来自文献的经典技术。另一本书[219]讨论了最近的数据聚类方法，虽然材料有点基础。文献中最近的一本书[32]提供了对不同数据聚类算法的全面概述。数据分类问题已经在标准的机器学习书中得到了解决[95,256,389]。分类问题也被模式识别团体广泛研究[189]。关于这个话题的最近的调查可以在[33]中找到。 [89,259]详细研究了异常值检测问题。然而，这些书是从统计的角度出发的，并没有从计算机科学界的角度来解决这个问题。从[5]中的计算机科学界的角度来解决这个问题。</p>
+<h2 id="19">1.9 习题</h2>
+<ol>
+<li>
+<p>一位分析师从不同的参与者那里收集关于他们喜欢和不喜欢的调查。 随后，分析师将数据上传到数据库，纠正错误或缺失的条目，并在此基础上设计推荐算法。 以下哪项行为代表数据收集，数据预处理和数据分析？ （a）进行调查并上传到数据库，（b）纠正缺失的条目，（c）设计推荐算法。</p>
+</li>
+<li>
+<p>一下每种数据的数据类型是什么？（a）年龄，（b）工资，（c）邮政编码，（d）居住国，（e）身高，（f）体重</p>
+</li>
+<li>
+<p>一位分析师从医生那里获取用于数据挖掘目的的医疗笔记，然后将其转换成包含针对每位患者处方的药物的表格。 （a）原始数据和（b）转换数据的数据类型是什么？ （c）将数据转换为称为新格式的过程是什么？</p>
+</li>
+<li>
+<p>分析人员建立了一个传感器网络，以便在一段时间内测量不同位置的温度。 收集的数据的数据类型是什么？</p>
+</li>
+<li>
+<p>上面练习4中讨论过的同一个分析师从另一个包含压力读数的数据源中找到另一个数据库。 她决定创建一个包含自己的读数和压力读数的单一数据库。 创建这样一个单一的数据库的过程是什么？</p>
+</li>
+<li>
+<p>分析人员处理Web日志，以便为来自不同用户的Web页面访问的订购信息创建记录。 这些数据的类型是什么？</p>
+</li>
+<li>
+<p>考虑一个数据对象，它对应于按一定顺序排列的一组核苷酸。 这类数据是什么？</p>
+</li>
+<li>
+<p>希望根据他们的人口统计资料将客户划分为相似的群体。 哪个数据挖掘问题最适合这项任务？</p>
+</li>
+<li>
+<p>假设在练习8中，商人已经知道一些客户是否已经购买了小部件。 哪个数据挖掘问题适合于识别剩余客户群体的任务，谁可能会在未来购买小部件？</p>
+</li>
+<li>
+<p>假设在练习9中，商家还可以获得顾客购买的其他商品（超出小工具）的信息。 哪个数据挖掘问题最适合查找通常与小部件一起购买的项目集？</p>
+</li>
+<li>
+<p>假设少数客户对他们的人口统计资料有不同的看法，这会导致购买行为和人口统计资料之间的不匹配，正如与其余数据相比所暗示的那样。 哪个数据挖掘问题最适合寻找这些客户？</p>
+</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="首页" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                首页
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../2/" title="第2章 数据预处理" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第2章 数据预处理
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

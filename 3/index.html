@@ -1,0 +1,1899 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/3/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第3章 相似度和距离 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#3" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第3章 相似度和距离
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第3章 相似度和距离
+      </label>
+    
+    <a href="./" title="第3章 相似度和距离" class="md-nav__link md-nav__link--active">
+      第3章 相似度和距离
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" title="3.1简介" class="md-nav__link">
+    3.1简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" title="3.2 多维数据" class="md-nav__link">
+    3.2 多维数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" title="3.2.1 定量数据" class="md-nav__link">
+    3.2.1 定量数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3211" title="3.2.1.1 特定领域中相关性的影响" class="md-nav__link">
+    3.2.1.1 特定领域中相关性的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3212" title="3.2.1.2 高维度的影响" class="md-nav__link">
+    3.2.1.2 高维度的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3213" title="3.2.1.3 局部不相关特征的影响" class="md-nav__link">
+    3.2.1.3 局部不相关特征的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3214-l_p-l_p-" title="3.2.1.4 不同L_p-L_p-范数的影响" class="md-nav__link">
+    3.2.1.4 不同L_p-L_p-范数的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3215" title="3.2.1.5 基于匹配的相似度计算" class="md-nav__link">
+    3.2.1.5 基于匹配的相似度计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3216" title="3.2.1.6 数据分布的影响" class="md-nav__link">
+    3.2.1.6 数据分布的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3217-isomap" title="3.2.1.7 非线性分布：ISOMAP" class="md-nav__link">
+    3.2.1.7 非线性分布：ISOMAP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3218" title="3.2.1.8 局部数据分布的影响" class="md-nav__link">
+    3.2.1.8 局部数据分布的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3219" title="3.2.1.9 计算考虑" class="md-nav__link">
+    3.2.1.9 计算考虑
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" title="3.2.2 分类数据" class="md-nav__link">
+    3.2.2 分类数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323" title="3.2.3 混合定量和分类数据" class="md-nav__link">
+    3.2.3 混合定量和分类数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" title="3.3 文本相似性度量" class="md-nav__link">
+    3.3 文本相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" title="3.3.1 二进制和集合数据" class="md-nav__link">
+    3.3.1 二进制和集合数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" title="3.4 时间相似性度量" class="md-nav__link">
+    3.4 时间相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" title="3.4.1 时间序列相似性度量" class="md-nav__link">
+    3.4.1 时间序列相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3411" title="3.4.1.1行为属性标准化的影响" class="md-nav__link">
+    3.4.1.1行为属性标准化的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3412-l_p-" title="3.4.1.2 $ L_p-$范数" class="md-nav__link">
+    3.4.1.2 $ L_p-$范数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3413" title="3.4.1.3 动态时间弯曲距离" class="md-nav__link">
+    3.4.1.3 动态时间弯曲距离
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3414" title="3.4.1.4 基于窗口的方法" class="md-nav__link">
+    3.4.1.4 基于窗口的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" title="3.4.2 离散序列相似性度量" class="md-nav__link">
+    3.4.2 离散序列相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3421" title="3.4.2.1 编辑距离" class="md-nav__link">
+    3.4.2.1 编辑距离
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3422" title="3.4.2.2 最长的公共子序列" class="md-nav__link">
+    3.4.2.2 最长的公共子序列
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35" title="3.5 图的相似性度量" class="md-nav__link">
+    3.5 图的相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351" title="3.5.1 单个图中两个节点之间的相似性" class="md-nav__link">
+    3.5.1 单个图中两个节点之间的相似性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3511" title="3.5.1.1基于结构距离的测量" class="md-nav__link">
+    3.5.1.1基于结构距离的测量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3512" title="3.5.1.2 随机行走相似度" class="md-nav__link">
+    3.5.1.2 随机行走相似度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352" title="3.5.2 两个图之间的相似性" class="md-nav__link">
+    3.5.2 两个图之间的相似性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36" title="3.6 监督相似函数" class="md-nav__link">
+    3.6 监督相似函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37" title="3.7 总结" class="md-nav__link">
+    3.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38" title="3.8 书目注释" class="md-nav__link">
+    3.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39" title="3.9 练习" class="md-nav__link">
+    3.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" title="3.1简介" class="md-nav__link">
+    3.1简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" title="3.2 多维数据" class="md-nav__link">
+    3.2 多维数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" title="3.2.1 定量数据" class="md-nav__link">
+    3.2.1 定量数据
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3211" title="3.2.1.1 特定领域中相关性的影响" class="md-nav__link">
+    3.2.1.1 特定领域中相关性的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3212" title="3.2.1.2 高维度的影响" class="md-nav__link">
+    3.2.1.2 高维度的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3213" title="3.2.1.3 局部不相关特征的影响" class="md-nav__link">
+    3.2.1.3 局部不相关特征的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3214-l_p-l_p-" title="3.2.1.4 不同L_p-L_p-范数的影响" class="md-nav__link">
+    3.2.1.4 不同L_p-L_p-范数的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3215" title="3.2.1.5 基于匹配的相似度计算" class="md-nav__link">
+    3.2.1.5 基于匹配的相似度计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3216" title="3.2.1.6 数据分布的影响" class="md-nav__link">
+    3.2.1.6 数据分布的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3217-isomap" title="3.2.1.7 非线性分布：ISOMAP" class="md-nav__link">
+    3.2.1.7 非线性分布：ISOMAP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3218" title="3.2.1.8 局部数据分布的影响" class="md-nav__link">
+    3.2.1.8 局部数据分布的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3219" title="3.2.1.9 计算考虑" class="md-nav__link">
+    3.2.1.9 计算考虑
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" title="3.2.2 分类数据" class="md-nav__link">
+    3.2.2 分类数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323" title="3.2.3 混合定量和分类数据" class="md-nav__link">
+    3.2.3 混合定量和分类数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" title="3.3 文本相似性度量" class="md-nav__link">
+    3.3 文本相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" title="3.3.1 二进制和集合数据" class="md-nav__link">
+    3.3.1 二进制和集合数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" title="3.4 时间相似性度量" class="md-nav__link">
+    3.4 时间相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" title="3.4.1 时间序列相似性度量" class="md-nav__link">
+    3.4.1 时间序列相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3411" title="3.4.1.1行为属性标准化的影响" class="md-nav__link">
+    3.4.1.1行为属性标准化的影响
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3412-l_p-" title="3.4.1.2 $ L_p-$范数" class="md-nav__link">
+    3.4.1.2 $ L_p-$范数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3413" title="3.4.1.3 动态时间弯曲距离" class="md-nav__link">
+    3.4.1.3 动态时间弯曲距离
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3414" title="3.4.1.4 基于窗口的方法" class="md-nav__link">
+    3.4.1.4 基于窗口的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" title="3.4.2 离散序列相似性度量" class="md-nav__link">
+    3.4.2 离散序列相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3421" title="3.4.2.1 编辑距离" class="md-nav__link">
+    3.4.2.1 编辑距离
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3422" title="3.4.2.2 最长的公共子序列" class="md-nav__link">
+    3.4.2.2 最长的公共子序列
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35" title="3.5 图的相似性度量" class="md-nav__link">
+    3.5 图的相似性度量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351" title="3.5.1 单个图中两个节点之间的相似性" class="md-nav__link">
+    3.5.1 单个图中两个节点之间的相似性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3511" title="3.5.1.1基于结构距离的测量" class="md-nav__link">
+    3.5.1.1基于结构距离的测量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3512" title="3.5.1.2 随机行走相似度" class="md-nav__link">
+    3.5.1.2 随机行走相似度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352" title="3.5.2 两个图之间的相似性" class="md-nav__link">
+    3.5.2 两个图之间的相似性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36" title="3.6 监督相似函数" class="md-nav__link">
+    3.6 监督相似函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37" title="3.7 总结" class="md-nav__link">
+    3.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38" title="3.8 书目注释" class="md-nav__link">
+    3.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39" title="3.9 练习" class="md-nav__link">
+    3.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/3.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="3">3 相似度和距离</h1>
+<!--本章由朱广阳翻译-->
+
+<blockquote>
+<p>“爱就是在不同的事物中找到相似性的能力。”—西奥多·阿多诺</p>
+</blockquote>
+<h2 id="31">3.1简介</h2>
+<p>许多应用数据挖掘的场合需要决定数据中的对象、模式、属性和时间是相似的还是不相似的。换句话说，就是需要一种定量地判定数据对象之间相似度的方法。事实上所有的数据挖掘问题，例如聚类、外点检测和分类，都需要用到相似度的计算。关于定量的相似度或者距离问题的一个正式的描述如下所示：</p>
+<p><em>给定两个对象<span><span class="MathJax_Preview">O_1</span><script type="math/tex">O_1</script></span>和<span><span class="MathJax_Preview">O_2</span><script type="math/tex">O_2</script></span> ，确定两个对象之间的相似度<span><span class="MathJax_Preview">Sim(O_1,O_2)</span><script type="math/tex">Sim(O_1,O_2)</script></span>（或者距离<span><span class="MathJax_Preview">Dist(O_1,O_2)</span><script type="math/tex">Dist(O_1,O_2)</script></span>）的值。</em></p>
+<p>对于相似度函数，较大的函数值意味着较大的相似度，而对于距离函数，较小的函数值意味着较大的相似度。在某些领域，例如空间数据，使用距离函数是一件更自然的事情，而在其它领域，例如文本数据，人们更习惯于使用相似度函数。尽管如此，在不同领域中设计这些函数所应用的原则是不变的。因此，本章会根据所处理数据的类型选择术语“距离函数”或者“相似度函数”。相似度和距离函数经常用显式表达式来表示，但在某些领域，例如时序数据，这些数据是通过算法定义的，不能表达维显式的形式。</p>
+<p>距离函数是设计有效的数据挖掘算法的基础，因为选择一个不好的距离函数会损害结果的质量。有时候，数据分析师选择欧式距离，把他当作一个“黑盒子”，而不考虑这个选择带来的影响。没有经验的分析师经常会花大力气去设计数据挖掘问题的算法，而把数据函数子程序当作事后处理。这是一个错误。本章会阐明，有时一个不好的距离函数在某些应用领域会带来毁灭性的误导。好的距离函数设计对于类型的可移植性也至关重要。正如第二章2.4.4.3节所述，谱嵌入方法可以用来将任何数据类型所构造的相似度图转化为多维数据。</p>
+<p>距离函数是对数据分布、维度和数据类型高度敏感的。相比于时序数据这样类型的数据，像多维数据这样类型的数据就更易于设计和计算距离函数。在某些情况下，可以使用用户的意图（或者一对数据对象的训练反馈）来监督距离函数的设计。尽管本章主要关注于无监督的方法，我们也会简要地涉及一些使用有监督方法的原则。</p>
+<p>本章组织结构如下：3.2节研究多维数据的距离函数。这包括定量的、分类的和混合的数据。3.3节讨论了文本、二进制和集合数据的相似度测量方法。3.4节讨论了时序数据。3.5节解决了图数据的距离函数设计。3.6节讨论了有监督的相似度。3.7节小结。</p>
+<h2 id="32">3.2 多维数据</h2>
+<p>尽管多维数据是最简单的数据形式，不同属性类型的距离函数设计之间还是有显著差异的，例如分类或定量数据。因此，本节会分别研究这些类型。</p>
+<h3 id="321">3.2.1 定量数据</h3>
+<p>对于定量数据，最常见的距离函数就是<span><span class="MathJax_Preview">L_p-​</span><script type="math/tex">L_p-​</script></span>范数。两个数据点<span><span class="MathJax_Preview">\overline{X}=(x_1 \dots x_d)​</span><script type="math/tex">\overline{X}=(x_1 \dots x_d)​</script></span>和<span><span class="MathJax_Preview">\overline{Y}=(y_1 \dots y_d)​</span><script type="math/tex">\overline{Y}=(y_1 \dots y_d)​</script></span>之间的<span><span class="MathJax_Preview">L_p-​</span><script type="math/tex">L_p-​</script></span>范数定义如下：</p>
+<div>
+<div class="MathJax_Preview">
+Dist(\overline{X},\overline{Y})=(\displaystyle\sum_{i=1}^d|x_i-y_i|^P)^{1/p}\tag{3.1}
+</div>
+<script type="math/tex; mode=display">
+Dist(\overline{X},\overline{Y})=(\displaystyle\sum_{i=1}^d|x_i-y_i|^P)^{1/p}\tag{3.1}
+</script>
+</div>
+<p><span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数的两个特例是*欧式*度量<span><span class="MathJax_Preview">(p=2)</span><script type="math/tex">(p=2)</script></span>和*曼哈顿*度量<span><span class="MathJax_Preview">(p=1)</span><script type="math/tex">(p=1)</script></span>。这些特例从空间应用的直觉中产生，具有清晰的物理意义。欧式距离是两个点之间的直线距离。曼哈顿距离是在“街区”中的开车距离，街区中的街道构成矩形的网格，例如纽约城的曼哈顿岛。</p>
+<p>欧式距离的一个优势是具有旋转不变性。因为两个点之间的直线距离不会随着坐标系朝向的改变而改变。这个性质意味着可以执行一些变换而不影响<span><span class="MathJax_Preview">^1</span><script type="math/tex">^1</script></span>距离，例如<span><span class="MathJax_Preview">PCA</span><script type="math/tex">PCA</script></span>(主成分分析)、<span><span class="MathJax_Preview">SVD</span><script type="math/tex">SVD</script></span>(奇异值分解)、或者时序的小波变换(见第二章)。另一个令人感兴趣的特例是令<span><span class="MathJax_Preview">P=\infty</span><script type="math/tex">P=\infty</script></span>。这样计算距离的结果是选择两个物体相距最远的那个维度，并返回这个维度上距离的绝对值。其他维度上的特征被忽略了。</p>
+<p><span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数实在数据挖掘分析中最流行的距离函数。该范数流行的一个原因是其自然直观的表现形式和<span><span class="MathJax_Preview">L_1-</span><script type="math/tex">L_1-</script></span>、<span><span class="MathJax_Preview">L_2-</span><script type="math/tex">L_2-</script></span>范数在空间应用中的可解释性。但是直观的可解释性不意味这他们是最相关的距离函数，特别是对于高维的情况。事实上，这些距离函数在数据是高维的情况下并不能正确的反应数据点之间的距离，这是因为数据的稀疏性、数据分布特点、噪声和特征相关性等因素带来的不同影响。这一章将会讨论在距离函数设计中需要考虑的更宽泛的原则。</p>
+<blockquote>
+<p><span><span class="MathJax_Preview">^1</span><script type="math/tex">^1</script></span>维度下降会影响距离。但是变换本身不会影响距离。</p>
+</blockquote>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/1.PNG" /></p>
+<h4 id="3211">3.2.1.1 特定领域中相关性的影响</h4>
+<p>在某些情况下，一个分析师有可能知道对于一个特定的应用，哪些特征相对于其他特征而言是更重要的。例如，对于一个信用评级应用，在设计距离函数时，像薪水这样的属性就会比性别这样的属性具有更高的相关性，尽管他们都对距离有些影响。在这种情况下，如果关于不同特征的相对重要性的领域专业知识是已知的，分析师可能会给不同的属性赋予不同的权值。这经常是一个基于经验和技能的启发式过程。在这里，一个广义的<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数是最合适的，他的定义形式与<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数相似，但是系数<span><span class="MathJax_Preview">a_i</span><script type="math/tex">a_i</script></span>是和第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个特征相关的。这个系数就是<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数中相应特征分量的权重：</p>
+<div>
+<div class="MathJax_Preview">
+Dist(\overline{X},\overline{Y})=(\displaystyle\sum_{i=1}^da_i\cdot|x_i-y_i|^P)^{1/p}\tag{3.2}
+</div>
+<script type="math/tex; mode=display">
+Dist(\overline{X},\overline{Y})=(\displaystyle\sum_{i=1}^da_i\cdot|x_i-y_i|^P)^{1/p}\tag{3.2}
+</script>
+</div>
+<p>这个距离又被称作广义的闵可夫斯基距离。在很多情况下，我们并不知道这些领域知识。因此，<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数成了默认的选择。不幸的是，在不知道最相关的特征时，<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数容易遭受维度增加带来的不良影响，正如下面所讨论的。</p>
+<h4 id="3212">3.2.1.2 高维度的影响</h4>
+<p>许多基于距离的数据挖掘应用在数据维度增加时失效了。例如，一个基于距离的聚类算法可能将不相关的数据点归为一类，因为距离函数在数据维度增加时不能很好的反映数据点之间内在的语义距离。结果，基于距离的聚类、分类和外点检测模型经常*定性地*失效了。这种现象被称作“维度的诅咒”，这个概念最早由理查德<span><span class="MathJax_Preview">\cdot</span><script type="math/tex">\cdot</script></span>贝尔曼提出。</p>
+<p>为了更好地理解维度诅咒对距离的影响。让我们检查一下维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>下的完全位于非负象限的一个单位立方体，它有一个顶点位于坐标原点<span><span class="MathJax_Preview">\overline{O}</span><script type="math/tex">\overline{O}</script></span>。从坐标原点到到立方体中任意一点<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>的曼哈顿距离是多少呢？在这里，因为一个端点位于坐标原点，并且所有的坐标值非负，曼哈顿距离就是<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>所有维度上的坐标值求和的结果。每一个坐标值都是在<span><span class="MathJax_Preview">[0,1]</span><script type="math/tex">[0,1]</script></span>区间上均匀分布的。因此，如果用<span><span class="MathJax_Preview">Y_i</span><script type="math/tex">Y_i</script></span>表示<span><span class="MathJax_Preview">[0,1]</span><script type="math/tex">[0,1]</script></span>区间上服从均匀分布的随机变量，那么曼哈顿距离就可以表示维如下形式：</p>
+<div>
+<div class="MathJax_Preview">
+Dist(\overline{O},\overline{Y})=\displaystyle\sum_{i=1}^d(Y_i-0)\tag{3.3}
+</div>
+<script type="math/tex; mode=display">
+Dist(\overline{O},\overline{Y})=\displaystyle\sum_{i=1}^d(Y_i-0)\tag{3.3}
+</script>
+</div>
+<p>结果是一个均值为<span><span class="MathJax_Preview">\mu=d/2</span><script type="math/tex">\mu=d/2</script></span>，标准差为<span><span class="MathJax_Preview">\sigma=\sqrt{d/12}</span><script type="math/tex">\sigma=\sqrt{d/12}</script></span>的随机变量。当<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>比较大时，由大数定理可知，立方体中绝大多数数据点将会位于区间<span><span class="MathJax_Preview">[D_{min},D_{max}]=[\mu-3\sigma,\mu+3\sigma]</span><script type="math/tex">[D_{min},D_{max}]=[\mu-3\sigma,\mu+3\sigma]</script></span>之内。因此，立方体中大多数点的距离会落在一段长为<span><span class="MathJax_Preview">D_{max}-D_{min}=6\sigma=\sqrt{3d}</span><script type="math/tex">D_{max}-D_{min}=6\sigma=\sqrt{3d}</script></span>的距离区间内。注意，曼哈顿距离的期望是随着维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>按线性比率增长的。因此，距离的变化值和绝对值之间的比率，记为<span><span class="MathJax_Preview">Contrast(d)</span><script type="math/tex">Contrast(d)</script></span>，如下所示：</p>
+<div>
+<div class="MathJax_Preview">
+Constrast(d)={{D_{max}-D_{min}}\over\mu}=\sqrt{12/d}.\displaystyle\tag{3.4}
+</div>
+<script type="math/tex; mode=display">
+Constrast(d)={{D_{max}-D_{min}}\over\mu}=\sqrt{12/d}.\displaystyle\tag{3.4}
+</script>
+</div>
+<p>这个比率可以解释为不同数据点之间的距离对比<span><span class="MathJax_Preview">(contrast)</span><script type="math/tex">(contrast)</script></span>，它反映从原点出发的最大距离和最小距离之间差异的程度。因为“对比”按照<span><span class="MathJax_Preview">\sqrt d</span><script type="math/tex">\sqrt d</script></span>的速率降低，这意味着当维度越来越大时，不同数据点的距离实际上没有对比。越来越低的对比度显然不是我们想要的，因为这意味着数据挖掘算法会将所有对数据点对的距离看作时一样的，从而不能很好地用不同层级的语义来区分不同对象对。当维度增加时，对比的方差的变化情况如图3.1a所示。实际上，所有不同<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>参数的<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数都有这种现象，只不过严重程度不同。这里严重程度的差异将会在后面的章节中研究。很清楚的是，当维度增加时，直接使用<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数可能不是有效的。</p>
+<h4 id="3213">3.2.1.3 局部不相关特征的影响</h4>
+<p>一个更加根本的探究高维度效果的方法是检查不相关特征的影响。这是因为在一个典型的高维数据集中，许多特征可能是不相关的。举个例子，考虑一个医学记录数据集，它包含各种医学情况的病人和每个人就医记录中的不同方面的广泛的定量的测量值。对于一个包含糖尿病患者的集合，特定的某些属性对于距离的计算更加重要，例如血糖水平。另一方面，对于包含癫痫病患者的集合，另一组特征会更加重要。许多属性值的自然方差的加性效果可能会非常显著。对于像欧式距离这样的距离度量，噪声分量可能会贡献很多不必要的数值，因为欧式距离是采用求平方和的方式计算距离的。这里需要理解的关键点是，和距离计算相关的几个特定特征可能有时会对于被比较的特定对象对非常敏感。在预处理过程中全局地筛选特征子集不能解决这个问题，因为特征是否相关是由被考虑的对象对*局部地*决定的。全局来说，所有特征可能都是相关的。</p>
+<p>当许多特征不相关时，不相关特征的加性噪声效果有时可能会表现为距离值的集中。在任意情况下，这样的不相关的特征总是会在距离计算中引入误差。因为高维数据集经常包含各种 特征，许多是不相关的，像<span><span class="MathJax_Preview">L_2-</span><script type="math/tex">L_2-</script></span>范数这样使用平方和的方式计算距离，其加性效果会非常具有破坏性。</p>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/2.PNG" /></p>
+<h4 id="3214-l_p-l_p-">3.2.1.4 不同<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数的影响</h4>
+<p>不同的<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数的表现效果是不一样的，无论是在不相关特征的影响方面，还是在距离对比方面。考虑<span><span class="MathJax_Preview">p=\infty</span><script type="math/tex">p=\infty</script></span>的极限情况。这个范数等价于只使用两个对象最相似的那个维度。经常发生的是，这个维度对应不相关的属性，其自然方差对基于相似度的算法有不利的影响。事实上，对于一个1000维的应用，如果两个对象在999个属性上有相似的值，那么这两个对象应该被定义为非常相似。但是，单独的一个不相关的属性，如果两个对象在这个属性上相差很多，那么在无穷范数<span><span class="MathJax_Preview">L_\infty</span><script type="math/tex">L_\infty</script></span>的度量下，这两个对象的距离会被拉的很远。换句话说，局部的相似的属性被无穷范数<span><span class="MathJax_Preview">L_\infty</span><script type="math/tex">L_\infty</script></span>忽视了。显然，这不是我们想要的效果。</p>
+<p>总体上，对于较大的<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值，<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数都是这样：不相关的属性被强调了。事实上，对于某些数据分布，当<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值较大时，距离对比的效果也减弱了。在不同维度的数据上，对于不同的<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值，距离对比如图3.1b所示。这个图的构造方式和图3.1a是一样的。尽管所有的<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数都随着维度的增加而退化，代表较大<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值的曲线要退化地更快一些。从图3.2中我们可以更好地理解这个趋势，图3.2的<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>轴代表<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值。在图3.2a中，不同维度数据的对比随着<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值变化。图3.2b是由图3.2a衍生而来，不同之处在于这个图的结果是用更高阶范数除以曼哈顿性能得到的分数。很明显的是，随着<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>的增加，当数据维度较大时衰减的速率更快。对于二维的数据，几乎不存在衰减。这就是为什么在低维应用中<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值的选取不是很重要。</p>
+<p>这段论述引出了分数度量的概念，也就是<span><span class="MathJax_Preview">p\in(0,1)</span><script type="math/tex">p\in(0,1)</script></span>。这个分数度量可以为高维度的数据提供更有效的结果。根据经验，维度越高，<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值越小。但是，对于<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值的选取并没有一个准确的准则，这是因为维度不是选取合适的<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值所要考虑的唯一因素。<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值的准确选取需要结合具体的应用，使用基准测试的方法。书目笔记包含了使用分数度量的讨论。</p>
+<h4 id="3215">3.2.1.5 基于匹配的相似度计算</h4>
+<p>由于希望为距离计算选择局部相关特征，因此会出现一个问题，即如何以数据挖掘应用的有意义和实用的方式实现这一点。 在许多情况下，基于累积证据匹配许多属性值的简单方法已被证明是有效的。 这种方法也相对容易高效实施。</p>
+<p>似乎适用于高维数据的一个更广泛的原则是，在计算多个维度上的累积匹配时，需要忽略沿着各个属性的噪声变化的影响。 当然，这种方法对低维度数据提出了挑战，因为匹配的累积影响不能用统计学上稳健的方式用少量维度来计算。 因此，需要一种能够自动适应数据维度的方法。</p>
+<p>随着维度的增加，记录可能包含相关和不相关的特征。由于不相关特征的噪声变化，一对语义相似的对象可能包含不相似的特征值（在沿着该维度的一个标准偏差的水平）。相反，一对对象不可能在许多属性中具有相似的值，只是偶然的，除非这些属性是相关的。有趣的是，欧几里德度量（通常是<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数）通过使用属性值差异的平方和来达到完全相反的效果。结果，来自不相关属性的“噪声”分量主宰了计算并掩盖了大量相关属性的相似效应。<span><span class="MathJax_Preview">L_\infty-</span><script type="math/tex">L_\infty-</script></span>范数提供了使用具有最大距离值的维度的这种效果的极端示例。在像文本这样的高维领域，相似度函数（如3.3节中讨论的余弦度量）倾向于强调匹配对许多属性值的累积效应，而不是沿着单个属性的大距离。这个一般原则也可以用于定量数据。</p>
+<p>一种不重视精确水平的差异的方法是以维度敏感的方式使用*邻近阈值*。 为了执行邻近阈值处理，数据被离散化为等距桶。 每个维度被分成<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>个 等深度桶，每个桶包含总记录的<span><span class="MathJax_Preview">1/k_d</span><script type="math/tex">1/k_d</script></span>。 桶的数量<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>取决于数据维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>。</p>
+<p>令<span><span class="MathJax_Preview">\overline{X} =(x_1\dots x_d)</span><script type="math/tex">\overline{X} =(x_1\dots x_d)</script></span>和<span><span class="MathJax_Preview">\overline{Y} =(y_1\dots y_d)</span><script type="math/tex">\overline{Y} =(y_1\dots y_d)</script></span>为两个<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维记录。 然后，对于维度<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，如果<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>和<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>都属于同一个桶，则这两个记录被认为在维度<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>上接近。<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>映射到同一个桶的维度的子集称为邻近集合，它由<span><span class="MathJax_Preview">S(\overline{X},\overline{Y},k_d)</span><script type="math/tex">S(\overline{X},\overline{Y},k_d)</script></span>表示。 此外，对于每个维度<span><span class="MathJax_Preview">i\in S(\overline{X},\overline{Y},k_d)</span><script type="math/tex">i\in S(\overline{X},\overline{Y},k_d)</script></span>，令<span><span class="MathJax_Preview">m_i</span><script type="math/tex">m_i</script></span>和<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>为维度<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>中桶的上下界，其中两个记录彼此靠近。 然后，相似度<span><span class="MathJax_Preview">PSelect(\overline{X},\overline{Y},k_d)</span><script type="math/tex">PSelect(\overline{X},\overline{Y},k_d)</script></span>被定义如下：</p>
+<div>
+<div class="MathJax_Preview">
+\displaystyle PSelect(\overline{X},\overline{Y},k_d)=\left [ \sum_{i \in S(\overline{X},\overline{Y},k_d)}\left(1-\frac{|x_i-y_i|}{m_i-n_i}\right)^p \right ]^{1/p}\tag{3.5}
+</div>
+<script type="math/tex; mode=display">
+\displaystyle PSelect(\overline{X},\overline{Y},k_d)=\left [ \sum_{i \in S(\overline{X},\overline{Y},k_d)}\left(1-\frac{|x_i-y_i|}{m_i-n_i}\right)^p \right ]^{1/p}\tag{3.5}
+</script>
+</div>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/3.PNG" /></p>
+<p>上述表达式的值将在<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>和<span><span class="MathJax_Preview">|S(\overline{X},\overline{Y},k_d)|</span><script type="math/tex">|S(\overline{X},\overline{Y},k_d)|</script></span>之间变化因为总和中的每个单独表达式都在<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>和<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>之间。这是一个相似性<span><span class="MathJax_Preview">(similarity)</span><script type="math/tex">(similarity)</script></span>函数，因为较大的值意味着更大的相似性。</p>
+<p>上述相似度函数仅为映射到相同桶的维度保证非零相似性分量。 equidepth分区的使用可确保两个记录共享特定维度的桶的概率为<span><span class="MathJax_Preview">1 / k_d</span><script type="math/tex">1 / k_d</script></span>。因此，平均而言，前述总和可能具有<span><span class="MathJax_Preview">d / k_d</span><script type="math/tex">d / k_d</script></span>非零分量。对于更多类似的记录，这些组件的数量会更大，并且每个组件也可能对相似度值贡献更多。这种方法忽略了遥远维度上的不相似程度，因为它常常受噪声支配。理论上[7]表明，对于某些数据分布，选择<span><span class="MathJax_Preview">k_d \propto d</span><script type="math/tex">k_d \propto d</script></span>可以在高维空间中获得恒定的对比度水平。 <span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>的高值导致每个维度的更严格的质量范围。这些结果表明，在高维空间中，最好针对每个维度设定更高的质量范围，以便在相似度计算中使用保留维度的较小百分比（而不是数量）。这个距离函数的一个有趣的方面是它对数据维度的敏感性。关于<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>的<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>的选择确保了对于低维应用，它通过使用大部分维度而与<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数有一些相似之处;而对于高维应用，它通过在匹配属性上使用相似性来表现类似于类似于文本域的相似性函数。距离函数也被证明对原型最近邻分类应用更有效。</p>
+<h4 id="3216">3.2.1.6 数据分布的影响</h4>
+<p><span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数仅取决于其参数中的两个数据点，并且对于其余数据点的全局统计量不变。距离是否取决于数据集中其余点的基础数据分布？答案是肯定的。为了说明这一点，考虑图3.3中以原点<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>为中心的分布。另外，图中标出了两个数据点<span><span class="MathJax_Preview">A=(1,2)</span><script type="math/tex">A=(1,2)</script></span>和<span><span class="MathJax_Preview">B =(1,-2)</span><script type="math/tex">B =(1,-2)</script></span>。显然，根据任何<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数，<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>与原点<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>等距。然而，出现了一个问题，关于<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>是否应该真正地被视为与<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>的等距离。这是因为从<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>到<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>的直线与数据中的*高方差*方向一致，统计上它更*很可能*数据点在这个方向上更远。另一方面，从<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>到<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>的路径的很多分段是稀疏的，相应的方向是低方差<span><span class="MathJax_Preview">(low-variance)</span><script type="math/tex">(low-variance)</script></span>方向。从统计的角度来看，B远不如沿这个方向远离O.因此，从<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>到<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>的距离应该<span><span class="MathJax_Preview">(ought)</span><script type="math/tex">(ought)</script></span>小于从<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>到<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>。</p>
+<p>*马哈拉诺比斯距离*是基于这个一般原则。 令<span><span class="MathJax_Preview">\Sigma</span><script type="math/tex">\Sigma</script></span>是其数据集的<span><span class="MathJax_Preview">d\times d</span><script type="math/tex">d\times d</script></span>协方差矩阵。 在这种情况下，协方差矩阵的<span><span class="MathJax_Preview">(i,j)</span><script type="math/tex">(i,j)</script></span>项等于维度<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的协方差。 然后，两个<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维数据点<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>马哈拉诺比斯距离 <span><span class="MathJax_Preview">Maha(\overline{X},\overline{Y})</span><script type="math/tex">Maha(\overline{X},\overline{Y})</script></span>如下：</p>
+<div>
+<div class="MathJax_Preview">
+Maha(\overline{X},\overline{Y})= \sqrt{(\overline{X}-\overline{Y})\Sigma^{-1}(\overline{X}-\overline{Y})^T}.
+</div>
+<script type="math/tex; mode=display">
+Maha(\overline{X},\overline{Y})= \sqrt{(\overline{X}-\overline{Y})\Sigma^{-1}(\overline{X}-\overline{Y})^T}.
+</script>
+</div>
+<p>理解马哈拉诺比斯距离的另一种方式是主成分分析<span><span class="MathJax_Preview">(PCA)</span><script type="math/tex">(PCA)</script></span>。马哈拉诺比斯距离与欧几里得距离相似，除了它基于该属性相关性对数据进行归一化。 例如，如果要将轴系旋转到数据的主方向（如图3.3所示），那么数据将不具有（二阶）相互作用关系。 在将每个变换的坐标值除以该数据的标准偏差之后，<span><span class="MathJax_Preview">Mahalanobis</span><script type="math/tex">Mahalanobis</script></span>距离相当于这样的经过变换（坐标轴旋转）的数据集中的欧几里德距离。 结果，图3.3中数据点<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>到原点<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>的距离将大于数据点<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>到原点<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>的距离。</p>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/4.PNG" /></p>
+<h4 id="3217-isomap">3.2.1.7 非线性分布：ISOMAP</h4>
+<p>我们现在研究数据包含任意形状的非线性分布的情况。例如，考虑图3.4所示的全局分布。在三个数据点<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>，<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>和<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>中，哪一对彼此最接近？乍看之下，看起来数据点<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>在欧几里得距离的基础上是最接近的。然而，全球数据分布告诉我们，否则。理解距离的一种方式是，当仅使用从数据点到他们的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个最近邻居中的一个的基于标准度量的点到点跳转时从一个数据点到另一个数据点的路径的最短长度，所述标准度量例如欧几里德度量。直观的基本原理是，只有短暂的点到点跳转才能准确测量该点生成过程中的微小变化。因此，点到点跳跃的总和反映了比点之间的直线距离更准确地从一点到另一（远点）的总变化（距离）。这种距离被称为测地距离。在图3.4的情况下，通过短点对点跳转从<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>到<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>走的唯一方法是沿着数据分布的整个椭圆形行进，同时沿途传递<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>。因此，在此基础上，<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>实际上是*最远*的一对数据点（在<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>，<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>和<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>之间）！隐含的假设是，非线性分布是*局部*欧几里得的，但*总体来说*是非欧几里得的。</p>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/5.PNG" /></p>
+<p>这种距离可以通过使用从非线性降维和嵌入方法（称为<span><span class="MathJax_Preview">ISOMAP</span><script type="math/tex">ISOMAP</script></span>）导出的方法来计算。该方法由两个步骤组成：</p>
+<ol>
+<li>
+<p>计算每个点的<span><span class="MathJax_Preview">k-</span><script type="math/tex">k-</script></span>最近邻点。用表示数据点的节点构造加权图<span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>，表示这些<span><span class="MathJax_Preview">k-</span><script type="math/tex">k-</script></span>最近邻点的距离的边权重（成本）。</p>
+</li>
+<li>
+<p>对于任何一对点<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>，报告<span><span class="MathJax_Preview">Dist(\overline{X},\overline{Y})</span><script type="math/tex">Dist(\overline{X},\overline{Y})</script></span>作为<span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>中相应节点之间的最短路径。</p>
+</li>
+</ol>
+<p>这两个步骤已经能够计算距离而无需明确执行降维。然而，将数据嵌入多维空间的额外步骤使许多对点之间的重复距离计算快得多，同时失去了一些准确性。这种嵌入方式还允许使用自动适用于具有预定距离度量标准的数字多维数据的算法。</p>
+<p>这通过使用全对最短路径问题来构造G中任意一对节点之间的全部距离来实现。随后，应用*多维缩放*<span><span class="MathJax_Preview">(MDS)</span><script type="math/tex">(MDS)</script></span>（参见第2章第2.4.4.2节）将数据嵌入到较低维空间中。该方法的总体效果是“矫直”图3.4的非线性形状，并将其嵌入到数据沿着扁平条带对齐的空间中。事实上，一维表示可以近似这个转换后的数据。此外，在这个新的空间中，只要在最后阶段使用度量<span><span class="MathJax_Preview">MDS</span><script type="math/tex">MDS</script></span>，距离函数（如欧几里得度量）就可以很好地工作。图3.5a举例说明了一个三维实例，其中数据沿螺旋排列。在这个图中，数据点<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>看起来比数据点B更接近彼此。但是，在图3.5b的<span><span class="MathJax_Preview">ISOMAP</span><script type="math/tex">ISOMAP</script></span>嵌入中，数据点<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>更接近<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>的每一个。此示例显示数据分布对距离计算的巨大影响。</p>
+<p>通常，高维数据沿着非线性低维形状排列，这也称为*流形*。这些流形可以被“扁平化”成为一种新的表示形式，可以有效地使用公制距离。因此，这是一种便于使用标准度量标准的数据转换方法。主要的计算挑战是执行降维。但是，在支付一次预处理成本之后，可以有效地执行重复的距离计算。</p>
+<p>非线性嵌入也可以通过<span><span class="MathJax_Preview">PCA</span><script type="math/tex">PCA</script></span>的扩展来实现。 <span><span class="MathJax_Preview">PCA</span><script type="math/tex">PCA</script></span>可以扩展到使用称为内核技巧的方法来发现非线性嵌入。参考第10章第10.6.4.1节，那里简要介绍了核<span><span class="MathJax_Preview">PCA</span><script type="math/tex">PCA</script></span>。</p>
+<h4 id="3218">3.2.1.8 局部数据分布的影响</h4>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/6.PNG" /></p>
+<p>迄今为止的讨论涉及全球分布对距离计算的影响。但是，数据的分布随着区域而变化很大。这种变化可能有两种类型。例如，数据的绝对密度可能随着数据局部性而显着变化，或者群集的形状可能随局部性而变化。第一种类型的变化如图3.6a所示，它有两个包含相同点数的簇，但其中一个比另一个更密集。即使<span><span class="MathJax_Preview">(A,B)</span><script type="math/tex">(A,B)</script></span>之间的绝对距离与<span><span class="MathJax_Preview">(C,D)</span><script type="math/tex">(C,D)</script></span>之间的绝对距离相同，根据局部数据分布，<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>和<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>之间的距离应该被认为更大。换句话说，<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>和<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>相对于他们的局部分布看起来更为分散。许多基于距离的方法经常会遇到这个问题，例如异常值检测。已经表明，调整距离中的局部变化的方法通常比不调整局部变化的方法好得多。被称为局部异常因子<span><span class="MathJax_Preview">(LOF)</span><script type="math/tex">(LOF)</script></span>的最常见的异常值检测方法之一就是基于这一原理。</p>
+<p>图3.6b举例说明了第二个例子，它说明了不同局部方位的影响。这里，<span><span class="MathJax_Preview">(A,B)</span><script type="math/tex">(A,B)</script></span>之间的距离与使用欧几里得度量的<span><span class="MathJax_Preview">(C,D)</span><script type="math/tex">(C,D)</script></span>之间的距离相同。然而，每个区域的局部集群呈现出非常不同的方向。与<span><span class="MathJax_Preview">(A,B)</span><script type="math/tex">(A,B)</script></span>相关的数据点集群的高变量轴沿着从<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>到<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>的路径对齐。对于<span><span class="MathJax_Preview">(C,D)</span><script type="math/tex">(C,D)</script></span>，这不是正确的。因此，<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>和<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>之间的固有距离比<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>之间的固有距离大得多。例如，如果使用相关聚类协方差统计来计算局部马氏距离，则<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>和<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>之间的距离将评估为更大值比<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>之间的值大。</p>
+<p>**共享最近邻近相似性：**用共享最近邻居相似性可以至少部分缓解第一个问题。在这种方法中，每个数据点的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个最近邻居在预处理阶段计算。共享最近邻居的相似度等于两个数据点之间的共同邻居数量。这个度量是局部敏感的，因为它取决于公共*邻居*的数量，而不取决于距离的绝对值。在密集区域中，<span><span class="MathJax_Preview">k-</span><script type="math/tex">k-</script></span>最近邻居距离将很小，因此数据点需要靠得更近以具有更大数量的共享最近邻居。可以使用共享最近邻居方法来定义底层数据点上的*相似度*图，其中具有至少一个共享邻居的数据点对具有它们之间的边缘。基于相似图的方法几乎总是局部敏感的，因为它们局限于<span><span class="MathJax_Preview">k-</span><script type="math/tex">k-</script></span>最近邻分布。</p>
+<p>**通用方法：**在通用局部距离计算方法中，想法是将空间划分为一组局部区域。然后使用该区域的局部统计数据在每个区域调整距离。因此，广泛的方法如下：</p>
+<ol>
+<li>
+<p>将数据分区为一组局部区域。</p>
+</li>
+<li>
+<p>对于任何一组对象，确定该对的最相关区域，并使用该区域的局部统计来计算成对距离。例如，局部的马哈拉诺比斯距离可以用在每个区域。</p>
+</li>
+</ol>
+<p>使用各种聚类方法将数据划分为局部区域。在对中的每个对象属于不同区域的情况下，可以使用全局分布，或者可以使用两个局部区域来计算平均值。另一个问题是算法的第一步（分区过程）本身需要一个用于聚类的距离的概念。这使解决方案成为循环，并要求提供迭代解决方案。尽管对这些方法的详细讨论超出了本书的范围，但本章最后的参考书目提供了许多指导。</p>
+<h4 id="3219">3.2.1.9 计算考虑</h4>
+<p>距离函数设计中的主要考虑因素是计算复杂性。这是因为距离函数计算通常嵌入在手头应用程序中重复使用的子例程中。如果子程序不能有效地实现，则适用性变得更加受限。例如，像<span><span class="MathJax_Preview">ISOMAP</span><script type="math/tex">ISOMAP</script></span>这样的方法计算起来很昂贵，而且对于非常大的数据集很难实现，因为这些方法至少按照数据大小的平方进行缩放。但是，它们确实具有一次性转换可以创建数据挖掘算法可以高效使用的表示的优点。距离函数重复执行，而预处理只执行一次。因此，只要加速后期计算，使用预处理密集型方法肯定是有利的。对于许多应用而言，即使对于一次性分析，<span><span class="MathJax_Preview">ISOMAP</span><script type="math/tex">ISOMAP</script></span>等复杂的方法也可能过于昂贵。对于这种情况，可能需要使用本章讨论的早期方法之一。在本节讨论的方法中，仔细选择<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数和基于匹配的技术是大规模应用程序最快的方法。</p>
+<h3 id="322">3.2.2 分类数据</h3>
+<p>距离函数自然地计算为数值数据中维数的差异函数，它是*有序的*。但是，分类数据的离散值之间不存在排序。如何计算距离？一种可能性是使用第二部分讨论的二值化方法将分类数据转换为数字数据。在第2章第2.2.2.2节中，由于二进制向量很可能是稀疏的（很多零值），因此可以从其他稀疏域（例如文本）调整相似性函数。对于分类数据的情况，使用相似性函数而不是距离函数更常见，因为离散值可以更自然地匹配。</p>
+<p>考虑两条记录<span><span class="MathJax_Preview">\overline{X} =(x_1 \dots x_d)</span><script type="math/tex">\overline{X} =(x_1 \dots x_d)</script></span>和<span><span class="MathJax_Preview">\overline{Y} =(y_1 \dots y_d)</span><script type="math/tex">\overline{Y} =(y_1 \dots y_d)</script></span>。记录<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>和<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>之间最简单的可能相似性是各个属性值的相似性总和。换句话说，如果<span><span class="MathJax_Preview">S(x_i,y_i)</span><script type="math/tex">S(x_i,y_i)</script></span>是属性值<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>和<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>之间的相似度，则总体相似度定义如下：</p>
+<div>
+<div class="MathJax_Preview">
+Sim(\overline{X},\overline{Y})=\sum_{i=1}^d S(x_i,y_i).
+</div>
+<script type="math/tex; mode=display">
+Sim(\overline{X},\overline{Y})=\sum_{i=1}^d S(x_i,y_i).
+</script>
+</div>
+<p>因此，<span><span class="MathJax_Preview">S(x_i,y_i)</span><script type="math/tex">S(x_i,y_i)</script></span>的选择定义了总体相似度函数。</p>
+<p>最简单的选择是当<span><span class="MathJax_Preview">x_i = y_i</span><script type="math/tex">x_i = y_i</script></span>时将<span><span class="MathJax_Preview">S(x_i,y_i)</span><script type="math/tex">S(x_i,y_i)</script></span>设置为1，否则设置0。这也被称为重叠<span><span class="MathJax_Preview">(overlap)</span><script type="math/tex">(overlap)</script></span>度量。这一措施的主要缺点是它没有考虑不同属性之间的相对频率。例如，考虑一个分类属性，其中99％的记录属性值为“正常”，其余记录为“癌症”或“糖尿病”。很明显，如果两个记录对于这个变量具有“正常”值，这不会提供关于相似性的统计上显着的信息，因为大多数对可能偶然地显示该模式。但是，如果这两个记录具有与此相匹配的“癌症”或“糖尿病”值，那么它提供了相似性的重要统计证据。这个论点与之前关于全球数据分布重要性的论点类似。异常的异同在统计上比那些常见的更重要。</p>
+<p>在分类数据的情况下，数据集的*总体统计特性*应该用于计算相似性。这与使用马哈拉诺比斯距离如何使用全球统计数据更准确地计算相似性相似。这个想法是，对一个分类属性的异常值的匹配应该比经常出现的值的权重更大。这也构成许多常用规范化技术的基本原理，这些技术在文本等领域中使用。下一节讨论的一个例子是在信息检索领域*逆文档频率* <span><span class="MathJax_Preview">(IDF)</span><script type="math/tex">(IDF)</script></span>的使用。这里将介绍类别数据的类似度量。</p>
+<p>*逆出现频率*是简单匹配度量的泛化。该度量通过匹配值的频率的反函数来加权两个记录的匹配属性之间的相似度。因此，当<span><span class="MathJax_Preview">x_i = y_i</span><script type="math/tex">x_i = y_i</script></span>时，相似度<span><span class="MathJax_Preview">S(x_i,y_i)</span><script type="math/tex">S(x_i,y_i)</script></span>等于逆加权频率，否则为0。令<span><span class="MathJax_Preview">p_k(x)</span><script type="math/tex">p_k(x)</script></span>为第k个属性在数据集中取<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>值的记录分数。换句话说，当<span><span class="MathJax_Preview">x_i = y_i</span><script type="math/tex">x_i = y_i</script></span>时，<span><span class="MathJax_Preview">S(x_i,y_i)</span><script type="math/tex">S(x_i,y_i)</script></span>的值为<span><span class="MathJax_Preview">1 / p_k(xi)^2</span><script type="math/tex">1 / p_k(xi)^2</script></span>，否则为0。</p>
+<div>
+<div class="MathJax_Preview">
+\displaystyle S(x_i,y_i)=
+\begin{cases}
+1/p_k(x_i)^2 &amp;\text{if}\ x_i=y_i \\[2ex]
+0 &amp;\text{otherwise}
+\end{cases}
+\tag{3.6}
+</div>
+<script type="math/tex; mode=display">
+\displaystyle S(x_i,y_i)=
+\begin{cases}
+1/p_k(x_i)^2 &\text{if}\ x_i=y_i \\[2ex]
+0 &\text{otherwise}
+\end{cases}
+\tag{3.6}
+</script>
+</div>
+<p>一个相关的措施是古道尔的措施。如反向出现频率的情况那样，当值不频繁时，将较高的相似度值分配给匹配。在这个度量[104]的简单变体中，当<span><span class="MathJax_Preview">x_i = y_i</span><script type="math/tex">x_i = y_i</script></span>时，第<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个属性的相似度定义为<span><span class="MathJax_Preview">1-p_k(x_i)^2</span><script type="math/tex">1-p_k(x_i)^2</script></span>，否则为0。</p>
+<div>
+<div class="MathJax_Preview">
+\displaystyle S(x_i,y_i)=
+\begin{cases}
+1-p_k(x_i)^2 &amp;\text{if}\ x_i=y_i \\[2ex]
+0 &amp;\text{otherwise}
+\end{cases}
+\tag{3.7}
+</div>
+<script type="math/tex; mode=display">
+\displaystyle S(x_i,y_i)=
+\begin{cases}
+1-p_k(x_i)^2 &\text{if}\ x_i=y_i \\[2ex]
+0 &\text{otherwise}
+\end{cases}
+\tag{3.7}
+</script>
+</div>
+<p>书目注释包含指向分类数据的各种相似性度量的指针。</p>
+<h3 id="323">3.2.3 混合定量和分类数据</h3>
+<p>通过添加数字和定量组件的权重，将混合数据的方法推广到相当简单。主要挑战是决定如何分配定量和分类组件的权重。例如，考虑两条记录<span><span class="MathJax_Preview">\overline{X} =(\overline{X_n},\overline{X_c})</span><script type="math/tex">\overline{X} =(\overline{X_n},\overline{X_c})</script></span>和<span><span class="MathJax_Preview">\overline{Y} =(\overline{Y_n},\overline{Y_c})</span><script type="math/tex">\overline{Y} =(\overline{Y_n},\overline{Y_c})</script></span>，其中<span><span class="MathJax_Preview">\overline{X_n}</span><script type="math/tex">\overline{X_n}</script></span>，<span><span class="MathJax_Preview">\overline{Y_n}</span><script type="math/tex">\overline{Y_n}</script></span>是数值属性的子集，<span><span class="MathJax_Preview">\overline{X_c}</span><script type="math/tex">\overline{X_c}</script></span>，<span><span class="MathJax_Preview">\overline{Y_c}</span><script type="math/tex">\overline{Y_c}</script></span>是分类属性的子集。然后，<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>之间的总体相似性定义如下：</p>
+<div>
+<div class="MathJax_Preview">
+Sim(\overline{X},\overline{Y})=\lambda\cdot NumSim(\overline{X_n},\overline{Y_n}) + (1-\lambda)\cdot CatSim(\overline{X_c},\overline{Y_c}).\tag{3.8}
+</div>
+<script type="math/tex; mode=display">
+Sim(\overline{X},\overline{Y})=\lambda\cdot NumSim(\overline{X_n},\overline{Y_n}) + (1-\lambda)\cdot CatSim(\overline{X_c},\overline{Y_c}).\tag{3.8}
+</script>
+</div>
+<p>参数<span><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span>调节分类属性和数字属性的相对重要性。 <span><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span>的选择是困难的。在缺乏关于属性相对重要性的领域知识的情况下，自然选择是使用等于数据中数值属性部分的<span><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span>值。此外，数值数据中的接近度通常使用距离函数而不是相似度函数来计算。但是，距离值也可以转换为相似度值。对于<span><span class="MathJax_Preview">dist</span><script type="math/tex">dist</script></span>的距离值，常用的方法是使用产生相似度值为<span><span class="MathJax_Preview">1/(1 + dist)</span><script type="math/tex">1/(1 + dist)</script></span>的核映射[104]。</p>
+<p>需要进一步的归一化以有意义地比较可能处于完全不同尺度的数值和分类属性上的相似性值分量。实现这一目标的一种方法是使用记录样本对来确定两个域中相似值的标准差。相似度值（数值或分类）的每个分量除以其标准偏差。因此，如果<span><span class="MathJax_Preview">\sigma_c</span><script type="math/tex">\sigma_c</script></span>和<span><span class="MathJax_Preview">\sigma_n</span><script type="math/tex">\sigma_n</script></span>是分类和数值分量中相似值的标准偏差，那么公式 3.8需要修改如下：</p>
+<div>
+<div class="MathJax_Preview">
+Sim(\overline{X},\overline{Y})=\lambda\cdot NumSim(\overline{X_n},\overline{Y_n})/\sigma_n + (1-\lambda)\cdot CatSim(\overline{X_c},\overline{Y_c})/\sigma_c.\tag{3.9}
+</div>
+<script type="math/tex; mode=display">
+Sim(\overline{X},\overline{Y})=\lambda\cdot NumSim(\overline{X_n},\overline{Y_n})/\sigma_n + (1-\lambda)\cdot CatSim(\overline{X_c},\overline{Y_c})/\sigma_c.\tag{3.9}
+</script>
+</div>
+<p>通过执行这种规范化，\lambda的值变得更有意义，作为两个组件之间的真实*相对权重*。默认情况下，除非有关属性的相对重要性的特定领域知识可用，否则可以将此权重设置为与每个组件中的属性数成比例。</p>
+<h2 id="33">3.3 文本相似性度量</h2>
+<p>严格地说，只有当文字被视为一袋文字时，它才可以被认为是定量的多维数据。每个单词的频率可以被视为一个量化的属性，基础词汇可以被视为整套属性。然而，文本的结构是稀疏的<span><span class="MathJax_Preview">(sparse)</span><script type="math/tex">(sparse)</script></span>，其中大多数属性取值为0。而且，所有的词频都是非负的。这种特殊的文本结构对相似性计算和其他挖掘算法具有重要意义。诸如<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数之类的措施不能很好地适应集合中不同文档的长度。例如，两个长文件之间的<span><span class="MathJax_Preview">L_2-</span><script type="math/tex">L_2-</script></span>距离几乎总是大于两个短文件之间的距离，即使这两个长文件有许多共同的单词，并且短文件是完全不相交的。如何规范这种没有规律的现象？这样做的一种方法是使用余弦测量。余弦度量计算两个文档之间的角度，这对文档的绝对长度不敏感。令<span><span class="MathJax_Preview">\overline{X} =(x_1 \dots  x_d)</span><script type="math/tex">\overline{X} =(x_1 \dots  x_d)</script></span>和<span><span class="MathJax_Preview">\overline{Y} =(y_1 \dots y_d)</span><script type="math/tex">\overline{Y} =(y_1 \dots y_d)</script></span>是大小为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>的词典中的两个文档。然后，<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>之间的余弦测度<span><span class="MathJax_Preview">cos(\overline{X},\overline{Y})</span><script type="math/tex">cos(\overline{X},\overline{Y})</script></span>可以定义如下：</p>
+<div>
+<div class="MathJax_Preview">
+cos(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d x_i \cdot y_i}\over{\sqrt{\textstyle \sum_{i=1}^d x_i^2}\cdot \sqrt{\sum_{i=1}^d y_i^2}}} \tag{3.10}
+</div>
+<script type="math/tex; mode=display">
+cos(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d x_i \cdot y_i}\over{\sqrt{\textstyle \sum_{i=1}^d x_i^2}\cdot \sqrt{\sum_{i=1}^d y_i^2}}} \tag{3.10}
+</script>
+</div>
+<p>上述措施仅使用属性之间的原始频率。 但是，与其他数据类型一样，可以使用全局统计量度来改进相似性计算。 例如，如果两个文档匹配一个不常见的单词，则它比两个文档匹配非常常见的单词更相似。 作为第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个词出现的文档<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>的数量的递减函数的*逆文档频率*<span><span class="MathJax_Preview">id_i</span><script type="math/tex">id_i</script></span>通常用于归一化：</p>
+<div>
+<div class="MathJax_Preview">
+id_i=log(n/n_i).\tag{3.11}
+</div>
+<script type="math/tex; mode=display">
+id_i=log(n/n_i).\tag{3.11}
+</script>
+</div>
+<p>这里，集合中的文档数量用<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>表示。 另一个常见的调整是确保单个词的过度存在不会影响相似性度量。 在相似性计算之前，可以将诸如平方根或对数的阻尼函数<span><span class="MathJax_Preview">f(\cdot)</span><script type="math/tex">f(\cdot)</script></span>可选地应用于频率。</p>
+<div>
+<div class="MathJax_Preview">
+f(x_i)=\sqrt{x_i}\\
+f(x_i)=log(x_i)
+</div>
+<script type="math/tex; mode=display">
+f(x_i)=\sqrt{x_i}\\
+f(x_i)=log(x_i)
+</script>
+</div>
+<p>在许多情况下，不使用阻尼函数，这相当于将<span><span class="MathJax_Preview">f(x_i)</span><script type="math/tex">f(x_i)</script></span>设置为<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>。 因此，可以如下定义第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个词的归一化频率$h(x_i):</p>
+<div>
+<div class="MathJax_Preview">
+h(x_i)=f(x_i)\cdot id_i.\tag{3.12}
+</div>
+<script type="math/tex; mode=display">
+h(x_i)=f(x_i)\cdot id_i.\tag{3.12}
+</script>
+</div>
+<p>然后，余弦测量定义如公式 3.10，除了使用单词的标准化频率：</p>
+<div>
+<div class="MathJax_Preview">
+cos(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d h(x_i) \cdot h(y_i)}\over{\sqrt{\textstyle \sum_{i=1}^d h(x_i)^2}\cdot \sqrt{\sum_{i=1}^d h(y_i)^2}}} \tag{3.13}
+</div>
+<script type="math/tex; mode=display">
+cos(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d h(x_i) \cdot h(y_i)}\over{\sqrt{\textstyle \sum_{i=1}^d h(x_i)^2}\cdot \sqrt{\sum_{i=1}^d h(y_i)^2}}} \tag{3.13}
+</script>
+</div>
+<p><em>$ Jaccard$系数</em> <span><span class="MathJax_Preview">J(\overline{X},\overline{Y})</span><script type="math/tex">J(\overline{X},\overline{Y})</script></span>是另一种不常用于文本的方法：</p>
+<div>
+<div class="MathJax_Preview">
+J(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d h(x_i) \cdot h(y_i)}\over{\textstyle \sum_{i=1}^d h(x_i)^2 + \sum_{i=1}^d h(y_i)^2 - \sum_{i=1}^d h(x_i)\cdot h(y_i)}}.\tag{3.14}
+</div>
+<script type="math/tex; mode=display">
+J(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d h(x_i) \cdot h(y_i)}\over{\textstyle \sum_{i=1}^d h(x_i)^2 + \sum_{i=1}^d h(y_i)^2 - \sum_{i=1}^d h(x_i)\cdot h(y_i)}}.\tag{3.14}
+</script>
+</div>
+<p>Jaccard系数很少用于文本域，但通常用于稀疏二进制数据集。</p>
+<h3 id="331">3.3.1 二进制和集合数据</h3>
+<p>二进制多维数据是基于集合的数据的表示，其中值为1表示集合中存在元素。 二进制数据通常出现在市场盘区域中，其中交易包含与交易中是否存在物品相对应的信息。 它可以被认为是文本数据的一个特殊情况，其中词频是0或1.如果<span><span class="MathJax_Preview">S_X</span><script type="math/tex">S_X</script></span>和<span><span class="MathJax_Preview">S_Y</span><script type="math/tex">S_Y</script></span>是具有二进制表示<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>的两个集合，那么可以证明应用方程 3.14到两组的原始二进制表示相当于：</p>
+<div>
+<div class="MathJax_Preview">
+J(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d x_i \cdot y_i}\over{\textstyle \sum_{i=1}^d x_i^2 + \sum_{i=1}^d y_i^2 - \sum_{i=1}^d x_i\cdot y_i}}={{|S_X\cap S_Y|}\over{|S_X \cup S_Y|}}.\tag{3.15}
+</div>
+<script type="math/tex; mode=display">
+J(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d x_i \cdot y_i}\over{\textstyle \sum_{i=1}^d x_i^2 + \sum_{i=1}^d y_i^2 - \sum_{i=1}^d x_i\cdot y_i}}={{|S_X\cap S_Y|}\over{|S_X \cup S_Y|}}.\tag{3.15}
+</script>
+</div>
+<p>这是一个特别直观的方法，因为它仔细考虑了两组中常见元素和不相交元素的数量。</p>
+<h2 id="34">3.4 时间相似性度量</h2>
+<p>时间数据包含表示时间的单个上下文属性以及测量在特定时间段内变化的属性的一个或多个行为属性。时间数据可以表示为连续的时间序列，或者表示为离散序列，这取决于应用领域。后一种表述可能被视为前者的不连续版本。应该指出，离散序列数据并不总是时间上的，因为上下文属性可以表示放置。这在生物序列数据中通常是这种情况。离散序列有时也被称为*字符串*。许多用于时间序列和离散序列的相似性度量都可以在任意域中重用，尽管一些度量更适合于其中一个域。因此，本节将讨论这两种数据类型，并将根据其最常见的用途，在连续序列或离散序列的小节中讨论每个相似性度量。对于某些度量，这两种数据类型的用法是通用的。</p>
+<h3 id="341">3.4.1 时间序列相似性度量</h3>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/7.PNG" /></p>
+<p>时间序列相似性度量的设计具有很高的应用特定性。例如，两个相等长度的时间序列之间最简单可能的相似性度量就是欧几里德度量。尽管这样的度量标准在许多情况下都可以很好地工作，但它并没有考虑到许多应用中常见的失真因素。其中一些因素如下：</p>
+<ol>
+<li>
+<p>*行为属性缩放和翻译：*在许多应用中，不同的时间序列可能不会以相同的比例绘制。例如，表示各种股票价格的时间序列可能表现出类似的移动模式，但绝对值在平均值和标准偏差方面可能会有很大不同。例如，几个不同的假设股票代号的股价如图3.7所示。所有三个系列都显示相似的模式，但具有不同的缩放比例和一些随机变化。显然，它们显示出相似的模式，但如果使用该系列的绝对值，则不能进行有意义的比较。</p>
+</li>
+<li>
+<p>*时间（上下文）属性翻译：*在一些应用中，例如金融市场的实时分析，不同的时间序列可能代表相同的时间段。在其他应用中，例如从医学测量中获得的时间序列的分析，读取时间的绝对时间戳并不重要。在这种情况下，时间属性值需要在至少一个时间序列中移位以允许更有效的匹配。</p>
+</li>
+<li>
+<p><em>时间（上下文）属性缩放：*在这种情况下，可能需要沿着时间轴拉伸或压缩该系列以允许更有效的匹配。这被称为*时间扭曲</em>。另外一个复杂的情况是，该系列的不同时间片段可能需要以不同的方式进行变形以允许更好的匹配。在图3.7中，显示了最简单的扭曲情况，即库存A的整组值已被拉伸。通常，在同一系列中的不同窗口可能被拉伸或压缩的情况下，时间扭曲可能更复杂不同。这被称为*动态*时间规整<span><span class="MathJax_Preview">(DTW)</span><script type="math/tex">(DTW)</script></span>。</p>
+</li>
+<li>
+<p>*匹配中的不连续性：*长时间序列可能会有噪点不匹配的部分。例如，图3.7中的其中一个系列由于数据收集限制而具有丢失读数的窗口。这在传感器数据中很常见。距离函数可能需要对这种噪声是鲁棒的。</p>
+</li>
+</ol>
+<p>其中一些问题可以通过预处理期间的属性规范化来解决。</p>
+<h4 id="3411">3.4.1.1行为属性标准化的影响</h4>
+<p>与上下文属性相比，翻译和缩放问题通常更易于解决行为属性，因为它们可以在预处理期间通过规范化来解决：</p>
+<ol>
+<li>
+<p>*行为属性翻译：*行为属性在预处理期间居中。</p>
+</li>
+<li>
+<p>*行为属性缩放：*行为属性的标准偏差缩放为1个单位。</p>
+</li>
+</ol>
+<p>请务必记住，这些规范化问题可能与每个应用程序无关。一些应用程序可能只需要翻译，只需要缩放，或两者都不需要。其他应用程序可能都需要。事实上，在某些情况下，标准化的错误选择可能会对结果的可解释性产生不利影响。因此，分析人员需要根据应用的具体需求明智地选择标准化方法。</p>
+<h4 id="3412-l_p-">3.4.1.2 $ L_p-$范数</h4>
+<p>可以为两个系列<span><span class="MathJax_Preview">\overline{X} =(x_1 \dots x_n) <span><span class="MathJax_Preview">和</span><script type="math/tex">和</script></span>\overline{Y} =(y_1 \dots  y_n)\overline{Y} =(y_1 \dots  y_n)</span><script type="math/tex">\overline{X} =(x_1 \dots x_n) <span><span class="MathJax_Preview">和</span><script type="math/tex">和</script></span>\overline{Y} =(y_1 \dots  y_n)\overline{Y} =(y_1 \dots  y_n)</script></span>定义<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数。此度量将时间序列视为一个多维数据点，其中每个时间戳都是一个维度。</p>
+<div>
+<div class="MathJax_Preview">
+Dist(\overline{X},\overline{Y})=\left (\displaystyle\sum_{i=1}^n|x_i-y_i|^P\right)^{1/p}\tag{3.16}
+</div>
+<script type="math/tex; mode=display">
+Dist(\overline{X},\overline{Y})=\left (\displaystyle\sum_{i=1}^n|x_i-y_i|^P\right)^{1/p}\tag{3.16}
+</script>
+</div>
+<p><span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数也可以应用于时间序列的小波变换。在<span><span class="MathJax_Preview">p = 2</span><script type="math/tex">p = 2</script></span>的特殊情况下，如果在表示中保留了大部分较大的小波系数，则可以用小波表示获得精确的距离计算。事实上，可以看出，如果没有去除小波系数，则两个表示之间的距离是相同的。这是因为小波变换可以看作是一个轴系统的旋转，其中每个维度代表一个时间戳。欧几里德度量对于轴旋转是不变的。 <span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数的主要问题是它们是为时间序列长度相等而设计的，并不能解决时间（上下文）属性的扭曲问题。</p>
+<h4 id="3413">3.4.1.3 动态时间弯曲距离</h4>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/8.PNG" /></p>
+<p><span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>沿时间轴以不同的部分以不同的（或*动态的*）方式延伸该系列以实现更有效的匹配。图3.8a中举例说明了扭曲，其中两个系列在A，B和C区段中具有非常相似的形状，但是每个系列中的特定区段需要适当拉伸以实现更好的匹配。<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>测量已经从语音识别领域进行了改进，其中时间扭曲被认为是匹配不同说话速度所必需的。 <span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>可用于时间序列或序列数据，因为它仅解决上下文属性缩放的问题，并且与行为属性的性质无关。以下描述是通用的，可用于时间序列或序列数据。</p>
+<p><span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>度量只能在两个等长的时间序列之间定义。然而，<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>就其本质而言允许测量两个*不同*长度系列之间的距离。在<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>距离中，两个时间序列的时间戳之间存在一对一的映射关系。但是，在<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>中，允许多对一映射考虑时间扭曲。这种多对一的映射可以考虑重复两个时间序列中的任何一个的仔细选择的片段中的一些元素。这可以用来人为地创建两个相同长度的系列，它们之间具有一对一的映射关系。可以使用任何距离度量诸如<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数在所产生的扭曲序列上测量距离。例如，在图3.8b中，重复这两个系列的几个片段中的某些元素，以创建两个系列之间的一对一映射。请注意，这两个系列现在看起来比图3.8a中的两个系列更相似。当然，这种重复可以以许多不同的方式完成，目标是以*最佳*方式执行它以最小化<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>距离。使用动态编程来确定最佳的扭曲选择。</p>
+<p>为了理解<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>如何推广一对一距离度量（如<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数），考虑在两个等长的时间序列<span><span class="MathJax_Preview">\overline{X} =(x_1 \dots x_n)</span><script type="math/tex">\overline{X} =(x_1 \dots x_n)</script></span>和<span><span class="MathJax_Preview">\overline{Y}=(y_1 \dots y_n)</span><script type="math/tex">\overline{Y}=(y_1 \dots y_n)</script></span>的第一个<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>元素上计算的<span><span class="MathJax_Preview">L_1</span><script type="math/tex">L_1</script></span>（曼哈顿）度量<span><span class="MathJax_Preview">M(\overline{X_i},\overline{Y_i})。</span><script type="math/tex">M(\overline{X_i},\overline{Y_i})。</script></span><span><span class="MathJax_Preview">M(\overline{X_i},\overline{Y_i})</span><script type="math/tex">M(\overline{X_i},\overline{Y_i})</script></span>的值可以*递归地*写成如下形式：</p>
+<div>
+<div class="MathJax_Preview">
+M(\overline{X_i},\overline{Y_i})=|x_i-y_i|+M(\overline{X_{i-1}},\overline{Y_{i-1}}).\tag{3.17}
+</div>
+<script type="math/tex; mode=display">
+M(\overline{X_i},\overline{Y_i})=|x_i-y_i|+M(\overline{X_{i-1}},\overline{Y_{i-1}}).\tag{3.17}
+</script>
+</div>
+<p>请注意，由于一对一匹配，两个系列的索引在右侧*同时*减少1。在<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>中，两个索引不需要减少1个单位，因为允许多对一映射。相反，取决于两个时间序列（或序列）之间的*最佳匹配*，任何一个或两个索引可以减少1。没有减少1的索引对应于重复的元素。指数减少的选择是递归地自然定义的，作为对各种选项的优化。</p>
+<p>令<span><span class="MathJax_Preview">DTW(i,j)</span><script type="math/tex">DTW(i,j)</script></span>分别为两个时间序列<span><span class="MathJax_Preview">\overline{X} =(x_1 \dots x_n) <span><span class="MathJax_Preview">和</span><script type="math/tex">和</script></span>\overline{Y} =(y_1 \dots  y_n)\overline{Y} =(y_1 \dots  y_n)</span><script type="math/tex">\overline{X} =(x_1 \dots x_n) <span><span class="MathJax_Preview">和</span><script type="math/tex">和</script></span>\overline{Y} =(y_1 \dots  y_n)\overline{Y} =(y_1 \dots  y_n)</script></span>的第一个<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和第一个<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>元素之间的最佳距离。请注意，两个时间序列的长度为<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>和<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>，可能不一样。然后，递归地定义<span><span class="MathJax_Preview">DTW(i,j)</span><script type="math/tex">DTW(i,j)</script></span>的值如下：</p>
+<div>
+<div class="MathJax_Preview">
+DTW(i,j)=distance(x_i,y_j)+min
+\begin{cases}
+DTW(i,j-1) &amp;repeat \ x_i \\
+DTW(i-1,j) &amp;repeat \ y_i \\
+DTW(i-1,j-1) &amp;repeat \ neither
+\end{cases}
+\tag{3.18}
+</div>
+<script type="math/tex; mode=display">
+DTW(i,j)=distance(x_i,y_j)+min
+\begin{cases}
+DTW(i,j-1) &repeat \ x_i \\
+DTW(i-1,j) &repeat \ y_i \\
+DTW(i-1,j-1) &repeat \ neither
+\end{cases}
+\tag{3.18}
+</script>
+</div>
+<p><span><span class="MathJax_Preview">distance(x_i,y_j)</span><script type="math/tex">distance(x_i,y_j)</script></span>的值可以以各种方式来定义，这取决于应用领域。例如，对于连续时间序列，它可以被定义为<span><span class="MathJax_Preview">| x_i - y_i |^ p</span><script type="math/tex">| x_i - y_i |^ p</script></span>，或者由（行为属性）缩放和平移的距离来定义。对于离散序列，可以使用分类度量来定义。 <span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>方法主要集中于扭曲*上下文*属性，与行为属性或距离函数的性质无关。由于这个事实，通过简单地使用递归中的多个属性的距离，时间扭曲可以很容易地扩展到多个行为属性。</p>
+<p>公式3.18产生一种自然迭代方法。该方法首先将<span><span class="MathJax_Preview">DTW(0,0)</span><script type="math/tex">DTW(0,0)</script></span>初始化为0，将<span><span class="MathJax_Preview">DTW(0,j)</span><script type="math/tex">DTW(0,j)</script></span>初始化为<span><span class="MathJax_Preview">\infty</span><script type="math/tex">\infty</script></span>，其中<span><span class="MathJax_Preview">j \in \{1 \dots n\}</span><script type="math/tex">j \in \{1 \dots n\}</script></span>，将<span><span class="MathJax_Preview">DTW(i,0)</span><script type="math/tex">DTW(i,0)</script></span>初始化为<span><span class="MathJax_Preview">\infty</span><script type="math/tex">\infty</script></span>，其中<span><span class="MathJax_Preview">i \in \{1 \dots m\}</span><script type="math/tex">i \in \{1 \dots m\}</script></span>。该算法通过增加i和j的索引值，重复执行方程式3.18计算<span><span class="MathJax_Preview">DTW(i,j)</span><script type="math/tex">DTW(i,j)</script></span>。这可以通过一个简单的嵌套循环来实现，其中索引<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>分别从1增加到<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>和1到<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>：</p>
+<div>
+<div class="MathJax_Preview">\text{对于$i = 1$到$m$}\\ \quad\text{对于$j = 1$到$n$}\\ \qquad\text{使用公式3.18计算$DTW(i,j)$}​</div>
+<script type="math/tex; mode=display">\text{对于$i = 1$到$m$}\\ \quad\text{对于$j = 1$到$n$}\\ \qquad\text{使用公式3.18计算$DTW(i,j)$}​</script>
+</div>
+<p>上述代码片段是一种非递归和迭代的方法。直接使用公式3.18也可以实现递归计算机程序。因此，该方法需要为每个<span><span class="MathJax_Preview">i \in [1,m]</span><script type="math/tex">i \in [1,m]</script></span>和每个<span><span class="MathJax_Preview">j \in [1,n]</span><script type="math/tex">j \in [1,n]</script></span>计算<span><span class="MathJax_Preview">DTW(i,j)</span><script type="math/tex">DTW(i,j)</script></span>的所有值。这是一个<span><span class="MathJax_Preview">m\times n</span><script type="math/tex">m\times n</script></span>的网格值，因此该方法可能需要<span><span class="MathJax_Preview">O(m\cdot n)</span><script type="math/tex">O(m\cdot n)</script></span>次迭代，其中<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>和<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>是该系列的长度。</p>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/9.PNG" /></p>
+<p>如图3.9所示，最优变形可以理解为通过<span><span class="MathJax_Preview">m\times n</span><script type="math/tex">m\times n</script></span>网格值中的不同<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>值的*最佳路径*。图中显示了三种可能的路径，用<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>，<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>和<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>表示。这些路径只移动到右边（增加<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和重复<span><span class="MathJax_Preview">y_j</span><script type="math/tex">y_j</script></span>），向上（增加<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>和重复<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>），或两个方向都移动（不重复）。</p>
+<p><span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>计算通常会添加许多实际的约束条件。一个常用的约束是在匹配元素之间施加最小水平<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>位置对齐的*窗口约束*。窗口约束要求仅在<span><span class="MathJax_Preview">| i - j |</span><script type="math/tex">| i - j |</script></span>时计算<span><span class="MathJax_Preview">DTW(i,j) ≤w</span><script type="math/tex">DTW(i,j) ≤w</script></span>。否则，默认情况下，该值可能被设置为<span><span class="MathJax_Preview">\infty</span><script type="math/tex">\infty</script></span>。例如，图3.9中的路径<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>和<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>不再需要计算。这节省了动态编程递归中许多值的计算。相应地，上面嵌套循环的内部变量<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>中的计算可以通过约束索引j来保存，因此它不会比外部循环变量<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>多出<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>单位。因此，内环索引<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>从<span><span class="MathJax_Preview">max \{0，i-w\}</span><script type="math/tex">max \{0，i-w\}</script></span>变化到<span><span class="MathJax_Preview">min \{n，i + w\}</span><script type="math/tex">min \{n，i + w\}</script></span>。</p>
+<p>如果假定不同的行为属性具有相同的时间扭曲，则<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>距离可以容易地扩展到多个行为属性。在这种情况下，递归不变，唯一的区别是距离<span><span class="MathJax_Preview">(\overline{x_i},\overline{y_j})</span><script type="math/tex">(\overline{x_i},\overline{y_j})</script></span>是使用基于矢量的距离度量来计算的。我们用<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>和<span><span class="MathJax_Preview">y_j</span><script type="math/tex">y_j</script></span>上的一个条来表示这些是多个行为属性的向量。这个多变量的扩展在第16章的第16.3.4.1节中讨论，用于测量二维轨迹之间的距离。</p>
+<h4 id="3414">3.4.1.4 基于窗口的方法</h4>
+<p>图3.7中的示例说明了丢失的读数可能导致匹配出现空隙的情况。基于窗口的方案试图将两个系列分解成窗口，然后将相似性度量“拼接”在一起。这里的直觉是，如果两个系列具有许多连续的匹配段，则应该认为它们是相似的。对于长时间序列，全局匹配变得越来越不可能。唯一合理的选择是使用窗口来测量分段的相似度。</p>
+<p>考虑两个时间序列<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>，并让<span><span class="MathJax_Preview">\overline{X_1} \dots \overline{X_r}</span><script type="math/tex">\overline{X_1} \dots \overline{X_r}</script></span>和<span><span class="MathJax_Preview">\overline{Y_1} \dots \overline{Y_r}</span><script type="math/tex">\overline{Y_1} \dots \overline{Y_r}</script></span>是从相应序列中提取的时间有序和非重叠窗口。请注意，基本系列中的一些窗口根本可能不包含在这些段中。这些对应于被丢弃的噪音段。那么，<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>之间的总体相似度可以计算如下：</p>
+<div>
+<div class="MathJax_Preview">
+Sim(\overline{X},\overline{Y})=\sum_{i=1}^r Match(\overline{X_i},\overline{Y_i}).\tag{3.19}
+</div>
+<script type="math/tex; mode=display">
+Sim(\overline{X},\overline{Y})=\sum_{i=1}^r Match(\overline{X_i},\overline{Y_i}).\tag{3.19}
+</script>
+</div>
+<p>本节讨论的各种措施可用于实例化<span><span class="MathJax_Preview">Match(\overline{X_i},\overline{Y_i})</span><script type="math/tex">Match(\overline{X_i},\overline{Y_i})</script></span>的值。确定<span><span class="MathJax_Preview">Match(\overline{X_i},\overline{Y_i})</span><script type="math/tex">Match(\overline{X_i},\overline{Y_i})</script></span>的正确值是很棘手的，因为长窗口的连续匹配比许多相同长度的短段更加不寻常。<span><span class="MathJax_Preview">Match(\overline{X_i},\overline{Y_i})</span><script type="math/tex">Match(\overline{X_i},\overline{Y_i})</script></span>的正确选择可能取决于手头的应用程序。另一个问题是，将序列最优分解成窗口可能是一项艰巨的任务。这些方法在这里没有详细讨论，但感兴趣的读者可以参考书目注释以获得相关方法的指示。</p>
+<h3 id="342">3.4.2 离散序列相似性度量</h3>
+<p>离散序列相似性度量基于与时间序列相似性度量相同的一般原则。就时间序列数据而言，离散序列数据在位置之间可能有也可能没有一对一映射。当一对一映射确实存在时，正如<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数可以适应连续时间序列一样，许多多维分类距离度量可以适应该域。然而，离散序列数据的应用领域通常是这样的，即一对一映射不存在。除了<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>方法之外，还有许多其他动态编程方法。</p>
+<h4 id="3421">3.4.2.1 编辑距离</h4>
+<p>编辑距离将两个字符串之间的距离定义为通过使用称为“编辑”的一系列变换操作将一个序列变换成另一个序列所需的*最少*量“努力”（或*成本*）。编辑距离也被称为作为<span><span class="MathJax_Preview">Levenshtein</span><script type="math/tex">Levenshtein</script></span>距离。编辑操作包括使用符号插入，删除和具有特定成本的替换。在许多模型中，假定替换的成本高于插入或删除的成本，尽管插入和删除通常被假定为具有相同的成本。考虑在字母表<span><span class="MathJax_Preview">\{a,b\}</span><script type="math/tex">\{a,b\}</script></span>上绘制的序列<span><span class="MathJax_Preview">ababababab</span><script type="math/tex">ababababab</script></span>和<span><span class="MathJax_Preview">bababababa</span><script type="math/tex">bababababa</script></span>。第一个字符串可以通过多种方式转换为第二个字符串。例如，如果第一个字符串中的每个字母都被另一个字母替换，则会导致第二个字符。这样做的代价是十次替代。但是，实现相同目标的更具成本效益的方法是删除字符串的最左侧元素，并将符号“<span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>”插入最右侧的元素中。这一系列操作的成本只有一个插入和一个删除。编辑距离被定义为用一系列插入，删除和替换将一个字符串转换为另一个字符串的最优成本。最优成本的计算需要动态编程递归。</p>
+<p>对于两个序列<span><span class="MathJax_Preview">\overline{X} = (x_1\dots x_m)</span><script type="math/tex">\overline{X} = (x_1\dots x_m)</script></span>和<span><span class="MathJax_Preview">\overline{Y} = (y_1 \dots y_n)</span><script type="math/tex">\overline{Y} = (y_1 \dots y_n)</script></span>，让编辑在序列<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>上执行以变换为<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>。请注意，由于编辑的方向性，此距离函数是不对称的。例如，如果插入和删除成本不相同，则<span><span class="MathJax_Preview">Edit(\overline{X},\overline{Y})</span><script type="math/tex">Edit(\overline{X},\overline{Y})</script></span>可能与<span><span class="MathJax_Preview">Edit(\overline{Y},\overline{X})</span><script type="math/tex">Edit(\overline{Y},\overline{X})</script></span>不同。然而，在实践中，插入和删除成本假定是相同的。</p>
+<p>令<span><span class="MathJax_Preview">I_{ij}</span><script type="math/tex">I_{ij}</script></span>为二进制指标，当<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个符号和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个符号相同时，该指标为0。否则，该指标的值为1.然后，考虑<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>的前<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个符号和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>的前<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个符号。假设这些段分别由<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>和<span><span class="MathJax_Preview">\overline{Y_j}</span><script type="math/tex">\overline{Y_j}</script></span>表示。令<span><span class="MathJax_Preview">Edit(i,j)</span><script type="math/tex">Edit(i,j)</script></span>表示这些段之间的最佳匹配成本。目标是确定在<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的最后一个元素上执行什么操作，以便它匹配<span><span class="MathJax_Preview">\overline{Y_j}</span><script type="math/tex">\overline{Y_j}</script></span>中的元素或将其删除。出现三种可能性：</p>
+<ol>
+<li>
+<p>删除<span><span class="MathJax_Preview">\overline{X_i}​</span><script type="math/tex">\overline{X_i}​</script></span>的最后一个元素，其成本为<span><span class="MathJax_Preview">[Edit(i-1,j)+ Deletion \ Cost]​</span><script type="math/tex">[Edit(i-1,j)+ Deletion \ Cost]​</script></span>。截断段<span><span class="MathJax_Preview">\overline{X_{i-1}}​</span><script type="math/tex">\overline{X_{i-1}}​</script></span>的最后一个元素可能匹配或不匹配<span><span class="MathJax_Preview">\overline{Y_j}​</span><script type="math/tex">\overline{Y_j}​</script></span>的最后一个元素。</p>
+</li>
+<li>
+<p>在<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的末尾插入一个元素以匹配Yj的最后一个元素，其成本为<span><span class="MathJax_Preview">[Edit(i,-1j)+ insertion \ Cost]</span><script type="math/tex">[Edit(i,-1j)+ insertion \ Cost]</script></span>。编辑项<span><span class="MathJax_Preview">Edit(i,j - 1)</span><script type="math/tex">Edit(i,j - 1)</script></span>的索引反映了两个系列的匹配元素现在可以被删除的事实。</p>
+</li>
+<li>
+<p>如果<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的最后一个元素*不同*，<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的最后一个元素被翻转为<span><span class="MathJax_Preview">\overline{Y_j}</span><script type="math/tex">\overline{Y_j}</script></span>，并且这个操作的成本是<span><span class="MathJax_Preview">[Edit(i-1,j-1)+ I_{ij}\cdot (Replacement \ Cost)]</span><script type="math/tex">[Edit(i-1,j-1)+ I_{ij}\cdot (Replacement \ Cost)]</script></span>。在最后一个要素相同的情况下，额外的重置成本不会发生，但是匹配仍然取得进展。这是因为两个系列的匹配元素<span><span class="MathJax_Preview">(x_i,y_j)</span><script type="math/tex">(x_i,y_j)</script></span>不需要进一步考虑，剩余匹配成本是<span><span class="MathJax_Preview">Edit(i-1,j-1)</span><script type="math/tex">Edit(i-1,j-1)</script></span>。</p>
+</li>
+</ol>
+<p>显然，最好选择这些成本中的最小值来进行最佳匹配。因此，最佳匹配由以下递归定义：</p>
+<div>
+<div class="MathJax_Preview">
+Edit(i,j)=min \begin{cases}
+Edit(i-1,j)+Deletion \ Cost \\
+Edit(i,j-1)+ Insertion \ Cost \\
+Edit(i-1,j-1)+I_{ij}\cdot(Replacement \ Cost)
+\end{cases}.
+\tag{3.20}
+</div>
+<script type="math/tex; mode=display">
+Edit(i,j)=min \begin{cases}
+Edit(i-1,j)+Deletion \ Cost \\
+Edit(i,j-1)+ Insertion \ Cost \\
+Edit(i-1,j-1)+I_{ij}\cdot(Replacement \ Cost)
+\end{cases}.
+\tag{3.20}
+</script>
+</div>
+<p>此外，递归的底部也需要设置。 <span><span class="MathJax_Preview">Edit(i,0)</span><script type="math/tex">Edit(i,0)</script></span>的值等于<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的任何值的<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>删除成本，而<span><span class="MathJax_Preview">Edit(0,j)</span><script type="math/tex">Edit(0,j)</script></span>的值等于任何<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>值的<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>插入成本。这很好地设置了动态编程方法。可以将相应的计算机程序编写为非递归嵌套循环（如<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>）或直接使用上述情况的递归计算机程序。</p>
+<p>上述讨论假定一般插入，删除和替换成本。然而，在实践中，插入和删除成本通常被假定为相同。在这种情况下，编辑功能是对称的，因为两个字符串中的哪一个编辑到另一个并不重要。对于从一个字符串到另一个字符串的任何编辑序列，将会存在相同成本的从另一个字符串到第一个字符串的相反编辑序列。</p>
+<p>通过将*插入*，*删除*和*替换*的基本操作更改为针对时间序列设计的转换规则，可以将编辑距离扩展为数字数据。这种转换规则可以包括对窗口段中时间序列的形状进行基本改变。这更复杂，因为它需要设计允许的时间序列形状转换的基本集合及其成本。这种方法在时间序列距离计算中没有得到广泛的普及。</p>
+<h4 id="3422">3.4.2.2 最长的公共子序列</h4>
+<p>序列的*子序列*是从序列中按照与原始序列相同的顺序绘制的一组符号。子序列不同于*子字符串*，因为子序列的值不必是连续的，而子字符串中的值需要是连续的。考虑序列<span><span class="MathJax_Preview">agbfcgdhei</span><script type="math/tex">agbfcgdhei</script></span>和<span><span class="MathJax_Preview">afbgchdiei</span><script type="math/tex">afbgchdiei</script></span>。在这种情况下，<span><span class="MathJax_Preview">ei</span><script type="math/tex">ei</script></span>是两个序列的子串，也是子序列。但是，<span><span class="MathJax_Preview">abcde</span><script type="math/tex">abcde</script></span>和<span><span class="MathJax_Preview">fgi</span><script type="math/tex">fgi</script></span>是两个字符串的子序列，但不是子字符串。显然，长度较长的子序列表示字符串之间的匹配程度更高。与编辑距离不同，最长的公共子序列（<span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>）是一个相似性函数，因为较高的值表示较大的相似性。可能子序列的数量与字符串的长度呈指数关系。然而，可以用动态规划方法在多项式时间内计算<span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>。</p>
+<p>对于两个序列<span><span class="MathJax_Preview">\overline{X} = (x_1\dots x_m)</span><script type="math/tex">\overline{X} = (x_1\dots x_m)</script></span>和<span><span class="MathJax_Preview">\overline{Y} = (y_1 \dots y_n)</span><script type="math/tex">\overline{Y} = (y_1 \dots y_n)</script></span>，考虑<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>的前<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个符号和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>的前<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个符号。假设这些段分别由<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>和<span><span class="MathJax_Preview">\overline{Y_j}</span><script type="math/tex">\overline{Y_j}</script></span>表示。设<span><span class="MathJax_Preview">LCSS(i,j)</span><script type="math/tex">LCSS(i,j)</script></span>表示这些段之间的最佳<span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>值。这里的目标是匹配<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>和<span><span class="MathJax_Preview">\overline{Y_j}</span><script type="math/tex">\overline{Y_j}</script></span>的最后一个元素，或者删除两个序列之一中的最后一个元素。出现两种可能性：</p>
+<ol>
+<li>
+<p><span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的最后一个元素匹配<span><span class="MathJax_Preview">\overline{Y_j}</span><script type="math/tex">\overline{Y_j}</script></span>，在这种情况下，它不会伤害到在最后一个元素上实例化匹配，然后删除这两个序列的最后一个元素。因为这是<span><span class="MathJax_Preview">LCSS(i-1,j-1)+1</span><script type="math/tex">LCSS(i-1,j-1)+1</script></span>，所以可以递归地表达相似值<span><span class="MathJax_Preview">LCSS(i,j)</span><script type="math/tex">LCSS(i,j)</script></span>。</p>
+</li>
+<li>
+<p>最后一个元素不匹配。在这种情况下，两个字符串中的至少一个字符串的最后一个元素需要在假设不能出现在匹配中的情况下被删除。在这种情况下，<span><span class="MathJax_Preview">LCSS(i,j)</span><script type="math/tex">LCSS(i,j)</script></span>的值是<span><span class="MathJax_Preview">LCSS(i,j - 1)</span><script type="math/tex">LCSS(i,j - 1)</script></span>或<span><span class="MathJax_Preview">LCSS(i - 1,j)</span><script type="math/tex">LCSS(i - 1,j)</script></span>，具体取决于选择删除哪个字符串。</p>
+</li>
+</ol>
+<p>因此，最佳匹配可以通过枚举这些情况来表示：</p>
+<div>
+<div class="MathJax_Preview">
+LCSS(i,j)=max \begin{cases}
+LCSS(i-1,j-1)+1 &amp;\text{only if $x_i=y_j$} \\
+LCSS(i-1,j) &amp;\text{otherwise(no match on $x_i$)} \\
+LCSS(i,j-1) &amp;\text{otherwise(no match on $y_j$)}
+\end{cases}.\tag{3.21}
+</div>
+<script type="math/tex; mode=display">
+LCSS(i,j)=max \begin{cases}
+LCSS(i-1,j-1)+1 &\text{only if $x_i=y_j$} \\
+LCSS(i-1,j) &\text{otherwise(no match on $x_i$)} \\
+LCSS(i,j-1) &\text{otherwise(no match on $y_j$)}
+\end{cases}.\tag{3.21}
+</script>
+</div>
+<p>此外，需要设置边界条件。对于<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的任何值，<span><span class="MathJax_Preview">LCSS(i,0)</span><script type="math/tex">LCSS(i,0)</script></span>和<span><span class="MathJax_Preview">LCSS(0,j)</span><script type="math/tex">LCSS(0,j)</script></span>的值总是等于0。与<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>和编辑距离计算一样，可以设置嵌套循环来计算最终值。递归计算机程序也可以使用上述递归关系来实现。虽然<span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>方法是针对离散序列定义的，但它也可以在将时间序列值离散为一系列分类值之后应用于连续时间序列。或者，可以离散化两个连续时间戳之间的时间序列*移动*。离散化的具体选择取决于手头应用程序的目标。</p>
+<h2 id="35">3.5 图的相似性度量</h2>
+<p>图的相似性可以用不同的方式来衡量，取决于相似度是在两个图之间测量，还是在单个图中的两个节点之间测量。为了简单起见，假设无向网络，尽管这些措施可以容易地推广到有向网络。</p>
+<h3 id="351">3.5.1 单个图中两个节点之间的相似性</h3>
+<p>令<span><span class="MathJax_Preview">G =(N,A)</span><script type="math/tex">G =(N,A)</script></span>为节点集<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>和边集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>的无向网络。在一些领域中，成本与节点相关联，而在其他领域中，权重与节点相关联。例如，在书目网络等领域，边缘自然是加权的，而在道路网络中，边缘自然会产生成本。通常，*距离*函数与成本一起工作，而*相似*函数与权重一起工作。因此，可以假定指定了边<span><span class="MathJax_Preview">(i,j)</span><script type="math/tex">(i,j)</script></span>的代价<span><span class="MathJax_Preview">c_{ij}</span><script type="math/tex">c_{ij}</script></span>或权重<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>。通常可以使用简单的启发式内核函数将成本转换为权重（反之亦然），这些函数是以特定于应用程序的方式选择的。一个例子是热度核<span><span class="MathJax_Preview">K(x)= e^{-x^2 / t^2}</span><script type="math/tex">K(x)= e^{-x^2 / t^2}</script></span>。</p>
+<p>期望测量任何一对节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的相似性。单个图中两个节点之间的相似性原理基于真实网络中的*同质*概念。同质的原则是，当网络中的节点通过边缘相互连接时，节点在网络中通常更加相似。这在很多领域都很常见，例如网络和社交网络。因此，通过*短路径*和*多条路径*连接的节点应该被认为更相似。后者的标准与节点之间的连通性概念密切相关。第一个标准在网络中使用最短路径算法相对容易实现。</p>
+<h4 id="3511">3.5.1.1基于结构距离的测量</h4>
+<p>这里的目标是测量从任何源节点到网络中任何其他节点的距离。设<span><span class="MathJax_Preview">SP(s,j)</span><script type="math/tex">SP(s,j)</script></span>为从源节点<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>到任意节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的最短路径距离。$ SP(s,j)<span><span class="MathJax_Preview">的值在</span><script type="math/tex">的值在</script></span>j = s<span><span class="MathJax_Preview">时被初始化为0，否则被初始化为</span><script type="math/tex">时被初始化为0，否则被初始化为</script></span>\infty<span><span class="MathJax_Preview">。然后，</span><script type="math/tex">。然后，</script></span>s$到网络中所有其他节点的距离计算可以按照一定的顺序对网络中的每个节点恰好执行一次的单个步骤进行汇总：</p>
+<ul>
+<li>到目前为止未检查的所有节点中，选择<span><span class="MathJax_Preview">SP(s,i)</span><script type="math/tex">SP(s,i)</script></span>值最小的节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，并更新其每个邻居<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的距离标签，如下所示：</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\displaystyle SP(s,j)=min\{SP(s,j),SP(s,j)+c_{ij}\}.\tag{3.22}
+</div>
+<script type="math/tex; mode=display">
+\displaystyle SP(s,j)=min\{SP(s,j),SP(s,j)+c_{ij}\}.\tag{3.22}
+</script>
+</div>
+<p>这是众所周知的<span><span class="MathJax_Preview">Dijkstra</span><script type="math/tex">Dijkstra</script></span>算法的本质。这种方法在网络边缘数量上是线性的，因为它只检查一次每个节点及其入射边缘。该方法提供了单次通过单个节点到所有其他节点的距离。 <span><span class="MathJax_Preview">SP(s,j)</span><script type="math/tex">SP(s,j)</script></span>的最终值提供了节点<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>和节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的结构距离的量化。基于结构距离的测量不会显著增加一对节点之间路径的多样性，因为它们只关注原始结构距离。</p>
+<h4 id="3512">3.5.1.2 随机行走相似度</h4>
+<p><img alt="img" src="https://github.com/JimPlayboy/MarkdownPhotos/raw/master/10.PNG" /></p>
+<p>当节点对之间有不同数量的路径时，前面部分的结构测量不能很好地工作。例如，在图3.10中，节点<span><span class="MathJax_Preview">A​</span><script type="math/tex">A​</script></span>和<span><span class="MathJax_Preview">B​</span><script type="math/tex">B​</script></span>之间的最短路径长度是4，而在<span><span class="MathJax_Preview">A​</span><script type="math/tex">A​</script></span>和<span><span class="MathJax_Preview">C​</span><script type="math/tex">C​</script></span>之间的最短路径长度是3.然而，节点<span><span class="MathJax_Preview">B​</span><script type="math/tex">B​</script></span>应该被认为更类似于<span><span class="MathJax_Preview">A​</span><script type="math/tex">A​</script></span>，因为两个节点之间的连接通过*多种*路径更紧密。随机行走相似性的想法基于这个原理。</p>
+<p>在基于随机行走的相似性中，方法如下：设想一个随机游走，从源节点<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>开始，然后以与<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>成比例的加权概率进入相邻节点。此外，在任何给定的节点处，允许以被称为*重新启动概率*的概率“跳回”到源节点<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>。这将导致严重偏向源节点的概率分布。与s更类似的节点访问的概率较高。这种方法将很好地适应图3.10所示的情况，因为步行将更频繁地访问<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>。</p>
+<p>这里的直觉如下：如果你失去了一个道路网络，随机开车，随机轮流，你更可能达到哪个位置？你更*有可能*到达附近的地点，并且可以通过多种方式到达。因此，随机行程度量提供的结果不同于最短路径度量的结果，因为它在相似性计算期间还考虑了路径中的多重性。</p>
+<p>这种相似性计算与<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>的概念密切相关，<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>用于通过搜索引擎对网页进行排名。测量节点之间相似性的相应修改也称为个性化<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>，对称变体称为<span><span class="MathJax_Preview">SimRank</span><script type="math/tex">SimRank</script></span>。本章不会讨论<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>和<span><span class="MathJax_Preview">SimRank</span><script type="math/tex">SimRank</script></span>计算的细节，因为它需要更多关于排名概念的背景知识。请参阅第18章第18.4节，其中提供了更完整的讨论。</p>
+<h3 id="352">3.5.2 两个图之间的相似性</h3>
+<p>在许多应用中，有多个图可用，有时需要确定多个图之间的距离。相似性计算的一个复杂因素是许多节点可能具有相同的标签，这使得它们难以区分。这种情况通常出现在化学化合物分析等领域。化合物可以表示为节点是元素，键是边的图形。因为一个元素可能在一个分子中重复，节点上的标签并不明显。在这种情况下确定图上的相似性度量是非常具有挑战性的，因为即使是确定这两个图是否相同的特殊情况也很困难。后一个问题被称为*图同构*问题，并且被<span><span class="MathJax_Preview">NP-hard</span><script type="math/tex">NP-hard</script></span> [221]所知。已经提出了许多措施，例如图编辑距离和基于子结构的相似性，以解决这个非常困难的情况。每种方法的核心思想如下：</p>
+<ol>
+<li>
+<p>*最大公共子图距离：*当两个图共同包含一个大的子图时，它们通常被认为更相似。第17章第17.2节介绍了最大公共子图问题和相关距离函数。</p>
+</li>
+<li>
+<p>*基于子结构的相似性：*虽然很难匹配两个大图，但匹配较小的子结构要容易得多。核心思想是计算两个图之间经常出现的子结构，并将其报告为相似性度量。这可以被认为是字符串中基于子序列相似性的图形模拟。第17章第17.3节详细讨论了基于子结构的相似性度量。</p>
+</li>
+<li>
+<p>*图形编辑距离：*这个距离度量类似于字符串编辑距离，并被定义为将一个图形转换为另一个图形所需的编辑数量。由于图匹配是一个难题，因此这个度量对于大图很难实现。图编辑距离将在第17章第17.2.3.2节中详细讨论。</p>
+</li>
+<li>
+<p>*图形内核：*定义了许多内核函数来度量图形之间的相似度，如最短路径内核和随机游走内核。第17章第17.3.3节对此主题进行了详细讨论。</p>
+</li>
+</ol>
+<p>这些方法非常复杂，需要图表区域的更大背景。因此，这些措施的讨论推迟到本书的第17章。</p>
+<h2 id="36">3.6 监督相似函数</h2>
+<p>前面的部分讨论了不需要对用户意图有任何理解的相似性度量。在实践中，特征的相关性或距离函数的选择在很大程度上取决于手边的领域。例如，对于图像数据集，颜色特征或纹理特征的权重应该更大一些吗？在不考虑用户意图的情况下，这些方面不能用距离函数来建模。无监督措施，如<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数，均等对待所有特征，对最终用户的相似性语义概念没有内在的理解。将这些信息并入相似函数的唯一方法是使用关于对象的相似性和不相似性的明确反馈。例如，反馈可以表示为以下几组对象：</p>
+<div>
+<div class="MathJax_Preview">
+\begin{align}
+&amp;S=\{(O_i,O_j):O_i\text{ is similar to }O_j\}\\
+&amp;D=\{(O_i,O_j):O_i\text{ is dissimilar to }O_j\}.
+\end{align}
+</div>
+<script type="math/tex; mode=display">
+\begin{align}
+&S=\{(O_i,O_j):O_i\text{ is similar to }O_j\}\\
+&D=\{(O_i,O_j):O_i\text{ is dissimilar to }O_j\}.
+\end{align}
+</script>
+</div>
+<p>如何利用这些信息来改善相似性的计算？已经设计了许多专门的方法用于监督相似度计算。一种常见的方法是假设需要学习参数的相似性函数的特定闭合形式。一个例子是3.2.1.1节中的加权<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数，其中由<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>表示的参数对应于特征权重<span><span class="MathJax_Preview">(a_1 \dots a_d)</span><script type="math/tex">(a_1 \dots a_d)</script></span>。因此，第一步是创建一个距离函数<span><span class="MathJax_Preview">f(O_i,O_j,\Theta)</span><script type="math/tex">f(O_i,O_j,\Theta)</script></span>，其中<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>是一组未知权重。假定函数的较高值表示更大的不相似性。因此，这是一个距离函数，而不是一个相似函数。然后，需要确定参数<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>，以便尽可能接近地满足以下条件：</p>
+<div>
+<div class="MathJax_Preview">
+f(O_i,O_j,\Theta)=\begin{cases}
+0 &amp;\text{if }(O_i,O_j)\in S\\
+1 &amp;\text{if }(O_i,O_j) \in \mathcal{D}
+\end{cases}.\tag{3.23}
+</div>
+<script type="math/tex; mode=display">
+f(O_i,O_j,\Theta)=\begin{cases}
+0 &\text{if }(O_i,O_j)\in S\\
+1 &\text{if }(O_i,O_j) \in \mathcal{D}
+\end{cases}.\tag{3.23}
+</script>
+</div>
+<p>这可以表示为<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>上的最小二乘优化问题，其具有以下误差<span><span class="MathJax_Preview">E</span><script type="math/tex">E</script></span>：</p>
+<div>
+<div class="MathJax_Preview">
+\displaystyle E=\sum_{(O_i,O_j)\in S}(f(O_i,O_j,\Theta)-0)^2+\sum_{(O_i,O_j)\in \mathcal{D}}(f(O_i,O_j,\Theta)-1)^2.\tag{3.24}
+</div>
+<script type="math/tex; mode=display">
+\displaystyle E=\sum_{(O_i,O_j)\in S}(f(O_i,O_j,\Theta)-0)^2+\sum_{(O_i,O_j)\in \mathcal{D}}(f(O_i,O_j,\Theta)-1)^2.\tag{3.24}
+</script>
+</div>
+<p>通过使用任何现成的优化求解器，该目标函数可以针对<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>进行优化。如果需要，可以在适当的地方添加额外的约束条件<span><span class="MathJax_Preview">\Theta \geq 0</span><script type="math/tex">\Theta \geq 0</script></span>。例如，当<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>表示<span><span class="MathJax_Preview">Minkowski</span><script type="math/tex">Minkowski</script></span>度量中的特征权重<span><span class="MathJax_Preview">(a_1 \dots a_d)</span><script type="math/tex">(a_1 \dots a_d)</script></span>时，假定系数的非负性是自然的。使用许多非线性优化方法可以很容易地解决这种约束优化问题。使用诸如<span><span class="MathJax_Preview">f(O_i,O_j,\Theta)</span><script type="math/tex">f(O_i,O_j,\Theta)</script></span>之类的封闭形式确保函数<span><span class="MathJax_Preview">f(O_i,O_j,\Theta)</span><script type="math/tex">f(O_i,O_j,\Theta)</script></span>可以在计算参数<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>的一次性成本之后被有效计算。</p>
+<p>在可能的情况下，应该使用用户反馈来提高距离函数的质量。学习距离函数的问题可以更一般地建模为分类的问题。分类问题将在第10章和第11章中详细研究。第10章以实例为基础的学习章节中还详细讨论了使用<span><span class="MathJax_Preview">Fisher</span><script type="math/tex">Fisher</script></span>方法的监督距离函数设计。</p>
+<h2 id="37">3.7 总结</h2>
+<p>距离函数设计的问题在数据挖掘应用中至关重要。这是因为许多数据挖掘算法使用距离函数作为关键子程序，并且函数的设计直接影响结果的质量。距离函数对数据的类型，数据的维度以及数据分布的全局和局部特性高度敏感。</p>
+<p><span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数是用于多维数据的最常见的距离函数。这种距离函数似乎不适用于增加维度。随着维度的增加，<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>值越高，工作效率就越差。在某些情况下，已经表明，当在<span><span class="MathJax_Preview">(0,1)</span><script type="math/tex">(0,1)</script></span>范围内选择p时，分数度量特别有效。随着维度的增加，许多基于接近度的措施也被证明可以有效地发挥作用。</p>
+<p>数据分布也对距离函数设计产生影响。使用全球分布的最简单可能的距离函数是马哈拉诺比斯度量。这个度量是欧氏度量的泛化，并且根据它们的方差来延伸沿着主要分量的距离值。一种更复杂的方法称为<span><span class="MathJax_Preview">ISOMAP</span><script type="math/tex">ISOMAP</script></span>，它使用非线性嵌入来解释非线性数据分布的影响。当数据分布不均匀时，局部归一化往往可以提供更有效的措施。</p>
+<p>其他数据类型（如分类数据，文本，时间和图形数据）也会带来更多挑战。时间序列和离散序列相似性度量的确定密切相关，因为后者可以被认为是前者的分类版本。主要问题是两个相似的时间序列可能表现出其行为属性和上下文属性的不同缩放比例。这需要通过对行为属性使用不同的规范化函数以及对上下文属性使用扭曲函数来解决。对于离散序列数据的情况，通常使用许多距离和相似性函数，例如编辑距离和<span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>。</p>
+<p>因为距离函数通常旨在模拟用户的相似性概念，所以应尽可能使用反馈来改进距离函数设计。该反馈可以在参数化模型的范围内使用，以了解与用户提供的反馈一致的最佳参数。</p>
+<h2 id="38">3.8 书目注释</h2>
+<p>数据挖掘研究人员和从业人员近年来对相似性计算的问题进行了广泛的研究。高维数据的问题在[17,88,266]中进行了探讨。在[88]的工作中，分析了距离集中效应对高维计算的影响。 [266]中的工作显示了对局部敏感的拾取距离函数的相对优势。该工作还显示了曼哈顿度量在欧几里德度量上的优势。分数度量在[17]中提出，并且通常比曼哈顿和欧几里得度量提供更准确的结果。本章讨论的<span><span class="MathJax_Preview">ISOMAP</span><script type="math/tex">ISOMAP</script></span>方法在[490]中提出。许多局部方法也可用于距离函数计算。一个有效的局部方法的例子是[543]中提出的基于实例的方法。</p>
+<p>类别数据的相似性在[104]中得到了广泛的探讨。在这项工作中，分析了一些相似性度量，并对它们如何应用于异常值检测问题进行了测试。 <span><span class="MathJax_Preview">Goodall</span><script type="math/tex">Goodall</script></span>措施在[232]中介绍。 [122]中的工作使用信息理论度量来计算相似度。本章讨论的大多数措施都不区分属性的不匹配。然而，[74,363,473]中提出的许多方法可以区分属性值的不匹配。前提是统计上预计不频繁的属性值会比频繁的属性值更加不同。因此，在这些方法中，当<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>和<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>不同时，<span><span class="MathJax_Preview">S(x_i,y_i)</span><script type="math/tex">S(x_i,y_i)</script></span>并不总是被设置为0（或者相同的值）。局部相似性度量在[182]中给出。文本相似性度量已经在信息检索文献[441]中得到了广泛的研究。</p>
+<p>时间序列相似性度量的领域是一个丰富的领域，并且在这种背景下设计了大量的算法。有关该主题的优秀教程可以在[241]中找到。在[130]中讨论了使用小波进行时间序列的相似性计算。尽管<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>已经广泛用于语音识别，但它在数据挖掘应用中的使用最早是由[87]提出的。随后，它在数据挖掘中被广泛用于基于相似性的应用[526]。数据挖掘应用中的主要挑战是其计算密集性。在时间序列数据挖掘文献中已经提出了许多方法[307]来加速<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>。在[308]中提出了一种计算<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>下界的快速方法，并说明了如何将它用于精确索引。在[53]中提出了一种基于窗口的方法来计算序列中噪声，缩放和平移的相似性。在[499，500]中提出了多元时间序列和序列中的相似搜索方法。编辑距离已广泛用于生物数据计算序列之间的相似性[244]。 [283，432]研究了时间序列相似性转换规则的使用。这种规则可以用来为连续时间序列创建编辑类似距离的度量。字符串编辑距离的方法在[438]中提出。在[141]中已经表明，<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数如何与编辑距离相结合。 <span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>问题的算法可以在[77,92,270,280]中找到。这些算法的调查可以在[92]中找到。 [32]中讨论了多种其他的时间序列和序列相似性度量。</p>
+<p>许多方法可用于图中的相似性搜索。在[62]中可以找到各种用于发现节点间距离的有效最短路径算法。页面排序算法在Web挖掘书[357]中讨论。 [221]中讨论了图的同构问题的<span><span class="MathJax_Preview">NP-hardness</span><script type="math/tex">NP-hardness</script></span>以及与编辑距离有关的其他紧密相关的问题。 [119,120]已经研究了最大公共子图问题和图像距离问题之间的关系。在[520,521]中已经解决了子结构相似性搜索的问题以及子结构用于相似性搜索的问题。在[522]中提出了一种突变距离的概念来衡量两个图之间的距离。 [42]中提出了一种使用图的频繁子结构进行聚类中的相似性计算的方法。图的匹配技术的调查可以在[26]中找到。</p>
+<p>用户监督已经在距离功能学习的范围内得到了广泛的研究。在[15]中提出了参数化<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数权重的最早方法之一。距离函数学习的问题已经与分类的问题形式化地联系起来，并且最近已经进行了很详细的研究。 [33]中提供了涵盖距离函数学习中重要主题的调查。</p>
+<h2 id="39">3.9 练习</h2>
+<ol>
+<li>
+<p>对于<span><span class="MathJax_Preview">p=1,2,\infty</span><script type="math/tex">p=1,2,\infty</script></span>，计算<span><span class="MathJax_Preview">(1,2)</span><script type="math/tex">(1,2)</script></span>和<span><span class="MathJax_Preview">(3,4)</span><script type="math/tex">(3,4)</script></span>之间的<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数。</p>
+</li>
+<li>
+<p>证明两个数据点之间的马哈拉诺比斯距离等于经过变换的数据集上的欧几里德距离，其中变换将数据投影到主成分上，并除以每个成分的标准差。</p>
+</li>
+<li>
+<p>从<span><span class="MathJax_Preview">UCI</span><script type="math/tex">UCI</script></span><em>机器学习库</em>[213]下载*电离层数据集*，并计算所有数据点对之间的<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>距离，<span><span class="MathJax_Preview">p = 1,2,\infty</span><script type="math/tex">p = 1,2,\infty</script></span>。计算数据集上不同范数的的对比度度量。在对第一个<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>尺寸进行采样后重复练习，其中<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>从1到数据的完整维度变化。</p>
+</li>
+<li>
+<p>计算两组<span><span class="MathJax_Preview">\{A,B,C\}</span><script type="math/tex">\{A,B,C\}</script></span>和<span><span class="MathJax_Preview">\{A,C,D,E\}</span><script type="math/tex">\{A,C,D,E\}</script></span>之间基于匹配的相似度，余弦相似度和Jaccard系数。</p>
+</li>
+<li>
+<p>设<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>是两个数据点。证明向量<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>之间的余弦角度由下式给出：</p>
+</li>
+</ol>
+<div>
+<div class="MathJax_Preview">
+cosine(\overline{X},\overline{Y})={{\|\overline{X}\|^2+\|\overline{Y}\|^2-\|\overline{X}-\overline{Y}\|^2}\over {2\|\overline{X}\|\|\overline{Y}\|}}.\tag{3.25}
+</div>
+<script type="math/tex; mode=display">
+cosine(\overline{X},\overline{Y})={{\|\overline{X}\|^2+\|\overline{Y}\|^2-\|\overline{X}-\overline{Y}\|^2}\over {2\|\overline{X}\|\|\overline{Y}\|}}.\tag{3.25}
+</script>
+</div>
+<ol>
+<li>
+<p>下载<span><span class="MathJax_Preview">UCI</span><script type="math/tex">UCI</script></span><em>机器学习资源库*的<span><span class="MathJax_Preview">KDD \ Cup</span><script type="math/tex">KDD \ Cup</script></span>*网络入侵数据集</em>[213]。创建一个仅包含分类属性的数据集。使用<span><span class="MathJax_Preview">(a)</span><script type="math/tex">(a)</script></span>匹配度量，以及<span><span class="MathJax_Preview">(b)</span><script type="math/tex">(b)</script></span>逆出现频率度量，来计算每个数据点的最近邻居。计算类标签上匹配的案例数量。</p>
+</li>
+<li>
+<p>仅使用数据集的量化属性重复练习6，并使用Lp范数，其中<span><span class="MathJax_Preview">p = 1,2,\infty</span><script type="math/tex">p = 1,2,\infty</script></span>。</p>
+</li>
+<li>
+<p>使用数据集中的所有属性重复练习6。使用混合属性函数，以及练习6和7的分类距离函数和量化距离函数的不同组合。</p>
+</li>
+<li>
+<p>编写一个计算机程序来计算编辑距离。</p>
+</li>
+<li>
+<p>编写一个计算机程序来计算<span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>距离。</p>
+</li>
+<li>
+<p>编写一个计算机程序来计算<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>距离。</p>
+</li>
+<li>
+<p>假设<span><span class="MathJax_Preview">Edit(\overline{X},\overline{Y})</span><script type="math/tex">Edit(\overline{X},\overline{Y})</script></span>表示将字符串<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>转换为<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>的开销。证明<span><span class="MathJax_Preview">Edit(\overline{X},\overline{Y})</span><script type="math/tex">Edit(\overline{X},\overline{Y})</script></span>和<span><span class="MathJax_Preview">Edit(\overline{Y},\overline{X})</span><script type="math/tex">Edit(\overline{Y},\overline{X})</script></span>是相同的，只要插入和删除成本相同即可。</p>
+</li>
+<li>
+<p>计算<span><span class="MathJax_Preview">(a)\ ababcabc</span><script type="math/tex">(a)\ ababcabc</script></span>和<span><span class="MathJax_Preview">babcbc</span><script type="math/tex">babcbc</script></span>与<span><span class="MathJax_Preview">(b)\ cbacbacba</span><script type="math/tex">(b)\ cbacbacba</script></span>和<span><span class="MathJax_Preview">acbacbacb</span><script type="math/tex">acbacbacb</script></span>之间的编辑距离和<span><span class="MathJax_Preview">LCSS</span><script type="math/tex">LCSS</script></span>相似性。对于编辑距离，假设插入，删除或替换的成本相等。</p>
+</li>
+<li>
+<p>证明<span><span class="MathJax_Preview">Edit(i,j)</span><script type="math/tex">Edit(i,j)</script></span>，<span><span class="MathJax_Preview">LCSS(i,j)</span><script type="math/tex">LCSS(i,j)</script></span>和<span><span class="MathJax_Preview">DTW(i,j)</span><script type="math/tex">DTW(i,j)</script></span>在<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>中都是单调函数。</p>
+</li>
+<li>
+<p>使用以下两句之间的原始频率计算余弦测量值：
+  （a）“狡猾的狐狸跳过懒狗。”
+  （b）“狗扑向入侵者。”</p>
+</li>
+<li>
+<p>假设插入和删除成本为1，编辑距离的替换成本为2单位。证明两个字符串之间的最佳编辑距离只能通过插入和删除操作来计算。在上述成本假设下，表明最佳编辑距离可以表示为最佳LCSS距离和两个字符串的长度的函数。</p>
+</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../2/" title="第2章 数据预处理" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第2章 数据预处理
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../4/" title="第4章 关联模式挖掘" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第4章 关联模式挖掘
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

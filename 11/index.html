@@ -1,0 +1,2438 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/11/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第11章 数据分类：高级概念 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#11" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第11章 数据分类：高级概念
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第11章 数据分类：高级概念
+      </label>
+    
+    <a href="./" title="第11章 数据分类：高级概念" class="md-nav__link md-nav__link--active">
+      第11章 数据分类：高级概念
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#111" title="11.1 介绍" class="md-nav__link">
+    11.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112" title="11.2 多类学习" class="md-nav__link">
+    11.2 多类学习
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113" title="11.3 稀有班级学习" class="md-nav__link">
+    11.3 稀有班级学习
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1131" title="11.3.1 示例重新加权" class="md-nav__link">
+    11.3.1 示例重新加权
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1132" title="11.3.2 采样方法" class="md-nav__link">
+    11.3.2 采样方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11321" title="11.3.2.1 加权与抽样之间的关系" class="md-nav__link">
+    11.3.2.1 加权与抽样之间的关系
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11322-smote" title="11.3.2.2 合成过采样：SMOTE" class="md-nav__link">
+    11.3.2.2 合成过采样：SMOTE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114" title="11.4 可扩展分类" class="md-nav__link">
+    11.4 可扩展分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1141" title="11.4.1 可扩展的决策树" class="md-nav__link">
+    11.4.1 可扩展的决策树
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11411-rainforest" title="11.4.1.1 RainForest(雨林)" class="md-nav__link">
+    11.4.1.1 RainForest(雨林)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11412-boat" title="11.4.1.2 BOAT(船)" class="md-nav__link">
+    11.4.1.2 BOAT(船)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1142" title="11.4.2 可扩展支持向量机" class="md-nav__link">
+    11.4.2 可扩展支持向量机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115" title="11.5 用数字类进行回归建模" class="md-nav__link">
+    11.5 用数字类进行回归建模
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1151" title="11.5.1 线性回归" class="md-nav__link">
+    11.5.1 线性回归
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11511-fisher" title="11.5.1.1 与Fisher线性判别式的关系" class="md-nav__link">
+    11.5.1.1 与Fisher线性判别式的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1152" title="11.5.2 主成分回归" class="md-nav__link">
+    11.5.2 主成分回归
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1153" title="11.5.3 广义线性模型" class="md-nav__link">
+    11.5.3 广义线性模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1154" title="11.5.4 非线性和多项式回归" class="md-nav__link">
+    11.5.4 非线性和多项式回归
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1155" title="11.5.5 从决策树到回归树" class="md-nav__link">
+    11.5.5 从决策树到回归树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1156" title="11.5.6 评估模型的有效性" class="md-nav__link">
+    11.5.6 评估模型的有效性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116" title="11.6半监督学习" class="md-nav__link">
+    11.6半监督学习
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1161" title="11.6.1通用元算法" class="md-nav__link">
+    11.6.1通用元算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11611" title="11.6.1.1自我训练" class="md-nav__link">
+    11.6.1.1自我训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11612" title="11.6.1.2联合训练" class="md-nav__link">
+    11.6.1.2联合训练
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1162" title="11.6.2分类算法的具体变化" class="md-nav__link">
+    11.6.2分类算法的具体变化
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11621em" title="11.6.2.1用EM进行半监督贝叶斯分类" class="md-nav__link">
+    11.6.2.1用EM进行半监督贝叶斯分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11622" title="11.6.2.2传导支持向量机" class="md-nav__link">
+    11.6.2.2传导支持向量机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1163" title="11.6.3基于图形的半监督式学习" class="md-nav__link">
+    11.6.3基于图形的半监督式学习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1164" title="11.6.4半监督学习的讨论" class="md-nav__link">
+    11.6.4半监督学习的讨论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#117" title="11.7主动学习" class="md-nav__link">
+    11.7主动学习
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1171" title="11.7.1基于异质性的模型" class="md-nav__link">
+    11.7.1基于异质性的模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11711" title="11.7.1.1不确定性抽样" class="md-nav__link">
+    11.7.1.1不确定性抽样
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11712" title="11.7.1.2按委员会查询" class="md-nav__link">
+    11.7.1.2按委员会查询
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11713" title="11.7.1.3预期的模型变化" class="md-nav__link">
+    11.7.1.3预期的模型变化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1172" title="11.7.2基于性能的模型" class="md-nav__link">
+    11.7.2基于性能的模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11721" title="11.7.2.1降低预期错误" class="md-nav__link">
+    11.7.2.1降低预期错误
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11722" title="11.7.2.2降低预期方差" class="md-nav__link">
+    11.7.2.2降低预期方差
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1173" title="11.7.3基于代表性的模型" class="md-nav__link">
+    11.7.3基于代表性的模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#118" title="11.8集合方法" class="md-nav__link">
+    11.8集合方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1181" title="11.8.1为什么集成分析有效？" class="md-nav__link">
+    11.8.1为什么集成分析有效？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1182-" title="11.8.2正态声明的误差 - 方差权衡" class="md-nav__link">
+    11.8.2正态声明的误差 - 方差权衡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1183" title="11.8.3 集合学习的具体实例" class="md-nav__link">
+    11.8.3 集合学习的具体实例
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11831" title="11.8.3.1 装袋" class="md-nav__link">
+    11.8.3.1 装袋
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11832" title="11.8.3.2 随机森林" class="md-nav__link">
+    11.8.3.2 随机森林
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11833" title="11.8.3.3 增强" class="md-nav__link">
+    11.8.3.3 增强
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11834" title="11.8.3.4 桶模型" class="md-nav__link">
+    11.8.3.4 桶模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11835" title="11.8.3.5 堆叠" class="md-nav__link">
+    11.8.3.5 堆叠
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#119" title="11.9 总结" class="md-nav__link">
+    11.9 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1110" title="11.10 书目注释" class="md-nav__link">
+    11.10 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1111" title="11.11 习题" class="md-nav__link">
+    11.11 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#111" title="11.1 介绍" class="md-nav__link">
+    11.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112" title="11.2 多类学习" class="md-nav__link">
+    11.2 多类学习
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113" title="11.3 稀有班级学习" class="md-nav__link">
+    11.3 稀有班级学习
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1131" title="11.3.1 示例重新加权" class="md-nav__link">
+    11.3.1 示例重新加权
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1132" title="11.3.2 采样方法" class="md-nav__link">
+    11.3.2 采样方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11321" title="11.3.2.1 加权与抽样之间的关系" class="md-nav__link">
+    11.3.2.1 加权与抽样之间的关系
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11322-smote" title="11.3.2.2 合成过采样：SMOTE" class="md-nav__link">
+    11.3.2.2 合成过采样：SMOTE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114" title="11.4 可扩展分类" class="md-nav__link">
+    11.4 可扩展分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1141" title="11.4.1 可扩展的决策树" class="md-nav__link">
+    11.4.1 可扩展的决策树
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11411-rainforest" title="11.4.1.1 RainForest(雨林)" class="md-nav__link">
+    11.4.1.1 RainForest(雨林)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11412-boat" title="11.4.1.2 BOAT(船)" class="md-nav__link">
+    11.4.1.2 BOAT(船)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1142" title="11.4.2 可扩展支持向量机" class="md-nav__link">
+    11.4.2 可扩展支持向量机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115" title="11.5 用数字类进行回归建模" class="md-nav__link">
+    11.5 用数字类进行回归建模
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1151" title="11.5.1 线性回归" class="md-nav__link">
+    11.5.1 线性回归
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11511-fisher" title="11.5.1.1 与Fisher线性判别式的关系" class="md-nav__link">
+    11.5.1.1 与Fisher线性判别式的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1152" title="11.5.2 主成分回归" class="md-nav__link">
+    11.5.2 主成分回归
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1153" title="11.5.3 广义线性模型" class="md-nav__link">
+    11.5.3 广义线性模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1154" title="11.5.4 非线性和多项式回归" class="md-nav__link">
+    11.5.4 非线性和多项式回归
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1155" title="11.5.5 从决策树到回归树" class="md-nav__link">
+    11.5.5 从决策树到回归树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1156" title="11.5.6 评估模型的有效性" class="md-nav__link">
+    11.5.6 评估模型的有效性
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116" title="11.6半监督学习" class="md-nav__link">
+    11.6半监督学习
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1161" title="11.6.1通用元算法" class="md-nav__link">
+    11.6.1通用元算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11611" title="11.6.1.1自我训练" class="md-nav__link">
+    11.6.1.1自我训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11612" title="11.6.1.2联合训练" class="md-nav__link">
+    11.6.1.2联合训练
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1162" title="11.6.2分类算法的具体变化" class="md-nav__link">
+    11.6.2分类算法的具体变化
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11621em" title="11.6.2.1用EM进行半监督贝叶斯分类" class="md-nav__link">
+    11.6.2.1用EM进行半监督贝叶斯分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11622" title="11.6.2.2传导支持向量机" class="md-nav__link">
+    11.6.2.2传导支持向量机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1163" title="11.6.3基于图形的半监督式学习" class="md-nav__link">
+    11.6.3基于图形的半监督式学习
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1164" title="11.6.4半监督学习的讨论" class="md-nav__link">
+    11.6.4半监督学习的讨论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#117" title="11.7主动学习" class="md-nav__link">
+    11.7主动学习
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1171" title="11.7.1基于异质性的模型" class="md-nav__link">
+    11.7.1基于异质性的模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11711" title="11.7.1.1不确定性抽样" class="md-nav__link">
+    11.7.1.1不确定性抽样
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11712" title="11.7.1.2按委员会查询" class="md-nav__link">
+    11.7.1.2按委员会查询
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11713" title="11.7.1.3预期的模型变化" class="md-nav__link">
+    11.7.1.3预期的模型变化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1172" title="11.7.2基于性能的模型" class="md-nav__link">
+    11.7.2基于性能的模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11721" title="11.7.2.1降低预期错误" class="md-nav__link">
+    11.7.2.1降低预期错误
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11722" title="11.7.2.2降低预期方差" class="md-nav__link">
+    11.7.2.2降低预期方差
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1173" title="11.7.3基于代表性的模型" class="md-nav__link">
+    11.7.3基于代表性的模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#118" title="11.8集合方法" class="md-nav__link">
+    11.8集合方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1181" title="11.8.1为什么集成分析有效？" class="md-nav__link">
+    11.8.1为什么集成分析有效？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1182-" title="11.8.2正态声明的误差 - 方差权衡" class="md-nav__link">
+    11.8.2正态声明的误差 - 方差权衡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1183" title="11.8.3 集合学习的具体实例" class="md-nav__link">
+    11.8.3 集合学习的具体实例
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11831" title="11.8.3.1 装袋" class="md-nav__link">
+    11.8.3.1 装袋
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11832" title="11.8.3.2 随机森林" class="md-nav__link">
+    11.8.3.2 随机森林
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11833" title="11.8.3.3 增强" class="md-nav__link">
+    11.8.3.3 增强
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11834" title="11.8.3.4 桶模型" class="md-nav__link">
+    11.8.3.4 桶模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11835" title="11.8.3.5 堆叠" class="md-nav__link">
+    11.8.3.5 堆叠
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#119" title="11.9 总结" class="md-nav__link">
+    11.9 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1110" title="11.10 书目注释" class="md-nav__link">
+    11.10 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1111" title="11.11 习题" class="md-nav__link">
+    11.11 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/11.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="11">11 数据分类：高级概念</h1>
+<!--本章由彭龙，吴旭桥翻译-->
+
+<blockquote>
+<p>“标签用于归档。标签用于服装。标签不适用于人。” - Martina Navratilova</p>
+</blockquote>
+<h2 id="111">11.1 介绍</h2>
+<p>本章将介绍一些与分类问题相关的高级场景。这些包括更困难的分类问题的特殊情况以及通过使用额外输入或分类器的组合来增强分类算法的各种方式。本章讨论的增强功能属于以下两类之一：</p>
+<ol>
+<li>
+<p><em>困难的分类方案</em>：分类问题的许多方案更具挑战性。这些包括多类场景，罕见类场景以及训练数据量很大的情况。</p>
+</li>
+<li>
+<p><em>增强分类</em>：可以通过附加的以数据为中心的输入，以用户为中心的输入或多个模型来增强分类方法。</p>
+</li>
+</ol>
+<p>本章讨论的困难分类情景如下：</p>
+<ol>
+<li>
+<p><em>多类学习</em>：虽然许多分类器（如决策树，贝叶斯方法和基于规则的分类器）可以直接用于多类学习，但一些模型（如支持向量机）自然是针对二元分类而设计的。因此，已经设计了许多元算法来使二元分类器适应多类学习。</p>
+</li>
+<li>
+<p><em>稀有种类学习</em>：正面和负面的例子可能失衡。换句话说，数据集只包含少数正面例子。直接使用传统的学习模型可能经常导致分类器将所有示例分配给否定类。这种分类方法对于不平衡情景的信息量不大，因为对罕见类别的错误分类比对正常类别错误分类的成本要高得多。</p>
+</li>
+<li>
+<p><em>可扩展学习</em>：近年来，典型培训数据集的规模已经大幅增加。因此，设计可以以可扩展方式进行学习的模型是非常重要的。在数据不是驻留内存的情况下，设计可最大限度减少磁盘访问的算法非常重要。</p>
+</li>
+<li>
+<p><em>数字类变量</em>：本书中的大部分讨论假定类变量是分类的。当类变量是数字时，需要对分类算法进行适当的修改。这个问题也被称为回归建模。</p>
+</li>
+</ol>
+<p>增加更多的训练数据或同时使用更多的分类模型可以提高学习的准确性。 已经提出了许多方法来增强分类方法。示例包括以下内容：</p>
+<ol>
+<li>
+<p><em>半监督学习</em>：在这些情况下，未标记的例子被用来提高分类器的有效性。尽管未标记的数据不包含有关标签分布的任何信息，但它确实包含大量有关基础数据的流形和聚类结构的信息。由于分类问题是聚类问题的监督版本，因此可以利用此连接来提高分类准确性。核心思想是，在大多数实际数据集中，标签在数据密集区域以平滑的方式变化。数据中稠密区域的确定只需要未标记的信息。</p>
+</li>
+<li>
+<p><em>主动学习</em>：在现实生活中，获取标签通常很昂贵。在主动学习中，用户（或预言者）积极参与确定需要获取标签的信息最丰富的例子。通常，这些例子为用户提供关于数据中不确定区域的更准确的知识，其中类别标签的分布未知。</p>
+</li>
+<li>
+<p><em>集成学习</em>：类似于聚类和异常值检测问题，集成学习使用多个模型的强大功能为分类过程提供更强大的结果。其动机类似于聚类和异常值检测问题。</p>
+</li>
+</ol>
+<p>本章安排如下。多类学习是在11.2部分；在11.3章节引入了稀有种类学习方法；可扩展的分类方法在11.4章节引入；有关数字类变量的分类将在11.5章节讨论； 半监督学习方法在11.6章节中介绍；主动学习方法将在11.7章节中讨论；集合方法将在11.8章节提出；最后，这一章的总结在11.9章节给出。</p>
+<h2 id="112">11.2 多类学习</h2>
+<p>一些模型，如支持向量机(SVMs)，神经网络和逻辑回归自然是为二元类情景设计的。 尽管可以使用这些方法的多类泛化，但设计可直接使用二元方法进行多类分类的泛型元框架是有帮助的。这些框架被设计为元算法，可以采用二进制分类算法<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>作为输入并用它来进行多标记预测。有几种策略可以将二进制分类器转换为多标签分类器。在下面的讨论中，将假定的类的数量由<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>表示。</p>
+<p>第一个策略是一对一休止的方法。在这种方法中，创建了<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个不同的二元分类问题，这样一个问题对应于每个类。在第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个问题中，第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>类被认为是一组正面的例子，而所有其余的例子被认为是负面的例子。二元分类器<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>应用于这些训练数据集中的每一个。这创建了总共<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个模型。如果在第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个问题中预测了积极的类，那么第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个类将得到一票表决。否则，剩下的每阶都会得到一票表决奖励。具有最多票数的班级被预测为相关班级。在实践中，不止一个模型可能预测一个例子属于一个积极的类。这可能会导致联系。为了避免关系，还可以使用分类器的数字输出（例如贝叶斯后验概率）来加权相应的投票。选择特定类别的最高数字分数来预测标签。请注意，用于加权投票的数字分数的选择取决于手头的分类器。直观地，分数表示该分类器在特定标签中的“置信度”。</p>
+<p>第二个策略是一对一的方法。在这个策略中，为每个<span><span class="MathJax_Preview">{k\choose2}</span><script type="math/tex">{k\choose2}</script></span>对类构建一个训练数据集。算法<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>应用于每个训练数据集。这导致总共<span><span class="MathJax_Preview">k(k-1)/2</span><script type="math/tex">k(k-1)/2</script></span>个模型。对于每个模型，预测都会向获胜者提供投票。得票最多的班级标签最终被宣布为获胜者。乍看起来，这种方法似乎在计算上更加昂贵，因为它需要我们训练<span><span class="MathJax_Preview">k(k-1)/2</span><script type="math/tex">k(k-1)/2</script></span>个分类器，而不是训练<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个分类器，就像在一对一休止方法中一样。但是，一对一方法中训练数据的规模较小，计算成本得到了改善。具体而言，后一种情况下的训练数据大小平均大约是在一次休息方法中使用的训练数据大小的<span><span class="MathJax_Preview">2/k</span><script type="math/tex">2/k</script></span>。如果每个分类器的运行时间与训练点的数量呈超线性关系，那么这种方法的整体运行时间可能实际上比第一种方法要低，这就需要我们仅训练k个分类器。内核SVM分类器的情况通常如此，其中运行时间比数据点的数量多于线性增加。请注意，核矩阵的大小与数据点的数量成正比地放大。一对一的方法也可能导致不同类别之间的联系获得相同数量的选票。在这种情况下，分类器输出的数字分数可用于对不同类别的投票进行加权。与前面的情况一样，数字分数的选择取决于基本分类器模型的选择。</p>
+<h2 id="113">11.3 稀有班级学习</h2>
+<p>许多应用程序中的类分布不均衡。考虑一种表示信用卡活动的数据点被标记为“正常”或“欺诈”的情景。 在这种情况下，班级分布通常非常贫乏。 例如，99％的数据点可能是正常的，而只有1％的数据点可能是正确的。 由于普通类的优势，分类算法的直接应用可能会导致误导结果。</p>
+<p>考虑一个测试实例<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>，其最近的100个邻居包含49个罕见的类实例和51个正常的类实例。 在这种情况下，显然测试工具被大部分相对于预期的罕见实例所包围。然而，<span><span class="MathJax_Preview">k=100</span><script type="math/tex">k=100</script></span>的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>-最近邻分类器会将实例<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>分类为正常类。这样的分类器没有提供信息丰富的结果，因为它的行为大致模仿了将每个实例分类为正常的简单分类器。</p>
+<p>此行为不限于最近邻居分类器。贝叶斯分类器会偏向于普通类的偏见。 决策树会发现很难区分属于这个难得的类的实例。结果，这些分类器中的大多数(如果没有适当修改的话)会将许多罕见实例归类为大多数类别。有趣的是，即使是一个普通的分类器，它将所有实例标记为正常可能会提供很高的绝对准确性。然而，在这样的应用领域中，对罕见类别实现高分类准确性更重要。这是因为与罕见类别检测相关的应用程序通常是这样的，以致对罕见类别错误分类的后果远高于对正常类别错误分类的后果。例如，在信用卡方案中，信用卡公司接受欺诈活动是正常的，而不是错误地向顾客警告其卡片上的可疑活动，其成本更高。</p>
+<p>这些观察结果表明，稀有类学习算法需要有一个明确的机制来强调稀有类的更重要性。这种机制由成本矩阵<span><span class="MathJax_Preview">C(i，j)</span><script type="math/tex">C(i，j)</script></span>提供，该成本矩阵<span><span class="MathJax_Preview">C(i，j)</span><script type="math/tex">C(i，j)</script></span>量化将类别<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>错分类为类别<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的成本，其中<span><span class="MathJax_Preview">i=j</span><script type="math/tex">i=j</script></span>。在实践中，对于多类问题，通常很难填充错误分类可能性的完整<span><span class="MathJax_Preview">k×k</span><script type="math/tex">k×k</script></span>矩阵。因此，简化是将错误分类成本与源类别关联起来，而不是源到目标对。换句话说，对类别i错误分类的成本由<span><span class="MathJax_Preview">C(i)</span><script type="math/tex">C(i)</script></span>表示，而不管它预测到的不正确的目的地类别<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>。通常，对罕见类别错误分类的成本比对正常类别错误分类的成本要大得多。因此，目标是最大限度地提高成本加权的精度，而不是绝对的准确度。</p>
+<p>幸运的是，通过对现有分类算法进行适度更改，可以实现这些目标。这些修改的一些例子如下：</p>
+<ol>
+<li>
+<p>示例重新加权：来自各个类别的训练示例根据错误分类成本进行重新加权。这种方法自然导致比常规类例更准确地对罕见类例子进行分类的偏见。因此，需要修改分类算法以使用加权示例。</p>
+</li>
+<li>
+<p>示例重采样：来自不同类别的示例被重采样为欠采样正常类和(或)超采样罕见类。在这种情况下，可以直接使用未加权的分类器。</p>
+</li>
+</ol>
+<p>以下各节将讨论这些不同的方法。</p>
+<h3 id="1131">11.3.1 示例重新加权</h3>
+<p>在这种情况下，这些例子按其成本比例加权。由于原始分类问题旨在最大限度地提高准确性，加权问题的类似解决方案最大限度地提高了成本加权精度。因此，属于第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>类的所有实例都由<span><span class="MathJax_Preview">C(i)</span><script type="math/tex">C(i)</script></span>加权。因此，需要修改现有的分类算法以处理这些附加权重。在大多数情况下，所需的更改相对较小。以下内容包含对各种分类算法所需更改的简要说明：</p>
+<p>1.决策树：权重可以轻松纳入决策树算法中。分裂准则要求计算基尼指数和熵，所有这些都可以使用示例上的权重来计算。基尼指数和熵都是作为训练样例的比例分布函数的函数来计算的。这个成比例的类别分布可以通过对示例使用权重来计算。树修剪也可以被修改以测量去除节点对加权准确度的影响。</p>
+<p>2.基于规则的分类器：顺序覆盖算法类似于决策树构造。主要区别在于用于增长规则的标准。诸如拉普拉斯测量和FOIL信息获取等措施使用规则涵盖的原始数量的正面和负面示例。在这种情况下，加权数量的例子被用作替代例子的原始数量。规则修剪使用加权准确度来衡量合并修剪的影响。对于关联分类器，实例上的权重需要用于计算支持和置信度。</p>
+<p>3.贝叶斯分类器：除了概率估计过程中的一个关键差异外，贝叶斯分类器的实现与未加权的情况基本保持相同。现在使用实例上的权重来估计类先验和条件特征概率。</p>
+<p>4.支持向量机：有趣的是，硬边缘支持向量机不受示例重新加权的影响，因为支持向量不依赖于示例权重。但是，实际上，使用软边缘。在这种情况下，目标函数中的松弛惩罚项被适当加权，并且它导致软SVM的原始和双重方法的修改(参见练习3和4)。这通常导致支持向量机的边界向分离的正常类侧移动。 这可以确保更少的罕见类例子受到惩罚(成本更高)的保证金违规，并且更正常的类例子受到惩罚。结果是对罕见类例子错误分类的可能性较低，但对正常类例子错误分类的可能性较大。</p>
+<p>5.基于实例的方法：在确定给定测试实例的m个最近邻居之后，加权投票用于不同的类。</p>
+<p>因此，大多数分类器可以用相对较小的变化与加权情况一起工作。加权技术的优势在于它们可以与原始训练数据一起工作，因此与操纵训练数据的抽样方法相比，它们更不易于过度拟合。</p>
+<h3 id="1132">11.3.2 采样方法</h3>
+<p>在自适应重采样中，对不同的类进行差分采样以增强罕见类对分类模型的影响。取样可以在有或没有更换的情况下进行。罕见的类可以被过采样，或者普通的类可以被欠采样，或者两者都可以发生。在重采样数据上学习分类模型。 抽样概率通常根据错误分类成本来选择。这提高了用于学习的样本中罕见成本的比例，并且该方法通常也适用于多类别场景。普遍观察到，对正常类进行欠采样与对超常规类过采样相比具有许多优点。采用欠采样时，采样的训练数据比原始数据集小得多，从而提高了训练效率。</p>
+<p>在一些变体中，罕见类的所有实例都与普通类的小样本结合使用。这也被称为单面选择。这种方法的逻辑是，罕见的类实例与培训数据来修改任何类型的抽样非常有价值。由于以下原因，欠采样在过采样方面有几个优点：
+1. 较小训练数据集的模型构建阶段所需的时间要少得多。</p>
+<ol>
+<li>普通类对于建模目的来说不那么重要，并且包含用于建模的更有价值的罕见类的所有实例。因此，丢弃的实例不会以显着的方式影响建模效率。</li>
+</ol>
+<h4 id="11321">11.3.2.1 加权与抽样之间的关系</h4>
+<p>重采样方法可以理解为按照权重对数据进行采样的方法，然后对所有例子进行平等对待。因此，尽管抽样方法具有更大的随机性，但这两种方法几乎相同。由于没有这种随机性，直接基于权重的技术通常更可靠。另一方面，采样可以更自然地与集合方法相结合（参见11.8节），例如装袋以提高准确性。此外，采样具有明显的效率优势，因为它使用的数据集小得多。例如，对于包含罕见与正常比例为1:99的数据集，当数据重新采样到正常和异常类的相等混合中时，重采样技术有可能在2％的原始数据下有效工作。这种重新采样转换为性能提高的50倍。</p>
+<h4 id="11322-smote">11.3.2.2 合成过采样：SMOTE</h4>
+<p>对少数类别过采样的问题之一是更多数量的替换样本会导致重复采样相同的数据点。重复样本会导致过度拟合并降低分类精度。为了解决这个问题，最近的一种方法是使用合成过采样来创建合成示例而不重复。</p>
+<p>SMOTE方法的工作原理如下。对于每个少数派实例，确定其属于同一类的k个最近邻居。然后，根据所需的过采样级别，随机选择其中的一部分。对于每个采样示例邻居对，在连接该少数示例与其最近邻居的线段上生成合成数据示例。该示例的确切位置是沿线段随机选择的。这些新的少数例子被添加到训练数据中，分类器用增强数据进行训练。SMOTE算法通常比香草超采样方法更准确。这种方法迫使重采样数据的判定区域变得比仅原始训练数据中罕见类别的成员被过采样的区域更加通用。</p>
+<h2 id="114">11.4 可扩展分类</h2>
+<p>在许多应用中，训练数据量相当大。这在建立分类模型时会导致无数的可扩展性挑战。在这种情况下，数据通常不适合主内存，因此需要设计算法来优化对磁盘的访问。虽然传统的决策树算法（如<span><span class="MathJax_Preview">C4.5</span><script type="math/tex">C4.5</script></span>）适用于较小的数据集，但它们并未针对磁盘驻留数据进行优化。一个解决方案是对训练数据进行采样，但是这具有丢弃训练实例中的学习知识的缺点。一些分类器，例如关联分类器和最近邻居方法，可以通过分别使用更高效的子例程来进行频繁模式挖掘和最近邻居索引而变得更快。其他分类器（如决策树和支持向量机）需要更仔细的重新设计，因为它们不依赖任何特定的计算密集型子例程。这两个分类器也特别受欢迎，并且它们中的每一个都广泛用于各种数据领域。因此，本章将特别关注可扩展性背景下的这两个分类器。流媒体数据带来了额外的可扩展性挑战，尽管本章未讨论这些算法。流媒体数据的讨论推迟到第12章。</p>
+<h3 id="1141">11.4.1 可扩展的决策树</h3>
+<p>决策树的构建可能在计算上是昂贵的，因为在节点处对分裂准则的评估有时可能非常缓慢。在下文中，我们将讨论两种众所周知的可扩展决策树构建方法。</p>
+<h4 id="11411-rainforest">11.4.1.1 RainForest(雨林)</h4>
+<p>RainForest方法基于以下认识：对单变量决策树中拆分标准的评估不需要以多维形式访问数据。由于每个属性值在单变量分裂中独立分析，因此只需要在不同类别上维护不同属性值的统计数据。对于数字数据，假定它们被离散化为分类属性值。统计统计被统称为AVC集。AVC集专用于决策树节点，并为不同类提供与该节点相关的数据记录中属性的不同值的计数。因此，AVC集的大小仅取决于不同属性值的数量和类的数量。与数据记录的数量相比，此大小通常非常小。因此，内存需求取决于数据的维度，每维的不同值的数量以及类的数量。基础训练数据集越大，比例节省越多。</p>
+<p>这些AVC集存储在主存储器中，用于高效评估节点处的拆分标准。拆分在节点上执行，直到AVC集合不再适合主内存。当为新创建的节点构建AVC集时，需要扫描数据。通过仔细交错分割和AVC集合构造，可以实现显着的计算和磁盘访问节省。</p>
+<h4 id="11412-boat">11.4.1.2 BOAT(船)</h4>
+<p>对于树结构优化算法Bootstrapped（BOAT）算法使用自举样本进行决策树构建。在自举中，数据被替换采样以创建<span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>个不同的自举样本。这些用于创建由<span><span class="MathJax_Preview">T_1...T_b</span><script type="math/tex">T_1...T_b</script></span>表示的<span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>个不同的树。然后，在不同的引导树中的特定节点上检查拆分属性和拆分子集的选择是否相同。引导程序用于创建一个信息粗分裂标准，其中置信区间施加在每个节点的数字属性上。这个置信区间的宽度可以通过自举样本的数量来控制。在该算法的后期阶段，粗分裂标准通过将分裂的各种置信区间整合成清晰标准而转换为精确分裂标准。实际上，BOAT使用树<span><span class="MathJax_Preview">T_1...T_b</span><script type="math/tex">T_1...T_b</script></span>来创建一个与已经构建的树非常接近的新树，即使所有数据都可用。BOAT算法比RainForest快，它只需要对数据库进行两次扫描。此外，BOAT还具有执行递增决策树归纳的能力，并且还可以处理元组删除。</p>
+<h3 id="1142">11.4.2 可扩展支持向量机</h3>
+<p>支持向量机的一个主要问题是优化问题的规模随着训练数据点的数量而变化，并且在基于内核的支持向量机的情况下，内存需求可能随着数据点数量的平方而缩放。例如，考虑第10章第10.6节讨论的SVM的优化问题。这个问题的核心拉格朗日对偶，如第10章中的公式10.62所示，可写成如下形式：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">L_D=\sum_{i=1}^{n}λ_i-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}λ_iλ_jy_iy_jK(\overline{X_i},\overline{X_j})\tag{11.1}</span><script type="math/tex">L_D=\sum_{i=1}^{n}λ_i-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}λ_iλ_jy_iy_jK(\overline{X_i},\overline{X_j})\tag{11.1}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">L_D=\sum_{i=1}^{n}λ_i-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}λ_iλ_jy_iy_jK(\overline{X_i},\overline{X_j})\tag{11.1}</span><script type="math/tex">L_D=\sum_{i=1}^{n}λ_i-\frac{1}{2}\sum_{i=1}^{n}\sum_{j=1}^{n}λ_iλ_jy_iy_jK(\overline{X_i},\overline{X_j})\tag{11.1}</script></span></script></span>拉格朗日参数<span><span class="MathJax_Preview">λi</span><script type="math/tex">λi</script></span>（或优化变量）的个数等于训练数据点的个数<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>，核矩阵<span><span class="MathJax_Preview">K(Xi，Xj)</span><script type="math/tex">K(Xi，Xj)</script></span>的大小为<span><span class="MathJax_Preview">O(n2)</span><script type="math/tex">O(n2)</script></span>。结果，对于大的n值，整个优化问题的系数甚至不能加载到主存储器中。SVMLight方法旨在解决这个问题。这种方法主要基于以下两点：</p>
+<ol>
+<li>
+<p>没有必要一次解决整个问题。变量<span><span class="MathJax_Preview">λ_1...λ_n</span><script type="math/tex">λ_1...λ_n</script></span>的子集（或工作集）可以选择在给定时间进行优化。迭代选择不同的工作集并进行优化以达到全局最优解。</p>
+</li>
+<li>
+<p>用于SVM的支持向量仅对应于少量的训练数据点。即使大部分其他训练数据点已被删除，它也不会影响SVM的决策边界。因此，在计算密集型培训过程中及早识别这些数据点对于效率最大化至关重要。</p>
+</li>
+</ol>
+<p>以下观察讨论如何利用上述每个观察结果。在第一次观察的情况下，使用迭代方法，其中优化问题的变量集通过将大多数变量固定到其当前值来迭代地改进，并且仅改进变量的小工作集。请注意，每个本地优化内的相关核矩阵的大小与工作集<span><span class="MathJax_Preview">S_q</span><script type="math/tex">S_q</script></span>的大小<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>的平方（而不是训练点的数量<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>）成比例。SVMLight算法重复执行以下两个迭代步骤，直到满足全局最优性条件：</p>
+<ol>
+<li>
+<p>选择<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>个变量作为活动工作集<span><span class="MathJax_Preview">S_q</span><script type="math/tex">S_q</script></span>，并将其余的<span><span class="MathJax_Preview">n-q</span><script type="math/tex">n-q</script></span>个变量固定为它们的当前值。</p>
+</li>
+<li>
+<p>求解<span><span class="MathJax_Preview">L_D(S_q)</span><script type="math/tex">L_D(S_q)</script></span>，一个较小的优化子问题，只有<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>个变量。</p>
+</li>
+</ol>
+<p>关键问题是如何在每次迭代中识别尺寸<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>的工作集。理想情况下，希望选择一个工作集合，以实现目标函数的最大改进。设<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>是一个长度等于拉格朗日变量数量和至多<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>个非零元素的向量。目标是确定<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>个非零元素的最佳选择以确定工作集。建立优化问题来确定<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>，其中<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>的点积与<span><span class="MathJax_Preview">L_D</span><script type="math/tex">L_D</script></span>的梯度（相对于拉格朗日变量）被优化。这是一个单独的优化问题，需要在每次迭代中解决以确定最佳工作集。</p>
+<p>加速支持向量机的第二个想法是缩减训练数据。在支持向量机的制定中，重点主要放在决策边界上。对于优化问题的解决方案，即使已将其删除，对于正确尺寸的边距和远离边距的培训示例也不会产生影响。在优化过程中，需要尽早识别这些训练实例，以尽可能减少它们的移除。基于拉格朗日乘数估计的启发式方法用于SVMLight方法。确定这些培训实例的具体细节超出了本书的范围，但在书目注释中提供了指针。另一种后来称为SVMPerf的方法显示了如何实现线性放大，但仅适用于线性模型。对于某些领域，如文本，线性模型在实践中运作良好。此外，SVMPerf方法具有<span><span class="MathJax_Preview">O(s·n)</span><script type="math/tex">O(s·n)</script></span>复杂度，其中<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>是非零特征的数量，<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>是训练样本的数量。在<span><span class="MathJax_Preview">s{\ll}d</span><script type="math/tex">s{\ll}d</script></span>的情况下，这样的分类器非常有效。对于诸如文本和购物篮数据的稀疏高维域来说，情况就是这样。因此，这种方法将在第13章的文本数据的第13.3.3节中描述。</p>
+<h2 id="115">11.5 用数字类进行回归建模</h2>
+<p>在很多应用程序中，类变量都是数字的。在这种情况下，目标是最小化数字类变量预测的平方误差。该变量也被称为响应变量，因变量或回归。特征变量被称为解释变量，输入变量，预测变量，自变量或回归因子。预测过程被称为回归建模。本节将讨论许多这样的回归建模算法。</p>
+<h3 id="1151">11.5.1 线性回归</h3>
+<p>令<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>为第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个数据点（行）为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维输入特征向量<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>数据矩阵，对应的响应变量为<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>。令<span><span class="MathJax_Preview">\overline{y}=(y1，...，yn)^T</span><script type="math/tex">\overline{y}=(y1，...，yn)^T</script></span> 表示响应变量的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维列向量。在线性回归中，每个响应变量<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>对相应的自变量<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的依赖性以线性关系的形式建模：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\overline{y_i}\approx\overline{W}·\overline{X_i}\qquad\forall{i}\in{1...n}\tag{11.2}</span><script type="math/tex">\overline{y_i}\approx\overline{W}·\overline{X_i}\qquad\forall{i}\in{1...n}\tag{11.2}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\overline{y_i}\approx\overline{W}·\overline{X_i}\qquad\forall{i}\in{1...n}\tag{11.2}</span><script type="math/tex">\overline{y_i}\approx\overline{W}·\overline{X_i}\qquad\forall{i}\in{1...n}\tag{11.2}</script></span></script></span> 这里，<span><span class="MathJax_Preview">\overline{W}=(w_1...w_d)</span><script type="math/tex">\overline{W}=(w_1...w_d)</script></span> 是需要从训练数据中学习的系数的<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维行向量，以最小化建模的未解释的误差<span><span class="MathJax_Preview">\sum_{i=1}^{n}(\overline{W}\centerdot\overline{X_i}-y_i)^2</span><script type="math/tex">\sum_{i=1}^{n}(\overline{W}\centerdot\overline{X_i}-y_i)^2</script></span>。 测试实例的响应值可以用这种线性关系来预测。请注意，在右侧不需要常数（偏差）项，因为我们可以在每个数据点上附加一个值为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>的人为维<span><span class="MathJax_Preview">^1</span><script type="math/tex">^1</script></span>以在<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>内包含常数项。或者，不是使用人工维度，而是使数据矩阵和响应变量居中。在这种情况下，可以证明偏差项不是必需的（参见练习8）。此外，假设数据矩阵的所有列的标准偏差（除了人工列以外）被假定为已被缩放为1。通常，以这种方式标准化数据以确保所有属性的类似缩放和加权。图11.1a举例说明了一维特征变量的线性关系。
+<center>
+<img alt="" src="http://p6atp7tts.bkt.clouddn.com/15259172580699.jpg" /></center>
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">图11.1：线性和非线性回归的例子</span><script type="math/tex">图11.1：线性和非线性回归的例子</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">图11.1：线性和非线性回归的例子</span><script type="math/tex">图11.1：线性和非线性回归的例子</script></span></script></span></p>
+<p>为了使训练数据的预测的平方误差最小，必须确定将以下目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>最小化的<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">O=\sum_{i=1}^{n}(\overline{W}·\overline{X_i}-y_i)^2=||D\overline{W}^T-\overline{y}||^2\tag{11.3}</span><script type="math/tex">O=\sum_{i=1}^{n}(\overline{W}·\overline{X_i}-y_i)^2=||D\overline{W}^T-\overline{y}||^2\tag{11.3}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">O=\sum_{i=1}^{n}(\overline{W}·\overline{X_i}-y_i)^2=||D\overline{W}^T-\overline{y}||^2\tag{11.3}</span><script type="math/tex">O=\sum_{i=1}^{n}(\overline{W}·\overline{X_i}-y_i)^2=||D\overline{W}^T-\overline{y}||^2\tag{11.3}</script></span></script></span> 使用矩阵微积分<span><span class="MathJax_Preview">^2</span><script type="math/tex">^2</script></span>，可以将<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>相对于<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>的梯度表示为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维矢量<span><span class="MathJax_Preview">2D^T(D\overline{W}^T-\overline{y})</span><script type="math/tex">2D^T(D\overline{W}^T-\overline{y})</script></span>。将渐变设置为<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>会生成以下优化条件的二维矢量：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">D^TD\overline{W}^T=D^T\overline{y}\tag{11.4}</span><script type="math/tex">D^TD\overline{W}^T=D^T\overline{y}\tag{11.4}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">D^TD\overline{W}^T=D^T\overline{y}\tag{11.4}</span><script type="math/tex">D^TD\overline{W}^T=D^T\overline{y}\tag{11.4}</script></span></script></span> 如果对称矩<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>是可逆的，那么<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>的解可以从前述条件推导为<span><span class="MathJax_Preview">\overline{W}=(D^TD)^{-1}D^T\overline{y}</span><script type="math/tex">\overline{W}=(D^TD)^{-1}D^T\overline{y}</script></span> 。之前未见过的测试实例<span><span class="MathJax_Preview">\overline{T}</span><script type="math/tex">\overline{T}</script></span>的数值分类值然后可以被预测为<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>和<span><span class="MathJax_Preview">\overline{T}</span><script type="math/tex">\overline{T}</script></span>之间的点积。</p>
+<p>值得注意的是，矩阵<span><span class="MathJax_Preview">(D^TD)^{-1}D^T</span><script type="math/tex">(D^TD)^{-1}D^T</script></span>也被称为矩阵D的Moore-Penrose伪逆<span><span class="MathJax_Preview">D^+</span><script type="math/tex">D^+</script></span>。因此，线性回归的解也可以表示为<span><span class="MathJax_Preview">D+\overline{y}</span><script type="math/tex">D+\overline{y}</script></span>。即使对于<span><span class="MathJax_Preview">(D^TD)</span><script type="math/tex">(D^TD)</script></span>不可逆的情况，伪逆更一般地定义：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">D^+=lim_{\delta\to0}(D^TD)+\delta^2I)^{-1}D^T\tag{11.5}</span><script type="math/tex">D^+=lim_{\delta\to0}(D^TD)+\delta^2I)^{-1}D^T\tag{11.5}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">D^+=lim_{\delta\to0}(D^TD)+\delta^2I)^{-1}D^T\tag{11.5}</span><script type="math/tex">D^+=lim_{\delta\to0}(D^TD)+\delta^2I)^{-1}D^T\tag{11.5}</script></span></script></span> 在这里，我是一个<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>的单位矩阵。当训练数据点的数量很少时，所有的训练样例都可能位于维度小于<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>的超平面上。结果，<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>矩阵<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>不是满秩的，因此不可逆。换句话说，方程组<span><span class="MathJax_Preview">D^TD\overline{W}=D^T\overline{y}</span><script type="math/tex">D^TD\overline{W}=D^T\overline{y}</script></span> 是欠定的并且具有无限多的解。在这种情况下，方程11.5中Moore-Penrose伪逆的一般定义是有用的。即使<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的倒数不存在，仍然可以计算公式11.5的极限。可以使用<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的SVD计算<span><span class="MathJax_Preview">D^+</span><script type="math/tex">D^+</script></span>（参见第2章第2.4.3.4节）。使用以下矩阵标识可以获得更高效的计算方法（请参见练习15）：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">D^+=(D^TD)^+D^T=D^T(DD^T)^+\tag{11.6}</span><script type="math/tex">D^+=(D^TD)^+D^T=D^T(DD^T)^+\tag{11.6}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">D^+=(D^TD)^+D^T=D^T(DD^T)^+\tag{11.6}</span><script type="math/tex">D^+=(D^TD)^+D^T=D^T(DD^T)^+\tag{11.6}</script></span></script></span> 当<span><span class="MathJax_Preview">d{\ll}n</span><script type="math/tex">d{\ll}n</script></span>或<span><span class="MathJax_Preview">n{\ll}d</span><script type="math/tex">n{\ll}d</script></span>时，此标识是有用的。在这里，我们只会显示<span><span class="MathJax_Preview">d{\ll}n</span><script type="math/tex">d{\ll}n</script></span>的情况，因为其他情况非常相似。对角化<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>对称矩阵<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的第一步：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">D^TD=P{\Lambda}P^T\tag{11.7}</span><script type="math/tex">D^TD=P{\Lambda}P^T\tag{11.7}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">D^TD=P{\Lambda}P^T\tag{11.7}</span><script type="math/tex">D^TD=P{\Lambda}P^T\tag{11.7}</script></span></script></span> <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的列是<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的正交特征向量，并且<span><span class="MathJax_Preview">Λ</span><script type="math/tex">Λ</script></span>是包含特征值的对角矩阵。 当矩阵<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的秩<span><span class="MathJax_Preview">k&lt;d</span><script type="math/tex">k<d</script></span>时，<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的伪逆<span><span class="MathJax_Preview">(D^TD)^+</span><script type="math/tex">(D^TD)^+</script></span>计算如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">(D^TD)^+=P{\Lambda}^+P^T\tag{11.8}</span><script type="math/tex">(D^TD)^+=P{\Lambda}^+P^T\tag{11.8}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">(D^TD)^+=P{\Lambda}^+P^T\tag{11.8}</span><script type="math/tex">(D^TD)^+=P{\Lambda}^+P^T\tag{11.8}</script></span></script></span> <span><span class="MathJax_Preview">Λ_{ii}^+</span><script type="math/tex">Λ_{ii}^+</script></span>通过将<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>设置为<span><span class="MathJax_Preview">1/Λ_{ii}</span><script type="math/tex">1/Λ_{ii}</script></span>而针对<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个非零条目导出，并且否则为<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>。然后，<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>的解决方案定义如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\overline{W}^T=(D^TD)^+D^T\overline{y}\tag{11.9}</span><script type="math/tex">\overline{W}^T=(D^TD)^+D^T\overline{y}\tag{11.9}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\overline{W}^T=(D^TD)^+D^T\overline{y}\tag{11.9}</span><script type="math/tex">\overline{W}^T=(D^TD)^+D^T\overline{y}\tag{11.9}</script></span></script></span> 尽管欠定方程组<span><span class="MathJax_Preview">D<sup>TD\overline{W}</sup>T=D^T\overline{y} <span><span class="MathJax_Preview">有无限多的解，但伪逆始终提供一个解</span><script type="math/tex">有无限多的解，但伪逆始终提供一个解</script></span>L_2L_2</span><script type="math/tex">D<sup>TD\overline{W}</sup>T=D^T\overline{y} <span><span class="MathJax_Preview">有无限多的解，但伪逆始终提供一个解</span><script type="math/tex">有无限多的解，但伪逆始终提供一个解</script></span>L_2L_2</script></span>，其中<span><span class="MathJax_Preview">L_2-norm||\overline{W}||</span><script type="math/tex">L_2-norm||\overline{W}||</script></span>在替代品中最小。较小的系数是可取的，因为它们减少了过度拟合。过度拟合通常是一个重要的问题，特别是当矩阵<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>不满秩时。更有效的方法是使用Tikhonov正则化或Lasso。在Tikhonov正则化中，也称为岭回归，在方程11.3的目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>上添加一个惩罚项<span><span class="MathJax_Preview">λ||\overline{W}||^2</span><script type="math/tex">λ||\overline{W}||^2</script></span>，其中<span><span class="MathJax_Preview">λ&gt;0</span><script type="math/tex">λ>0</script></span>是正则化参数。在这种情况下，<span><span class="MathJax_Preview">W^T</span><script type="math/tex">W^T</script></span>的解为<span><span class="MathJax_Preview">(D^TD+λI)^{-1}D^T\overline{y}</span><script type="math/tex">(D^TD+λI)^{-1}D^T\overline{y}</script></span>，其中<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>是一个<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>单位矩阵。矩阵<span><span class="MathJax_Preview">(D^TD +λI)</span><script type="math/tex">(D^TD +λI)</script></span>可以表示为总是正定的，因此是可逆的。由Moore-Penrose伪逆提供的紧凑解决方案是<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>非常小（即<span><span class="MathJax_Preview">λ→0</span><script type="math/tex">λ→0</script></span>）的Tikhonov正则化的特例。通常，<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>的值应该通过交叉验证自适应地选择。在Lasso中，使用了<span><span class="MathJax_Preview">λ\sum_{i=1}^{d}|w_i|</span><script type="math/tex">λ\sum_{i=1}^{d}|w_i|</script></span>的<span><span class="MathJax_Preview">L_1</span><script type="math/tex">L_1</script></span>惩罚，而不是<span><span class="MathJax_Preview">L_2</span><script type="math/tex">L_2</script></span>惩罚项。由此产生的问题没有封闭形式的解决方案，它使用迭代技术解决，如近端梯度法和坐标下降<span><span class="MathJax_Preview">^{[256]}</span><script type="math/tex">^{[256]}</script></span>。Lasso倾向于为<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>选择稀疏解（即非零零部件），对于具有许多不相关特征的高维数据尤其有效。套索也可以被视为嵌入模型（参见第10章第10.2节）以进行特征选择，因为零系数的特征被有效地丢弃。Lasso对岭回归的主要优势不一定是表现，而是高度可解释的特征选择。</p>
+<p>虽然使用正则化的惩罚条款似乎是任意的，但它通过阻碍非常大的系数来创造稳定性。通过惩罚所有的回归系数，嘈杂的特征往往在更大程度上不被重视。线性回归中过度拟合的一个常见表现是大系数对<span><span class="MathJax_Preview">W\centerdot{X}</span><script type="math/tex">W\centerdot{X}</script></span>的附加贡献可能会被小型训练数据集中的另一个大系数频繁地抵消。这些功能可能会很嘈杂。由于响应预测对特征值中的小扰动非常敏感，因此这种情况可能会导致对未发现的测试实例的不准确预测。正规化通过惩罚大系数来防止这种情况。贝叶斯解释也存在这些正则化方法。例如，Tikhonov正则化假设了参数<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>和类变量的高斯先验值。当可用的培训数据有限时，这样的假设有助于获得独特的概率解释解决方案。</p>
+<h4 id="11511-fisher">11.5.1.1 与Fisher线性判别式的关系</h4>
+<p>费舍尔对二元类的线性判别（参见第10章第10.2.1.4节）可以证明是最小二乘回归的一个特例。考虑两个类的问题，其中两个类<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>和<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>分别包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个数据点中的部分<span><span class="MathJax_Preview">p_0</span><script type="math/tex">p_0</script></span>和<span><span class="MathJax_Preview">p_1</span><script type="math/tex">p_1</script></span>。假设两类的<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维平均向量分别为<span><span class="MathJax_Preview">μ_0</span><script type="math/tex">μ_0</script></span>和<span><span class="MathJax_Preview">μ_1</span><script type="math/tex">μ_1</script></span>，协方差矩阵分别为<span><span class="MathJax_Preview">Σ_0</span><script type="math/tex">Σ_0</script></span>和<span><span class="MathJax_Preview">Σ_1</span><script type="math/tex">Σ_1</script></span>。此外，假设数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>是以均值为中心的。对于类<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>，响应变量<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>设置为<span><span class="MathJax_Preview">-1/p_0</span><script type="math/tex">-1/p_0</script></span>，对于类<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>，响应变量<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>设置为<span><span class="MathJax_Preview">+1/p_1</span><script type="math/tex">+1/p_1</script></span>。请注意，响应变量也是以结果为中心的。现在让我们来看看通过最小二乘回归得到的<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>的解。<span><span class="MathJax_Preview">D^Ty</span><script type="math/tex">D^Ty</script></span>项与<span><span class="MathJax_Preview">μ_1^T-μ_0^T</span><script type="math/tex">μ_1^T-μ_0^T</script></span>成正比，因为对于属于类<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>的数据记录的分数<span><span class="MathJax_Preview">p_0</span><script type="math/tex">p_0</script></span>，<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>的值为<span><span class="MathJax_Preview">-1/p0</span><script type="math/tex">-1/p0</script></span>，对于数据记录的分数<span><span class="MathJax_Preview">p_1</span><script type="math/tex">p_1</script></span>，<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>的值等于<span><span class="MathJax_Preview">1/p_1</span><script type="math/tex">1/p_1</script></span>属于类1。换句话说，我们有：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\begin{split}(D^TD)\overline{W}^T&amp;=&amp;D^T\overline{y}\\&amp;∝&amp;\overline{\mu_1}^T-\overline{\mu_0}^T\end{split}</span><script type="math/tex">\begin{split}(D^TD)\overline{W}^T&=&D^T\overline{y}\\&∝&\overline{\mu_1}^T-\overline{\mu_0}^T\end{split}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\begin{split}(D^TD)\overline{W}^T&amp;=&amp;D^T\overline{y}\\&amp;∝&amp;\overline{\mu_1}^T-\overline{\mu_0}^T\end{split}</span><script type="math/tex">\begin{split}(D^TD)\overline{W}^T&=&D^T\overline{y}\\&∝&\overline{\mu_1}^T-\overline{\mu_0}^T\end{split}</script></span></script></span> 对于以均值为中心的数据，<span><span class="MathJax_Preview">\frac{D^TD}{n}</span><script type="math/tex">\frac{D^TD}{n}</script></span>等于协方差矩阵。它可以用一些简单的代数来表示（见第10章练习21）协方差矩阵等于<span><span class="MathJax_Preview">S_w+p_0p_1S_b</span><script type="math/tex">S_w+p_0p_1S_b</script></span>，其中<span><span class="MathJax_Preview">S_w=(p_0Σ_0+p_1Σ_1)</span><script type="math/tex">S_w=(p_0Σ_0+p_1Σ_1)</script></span>和<span><span class="MathJax_Preview">S_b=(\overline{μ_1}-\overline{μ_0})^T(\overline{μ_1}-\overline{μ_0})</span><script type="math/tex">S_b=(\overline{μ_1}-\overline{μ_0})^T(\overline{μ_1}-\overline{μ_0})</script></span>是（缩放的）<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>类内散布矩阵和类间散布矩阵。因此，我们有：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">(S_w+p_0p_1S_b)\overline{W}^T∝\overline{\mu_1}^T-\overline{\mu_0}^T\tag{11.10}</span><script type="math/tex">(S_w+p_0p_1S_b)\overline{W}^T∝\overline{\mu_1}^T-\overline{\mu_0}^T\tag{11.10}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">(S_w+p_0p_1S_b)\overline{W}^T∝\overline{\mu_1}^T-\overline{\mu_0}^T\tag{11.10}</span><script type="math/tex">(S_w+p_0p_1S_b)\overline{W}^T∝\overline{\mu_1}^T-\overline{\mu_0}^T\tag{11.10}</script></span></script></span> 此外，由于<span><span class="MathJax_Preview">S_bW^T=(\overline{μ_1}^T-\overline{μ_0}^T)[(\overline{μ_1}-\overline{μ_0})\overline{W}^T]</span><script type="math/tex">S_bW^T=(\overline{μ_1}^T-\overline{μ_0}^T)[(\overline{μ_1}-\overline{μ_0})\overline{W}^T]</script></span>，矢量<span><span class="MathJax_Preview">S_b\overline{W}^T</span><script type="math/tex">S_b\overline{W}^T</script></span>总是指向方向<span><span class="MathJax_Preview">\overline{μ_1}^T-\overline{μ_0}^T</span><script type="math/tex">\overline{μ_1}^T-\overline{μ_0}^T</script></span>，这意味着我们可以从方程11.10中删除涉及<span><span class="MathJax_Preview">S_b</span><script type="math/tex">S_b</script></span>的项而不影响比例常数：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\begin{split}
+&amp;S_w\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&amp;(p_0\Sigma_0+p_1\Sigma_1)\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&amp;\overline{W}^T∝(p_0\Sigma_0+p_1\Sigma_1)^{-1}(\overline{\mu_1}^T-\overline{\mu_0}^T)
+\end{split}</span><script type="math/tex">\begin{split}
+&S_w\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&(p_0\Sigma_0+p_1\Sigma_1)\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&\overline{W}^T∝(p_0\Sigma_0+p_1\Sigma_1)^{-1}(\overline{\mu_1}^T-\overline{\mu_0}^T)
+\end{split}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\begin{split}
+&amp;S_w\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&amp;(p_0\Sigma_0+p_1\Sigma_1)\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&amp;\overline{W}^T∝(p_0\Sigma_0+p_1\Sigma_1)^{-1}(\overline{\mu_1}^T-\overline{\mu_0}^T)
+\end{split}</span><script type="math/tex">\begin{split}
+&S_w\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&(p_0\Sigma_0+p_1\Sigma_1)\overline{W}^T∝(\overline{\mu_1}^T-\overline{\mu_0}^T)\\
+&\overline{W}^T∝(p_0\Sigma_0+p_1\Sigma_1)^{-1}(\overline{\mu_1}^T-\overline{\mu_0}^T)
+\end{split}</script></span></script></span> 很容易看出，向量<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>与第10章中的第10.2.1.4节的Fisher线性判别式相同。</p>
+<h3 id="1152">11.5.2 主成分回归</h3>
+<p>因为过度拟合是由<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>中的大量参数引起的，所以自然的方法是使用简化的维数据矩阵。在主成分回归中，确定输入数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>（参见第2章的2.4.3.1节）中具有非零特征值的最大<span><span class="MathJax_Preview">k{\ll}d</span><script type="math/tex">k{\ll}d</script></span>主成分。这些主成分是<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>协方差矩阵的top-k特征向量。设top-k特征向量以矩阵形式排列为<span><span class="MathJax_Preview">d×k</span><script type="math/tex">d×k</script></span>矩阵<span><span class="MathJax_Preview">P_k</span><script type="math/tex">P_k</script></span>的标准正交列。原始<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>被变换为新的<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>数据矩阵<span><span class="MathJax_Preview">R=DPk</span><script type="math/tex">R=DPk</script></span>。作为<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>的行的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维输入变量<span><span class="MathJax_Preview">\overline{Z1}...\overline{Zn}</span><script type="math/tex">\overline{Z1}...\overline{Zn}</script></span>的新导出集合被用作训练数据以学习简化的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维系数集合<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">y_i\approx\overline{W}·\overline{Z_i}\tag{11.11}</span><script type="math/tex">y_i\approx\overline{W}·\overline{Z_i}\tag{11.11}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">y_i\approx\overline{W}·\overline{Z_i}\tag{11.11}</span><script type="math/tex">y_i\approx\overline{W}·\overline{Z_i}\tag{11.11}</script></span></script></span> 在这种情况下，回归系数<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维矢量可以用<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>表示为<span><span class="MathJax_Preview">(R^TR)^{-1}R^T\overline{y}</span><script type="math/tex">(R^TR)^{-1}R^T\overline{y}</script></span>。除了较小的和满秩的<span><span class="MathJax_Preview">k×k</span><script type="math/tex">k×k</script></span>矩阵<span><span class="MathJax_Preview">R^TR</span><script type="math/tex">R^TR</script></span>被反转之外，该解决方案与前面的情况相同。测试实例<span><span class="MathJax_Preview">\overline{T}</span><script type="math/tex">\overline{T}</script></span>的预测是在将其转换为<span><span class="MathJax_Preview">\overline{T}P_K</span><script type="math/tex">\overline{T}P_K</script></span>的这个新的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维空间之后执行的。<span><span class="MathJax_Preview">\overline{T}P_K</span><script type="math/tex">\overline{T}P_K</script></span>和<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>之间的点积提供了测试实例的数值预测。主成分回归的有效性是由于丢弃了低方差维度，这是冗余方向（零特征值）或噪声方向（非常小的特征值）。如果在基于*PCA*的轴旋转（即<span><span class="MathJax_Preview">k=d</span><script type="math/tex">k=d</script></span>）之后包括所有方向，则该方法将产生与原始数据的线性回归相同的结果。在执行*PCA*之前，将数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>标准化为零均值和单位方差是很常见的。在这种情况下，测试实例也需要以相同的方式进行缩放和翻译。</p>
+<h3 id="1153">11.5.3 广义线性模型</h3>
+<p>线性模型中的隐含假设是，第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个特征变量的不断变化导致响应变量的不断变化，这与<span><span class="MathJax_Preview">w_i</span><script type="math/tex">w_i</script></span>成正比。但是，这样的假设在很多情况下都是不恰当的。例如，如果响应变量是人的身高，而特征变量是年龄，则身高不会随着年龄线性变化。此外，该模型需要考虑到这样的事实，即这些变量永远不会是负面的。在其他情况下，例如客户评级，响应变量可能会采用有限范围内的整数值。尽管如此，线性模型的优雅简单仍然可以在这些设置中使用。在广义线性模型（<em>GLM</em>）中，每个响应变量<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>被建模为具有平均值<span><span class="MathJax_Preview">f(\overline{W}·\overline{X_i})</span><script type="math/tex">f(\overline{W}·\overline{X_i})</script></span>的（通常指数的）概率分布的结果，如下所示：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">y_i～概率分布均值f(\overline{W}·\overline{X_i})\qquad\forall{i}\in{1...n}\tag{11.12}</span><script type="math/tex">y_i～概率分布均值f(\overline{W}·\overline{X_i})\qquad\forall{i}\in{1...n}\tag{11.12}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">y_i～概率分布均值f(\overline{W}·\overline{X_i})\qquad\forall{i}\in{1...n}\tag{11.12}</span><script type="math/tex">y_i～概率分布均值f(\overline{W}·\overline{X_i})\qquad\forall{i}\in{1...n}\tag{11.12}</script></span></script></span> 这个函数<span><span class="MathJax_Preview">f(·)</span><script type="math/tex">f(·)</script></span>被称为平均函数，它的逆<span><span class="MathJax_Preview">f^{-1}(·)</span><script type="math/tex">f^{-1}(·)</script></span>被称为链接函数。 虽然相同的平均值/连接函数可以用于不同的概率分布，但选择的平均值/连接函数和概率分布通常仔细配对以最大化模型的有效性和可解释性。 如果观察到的响应是离散的（例如，二进制），则可以对<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>（例如伯努利）使用离散概率分布，只要其均值是<span><span class="MathJax_Preview">f(\overline{W}·\overline{X_i})</span><script type="math/tex">f(\overline{W}·\overline{X_i})</script></span>即可。这种情况的一个例子是逻辑回归。下表说明了平均函数及其相关概率分布假设的一些常见示例：</p>
+<table>
+<thead>
+<tr>
+<th>链接函数</th>
+<th align="right">平均函数</th>
+<th align="center">分配假设</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span><span class="MathJax_Preview">Identity</span><script type="math/tex">Identity</script></span></td>
+<td align="right"><span><span class="MathJax_Preview">\overline{W}·\overline{X}</span><script type="math/tex">\overline{W}·\overline{X}</script></span></td>
+<td align="center">Normal</td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">Inverse</span><script type="math/tex">Inverse</script></span></td>
+<td align="right"><span><span class="MathJax_Preview">-\frac{1}{\overline{W}·\overline{X}}</span><script type="math/tex">-\frac{1}{\overline{W}·\overline{X}}</script></span></td>
+<td align="center">Exponential, Gamma</td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">Log</span><script type="math/tex">Log</script></span></td>
+<td align="right"><span><span class="MathJax_Preview">exp(\overline{W}·\overline{X})</span><script type="math/tex">exp(\overline{W}·\overline{X})</script></span></td>
+<td align="center">Poisson</td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">Logit</span><script type="math/tex">Logit</script></span></td>
+<td align="right"><span><span class="MathJax_Preview">\frac{1}{1+exp(-\overline{W}·\overline{X})}</span><script type="math/tex">\frac{1}{1+exp(-\overline{W}·\overline{X})}</script></span></td>
+<td align="center">Bernoulli, Categorical</td>
+</tr>
+<tr>
+<td><span><span class="MathJax_Preview">Probit</span><script type="math/tex">Probit</script></span></td>
+<td align="right"><span><span class="MathJax_Preview">\Phi(\overline{W}·\overline{X})</span><script type="math/tex">\Phi(\overline{W}·\overline{X})</script></span></td>
+<td align="center">Bernoulli, Categorical</td>
+</tr>
+</tbody>
+</table>
+<p>链接函数调节响应变量的性质及其在特定应用程序中的可用性。例如，<span><span class="MathJax_Preview">log</span><script type="math/tex">log</script></span>，<span><span class="MathJax_Preview">logit</span><script type="math/tex">logit</script></span>和<span><span class="MathJax_Preview">probit</span><script type="math/tex">probit</script></span>链接函数通常用于模拟离散或分类结果的相对频率。由于响应变量的概率建模，最大似然法被用来确定最优参数集<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>，其中响应变量结果的概率（或概率密度）的乘积被最大化。在估计<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>中的参数之后，测试实例<span><span class="MathJax_Preview">\overline{T}</span><script type="math/tex">\overline{T}</script></span>的期望响应值被估计为<span><span class="MathJax_Preview">f(\overline{W}·\overline{T})</span><script type="math/tex">f(\overline{W}·\overline{T})</script></span>。此外，响应变量（平均值<span><span class="MathJax_Preview">f(\overline{W}·\overline{T})</span><script type="math/tex">f(\overline{W}·\overline{T})</script></span>）的概率分布可用于详细分析。<span><span class="MathJax_Preview">GLM</span><script type="math/tex">GLM</script></span>的一个重要特例是最小二乘回归。在这种情况下，响应<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>的概率分布是平均<span><span class="MathJax_Preview">f(\overline{W}·\overline{X_i})=\overline{W}·\overline{X_i}</span><script type="math/tex">f(\overline{W}·\overline{X_i})=\overline{W}·\overline{X_i}</script></span>和常数方差<span><span class="MathJax_Preview">σ^2</span><script type="math/tex">σ^2</script></span>的正态分布。关系<span><span class="MathJax_Preview">f(\overline{W}·\overline{X_i})=\overline{W}·\overline{X_i}</span><script type="math/tex">f(\overline{W}·\overline{X_i})=\overline{W}·\overline{X_i}</script></span>来自链接函数是身份函数的事实。训练数据的可能性如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\begin{split}
+可能性({y1 . . . yn})=\prod_{i=1}^n概率(y_i)&amp;=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-f(\overline{W}·\overline{X_i}))^2}{2\sigma^2})\\
+&amp;=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})\\
+&amp;∝exp(-\frac{\sum_{i=1}^{n}(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})
+\end{split}</span><script type="math/tex">\begin{split}
+可能性({y1 . . . yn})=\prod_{i=1}^n概率(y_i)&=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-f(\overline{W}·\overline{X_i}))^2}{2\sigma^2})\\
+&=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})\\
+&∝exp(-\frac{\sum_{i=1}^{n}(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})
+\end{split}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\begin{split}
+可能性({y1 . . . yn})=\prod_{i=1}^n概率(y_i)&amp;=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-f(\overline{W}·\overline{X_i}))^2}{2\sigma^2})\\
+&amp;=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})\\
+&amp;∝exp(-\frac{\sum_{i=1}^{n}(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})
+\end{split}</span><script type="math/tex">\begin{split}
+可能性({y1 . . . yn})=\prod_{i=1}^n概率(y_i)&=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-f(\overline{W}·\overline{X_i}))^2}{2\sigma^2})\\
+&=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})\\
+&∝exp(-\frac{\sum_{i=1}^{n}(y_i-\overline{W}·\overline{X_i})^2}{2\sigma^2})
+\end{split}</script></span></script></span> 在这种特殊情况下，最大似然法可以表示为等效于最小二乘法，因为可能性的对数产生线性回归的缩放目标函数。在第10章的第9.6节中详细讨论了使用<span><span class="MathJax_Preview">logit</span><script type="math/tex">logit</script></span>函数和伯努利分布进行最大似然估计的另一个具体例子。在这种情况下，离散二元变量<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>由均值函数<span><span class="MathJax_Preview">f(\overline{W}·\overline{X_i})=1/[1+exp(-\overline{W}·\overline{X_i})]</span><script type="math/tex">f(\overline{W}·\overline{X_i})=1/[1+exp(-\overline{W}·\overline{X_i})]</script></span>的伯努利分布建模：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">y_i=\begin{cases}1&amp;概率 1/[1+exp(-\overline{W}·\overline{X_i})]\\0&amp;概率1/[1+exp(\overline{W}·\overline{X_i})]\end{cases}\tag{11.13}</span><script type="math/tex">y_i=\begin{cases}1&概率 1/[1+exp(-\overline{W}·\overline{X_i})]\\0&概率1/[1+exp(\overline{W}·\overline{X_i})]\end{cases}\tag{11.13}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">y_i=\begin{cases}1&amp;概率 1/[1+exp(-\overline{W}·\overline{X_i})]\\0&amp;概率1/[1+exp(\overline{W}·\overline{X_i})]\end{cases}\tag{11.13}</span><script type="math/tex">y_i=\begin{cases}1&概率 1/[1+exp(-\overline{W}·\overline{X_i})]\\0&概率1/[1+exp(\overline{W}·\overline{X_i})]\end{cases}\tag{11.13}</script></span></script></span> 请注意，<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>的平均值仍然按照上表中的均值函数满足。<span><span class="MathJax_Preview">GLM</span><script type="math/tex">GLM</script></span>的这种特殊情况被称为逻辑回归。逻辑回归也可用于<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>路分类响应值。在这种情况下，使用<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>路分类分布，其平均函数映射到<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维矢量以表示分类变量的每个结果。另外一个限制是<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维矢量的分量必须加<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>。<span><span class="MathJax_Preview">Probit</span><script type="math/tex">Probit</script></span>回归是<span><span class="MathJax_Preview">logit</span><script type="math/tex">logit</script></span>回归模型的姐妹家族，其中使用标准正态分布的累积密度函数<span><span class="MathJax_Preview">(CDF)Φ(·)</span><script type="math/tex">(CDF)Φ(·)</script></span>代替<span><span class="MathJax_Preview">logit</span><script type="math/tex">logit</script></span>函数。有序概率回归可以通过使用标准正态分布的分位数对响应变量的范围（例如，评级）中的有序整数值建模。<span><span class="MathJax_Preview">GLM</span><script type="math/tex">GLM</script></span>的关键洞察是根据特定应用中观察到的响应的性质，明智地选择链路功能和分配假设。广义线性模型可以看作是大量回归模型的统一，如线性回归，逻辑回归，概率回归和泊松回归。</p>
+<h3 id="1154">11.5.4 非线性和多项式回归</h3>
+<p>线性回归不能捕获非线性关系，如图11.1b所示。基本的线性回归方法可以通过使用导出的输入特征用于非线性回归。例如，考虑第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个数据点由<span><span class="MathJax_Preview">h_1(\overline{X_j})...h_m\overline{(X_j)}</span><script type="math/tex">h_1(\overline{X_j})...h_m\overline{(X_j)}</script></span>表示的一组新的m个特征。这里，<span><span class="MathJax_Preview">h_i(·)</span><script type="math/tex">h_i(·)</script></span>表示从二维输入特征空间到一维空间的非线性变换函数。这导致新的<span><span class="MathJax_Preview">n×m</span><script type="math/tex">n×m</script></span>输入数据矩阵。通过对这个导出的数据矩阵应用线性回归，可以对以下形式的关系建模：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">y=\sum_{i=1}^{m}w_ih_i(\overline{X})\tag{11.14}</span><script type="math/tex">y=\sum_{i=1}^{m}w_ih_i(\overline{X})\tag{11.14}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">y=\sum_{i=1}^{m}w_ih_i(\overline{X})\tag{11.14}</span><script type="math/tex">y=\sum_{i=1}^{m}w_ih_i(\overline{X})\tag{11.14}</script></span></script></span> 例如，在多项式回归中，直到阶数<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>的每个维度的较高幂被用作一组新的派生特征。这种方法将维度的数量扩大了一个因子<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>，但它允许在非线性关系方面表现更强。该方法的主要缺点是它扩展了参数集<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>的维数，因此可能导致过拟合。因此，使用正则化很重要。</p>
+<p>任意的非线性关系也可以通过核岭回归等方法来捕获。为了使用内核，主要目标是证明线性岭回归的封闭形式解可以用训练和测试实例之间的点积表示。实现这一目标的一种方法是通过形成线性岭回归问题的对偶<span><span class="MathJax_Preview">^{[448]}</span><script type="math/tex">^{[448]}</script></span>，然后像<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>中一样使用核心技巧。更简单的方法是在矩阵代数中使用谢尔曼-莫里森-伍德伯里同一性的特殊变体（参见练习14），对任何<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>和标量<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>来说都是如此：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">(D^TD+λI_d)^{-1}D^T=D^T(DD^T+λI_n)^{-1}\tag{11.15}</span><script type="math/tex">(D^TD+λI_d)^{-1}D^T=D^T(DD^T+λI_n)^{-1}\tag{11.15}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">(D^TD+λI_d)^{-1}D^T=D^T(DD^T+λI_n)^{-1}\tag{11.15}</span><script type="math/tex">(D^TD+λI_d)^{-1}D^T=D^T(DD^T+λI_n)^{-1}\tag{11.15}</script></span></script></span> 请注意，<span><span class="MathJax_Preview">I_d</span><script type="math/tex">I_d</script></span>是一个<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>的单位矩阵，而<span><span class="MathJax_Preview">I_n</span><script type="math/tex">I_n</script></span>是一个<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>的单位矩阵。对于一个不可见的测试实例<span><span class="MathJax_Preview">\overline{Z}</span><script type="math/tex">\overline{Z}</script></span>，它被表示为一个行向量，线性回归的预测<span><span class="MathJax_Preview">F(\overline{Z})</span><script type="math/tex">F(\overline{Z})</script></span>由<span><span class="MathJax_Preview">\overline{Z}\overline{W}^T</span><script type="math/tex">\overline{Z}\overline{W}^T</script></span>给出。通过用岭回归的封闭形式解代替<span><span class="MathJax_Preview">\overline{W}</span><script type="math/tex">\overline{W}</script></span>，然后利用上述身份，我们得到：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">F(\overline{Z})=\overline{Z}(D^TD+λI_d)^{-1}D^T\overline{y}=\overline{Z}D^T(DD^T+λI_n)^{-1}D^T\overline{y}\tag{11.16}</span><script type="math/tex">F(\overline{Z})=\overline{Z}(D^TD+λI_d)^{-1}D^T\overline{y}=\overline{Z}D^T(DD^T+λI_n)^{-1}D^T\overline{y}\tag{11.16}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">F(\overline{Z})=\overline{Z}(D^TD+λI_d)^{-1}D^T\overline{y}=\overline{Z}D^T(DD^T+λI_n)^{-1}D^T\overline{y}\tag{11.16}</span><script type="math/tex">F(\overline{Z})=\overline{Z}(D^TD+λI_d)^{-1}D^T\overline{y}=\overline{Z}D^T(DD^T+λI_n)^{-1}D^T\overline{y}\tag{11.16}</script></span></script></span> 请注意，<span><span class="MathJax_Preview">\overline{Z}D^T</span><script type="math/tex">\overline{Z}D^T</script></span>是测试实例<span><span class="MathJax_Preview">overline{Z}</span><script type="math/tex">overline{Z}</script></span>和<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个训练实例之间的点积的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维行向量。根据核心技巧，我们可以用包含测试和训练实例之间的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个核心相似性的向量<span><span class="MathJax_Preview">\overline{κ}</span><script type="math/tex">\overline{κ}</script></span>替换该行向量。此外，矩阵<span><span class="MathJax_Preview">DD^T</span><script type="math/tex">DD^T</script></span>包含训练实例之间的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>点积。我们可以用训练实例上构造的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>核矩阵<span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span>代替这个矩阵。然后，测试实例<span><span class="MathJax_Preview">\overline{Z}</span><script type="math/tex">\overline{Z}</script></span>的预测如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">F(\overline{Z})=\overline{κ}(K+λI_n)^{-1}\overline{y}\tag{11.17}</span><script type="math/tex">F(\overline{Z})=\overline{κ}(K+λI_n)^{-1}\overline{y}\tag{11.17}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">F(\overline{Z})=\overline{κ}(K+λI_n)^{-1}\overline{y}\tag{11.17}</span><script type="math/tex">F(\overline{Z})=\overline{κ}(K+λI_n)^{-1}\overline{y}\tag{11.17}</script></span></script></span> 内核技巧也可以应用于线性回归的其他变体，如<span><span class="MathJax_Preview">Fisher</span><script type="math/tex">Fisher</script></span>判别式和逻辑回归。<span><span class="MathJax_Preview">Fisher</span><script type="math/tex">Fisher</script></span>判别式的扩展是直接的，因为它是线性回归的一个特例，而核逻辑回归的推导使用像<span><span class="MathJax_Preview">SVMs</span><script type="math/tex">SVMs</script></span>这样的双优化公式。</p>
+<h3 id="1155">11.5.5 从决策树到回归树</h3>
+<p>回归树被设计用于建模特征和响应变量之间的非线性关系。如果在数据的分层分区中在每个叶节点处构建回归模型，则可以在每个分区内获得局部优化的线性回归模型。即使类变量和特征变量之间的关系是非线性的，局部线性逼近也是非常有效的。然后可以通过确定其适当的分区，使用其本地优化线性回归模型对每个测试实例进行分类。这种分层划分本质上是一个决策树，因为测试实例的分配分区由内部节点的分离条件决定。构造决策树的总体策略与分类类变量的情况相同。类似地，分割可以对特征变量使用单变量（轴平行）分割，如在传统的决策树中那样。但是，由于数字类变量，需要对分割和修剪标准进行更改：</p>
+<ol>
+<li>分裂准则：在分类类别的情况下，分裂准则使用基尼指数或类别变量的熵作为定性度量来确定分裂属性。但是，在数字类的情况下，使用基于错误的度量。前一部分的回归建模方法适用于每个潜在分裂产生的孩子。计算不同子节点中所有训练数据点的预测总体平方误差。具有最小集合平方误差的分裂是在特定节点的所有可能的分裂中选择的。</li>
+</ol>
+<p>这种方法的主要计算问题是需要为每个可能的拆分构建线性回归模型。另一种方法是在树构建阶段不使用线性回归。由可能的分割导致的子节点中的数字类变量的平均方差被用作分割评估的质量标准。换句话说，传统决策树构造中分类类变量的基尼指数分裂标准被数字类变量的方差所取代。只有在整个树已经被构建之后，才在叶节点处构建线性回归模型用于预测。虽然这种方法会导致更大的树，但从计算的角度来看更实用。</p>
+<ol>
+<li>修剪准则：为了使过度拟合最小化，一部分训练数据不用于构建决策树。这个训练数据然后用于评估决策树预测的平方误差。类似的后期修剪策略被用作分类类变量的情况。如果叶节点的删除提高了验证集的准确性，那么迭代地删除叶节点，直到不再有节点可以被删除。</li>
+</ol>
+<p>这种方法的主要缺点是当叶节点不包含足够的数据时，过度拟合线性回归模型是一种真正的可能性。 因此，需要足够数量的训练数据才能开始。 在这种情况下，回归树可以非常强大，因为它们可以建模复杂的非线性关系。</p>
+<h3 id="1156">11.5.6 评估模型的有效性</h3>
+<p>线性回归模型的有效性可以用称为<span><span class="MathJax_Preview">R_2</span><script type="math/tex">R_2</script></span>统计量的测量或者测定系数来评估。术语<span><span class="MathJax_Preview">SSE=\sum_{i=1}^{n}(y_i-g(\overline{X_i}))^2</span><script type="math/tex">SSE=\sum_{i=1}^{n}(y_i-g(\overline{X_i}))^2</script></span>产生回归预测的平方和误差。这里，<span><span class="MathJax_Preview">g(\overline{X})</span><script type="math/tex">g(\overline{X})</script></span>表示用于回归的线性模型。响应变量平均误差平方(或总平方和)为<span><span class="MathJax_Preview">SST=\sum_{i=1}^{n}(y_i-\sum_{j=1}^{n}\frac{y_j}{n})^2</span><script type="math/tex">SST=\sum_{i=1}^{n}(y_i-\sum_{j=1}^{n}\frac{y_j}{n})^2</script></span>，然后由<span><span class="MathJax_Preview">SSE/SST</span><script type="math/tex">SSE/SST</script></span>给出无法解释的方差分数，<span><span class="MathJax_Preview">R^2</span><script type="math/tex">R^2</script></span>统计如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">R^2=1-\frac{SSE}{SST}\tag{11.18}</span><script type="math/tex">R^2=1-\frac{SSE}{SST}\tag{11.18}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">R^2=1-\frac{SSE}{SST}\tag{11.18}</span><script type="math/tex">R^2=1-\frac{SSE}{SST}\tag{11.18}</script></span></script></span> 对于线性模型的情况，此统计量总是介于<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>和<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>之间。更高的值是可取的。当维度较大时，调整后的<span><span class="MathJax_Preview">R^2</span><script type="math/tex">R^2</script></span>统计量提供了更准确的度量：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">R^2=1-\frac{(n-d)SSE}{(n-1)SST}\tag{11.19}</span><script type="math/tex">R^2=1-\frac{(n-d)SSE}{(n-1)SST}\tag{11.19}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">R^2=1-\frac{(n-d)SSE}{(n-1)SST}\tag{11.19}</span><script type="math/tex">R^2=1-\frac{(n-d)SSE}{(n-1)SST}\tag{11.19}</script></span></script></span> <span><span class="MathJax_Preview">R^2</span><script type="math/tex">R^2</script></span>统计量仅适用于线性模型的情况。对于非线性模型，<span><span class="MathJax_Preview">R^2</span><script type="math/tex">R^2</script></span>统计量可能具有高度的误导性甚至是负面的。在这种情况下，可以直接使用<span><span class="MathJax_Preview">SSE</span><script type="math/tex">SSE</script></span>来衡量错误。</p>
+<h2 id="116">11.6半监督学习</h2>
+<p>在许多应用中，标记过的数据非常昂贵且难以获得。另一方面，无标签的数据通常充足且可用。事实证明，可以使用未标记的数据大大提高了许多挖掘算法的准确性。未标记的数据由于以下两个原因而具有较强可用性：</p>
+<ol>
+<li>未标记的数据可以用来估计低维流形结构数据。然后可以根据流形结构推断出标签分发中可用的变形。</li>
+<li>未标记的数据可用于估计特征的联合概率分布。特征的联合概率分布对于间接相关的特征是有用的标签值。</li>
+</ol>
+<p>上述两点密切相关。 为了解释这些问题，我们将使用两个例子。 在图11.2中，已经举例说明了一个例子，其中只有两个标记的例子可用。 仅基于这个训练数据，就说明了在图11.2a中存在的一个合理的决策边界。 请注意，这是人们希望找到的使用这种有限的训练数据的最佳决策边界。 这个决策边界的一部分在几乎没有特征值可用的空间。 因此，决定边界在这些地区可能不会反映看不见的测试实例的类行为。</p>
+<p>现在，假设将大量未标记的实例添加到训练数据中，如图11.2b所示。由于添加了这些未标记的实例，可以立即看出数据是沿着两个流形分布的，每个流形都包含其中一个训练实例。这里的一个关键假设是类变量是可能的在空间的密集区域上平滑地变化，但是它可能在稀疏的空间区域上显着变化。这导致了一个新的决策边界，它除了标记的实例之外还考虑了采用基础特征的相关性。在图11.2a的特定实例中，如果测试实例仅在原始坐标（1,0.7）附近提供训练数据，那么几乎任何分类器（例如最近邻分类器）都将把数据分配为A类。但是，由于之前很少有在测试实例处看到标记的例子，这种预测是不可靠的。然而，没有标签的例子可以用来适当地扩大标记的事例群，通过用适当的类别增加标记图11.2b中每个超平面的未标记例子的方式。在这点，很明显，靠近坐标（1，0.7）的测试实例确实属于B类
+<center> 
+<img alt="11.2" src="http://p6atp7tts.bkt.clouddn.com/11.2.png" />
+ 图11.2：未标记数据对分类的影响</center></p>
+<p>理解特征相关性估计的影响的另一种方式是
+检查直观可解释的文本域。考虑一个场景，该场景
+试图确定文档是否属于“科学”类别。没有足够标签的文件可能在文件中包含“爱因斯坦”一词。然而，
+“爱因斯坦”一词可能经常与其他（更常见的）词汇共同出现，例如
+在未标记的文件中的“物理学”。同时，这些更常见的词可能已经
+与“科学”类别产生了关系，因为它们存在于标签文件中。
+因此，没有标签的文件提供了“爱因斯坦”一词也是相关
+到“科学”类别的见解。这个例子表明可以使用未标记的数据来学习
+与分类过程非常相关的联合特征分布。</p>
+<p>许多半监督方法通常被称为直导因为它们
+无法处理超出样本的测试实例。换句话说，所有的测试实例都需要
+在构建训练模型时指定。新的超出样本的实例不能
+在模型建成后进行分类。这与大多数
+在上一章讨论的分类器中的归纳法不同，其中训练和测试阶段数据都很清晰的
+分离了。</p>
+<p>有两种主要类型的技术用于半监督学习。
+其中一些方法是元算法，可以使用任何现有的分类算法
+作为子程序，并利用它来整合未标记数据的影响。 第二种
+类型是那些其中包含了许多
+分类器修正来解释未标记数据的影响的方法。 第二种类型的两个典型
+的方法是半监督贝叶斯分类器和直推式支持向量机。
+本节将讨论这两类技术。</p>
+<h3 id="1161">11.6.1通用元算法</h3>
+<p>通用元算法的目标是使用现有的分类算法增强
+带有未标记数据的分类过程。 最简单的方法是自我训练，其中
+平滑度假设用于递增地扩展训练数据标记的部分。 这种方法的主要缺点是可能导致过度拟合。 一
+避免过度拟合的方法是使用联合训练。 共同训练划分特征空间
+并使用在这些特征空间中的每一个上训练的分类器独立地标记实例。
+来自一个分类器的标记实例被用作另一个分类器的反馈，反之亦然。</p>
+<h4 id="11611">11.6.1.1自我训练</h4>
+<p>自我训练过程可以使用任何现有的分类算法*<span><span class="MathJax_Preview">{\cal{A}}</span><script type="math/tex">{\cal{A}}</script></span><em>作为输入。该
+分类器</em><span><span class="MathJax_Preview">{\cal{A}}</span><script type="math/tex">{\cal{A}}</script></span><em>用于递增地将标签分配给它所具有的未标记实例
+最确定的预测。作为输入，自我训练程序使用初始标记
+设置*L</em>，未标记的集合*U*以及有时可以设置为的用户定义为1的参数k
+。自我训练过程反复进行以下步骤：</p>
+<ol>
+<li>
+<p>使用当前标记的集合*L*上的算法<span><span class="MathJax_Preview">{\cal{A}}</span><script type="math/tex">{\cal{A}}</script></span>来标识分类器*<span><span class="MathJax_Preview">{\cal{A}}</span><script type="math/tex">{\cal{A}}</script></span>*最确定的未标记数据*U*中的*k*个实例。</p>
+</li>
+<li>
+<p>为k个最确定地预测的实例分配标签并将它们添加到*L*。删除这些来自*U*的情况。</p>
+</li>
+</ol>
+<p>很容易看出，自我训练程序将很好地用于图11.2中简单的例子。然而，在实践中，不同的类别可能并没有完全分开。
+自我训练的主要缺点是将预测标签添加到训练数据中
+可能会导致在存在噪音时传播错误。已知的另一个程序，即联合训练，能够更有效地避免这种过度拟合。</p>
+<h4 id="11612">11.6.1.2联合训练</h4>
+<p>在共同训练中，假设特征集可以被划分成两个不相交的组
+<span><span class="MathJax_Preview">F_{1}</span><script type="math/tex">F_{1}</script></span>和<span><span class="MathJax_Preview">F_{2}</span><script type="math/tex">F_{2}</script></span>，这样它们中的每一个都足以学习目标分类功能。
+选择两个特征子集是非常重要的，以便它们尽可能独立于另一个特征子集
+。构造两个分类器，从而根据每个组构建一个分类器
+。这些分类器不允许直接互相交互，以便预测未标记的实例，尽管它们用于为每个实例构建训练集。这就是该方法被称为共同训练的原因。</p>
+<p>设*L*是标记了的训练数据，<em>U*是未标记的数据。设<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>和<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>是
+这些分类器的标记集合。集合<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>和<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>被初始化为可用
+标记的数据*L</em>，除非它们是分别用不相交的特征集合<span><span class="MathJax_Preview">F_{1}</span><script type="math/tex">F_{1}</script></span>和<span><span class="MathJax_Preview">F_{2}</span><script type="math/tex">F_{2}</script></span>来表示的。在联合训练过程中，由于未标记的集合*U*中不同的实例分别被添加到<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>和<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>中，<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>中的训练实例与<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>可能彼此不同。两个分类器模型<span><span class="MathJax_Preview">A_{1}</span><script type="math/tex">A_{1}</script></span>和<span><span class="MathJax_Preview">A_{2}</span><script type="math/tex">A_{2}</script></span>使用训练集合<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>和<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>分别构造。然后迭代进行以下步骤：</p>
+<ol>
+<li>
+<p>使用标记集合<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>训练分类器<span><span class="MathJax_Preview">A_{1}</span><script type="math/tex">A_{1}</script></span>，并从未标记的集合*U-<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>*添加k个最确定地预测的实例到分类器用于<span><span class="MathJax_Preview">A_{2}</span><script type="math/tex">A_{2}</script></span>的训练数据集合<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>。</p>
+</li>
+<li>
+<p>使用标记集<span><span class="MathJax_Preview">L_{2}</span><script type="math/tex">L_{2}</script></span>训练分类器<span><span class="MathJax_Preview">A_{2}</span><script type="math/tex">A_{2}</script></span>，并从未标记的集合*U-<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>*添加k个最确定地预测的实例到分类器用于<span><span class="MathJax_Preview">A_{1}</span><script type="math/tex">A_{1}</script></span>的训练数据集合<span><span class="MathJax_Preview">L_{1}</span><script type="math/tex">L_{1}</script></span>。</p>
+</li>
+</ol>
+<p>在该方法的许多实现中，每个类都有最确定的标记实例
+被添加到另一个分类器的训练集。重复此过程直至全部
+实例被标记。然后用扩展的训练数据对两个分类器进行再训练。这种方法不仅可以用来标记未标记的数据集*U*，而且也可以标记未被看到的测试实例。在过程结束时，返回两个分类器。对于一个看不见的测试
+实例，可以使用每个分类器来确定类别标签值。实例测试的分数
+通过组合两个分类器的分数来确定。例如，如果
+贝叶斯方法被用作基分类器，然后可以返回两个分类器返回的数据的后验概率的乘积。</p>
+<p>由于使用两种算法不相交的特征集合，协同训练方法对噪声更具鲁棒性。一个重要的假设是条件独立
+两组集合中的特征与特定类别有关。换句话说，在类标签固定后，一个子集中的特征相较于另一个子集是有条件独立的。
+直觉就是由一个分类器生成的实例看起来是随机的
+分发给其他人，反之亦然。因此，这种方法通常会更多
+比自我训练方法更能抵御噪音。</p>
+<h3 id="1162">11.6.2分类算法的具体变化</h3>
+<p>上一节中的算法被设计为通用的元算法，该算法实际上使用任何已知的分类算法<span><span class="MathJax_Preview">{\cal{A}}</span><script type="math/tex">{\cal{A}}</script></span>进行半监督学习。 还设计了一些依赖于其他分类算法变体的方法，例如贝叶斯分类器和支持向量机的变体。</p>
+<h4 id="11621em">11.6.2.1用EM进行半监督贝叶斯分类</h4>
+<p>一个重要的观察结果是，EM聚类算法（参见第6章第6.5节）
+和朴素贝叶斯分类器（参见第10章的10.5.1节）使用相同的生成混合模型，其中来自每个聚类（类）的实例是从预定义的
+分布，如伯努利或高斯分布中产生的。 在朴素贝叶斯分类器的情况下，
+EM算法的迭代方法并不是必需的，因为类成员资格
+的训练数据已经被修复，这使得E-step是不必要的。 然而，在半监督分类的情况下，未标记的实例需要分配给类
+以扩大训练数据。 因此，EM算法的迭代方法再次成为必不可少的。 半监督贝叶斯分类可以被看作是一个EM聚类和朴素贝叶斯分类器的组合。</p>
+<p>这个方法最初是在文本数据的背景下提出的，尽管这个讨论
+为简单起见，将假设分类数据。请注意文本数据的二进制表示
+也可能被视为分类数据。朴素贝叶斯算法需要估计
+的每个类的特征值的条件概率。具体而言，第十章的公式10.22需要估计<span><span class="MathJax_Preview">P（x_{j} = a_{j} | C = c）</span><script type="math/tex">P（x_{j} = a_{j} | C = c）</script></span>。这个表达式
+表示在给定类别和训练数据估计的情况下特征值的条件概率。如果数量太少，估算不能准确执行。考虑文本域的情况。如果只有五到十个标签
+文档可用于特定的类，而<span><span class="MathJax_Preview">x_{j}</span><script type="math/tex">x_{j}</script></span>是与之对应的二进制变量
+火特定单词<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>不存在，则不能有效执行该估计。正如前面所讨论的，标记和未标记的特征的联合分布
+数据在这方面可能非常有用。</p>
+<p>直观地说，这个想法是使用EM聚类算法来确定聚类
+与标签类最相似的文档。 部分监督的EM聚类方法
+将每个群集与特定的类相关联。 这些条件特征分布
+集群被用作相应的特征分布的更强健的代理
+类。</p>
+<p>基本思想是使用生成模型来根据数据创建半监督集群。 混合物组和类之间的一一对应关系在这种情况下保留下来。 用于分类数据聚类的EM算法及其半监督变体分别在
+章节7的第7.2.3和7.5.1中进行了讨论。建议读者在进一步阅读前重新阅读这些部分的相关背景。</p>
+<p>为了初始化，标记的实例被用作EM算法的种子，并且
+混合物组分的数量被设置为类别的数量。 贝叶斯分类器是
+用于在E步骤中将文档分配给群集（类）。 在第一次迭代中，贝叶斯
+分类器仅使用标记的数据来确定后集群（类）的初始集合
+成员概率，如在标准贝叶斯分类器中那样。 这导致一组“软”聚类，
+其中（未标记的）数据点<span><span class="MathJax_Preview">{\bar{X}}</span><script type="math/tex">{\bar{X}}</script></span>具有在范围<span><span class="MathJax_Preview">（0,1）</span><script type="math/tex">（0,1）</script></span>中与每个类<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>相关的权重<span><span class="MathJax_Preview">w（X，c）</span><script type="math/tex">w（X，c）</script></span>
+，对应于其后验贝叶斯成员概率。
+只有带标签的文档具有二进制权重。对于每个类别，其权重均为0或1，具体决定于他们的固定任务。 现在<span><span class="MathJax_Preview">P（x_{j} = a_{j} | C = c）</span><script type="math/tex">P（x_{j} = a_{j} | C = c）</script></span>的值使用
+章节10的公式10.22的变体进行使用标签和无标签的文档的加权估计。</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">P(x_{j}=a_{j}|C=c)=\frac{\sum_{\bar{X}\in LUu}w({\bar{X},c)}I(x_{j},a_{j})}{\sum_{\bar{X}\in LUu}w({\bar{X},c)}} \tag{11.20}</span><script type="math/tex">P(x_{j}=a_{j}|C=c)=\frac{\sum_{\bar{X}\in LUu}w({\bar{X},c)}I(x_{j},a_{j})}{\sum_{\bar{X}\in LUu}w({\bar{X},c)}} \tag{11.20}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">P(x_{j}=a_{j}|C=c)=\frac{\sum_{\bar{X}\in LUu}w({\bar{X},c)}I(x_{j},a_{j})}{\sum_{\bar{X}\in LUu}w({\bar{X},c)}} \tag{11.20}</span><script type="math/tex">P(x_{j}=a_{j}|C=c)=\frac{\sum_{\bar{X}\in LUu}w({\bar{X},c)}I(x_{j},a_{j})}{\sum_{\bar{X}\in LUu}w({\bar{X},c)}} \tag{11.20}</script></span></script></span></center></p>
+<p>这里，<span><span class="MathJax_Preview">I（x_{j}，a_{j}）</span><script type="math/tex">I（x_{j}，a_{j}）</script></span>是一个指标变量，如果<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个特征<span><span class="MathJax_Preview">x_{j}</span><script type="math/tex">x_{j}</script></span>
+是<span><span class="MathJax_Preview">a_{j}</span><script type="math/tex">a_{j}</script></span>，其值为1，否则为0。 与公式10.22的主要区别在于，后验贝叶斯
+未标记文档的估计也用于估计类别条件特征分布。 正如在标准贝叶斯方法中一样，拉普拉斯平滑法也可以
+被纳入以减少过度拟合。 每个簇的先验概率<span><span class="MathJax_Preview">P（C = c）</span><script type="math/tex">P（C = c）</script></span>
+也可以通过计算对应类别数据点的平均分配概率来估计。这是EM算法的M步骤。 下一个E-步骤使用这些步骤得到的<span><span class="MathJax_Preview">P（xj = aj | C = c）</span><script type="math/tex">P（xj = aj | C = c）</script></span>的修正值并使用标准贝叶斯分类器的概率导出后验贝叶斯的先验概率。因此，贝叶斯分类器隐含地引入了未标记数据的影响。 该算法可以概括为如下两个不断重复收敛的迭代步骤：</p>
+<ol>
+<li>
+<p>使用贝叶斯规则（E步骤）估计数据点对应簇（类）的后验概率。
+  <center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">P（C=c|\bar{X}）αP（C=c）\prod_{j= 1}^{d}P（x_{j} = a_{j} | C = c）\tag{11.21}</span><script type="math/tex">P（C=c|\bar{X}）αP（C=c）\prod_{j= 1}^{d}P（x_{j} = a_{j} | C = c）\tag{11.21}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">P（C=c|\bar{X}）αP（C=c）\prod_{j= 1}^{d}P（x_{j} = a_{j} | C = c）\tag{11.21}</span><script type="math/tex">P（C=c|\bar{X}）αP（C=c）\prod_{j= 1}^{d}P（x_{j} = a_{j} | C = c）\tag{11.21}</script></span></script></span></center></p>
+</li>
+<li>
+<p>（M-step）估计不同群集（类别）的特征的条件分布，使用当前估计的后验概率（未标记的数据）和数据点的已知成员资格（标记数据）用于聚类（类别）。</p>
+</li>
+</ol>
+<p>使用这种方法的一个挑战是聚类结构有时可能不能很好地与类分布相对应。在这种情况下，使用未标记的数据可能会损害分类准确性，因为EM算法找到的聚类偏离真正的类结构。毕竟，无标签的数据比有标记的数据丰富，因此估计公式11.20中的<span><span class="MathJax_Preview">P（x_{j} = a_{j}|C = c）</span><script type="math/tex">P（x_{j} = a_{j}|C = c）</script></span>会
+由未标记的数据支配。为了改善这种效应，标记的和未标记的数据
+在估计<span><span class="MathJax_Preview">P（x_{j} = a_{j}|C = c）</span><script type="math/tex">P（x_{j} = a_{j}|C = c）</script></span>期间数据的权重是不同的。未标记的
+数据按照预定折扣因子<span><span class="MathJax_Preview">μ&lt;1</span><script type="math/tex">μ<1</script></span>加权下降以确保聚类结构和类别分布之间的更好对应。换句话说，
+在估计公式11.20中的<span><span class="MathJax_Preview">P（x_{j} = a_{j}|C = c）</span><script type="math/tex">P（x_{j} = a_{j}|C = c）</script></span>之前，<span><span class="MathJax_Preview">w（X，c）</span><script type="math/tex">w（X，c）</script></span>的值仅与未标记实例的<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>相乘。用于半监督分类的EM方法尤其显着，因为它证明了半监督聚类和
+半监督分类的联系，即使这两种半监督都是根据不同的应用场景变化的。</p>
+<h4 id="11622">11.6.2.2传导支持向量机</h4>
+<p>大多数半监督方法的一般假设是
+无人监督的实例的标签值在人口密集的地区不会突然变化。在
+直接支持向量机中，这种假设是通过分配
+标签到无监督实例的隐式编码实现的，最大化支持向量机的边际。
+为了理解这一点，请考虑图11.2b的例子。在这种情况下，
+只有当集群中的实例标签包含类A的单个例子时，SVM边际才会进行优化，且也被设置为相同的值A。对于包含B类单一标签的群集中未标记的实例也是如此。因此，
+现在需要修改支持向量机公式，以结合额外的边界限制，
+以及每个未标记实例的二元决策变量。回想一下在章节10.6的讨论，原始SVM公式是为了最小化目标
+函数<span><span class="MathJax_Preview">\frac{|| W ||^2}{2}+C\sum_{i= 1}^{n}ξi</span><script type="math/tex">\frac{|| W ||^2}{2}+C\sum_{i= 1}^{n}ξi</script></span>，且受以下限制：</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">y_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi   ∀i \tag{11.22}</span><script type="math/tex">y_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi   ∀i \tag{11.22}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">y_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi   ∀i \tag{11.22}</span><script type="math/tex">y_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi   ∀i \tag{11.22}</script></span></script></span></center></p>
+<p>另外，观察松弛变量的非负性约束<span><span class="MathJax_Preview">ξ_{i}≥0</span><script type="math/tex">ξ_{i}≥0</script></span>。注意
+<span><span class="MathJax_Preview">y_{i}</span><script type="math/tex">y_{i}</script></span>的值是已知的，因为训练样例被标记了。对于未标记的实例的情况，二元决策变量<span><span class="MathJax_Preview">z_{i}∈(-1，+1)</span><script type="math/tex">z_{i}∈(-1，+1)</script></span>（在相应的松弛惩罚条件下）被纳入每个无标签的训练样例<span><span class="MathJax_Preview">X_{i}∈U</span><script type="math/tex">X_{i}∈U</script></span>。这些决定变量对应于将未标记的实例分配给特定的类。以下约束被添加到优化问题中：
+<center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">z_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi ∀i：\bar{X_{i}}∈U\tag{11.23}</span><script type="math/tex">z_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi ∀i：\bar{X_{i}}∈U\tag{11.23}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">z_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi ∀i：\bar{X_{i}}∈U\tag{11.23}</span><script type="math/tex">z_{i}（\bar{W}·\bar{X_{i}}+b）≥1-ξi ∀i：\bar{X_{i}}∈U\tag{11.23}</script></span></script></span></center></p>
+<p>未标记实例的松弛惩罚也可以包含在目标函数优化中。请注意，与<span><span class="MathJax_Preview">y_{i}</span><script type="math/tex">y_{i}</script></span>不同，<span><span class="MathJax_Preview">z_{i}</span><script type="math/tex">z_{i}</script></span>的值不是已知的，而且是二进制整数变量，且为优化问题的一部分。此外，修改
+优化公式是一个整数程序，比原始用支持向量机的凸优化问题困难得多。</p>
+<p>因此，已经设计了许多技术用迭代机制近似解决这个问题。其中一种方法最确定地开始标记
+预测的实例并迭代扩展它们。从未标记的实例开始标记的正面例子的数量基于精度和反馈之间所需的折衷。积极比消极实例的比例在整个迭代过程中保持不变。在每次迭代中，一个正面的例子变为负面的，一个负面的实例尽可能地改善分类器的软边界。
+书目注释包含了对这方面常用方法的讨论。</p>
+<h3 id="1163">11.6.3基于图形的半监督式学习</h3>
+<p>将任意数据类型转换为图形将在章节2.2.2.9中讨论。
+因此，这种方法的一个优点是它可以用于任意数据类型的半监督分类，只要距离函数可用于量化
+数据对象之间的距离。这是基于图形方法继承的属性，
+它们起源于最近邻分类。基于图的半监督学习的步骤如下：</p>
+<ol>
+<li>
+<p>在标记数据记录和未标记数据记录上构建相似图。每个数据对象<span><span class="MathJax_Preview">O_{i}</span><script type="math/tex">O_{i}</script></span>与相似度图中的节点相关联。每个对象连接到其k个最近邻居。</p>
+</li>
+<li>
+<p>边<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>的权重<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>等于对象<span><span class="MathJax_Preview">O_{i}</span><script type="math/tex">O_{i}</script></span>和<span><span class="MathJax_Preview">O_{j}</span><script type="math/tex">O_{j}</script></span>之间距离<span><span class="MathJax_Preview">d（O_{i}，O_{j}）</span><script type="math/tex">d（O_{i}，O_{j}）</script></span>的核函数，因此较大的权重表示更大
+  相似度。一个典型的权重例子基于热内核[90]：</p>
+</li>
+</ol>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">w_{ij}=e^{-d（O_{i}，O_{j}）^2 / t^2} \tag{11.24}</span><script type="math/tex">w_{ij}=e^{-d（O_{i}，O_{j}）^2 / t^2} \tag{11.24}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">w_{ij}=e^{-d（O_{i}，O_{j}）^2 / t^2} \tag{11.24}</span><script type="math/tex">w_{ij}=e^{-d（O_{i}，O_{j}）^2 / t^2} \tag{11.24}</script></span></script></span></center></p>
+<p>这里，t是用户定义的参数。</p>
+<p>这个问题是我们有一个包含标记节点和未标记节点的图。
+现在希望使用这些接近度来推断未标记节点的标签。这个问题与章节19.4中引入的集体分类问题完全相同。建议读者参考该部分中讨论的方法。</p>
+<p>基于图形的半监督式学习可以被看作是最近邻居分类器半监督式的扩展。基于图的半监督方法与最近邻分类器的唯一区别是构造相似图的方式。
+最近邻居方法在相似度图上可以从概念上看作集体分类方法，其中边只被添加在标记和未标记实例对之间。最近邻分类只是从标记的节点中选择主导标签
+投射在未标记的节点上。在半监督的情况下，可以添加边缘
+到任何节点对之间，无论它们是标记的还是未标记的。
+由于相似度图中的节点标签的稀缺性，在半监督学习中需要增加额外的边缘。这样的边缘能够关联未标记的任意集群形状更加有效地贴近他们最接近的标记实例。读者请参阅章节19.4的集体分类讨论。</p>
+<h3 id="1164">11.6.4半监督学习的讨论</h3>
+<p>半监督学习的一个重要问题是无标签数据是否总是有效提高分类准确性。半监督学习取决于固有的分类
+底层数据的结构。对于半监督学习是有效的，这个分类数据结构应与其聚类结构大致相符。这个假设
+在半监督EM算法的情况下是显而易见的。然而，假设也被其他方法隐含地使用。</p>
+<p>在实践中，当标记的例子数量非常少时，半监督式学习是最有效的，而且没有现实的方法可以做出空间中人口稀少的地区确定的预测。在某些领域，如节点分类
+图表，这几乎总是如此。因此，在这些领域中，换能设置是分类可以执行的唯一方式。这些方法将在下面的章节19.4中进行详细讨论。另一方面，当有大量标签的数据已经存在时，那么未标记的实例不会给学习者提供很多好处，而且
+实际上在某些情况下可能是有害的。</p>
+<h2 id="117">11.7主动学习</h2>
+<p>从前面关于半监督分类的讨论可以看出，有标签的数据在实际应用中通常很少。标记的数据通常很昂贵
+获取标签数据的成本往往可以量化。一些实例标签昂贵的获取机制如下：</p>
+<ol>
+<li>文档集合：大量的文档数据通常没有标签，这些文档可在网上找到。常用的方法是手动标注文档，
+  这是一个缓慢，艰苦和繁重的过程。另外，可以使用众包机制，如Amazon Mechanical Turk等机制。但是，这种机制通常会在每个实例的基础上产生较高成本。</li>
+<li>
+<p>隐私受限的数据集：在许多情况下，记录的标签可能是敏感的信息，可以以高昂的查询成本获取（例如，从相关企业获得许可）。在这种情况下，成本很难明确量化，但仍然可以通过建模来估计。</p>
+</li>
+<li>
+<p>社交网络：在社交网络中，可能需要识别具有特定属性的节点。例如，一家广告公司可能希望识别对“化妆品”感兴趣的社交网络节点。然而，标签很少与节点明确关联。相关节点的标识可能需要
+  手动检查社交网络帖子或用户调查。这两个过程都是耗时且昂贵的。</p>
+</li>
+</ol>
+<p>从上述例子中可以清楚地看到标签的获取
+作为一个有助于提高建模的准确性的以成本为中心的步骤。主动学习的目标
+是以标签获取的特定成本最大化分类的准确性。因此，
+主动学习整合标签获取和模型构建。这不同于所有
+本书中讨论的其他算法，这些算法假定训练数据标签
+已经可用。</p>
+<p>并非所有的训练实例都具有同样的信息。为了说明这一点，考虑一下
+如图11.3所示的两类问题。由A和B分别标记的两个类别具有将它们分开的垂直决策边界。假设收购
+标签是如此昂贵，以至于只能获得整个数据集四个例子的标签并使用这组四个实例来训练模型。显然，这是一个非常少的训练实例，以及训练实例的错误选择可能导致
+显著的过度拟合。例如，在图11.3a的情况下，已经从数据集中随机抽样了四个实例。典型的线性分类器，如逻辑回归，
+可以确定对应于图11.3a中的虚线的判定边界。它是
+很明显，这个决策边界是真实（垂直）决策的表现糟糕的边界。另一方面，在图11.3b的情况下，更仔细地选择采样的例子以按照真实的决策边界进行调整。这组标签实例将会生成整个数据集更好的分类模型。主动学习的目标是将标签和分类过程集成到一个框架中，以创建健壮的模型。在实践中，确定查询实例的正确选择是很有挑战性的问题。关键是要使用从标签中获得的知识
+以“猜测”查询标签的信息最丰富的区域。这样的
+方法可以帮助尽快发现决策边界的真实形状。
+因此，主动学习的关键问题如下：</p>
+<p>我们如何选择实例进行标注，以给定成本创建最精确的模型？</p>
+<p><center> 
+<img alt="11.3" src="http://p6atp7tts.bkt.clouddn.com/11.3.png" /></p>
+<p>图11.3：主动采样对决策边界的影响</center></p>
+<p>在某些情况下，标签成本可能是特定于实例的成本，尽管大多数模型在所有情况下都使用等价成本的简化假设。每一个主动学习
+系统有两个主要组成部分，其中之一已经给出：</p>
+<ol>
+<li>
+<p>Oracle：Oracle以指定测试实例的标签的形式提供对基础查询的响应。Oracle可能是一个人类贴标 签者，或者是一个成本驱动的数据采集系统，如Amazon Mechanical Turk。一般来说，在建模过程中，oracle被视为一个黑盒子，是过程输入的一部分。</p>
+</li>
+<li>
+<p>查询系统：查询系统的工作是向oracle提供查询标签的查询的具体记录。查询策略通常使用当前已知的一组训练实例标签进行分配来确定最具信息性的区域查询。</p>
+</li>
+</ol>
+<p>查询系统的设计可能取决于手头的应用程序。例如，
+一些查询系统使用选择性抽样，其中提供了一系列实例
+给决定是否查询它们的用户。基于池的
+抽样方法假设可以从中查询实例的基“池”获取
+数据点的标签。因此，学习者的任务是逐个确定（提供信息）这个池中的查询实例。</p>
+<p>基于池的方法是主动学习最常见的情况，而且因此将在本章中讨论。程序中的整体方法是一个迭代方法。在每次迭代中，确定了一系列兴趣实例，以此添加
+的标签对于进一步分类将是最有帮助的。这些被认为是
+“重要”的实例。重要实例的确定是查询系统的工作，而确定查询实例的标签是oracle的工作，或者在某些情况下，它可能是人类专家的工作。重复迭代过程，直到
+成本预算已经耗尽，或者分类精度不再随进一步添加标签提高为止。</p>
+<p>显然，主动学习的关键部分是查询策略的选择。这个查询应该如何执行？从图11.3的例子可以看出，
+最有效的查询策略可以清晰的最大限度地映射出分离的边界。因为边界区域通常包含多个类的实例，所以它们是根据不同学习者之间的分类标签不确定性或分歧进行分类的。当然，这并非总是如此，因为不确定区域有时可能包含无代表性的异常值。因此，各种模式的工作根据最具信息性查询点选取的最适方法的改变而变化。</p>
+<ol>
+<li>基于异质性的模型：这些模型尝试对不确定的，异质的，或与已经看到的不一样的空间区域进行采样。这种模型的实例包括不确定性抽样，委员会查询和预期模型变化。这些模型基于接近决策边界的区域更可能是异构的假设和这些区域的实例对于学习决策边界更有价值。</li>
+<li>基于性能的模型：这些模型直接使用分类器的性能测度，例如预期误差或方差降低量。因此，这些模型将查询实例添加到分类器性能对未标记的实例的影响量化。</li>
+<li>基于代表性的模型：这些模型试图创建数据，以尽可能代表训练实例的基础集群。例如，可能需要查询的实例的密度分布与训练数据匹配。但是，在查询模型内经常保留异质性标准。</li>
+</ol>
+<p>下面简要讨论这些不同类型的模型。</p>
+<h3 id="1171">11.7.1基于异质性的模型</h3>
+<p>这些模型的目标是确定最大的异质性区域。典型的
+方法是使用当前的一组训练标签来检查分类不可见实例相关的可用标签的不确定性。这种异质性可以以各种方式量化，如通过测量分类的不确定性，与目前模型的不相似性
+，或分类器委员会之间的分歧。</p>
+<h4 id="11711">11.7.1.1不确定性抽样</h4>
+<p>在不确定性抽样中，学习者试图标记那些
+标签值表现最不确定的的实例。例如，贝叶斯分类器的后验概率可以
+用于量化其不确定性。贝叶斯分类器是根据已经可用的标签实例进行训练的
+。二元标签实例在其次级类别概率接近0.5时被认为是不确定的。相应的标准可以形式化
+如下：
+<center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Certain（\bar{X}）=\sum_{i= 1}^{k}|| p_{i} - 0.5 || \tag{11.25}</span><script type="math/tex">Certain（\bar{X}）=\sum_{i= 1}^{k}|| p_{i} - 0.5 || \tag{11.25}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Certain（\bar{X}）=\sum_{i= 1}^{k}|| p_{i} - 0.5 || \tag{11.25}</span><script type="math/tex">Certain（\bar{X}）=\sum_{i= 1}^{k}|| p_{i} - 0.5 || \tag{11.25}</script></span></script></span></center></p>
+<p>该值在范围<span><span class="MathJax_Preview">（0,1）</span><script type="math/tex">（0,1）</script></span>内，且较低的值表示较大的不确定性。
+在多种场景中，可以使用正式的熵度量来量化不确定性。
+如果<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个类的贝叶斯后验概率分别为<span><span class="MathJax_Preview">p_{1}... p_{K}</span><script type="math/tex">p_{1}... p_{K}</script></span>，基与
+当前的标记实例集合，那么熵的度量<span><span class="MathJax_Preview">Entropy（\bar{X}）</span><script type="math/tex">Entropy（\bar{X}）</script></span>定义如下：</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Entropy（\bar{X}）=-\sum_{i= 1}^{k}p_{i}log(p_{i})\tag{11.26}</span><script type="math/tex">Entropy（\bar{X}）=-\sum_{i= 1}^{k}p_{i}log(p_{i})\tag{11.26}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Entropy（\bar{X}）=-\sum_{i= 1}^{k}p_{i}log(p_{i})\tag{11.26}</span><script type="math/tex">Entropy（\bar{X}）=-\sum_{i= 1}^{k}p_{i}log(p_{i})\tag{11.26}</script></span></script></span></center></p>
+<p>在这种情况下，较大的熵值表明更大的不确定性，并且在标签获取中更需要。</p>
+<h4 id="11712">11.7.1.2按委员会查询</h4>
+<p>在这种情况下，异质性是根据不同分类器的不一致而测量的，而不是根据单个分类器在不同标签上的后验概率。然而，这个标准试图以不同的方式实现相同的直观目标。直观地说，
+当贝叶斯分类器的后验概率在不同类别中相同时，不同分类模型之间的预测标签可能存在显着的不一致。因此，这种方法使用了经过当前的标记实例集训练的不同分类器的委员会。这些分类器然后用于预测每个未标记实例的类别标签。分类器最不同意的实例在这种情况下被选为一个相关实例。</p>
+<p>在直观的层面上，按委员会查询的方法实现了与不确定性抽样方法类似的异质性
+目标。不同的分类器更可能不同意靠近真实决策边界的实例的类标签。数学公式
+对不一致的量化也与不确定性抽样相同。尤其是，
+等式11.26中每个类别<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的后验概率<span><span class="MathJax_Preview">p_{i}</span><script type="math/tex">p_{i}</script></span>被每个类别<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>收到的选票替换。使用从建模方法完全上不同的不同分类器是特别有益的。</p>
+<h4 id="11713">11.7.1.3预期的模型变化</h4>
+<p>在这种方法中，通过将特定实例添加到训练数据中来选择具有来自当前分类模型的最大预期变化的实例。在很多
+基于优化的分类模型，如区分性概率模型，
+关于模型参数的模型目标函数的梯度可以被量化。通过向训练数据添加查询实例，梯度也会随着变化。将查询实例添加到一组标记的实例时实例梯度变化最大
+。直觉是这样的一个例子可能是与使用已标记实例构建的模型非常的
+不同。在候选实例<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的正确训练标签是第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>类时，假设<span><span class="MathJax_Preview">δg_{i}（\bar{X}）</span><script type="math/tex">δg_{i}（\bar{X}）</script></span>是相对于模型参数的梯度变化。换句话说，如果当前标注的训练集<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>和<span><span class="MathJax_Preview">\bar{∇G（L）}</span><script type="math/tex">\bar{∇G（L）}</script></span>是考虑模型参数的目标函数的梯度
+，我们有：</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">δg_{i}（\bar{X}）= ||\bar{ ∇G（L∪（\bar{X}，i））} -\bar{∇G（L）}||\tag{11.27}</span><script type="math/tex">δg_{i}（\bar{X}）= ||\bar{ ∇G（L∪（\bar{X}，i））} -\bar{∇G（L）}||\tag{11.27}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">δg_{i}（\bar{X}）= ||\bar{ ∇G（L∪（\bar{X}，i））} -\bar{∇G（L）}||\tag{11.27}</span><script type="math/tex">δg_{i}（\bar{X}）= ||\bar{ ∇G（L∪（\bar{X}，i））} -\bar{∇G（L）}||\tag{11.27}</script></span></script></span></center></p>
+<p>当然，我们还不知道<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的训练标签，但我们只能估计带有贝叶斯分类器的每个标签的后验
+概率。设<span><span class="MathJax_Preview">p_{i}</span><script type="math/tex">p_{i}</script></span>是关于训练数据中当前已知标签的标签集合的类别<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的后验概率。然后，
+模型变化的期望<span><span class="MathJax_Preview">C（\bar{X}）</span><script type="math/tex">C（\bar{X}）</script></span>相对于实例<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>被定义如下：</p>
+<p><center><span><span class="MathJax_Preview">C（\bar{X}）=\sum_{i= 1}^{k}p_{i}·δg_{i}（\bar{X}）</span><script type="math/tex">C（\bar{X}）=\sum_{i= 1}^{k}p_{i}·δg_{i}（\bar{X}）</script></span></center></p>
+<p>查询具有<span><span class="MathJax_Preview">C（\bar{X}）</span><script type="math/tex">C（\bar{X}）</script></span>最大值的实例<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的标签。</p>
+<h3 id="1172">11.7.2基于性能的模型</h3>
+<p>虽然基于异质性的模型的动机是由于不确定性区域靠近决策边界而最具信息性，他们有依然一个缺点。查询不确定区域可能会无意中导致训练数据中增加不具代表性的异常值。因此基于性能的分类器直接关注于分类目标函数。因此，这些方法评估对其余未标记的实例进行分类的准确性。</p>
+<h4 id="11721">11.7.2.1降低预期错误</h4>
+<p>为了进行讨论，尚未标记的实例的集合由<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>表示。这个集合被用作计算预期错误减少量的验证集合。这种方法与不确定性采样相辅相成。
+不确定性采样使得查询实例的标签不确定性最大化，
+当查询的实例被添加到训练数据时，期望的误差减少使剩余实例<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>的预期标签不确定性最小化。因此，在二元分类问题的情况下，<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>中实例的后验概率期望在添加查询实例后应尽可能远离0.5。这里的想法是
+更大的剩余未标记实例的类标签的确定性最终导致一个不可见的测试集的错误率更低。因此，错误减少模型也可以被认为是最大确定性模型，除了确定性标准
+应用于<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>中的实例而不是查询实例本身。假设<span><span class="MathJax_Preview">p_{i}（\bar{X}）</span><script type="math/tex">p_{i}（\bar{X}）</script></span>表示
+将当前的标记实例集经过贝叶斯模型训练过的查询候选实例<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的标签<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的后验概率。当实例标签组合<span><span class="MathJax_Preview">（\bar{X}，i）</span><script type="math/tex">（\bar{X}，i）</script></span>被添加到当前的标记集合中时，令<span><span class="MathJax_Preview">P_{j}^{（\bar{X}，i）}（\bar{Z}）</span><script type="math/tex">P_{j}^{（\bar{X}，i）}（\bar{Z}）</script></span>是类别标签<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的后验概率。然后，二元类问题的错误目标函数<span><span class="MathJax_Preview">E（\bar{X}，V）</span><script type="math/tex">E（\bar{X}，V）</script></span>（假设k = 2）定义如下：</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">E（\bar{X}，V）=\sum_{i= 1}^{k}p_{i}(\bar{X})(\sum_{j= 1}^{k}\sum_{\bar{Z}∈V }||P{j}^{(\bar{X},i)}(Z) - 0.5|| )\tag{11.28}</span><script type="math/tex">E（\bar{X}，V）=\sum_{i= 1}^{k}p_{i}(\bar{X})(\sum_{j= 1}^{k}\sum_{\bar{Z}∈V }||P{j}^{(\bar{X},i)}(Z) - 0.5|| )\tag{11.28}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">E（\bar{X}，V）=\sum_{i= 1}^{k}p_{i}(\bar{X})(\sum_{j= 1}^{k}\sum_{\bar{Z}∈V }||P{j}^{(\bar{X},i)}(Z) - 0.5|| )\tag{11.28}</span><script type="math/tex">E（\bar{X}，V）=\sum_{i= 1}^{k}p_{i}(\bar{X})(\sum_{j= 1}^{k}\sum_{\bar{Z}∈V }||P{j}^{(\bar{X},i)}(Z) - 0.5|| )\tag{11.28}</script></span></script></span></center></p>
+<p>目标函数可以解释为剩余测试实例的标签确定性期望。因此，目标函数是最大化的而不是最小化的，如同基于不确定性模型的情况。</p>
+<p>通过使用与基于不确定性模型的讨论中相同的熵准则，这个结果可以很容易地扩展到<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>路模型的情况。在那种情况下，通过类特定的熵<span><span class="MathJax_Preview">-P_{j}^{（\bar{X}，i）}（\bar{Z}）log（P_{j}^{（\bar{X}，i）}（\bar{Z}））</span><script type="math/tex">-P_{j}^{（\bar{X}，i）}（\bar{Z}）log（P_{j}^{（\bar{X}，i）}（\bar{Z}））</script></span>修改前述表达式以代替<span><span class="MathJax_Preview">|| P_{j}^{（\bar{X}，i）}（\bar{Z}）-0.5 ||</span><script type="math/tex">|| P_{j}^{（\bar{X}，i）}（\bar{Z}）-0.5 ||</script></span>。此外，这个标准需要最小化。</p>
+<h4 id="11722">11.7.2.2降低预期方差</h4>
+<p>关于上述方程式11.28的一个误差减少方法的是观点是，
+需要根据<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>中的全部未标记实例进行计算，
+并需要对新模型逐步进行训练以测试添加新实例的效果。这可能导致
+计算成本很高。应该指出的是，当一个实例集的错误
+减少，相应的方差也通常减少。整体泛化错误
+可以表示为真实标签噪声，模型误差和方差的总和。这些中，
+只有最后一项高度依赖于所选实例的选择。因此
+减少方差而不减少错误是可能的，这样做的主要优点是
+计算要求的降低。这些技术的主要优点是
+以闭合形式表达方差的能力，并因此实现更大的计算
+效率。这类方法的详细描述超出了本书的范围。
+请参阅书目注释。</p>
+<h4 id="1173">11.7.3基于代表性的模型</h4>
+<p>基于性能的模型比基于异质性的模型的主要优势在于
+他们打算改善未标记集合实例的错误行为
+而不是评估被查询实例的不确定性行为。因此，避免了不具代表性或类似异常的查询。在一些模型中，代表性本身就变成了查询标准的一部分。衡量代表性的一种方法是使用
+基于密度的标准，其中空间中的区域的密度用于衡量
+查询标准。该权重与基于异质性的查询条件相结合。
+因此，这种方法可以被认为是基于异质性模型的变体，
+但采用代表性加权以确保不选择异常值。</p>
+<p>因此，这些方法结合了查询实例的异质性行为
+和自未标记集合<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>的代表性函数来决定所查询的
+实例。代表性函数估计输入空间的密集区域的权重。
+这种模型的目标函数<span><span class="MathJax_Preview">O（\bar{X}，V）</span><script type="math/tex">O（\bar{X}，V）</script></span>表示为异质性分量<span><span class="MathJax_Preview">H（\bar{X}）</span><script type="math/tex">H（\bar{X}）</script></span>和代表性分量<span><span class="MathJax_Preview">R（\bar{X}，V）</span><script type="math/tex">R（\bar{X}，V）</script></span>的乘积。</p>
+<p><center><span><span class="MathJax_Preview">O（\bar{X}，V）= H（\bar{X}）R（\bar{X}，V）</span><script type="math/tex">O（\bar{X}，V）= H（\bar{X}）R（\bar{X}，V）</script></span></center></p>
+<p><span><span class="MathJax_Preview">H（\bar{X}）</span><script type="math/tex">H（\bar{X}）</script></span>（假定为最大化函数）的值可以是任何异质性标准（适合于最大化变换），例如不确定性抽样的熵标准，或预期的模型变化准则。代表性
+准则<span><span class="MathJax_Preview">R（\bar{X}，V）</span><script type="math/tex">R（\bar{X}，V）</script></span>仅仅是考虑<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>中实例的<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的密度。此密度的简单版本是<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>中实例<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的平均相似度。
+使用到了这个简单的测度的许多其他复杂的变化。读者可以参考书目注释以便讨论现有的措施。</p>
+<h2 id="118">11.8集合方法</h2>
+<p>集合方法的动机是不同的分类器由于分类器的特定特性可能会导致测试实例的预测有所不同，
+或者他们对训练数据中随机伪像的敏感性不同。整体方法是一种通过组合来自多个分类器的结果来提高预测精度的方法。集合分析的基本方法是根据不同的模型多次应用基础集合学习器，或者在不同的训练数据子集上使用相同的模型。然后将不同分类器的结果合并为一个强大的预测。</p>
+<p><center> 
+<img alt="11.4" src="http://p6atp7tts.bkt.clouddn.com/11.4.png" />
+图11.4：泛型集合框架</center></p>
+<p>虽然个人学习者的构建并通过各种集合模型进行组合的方式存在显着差异，我们从一个非常通用的集合算法的描述开始。在本节的后面，我们将讨论这个广泛框架的具体实例
+，例如装袋，提升和随机决策树。集合方法
+使用一组基本分类算法<span><span class="MathJax_Preview">A_{1}...A_{r}</span><script type="math/tex">A_{1}...A_{r}</script></span>。请注意，这些学习者可能是
+完全不同的算法，如决策树，SVM或贝叶斯分类器。在
+一些类型的集合中，如助推和装袋，使用单一的学习算法
+但有不同的训练数据选择。不同的学习者被用来衡量更大的
+不同区域数据的不同算法的鲁棒性。假设第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>次迭代中的学习算法用<span><span class="MathJax_Preview">Q_{j}</span><script type="math/tex">Q_{j}</script></span>表示。假设从基础学习者中选出<span><span class="MathJax_Preview">Q_{j}</span><script type="math/tex">Q_{j}</script></span>。此时，选择来自基础训练数据的派生训练数据集<span><span class="MathJax_Preview">f_{j}（D）</span><script type="math/tex">f_{j}（D）</script></span>。这可能是训练数据的随机样本，如装袋算法，或者可能是基于过去执行集合组件的结果，如同提升算法。
+通过将选择的学习算法<span><span class="MathJax_Preview">Q_{j}</span><script type="math/tex">Q_{j}</script></span>应用于<span><span class="MathJax_Preview">f_{j}（D）</span><script type="math/tex">f_{j}（D）</script></span>，在第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>次迭代中形成学习模型<span><span class="MathJax_Preview">M_{j}</span><script type="math/tex">M_{j}</script></span>。
+对于每个测试实例<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>，通过组合<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>对应的不同模型<span><span class="MathJax_Preview">M_{j}</span><script type="math/tex">M_{j}</script></span>的结果来进行预测。这种组合可以以各种方式执行。例子包括使用简单平均，使用加权投票或模型组合的处理过程作为学习问题。整体集成框架如图11.4所示。</p>
+<p>图11.4的描述是非常通用的，并且允许在如何学习集合组件和组合的执行的很多方面具有很大的灵活性。集合的两种主要类型是图11.4描述的特例：</p>
+<ol>
+<li>以数据为中心的集合：使用单个基本学习算法（例如，SVM或决策
+  树算法），并且主要变化是如何导出构建第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个集合成分时的数据集<span><span class="MathJax_Preview">f_{j}（D）</span><script type="math/tex">f_{j}（D）</script></span>。在这种情况下，算法的输入仅包含单个学习算法<span><span class="MathJax_Preview">A_{1}</span><script type="math/tex">A_{1}</script></span>。集合第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个成分的数据集<span><span class="MathJax_Preview">f_{j}（D）</span><script type="math/tex">f_{j}（D）</script></span>可以通过对数据进行采样的方式构建，主要关注对先前执行的组件集合中的训练数据分类错误的部分，操纵数据的特征或操纵数据中的类标签。</li>
+</ol>
+<p><center> 
+<img alt="11.5" src="http://p6atp7tts.bkt.clouddn.com/11.5.png" /></p>
+<p>图11.5：误差和方差对分类精度的影响</center></p>
+<ol>
+<li>以模型为中心的集合：在每个集合迭代中使用不同的算法<span><span class="MathJax_Preview">Q_{j}</span><script type="math/tex">Q_{j}</script></span>。在这些情况下，每个集合组件的数据集<span><span class="MathJax_Preview">f_{j}（D）</span><script type="math/tex">f_{j}（D）</script></span>与原始数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>相同。这些方法的基本原理是不同的模型可能在数据的不同区域中效果更好，因此模型的组合可能比任何给定的测试实例更有效，只要分类算法的具体错误不会在任何特定的测试实例上被大多数集成组件所反映。</li>
+</ol>
+<p>以下讨论介绍了在展示具体的实例之前集成分析的基本原理。</p>
+<h3 id="1181">11.8.1为什么集成分析有效？</h3>
+<p>集合分析的基本原理可以通过检查不同分类器误差的组成部分的方法得到最好的理解，
+正如统计学习理论所讨论的那样。
+分类器错误的三个主要组成部分包括：</p>
+<ol>
+<li>
+<p>误差：每个分类器都会对类之间的决策边界性质做出自己的建模假设。例如，线性SVM分类器假定
+  这两个类可以通过线性决策边界分开。当然，在实践中这不是真实的。例如，在图11.5a中，不同类别之间的决策边界显然不是线性的。通过实线显示正确的决策边界。因此，没有（线性）SVM分类器能对所有可能的测试实例进行分类，即使可能是最好的SVM模型是用非常大的训练数据集构建的。尽管图11.5a中的SVM分类器似乎是最好的近似，它显然不能匹配正确的决策边界，也因此有一个固有的错误。换句话说，任何给定的线性SVM模型都会有内在的误差。当分类器具有较高的误差时，它会对错误建模决策边界附近的测试实例的特定选择始终做出不正确的预测，即使练数据的不同样本被用于学习过程。</p>
+</li>
+<li>
+<p>方差：训练数据选择的随机变化会导致不同模型。考虑图11.5b所示的例子。在这种情况下，真正的决策边界是线性的。一个足够深的单变量决策树可以逼近一个与轴平行分段近似值相当的线性边界。但是，在有限的训练数据下，即使决策树深度足够且没有修剪，分段近似依旧将会像图11.5b中的决策树<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>假设的边界那样粗糙。不同的训练数据可能会导致不同的分割选择，作为其结果树<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>的决策边界是非常不同的。因此，诸如X的（测试）实例的不一致分类是通过选择不同的训练数据集创建的决策树实现的。这个是模型方差的表现。模型方差与过度拟合密切相关。当分类器具有过度拟合倾向时，它会对在不同训练数据集上的相同测试实例产生不一致的预测。</p>
+</li>
+<li>
+<p>噪音：噪音是指目标类别标签中的固有误差。因为这是数据质量的一个固有方面，人们很难做出改正。因此，集合分析的重点一般是减少误差和方差。</p>
+</li>
+</ol>
+<p>请注意，分类器的设计选择往往反映了误差和方差之间的折衷。例如，修剪决策树会导致更稳定的分类器和方差的降低。另一方面，因为裁剪后的决策树
+关于决策边界的简单性的假设要比未经处理的决策树的假设更强，前者导致更大的误差。同样，使用更多的邻居训练一个最近邻分类器将导致更大的误差但更低的方差。一般来说，简化
+关于决策边界的假设会导致更大的误差但更低的方差。在
+另一方面，复杂的假设减少了误差，但难以根据有限的数据进行稳健估计。误差和方差几乎受到每个模型设计选择的影响，例如基本算法的选择或模型参数的选择。</p>
+<p>集合分析通常可用于减少分类过程的误差和方差。例如，考虑图11.5a中所示实例的情况，
+其中决策边界不是线性的，因此任何线性SVM分类器都不会
+找到正确的决策边界。但是，通过使用不同的模型参数选择，
+或数据子集的选择，可以创建三个不同的线性SVM超平面A，
+B和C，如图11.6a所示。请注意，这些不同的分类器在数据的不同部分往往效果不错，并在数据任何特定部分有不同的偏向。在一些方法中有时会人为地引入了集合成分数据的不同部分的差异性能，例如增强算法。在其他情况中，它可能是使用完全不同的集合模型组件的自然结果
+（例如，决策树和贝叶斯分类器）。现在考虑一个新的集合分类器，该分类器通过使用对应于超平面A，B和C的三个上述分类器的多数投票来创建。该集成分类器的决策边界
+也在图11.6a中进行了说明。这个决策边界不是线性的，且与真实的决策边界误差较小。原因是不同的分类器
+在训练数据的不同部分有不同的误差级别和方向，
+大多数不同分类器的投票能够通常可以在每个组分分类器以外的任何特定区域获得误差较少的结果。</p>
+<p>类似的论点适用于图11.5b所示的方差实例。虽然
+像<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>这样的实例由于模型方差而分类不一致，当模型误差较低时
+通常能够正确分类。结果是，通过对于足够独立的分类器使用聚合，实例越来越可能逼近到决策边界，如<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>，将被正确分类。例如，通过三个决策树进行多数投票，其中每个决策树以80％的概率正确地对X进行分类，正确率将为<span><span class="MathJax_Preview">(0.8^{3} + (^{3}_{2}) × 0.8^{2} × 0.2) × 100 ≈ 90%</span><script type="math/tex">(0.8^{3} + (^{3}_{2}) × 0.8^{2} × 0.2) × 100 ≈ 90%</script></span>%。换句话说，
+多数分类器的集合决策边界将比它的任何分量分类器的边界更为接近真实的决策
+边界。事实上，一个合并一组相对粗略的决策树后的可能的集合边界的现实例子如图11.6b所示。请注意，集合边界更接近真正的边界，因为它不受有限大小的训练数据集的决策树行为中不可预测的变化的限制。因此，这样的集合能够更好
+利用训练数据中的知识。</p>
+<p>一般来说，不同的分类模型有不同的误差和方差来源。
+太简单的模型（比如线性SVM或浅层决策树）会造成太多
+关于决策边界形状的假设，因此会有很高的偏差。
+太复杂的模型（例如深层决策树）会过度拟合数据，并且会
+因此具有很高的方差。有时在同一分类器中设置不同的参数
+将偏向误差-方差权衡曲线的不同部分。例如，在最近邻分类器中<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的值很小
+将导致较低的误差但较高的方差。因为不同
+不同类型的学习者对误差和方差有不同的影响，
+选择组件分类器这一点很重要，以便优化对误差-方差权衡的影响。
+表11.1提供了不同模型对误差和方差的影响。</p>
+<h3 id="1182-">11.8.2正态声明的误差 - 方差权衡</h3>
+<p>在下文中，将提供关于误差 - 方差权衡的正式声明。考虑
+一个训练数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的分类问题。分类问题可以看作
+特征变量<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>和二进制类变量<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>之间的函数<span><span class="MathJax_Preview">f（\bar{X}）</span><script type="math/tex">f（\bar{X}）</script></span>的学习函数：</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">y=f（\bar{X}）+e\tag{11.29}</span><script type="math/tex">y=f（\bar{X}）+e\tag{11.29}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">y=f（\bar{X}）+e\tag{11.29}</span><script type="math/tex">y=f（\bar{X}）+e\tag{11.29}</script></span></script></span></center></p>
+<p>这里，<span><span class="MathJax_Preview">f（\bar{X}）</span><script type="math/tex">f（\bar{X}）</script></span>是代表函数特征变量和类变量的真实（但未知）关系，且<span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>是数据中不能被建模的内在错误。因此，在<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个测试实例<span><span class="MathJax_Preview">（\bar{X_{1}}，y_{1}）...（\bar{X_{n}}，y_{n}）</span><script type="math/tex">（\bar{X_{1}}，y_{1}）...（\bar{X_{n}}，y_{n}）</script></span>中，固有噪声<span><span class="MathJax_Preview">e^{2}_{a}</span><script type="math/tex">e^{2}_{a}</script></span>可以估计如下：</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">e^{2}_{a}=\frac{1}{n}\sum_{i= 1}^n(y_{i}-f{\bar{X_{i}}})^{2}\tag{11.30}</span><script type="math/tex">e^{2}_{a}=\frac{1}{n}\sum_{i= 1}^n(y_{i}-f{\bar{X_{i}}})^{2}\tag{11.30}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">e^{2}_{a}=\frac{1}{n}\sum_{i= 1}^n(y_{i}-f{\bar{X_{i}}})^{2}\tag{11.30}</span><script type="math/tex">e^{2}_{a}=\frac{1}{n}\sum_{i= 1}^n(y_{i}-f{\bar{X_{i}}})^{2}\tag{11.30}</script></span></script></span></center></p>
+<p><center>表11.1：不同方法对误差和方差的影响</p>
+<p><img alt="表11.1" src="http://p6atp7tts.bkt.clouddn.com/表11.1.png" /></center> </p>
+<p>由于函数<span><span class="MathJax_Preview">f（\bar{X}）</span><script type="math/tex">f（\bar{X}）</script></span>的精确形式是未知的，大多数分类算法
+基于某些建模假设构建模型<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>。这样的一个例子的
+建模假设是SVM中的线性决策边界。函数<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>可能是
+定义为算法（例如，决策树），或者它可以定义为封闭形式，如
+在章节10.6中讨论的SVM分类器，在后一种情况下，公式
+<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>的定义如下：</p>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">g（\bar{X}，D）=sign(\bar{W}·\bar{X} + b)\tag{11.31}</span><script type="math/tex">g（\bar{X}，D）=sign(\bar{W}·\bar{X} + b)\tag{11.31}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">g（\bar{X}，D）=sign(\bar{W}·\bar{X} + b)\tag{11.31}</span><script type="math/tex">g（\bar{X}，D）=sign(\bar{W}·\bar{X} + b)\tag{11.31}</script></span></script></span></center></p>
+<p>请注意，系数<span><span class="MathJax_Preview">\bar{W}</span><script type="math/tex">\bar{W}</script></span>和<span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>只能根据训练数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>估算。
+符号<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>作为<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>的参数出现，因为训练数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>
+在估计诸如<span><span class="MathJax_Preview">\bar{W}</span><script type="math/tex">\bar{W}</script></span>和<span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>的模型系数中是必需的。对于有限尺寸的训练数据集D，
+通常不可能非常精确地估计<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>，就像估计图11.5b的粗糙决策边界的情况一样。因此，训练数据集对估计结果<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>的具体影响可以通过将其与对训练数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的所有可能结果期望值<span><span class="MathJax_Preview">E_{D} [g（\bar{X}，D）]</span><script type="math/tex">E_{D} [g（\bar{X}，D）]</script></span>进行比较来量化。</p>
+<p>除了数据集特定的内在的错误<span><span class="MathJax_Preview">e^{2}_{a}</span><script type="math/tex">e^{2}_{a}</script></span>，在建模和估计过程中的错误有两个主要来源：</p>
+<ol>
+<li>
+<p>有关<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>的建模假设可能不会反映真实模型。考虑对于<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>使用线性SVM建模假设和真实类之间的边界不是线性的情况。这会导致模型的误差。在实践中，误差通常是由建模假设中的过分简化引起的。即使我们有一个非常大的训练数据集并可以以某种方式估计预期的数据<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>的值，因为由真实模型和假设模型之间的差异引起的误差,<span><span class="MathJax_Preview">（f（\bar{X}）-E_{D} [g（\bar{X}，D）]）^{2}</span><script type="math/tex">（f（\bar{X}）-E_{D} [g（\bar{X}，D）]）^{2}</script></span>的值将是非零的。这称为（平方）误差。请注意，通常可以通过假设更复杂的<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>的形式减少误差，例如使用内核SVM而不是图11.5a中的线性SVM。</p>
+</li>
+<li>
+<p>即使我们对<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>的假设是正确的，也不可能用任何给定的训练数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>准确估计<span><span class="MathJax_Preview">E_{D} [g（\bar{X}，D）]</span><script type="math/tex">E_{D} [g（\bar{X}，D）]</script></span>。在训练数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>和固定测试实例<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的不同实例上，预测的类标签<span><span class="MathJax_Preview">g（\bar{X}，D）</span><script type="math/tex">g（\bar{X}，D）</script></span>会有所不同。这是模型方差，对应于<span><span class="MathJax_Preview">E_{D} [(g（\bar{X}，D）-E_{D} [g（\bar{X}，D)])^{2}]</span><script type="math/tex">E_{D} [(g（\bar{X}，D）-E_{D} [g（\bar{X}，D)])^{2}]</script></span>。请注意，与训练数据的特定实例<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>定义的集合边界估计相比较（例如，图11.5b中的边界<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>），期望函数<span><span class="MathJax_Preview">E_{D} [g（\bar{X}，D）]</span><script type="math/tex">E_{D} [g（\bar{X}，D）]</script></span>定义了通常更接近真实决策边界的决策边界（例如，图11.6b中的集合边界估计）。</p>
+</li>
+</ol>
+<p>可以证明基于训练数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>上的测试数据点<span><span class="MathJax_Preview">（\bar{X_{1}}，y_{1}）...（\bar{X_{n}}，y_{n}）</span><script type="math/tex">（\bar{X_{1}}，y_{1}）...（\bar{X_{n}}，y_{n}）</script></span>在不同的选择上的预测的均方误差期望<span><span class="MathJax_Preview">E_{D} [MSE] =\frac{1}{n}\sum_{i= 1}^nE_{D}[(y_{i}-g{(\bar{X_{i}},D)})^{2}]</span><script type="math/tex">E_{D} [MSE] =\frac{1}{n}\sum_{i= 1}^nE_{D}[(y_{i}-g{(\bar{X_{i}},D)})^{2}]</script></span>可以分解为误差，方差和内在误差如下：</p>
+<p><span><span class="MathJax_Preview">E_{D} [MSE]=\frac{1}{n}\sum_{i= 1}^n(（f（\bar{X}_{i}）-E_{D} [g（\bar{X}_{i}，D）]）^{2}-E_{D} [(g（\bar{X}_{i}，D）-E_{D} [g（\bar{X}_{i}，D)])^{2}])+e^{2}_{a}</span><script type="math/tex">E_{D} [MSE]=\frac{1}{n}\sum_{i= 1}^n(（f（\bar{X}_{i}）-E_{D} [g（\bar{X}_{i}，D）]）^{2}-E_{D} [(g（\bar{X}_{i}，D）-E_{D} [g（\bar{X}_{i}，D)])^{2}])+e^{2}_{a}</script></span></p>
+<p>集合方法通过减少误差和方差来减少组合模型的分类错误。通过仔细选择具有特定误差性质的组件模型并将它们适当地结合起来，通常可以同时减少个体模型的误差和方差。</p>
+<h3 id="1183">11.8.3 集合学习的具体实例</h3>
+<p>已经设计了一些集合方法通过误差减少来提高准确性，方差或两者的组合。在下文中，提供了对选定模型的讨论。</p>
+<h4 id="11831">11.8.3.1 装袋</h4>
+<p>装袋，也被称为引导聚集，是一种尝试减少预测方差的方法。它基于这样的想法，即如果<span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>的方差
+预测是<span><span class="MathJax_Preview">σ^{2}</span><script type="math/tex">σ^{2}</script></span>，那么<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个独立相同分布（独立同分布）预测的平均值的方差减少到<span><span class="MathJax_Preview">\frac{σ^{2}}{k}</span><script type="math/tex">\frac{σ^{2}}{k}</script></span>。给定足够的独立预测因素，那么平均的方法将显着减少差异。</p>
+<p>那么如何近似进行独立同分布预测？装袋时，从原始数据中的数据点中统一采样替代。这种抽样方法被称为自举，并且也用于模型评估。获得了与原始数据大小相同的样本。此实例可能包含重复项，通常包含在原始不同的数据点中大约<span><span class="MathJax_Preview">1-（1-1/n）^{n}≈1-1/e</span><script type="math/tex">1-（1-1/n）^{n}≈1-1/e</script></span>部分的数据。这里，<span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>代表自然对数的基数。很容易获得这个结果，因为数据点不包含在样本中的概率由<span><span class="MathJax_Preview">（1-1/n）^{n}</span><script type="math/tex">（1-1/n）^{n}</script></span>给出。
+总共<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个不同的自举样本，每个样本大小为<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>，都是独立绘制的，
+且分类器在每个样本上进行训练。对于给定的测试实例，预测的类标签是
+由不同分类器的主要投票的集合形成的。</p>
+<p>装袋的主要优点是它减少了模型的差异。但是，装袋并不能减少模型误差。因此，这种做法对于图11.5a所示的这种情况不会有效，但它对图11.5b所示的例子有效。在图11.5b中，
+不同的决策树边界由自举样本中的随机变量创建。然而，这些自举样本的大多数投票表现会比根据方差分量减少而在整个数据集上构建的模型更好。对于误差是错误的主要组成部分的情况，自举
+方法可能会导致精度略有下降。因此，在设计自举方法时，建议分别设计各个组件以减少为了降低方差而产生的误差，因为装袋会照顾方差。这样的
+选择优化了误差-方差的权衡。例如，人们可能想要发展叶子上有100％纯度的深度决策树。事实上，决策树是一个装袋的理想选择，因为它们在生长足够深时具有低误差和高方差。装袋的主要问题是独立同分布假设因为整体组件之间的相关性而通常无法满足。</p>
+<h4 id="11832">11.8.3.2 随机森林</h4>
+<p>当来自各种组合部件的独立预测满足独立同分布属性时，套袋效果最佳。如果<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个不同的预测变量，每个预测变量都有一个正的方差σ2，且它们两两之间的相关系数为<span><span class="MathJax_Preview">ρ</span><script type="math/tex">ρ</script></span>，则平均的预测方差可以表示为<span><span class="MathJax_Preview">ρ·σ^{2}+\frac{（1-ρ）·σ^{2}}{k}</span><script type="math/tex">ρ·σ^{2}+\frac{（1-ρ）·σ^{2}}{k}</script></span>。<span><span class="MathJax_Preview">ρ·σ^{2}</span><script type="math/tex">ρ·σ^{2}</script></span>项在集合中对应的分量<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的数量是不变的。这个项限制了装袋的性能收益。下面我们将讨论自举决策树的预测通常是正相关的。</p>
+<p>随机森林可以被看作是基本装袋方法的一般化，如
+应用于决策树。随机森林被定义为决策树的集合，
+其中随机性被明确插入到每个模型决策树的建模过程中。自举式采样方法也是间接的
+为模型构建添加随机性的方式，这样做有一些缺点。
+直接在装袋中使用决策树的主要缺点是在树的顶层的分割选择
+在统计上可能与自举采样保持近似不变。因此，树之间更相关，这限制了从装袋获得的错误减少的数量。在这种情况下，直接增加组成决策树模型的多样性是有意义的。这个想法是使用与不同的集合组件之间的相关性较小随机决策树模型。
+然后可以通过平均方法更有效地降低底层可变性。最终结果
+通常比在决策树上直接应用装袋更准确。图11.6b
+提供了该方法对决策边界的影响的典型例子，
+该方法类似于装袋，但通常更明显。</p>
+<p>随机分割选择方法直接将随机性引入分割标准。整数参数<span><span class="MathJax_Preview">q≤d</span><script type="math/tex">q≤d</script></span>用于调节在拆分选择中引入的随机数数量。每个节点的分割选择之前首先随机选择
+大小为<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>的属性的子集<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>。然后仅使用这个子集来执行该节点处的分割。较大的<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>值将导致相似树与没有任何注入随机性的树相似。通过从全维数<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>中选择小的<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>值，可以减少随机森林不同组成部分之间的相关性。该结果树也可以更有效地生长，因为需要在每个节点上考虑的属性的数量较少。另一方面，当选择使用特征集<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的更大尺寸<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>时，则每个单独的集合成分将具有更好的准确性，
+这也是可取的。因此，我们的目标是选择一个好的平衡点。研究
+表明，当输入属性的数量为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>时，共有<span><span class="MathJax_Preview">q=log_{2}（d）+1</span><script type="math/tex">q=log_{2}（d）+1</script></span>个属性
+应该被选择来实现最佳的取舍。有趣的是，即使是<span><span class="MathJax_Preview">q=1</span><script type="math/tex">q=1</script></span>的选择似乎在准确度方面表现也是如此良好，虽然它需要使用更多的集合成分。集合构建结束后，各种主要测试实例的预测标签将被反馈。这种方法被称为<span><span class="MathJax_Preview">Forest-RI</span><script type="math/tex">Forest-RI</script></span>，因为
+它基于随机输入选择。</p>
+<p>当总体维数<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>很小时，这种方法并不适用，因此不再可能使用比<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>小得多的<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>值。在这种情况下，
+指定一个值<span><span class="MathJax_Preview">L≤d</span><script type="math/tex">L≤d</script></span>，这与组合的输入要素的数量结合在一起。在每个节点处，随机选择L个特征，并且与从<span><span class="MathJax_Preview">[-1,1]</span><script type="math/tex">[-1,1]</script></span>范围内随机均匀生成的系数线性组合。总共生成<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>个这样的组合以创建多变量属性的新子集S。与前面的情况一样，只使用属性集<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>执行分割。这会导致多变量
+随机分裂。这种方法被称为<span><span class="MathJax_Preview">Forest-RC</span><script type="math/tex">Forest-RC</script></span>，因为它使用随机线性
+组合。</p>
+<p>在随机森林方法中，深树在没有修剪的情况下生长。每棵树都是
+在训练数据的自举样本上生长以增加方差减少量。如
+在装袋时，随机森林方法显着降低了方差。但是，
+由于每个分类器成分选择的限制，组分分类器可能具有更高的误差。当训练数据中的有信息特征的部分很小时，会导致问题。因此，随机森林的收益是由于
+方差的减少。在实践中，随机森林方法通常比
+装袋效果好并可以与增强相媲美。它也能抵抗噪音和异常值。</p>
+<h4 id="11833">11.8.3.3 增强</h4>
+<p>在增强中，权重与每个训练实例相关联，使用这些权重对不同的分类器
+进行训练。权重基于分类器性能根据迭代进行修改。换句话说，构建的未来模型依赖于
+以前模型的结果。因此，这个模型中的每个分类器都是使用加权训练数据集上的相同算法<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>构造的。
+基本的想法是把重点放在在未来的迭代中通过增加这些实例的相对权重带来的错误地分类实例。假设这些错误分类实例的错误是由分类器误差造成的。因此，增加错误分类实例的权重会导致
+在一个新的分类器中纠正这些特定情况下的误差。通过迭代使用
+这种方法和创建各种分类器的加权组合，可能实现
+创建一个整体误差较低的分类器。例如，在图11.6a中，每个单独的SVM
+不是全局最优的，并且仅在决策边界的特定部分附近是准确的，
+但组合集合提供了非常准确的决策边界。</p>
+<p><span><span class="MathJax_Preview">AdaBoost</span><script type="math/tex">AdaBoost</script></span>算法是最着著名的增强算法。为简单起见，
+以下讨论将假设二进制类方案。假设这个类别
+标签位于<span><span class="MathJax_Preview">(-1，+1)</span><script type="math/tex">(-1，+1)</script></span>中。该算法通过关联每个训练实例来实例，
+其权重在每次迭代中都会更新，具体取决于在最后一次迭代的分类结果。基础分类器因此需要能够使用加权实例。权重可以通过直接修改训练模型来实现，或者
+通过（有偏）的训练数据的自举采样。读者应该重新审视这一部分
+在稀疏类别学习上讨论这个话题。错误分类的实例
+在连续迭代中有更高的权重。请注意，这对应于在后面的迭代中关于全局训练数据有意偏置
+分类器的情况，但是减少了
+在特定模式<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>中被认为“难以分类”的某些地区存在的误差。</p>
+<p><center>
+<img alt="11.7" src="http://p6atp7tts.bkt.clouddn.com/11.7.png" />
+图11.7：<span><span class="MathJax_Preview">AdaBoost</span><script type="math/tex">AdaBoost</script></span> 算法</center></p>
+<p>在第<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>轮中，第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个实例的权重是<span><span class="MathJax_Preview">W_{t}（i）</span><script type="math/tex">W_{t}（i）</script></span>。算法开始于
+<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个实例中的每一个实例，均衡权重为<span><span class="MathJax_Preview">1/n</span><script type="math/tex">1/n</script></span>，并在每次迭代中更新它们。在
+第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个实例被错误分类的事件发生时，则其（相对）权重增加到
+<span><span class="MathJax_Preview">W_{t+1}（i）=W_{t}（i）e^{α_{t}}</span><script type="math/tex">W_{t+1}（i）=W_{t}（i）e^{α_{t}}</script></span>，而在正确分类的情况下，权重下降
+到<span><span class="MathJax_Preview">W_{t+1}（i）=W_{t}（i）e^{-α_{t}}</span><script type="math/tex">W_{t+1}（i）=W_{t}（i）e^{-α_{t}}</script></span>。这里选择<span><span class="MathJax_Preview">α_{t}</span><script type="math/tex">α_{t}</script></span>作为函数<span><span class="MathJax_Preview">\frac{1}{2}log_{e}（（1-e_{t}）/e_{t}）</span><script type="math/tex">\frac{1}{2}log_{e}（（1-e_{t}）/e_{t}）</script></span>，其中<span><span class="MathJax_Preview">e_{t}</span><script type="math/tex">e_{t}</script></span>是
+通过第<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>次迭代中的模型错误预测训练实例的一小部分（用<span><span class="MathJax_Preview">W_{t}（i）</span><script type="math/tex">W_{t}（i）</script></span>加权后计算）。该方法在训练数据上的分类器分类的准确率为100％时终止<span><span class="MathJax_Preview">（e_{t}=0）</span><script type="math/tex">（e_{t}=0）</script></span>，或者比随机（二进制）
+分类器<span><span class="MathJax_Preview">（e_{t}≥0.5）</span><script type="math/tex">（e_{t}≥0.5）</script></span>还差时终止。另外的终止标准是以用户定义的参数<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>为界的增强次数
+轮次。算法的整体训练部分
+如图11.7所示。</p>
+<p>如何将一个特定的测试实例在集合学习器中进行分类仍然有待解释。在不同轮次的增强中引入的每个模型都应用于测试实例。对第<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>轮的测试实例的预测<span><span class="MathJax_Preview">p_{t}∈(-1，+1)</span><script type="math/tex">p_{t}∈(-1，+1)</script></span>通过<span><span class="MathJax_Preview">α_{t}</span><script type="math/tex">α_{t}</script></span>进行加权
+并将这些加权预测求和。求和标志<span><span class="MathJax_Preview">\sum_{t}p_{t}α_{t}</span><script type="math/tex">\sum_{t}p_{t}α_{t}</script></span>提供测试实例的类标签预测。请注意，不太准确的组件
+在这种方法下的权重较小。</p>
+<p><span><span class="MathJax_Preview">e_{t}≥0.5</span><script type="math/tex">e_{t}≥0.5</script></span>的错误率与随机（二进制）分类器中的预期错误率一样差或更差。这就是这种情况也被用作终止标准的原因。
+在增强算法的一些实现中，每当<span><span class="MathJax_Preview">e_{t}≥0.5</span><script type="math/tex">e_{t}≥0.5</script></span>时，权重<span><span class="MathJax_Preview">W_{t}（i）</span><script type="math/tex">W_{t}（i）</script></span>被重置为<span><span class="MathJax_Preview">1/n</span><script type="math/tex">1/n</script></span>，
+并且利用复位权重继续进行增强处理。在其他实现中，<span><span class="MathJax_Preview">e_{t}</span><script type="math/tex">e_{t}</script></span>
+允许增加到0.5以上，因此一些测试实例的预测结果<span><span class="MathJax_Preview">p_{t}</span><script type="math/tex">p_{t}</script></span>通过权重<span><span class="MathJax_Preview">α_{t}=log_{e}（（1-e_{t}）/e_{t}）</span><script type="math/tex">α_{t}=log_{e}（（1-e_{t}）/e_{t}）</script></span>的负值有效地实现反转。</p>
+<p>增强主要侧重于减少误差。错误的误差成分
+由于更加关注错误分类的实例而减少了。合并决定
+边界是更简单的决策边界的复杂组合，这是针对
+训练数据的特定部分进行了优化。图11.6a展示了一个简单的决策边界如何组合以提供复杂决策边界的例子。
+由于其侧重于分类器模型的误差，这种方法能够结合许多弱（高误差）学习者来创建一个强学习者。因此，该方法通常应该与较简单的（高误差）学习者一起使用，且这些学习者在个体集合成分中的误差较小。尽管注重误差，增强也可以在采样时实施重新加权的情况下微弱的减少误差。这种减少是因为
+在随机抽样，重新加权的实例的情况下重复构建模型。
+方差减少量取决于所使用的重新加权方案。
+在轮次之间少量的修改权重能更好的降低方差。例如，
+如果权重在增强轮次之间完全没有修改，则增强算法
+默认降为装袋算法，这会只减少方差。因此，有可能利用增前算法的变体
+以各种方式探索误差-方差权衡。</p>
+<p>增强算法容易受到存在重大噪声的数据集的影响。这是因为增强算法假设错误分类是由于错误建模决策边界附近的实例误差成分造成的，而这可能只是数据错误标记的结果。这是数据固有的噪音成分，而不是
+模型的。在这种情况下，增强算法不恰当在低质量数据上过度地训练了分类器。事实上，有很多嘈杂的现实世界的数据集在增强算法上
+表现不佳。在数据不是过分嘈杂时，其数据准确性通常优于装袋算法。</p>
+<h4 id="11834">11.8.3.4 桶模型</h4>
+<p>桶模型的基础是直觉，它往往很难先验知道，
+分类器对于特定的数据集可以很好地工作。例如，一个特定的数据集可能
+适合使用决策树，而另一个数据集可能非常适合使用支持向量
+机。因此，模型选择方法是必需的。给定一个数据集，如何
+确定使用哪种算法？思路是首先将数据集分成两个子集
+<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>。每个算法在子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>上进行训练。然后使用集合<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>来评估
+每个模型的性能。在这次“烘烤”比赛中获胜者被选中。然后，
+使用完整的数据集对获胜者进行再训练。如果需要，可以使用交叉验证
+而不是将训练数据分成两个子集的“延伸”方法进行测试。</p>
+<p>请注意，模型桶的准确性并不比针对特定数据集的最佳分类器的准确性好。但是，这种方法在很多数据集上都有能够使用适合每个数据集的最佳模型的优势，因为
+不同的分类器可能在不同的数据集上工作效果不同。桶模型
+通常用于分类算法中的模型选择和参数调整。每个
+个体模型是在不同参数的选择上的相同分类器。获胜者
+因此提供了所有模型的最佳参数选择。</p>
+<p>桶模型方法是基于不同分类器在不同数据集上的具有不同类型的误差的想法。这是因为“正确的”决策边界
+随着数据集的变化而变化。通过使用“赢者通吃”比赛，
+将为每个数据集选择具有最准确的决策边界的分类器。因为桶模型
+根据总体准确度评估分类器的准确性，它也倾向于选择一个方差较小的模型。因此，该方法可以减少误差和方差。</p>
+<h4 id="11835">11.8.3.5 堆叠</h4>
+<p>堆叠方法是非常普遍的方法，其中使用了两个级别的分类。如
+在模型桶的情况下，训练数据被分成两个子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>
+和<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>。子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>用于作为集合组件的第一级分类器。
+子集<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>用于结合上一阶段的集合组件不同结果的二级分类器。这两个步骤描述如下：</p>
+<ol>
+<li>在训练数据子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>上训练一组<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个分类器（集合组件）。这些<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个集成组件可以用各种方式生成，例如从数据子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>上选出<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个自举样本<span><span class="MathJax_Preview">（bagging）</span><script type="math/tex">（bagging）</script></span>，在数据子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>上进行<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>轮增强，在数据子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>上生成<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个不同的随机决策树，或简单地在数据子集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>上训练<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个异构分类器。</li>
+<li>确定训练数据子集<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>上每个分类器的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个输出。创建一组新的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个特征的集合，其中每个特征值是<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个分类器其中一个的输出。因此，训练数据子集<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>中的每个点都被转换成这个基于<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个第一级分类器的预测的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维空间。它的类标签是它的（已知）地面真值。二级分类器就此在子集<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>的新表示上进行了训练。</li>
+</ol>
+<p>结果是一组用于转换特征空间的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个第一级模型，和一个二级分类器的集合。对于测试实例，使用第一级模型创建
+一个新的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维表示。然后将第二级分类器用于预测
+测试实例。在堆叠的许多实现中，数据子集<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>的原始特征
+与学习二级分类器的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个新特征一起保留。
+也可能使用类概率而不是类标签预测作为特征。
+为了防止在一级和二级模型中丢失训练数据，这种方法可以
+结合<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>路交叉验证。在这种方法中，通过迭代地使用（m-1）段来自训练第一级分类器的各个训练数据点派生出一个新的功能集，并使用它来推导剩余的特征。二级分类器
+接受新创建的数据集的训练，该数据集表示所有训练数据点。
+此外，第一级分类器根据完整的训练数据重新进行训练，以便
+在分类过程中启用测试实例的更强大的功能转换。</p>
+<p>堆叠方法能够减少误差和方差，因为它的组合器
+从不同的集合组件的错误中学习。许多其他集合方法
+可以看作堆叠的特殊情况，其中使用了与数据无关的模型和算法，如多数票算法的结合。堆叠的主要优点是它的组合器的学习方法的灵活性，这使得它可能比其他集合方法更强大。</p>
+<h2 id="119">11.9 总结</h2>
+<p>在本章中，我们研究了数据分类中的几个高级主题，如多类
+学习，可扩展的学习和稀疏类别学习。这些是需要专用方法的数据分类中更具挑战性的情况。分类通常可以通过在半监督学习中添加额外的未标记数据增强，或通过选择性采集用户的方法，如在主动学习中。集合方法也可以用来显着改善分类准确性。</p>
+<p>在多类学习方法中，二元分类器被组合在一个元算法框架中。通常情况下，要么采用一对剩余的方式，要么采用一对一的方式。
+使用不同分类器投票的方式用来提供最终结果。在许多情况下，一对以方法比一对剩余的方法更有效。许多可扩展的方法已经被设计用于数据分类。对于决策树，有两种可扩展的方法，包括<span><span class="MathJax_Preview">RainForest</span><script type="math/tex">RainForest</script></span>法和<span><span class="MathJax_Preview">BOAT</span><script type="math/tex">BOAT</script></span>法。SVM分类器也有许多快速变化方法。</p>
+<p>稀疏类别学习问题非常普遍，特别是因为类别分布
+在许多实际情况下非常不平衡。通常，分类问题的目标函数会随着成本权重的使用而改变。可以使用实例权重实现成本加权，也可以使用实例重采样。通常，正常的类是
+在实例重采样中欠采样，从而导致更好的训练效率。</p>
+<p>训练数据的缺乏在实际领域中很常见。半监督学习是一个
+解决缺乏训练数据的方式。在这些方法中，大量可用的
+未标记数据被用来估计几乎没有可用标签数据的区域的类别分布。利用丰富的无标签数据的第二种方法是主动分配标签，以便为分类确定最丰富的标签。</p>
+<p>集合方法通过减少误差和方差来提高分类器的准确性。一些
+集合方法，如装袋和随机森林，只是为了减少
+方差，而其他的集合方法，如增强和堆叠，可以同时减少
+误差和方差。在某些情况下，例如增强，集合有可能由于
+过度拟合数据中的噪声而导致精度降低。</p>
+<h2 id="1110">11.10 书目注释</h2>
+<p>多类策略用于那些设计为二进制的分类器。这种分类器的典型例子是支持向量机。在<span><span class="MathJax_Preview">[106]</span><script type="math/tex">[106]</script></span>中介绍了一种一对剩余的方法。在<span><span class="MathJax_Preview">[318]</span><script type="math/tex">[318]</script></span>中讨论了一对一策略。</p>
+<p>可拓展决策树方法的一些例子包括<span><span class="MathJax_Preview">SLIQ [381]</span><script type="math/tex">SLIQ [381]</script></span>，<span><span class="MathJax_Preview">BOAT [227]</span><script type="math/tex">BOAT [227]</script></span>和<span><span class="MathJax_Preview">RainForest [228]</span><script type="math/tex">RainForest [228]</script></span>。决策树的一些早期并行实现包括<span><span class="MathJax_Preview">SPRINT</span><script type="math/tex">SPRINT</script></span>方法<span><span class="MathJax_Preview">[458]</span><script type="math/tex">[458]</script></span>。可拓展<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>方法的一个例子是<span><span class="MathJax_Preview">SVMLight [291]</span><script type="math/tex">SVMLight [291]</script></span>。其他方法，如<span><span class="MathJax_Preview">SVMPerf [292]</span><script type="math/tex">SVMPerf [292]</script></span>法，重新构造<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>优化以减少松弛变量的数量，并增加约束的数量。一个切割平面方法每次与一小部分约束一起使用以使<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>分类器具有可扩展性。这种方法在第十三章文本挖掘中详细讨论。</p>
+<p>有关不平衡和成本敏感的学习的详细讨论可参见<span><span class="MathJax_Preview">[136,139,193]</span><script type="math/tex">[136,139,193]</script></span>。已经提出了多种通用方法用于成本敏感的学习，例如<span><span class="MathJax_Preview">MetaCost [174]</span><script type="math/tex">MetaCost [174]</script></span>，加权<span><span class="MathJax_Preview">[531]</span><script type="math/tex">[531]</script></span>和抽样<span><span class="MathJax_Preview">[136,531]</span><script type="math/tex">[136,531]</script></span>。<span><span class="MathJax_Preview">SMOTE</span><script type="math/tex">SMOTE</script></span>方法在<span><span class="MathJax_Preview">[137]</span><script type="math/tex">[137]</script></span>中讨论。增强算法也被用于研究成本敏感学习的问题。<span><span class="MathJax_Preview">AdaCost</span><script type="math/tex">AdaCost</script></span>算法在<span><span class="MathJax_Preview">[203]</span><script type="math/tex">[203]</script></span>中提出。增强技术也可以与抽样方法相结合，就像<span><span class="MathJax_Preview">SMOTEBoost</span><script type="math/tex">SMOTEBoost</script></span>算法<span><span class="MathJax_Preview">[138]</span><script type="math/tex">[138]</script></span>一样。<span><span class="MathJax_Preview">[296]</span><script type="math/tex">[296]</script></span>中提供了用于稀疏类别检测的增强算法的评估。线性回归模型和回归树的讨论可以在<span><span class="MathJax_Preview">[110,256,391]</span><script type="math/tex">[110,256,391]</script></span>中找到。</p>
+<p>最近，正在研究使用外部信息对半监督和主动学习问题进行更好的监督。在<span><span class="MathJax_Preview">[100]</span><script type="math/tex">[100]</script></span>中讨论了共同训练方法。在<span><span class="MathJax_Preview">[410]</span><script type="math/tex">[410]</script></span>中提出了用于组合标记和未标记数据的<span><span class="MathJax_Preview">EM</span><script type="math/tex">EM</script></span>算法。传导支持向量机方法在<span><span class="MathJax_Preview">[293,496]</span><script type="math/tex">[293,496]</script></span>中提出。<span><span class="MathJax_Preview">[293]</span><script type="math/tex">[293]</script></span>中的方法是一种使用迭代方法的可伸缩<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>方法。在<span><span class="MathJax_Preview">[101,294]</span><script type="math/tex">[101,294]</script></span>中讨论了基于图的半监督学习方法。关于半监督分类的研究可以在<span><span class="MathJax_Preview">[33,555]</span><script type="math/tex">[33,555]</script></span>中找到。</p>
+<p>有关主动学习的详细研究可以在<span><span class="MathJax_Preview">[13,454]</span><script type="math/tex">[13,454]</script></span>中找到。已经提出了不确定性抽样法<span><span class="MathJax_Preview">[345]</span><script type="math/tex">[345]</script></span>，委员会查询法<span><span class="MathJax_Preview">[457]</span><script type="math/tex">[457]</script></span>，最大模型变更发<span><span class="MathJax_Preview">[157]</span><script type="math/tex">[157]</script></span>，最大误差减少法<span><span class="MathJax_Preview">[158]</span><script type="math/tex">[158]</script></span>和最大方差减少法<span><span class="MathJax_Preview">[158]</span><script type="math/tex">[158]</script></span>。基于代表性的模型已经在[455]中讨论过。另一种主动学习形式垂直查询数据。换句话说，不是示例，而是了解在给定的成本水平下学习哪些属性以最小化错误<span><span class="MathJax_Preview">[382]</span><script type="math/tex">[382]</script></span>。</p>
+<p>元算法分析问题最近变得非常重要，因为它对提高分类算法的准确性有显着的影响。在<span><span class="MathJax_Preview">[111,112]</span><script type="math/tex">[111,112]</script></span>中提出了装袋和随机森林的方法。<span><span class="MathJax_Preview">[215]</span><script type="math/tex">[215]</script></span>中提出了增强方法。贝叶斯模型平均和组合方法在<span><span class="MathJax_Preview">[175]</span><script type="math/tex">[175]</script></span>中提出。堆叠方法在<span><span class="MathJax_Preview">[491,513]</span><script type="math/tex">[491,513]</script></span>中讨论，桶模型方法在<span><span class="MathJax_Preview">[541]</span><script type="math/tex">[541]</script></span>中解释。</p>
+<h2 id="1111">11.11 习题</h2>
+<ol>
+<li>假设一个分类训练算法需要<span><span class="MathJax_Preview">O（n^{r}）</span><script type="math/tex">O（n^{r}）</script></span>时间训练一个大小为<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的数据集。这里假设<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>大于1。考虑一个数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>，其中<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个不同类的分布完全均匀。比较一对剩余方法的运行时间和一对一方法的运行时间。</li>
+<li>讨论用于加快分类的一些通用元策略。讨论一些你可能用来扩大<span><span class="MathJax_Preview">（a）</span><script type="math/tex">（a）</script></span>最近邻分类器和<span><span class="MathJax_Preview">（b）</span><script type="math/tex">（b）</script></span>联想分类器的策略。</li>
+<li>描述软性<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>分类器与铰链损失的双重公式所需的变化，使其成为稀疏类学习的加权分类器。</li>
+<li>描述具有铰链损失的软<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>分类器的原始公式的变化，使其成为稀疏类学习的加权分类器。</li>
+<li>实现一对剩余和一对一的多类方法。使用最近邻算法作为基本分类器。</li>
+<li>使用监督修正<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>均值算法设计的半监督分类算法。该算法如何与基于<span><span class="MathJax_Preview">EM</span><script type="math/tex">EM</script></span>的半监督方法相关？</li>
+<li>假设你的数据被分成两个细小且分离的同心圆环，每个圆环分别属于两个类别之一。假设你在每个环中只有少量标记的例子，但你有很多未标记的例子。你会宁愿使用<span><span class="MathJax_Preview">（a）EM</span><script type="math/tex">（a）EM</script></span>算法，<span><span class="MathJax_Preview">（b）</span><script type="math/tex">（b）</script></span>直推式<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>算法，或<span><span class="MathJax_Preview">（c）</span><script type="math/tex">（c）</script></span>基于图的方法来进行半监督分类？为什么？</li>
+<li>编写<span><span class="MathJax_Preview">y=\bar{W}·\bar{X}+b</span><script type="math/tex">y=\bar{W}·\bar{X}+b</script></span>形式的最小二乘回归的优化公式，其中偏差项为<span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>。根据数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>和响应变量向量<span><span class="MathJax_Preview">\bar{y}</span><script type="math/tex">\bar{y}</script></span>，为<span><span class="MathJax_Preview">\bar{W}</span><script type="math/tex">\bar{W}</script></span>和<span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>的最优值提供封闭形式的解。证明当数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>和响应变量向量<span><span class="MathJax_Preview">\bar{y}</span><script type="math/tex">\bar{y}</script></span>都是以均值为中心时，偏置项<span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>的最优值总是为0。</li>
+<li>设计不确定性抽样方法的修正，其中查询各种实例的成本已知是不同的。假设查询实例<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的成本被称为<span><span class="MathJax_Preview">c_{i}</span><script type="math/tex">c_{i}</script></span>。</li>
+<li>考虑一个分类器在（训练）数据样本训练时给出非常一致的类标签预测的情况。你不应该使用哪种集合方法？为什么？</li>
+<li>设计<span><span class="MathJax_Preview">AdaBoost</span><script type="math/tex">AdaBoost</script></span>算法的启发式变体，在减少错误的方差分量方面比<span><span class="MathJax_Preview">AdaBoost</span><script type="math/tex">AdaBoost</script></span>执行得更好。这是否意味着这个变体的整体误差将低于<span><span class="MathJax_Preview">AdaBoost</span><script type="math/tex">AdaBoost</script></span>？</li>
+<li>您是否愿意使用线性<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>在袋装或内核<span><span class="MathJax_Preview">SVM</span><script type="math/tex">SVM</script></span>中创建集合组件？在增强的情况下你会做什么？</li>
+<li>考虑一个<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维数据集。假设您使用维数为<span><span class="MathJax_Preview">d/2</span><script type="math/tex">d/2</script></span>的随机选择子空间中的<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>最近邻类标签作为分类模型。 此分类器在测试实例中重复使用以创建多数投票预测。讨论这种分类器将减少错误的偏差-变异机制。</li>
+<li>对于任何<span><span class="MathJax_Preview">d×n</span><script type="math/tex">d×n</script></span>矩阵<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>和标量<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>，使用其奇异值分解来表明以下情况总是真的：</li>
+</ol>
+<p><center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">（AA^{T} +λI_{d}）^{-1}A=A（A^{T}A+λI_{n}）^{-1}</span><script type="math/tex">（AA^{T} +λI_{d}）^{-1}A=A（A^{T}A+λI_{n}）^{-1}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">（AA^{T} +λI_{d}）^{-1}A=A（A^{T}A+λI_{n}）^{-1}</span><script type="math/tex">（AA^{T} +λI_{d}）^{-1}A=A（A^{T}A+λI_{n}）^{-1}</script></span></script></span></center></p>
+<p>这里，<span><span class="MathJax_Preview">I_{d}</span><script type="math/tex">I_{d}</script></span>和<span><span class="MathJax_Preview">I_{n}</span><script type="math/tex">I_{n}</script></span>分别是<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>和<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>单位矩阵。</p>
+<ol>
+<li>设一个<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的奇异值分解为<span><span class="MathJax_Preview">QΣP^{T}</span><script type="math/tex">QΣP^{T}</script></span>。据第二章，其伪逆为<span><span class="MathJax_Preview">PΣ^{+} Q^{T}</span><script type="math/tex">PΣ^{+} Q^{T}</script></span>。这里，通过反转<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>矩阵<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>的非零对角条目然后转换所得到的矩阵来获得<span><span class="MathJax_Preview">Σ^{+}</span><script type="math/tex">Σ^{+}</script></span>。</li>
+</ol>
+<p>（a）用这个结果来表明：
+<center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">D^{+}=（D^{T}D）^{+} D^{T}</span><script type="math/tex">D^{+}=（D^{T}D）^{+} D^{T}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">D^{+}=（D^{T}D）^{+} D^{T}</span><script type="math/tex">D^{+}=（D^{T}D）^{+} D^{T}</script></span></script></span></center>
+（b）证明计算伪逆的另一种方法如下：
+<center><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">D<sup>{+}=D</sup>{T}（D<sup>{T}D）</sup>{+} <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</span><script type="math/tex"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</script></span>和和</span><script type="math/tex">D<sup>{+}=D</sup>{T}（D<sup>{T}D）</sup>{+} <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</span><script type="math/tex"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</script></span>和和</script></span>dd</span><script type="math/tex"><span><span class="MathJax_Preview">D<sup>{+}=D</sup>{T}（D<sup>{T}D）</sup>{+} <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</span><script type="math/tex"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</script></span>和和</span><script type="math/tex">D<sup>{+}=D</sup>{T}（D<sup>{T}D）</sup>{+} <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</span><script type="math/tex"><span><span class="MathJax_Preview">&lt;/center&gt;
+（c）讨论用不同的</span><script type="math/tex"></center>
+（c）讨论用不同的</script></span>nn</script></span>和和</script></span>dd</script></span>值计算<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的伪逆的各种方法的效率。
+（d）讨论在线性回归中结合内核技巧的上下文中用于计算伪逆的任何上述方法的有效性。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../10/" title="第10章 数据分类" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第10章 数据分类
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../12/" title="第12章 数据流挖掘" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第12章 数据流挖掘
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

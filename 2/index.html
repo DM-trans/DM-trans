@@ -1,0 +1,1775 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/2/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第2章 数据预处理 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#2" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第2章 数据预处理
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第2章 数据预处理
+      </label>
+    
+    <a href="./" title="第2章 数据预处理" class="md-nav__link md-nav__link--active">
+      第2章 数据预处理
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21" title="2.1 简介" class="md-nav__link">
+    2.1 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" title="2.2 特征提取和可移植性" class="md-nav__link">
+    2.2 特征提取和可移植性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" title="2.2.1 特征提取" class="md-nav__link">
+    2.2.1 特征提取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" title="2.2.2 数据类型可移植性" class="md-nav__link">
+    2.2.2 数据类型可移植性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2221" title="2.2.2.1 数字到分类数据：离散化" class="md-nav__link">
+    2.2.2.1 数字到分类数据：离散化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2222" title="2.2.2.2 分类到数字数据：二值化" class="md-nav__link">
+    2.2.2.2 分类到数字数据：二值化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2223" title="2.2.2.3 文本到数字数据" class="md-nav__link">
+    2.2.2.3 文本到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2224" title="2.2.2.4 时间序列到离散序列数据" class="md-nav__link">
+    2.2.2.4 时间序列到离散序列数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2225" title="2.2.2.5 时间序列到数字数据" class="md-nav__link">
+    2.2.2.5 时间序列到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2226" title="2.2.2.6 离散序列到数字数据" class="md-nav__link">
+    2.2.2.6 离散序列到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2227" title="2.2.2.7 空间到数字数据" class="md-nav__link">
+    2.2.2.7 空间到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2228" title="2.2.2.8 图像到数字数据" class="md-nav__link">
+    2.2.2.8 图像到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2229" title="2.2.2.9 基于相似性应用的任何类型到图像" class="md-nav__link">
+    2.2.2.9 基于相似性应用的任何类型到图像
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" title="2.3 数据清洗" class="md-nav__link">
+    2.3 数据清洗
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" title="2.3.1 处理缺少的条目" class="md-nav__link">
+    2.3.1 处理缺少的条目
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" title="2.3.2 处理不正确和不一致的条目" class="md-nav__link">
+    2.3.2 处理不正确和不一致的条目
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233" title="2.3.3 缩放和标准化" class="md-nav__link">
+    2.3.3 缩放和标准化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" title="2.4 数据缩减和转换" class="md-nav__link">
+    2.4 数据缩减和转换
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" title="2.4.1 采样" class="md-nav__link">
+    2.4.1 采样
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2411" title="2.4.1.1 静态数据采样" class="md-nav__link">
+    2.4.1.1 静态数据采样
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2412" title="2.4.1.2 数据流的水塘采样" class="md-nav__link">
+    2.4.1.2 数据流的水塘采样
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" title="2.4.2 特征子集选择" class="md-nav__link">
+    2.4.2 特征子集选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243" title="2.4.3 轴旋转降维" class="md-nav__link">
+    2.4.3 轴旋转降维
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2431" title="2.4.3.1 主成分分析" class="md-nav__link">
+    2.4.3.1 主成分分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2432" title="2.4.3.2 奇异值分解" class="md-nav__link">
+    2.4.3.2 奇异值分解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2433" title="2.4.3.3 潜在语义分析" class="md-nav__link">
+    2.4.3.3 潜在语义分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2434-pcasvd" title="2.4.3.4 PCA和SVD的应用" class="md-nav__link">
+    2.4.3.4 PCA和SVD的应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244" title="2.4.4 用类型转换降维" class="md-nav__link">
+    2.4.4 用类型转换降维
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2441-haar" title="2.4.4.1 哈尔(Haar)小波变换" class="md-nav__link">
+    2.4.4.1 哈尔(Haar)小波变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2442" title="2.4.4.2 多维度缩放" class="md-nav__link">
+    2.4.4.2 多维度缩放
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2443" title="2.4.4.3 图谱的谱变换和嵌入" class="md-nav__link">
+    2.4.4.3 图谱的谱变换和嵌入
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" title="2.5 总结" class="md-nav__link">
+    2.5 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" title="2.6 书目注释" class="md-nav__link">
+    2.6 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27" title="2.7 习题" class="md-nav__link">
+    2.7 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21" title="2.1 简介" class="md-nav__link">
+    2.1 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" title="2.2 特征提取和可移植性" class="md-nav__link">
+    2.2 特征提取和可移植性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" title="2.2.1 特征提取" class="md-nav__link">
+    2.2.1 特征提取
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" title="2.2.2 数据类型可移植性" class="md-nav__link">
+    2.2.2 数据类型可移植性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2221" title="2.2.2.1 数字到分类数据：离散化" class="md-nav__link">
+    2.2.2.1 数字到分类数据：离散化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2222" title="2.2.2.2 分类到数字数据：二值化" class="md-nav__link">
+    2.2.2.2 分类到数字数据：二值化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2223" title="2.2.2.3 文本到数字数据" class="md-nav__link">
+    2.2.2.3 文本到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2224" title="2.2.2.4 时间序列到离散序列数据" class="md-nav__link">
+    2.2.2.4 时间序列到离散序列数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2225" title="2.2.2.5 时间序列到数字数据" class="md-nav__link">
+    2.2.2.5 时间序列到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2226" title="2.2.2.6 离散序列到数字数据" class="md-nav__link">
+    2.2.2.6 离散序列到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2227" title="2.2.2.7 空间到数字数据" class="md-nav__link">
+    2.2.2.7 空间到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2228" title="2.2.2.8 图像到数字数据" class="md-nav__link">
+    2.2.2.8 图像到数字数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2229" title="2.2.2.9 基于相似性应用的任何类型到图像" class="md-nav__link">
+    2.2.2.9 基于相似性应用的任何类型到图像
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" title="2.3 数据清洗" class="md-nav__link">
+    2.3 数据清洗
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" title="2.3.1 处理缺少的条目" class="md-nav__link">
+    2.3.1 处理缺少的条目
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" title="2.3.2 处理不正确和不一致的条目" class="md-nav__link">
+    2.3.2 处理不正确和不一致的条目
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233" title="2.3.3 缩放和标准化" class="md-nav__link">
+    2.3.3 缩放和标准化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" title="2.4 数据缩减和转换" class="md-nav__link">
+    2.4 数据缩减和转换
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" title="2.4.1 采样" class="md-nav__link">
+    2.4.1 采样
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2411" title="2.4.1.1 静态数据采样" class="md-nav__link">
+    2.4.1.1 静态数据采样
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2412" title="2.4.1.2 数据流的水塘采样" class="md-nav__link">
+    2.4.1.2 数据流的水塘采样
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" title="2.4.2 特征子集选择" class="md-nav__link">
+    2.4.2 特征子集选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243" title="2.4.3 轴旋转降维" class="md-nav__link">
+    2.4.3 轴旋转降维
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2431" title="2.4.3.1 主成分分析" class="md-nav__link">
+    2.4.3.1 主成分分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2432" title="2.4.3.2 奇异值分解" class="md-nav__link">
+    2.4.3.2 奇异值分解
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2433" title="2.4.3.3 潜在语义分析" class="md-nav__link">
+    2.4.3.3 潜在语义分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2434-pcasvd" title="2.4.3.4 PCA和SVD的应用" class="md-nav__link">
+    2.4.3.4 PCA和SVD的应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244" title="2.4.4 用类型转换降维" class="md-nav__link">
+    2.4.4 用类型转换降维
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2441-haar" title="2.4.4.1 哈尔(Haar)小波变换" class="md-nav__link">
+    2.4.4.1 哈尔(Haar)小波变换
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2442" title="2.4.4.2 多维度缩放" class="md-nav__link">
+    2.4.4.2 多维度缩放
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2443" title="2.4.4.3 图谱的谱变换和嵌入" class="md-nav__link">
+    2.4.4.3 图谱的谱变换和嵌入
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" title="2.5 总结" class="md-nav__link">
+    2.5 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" title="2.6 书目注释" class="md-nav__link">
+    2.6 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27" title="2.7 习题" class="md-nav__link">
+    2.7 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/2.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="2">2 数据预处理</h1>
+<!--本章由程琳翻译-->
+
+<blockquote>
+<p>“凡事预则立，不预则废。”——孔子</p>
+</blockquote>
+<h2 id="21">2.1 简介</h2>
+<p>真实数据的原始格式通常变化很大。许多值可能会丢失，不同数据源之间不一致，并且是错误的。对于分析人员来说，这会在有效使用数据方面带来诸多挑战。例如，考虑在社交媒体网站上评估消费者对其活动的兴趣的情况。分析人员可能首先需要确定对挖掘过程有价值的活动类型。该活动可以对应于用户输入的兴趣，用户输入的评论以及用户伴随兴趣而产生的朋友圈。所有这些信息都是多样的，需要从社交媒体网站的不同数据库中收集。此外，某些形式的数据（如原始日志）通常由于其非结构性而不能直接使用。换句话说，需要从这些数据源中提取有用的特征。因此，需要**数据预处理阶段**。</p>
+<p>数据预处理阶段是一个多阶段过程，包含几个单独的步骤，其中一些或全部可用于给定的应用程序。这些步骤如下所示：</p>
+<ol>
+<li>
+<p><strong>特征提取和可移植性</strong>：原始数据通常是不适合处理的形式。例子包括原始日志、文档、半结构化数据以及可能的其他形式的异构数据。在这种情况下，可能需要从数据中获得有意义的特征。一般而言，具有良好语义解释性的特征更为理想，因为它们简化了分析人员了解中间结果的能力。而且，它们通常更好地绑定到数据挖掘应用程序的目标。在某些情况下，数据是从多个来源获得的，需要将其集成到单个数据库中进行处理。另外，有些算法只能使用特定的数据类型，而数据可能包含不同类型的数据。在这种情况下，**数据类型的可移植性**在一种类型的属性转换为另一种类型时变得重要。这将生成可以通过现有算法处理的更均匀的数据集。</p>
+</li>
+<li>
+<p><strong>数据清洗</strong>：在数据清洗阶段，从数据中删除丢失、错误和不一致的条目。另外，一些缺失的条目也可以通过称为**插补**的过程来估计。</p>
+</li>
+<li>
+<p><strong>数据消减、选择和转换</strong>：在这个阶段，通过数据子集选择、特征子集选择或数据转换来减少数据的大小。这一阶段获得的收益是双重的。首先，当数据的大小减小时，算法通常更有效。其次，如果不相关的特征或不相关的记录被删除，数据挖掘过程的质量就会提高。第一个目标是通过通用采样和降维技术来实现的。要实现第二个目标，必须使用高度针对特定问题的方法来进行特征选择。例如，适用于群集的特征选择方法可能不适用于分类。</p>
+</li>
+</ol>
+<p>某些形式的特征选择与手头的问题紧密结合。稍后关于聚类和分类等具体问题的章节将包含关于特征选择的详细讨论。</p>
+<p>本章安排如下。特征提取阶段在章节2.2中讨论。数据清洗阶段在章节2.3中介绍。数据消减阶段在章节2.4解释。总结在章节2.5中给出。</p>
+<h2 id="22">2.2 特征提取和可移植性</h2>
+<p>数据挖掘过程的第一阶段是创建一组分析人员可用的特征。在数据处于原始和非结构化形式（例如，原始文本、传感器信号）的情况下，需要提取相关特征进行处理。在其他情况下，以不同形式提供的混合特征往往不能用“现成”的分析方法进行处理。在这种情况下，可能需要将数据转换为统一的形式进行处理。这被称为**数据类型移植**。</p>
+<h3 id="221">2.2.1 特征提取</h3>
+<p>特征提取的第一阶段是非常关键的一步，尽管它非常适合特定的应用。在某些情况下，特征提取与数据类型可移植性的概念密切相关，其中一种类型的低级特征可能转换为另一种类型的高级特征。特征提取的性质取决于数据应用的领域：</p>
+<ol>
+<li>
+<p><strong>传感器数据</strong>：传感器数据通常以大量的低电平信号收集。有时使用小波变换或傅里叶变换将低电平信号转换为更高级的特征。在其他情况下，时间序列在一些清洗后直接使用。信号处理领域有大量关于这种方法的文献。这些技术对于将时间序列数据移植到多维数据也很有用。</p>
+</li>
+<li>
+<p><strong>图像数据</strong>：在其最原始的形式中，图像数据被表示为像素。在稍高的级别上，可以使用颜色直方图来表示图像不同部分的特征。最近，**视觉词**的使用变得越来越流行。这是一个语义丰富的表示，与文档数据类似。图像处理中的一个挑战是数据通常是非常大的尺寸。因此，取决于手头的应用，特征提取可以在不同的级别执行。</p>
+</li>
+<li>
+<p><strong>Web日志</strong>：Web日志通常以预先指定的格式表示为文本字符串。由于这些日志中的字段被明确指定和分隔，因此将Web访问日志转换为（相关）分类和数字属性的多维表示相对比较容易。</p>
+</li>
+<li>
+<p><strong>网络流量</strong>：在许多入侵检测应用程序中，网络数据包的特征用于分析入侵或其他有趣的活动。根据底层应用程序，可以从这些数据包中提取各种特征，例如传输的字节数、使用的网络协议等。</p>
+</li>
+<li>
+<p><strong>文档数据</strong>：文档数据通常以原始和非结构化形式提供，并且数据可能包含不同实体之间丰富的语言关系。一种方法是删除停用词，停止数据，并使用袋装词表示法。其他方法使用**实体提取**来确定语言关系。</p>
+</li>
+</ol>
+<p>命名实体识别是信息提取的重要子任务。这种方法将文本中的原子元素定位和分类为人员、组织、位置、动作、数量等名称的预定义表达式。显然，识别这种原子元素的能力非常有用，因为它们可以用来理解句子和复杂事件的结构。这种方法也可以用于填充更传统的关系元素数据库或者更容易分析的原子实体序列。例如，请考虑以下语句：</p>
+<p><em>比尔·克林顿住在查巴克。</em></p>
+<p>在这里，“比尔·克林顿”是一个人的名字，“查巴克”是一个地方的名字。“住”一词表示一种行为。取决于当前的应用，每种类型的实体可能在数据挖掘过程具有不同的意义。 例如，如果数据挖掘应用程序主要关注提到特定位置，则需要提取“查巴克”一词。</p>
+<p>用于命名实体识别的流行技术包括基于语言语法的技术和统计模型。语法规则的使用通常非常有效，但它需要经验丰富的计算语言学家的工作。另一方面，统计模型需要大量的训练数据。设计的技术通常是特定领域的。命名实体识别领域本身就很广泛，这超出了本书的范围。读者可以参考文献[400]详细讨论实体识别的不同方法。</p>
+<p>特征提取是一种艺术形式，高度依赖于分析人员选择最适合手头任务的特征及其表示。虽然数据分析的这个特定方面通常属于领域专家，但它也许是最重要的一个。如果不提取正确的特征，则分析只能基于可用数据。</p>
+<h3 id="222">2.2.2 数据类型可移植性</h3>
+<p>数据类型的可移植性是数据挖掘过程的关键要素，因为数据通常是异构的，并且可能包含多种类型。例如，人口统计数据集可能包含数字和混合属性。从心电图（ECG）传感器收集的时间序列数据集可能具有与其相关联的许多其他元信息和文本属性。这对于现在面临用任意数据类型组合设计算法的困难挑战的分析人员而言，是令人困惑的局面。数据类型的混合也限制了分析人员使用现成的工具进行处理的能力。请注意，在某些情况下移植数据类型确实会丢失代表性、准确性和表达性。理想情况下，最好根据特定的数据类型组合来定制算法以优化结果。然而，这是耗时且有时不切实际的。</p>
+<p>本节将介绍在各种数据类型之间转换的方法。因为数字数据类型是数据挖掘算法中最简单和研究最广泛的数据类型，所以专注于如何将不同数据类型转换为数字数据类型尤其有用。但是，其他形式的转换在许多情况下也很有用。例如，对于基于相似性的算法，可以将几乎任何数据类型转换为图形，并将基于图形的算法应用于该表示。表2.1总结了在不同类型之间转换数据的各种方式。</p>
+<h4 id="2221">2.2.2.1 数字到分类数据：离散化</h4>
+<p>最常用的转换是从数字到分类数据类型。这个过程被称为离散化。离散化过程将数字属性的范围划分为φ个范围。然后，根据原始属性所在的范围，假定该属性包含从1到φ的φ个不同分类标注值。例如，考虑年龄属性。人们可以创建范围[0,10]，[11,20]，[21,30]等等。范围[11,20]中任何记录的符号值为“2”，范围[21,30]中记录的符号值为“3”。由于这些是符号值，因此在值“2”和“3”之间不会进行排序。此外，一个范围内的变化在离散化之后是不可区分的。因此，离散化过程的确会失去一些挖掘过程的信息。但是，对于某些应用程序而言，这种信息丢失不会太过虚弱。离散化的一个挑战是数据可能在不同的时间间隔内不均匀分布。例如，对于工资属性的情况，大量的人口子集可以被分组在[40,000,800,000]范围内，但很少会被分组在[1,040,000,1,080,000]范围内。请注意，这两个范围都具有相同的大小。因此，使用相同大小的范围可能对区分不同数据段不是很有帮助。另一方面，许多属性，如年龄，并不是非均匀分布的，因此相同大小的范围可能工作得相当好。离散化过程可以根据应用特定目标以各种方式执行：</p>
+<ol>
+<li>
+<p>等宽范围：在这种情况下，每个范围[a，b]的选择方式使得b - a对于每个范围都是相同的。 这种方法的缺点是，它不适用于跨不同范围分布不均匀的数据集。 确定每个属性的最小值和最大值以确定范围的实际值。然后这个范围[min,max]将数据分成长度相等的φ个范围。</p>
+</li>
+<li>
+<p>等值日志范围：每个范围[a，b]的选择方式使得log(b)-log(a)具有相同的值。对于某些α&gt; 1，这种范围选择具有几何范围[a，a·α]，[a·α，a·α2]等的作用。当属性在一个范围内显示指数分布时，这种范围可能很有用。事实上，如果一个属性的属性频率分布可以用函数形式建模，那么一个自然的方法是选择范围[a,b]，使得f(b)-f(a)对于某个函数f(·)相等。以这样的方式选择函数f(·)，使得每个范围包含大致相似数量的记录。然而，在大多数情况下，很难找到封闭形式的函数f(·)。</p>
+</li>
+<li>
+<p>等深度范围：在这种情况下，选择范围以便每个范围具有相同数量的记录。这个想法是为每个范围提供相同的粒度级别。一个属性可以分为等深度范围，首先对它进行排序，然后在排序的属性值上选择分割点，以便每个范围包含相同数量的记录。</p>
+</li>
+</ol>
+<p>离散化过程也可用于将时间序列数据转换为离散序列数据。
+<center>表2.1 不同数据类型的可移植性
+<img alt="" src="http://p6atp7tts.bkt.clouddn.com/15256127943205.jpg" />
+</center></p>
+<h4 id="2222">2.2.2.2 分类到数字数据：二值化</h4>
+<p>在某些情况下，希望对分类数据使用数字数据挖掘算法。由于二进制数据是数字和分类数据的特殊形式，因此可以将分类属性转换为二进制形式，然后对二进制数据使用数字算法。如果分类属性具有φ个不同的值，则创建φ个不同的二元属性。每个二进制属性对应于分类属性的一个可能值。因此，φ个属性中恰好有一个值为1，其余的值为0。</p>
+<h4 id="2223">2.2.2.3 文本到数字数据</h4>
+<p>尽管文本的向量空间表示可以被认为是具有非常高维度的稀疏数字数据集，但是这种特殊的数字表示形式对于传统的数据挖掘算法并不是很适合。例如，通常使用专门的相似度函数，例如余弦，而不是文本数据的欧几里德距离。这就是文本挖掘本身就是一个独特领域的原因，它拥有自己的专业算法系列。不过，可以将文本集合转换为更适合使用数字数据挖掘算法的形式。第一步是使用潜在语义分析（LSA）将文本集合转换为具有较低维度的非稀疏表示。此外，在变换之后，每个文档 需要被缩放为 。这种缩放对于确保不同长度的文档以统一的方式处理是必需的。经过这种缩放之后，传统的数字度量（例如欧几里得距离）更有效地工作。LSA在章节2.4.3.3中讨论。请注意，LSA很少与这种缩放结合使用。相反，传统的文本挖掘算法直接应用于从LSA获得的简化表示。</p>
+<h4 id="2224">2.2.2.4 时间序列到离散序列数据</h4>
+<p>时间序列数据可以使用称为符号聚合近似（SAX）的方法转换为离散序列数据。该方法包括两个步骤：</p>
+<ol>
+<li>
+<p>基于窗口的平均：将该序列划分为长度为w的窗口，并且计算每个窗口上的平均时间序列值。</p>
+</li>
+<li>
+<p>基于值的离散化：（已经平均的）时间序列值被离散化为更小数量的近似等深度间隔。这与前面讨论的数值属性的等深度离散化相同。这个想法是确保每个符号在时间序列中具有近似相等的频率。间隔边界通过假定时间序列值是用高斯假设分布来构造的。 （窗口化的）时间序列值的均值和标准偏差以数据驱动的方式估计以实例化高斯分布的参数。高斯分布的分位数用于确定间隔的边界。这比对所有数据值进行排序以确定分位数更有效，对于长时间（或流式）时间序列来说，这可能是更实用的方法。为了获得最好的结果，这些值被离散化为一小部分（通常为3到10）的间隔。每个这样的等深度间隔被映射为符号值。这创建了时间序列的符号表示，其实质上是一个离散序列。</p>
+</li>
+</ol>
+<p>因此，SAX可能被视为基于窗口平均的等深度离散化方法。</p>
+<h4 id="2225">2.2.2.5 时间序列到数字数据</h4>
+<p>这种特殊的转换非常有用，因为它可以使用时间序列数据的多维算法。用于这种转换的常用方法是离散小波变换（DWT）。小波变换将时间序列数据转换为多维数据，作为表示系列的不同部分之间的平均差异的一组系数。如果需要，可以使用最大系数的子集来减小数据大小。 这个方法将在章节2.4.4.1关于数据消减部分讨论。 另一种方法称为离散傅立叶变换（DFT），在第14章章节14.2.4.2讨论。这些变换的共同特点是各种系数不再像原始时间序列值那样依赖于相关性。</p>
+<h4 id="2226">2.2.2.6 离散序列到数字数据</h4>
+<p>这种转换可以分两步进行。第一步是将离散序列转换为一组（二进制）时间序列，其中该组中的时间序列的数量等于不同符号的数量。第二步是使用小波变换将每个时间序列映射到多维向量中。最后，将来自不同系列的功能组合起来创建一个单一的多维记录。</p>
+<p>要将序列转换为二进制时间序列，可以创建一个二进制字符串，其中的值表示某个特定符号是否出现在某个位置。例如，考虑以下四个符号的核苷酸序列：</p>
+<p>ACACACTGTGACTG</p>
+<p>该系列可以转换为与符号A，C，T和G分别对应的以下四组二进制时间序列：</p>
+<p>10101000001000<br />
+01010100000100<br />
+00000010100010<br />
+00000001010001</p>
+<p>可以将小波变换应用于这些系列中的每一个以创建多维特征集。可以附加来自四个不同系列的特征来创建单个数字多维记录。</p>
+<h4 id="2227">2.2.2.7 空间到数字数据</h4>
+<p>空间数据可以通过使用与时间序列数据相同的方法转换为数字数据。主要区别是现在有两个上下文属性（而不是一个）。这需要修改小波变换方法。第2.4.4.1节将简要讨论如何在有两个上下文属性时推广一维小波方法。该方法相当一般，可用于任何数量的上下文属性。</p>
+<h4 id="2228">2.2.2.8 图像到数字数据</h4>
+<p>可以使用多维缩放（MDS）和频谱转换等方法将图像转换为数字数据。此方法适用于边缘加权的应用程序，并表示节点之间的相似性或距离关系。MDS的一般方法可以实现这一目标，并在第2.4.4.2节进行了讨论。谱方法也可用于将图像转换为多维表示。这也是一种将结构信息转换为多维表示的降维方案。这个方法将在第2.4.4.3节进行讨论。</p>
+<h4 id="2229">2.2.2.9 基于相似性应用的任何类型到图像</h4>
+<p>许多应用程序都基于相似性的概念。例如，聚类问题被定义为类似对象组的创建，而异常值检测问题被定义为识别其中与剩余对象明显不同的对象子集的问题。许多形式的分类模型，如最近邻分类器，也依赖于相似性的概念。配对相似性的概念可以通过使用邻域图来最好地得到。对于给定的一组数据对象<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">O=\{O_1…O_n\}</span><script type="math/tex">O=\{O_1…O_n\}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">O=\{O_1…O_n\}</span><script type="math/tex">O=\{O_1…O_n\}</script></span></script></span>，邻域图定义如下：</p>
+<ol>
+<li>
+<p>为<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>中的每个对象定义单个节点。这由节点集<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>定义，包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点，其中节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>对应于对象<span><span class="MathJax_Preview">O_i</span><script type="math/tex">O_i</script></span>。</p>
+</li>
+<li>
+<p>如果距离<span><span class="MathJax_Preview">d（O_i，O_j）</span><script type="math/tex">d（O_i，O_j）</script></span>小于特定阈值<span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span>，则在<span><span class="MathJax_Preview">O_i</span><script type="math/tex">O_i</script></span>和<span><span class="MathJax_Preview">O_j</span><script type="math/tex">O_j</script></span>之间存在边缘。或者，可以使用每个节点的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个最近邻。由于<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>-最近邻关系不是对称的，这导致有向图。边缘上的方向被忽略，并且平行边被去除。边<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>的权重<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>等于对象<span><span class="MathJax_Preview">O_i</span><script type="math/tex">O_i</script></span>和<span><span class="MathJax_Preview">O_j</span><script type="math/tex">O_j</script></span>之间距离的核函数，因此较大的权重表示较大的相似性。热内核就是一个例子：</p>
+</li>
+</ol>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">w_{ij}=e^{-d(O_i,O_j)^2/t^2}\tag{2.1}</span><script type="math/tex">w_{ij}=e^{-d(O_i,O_j)^2/t^2}\tag{2.1}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">w_{ij}=e^{-d(O_i,O_j)^2/t^2}\tag{2.1}</span><script type="math/tex">w_{ij}=e^{-d(O_i,O_j)^2/t^2}\tag{2.1}</script></span></script></span></p>
+<p>这里，<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>是用户定义的参数。</p>
+<p>各种数据挖掘算法可用于网络数据。所有这些方法也可用于相似图。请注意，只要可以定义适当的距离函数，就可以为任何类型的数据对象清晰地定义相似度图。这就是距离函数设计对于任何数据类型都非常重要的原因。距离函数设计的问题将在第3章中讨论。请注意，此方法仅适用于基于相似性或距离概念的应用程序。不过，许多数据挖掘问题直接或间接地与相似性和距离的概念相关。</p>
+<p><center>表2.1 不同数据类型的可移植性</center></p>
+<h2 id="23">2.3 数据清洗</h2>
+<p>由于存在与数据收集过程相关的错误，数据清洗过程很重要。数据收集过程中可能会出现一些缺失条目和错误的来源。一些例子如下：</p>
+<ol>
+<li>由于与收集和传输有关的硬件限制，一些数据收集技术（如传感器）本质上不准确。由于硬件故障或电池耗尽，有时传感器可能会降低读数。</li>
+<li>使用扫描技术收集的数据可能存在与其相关的错误，因为光学字符识别技术远非完美。此外，语音-文本数据也容易出错。</li>
+<li>用户出于隐私原因可能不想公开他们的信息，或者他们可能故意公开不正确的信息。例如，经常观察到用户有时在诸如社交网络的自动化注册站点上错误地填写他们的生日。在某些情况下，用户可能会选择将几个字段留空。</li>
+<li>大量的数据是手动创建的。数据输入过程中手动错误很常见。</li>
+<li>负责数据收集的实体如果成本太高，可能不会为某些记录收集某些字段。因此，记录可能没有完全列举。</li>
+</ol>
+<p>上述问题可能是数据挖掘应用程序不准确的重要原因。需要使用方法从数据中删除或更正丢失和错误的条目。数据清洗有几个重要方面：</p>
+<ol>
+<li><strong>处理缺少的条目</strong>：由于数据收集的缺陷或数据的固有性质，数据中的许多条目可能保持未列举。这些缺失的条目可能需要估计。估计缺失条目的过程也被称为插补。</li>
+<li><strong>处理不正确的条目</strong>：如果可以从多个来源获得相同的信息，则可能会检测到**不一致**。作为分析过程的一部分，这些不一致可以被删除。检测错误条目的另一种方法是使用关于数据已知信息的特定域的知识。例如，如果一个人的身高被列为6米，那很可能是不正确的。更一般地说，与剩余数据分布不一致的数据点通常是嘈杂的。这些数据点被称为异常值。但是，假设这些数据点总是由错误引起是危险的。例如，表示信用卡欺诈的记录可能与大多数（正常）数据中的模式不一致，但不应将其作为“不正确”数据删除。</li>
+<li><strong>缩放和规范化</strong>：数据可能经常以不同的比例表示（例如年龄和薪水）。这可能会导致某些功能被无意中加权得太多，以致其他功能被隐式忽略。因此，规范不同的功能是非常重要的。</li>
+</ol>
+<p>以下部分将讨论数据清洗的各个方面。</p>
+<h3 id="231">2.3.1 处理缺少的条目</h3>
+<p>数据收集方法不完善的数据库中缺少条目。例如，用户调查往往无法收集所有问题的答案。在数据贡献是自愿的情况下，数据几乎总是不完整的。三类技术用于处理缺失的条目：</p>
+<ol>
+<li>任何包含缺失条目的数据记录都可能被完全删除。但是，当大多数记录包含缺失条目时，这种方法可能并不实际。</li>
+<li>缺失的值可能会被估计或估算。但是，插补过程所产生的错误可能会影响数据挖掘算法的结果。</li>
+<li>分析阶段的设计方式可以处理缺失值。许多数据挖掘方法固有地被设计为在缺失值的情况下稳健工作。这种方法通常是最合乎需要的，因为它避免了插补过程中固有的额外偏差。</li>
+</ol>
+<p>估计缺失条目的问题与分类问题直接相关。在分类问题中，专门处理单个属性，并使用其他功能估计其值。在这种情况下，缺失值可能出现在任何功能上，因此问题更具挑战性，尽管它从根本上说并没有不同。第10和11章中讨论的许多分类方法也可用于缺失值估计。另外，在章节18.5中讨论的矩阵完成方法也可以使用。</p>
+<p><center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15256128468792.jpg" />
+图2.1 通过以数据为中心的方法来查找噪声</center></p>
+<p>在依赖于数据的情况下，如时间序列或空间数据，缺失值估计要简单得多。在这种情况下，上下文记录的行为属性值用于插补过程。例如，在时间序列数据集中，可以使用在丢失属性之前或之后的时间戳的值的平均值来进行估计。或者，可以线性内插最后<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个时间序列数据标记处的行为值以确定缺失值。对于空间数据的情况，估计过程非常相似，其中可以使用相邻空间位置处的值的平均值。</p>
+<h3 id="232">2.3.2 处理不正确和不一致的条目</h3>
+<p>用于删除或更正不正确和不一致条目的关键方法如下所示：</p>
+<ol>
+<li><strong>不一致性检测</strong>：通常在数据以不同格式的不同来源可用时完成。例如，一个人的姓名可能在一个来源中全部拼写出来，而另一个来源可能只包含姓名缩写和姓氏。在这种情况下，关键问题是重复检测和不一致性检测。这些主题是在数据库领域内的数据集成的总体框架下进行研究的。</li>
+<li><strong>领域知识</strong>：根据指定不同属性间关系的属性或规则的范围，通常会提供大量的领域知识。例如，如果国家/地区是“美国”，那么城市领域不能是“上海”。许多数据清洗和数据审计工具已经被开发出来，它们使用这些领域知识和约束来检测不正确的条目。</li>
+<li><strong>以数据为中心的方法</strong>：在这些情况下，数据的统计行为用于检测异常值。例如，图2.1中标记为“噪声”的两个隔离数据点是异常值。这些孤立点可能是由于数据收集过程中的错误而产生的。但是，这可能并非总是如此，因为异常可能是底层系统有趣行为的结果。因此，任何检测到的异常值在丢弃前可能需要手动检查。使用以数据为中心的方法进行清理有时会很危险，因为它们会导致从底层系统中删除有用的知识。异常值检测问题本身就是一种重要的分析技术，并在第8章和第9章中进行了详细讨论。</li>
+</ol>
+<p>解决错误和不一致条目的方法通常是高度特定于域的。</p>
+<h3 id="233">2.3.3 缩放和标准化</h3>
+<p>在许多情况下，不同的特征代表不同的参考尺度，因此可能无法相互比较。例如，年龄等属性与薪水等属性的截然不同。后者的属性通常比前者大几个数量级。结果，对不同特征（例如，欧几里得距离）计算的任何集合函数将由较大幅度的属性支配。</p>
+<p>为了解决这个问题，通常使用标准化。考虑第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个属性具有均值<span><span class="MathJax_Preview">μ_j</span><script type="math/tex">μ_j</script></span>和标准偏差<span><span class="MathJax_Preview">σ_j</span><script type="math/tex">σ_j</script></span>的情况。然后，第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个记录<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个属性值<span><span class="MathJax_Preview">x^j_i</span><script type="math/tex">x^j_i</script></span>可以如下归一化：</p>
+<div>
+<div class="MathJax_Preview">z^j_i=\frac{x^j_i-μ_j}{σ_j}\tag{2.2}</div>
+<script type="math/tex; mode=display">z^j_i=\frac{x^j_i-μ_j}{σ_j}\tag{2.2}</script>
+</div>
+<p>在正态分布假设下，绝大多数标准化值通常位于<span><span class="MathJax_Preview">[-3,3]</span><script type="math/tex">[-3,3]</script></span>范围内。</p>
+<p>第二种方法使用**最小最大比例缩放**来将所有属性映射到范围<span><span class="MathJax_Preview">[0,1]</span><script type="math/tex">[0,1]</script></span>。令<span><span class="MathJax_Preview">min_j</span><script type="math/tex">min_j</script></span>和<span><span class="MathJax_Preview">max_j</span><script type="math/tex">max_j</script></span>表示属性<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的最小值和最大值。那么，第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个记录<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个属性值<span><span class="MathJax_Preview">x^j_i</span><script type="math/tex">x^j_i</script></span>可以如下缩放：</p>
+<div>
+<div class="MathJax_Preview">y^j_i=\frac{x^j_i-min_j}{max_j-min_j}\tag{2.3}</div>
+<script type="math/tex; mode=display">y^j_i=\frac{x^j_i-min_j}{max_j-min_j}\tag{2.3}</script>
+</div>
+<p>当最大值和最小值由于数据收集中的某些错误而导致极值异常值时，此方法无效。例如，考虑年龄属性，其中数据收集中的错误导致将附加的零附加到年龄，导致年龄值为800岁而不是80岁。在这种情况下，沿着年龄属性的大部分缩放数据将会在<span><span class="MathJax_Preview">[0,0.1]</span><script type="math/tex">[0,0.1]</script></span>的范围内，因此可以不强调该属性。标准化对于这种情况更加鲁棒。</p>
+<h2 id="24">2.4 数据缩减和转换</h2>
+<p>数据缩减的目标是更紧凑地表示它。当数据量较小时，应用复杂且计算量大的算法要容易得多。数据的减少可以根据行数（记录）或以列数（维度）来表示。数据减少确实会导致一些信息的丢失。使用更复杂的算法有时可以弥补数据减少导致的信息损失。在各种应用中使用不同类型的数据缩减：</p>
+<ol>
+<li><strong>数据采样</strong>：对来自底层数据的记录进行采样以创建更小的数据库。在样本需要动态维护的流场景中，采样通常要困难得多。</li>
+<li><strong>特征选择</strong>：分析过程中只使用底层数据的一部分特征。通常，这些子集是以特定于应用程序的方式选择的。例如，适用于群集的特征选择方法可能不适用于分类，反之亦然。因此，本节将仅以有限的方式讨论特征子集的问题，并将更详细的讨论推迟到后面的章节。</li>
+<li><strong>通过轴旋转减少数据</strong>：利用数据中的相关性以较小的维数表示它。这种数据缩减方法的例子包括文本域的主成分分析（PCA），奇异值分解（SVD）或潜在语义分析（LSA）。</li>
+<li><strong>使用类型转换的数据缩减</strong>：这种数据缩减的形式与数据类型的可移植性密切相关。例如，通过离散小波变换将时间序列转换为尺寸更小，复杂度更低的多维数据。同样，通过使用嵌入技术，图可以转换为多维表示。</li>
+</ol>
+<p>上述各方面将在本节的不同部分进行讨论。</p>
+<h3 id="241">2.4.1 采样</h3>
+<p>抽样的主要优点是它简单，直观并且相对容易实施。使用的采样类型可能随手边的应用而变化。</p>
+<h4 id="2411">2.4.1.1 静态数据采样</h4>
+<p>在整个数据已经可用时对数据进行采样要简单得多，因此基础数据点的数量预先知道。在无偏抽样方法中，选择并保留数据点的预定义分数<span><span class="MathJax_Preview">f</span><script type="math/tex">f</script></span>用于分析。这是非常简单的实现，并且可以通过两种不同的方式实现，取决于是否使用替换。</p>
+<p>在从具有<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个记录的数据组<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中取样而没有替换的情况下，总共<span><span class="MathJax_Preview">\lceil n·f \rceil</span><script type="math/tex">\lceil n·f \rceil</script></span>个记录是从数据中随机挑选的。因此，样本中不包含重复项，除非原始数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>也包含重复项。在用具有<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个记录的数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>进行替换的采样中，对记录进行顺序且独立于整个数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的采样，总共<span><span class="MathJax_Preview">\lceil n·f \rceil</span><script type="math/tex">\lceil n·f \rceil</script></span>倍。因此，重复是可能的，因为相同的记录可能被包括在顺序选择的样本中。通常，大多数应用程序不使用替换，因为不必要的重复对于某些数据挖掘应用程序（如异常值检测）可能造成麻烦。其他一些特殊的采样形式如下：</p>
+<ol>
+<li><strong>有偏抽样</strong>：在有偏的抽样中，由于对分析的重要性，故意强调数据的某些部分。一个典型的例子是时间衰减偏差，其中更新的记录有更大的机会被纳入样本，而陈旧的记录被纳入的可能性较低。在指数衰减偏差中，对<span><span class="MathJax_Preview">δ_t</span><script type="math/tex">δ_t</script></span>时间单位前产生的数据记录<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>进行采样的概率<span><span class="MathJax_Preview">p（\overline{X}）</span><script type="math/tex">p（\overline{X}）</script></span>与由衰变参数<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>调节的指数衰减函数值成比例：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">p(\overline{X})∝e^{-\lambda\cdot\delta_t}\tag{2.4}</span><script type="math/tex">p(\overline{X})∝e^{-\lambda\cdot\delta_t}\tag{2.4}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">p(\overline{X})∝e^{-\lambda\cdot\delta_t}\tag{2.4}</span><script type="math/tex">p(\overline{X})∝e^{-\lambda\cdot\delta_t}\tag{2.4}</script></span></script></span></li>
+</ol>
+<p>这里<span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>是自然对数的基数。通过使用不同的<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>值，可以适当调节时间衰减的影响。</p>
+<ol>
+<li><strong>分层抽样</strong>：在一些数据集中，数据的重要部分可能由于其稀缺性而无法充分体现。因此，分层样本首先将数据划分为一组所需的层，然后根据应用特定的方式基于预定义的比例从这些层中的每一层独立采样。</li>
+</ol>
+<p>例如，考虑一项衡量人口中不同个人生活方式的经济多样性的调查。因为其相对稀缺，即使是100万参与者的样本也不会采样到亿万富翁。然而，分层样本（按收入）将独立地从每个收入组中取样预定义的一部分参与者，以确保分析具有更好的鲁棒性。</p>
+<p>许多其他形式的有偏抽样是可能的。例如，在密度有偏抽样中，较高密度区域中的点的权重较小，以确保样本中稀有区域具有更高的代表性。</p>
+<h4 id="2412">2.4.1.2 数据流的水塘采样</h4>
+<p>一个特别有趣的采样形式是数据流的水塘采样。在水塘采样中，从数据流中动态维护<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个点的样本。回想一下，流的体积非常大，因此无法将其存储在磁盘上进行采样。因此，对于流中的每个传入数据点，必须使用一组有效实现的操作来维护样本。</p>
+<p>在静态情况下，样本中包含数据点的概率为<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>，其中<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>为样本量，<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>为“数据集”中的点数。在这种情况下，“数据集”不是静态的，不能存储在磁盘上。此外，<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的值随着更多点的到达而不断增加，并且之前的数据点（样本外部）已经被丢弃。因此，采样方法在任何特定时刻都不完全了解流的以前历史。换句话说，对于流中的每个输入数据点，我们需要动态地做出两个简单的准入控制决策：</p>
+<ol>
+<li>应该用什么抽样规则来决定是否在样本中包含新来的数据点？</li>
+<li>应该使用什么规则来决定如何从样本中剔除数据点以便为新插入的数据点“腾出空间”？</li>
+</ol>
+<p>幸运的是，设计数据流中的水塘采样算法相对简单[498]。对于<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>大小的储存器，流中的前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据点用于初始化储层。随后，对于第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个输入流数据点，应用以下两个准入控制决策：</p>
+<ol>
+<li>以概率<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>将第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个输入流数据点插入储层。</li>
+<li>如果新插入的数据点被插入，则随机从旧的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据点中剔除一个为新到达的点腾出空间。</li>
+</ol>
+<p>可以证明，上述规则保留了来自数据流的无偏储存样本。</p>
+<p><strong>引理2.4.1</strong>  <em>在<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个流点到达后，任何流点包含在储层中的概率是相同的，并且等于<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>。</em></p>
+<p><strong>证明</strong>：这个结果很容易通过归纳显示。在初始化前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据点时，定理是非常正确的。让我们（归纳地）假设在<span><span class="MathJax_Preview">（n-1）</span><script type="math/tex">（n-1）</script></span>个数据点被接收后它也是如此，因此每个点包含在储层中的概率为<span><span class="MathJax_Preview">k/（n-1）</span><script type="math/tex">k/（n-1）</script></span>。到达点包含在流中的概率是<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>，因此引理对于到达的数据点是成立的。它仍然需要证明数据流中剩余点的结果。对于一个输入数据点可能会出现两个不相交的情况事件，并且一个点被包含在储层中的最终概率是这两种情况的总和：</p>
+<ol>
+<li>
+<p>传入的数据点未插入储存器。这个概率是<span><span class="MathJax_Preview">（n-k）/n</span><script type="math/tex">（n-k）/n</script></span>。 由于归纳假设中包含在水塘中的任何点的原始概率为<span><span class="MathJax_Preview">k/（n-1）</span><script type="math/tex">k/（n-1）</script></span>，因此一个点包含在储层中和情况1事件中的总体概率是二者的乘积<span><span class="MathJax_Preview">p_1=\frac{k(n-k)}{n(n-1)}</span><script type="math/tex">p_1=\frac{k(n-k)}{n(n-1)}</script></span>。</p>
+</li>
+<li>
+<p>传入的数据点被插入到储存器中。情况2的概率等于传入数据点的插入概率<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>。随后，现有储层点以概率<span><span class="MathJax_Preview">（k-1）/k</span><script type="math/tex">（k-1）/k</script></span>保留，因为其中只有一个被剔除。因为归纳假设意味着数据流中的任何早期点最初都以概率<span><span class="MathJax_Preview">k/（n-1）</span><script type="math/tex">k/（n-1）</script></span>出现在储层中，这意味着给定了一个点包含在储层和情况2事件中的概率为上述三种概率的乘积<span><span class="MathJax_Preview">p_2</span><script type="math/tex">p_2</script></span>：</p>
+</li>
+</ol>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">p_2=\left( \frac{k}{n} \right)\left( \frac{k-1}{k} \right)\left( \frac{k}{n-1} \right)=\frac{k(k-1)}{n(n-1)}\tag{2.5}</span><script type="math/tex">p_2=\left( \frac{k}{n} \right)\left( \frac{k-1}{k} \right)\left( \frac{k}{n-1} \right)=\frac{k(k-1)}{n(n-1)}\tag{2.5}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">p_2=\left( \frac{k}{n} \right)\left( \frac{k-1}{k} \right)\left( \frac{k}{n-1} \right)=\frac{k(k-1)}{n(n-1)}\tag{2.5}</span><script type="math/tex">p_2=\left( \frac{k}{n} \right)\left( \frac{k-1}{k} \right)\left( \frac{k}{n-1} \right)=\frac{k(k-1)}{n(n-1)}\tag{2.5}</script></span></script></span></p>
+<p>因此，在第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个数据点到达之后，流点保留在储层中的总概率由<span><span class="MathJax_Preview">p_1</span><script type="math/tex">p_1</script></span>和<span><span class="MathJax_Preview">p_2</span><script type="math/tex">p_2</script></span>的和给出。可以证明这等于<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>。</p>
+<p>有可能将水塘采样扩展到数据流中存在时间偏差的情况。需要指出的是，指数偏差的情况已在[35]中得到解决。</p>
+<h3 id="242">2.4.2 特征子集选择</h3>
+<p>数据预处理的第二种方法是特征子集选择。有些功能在已知不相关时可以丢弃。哪些功能是相关的？显然，这个决定取决于手头的应用。有两种主要类型的特征选择：</p>
+<ol>
+<li><strong>无监督特征选择</strong>：这对应于从数据中去除嘈杂和冗余的属性。无监督的特征选择最好根据其对集群应用程序的影响来定义，尽管适用范围更广。如果不使用聚类问题作为合适的上下文，则很难全面描述这些特征选择方法。因此，无监督特征选择方法的讨论推迟到第6章数据聚类部分。</li>
+</ol>
+<p><center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15256128806389.jpg" />
+图2.2：在适当旋转的轴系统中的少量维度中表示的高度相关的数据</center></p>
+<ol>
+<li><strong>监督特征选择</strong>：这种类型的特征选择与数据分类问题相关。在这种情况下，只有可以有效预测类属性的功能是最相关的。这些特征选择方法通常与用于分类的分析方法紧密结合。详细的讨论推迟到第10章数据分类部分。</li>
+</ol>
+<p>特征选择是数据挖掘过程的重要组成部分，因为它决定了输入数据的质量。</p>
+<h3 id="243">2.4.3 轴旋转降维</h3>
+<p>在实际数据集中，不同属性之间存在相当多的相关性。在某些情况下，属性之间的硬性约束或规则可能会以其他方式唯一地定义某些属性。例如，个人的出生日期（定量表示）与他或她的年龄完全相关。在大多数情况下，相关性可能不尽相同，但是不同特征之间仍然存在显著的相关性。不幸的是，真实的数据集包含许多这样的冗余，在数据创建的初始阶段，这些冗余已经逃脱了分析人员的注意。这些相关性和约束对应于隐式冗余，因为它们意味着可以使用维度的某些子集的知识来预测其他维度的值。例如，考虑图2.2所示的三维数据集。在这种情况下，如果轴旋转到图中所示的方向，则新变换后的特征值中的相关性和冗余性将被移除。作为这种冗余移除的结果，整个数据可以（近似）沿着一维线表示。因此，此三维数据集的固有维数为1。其他两个轴对应于低变量维数。如果数据在图2.2所示的新轴系中表示为坐标，那么沿这些低方差维的坐标值变化不大。因此，在轴系旋转之后，这些尺寸可以被移除而没有太多的信息损失。</p>
+<p>一个自然的问题就是如何以自动的方式确定如图2.2所示的相关消除轴系统。实现这一目标的两种自然方法是主成分分析（PCA）和奇异值分解（SVD）。这两种方法虽然在定义层面上不完全相同，但是密切相关。尽管主成分分析的概念在直观上更容易理解，但SVD是一个更为通用的框架，可用于执行PCA作为特例。</p>
+<h4 id="2431">2.4.3.1 主成分分析</h4>
+<p>通常在从每个数据点减去数据集的平均值之后应用PCA。但是，只要数据的平均值被单独存储，也可以不使用平均中心来使用它。该操作被称为平均居中，并且其导致以原点为中心的数据集。PCA的目标是将数据旋转到一个轴系统，在这个轴系统中，在少量维度中捕获最大变异量。从图2.2的例子可以直观地看出，这样一个轴系统受到属性之间的相关性的影响。我们将在下面展示一个重要的观察结果，即一个数据集沿特定方向的方差可以直接用其协方差矩阵表示。</p>
+<p>设<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>是<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>对称协方差矩阵。因此，<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>的<span><span class="MathJax_Preview">（i，j）</span><script type="math/tex">（i，j）</script></span>条目<span><span class="MathJax_Preview">c_{ij}</span><script type="math/tex">c_{ij}</script></span>表示数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>列和第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>列（维度）之间的协方差。令<span><span class="MathJax_Preview">μ_i</span><script type="math/tex">μ_i</script></span>表示沿第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>维的平均值。具体而言，如果<span><span class="MathJax_Preview">x^m_k</span><script type="math/tex">x^m_k</script></span>是第<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>条记录的第<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>维，则协方差条目<span><span class="MathJax_Preview">c_{ij}</span><script type="math/tex">c_{ij}</script></span>的值如下所示：</p>
+<div>
+<div class="MathJax_Preview">c_{ij}=\frac{\begin{matrix} \sum_{k=1}^n x^i_kx^j_k \end{matrix}}{n}-μ_iμ_j\ \ \forall{i,j\in\{1…d\}}\tag{2.6}</div>
+<script type="math/tex; mode=display">c_{ij}=\frac{\begin{matrix} \sum_{k=1}^n x^i_kx^j_k \end{matrix}}{n}-μ_iμ_j\ \ \forall{i,j\in\{1…d\}}\tag{2.6}</script>
+</div>
+<p>令<span><span class="MathJax_Preview">\overline{μ}=（μ_1...μ_d）</span><script type="math/tex">\overline{μ}=（μ_1...μ_d）</script></span>是代表沿着不同维度的均值的<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维行向量。然后，前面提到的<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>计算公式2.6对于不同的<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>值可以用<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>矩阵形式紧凑地表示如下：</p>
+<div>
+<div class="MathJax_Preview">C=\frac{D_TD}{n}-\overline{μ}^T\overline{μ}\tag{2.7}</div>
+<script type="math/tex; mode=display">C=\frac{D_TD}{n}-\overline{μ}^T\overline{μ}\tag{2.7}</script>
+</div>
+<p>请注意，矩阵<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>的<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>条对角线条目对应于<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>个方差。协方差矩阵<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>是半正定的，因为可以证明，对于任何<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维列向量<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>，<span><span class="MathJax_Preview">\overline{v}_TC\overline{v}</span><script type="math/tex">\overline{v}_TC\overline{v}</script></span>的值等于<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>上的数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的一维投影<span><span class="MathJax_Preview">D\overline{v}</span><script type="math/tex">D\overline{v}</script></span>的方差。</p>
+<div>
+<div class="MathJax_Preview">\overline{v}^TC\overline{v}=\frac{(D\overline{v})^TD\overline{v}}{n}-(\overline{μ}\overline{v})^2=Variance\ of\ 1-dimensional\ points\ in\ D\overline{v}\ge0\tag{2.8}</div>
+<script type="math/tex; mode=display">\overline{v}^TC\overline{v}=\frac{(D\overline{v})^TD\overline{v}}{n}-(\overline{μ}\overline{v})^2=Variance\ of\ 1-dimensional\ points\ in\ D\overline{v}\ge0\tag{2.8}</script>
+</div>
+<p>事实上，PCA的目标是相继确定正交矢量<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>使<span><span class="MathJax_Preview">\overline{v}^TC\overline{v}</span><script type="math/tex">\overline{v}^TC\overline{v}</script></span>最大化。如何确定这样的方向？ 因为协方差矩阵是对称的且是半正定的，所以可以如下对角化：</p>
+<div>
+<div class="MathJax_Preview">C=P \Lambda P^T\tag{2.9}</div>
+<script type="math/tex; mode=display">C=P \Lambda P^T\tag{2.9}</script>
+</div>
+<p>矩阵<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的列包含<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>的正交特征向量，<span><span class="MathJax_Preview">Λ</span><script type="math/tex">Λ</script></span>是包含非负特征值的对角矩阵。<span><span class="MathJax_Preview">\Lambda_{ii}</span><script type="math/tex">\Lambda_{ii}</script></span>条目是与矩阵<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个特征向量（或列）相对应的特征值。这些特征向量表示沿着单位方向<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>最大化方差<span><span class="MathJax_Preview">\overline{v}^TC\overline{v}</span><script type="math/tex">\overline{v}^TC\overline{v}</script></span>的前述优化模型的连续正交解。</p>
+<p>这种对角化的一个有趣特性是特征向量和特征值都具有根据数据分布的几何解释。具体来说，如果数据表示的轴系被旋转到<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>列中的特征向量的正交集，则可以表明新变换的特征值的所有<span><span class="MathJax_Preview">\begin{pmatrix} d \\ 2\end{pmatrix}</span><script type="math/tex">\begin{pmatrix} d \\ 2\end{pmatrix}</script></span> 个协方差都是零。换句话说，最大的方差保存方向也是相关去除方向。此外，特征值表示沿着相应特征向量的数据的方差。实际上，对角矩阵<span><span class="MathJax_Preview">Λ</span><script type="math/tex">Λ</script></span>是轴旋转后的新的协方差矩阵。因此，具有大特征值的特征向量保持较大的方差，并且也被称为主要分量。由于用于推导该变换的优化公式的性质，仅包含具有最大特征值的特征向量的新轴系统被优化以保持固定数量的维度中的最大方差。例如，图2.2的散点图说明了各种特征向量，并且很明显，具有最大方差的特征向量是创建方差保持表示所需的全部。只保留少量具有大特征值的特征向量通常就足够了。</p>
+<p>在不失一般性的情况下，可以假定<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>（和对应的对角矩阵<span><span class="MathJax_Preview">Λ</span><script type="math/tex">Λ</script></span>）的列从左到右排列，使得它们对应于递减的特征值。然后，变换后的数据矩阵<span><span class="MathJax_Preview">D'</span><script type="math/tex">D'</script></span>在轴旋转到<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的标准正交列后的新坐标系中，可以用下列线性变换代数计算：</p>
+<div>
+<div class="MathJax_Preview">D^\prime=DP \tag{2.10}</div>
+<script type="math/tex; mode=display">D^\prime=DP \tag{2.10}</script>
+</div>
+<p>虽然变换后的数据矩阵<span><span class="MathJax_Preview">D'</span><script type="math/tex">D'</script></span>的大小也是<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>，只有其第一个（最左边的）<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>列将显示值的显著变化。<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的剩余<span><span class="MathJax_Preview">（d-k）</span><script type="math/tex">（d-k）</script></span>列中的每一列将近似等于旋转轴系统中数据的平均值。对于以均值为中心的数据，这<span><span class="MathJax_Preview">（d-k）</span><script type="math/tex">（d-k）</script></span>列的值几乎为0。因此，数据的维数可以减少，并且只有变换后的数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>列。为表示目的可能需要保留。此外，可以证实，变换后的数据<span><span class="MathJax_Preview">D'=DP</span><script type="math/tex">D'=DP</script></span>的协方差矩阵是通过应用方程式的协方差定义的对角线矩阵<span><span class="MathJax_Preview">Λ</span><script type="math/tex">Λ</script></span>。公式2.7到<span><span class="MathJax_Preview">DP</span><script type="math/tex">DP</script></span>（转换数据）和<span><span class="MathJax_Preview">\overline{μ}P</span><script type="math/tex">\overline{μ}P</script></span>（转换平均值）分别代替<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>和<span><span class="MathJax_Preview">\overline{μ}</span><script type="math/tex">\overline{μ}</script></span>。得到的协方差矩阵可以用原始协方差矩阵<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>表示为<span><span class="MathJax_Preview">P^TCP</span><script type="math/tex">P^TCP</script></span>。用等式中的<span><span class="MathJax_Preview">C=P\Lambda P^T</span><script type="math/tex">C=P\Lambda P^T</script></span>代替。公式2.9显示了等价性，因为<span><span class="MathJax_Preview">P^TP=PP^T=I</span><script type="math/tex">P^TP=PP^T=I</script></span>。换句话说，因为<span><span class="MathJax_Preview">Λ</span><script type="math/tex">Λ</script></span>是对角的，所以相关性已经从转换后的数据中移除。</p>
+<p>由沿着top-<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>特征向量的投影定义的数据集的方差等于<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个对应特征值的总和。在许多应用中，特征值在前几个值后显示急剧下降。例如，图2.3说明了来自UCI机器学习库[213]的279维Arrythmia数据集的特征值的行为。图2.3a以增加的顺序显示特征值的绝对量值，而图2.3b显示在top-<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>特征值中保留的总变量量。图2.3b可以通过使用图2.3a中最小特征值的累加和来导出。值得注意的是，215个最小特征值包含的数据总方差不到1％，因此可以在基于相似性的应用程序的结果变化很小的情况下将其删除。请注意，Arrythmia数据集不是沿着许多维度对的非常强关联的数据集。然而，由于相关性在多个维度上的累积效应，因此降维是激烈的。</p>
+<p><center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15256129691951.jpg" />
+图2.3 随着心律失常数据集（Arrythmia dataset）的特征值数量的增加，方差保持不变</center></p>
+<p>矩阵<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>的特征向量可以通过使用[295]中讨论的任何数值方法或通过现成的特征向量求解器来确定。PCA可以扩展到使用称为内核技巧的方法来发现非线性嵌入。参考第10章的章节10.6.4.1，简要介绍了内核PCA。</p>
+<h4 id="2432">2.4.3.2 奇异值分解</h4>
+<p>奇异值分解（SVD）与主成分分析（PCA）密切相关。然而，由于密切的关系，这些不同的方法有时会彼此混淆。在开始讨论SVD之前，我们说明它与PCA的关系。SVD比PCA更普遍，因为它提供了两套基本矢量而不是一套。SVD提供数据矩阵的行和列的基向量，而PCA仅提供数据矩阵的行的基向量。此外，在某些特殊情况下，SVD为数据矩阵的行提供了与PCA相同的基础：</p>
+<p><em>对于其中每个属性的均值为0的数据集，SVD提供与PCA相同的基本向量和数据转换。</em></p>
+<p>PCA的基本向量对平均转换不变，而SVD的基向量不是。当数据不是以中心为中心时，SVD和PCA的基向量将不会相同，并且可能得到定性不同的结果。SVD通常在没有均值集中的情况下应用于稀疏非负数据，例如文档项矩阵。定义SVD的正式方法是作为（或分解成）三个矩阵的可分解产物：</p>
+<div>
+<div class="MathJax_Preview">D=Q \Sigma P^T\tag{2.11}</div>
+<script type="math/tex; mode=display">D=Q \Sigma P^T\tag{2.11}</script>
+</div>
+<p>这里，<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>是具有正交列的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>矩阵，其是左奇异向量。<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>是包含奇异值的<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>对角矩阵，其总是非负的，并且按照惯例，以非递增顺序排列。此外，<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>是具有正交列的<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>矩阵，它们是右奇异向量。请注意，对角矩阵<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>是矩形的而不是正方形的，但它被称为对角线，因为只有形式<span><span class="MathJax_Preview">Σ_{ii}</span><script type="math/tex">Σ_{ii}</script></span>的输入不为零。线性代数的一个基本事实是这种分解总是存在的，并且可以在[480]中找到证明。<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>的非零对角元素的个数等于矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的秩，为<span><span class="MathJax_Preview">min\{n，d\}</span><script type="math/tex">min\{n，d\}</script></span>。此外，由于奇异向量的正交性，<span><span class="MathJax_Preview">P^TP</span><script type="math/tex">P^TP</script></span>和<span><span class="MathJax_Preview">Q^TQ</span><script type="math/tex">Q^TQ</script></span>都是单位矩阵。 我们提出以下意见：</p>
+<ol>
+<li>
+<p>矩阵<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的列也是左奇异向量，是<span><span class="MathJax_Preview">DD^T</span><script type="math/tex">DD^T</script></span>的正交特征向量。这是因为<span><span class="MathJax_Preview">DD^T =QΣ（P^TP）Σ^TQ^T=QΣΣ^TQ^T</span><script type="math/tex">DD^T =QΣ（P^TP）Σ^TQ^T=QΣΣ^TQ^T</script></span>。因此，作为<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>对角矩阵<span><span class="MathJax_Preview">ΣΣ^T</span><script type="math/tex">ΣΣ^T</script></span>的对角项的非零奇异值的平方表示<span><span class="MathJax_Preview">DD^T</span><script type="math/tex">DD^T</script></span>的非零特征值。</p>
+</li>
+<li>
+<p>矩阵<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的列也是右奇异向量，是<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的正交特征向量。在<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>对角矩阵<span><span class="MathJax_Preview">Σ^TΣ</span><script type="math/tex">Σ^TΣ</script></span>的对角条目中表示的非零奇异值的平方是<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的非零特征值。请注意，<span><span class="MathJax_Preview">DD^T</span><script type="math/tex">DD^T</script></span>和<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的非零特征值是相同的。矩阵<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>特别重要，因为它提供了与PCA中协方差矩阵的特征向量类似的基向量。</p>
+</li>
+<li>
+<p>因为以均值为中心的数据的协方差矩阵是<span><span class="MathJax_Preview">\frac{D^TD}{n}</span><script type="math/tex">\frac{D^TD}{n}</script></span>（参考等式2.7），并且SVD的右奇异向量是<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的特征向量，所以对于中心平均的数据来说，PCA的特征向量与SVD的右奇异向量相同。此外，奇异值分解中的平方奇异值是主成分分析特征值的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>倍。这种等价性说明了为什么SVD和PCA可以为以均值为中心的数据提供相同的转换。</p>
+</li>
+<li>
+<p>在不失一般性的情况下，可以假设<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>的对角条目按降序排列，并且矩阵<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>和<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的列也相应地排序。令<span><span class="MathJax_Preview">P_k</span><script type="math/tex">P_k</script></span>和<span><span class="MathJax_Preview">Q_k</span><script type="math/tex">Q_k</script></span>分别是通过选择<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>和<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>列获得的截短的<span><span class="MathJax_Preview">d×k</span><script type="math/tex">d×k</script></span>和<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵。 设<span><span class="MathJax_Preview">Σ_k</span><script type="math/tex">Σ_k</script></span>是包含最高<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个奇异值的<span><span class="MathJax_Preview">k×k</span><script type="math/tex">k×k</script></span>平方矩阵。然后，SVD分解产生原始数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的近似<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维数据表示：</p>
+</li>
+</ol>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">D\approx Q_kΣ_kP^T_k\tag{2.12}</span><script type="math/tex">D\approx Q_kΣ_kP^T_k\tag{2.12}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">D\approx Q_kΣ_kP^T_k\tag{2.12}</span><script type="math/tex">D\approx Q_kΣ_kP^T_k\tag{2.12}</script></span></script></span></p>
+<p><span><span class="MathJax_Preview">P_k</span><script type="math/tex">P_k</script></span>的列表示用于数据集简化表示的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维基系统。在这个<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维基系统中的降维数据集由<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>数据集<span><span class="MathJax_Preview">D'_k=DP_k=Q_kΣ_k</span><script type="math/tex">D'_k=DP_k=Q_kΣ_k</script></span>，如等式2.10。<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>行中的每一行都是<span><span class="MathJax_Preview">D'_k</span><script type="math/tex">D'_k</script></span>包含这个新轴系统中每个变换数据点的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>坐标。通常，<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的值比<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>和<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>都小得多。此外，不同于PCA，全<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维变换数据矩阵<span><span class="MathJax_Preview">D'</span><script type="math/tex">D'</script></span>的最右<span><span class="MathJax_Preview">（d-k）</span><script type="math/tex">（d-k）</script></span>列<span><span class="MathJax_Preview">D'=DP</span><script type="math/tex">D'=DP</script></span>将近似为0（而不是数据平均值），数据是否以平均值为中心。一般来说，PCA将数据投影到穿过数据平均值的低维超平面上，而SVD将数据投射到穿过原点的低维超平面上。PCA尽可能多地捕获数据的方差（或平均欧几里德距离），而SVD捕获尽可能多的关于起点的总欧氏距离的平方欧氏距离。这种近似数据矩阵的方法被称为截断SVD。</p>
+<p>在下文中，我们将显示截断SVD使关于原点的变换数据点的聚集平方欧几里得距离（或能量）最大化。令<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>是<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维列向量，<span><span class="MathJax_Preview">D\overline{v}</span><script type="math/tex">D\overline{v}</script></span>是数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>在<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>上的投影。考虑确定单位向量<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>的问题，使得投影数据的欧几里德距离<span><span class="MathJax_Preview">（D\overline{v}）^T（D\overline{v}）</span><script type="math/tex">（D\overline{v}）^T（D\overline{v}）</script></span>的平方和来自原点的点数最大化。将拉格朗日松弛<span><span class="MathJax_Preview">\overline{v}^TD^TD\overline{v}-λ（||\overline{v}||^2-1）</span><script type="math/tex">\overline{v}^TD^TD\overline{v}-λ（||\overline{v}||^2-1）</script></span>的梯度设置为0等价于特征向量条件<span><span class="MathJax_Preview">D^TD\overline{v}-λ\overline{v}=0</span><script type="math/tex">D^TD\overline{v}-λ\overline{v}=0</script></span>。由于右奇异向量是<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的特征向量，因此它的特征向量具有<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个最大特征值（平方奇异值）的右奇异向量提供了使经转换和减少的数据矩阵<span><span class="MathJax_Preview">D'</span><script type="math/tex">D'</script></span>中的保存能量最大化的基础。<span><span class="MathJax_Preview">D'_k=DP_k=Q_kΣ_k</span><script type="math/tex">D'_k=DP_k=Q_kΣ_k</script></span>。因为能量是距离原点的平方欧几里德距离之和，对轴旋转是不变的，所以能量在<span><span class="MathJax_Preview">D'_k</span><script type="math/tex">D'_k</script></span>与<span><span class="MathJax_Preview">D'_kP^T_k=Q_kΣ_kP^T_k</span><script type="math/tex">D'_kP^T_k=Q_kΣ_kP^T_k</script></span>中的相同。因此，<span><span class="MathJax_Preview">k-rank</span><script type="math/tex">k-rank</script></span>奇异值分解是一个最大的能量保留因子分解。这个结果被称为Eckart-Young定理。</p>
+<p><span><span class="MathJax_Preview">（D\overline{v}）^T（D\overline{v}）</span><script type="math/tex">（D\overline{v}）^T（D\overline{v}）</script></span>给出了数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>沿奇异值向量<span><span class="MathJax_Preview">\overline{v}</span><script type="math/tex">\overline{v}</script></span>的投影<span><span class="MathJax_Preview">D\overline{v}</span><script type="math/tex">D\overline{v}</script></span>的总保存能量，简化如下：</p>
+<div>
+<div class="MathJax_Preview">(D\overline{v})^T(D\overline{v})=\overline{v}^T(D^TD\overline{v})=\overline{v}^T(\sigma^2\overline{v})=\sigma^2</div>
+<script type="math/tex; mode=display">(D\overline{v})^T(D\overline{v})=\overline{v}^T(D^TD\overline{v})=\overline{v}^T(\sigma^2\overline{v})=\sigma^2</script>
+</div>
+<p>因为能量被定义为沿着标准正交方向的线性可分的总和，所以沿前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个奇异向量的数据投影中的保存能量等于前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个奇异值的平方和。请注意，数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中的总能量总是等于所有非零奇异值的平方和。可以证明，最大化保存的能量与最小化<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>-阶近似的平方误差（或失去的能量）是相同的。这是因为保留子空间中的能量和互补（丢弃）子空间中的损失能量之和总是恒定的，这等于原始数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中的能量。</p>
+<p>纯粹从特征向量分析的角度来看，SVD提供了两种不同的视角来理解变换和减少的数据。变换后的数据矩阵既可以被视为<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>散布矩阵<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>的前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个基本特征向量<span><span class="MathJax_Preview">P_k</span><script type="math/tex">P_k</script></span>上的数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的投影<span><span class="MathJax_Preview">DP_k</span><script type="math/tex">DP_k</script></span>，也可以直接被看作是缩放特征向量<span><span class="MathJax_Preview">Q_kΣ_k=DP_k</span><script type="math/tex">Q_kΣ_k=DP_k</script></span>的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>点积相似度矩阵<span><span class="MathJax_Preview">DD^T</span><script type="math/tex">DD^T</script></span>。尽管提取<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>相似度矩阵的特征向量通常在计算上是昂贵的，但这种方法也推广到非线性降维方法，其中线性基向量的概念不存在于原始空间中。在这种情况下，为了提取非线性嵌入（参见表2.3），将点积相似度矩阵替换为更复杂的相似度矩阵。</p>
+<p>SVD比PCA更普遍，并且可用于同时确定数据矩阵的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个基向量的子集及其具有最大能量的转置。后者可以用于理解<span><span class="MathJax_Preview">D^T</span><script type="math/tex">D^T</script></span>的互补转换特性。<span><span class="MathJax_Preview">Q_k</span><script type="math/tex">Q_k</script></span>的正交列提供了用于（近似）变换与<span><span class="MathJax_Preview">D^T</span><script type="math/tex">D^T</script></span>的行对应的“数据点”的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维基础系统，并且矩阵<span><span class="MathJax_Preview">D^TQ_k=P_kΣ_k</span><script type="math/tex">D^TQ_k=P_kΣ_k</script></span>包含相应的坐标。例如，在用户项目评分矩阵中，可能希望确定用户的简化表示或项目的简化表示。SVD为这两种简化提供了基础向量。截断SVD以<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个主要潜在成分表示数据。第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个潜在分量用<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>和<span><span class="MathJax_Preview">D^T</span><script type="math/tex">D^T</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个基向量表示，它在数据中的相对重要性由第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个奇异值定义。通过将矩阵乘积<span><span class="MathJax_Preview">Q_kΣ_kP^T_k</span><script type="math/tex">Q_kΣ_kP^T_k</script></span>分解成<span><span class="MathJax_Preview">Q_k</span><script type="math/tex">Q_k</script></span>和<span><span class="MathJax_Preview">P_k</span><script type="math/tex">P_k</script></span>的列向量（即<span><span class="MathJax_Preview">D^T</span><script type="math/tex">D^T</script></span>和<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的主导基向量），可以获得<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个潜在分量的下列相加和：</p>
+<div>
+<div class="MathJax_Preview">Q_k\Sigma_kP^T_k=\sum_{i=1}^k \overline{q_i}\sigma_i\overline{p_i}^T=\sum_{i=1}^k \sigma_i(\overline{q_i}\overline{p_i}^T)\tag{2.13}</div>
+<script type="math/tex; mode=display">Q_k\Sigma_kP^T_k=\sum_{i=1}^k \overline{q_i}\sigma_i\overline{p_i}^T=\sum_{i=1}^k \sigma_i(\overline{q_i}\overline{p_i}^T)\tag{2.13}</script>
+</div>
+<p>这里<span><span class="MathJax_Preview">\overline{q_i}</span><script type="math/tex">\overline{q_i}</script></span>是<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>列，<span><span class="MathJax_Preview">\overline{p_i}</span><script type="math/tex">\overline{p_i}</script></span>是<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>列，而<span><span class="MathJax_Preview">σ_i</span><script type="math/tex">σ_i</script></span>是<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个对角条目。每个潜在分量<span><span class="MathJax_Preview">σ_i（\overline{q_i}\overline{p_i}^T）</span><script type="math/tex">σ_i（\overline{q_i}\overline{p_i}^T）</script></span>是具有秩1和能量<span><span class="MathJax_Preview">σ^2_i</span><script type="math/tex">σ^2_i</script></span>的<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>矩阵。这种分解被称为频谱分解。简化基矢量与SVD矩阵分解的关系如图2.4所示。</p>
+<p><center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15256130854039.jpg" />
+图2.4 矩阵分解在SVD中的互补性质</center></p>
+<p>下面举例说明6×6矩阵的2秩截断奇异值分解：</p>
+<div>
+<div class="MathJax_Preview">D=\begin{pmatrix}2&amp; 2&amp;1&amp;2&amp;0&amp;0 \\2 &amp; 3&amp;3&amp;3&amp;0&amp;0\\1&amp;1&amp;1&amp;1&amp;0&amp;0\\2&amp;2&amp;2&amp;3&amp;1&amp;1\\0&amp;0&amp;0&amp;1&amp;1&amp;1\\0&amp;0&amp;0&amp;2&amp;1&amp;2\end{pmatrix}\approx Q_2\Sigma_2P^T_2</div>
+<script type="math/tex; mode=display">D=\begin{pmatrix}2& 2&1&2&0&0 \\2 & 3&3&3&0&0\\1&1&1&1&0&0\\2&2&2&3&1&1\\0&0&0&1&1&1\\0&0&0&2&1&2\end{pmatrix}\approx Q_2\Sigma_2P^T_2</script>
+</div>
+<div>
+<div class="MathJax_Preview">\approx\begin{pmatrix}-0.41&amp; 0.17 \\-0.65 &amp; 0.31\\-0.23&amp;0.13\\-0.56&amp;-0.20\\-0.10&amp;-0.46\\-0.19&amp;-0.78\end{pmatrix}\begin{pmatrix}8.4 &amp; 0 \\0 &amp; 3.3\end{pmatrix}\begin{pmatrix}-0.41 &amp; -0.49&amp;-0.44&amp;-0.61&amp;-0.10&amp;-0.12 \\0.21 &amp; 0.31&amp;0.26&amp;-0.37&amp;-0.44&amp;-0.68\end{pmatrix}</div>
+<script type="math/tex; mode=display">\approx\begin{pmatrix}-0.41& 0.17 \\-0.65 & 0.31\\-0.23&0.13\\-0.56&-0.20\\-0.10&-0.46\\-0.19&-0.78\end{pmatrix}\begin{pmatrix}8.4 & 0 \\0 & 3.3\end{pmatrix}\begin{pmatrix}-0.41 & -0.49&-0.44&-0.61&-0.10&-0.12 \\0.21 & 0.31&0.26&-0.37&-0.44&-0.68\end{pmatrix}</script>
+</div>
+<div>
+<div class="MathJax_Preview">=\begin{pmatrix}1.55&amp;1.87&amp;\underline{1.67}&amp;1.91&amp;0.10&amp;0.04\\2.46&amp;2.98&amp;2.66&amp;2.95&amp;0.10&amp;-0.03\\0.89&amp;1.08&amp;0.96&amp;1.04&amp;0.01&amp;-0.04\\1.81&amp;2.11&amp;1.91&amp;3.14&amp;0.77&amp;1.03\\0.02&amp;-0.05&amp;-0.02&amp;1.06&amp;0.74&amp;1.11\\0.10&amp;-0.02&amp;0.04&amp;1.89&amp;1.28&amp;1.92\end{pmatrix}</div>
+<script type="math/tex; mode=display">=\begin{pmatrix}1.55&1.87&\underline{1.67}&1.91&0.10&0.04\\2.46&2.98&2.66&2.95&0.10&-0.03\\0.89&1.08&0.96&1.04&0.01&-0.04\\1.81&2.11&1.91&3.14&0.77&1.03\\0.02&-0.05&-0.02&1.06&0.74&1.11\\0.10&-0.02&0.04&1.89&1.28&1.92\end{pmatrix}</script>
+</div>
+<p>请注意，秩2矩阵是原始矩阵的一个很好的近似值。具有最大误差的条目在最终的近似矩阵中加下划线。有趣的是，这个条目也与原始数据中剩余矩阵的结构不一致（为什么？）。截断SVD通常会尝试纠正不一致的条目，并且此属性有时会用于降低容易出错的数据集中的噪声。</p>
+<h4 id="2433">2.4.3.3 潜在语义分析</h4>
+<p>潜在语义分析（LSA）是SVD方法在文本域中的一种应用。在这种情况下，数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>是包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个文档中的归一化词频的<span><span class="MathJax_Preview">n×d</span><script type="math/tex">n×d</script></span>文档项矩阵，其中<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>是词典的大小。没有使用均值居中，但由于<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的稀疏性，结果与PCA大致相同。<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的稀疏性意味着<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中的大多数项是0，并且每列的平均值远小于非零值。在这种情况下，可以证明协方差矩阵与<span><span class="MathJax_Preview">D^TD</span><script type="math/tex">D^TD</script></span>近似成正比。数据集的稀疏性也导致了低固有维数。因此，在文本领域，LSA的维度降低是相当激烈的。例如，能够在少于300个维度上表示在100,000个维度的词典上绘制的语料库并不罕见。</p>
+<p>LSA是一个典型的例子，说明某些维度的信息“丢失”实际上能够改善数据表示的质量。文本域存在两个与同义词和多义词相对应的主要问题。同义词是指两个词可能具有相同的含义。例如，“滑稽”和“欢闹”这两个词的意思大致相同。多义性是指这个事实，即同一个词可能意味着两个不同的东西。例如，“捷豹”一词可以指汽车或猫。通常，一个词的重要性只能在文档中的其他词的上下文中理解。这对于基于相似性的应用程序来说是一个问题，因为计算与使用词频的相似性可能不完全准确。例如，分别包含“滑稽”和“欢闹”两个词的两个文件在原始表示空间中可能不被认为足够相似。上述两个问题是同义词和多义词效应的直接结果。 LSA之后的截断表示法典型地消除了同义词和多义词的噪音影响，因为（高能量）奇异向量表示数据中的相关方向，并且沿着这些方向隐含地表示该词的适当上下文。由于使用中的个体差异而产生的变化隐含地编码在低能量方向上，无论如何都被截断。据观察，使用LSA可以实现文本应用的重大质量改进[184,416]。同义词效应方面的改进通常比多义词更大。这种SVD的噪声消除行为也在一般的多维数据集中得到证明[25]。</p>
+<h4 id="2434-pcasvd">2.4.3.4 PCA和SVD的应用</h4>
+<p>虽然PCA和SVD主要用于数据压缩，但它们在数据挖掘中还有许多其他应用。一些例子如下：</p>
+<ol>
+<li>降噪：虽然去除PCA和SVD中较小的特征向量/奇异向量可能会导致信息丢失，但在许多情况下，它还可能导致数据表示质量的提高。主要原因是沿着小特征向量的变化通常是噪声的结果，并且它们的去除通常是有益的。一个例子是LSA在文本域中的应用，其中删除较小的组件导致文本的语义特征的增强。奇异值分解也用于去噪图像。这些特定于文本和图像的结果在任意数据域中也被证明是正确的[25]。因此，减少数据不仅仅是节省空间，而且实际上在许多情况下提供了定性优势。</li>
+<li>数据估算：SVD和PCA可用于数据估算应用[23]，如协同过滤，因为即使从不完整的数据矩阵中可以估算出<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>值较小的简化矩阵<span><span class="MathJax_Preview">Q_k</span><script type="math/tex">Q_k</script></span>，<span><span class="MathJax_Preview">Σ_k</span><script type="math/tex">Σ_k</script></span>和<span><span class="MathJax_Preview">P_k</span><script type="math/tex">P_k</script></span>。因此，整个矩阵可以近似重建为<span><span class="MathJax_Preview">Q_kΣ_kP^T_k</span><script type="math/tex">Q_kΣ_kP^T_k</script></span>。这个应用程序在第18章第18.5节讨论。</li>
+<li>线性方程：许多数据挖掘应用程序都是优化问题，其中解决方案被重新组合为线性方程组。对于任何线性系统<span><span class="MathJax_Preview">A\overline{y}=0</span><script type="math/tex">A\overline{y}=0</script></span>，任何具有0奇异值的<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>的奇异向量将满足方程组（见习题14）。因此，0个奇异向量的任何线性组合将提供解决方案。</li>
+<li>矩阵求逆：SVD可用于<span><span class="MathJax_Preview">d×d</span><script type="math/tex">d×d</script></span>矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的求逆。设<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的分解由<span><span class="MathJax_Preview">QΣP^T</span><script type="math/tex">QΣP^T</script></span>给出。那么，<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的逆矩阵是<span><span class="MathJax_Preview">D^{-1}=PΣ^{-1}Q^T</span><script type="math/tex">D^{-1}=PΣ^{-1}Q^T</script></span>。请注意，<span><span class="MathJax_Preview">Σ^{-1}</span><script type="math/tex">Σ^{-1}</script></span>可以通过对<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>的对角项求倒数得到。该方法还可以推广到通过仅求<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>的非零对角条目的倒数来确定<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>秩矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的Moore-Penrose广义逆<span><span class="MathJax_Preview">D^+</span><script type="math/tex">D^+</script></span>。通过执行转置<span><span class="MathJax_Preview">Σ</span><script type="math/tex">Σ</script></span>的附加操作，该方法甚至可以推广到非方阵。这种矩阵求逆运算在许多数据挖掘应用中是必需的，例如最小二乘回归（参见第11章第11.5节）和社会网络分析（参见第19章）。</li>
+<li>矩阵代数：许多网络挖掘应用需要应用代数运算，例如计算矩阵的功率。这在随机游走方法中很常见（参见第19章），其中可能需要计算无向网络的对称邻接矩阵的第<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个幂。这种对称邻接矩阵可以分解为<span><span class="MathJax_Preview">QΔQ^T</span><script type="math/tex">QΔQ^T</script></span>形式。这种分解的第<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>次方可以有效地计算为<span><span class="MathJax_Preview">D^k=QΔ^kQ^T</span><script type="math/tex">D^k=QΔ^kQ^T</script></span>。事实上，矩阵的任何多项式函数都可以被有效地计算。</li>
+</ol>
+<p>SVD和PCA非常有用，因为矩阵和线性代数运算在数据挖掘中无处不在。SVD和PCA通过提供方便的分解和基本表示来促进这种矩阵运算。SVD被形象地称为“绝对是线性代数的一个高点”。[481]</p>
+<h3 id="244">2.4.4 用类型转换降维</h3>
+<p>在这些方法中，降维与类型转换相结合。 在大多数情况下，数据会从更复杂的类型转换为不太复杂的类型，例如多维数据。 因此，这些方法实现了数据缩减和类型可移植性的双重目的。 本节将研究两种这样的转换方法：</p>
+<ol>
+<li>
+<p>时间序列到多维：使用了许多方法，例如离散傅里叶变换和离散小波变换。 虽然这些方法也可以看作由上下文属性的各种时间戳定义的轴系统的旋转，但数据在旋转后不再依赖于相关性。 因此，可以以类似于多维数据的方式处理结果数据集。 由于其直观的简单性，我们将研究Haar小波变换。</p>
+</li>
+<li>
+<p>加权图到多维：使用多维缩放和谱方法在多维空间中嵌入加权图，以便通过多维嵌入来捕获边上的相似度或距离值。</p>
+</li>
+</ol>
+<p>本节将讨论这些技术中的每一种。
+<center>表2.2 小波系数计算的一个例子</center>
+<img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249143212707.jpg" /></p>
+<h4 id="2441-haar">2.4.4.1 哈尔(Haar)小波变换</h4>
+<p>小波是一种众所周知的技术，可用于多粒度分解并将时间序列数据汇总为多维表示。 哈尔小波是一种特别流行的小波分解形式，因为它的直观性和易于实现。 为了理解小波分解背后的直觉，将使用传感器温度的一个例子。</p>
+<p>假设传感器测量从早晨到晚上12小时的温度。 假设传感器以1个样本/秒的速率采样温度。 因此，在一天的过程中，传感器将收集<span><span class="MathJax_Preview">12×60×60 = 43,200</span><script type="math/tex">12×60×60 = 43,200</script></span>个读数。 显然，这将不会在很多天和很多传感器上得到很好的扩展。 一个重要的观察结果是许多相邻的传感器读数非常相似，导致这种表示非常浪费。 那么，我们如何能够在少量空间中大致表示这些数据呢？ 我们如何确定读数发生“变化”的关键区域，并存储这些变化而不是重复值？</p>
+<p>假设我们只存储整天的平均值。 这提供了一些关于温度的想法，但没有提供关于当天变化的其他信息。 现在，如果上半年和下半年的平均温度差也存储起来，那么我们可以从这两个值中得出当天的第一天和第二天的平均值。 这个原则可以递归地应用，因为这一天的前半部分可以分为第一季和第二季。 因此，利用四个存储值，我们可以在一天中的四个季度完美重建平均值。 该过程可以递归地应用到传感器读数的粒度级别。 这些“差异值”用于导出小波系数。 当然，我们还没有实现任何数据压缩，因为这些系数的数量可以显示为与原始时间序列的长度完全相等。</p>
+<p>重要的是要明白，大的差异值告诉我们更多关于温度值的变化，而不是小的变化，因此它们对于储存更重要。 因此，粒度级别的归一化之后存储更大的系数值。 这种归一化，稍后讨论，存储代表更长时间尺度的系数是有偏见的，因为更长时间的趋势对于（全局）系列重建更具信息性。</p>
+<p>更正式地，小波技术将时间序列分解成一组系数加权小波基向量。 每个系数代表特定时间范围两半之间时间序列的粗略变化。 小波基矢量是一个时间序列，以简单的阶跃函数的形式表示这种变化的时间范围。 小波系数具有不同的阶数，取决于分析的时间序列片段的长度，这也代表了分析的粒度。 高阶系数代表系列中的大趋势，因为它们对应较大的范围。 低阶系数捕获更多的局部趋势。 在提供更多符号描述之前，下面分两步提供时间序列段S的小波分解的简单递归描述：</p>
+<ol>
+<li>
+<p>将S的第一和第二时间半部分之间的行为属性值的平均差异的一半报告为小波系数。</p>
+</li>
+<li>
+<p>递归地将这种方法应用于S的第一和第二时间半部分。
+<center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249155436388.jpg" /></center>
+<center>图2.5 小波分解的例证</center></p>
+</li>
+</ol>
+<p>在该过程结束时，执行还原过程，其中保留较大（归一化）的系数。 该标准化步骤将在后面详细描述。</p>
+<p>在这一点上将提供更正式的和符号密集的描述。 为了便于讨论，假设系列的长度<span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span>是2的幂。对于<span><span class="MathJax_Preview">k≥1</span><script type="math/tex">k≥1</script></span>的每个值，Haar小波分解定义<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>阶的<span><span class="MathJax_Preview">2^{k-1}</span><script type="math/tex">2^{k-1}</script></span>个系数。这<span><span class="MathJax_Preview">2^{k-1}</span><script type="math/tex">2^{k-1}</script></span>系数中的每一个都对应于长度为<span><span class="MathJax_Preview">q/ 2^{k-1}</span><script type="math/tex">q/ 2^{k-1}</script></span>的时间序列的连续部分。这<span><span class="MathJax_Preview">2^{k-1}</span><script type="math/tex">2^{k-1}</script></span>系数的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个对应于从位置<span><span class="MathJax_Preview">（i-1）·q / 2^{k-1}+1</span><script type="math/tex">（i-1）·q / 2^{k-1}+1</script></span>开始到位置<span><span class="MathJax_Preview">i·q /2^{k-1}</span><script type="math/tex">i·q /2^{k-1}</script></span>的序列中的分段。让我们用<span><span class="MathJax_Preview">\psi^i_k</span><script type="math/tex">\psi^i_k</script></span>表示这个系数，用<span><span class="MathJax_Preview">S^i_k</span><script type="math/tex">S^i_k</script></span>表示相应的时间序列片段。同时，让我们将<span><span class="MathJax_Preview">S^i_k</span><script type="math/tex">S^i_k</script></span>的前半部分的平均值定义为<span><span class="MathJax_Preview">a^i_k</span><script type="math/tex">a^i_k</script></span>，将后半部分的平均值定义为<span><span class="MathJax_Preview">b^k_i</span><script type="math/tex">b^k_i</script></span>。那么，<span><span class="MathJax_Preview">\psi^i_k</span><script type="math/tex">\psi^i_k</script></span>的值由<span><span class="MathJax_Preview">(a^i_k-b^i_k)/2</span><script type="math/tex">(a^i_k-b^i_k)/2</script></span>给出。 更正式地说，如果<span><span class="MathJax_Preview">\phi^i_k</span><script type="math/tex">\phi^i_k</script></span>表示<span><span class="MathJax_Preview">S^i_k</span><script type="math/tex">S^i_k</script></span>的平均值，那么可以递归地定义<span><span class="MathJax_Preview">\psi^i_k</span><script type="math/tex">\psi^i_k</script></span>的值如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\psi^i_k=(\phi^{2 \cdot i-1}_{k+1}-\phi^{2 \cdot i}_{k+1})/2 \tag{2.14}</span><script type="math/tex">\psi^i_k=(\phi^{2 \cdot i-1}_{k+1}-\phi^{2 \cdot i}_{k+1})/2 \tag{2.14}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\psi^i_k=(\phi^{2 \cdot i-1}_{k+1}-\phi^{2 \cdot i}_{k+1})/2 \tag{2.14}</span><script type="math/tex">\psi^i_k=(\phi^{2 \cdot i-1}_{k+1}-\phi^{2 \cdot i}_{k+1})/2 \tag{2.14}</script></span></script></span></p>
+<p>Haar系数集由1到<span><span class="MathJax_Preview">\log_2(q)</span><script type="math/tex">\log_2(q)</script></span>的所有系数定义。 此外，为了完美重建，需要全局平均值<span><span class="MathJax_Preview">\phi^1_1</span><script type="math/tex">\phi^1_1</script></span>。系数的总数恰好等于原始序列的长度，并且通过丢弃较小（归一化）的系数来获得降维。这部分我们会在后面继续讨论。
+<center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249177317640.jpg" /></center>
+<center>图2.6： 小波分解的错误树</center></p>
+<p>不同订单的系数以特定的粒度级别了解数据的主要趋势。例如，系数<span><span class="MathJax_Preview">\phi^i_k</span><script type="math/tex">\phi^i_k</script></span>是片段<span><span class="MathJax_Preview">S^i_k</span><script type="math/tex">S^i_k</script></span>的前半部分大于同一片段后半部分的量的一半。由于较大的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>值对应于几何缩小的段大小，因此可以在不同粒度级别上理解基本趋势。 Haar小波的这种定义使得通过一系列平均和差分操作非常容易进行计算。表2.2显示了序列<span><span class="MathJax_Preview">（8,6,2,3,4,6,6,5）</span><script type="math/tex">（8,6,2,3,4,6,6,5）</script></span>的小波系数的计算。这种分解在图2.5中以图形形式说明。请注意，原始序列中的每个值都可以表示为<span><span class="MathJax_Preview">\log_2(8)= 3</span><script type="math/tex">\log_2(8)= 3</script></span>小波系数的总和，前面加上正号或负号。通常，整个分解可以表示为深度3的树，其表示整个系列的分层分解。这也被称为错误树。在图2.6中，说明了表2.2中小波分解的误差树。树中的节点包含小波系数的值，但包含系列平均值的特殊超根节点除外。</p>
+<p>该系列中小波系数的数量是8，这也是原始系列的长度。 原始序列已复制到图2.6中错误树的正下方，并可通过在沿着通向该值的路径上的节点中添加或减去值来重建。 如果我们使用它下面的左分支来达到系列值，则应该添加节点中的每个系数。 否则，应该减去它。 这种自然分解意味着可以通过仅使用与其相关的错误树的部分来重建沿着该系列的整个连续范围。</p>
+<p>与所有降维方法一样，较小的系数被忽略。 我们将借助与每个系数相关的基向量的概念来解释丢弃系数的过程：</p>
+<p><em>小波表示是将长度为q的原始时间序列分解为彼此正交的q个“更简单”时间序列（或小波）的集合的加权和。 这些“更简单”的时间序列是基本向量，小波系数表示分解中不同基向量的权重。</em></p>
+<p>图2.5显示了这些“更简单”的时间序列及其相应的系数。小波系数（和基向量）的数量等于系列q的长度。
+代表每个基矢量的时间序列的长度也是q。每个基矢量在连续的时间序列段中具有+1或-1的值，通过差分操作从中得出特定的系数。否则，该值为0，因为小波与时间序列中该区域的变化无关。基矢的非零段的前半部分是+1，后半部分是-1。当它被绘制成时间序列时，这给出了小波的形状，并且还反映了相关时间序列片段中的差异操作。乘以系数的基向量具有建立加权时间序列的作用，其中第一半和第二半之间的差异反映了原始时间序列中相应段之间的平均差异。因此，通过在错误树中将不同粒度级别的所有这些加权小波相加，就可以重建原始序列。图2.5中的基向量列表是以下矩阵的行：</p>
+<div>
+<div class="MathJax_Preview">\begin{pmatrix} 1 &amp;-1 &amp;0 &amp;0 &amp;0 &amp;0 &amp;0 &amp; 0 \\ 0 &amp;0 &amp;1 &amp;-1 &amp;0 &amp;0 &amp;0 &amp; 0\\ 0 &amp;0 &amp;0 &amp;0 &amp;1 &amp;-1 &amp;0 &amp; 0\\ 0 &amp;0 &amp;0 &amp;0 &amp;0 &amp;0 &amp;1 &amp;-1\\ 1 &amp;1 &amp;-1 &amp;-1 &amp;0 &amp;0 &amp;0 &amp; 0\\ 0 &amp;0 &amp;0 &amp;0 &amp;1 &amp;1 &amp;-1 &amp;-1\\ 1 &amp;1 &amp;1 &amp;1 &amp;-1 &amp;-1 &amp;-1 &amp;-1\\ 1 &amp;1 &amp;1 &amp;1 &amp;1 &amp;1 &amp;1 &amp;1
+\end{pmatrix}</div>
+<script type="math/tex; mode=display">\begin{pmatrix} 1 &-1 &0 &0 &0 &0 &0 & 0 \\ 0 &0 &1 &-1 &0 &0 &0 & 0\\ 0 &0 &0 &0 &1 &-1 &0 & 0\\ 0 &0 &0 &0 &0 &0 &1 &-1\\ 1 &1 &-1 &-1 &0 &0 &0 & 0\\ 0 &0 &0 &0 &1 &1 &-1 &-1\\ 1 &1 &1 &1 &-1 &-1 &-1 &-1\\ 1 &1 &1 &1 &1 &1 &1 &1
+\end{pmatrix}</script>
+</div>
+<p>请注意，任何一对基矢量的点积是0，因此这些系列彼此正交。 最详细的系数只有一个+1和一个-1，而最粗略的系数有四个+1和-1个条目。 此外，需要使用向量<span><span class="MathJax_Preview">（11111111）</span><script type="math/tex">（11111111）</script></span>来表示系列平均值。</p>
+<p>对于时间序列<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>，令<span><span class="MathJax_Preview">\overline{W_1}...\overline{W_q}</span><script type="math/tex">\overline{W_1}...\overline{W_q}</script></span>是相应的基本向量。那么，如果<span><span class="MathJax_Preview">a_1...a_q</span><script type="math/tex">a_1...a_q</script></span>是基向量<span><span class="MathJax_Preview">\overline{W_1}...\overline{W_q}</span><script type="math/tex">\overline{W_1}...\overline{W_q}</script></span>的小波系数，时间序列<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>可以表示如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">T = \sum_{i=1}^qa_i\overline{W_i}=\sum_{i=1}^q(a_i||\overline{W_i}||)\frac{\overline{W_i}}{||\overline{W_i}||} \tag{2.15}</span><script type="math/tex">T = \sum_{i=1}^qa_i\overline{W_i}=\sum_{i=1}^q(a_i||\overline{W_i}||)\frac{\overline{W_i}}{||\overline{W_i}||} \tag{2.15}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">T = \sum_{i=1}^qa_i\overline{W_i}=\sum_{i=1}^q(a_i||\overline{W_i}||)\frac{\overline{W_i}}{||\overline{W_i}||} \tag{2.15}</span><script type="math/tex">T = \sum_{i=1}^qa_i\overline{W_i}=\sum_{i=1}^q(a_i||\overline{W_i}||)\frac{\overline{W_i}}{||\overline{W_i}||} \tag{2.15}</script></span></script></span></p>
+<p>图2.5中表示的系数是未标准化的，因为基向量没有单位标准化。虽然<span><span class="MathJax_Preview">a_i</span><script type="math/tex">a_i</script></span>是图2.5中的非标准化值，但值<span><span class="MathJax_Preview">a_i || W_i ||</span><script type="math/tex">a_i || W_i ||</script></span> 代表归一化的系数。<span><span class="MathJax_Preview">|| W_i ||</span><script type="math/tex">|| W_i ||</script></span>的值对于不同次序的系数是不同的，在这个特例中等于<span><span class="MathJax_Preview">\sqrt{2}</span><script type="math/tex">\sqrt{2}</script></span>，<span><span class="MathJax_Preview">\sqrt{4}</span><script type="math/tex">\sqrt{4}</script></span>或<span><span class="MathJax_Preview">\sqrt8</span><script type="math/tex">\sqrt8</script></span>。例如，在图2.5中，最大层次的非归一化系数是-0.25，而相应的归一化值是<span><span class="MathJax_Preview">-0.25\sqrt8</span><script type="math/tex">-0.25\sqrt8</script></span>。归一化之后，基向量<span><span class="MathJax_Preview">\overline{W_1}...\overline{W_q}</span><script type="math/tex">\overline{W_1}...\overline{W_q}</script></span>是正交的，因此，相应（归一化）系数的平方和等于近似时间序列中的保留能量。 由于归一化后的系数在轴旋转之后提供了一个新的坐标表示，所以如果系数没有丢失，则时间序列之间的欧几里德距离将保留在这个新的表示中。 可以证明，通过保留具有最大归一化值的系数，小波表示中的误差损失被最小化。</p>
+<p>前面的讨论集中在单个时间序列的逼近上。 实际上，人们可能想要将N个时间序列的数据库转换为N个多维向量。 当多个时间序列数据库可用时，可以使用两种策略：</p>
+<ol>
+<li>
+<p>为每个系列选择相同基础矢量的系数，以创建一个有意义的低维度多维数据库。 因此，选择N个不同序列中具有最大平均归一化系数的基向量。</p>
+</li>
+<li>
+<p>小波系数表示的全部维度被保留。 然而，对于每个时间序列，最大归一化系数（幅度）是单独选择的。 剩下的值被设置为0.这导致了一个稀疏的高维度数据库，其中许多值为0.像SVD这样的方法可以作为进一步降低维度的第二步应用。 这种方法的第二步缺点是失去了小波变换特征的可解释性。 回想一下，哈尔小波是少数几个降维变换之一，其中系数在特定时间序列段的特定趋势方面确实具有一定的可解释性。</p>
+</li>
+</ol>
+<p>小波分解方法通过仅保留少量系数为降维（和数据类型转换）提供了一种自然的方法。
+<center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249202886163.jpg" /></center>
+<center>图2.7 说明包含海面温度的网格中空间数据的小波分解的顶层</center></p>
+<p><strong>具有多个上下文属性的小波分解</strong>
+时间序列数据包含与时间值相对应的单个上下文属性。 这有助于简化小波分解。 但是，在某些情况下，如空间数据，可能会有两个与X坐标和Y坐标对应的上下文属性。 例如，在使用两个坐标描述的空间位置处测量海面温度。 在这种情况下如何进行小波分解？ 在本节中，提供了将小波扩展到多个上下文属性的简要概述。</p>
+<p>假设空间数据以尺寸为<span><span class="MathJax_Preview">q \times q</span><script type="math/tex">q \times q</script></span>的二维网格的形式表示。 回想一维情况下，通过连续划分时间序列以分层方式对时间序列的连续段应用差分操作。 相应的基向量在相关位置处具有+1和-1。 二维情况完全类似于连续分区使用空间网格的连续区域。 这些分区沿着不同的轴交替进行。 相应的基本矢量是尺寸为<span><span class="MathJax_Preview">q \times q</span><script type="math/tex">q \times q</script></span>的二维矩阵，用于调节差分操作的执行方式。</p>
+<p>图2.7说明了二维分解策略的一个例子。图中只显示了分解的前两个层次。这里以空间温度的<span><span class="MathJax_Preview">4 \times 4</span><script type="math/tex">4 \times 4</script></span>网格为例。沿着X轴的第一个分区将空间区域分成两个大小为<span><span class="MathJax_Preview">4 \times 2</span><script type="math/tex">4 \times 2</script></span>的块。相应的二维二元基矩阵被示为相同的图。下一阶段在分层分解过程中将这些<span><span class="MathJax_Preview">4 \times 2</span><script type="math/tex">4 \times 2</script></span>块中的每一块划分为大小为<span><span class="MathJax_Preview">2 \times 2</span><script type="math/tex">2 \times 2</script></span>的块。与一维时间序列的情况一样，小波系数是被分解的相关块的两半之间的平均温度的一半差异。沿着X轴和Y轴的交替分割过程可以进行到各个数据条目。这创建了分层小波误差树，其具有与1维情况中创建的许多类似的属性。这种分解的总体原理与1维情况几乎相同，不同层次的切割如何通过在不同层次交替进行而产生主要差异。该方法可以扩展到<span><span class="MathJax_Preview">k&gt; 2</span><script type="math/tex">k> 2</script></span>的上下文属性的情况下，使用在树的不同级别上选择的轴上的循环旋转进行差异化操作。</p>
+<h4 id="2442">2.4.4.2 多维度缩放</h4>
+<p>图是用于表示对象之间关系的强大机制。 在某些数据挖掘场景中，对象的数据类型可能非常复杂且异构，如用文本和其他数字属性注释的时间序列。 然而，基于应用程序特定的目标，几对数据对象之间的距离之间的明确概念可能是可用的。 如何可视化这些对象之间的内在相似性？ 一个人如何想象社交网络中两个人的“接近度”？ 这样做的一种自然方式是多维缩放（MDS）的概念。 虽然MDS最初是在图形结构距离的空间可视化的背景下提出的，但它在嵌入多维空间中任意类型的数据对象方面具有更广泛的适用性。 这种方法还可以在嵌入数据上使用多维数据挖掘算法。</p>
+<p>对于体格n个节点的图，令<span><span class="MathJax_Preview">\delta_{ij}=\delta_{ji}</span><script type="math/tex">\delta_{ij}=\delta_{ji}</script></span>表示节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的具体距离。它假设了所有<span><span class="MathJax_Preview">\binom{n}{2}</span><script type="math/tex">\binom{n}{2}</script></span>对节点之间的距离都是明确的。希望将n个节点映射到n个不同的k维向量<span><span class="MathJax_Preview">\overline{X_i}...\overline{X_j}</span><script type="math/tex">\overline{X_i}...\overline{X_j}</script></span>，使得多维空间中的距离与距离图中的<span><span class="MathJax_Preview">\binom{n}{2}</span><script type="math/tex">\binom{n}{2}</script></span>距离值紧密对应。 在MDS中，这<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个点中每一个点的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>坐标都被视为需要优化的变量，以便它们能够拟合当前的成对距离集。公制MDS也称为经典MDS，试图解决以下优化（最小化）问题：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">O=\sum_{i,j:i&lt;j}(||\overline{X_i}-\overline{X_j}||-\delta_{ij})^2 \tag{2.16}</span><script type="math/tex">O=\sum_{i,j:i<j}(||\overline{X_i}-\overline{X_j}||-\delta_{ij})^2 \tag{2.16}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">O=\sum_{i,j:i&lt;j}(||\overline{X_i}-\overline{X_j}||-\delta_{ij})^2 \tag{2.16}</span><script type="math/tex">O=\sum_{i,j:i<j}(||\overline{X_i}-\overline{X_j}||-\delta_{ij})^2 \tag{2.16}</script></span></script></span></p>
+<p>此处，<span><span class="MathJax_Preview">||\cdot||</span><script type="math/tex">||\cdot||</script></span>代表欧几里得常数。换句话说，每个节点都由一个多维数据点表示，这样这些点之间的欧几里得距离尽可能接近地反映了图的距离。 在其他形式的非度量MDS中，这个目标函数可能是不同的。 这个优化问题因此具有<span><span class="MathJax_Preview">n\cdot k</span><script type="math/tex">n\cdot k</script></span>个变量，并且它随着数据<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的大小和嵌入的期望维度<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>而缩放。公式2.16中的对象<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>通常被<span><span class="MathJax_Preview">\sum_{i,j:i&lt;j}\delta^2_{ij}</span><script type="math/tex">\sum_{i,j:i<j}\delta^2_{ij}</script></span>来产生一个位于<span><span class="MathJax_Preview">(0,1)</span><script type="math/tex">(0,1)</script></span>范围内的值。这个值的平方根被称为*克鲁斯卡尔压力(Kruskal stress)*。</p>
+<p>经典MDS的基础假设是距离矩阵<span><span class="MathJax_Preview">\Delta=[\delta^2_{ij}]_{n\times n}</span><script type="math/tex">\Delta=[\delta^2_{ij}]_{n\times n}</script></span> 是通过计算一些假设的数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中的成对欧氏距离产生的，其条目和维度是未知的。在经典的MDS中，矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>永远无法完全恢复，因为欧几里德距离对于平移和轴旋转是不变的。 数据平均值和轴方向的适当约定将在后面讨论。 尽管公式2.16的优化需要数值技术，但是在特定距离矩阵为欧几里得的假设下，可以通过特征分解获得经典MDS的直接解决方案：</p>
+<ol>
+<li>
+<p>借助欧几里得空间中的余弦定律，任意两两（平方）距离矩阵<span><span class="MathJax_Preview">\Delta=[\delta^2_{ij}]_{n\times n}</span><script type="math/tex">\Delta=[\delta^2_{ij}]_{n\times n}</script></span>可以转换为对称点积矩阵<span><span class="MathJax_Preview">S_{n\times n}</span><script type="math/tex">S_{n\times n}</script></span>。特别是，如果<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>和<span><span class="MathJax_Preview">\overline{X_j}</span><script type="math/tex">\overline{X_j}</script></span>是第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个和第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个节点的嵌入表示，则<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>和<span><span class="MathJax_Preview">\overline{X_j}</span><script type="math/tex">\overline{X_j}</script></span>之间的点积可以与距离相关如下：
+    <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\overline{X_i}\cdot \overline{X_j}= -\frac{1}{2}[||\overline{X_i}-\overline{X_j}||^2-||\overline{X_i}+\overline{X_j}||^2] ~~~\forall i,j \in \{1..n\} \tag{2.17}</span><script type="math/tex">\overline{X_i}\cdot \overline{X_j}= -\frac{1}{2}[||\overline{X_i}-\overline{X_j}||^2-||\overline{X_i}+\overline{X_j}||^2] ~~~\forall i,j \in \{1..n\} \tag{2.17}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\overline{X_i}\cdot \overline{X_j}= -\frac{1}{2}[||\overline{X_i}-\overline{X_j}||^2-||\overline{X_i}+\overline{X_j}||^2] ~~~\forall i,j \in \{1..n\} \tag{2.17}</span><script type="math/tex">\overline{X_i}\cdot \overline{X_j}= -\frac{1}{2}[||\overline{X_i}-\overline{X_j}||^2-||\overline{X_i}+\overline{X_j}||^2] ~~~\forall i,j \in \{1..n\} \tag{2.17}</script></span></script></span>
+    对于以平均值为中心的嵌入，<span><span class="MathJax_Preview">||\overline{X_i}||^2+||\overline{X_j}||^2</span><script type="math/tex">||\overline{X_i}||^2+||\overline{X_j}||^2</script></span>的值可以用可以用距离矩阵<span><span class="MathJax_Preview">\Delta</span><script type="math/tex">\Delta</script></span>的条目表示（见练习9），如下所示：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.18}</span><script type="math/tex">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.18}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.18}</span><script type="math/tex">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.18}</script></span></script></span>
+  平均中心假设是必要的，因为欧几里得距离是平均不变量，而点积不是。 通过把方程2.18带入方程2.17，可以完全根据距离矩阵<span><span class="MathJax_Preview">\Delta</span><script type="math/tex">\Delta</script></span>的条目表达点积<span><span class="MathJax_Preview">\overline{X_i}\cdot \overline{X_j}</span><script type="math/tex">\overline{X_i}\cdot \overline{X_j}</script></span>。由于这个条件对于<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的所有可能值都是正确的，所以我们可以方便地用<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>矩阵形式表达它。令<span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span>是所有1的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>矩阵，并令<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>为单位矩阵。然后，我们上面的论证显示点积矩阵<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>等于<span><span class="MathJax_Preview">-\frac{1}{2}(I-\frac{U}{n})\Delta(I-\frac{U}{n})</span><script type="math/tex">-\frac{1}{2}(I-\frac{U}{n})\Delta(I-\frac{U}{n})</script></span>。在欧几里德假设下，矩阵<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>总是正半正定，因为它等于未知维数的未观测数据矩阵<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>点积矩阵<span><span class="MathJax_Preview">DD^T</span><script type="math/tex">DD^T</script></span>。因此，希望将<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的高质量因子分解确定为形式<span><span class="MathJax_Preview">D_kD_k^T</span><script type="math/tex">D_kD_k^T</script></span>，其中<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>是维数<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵。</p>
+</li>
+<li>
+<p>这种分解可以通过特征分解来获得。令<span><span class="MathJax_Preview">S\approx Q_k\sum^2_kQ^T_k=(Q_k\sum_k)(Q_k\sum_k)^T</span><script type="math/tex">S\approx Q_k\sum^2_kQ^T_k=(Q_k\sum_k)(Q_k\sum_k)^T</script></span>表示<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的近似对角化，其中<span><span class="MathJax_Preview">Q_k</span><script type="math/tex">Q_k</script></span>是包含<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的最大<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个特征向量的<span><span class="MathJax_Preview">n \times k <span><span class="MathJax_Preview">矩阵，并且</span><script type="math/tex">矩阵，并且</script></span>\sum</span><script type="math/tex">n \times k <span><span class="MathJax_Preview">矩阵，并且</span><script type="math/tex">矩阵，并且</script></span>\sum<sup>2_k\sum</sup>2_k</script></span>是一个<span><span class="MathJax_Preview">k \times k</span><script type="math/tex">k \times k</script></span>的包含特征值的对角矩阵。嵌入表示由<span><span class="MathJax_Preview">D_k =Q_k\sum_k</span><script type="math/tex">D_k =Q_k\sum_k</script></span>给出。请注意，SVD也可以将最佳嵌入作为原始数据点积矩阵的缩放特征向量。 因此，这种方法使表示的平方误差最小化。 这也可以被证明相当于最小化Kruskal压力。</p>
+</li>
+</ol>
+<p>最佳解决方案并不是唯一的，因为我们可以将<span><span class="MathJax_Preview">Q_k\sum_k</span><script type="math/tex">Q_k\sum_k</script></span>与任何具有正交列的<span><span class="MathJax_Preview">k \times k</span><script type="math/tex">k \times k</script></span>矩阵相乘，并且成对的欧几里德距离不会受到影响。换句话说，旋转轴系统中<span><span class="MathJax_Preview">Q_k \sum_k</span><script type="math/tex">Q_k \sum_k</script></span>的任何表示也是最优的。MDS找到像PCA这样的轴系统，其中各个属性是不相关的。事实上，如果将经典MDS应用于通过计算实际数据集中的成对欧几里得距离构造的距离矩阵<span><span class="MathJax_Preview">\Delta</span><script type="math/tex">\Delta</script></span>，则它将产生与在该数据集上应用PCA相同的嵌入。当这种数据集不可用时，MDS非常有用，并且只有距离矩阵<span><span class="MathJax_Preview">\Delta</span><script type="math/tex">\Delta</script></span>可用。</p>
+<p>与所有降维方法一样，维度k的值提供了表示大小和准确性之间的交换。维数<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的较大值将导致较低的应力。大量的数据点通常需要更大的表示维度来实现相同的压力。然而，最关键的因素是距离矩阵的内在结构。例如，如果一个<span><span class="MathJax_Preview">10,000\times10,000</span><script type="math/tex">10,000\times10,000</script></span>的距离矩阵包含<span><span class="MathJax_Preview">10,000</span><script type="math/tex">10,000</script></span>个城市之间的成对驾驶距离，通常可以用二维表示来很好地近似。这是因为驾驶距离是二维空间中欧几里德距离的近似值。另一方面，任意距离矩阵可能不是欧几里德距离，这些距离甚至可能不满足三角不等式。结果，矩阵<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>可能不是正半正定。在这种情况下，有时仍然可以使用度量假设来获得高质量的嵌入。具体而言，只能使用那些正特征值，其幅度超过最负特征值的特征值。如果负特征值的幅度很小，这种方法效果很好。</p>
+<p>MDS常用于非线性降维方法，如ISOMAP（参见第3章第3.2.1.7节）。值得注意的是，在常规SVD中，<span><span class="MathJax_Preview">n\times n</span><script type="math/tex">n\times n</script></span>点积相似度矩阵<span><span class="MathJax_Preview">DD^T</span><script type="math/tex">DD^T</script></span>的缩放特征向量产生<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>的低维嵌入表示，就像<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的特征向量产生MDS中的嵌入一样。 相似矩阵的特征分解是许多线性和非线性降维方法的基础，如PCA，SVD，ISOMAP，核PCA和谱嵌入。 每个嵌入的特定属性是选择相似性矩阵和所得特征向量上使用的缩放比例的结果。表2.3提供了这些方法的初步比较，尽管其中一些仅在后面的章节中详细讨论。</p>
+<p><center>表2.3 各种相似性矩阵的缩放特征向量产生具有不同属性的嵌入</center>
+<center><img alt="" src="http://p6atp7tts.bkt.clouddn.com/15249278299467.jpg" /></center></p>
+<h4 id="2443">2.4.4.3 图谱的谱变换和嵌入</h4>
+<p>鉴于MDS方法是为保存全球距离而设计的，谱方法的设计是为了保存聚类等应用的局部距离。 光谱方法与相似度图一起工作，其中边缘的权重代表相似性而不是距离。 当距离值可用时，它们被转换为具有内核函数的相似值，例如本章前面讨论的热内核。由于同源性的概念，相似性的概念对于许多真实的网络，社交和信息网络来说很自然。例如，考虑一个书目网络，其中节点对应于作者，边缘对应于共同作者关系。边的权重表示作者之间的出版物数量，因此表示作者出版物中可能的相似概念。相似图也可以在任意数据类型之间构建。例如，一组n个时间序列可以转换成一个有n个节点的图，其中一个节点表示每个时间序列。边的权重等于两个节点之间的相似度，并且只保留具有“足够”相似水平的边。第2.2.2.9节提供了关于相似图构造的讨论。因此，如果可以将相似图转换为保留节点之间相似性结构的多维表示，则它提供了一种转换，可以将任何数据类型虚拟地转换为易于使用的多维表示。这里需要注意的是，这种转换只能用于基于相似性的应用，如聚类或最近邻分类，因为转换的目的是保持局部相似性结构。数据集的局部相似性结构对于许多数据挖掘应用程序而言至关重要。</p>
+<p>令<span><span class="MathJax_Preview">G =（N，A）</span><script type="math/tex">G =（N，A）</script></span>为节点集<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>和边集<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>的无向图。假设节点集包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点。 对称<span><span class="MathJax_Preview">n\times n</span><script type="math/tex">n\times n</script></span>权重矩阵<span><span class="MathJax_Preview">W = [w_{ij}]</span><script type="math/tex">W = [w_{ij}]</script></span>表示不同节点之间的相似度。与MDS一起使用完整的全局距离图，MDS通常是稀疏表示每个对象与其最近k个对象的相似性（参见2.2.2.9节）。与其他对象的相似性不会相互区分并设置为0.这是因为频谱方法仅保留聚类等应用程序的局部相似性结构。 这个矩阵中的所有条目都被假定为非负的，并且较高的值表示较大的相似性。 如果在一对节点之间不存在边缘，则相应的条目被假定为0.希望将该图的节点嵌入到<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维空间中，以便保持数据的相似性结构。</p>
+<p>首先，让我们讨论将节点映射到一维空间的更简单的问题。对<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维情况的推广是相对直接的。 我们想将<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>中的节点映射成一组一维实数值<span><span class="MathJax_Preview">y_1...y_n</span><script type="math/tex">y_1...y_n</script></span>在一条线上，这样这些点之间的距离反映了节点之间的边缘连通性。 因此，将连接高权重边的节点映射到该线上的远端点是不理想的。 因此，我们想确定<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>的最小化以下目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>的值：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">O=\sum_{i=1}^n\sum_{j=1}^nw_{ij}(y_i-y_j)^2 \tag{2.19}</span><script type="math/tex">O=\sum_{i=1}^n\sum_{j=1}^nw_{ij}(y_i-y_j)^2 \tag{2.19}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">O=\sum_{i=1}^n\sum_{j=1}^nw_{ij}(y_i-y_j)^2 \tag{2.19}</span><script type="math/tex">O=\sum_{i=1}^n\sum_{j=1}^nw_{ij}(y_i-y_j)^2 \tag{2.19}</script></span></script></span></p>
+<p>这个目标函数惩罚<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>和<span><span class="MathJax_Preview">y_j</span><script type="math/tex">y_j</script></span>之间的距离，权重与<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>成正比。因此，当<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>非常大（更相似的节点）时，数据点<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>和<span><span class="MathJax_Preview">y_j</span><script type="math/tex">y_j</script></span>将更可能在嵌入式空间中更接近彼此。目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>可以用权重矩阵<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>的拉普拉斯矩阵<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>重写。拉普拉斯矩阵<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>定义是<span><span class="MathJax_Preview">\Lambda-W</span><script type="math/tex">\Lambda-W</script></span>，其中<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>是一个对角矩阵<span><span class="MathJax_Preview">\Lambda_{ii}=\sum_{j=1}^nw_{ij}</span><script type="math/tex">\Lambda_{ii}=\sum_{j=1}^nw_{ij}</script></span>。设嵌入值的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维列向量表示为<span><span class="MathJax_Preview">\overline{y}=(y_1 ... y_n)^T</span><script type="math/tex">\overline{y}=(y_1 ... y_n)^T</script></span>。 在一些代数简化后，可以用拉普拉斯矩阵来重写最小化目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">O=2\overline{y}^TL\overline{y} \tag{2.20}</span><script type="math/tex">O=2\overline{y}^TL\overline{y} \tag{2.20}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">O=2\overline{y}^TL\overline{y} \tag{2.20}</span><script type="math/tex">O=2\overline{y}^TL\overline{y} \tag{2.20}</script></span></script></span></p>
+<p>矩阵<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>是具有非负特征值的正半正定矩阵，因为和平方目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>总是非负的。我们需要合并缩放约束来确保所有<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的<span><span class="MathJax_Preview">y_i = 0</span><script type="math/tex">y_i = 0</script></span>的平凡值不被优化方案选择。可能的缩放限制如下：
+$<span><span class="MathJax_Preview">\overline{y}^T\Lambda\overline{y}=1 \tag{2.21}</span><script type="math/tex">\overline{y}^T\Lambda\overline{y}=1 \tag{2.21}</script></span></p>
+<p>在方程2.21的约束中使用矩阵$\Lambda $基本上是一个归一化约束，这在19章的19.3.4节中有详细讨论。</p>
+<p>可以证明，通过选择<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>作为关系<span><span class="MathJax_Preview">\Lambda^{-1}L\overline{y} =\lambda \overline{y}</span><script type="math/tex">\Lambda^{-1}L\overline{y} =\lambda \overline{y}</script></span>的最小特征向量来优化<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>的值。然而，最小的特征值总是0，并且它对应于节点嵌入<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>与仅包含1的矢量成比例的平凡解。这个平凡的特征向量是非信息性的，因为它对应于每个节点都映射到相同点的嵌入。 因此，它可以被丢弃，并且不用于分析。然后，第二小的特征向量提供更具信息性的最佳解决方案。</p>
+<p>通过确定随特征值增加的特征向量的连续方向，可将该解推广到寻找最佳<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维嵌入。在丢弃具有特征值<span><span class="MathJax_Preview">λ_1=0</span><script type="math/tex">λ_1=0</script></span>的第一平凡特征向量<span><span class="MathJax_Preview">\overline{e_1}</span><script type="math/tex">\overline{e_1}</script></span>之后，这导致一组<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个特征向量<span><span class="MathJax_Preview">\overline{e_2}，\overline{e_3}...\overline{e_{k+1}}</span><script type="math/tex">\overline{e_2}，\overline{e_3}...\overline{e_{k+1}}</script></span>，相应的特征值<span><span class="MathJax_Preview">λ_2\leqλ_3\leq...\leqλ_{k+1} <span><span class="MathJax_Preview">。每个特征向量的长度为n，并且包含每个节点的一个坐标值。 沿着第</span><script type="math/tex">。每个特征向量的长度为n，并且包含每个节点的一个坐标值。 沿着第</script></span>jj</span><script type="math/tex">λ_2\leqλ_3\leq...\leqλ_{k+1} <span><span class="MathJax_Preview">。每个特征向量的长度为n，并且包含每个节点的一个坐标值。 沿着第</span><script type="math/tex">。每个特征向量的长度为n，并且包含每个节点的一个坐标值。 沿着第</script></span>jj</script></span>个特征向量的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个值代表第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个节点的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个坐标。 这创建了一个<span><span class="MathJax_Preview">n\times k</span><script type="math/tex">n\times k</script></span>矩阵，对应于<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维嵌入。</p>
+<p>小尺度特征向量在新的变换空间中直观地表示什么？通过使用沿小幅度特征向量的节点的排序来创建切口，穿过切口的边缘的重量可能很小。因此，这代表节点空间中的一个集群。在实践中，选择k个最小的特征向量（忽略第一个特征向量）进行缩减并创建k维嵌入。这种嵌入通常包含节点潜在相似结构的极好表示。嵌入可以用于几乎任何基于相似性的应用，尽管这种方法最常见的应用是谱聚类。这种方法的许多变体存在于拉普拉斯算子L如何归一化以及如何生成最终的群集。 谱聚类方法将在第19章第19.3.4节中详细讨论。</p>
+<h2 id="25">2.5 总结</h2>
+<p>数据准备是数据挖掘过程的一个重要部分，因为分析算法对输入数据的质量很敏感。 数据挖掘过程需要从各种来源收集原始数据，这些数据可能处于不适合直接应用分析算法的形式。 因此，可能需要应用许多方法才能从基础数据中提取特征。 由此产生的数据可能具有显着的缺失值，错误，不一致性和冗余性。 存在各种分析方法和数据清理工具，用于输入缺失的条目或纠正数据中的不一致性。</p>
+<p>另一个重要问题是数据异质性。 分析师可能面临着众多不同的属性，因此数据挖掘算法的直接应用可能并不容易。 因此，数据类型的可移植性很重要，其中一些属性子集被转换为预定义的格式。 由于其简单性，多维格式通常是优选的。 事实上，任何数据类型都可以通过构建相似图的两步过程转换为多维表示，然后是多维嵌入。</p>
+<p>数据集可能非常大，并且可能需要在行数和维数方面减小其大小。 使用采样来减少行数是很简单的。 要减少数据中的列数，可以使用特征子集选择或数据转换。 在特征子集选择中，只保留最适合分析的一组较小的特征。 这些方法与分析方法密切相关，因为功能的相关性可能取决于应用程序。 因此，特征选择阶段需要根据特定的分析方法进行调整。</p>
+<p>有两种类型的特征转换。 在第一种类型中，可以旋转轴系以与数据的相关性保持一致，并保留方差最大的方向。 第二种类型适用于复杂的数据类型，如图形和时间序列。 在这些方法中，表示的大小减小了，并且数据也被转换为多维表示。</p>
+<h2 id="26">2.6 书目注释</h2>
+<p>特征提取的问题对于数据挖掘过程是一个重要的问题，但它具有很高的应用特性。 例如，从文档数据集[400]中提取命名实体的方法与从图像数据集中提取特征的方法[424]非常不同[424]。 [245]中可以找到用于各种领域中的特征提取的一些有前途的技术的概述。</p>
+<p>在从不同来源提取功能之后，需要将它们集成到单个数据库中。 传统的数据库文献中描述了很多方法用于数据集成[194,434]。 随后，数据需要清理并且需要删除缺失的条目。 出现了一个概率性或不确定性数据的新领域[18]，它以概率数据库的形式建模了不确定和错误的记录。 然而，这个领域仍处于研究阶段，尚未进入数据库应用的主流。 目前的大多数方法要么使用缺失数据分析的工具[71,364]，要么使用更常规的数据清理和数据清理工具[222,433,435]。</p>
+<p>数据清理完毕后，其大小需要根据数量或维数来降低。 最常见和简单的减少数量的方法是采样。 采样方法可用于静态数据集或动态数据集。 传统的数据采样方法在[156]中讨论。 采样方法也已扩展到以油藏采样形式的数据流[35,498]。 [35]中的工作讨论了将油藏采样方法扩展到需要从数据流中创建偏向样本的情况。</p>
+<p>特征选择是数据挖掘过程的一个重要方面。 该方法通常高度依赖于正在使用的特定数据挖掘算法。 例如，适用于聚类的特征选择方法可能不适用于分类。 因此，我们将关于特征选择的讨论推迟到本书有关聚类和分类主题的章节。 关于特征选择的主题有很多书[246,336]。</p>
+<p>用于多维数据的两种最常见的降维方法是SVD [480,481]和PCA [295]。 这些方法也已扩展到LSA [184,416]形式的文本。 在许多领域[25,184,416]已经表明，使用诸如SVD，LSA和PCA的方法在执行缩减之后出乎意料地提高了底层表示的质量。 这种改进是因为通过丢弃低变量维度来降低噪音影响。 SVD在数据估算中的应用见于[23]和Chap。 本书18。 降维和变换的其他方法包括卡尔曼滤波[260]，Fastmap [202]和非线性方法如拉普拉斯特征映射[90]，MDS [328]和ISOMAP [490]。</p>
+<p>近年来还提出了许多降维方法，它们与还原过程一起同时执行类型转换。 这些包括小波变换[475]和图嵌入方法，如ISOMAP和拉普拉斯特征映射[90,490]。 关于图嵌入的谱方法的教程可以在[371]中找到。</p>
+<h2 id="27">2.7 习题</h2>
+<ol>
+<li>
+<p>考虑时间序列<span><span class="MathJax_Preview">（-3，-1，1，3，5，7，*）</span><script type="math/tex">（-3，-1，1，3，5，7，*）</script></span>。 这里，缺少的条目用<span><span class="MathJax_Preview">*</span><script type="math/tex">*</script></span>表示。在大小为3的窗口上使用线性插值的缺失条目的估计值是多少？</p>
+</li>
+<li>
+<p>假设你有一堆文本文档，并且你想确定这些文档中提到的所有人物。 你会用什么类别的技术来实现这个目标？</p>
+</li>
+<li>
+<p>从*UCI Machine Learning Repository（UCI机器学习库）* [213]下载Arrythmia数据集。将所有记录标准化为平均值0和标准偏差1.将每个数字属性分解为<span><span class="MathJax_Preview">（a）</span><script type="math/tex">（a）</script></span>10个等宽范围和<span><span class="MathJax_Preview">（b）</span><script type="math/tex">（b）</script></span>10个等深度范围。</p>
+</li>
+<li>
+<p>假设你有一组不同类型的任意对象代表不同的小部件特征。 领域专家为您提供每对对象之间的相似度值。 你如何将这些对象转换为一个多维数据集来进行聚类？</p>
+</li>
+<li>
+<p>假设你有一个数据集，这样每个数据点对应的分辨率为<span><span class="MathJax_Preview">10×10</span><script type="math/tex">10×10</script></span>平方英里的海面温度。 换句话说，每个数据记录包含具有空间位置的<span><span class="MathJax_Preview">10×10</span><script type="math/tex">10×10</script></span>个温度值网格。 您还有一些文字与每个<span><span class="MathJax_Preview">10×10</span><script type="math/tex">10×10</script></span>网格相关联。 你如何将这些数据转换成多维数据集？</p>
+</li>
+<li>
+<p>假设您有一组离散的生物蛋白质序列，并注明了描述蛋白质特性的文本。 你将如何从这个异构数据集创建一个多维表示？</p>
+</li>
+<li>
+<p>从*UCI Machine Learning Repository* [213]下载Musk数据集。 将PCA应用于数据集，并报告特征向量和特征值。</p>
+</li>
+<li>
+<p>使用*SVD*重复以前的练习。</p>
+</li>
+<li>
+<p>对于一个以平均数为中心的数据集<span><span class="MathJax_Preview">\overline{X_1}...\overline{X_n}</span><script type="math/tex">\overline{X_1}...\overline{X_n}</script></span>，证明下面结论：
+    <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.22}</span><script type="math/tex">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.22}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.22}</span><script type="math/tex">||\overline{X_i}||^2+||\overline{X_j}||^2=\frac{\sum_{p=1}^n ||\overline{X_i}-\overline{X_p}||^2 }{n}+\frac{\sum_{q=1}^n ||\overline{X_j}-\overline{X_q}||^2 }{n}-\frac{\sum_{p=1}^n \sum_{1=1}^n||\overline{X_p}-\overline{X_q}||^2 }{n^2} \tag{2.22}</script></span></script></span></p>
+</li>
+<li>
+<p>考虑时间序列1，1，3，3，3，3，1，1.对时间序列执行小波分解。 系列中有多少系数非零？</p>
+</li>
+<li>
+<p>下载*Intel Research Berkeley data set*（英特尔研究伯克利）数据集。 对第一个传感器中的温度值应用小波变换。</p>
+</li>
+<li>
+<p>将来自UCI机器学习库[213]的KDD CUP 1999网络入侵数据集中的每个定量变量作为时间序列来处理。 执行此时间序列的小波分解。</p>
+</li>
+<li>
+<p>从前一个练习的数据集中创建大小为<span><span class="MathJax_Preview">n = 1,10,100,1000,10000</span><script type="math/tex">n = 1,10,100,1000,10000</script></span>个记录的样本，并确定使用该样本的每个定量列<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的平均值<span><span class="MathJax_Preview">e_i</span><script type="math/tex">e_i</script></span>。 设<span><span class="MathJax_Preview">\mu_i</span><script type="math/tex">\mu_i</script></span>和<span><span class="MathJax_Preview">\sigma_i</span><script type="math/tex">\sigma_i</script></span>是整个数据集的全局平均值和标准差。 计算<span><span class="MathJax_Preview">e_i</span><script type="math/tex">e_i</script></span>从<span><span class="MathJax_Preview">\mu_i</span><script type="math/tex">\mu_i</script></span>变化的标准偏差<span><span class="MathJax_Preview">z_i</span><script type="math/tex">z_i</script></span>的数量。
+    <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">z_i=\frac{|e_i-\mu_i|}{\sigma_i}</span><script type="math/tex">z_i=\frac{|e_i-\mu_i|}{\sigma_i}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">z_i=\frac{|e_i-\mu_i|}{\sigma_i}</span><script type="math/tex">z_i=\frac{|e_i-\mu_i|}{\sigma_i}</script></span></script></span>
+    <span><span class="MathJax_Preview">z_i</span><script type="math/tex">z_i</script></span>如何随<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>变化？</p>
+</li>
+<li>
+<p>证明任意0奇异值的奇异向量<span><span class="MathJax_Preview">\overline{y}</span><script type="math/tex">\overline{y}</script></span>满足<span><span class="MathJax_Preview">A\overline{y} = 0</span><script type="math/tex">A\overline{y} = 0</script></span>。</p>
+</li>
+<li>
+<p>证明方阵的对角化是*SVD*的一个特殊变体。</p>
+</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../1/" title="第1章 绪论" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第1章 绪论
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../3/" title="第3章 相似度和距离" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第3章 相似度和距离
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

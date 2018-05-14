@@ -1,0 +1,1723 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/7/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第7章 聚类分析：高级概念 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#7" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第7章 聚类分析：高级概念
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第7章 聚类分析：高级概念
+      </label>
+    
+    <a href="./" title="第7章 聚类分析：高级概念" class="md-nav__link md-nav__link--active">
+      第7章 聚类分析：高级概念
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71" title="7.1 介绍" class="md-nav__link">
+    7.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72" title="7.2 分类数据聚类" class="md-nav__link">
+    7.2 分类数据聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#721" title="7.2.1 基于代表的算法" class="md-nav__link">
+    7.2.1 基于代表的算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7211-k" title="7.2.1.1 k模式聚类" class="md-nav__link">
+    7.2.1.1 k模式聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7212-k" title="7.2.1.2 k中心点划分聚类" class="md-nav__link">
+    7.2.1.2 k中心点划分聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#722" title="7.2.2 层次聚类" class="md-nav__link">
+    7.2.2 层次聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7221-rock" title="7.2.2.1 ROCK" class="md-nav__link">
+    7.2.2.1 ROCK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#723" title="7.2.3 概率算法" class="md-nav__link">
+    7.2.3 概率算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#724" title="7.2.4 基于图形的算法" class="md-nav__link">
+    7.2.4 基于图形的算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" title="7.3 可扩展数据的聚类" class="md-nav__link">
+    7.3 可扩展数据的聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#731-clarans" title="7.3.1 CLARANS" class="md-nav__link">
+    7.3.1 CLARANS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#732-birch" title="7.3.2 BIRCH" class="md-nav__link">
+    7.3.2 BIRCH
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#733-cure" title="7.3.3 CURE" class="md-nav__link">
+    7.3.3 CURE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74" title="7.4 高维度聚类" class="md-nav__link">
+    7.4 高维度聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#741-clique" title="7.4.1 CLIQUE" class="md-nav__link">
+    7.4.1 CLIQUE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#742-proclus" title="7.4.2 PROCLUS" class="md-nav__link">
+    7.4.2 PROCLUS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#743-orclus" title="7.4.3 ORCLUS" class="md-nav__link">
+    7.4.3 ORCLUS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" title="7.5 半监督聚类" class="md-nav__link">
+    7.5 半监督聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#751" title="7.5.1 点对点监督" class="md-nav__link">
+    7.5.1 点对点监督
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#752" title="7.5.2 成对监督" class="md-nav__link">
+    7.5.2 成对监督
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76" title="7.6 人工视觉监督聚类" class="md-nav__link">
+    7.6 人工视觉监督聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#761" title="7.6.1 现有聚类算法的修改" class="md-nav__link">
+    7.6.1 现有聚类算法的修改
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#762" title="7.6.2 视觉聚类" class="md-nav__link">
+    7.6.2 视觉聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#77" title="7.7 集成聚类" class="md-nav__link">
+    7.7 集成聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#772" title="7.7.2 结合不同的整体组件" class="md-nav__link">
+    7.7.2 结合不同的整体组件
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7721" title="7.7.2.1 超图划分算法" class="md-nav__link">
+    7.7.2.1 超图划分算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7722" title="7.7.2.2 元聚类算法" class="md-nav__link">
+    7.7.2.2 元聚类算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#78" title="7.8 应用" class="md-nav__link">
+    7.8 应用
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#781" title="7.8.1 应用于其他数据挖掘问题" class="md-nav__link">
+    7.8.1 应用于其他数据挖掘问题
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7811" title="7.8.1.1 数据汇总" class="md-nav__link">
+    7.8.1.1 数据汇总
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7812" title="7.8.1.2 离群分析" class="md-nav__link">
+    7.8.1.2 离群分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7813" title="7.8.1.3 分类" class="md-nav__link">
+    7.8.1.3 分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7814" title="7.8.1.4 降维" class="md-nav__link">
+    7.8.1.4 降维
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7815" title="7.8.1.5 相似性搜索和索引" class="md-nav__link">
+    7.8.1.5 相似性搜索和索引
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#782" title="7.8.2 客户细分和协作过滤" class="md-nav__link">
+    7.8.2 客户细分和协作过滤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#783" title="7.8.3 文本应用" class="md-nav__link">
+    7.8.3 文本应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#784" title="7.8.4 多媒体应用" class="md-nav__link">
+    7.8.4 多媒体应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#785" title="7.8.5 时间和序列应用" class="md-nav__link">
+    7.8.5 时间和序列应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#786" title="7.8.6 社交网络分析" class="md-nav__link">
+    7.8.6 社交网络分析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#79" title="7.9 总结" class="md-nav__link">
+    7.9 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#710" title="7.10 书目注释" class="md-nav__link">
+    7.10 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#711" title="7.11 习题" class="md-nav__link">
+    7.11 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71" title="7.1 介绍" class="md-nav__link">
+    7.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72" title="7.2 分类数据聚类" class="md-nav__link">
+    7.2 分类数据聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#721" title="7.2.1 基于代表的算法" class="md-nav__link">
+    7.2.1 基于代表的算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7211-k" title="7.2.1.1 k模式聚类" class="md-nav__link">
+    7.2.1.1 k模式聚类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7212-k" title="7.2.1.2 k中心点划分聚类" class="md-nav__link">
+    7.2.1.2 k中心点划分聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#722" title="7.2.2 层次聚类" class="md-nav__link">
+    7.2.2 层次聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7221-rock" title="7.2.2.1 ROCK" class="md-nav__link">
+    7.2.2.1 ROCK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#723" title="7.2.3 概率算法" class="md-nav__link">
+    7.2.3 概率算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#724" title="7.2.4 基于图形的算法" class="md-nav__link">
+    7.2.4 基于图形的算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" title="7.3 可扩展数据的聚类" class="md-nav__link">
+    7.3 可扩展数据的聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#731-clarans" title="7.3.1 CLARANS" class="md-nav__link">
+    7.3.1 CLARANS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#732-birch" title="7.3.2 BIRCH" class="md-nav__link">
+    7.3.2 BIRCH
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#733-cure" title="7.3.3 CURE" class="md-nav__link">
+    7.3.3 CURE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74" title="7.4 高维度聚类" class="md-nav__link">
+    7.4 高维度聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#741-clique" title="7.4.1 CLIQUE" class="md-nav__link">
+    7.4.1 CLIQUE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#742-proclus" title="7.4.2 PROCLUS" class="md-nav__link">
+    7.4.2 PROCLUS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#743-orclus" title="7.4.3 ORCLUS" class="md-nav__link">
+    7.4.3 ORCLUS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" title="7.5 半监督聚类" class="md-nav__link">
+    7.5 半监督聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#751" title="7.5.1 点对点监督" class="md-nav__link">
+    7.5.1 点对点监督
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#752" title="7.5.2 成对监督" class="md-nav__link">
+    7.5.2 成对监督
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76" title="7.6 人工视觉监督聚类" class="md-nav__link">
+    7.6 人工视觉监督聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#761" title="7.6.1 现有聚类算法的修改" class="md-nav__link">
+    7.6.1 现有聚类算法的修改
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#762" title="7.6.2 视觉聚类" class="md-nav__link">
+    7.6.2 视觉聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#77" title="7.7 集成聚类" class="md-nav__link">
+    7.7 集成聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#772" title="7.7.2 结合不同的整体组件" class="md-nav__link">
+    7.7.2 结合不同的整体组件
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7721" title="7.7.2.1 超图划分算法" class="md-nav__link">
+    7.7.2.1 超图划分算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7722" title="7.7.2.2 元聚类算法" class="md-nav__link">
+    7.7.2.2 元聚类算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#78" title="7.8 应用" class="md-nav__link">
+    7.8 应用
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#781" title="7.8.1 应用于其他数据挖掘问题" class="md-nav__link">
+    7.8.1 应用于其他数据挖掘问题
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7811" title="7.8.1.1 数据汇总" class="md-nav__link">
+    7.8.1.1 数据汇总
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7812" title="7.8.1.2 离群分析" class="md-nav__link">
+    7.8.1.2 离群分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7813" title="7.8.1.3 分类" class="md-nav__link">
+    7.8.1.3 分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7814" title="7.8.1.4 降维" class="md-nav__link">
+    7.8.1.4 降维
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7815" title="7.8.1.5 相似性搜索和索引" class="md-nav__link">
+    7.8.1.5 相似性搜索和索引
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#782" title="7.8.2 客户细分和协作过滤" class="md-nav__link">
+    7.8.2 客户细分和协作过滤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#783" title="7.8.3 文本应用" class="md-nav__link">
+    7.8.3 文本应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#784" title="7.8.4 多媒体应用" class="md-nav__link">
+    7.8.4 多媒体应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#785" title="7.8.5 时间和序列应用" class="md-nav__link">
+    7.8.5 时间和序列应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#786" title="7.8.6 社交网络分析" class="md-nav__link">
+    7.8.6 社交网络分析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#79" title="7.9 总结" class="md-nav__link">
+    7.9 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#710" title="7.10 书目注释" class="md-nav__link">
+    7.10 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#711" title="7.11 习题" class="md-nav__link">
+    7.11 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/7.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="7">7 聚类分析：高级概念</h1>
+<!--本章由张万龙翻译-->
+
+<blockquote>
+<p><em>"The crowd is just as important as the group. It takes everything to make it work." ——Levon Helm</em></p>
+</blockquote>
+<h2 id="71">7.1 介绍</h2>
+<p>在前一章中，介绍了基本的数据聚类方法。 在本章中，将研究几种高级聚类方案，如大小，维度或基础数据类型的影响。 此外，通过使用高级的监督方法或使用基于集合的算法来加深理解。 下面讲一下聚类算法的两个重要问题：</p>
+<ol>
+<li>复杂的聚类背景：实际情况中许多聚类背景都是极富挑战的。 这些包括分类数据的聚类，高维数据和海量数据。 由于距离度量的问题以及从一组分类数据点中适当定义“中心”集群代表，离散数据很难聚类。 在高维情况下，许多不相关的维度可能会对聚类过程造成困难。 最后，由于可扩展性问题，海量数据集更难以集群化。</li>
+<li>先进的见解：因为聚类问题是无监督的，所以很难有效评估底层聚类的质量。 上一章讨论了评估聚类效果的这个问题。 可能存在许多可选的聚类，并且可能难以评估它们的相对质量。 通过使用外部监督，人工监督或元组算法（如集成多个数据聚类的集成聚类），可以通过多种方法提高特定于应用程序的相关性和鲁棒性。</li>
+</ol>
+<p>不同的聚类场景通常是由数据的特定性质引起的，这些性质使分析更具挑战性。 这些性质如下：</p>
+<ol>
+<li>分类数据聚类：分类数据集对聚类来说更具挑战性，因为在这种情况下，相似性的概念很难界定。 此外，聚类算法中的许多中间步骤，如确定聚类的均值，都不像数值型数据中那样自然。</li>
+<li>可伸缩聚类：许多聚类算法需要多次传递数据。 当数据非常大并驻留在磁盘上时，这可能会产生麻烦。</li>
+<li>高维集群：正如在章节3.2.1.2中图3所示的那样，高维数据点之间相似性的计算通常不反映固有距离，因为许多不相关的属性和浓度效应。 因此，已经设计了许多方法使用投影来确定相关维度子集中的聚类。</li>
+</ol>
+<p>由于聚类是一个无监督的问题，在许多真实场景中，聚类的质量可能难以评估。 此外，当数据有噪点时，质量可能也很差。 因此，使用各种方法来监督聚类，或从聚类过程中获得先进的见解。 这些方法如下：</p>
+<ol>
+<li>半监督式聚类：在某些情况下，我们可以得到有关底层集群的部分信息。此信息可能以标签或其他外部反馈的形式提供。 这些信息可以大大提高聚类质量。</li>
+<li>交互式和视觉聚类：在这些情况下，可以利用来自用户的反馈来改善聚类的质量。 在聚类的情况下，这种反馈通常是在视觉交互的帮助下实现的。 例如，交互式方法可以探索不同子空间投影中的数据并隔离最相关的聚类。</li>
+<li>集合聚类：正如前一章所讨论的，聚类的不同模型可能会产生彼此不同的聚类。 哪种聚类方法是最好的解决方案？ 通常，这个问题没有单一的答案。 相反，来自多个模型的知识可以结合起来，从聚类过程中获得更加统一的理解。 集合聚类可以被看作是一种元算法，它被用来从多个模型中获得更多重要的理解。</li>
+</ol>
+<p>本章组织如下：第7.2节讨论聚类分类数据的算法。第7.3节讨论可扩展的聚类算法。第7.4节讨论高维算法。第7.5节讨论半监督聚类算法。第7.6节讨论交互式和可视化的聚类算法。第7.7节讨论集合聚类方法见。第7.8节讨论了数据集群的不同应用。 第7.9节对本章内容进行总结。</p>
+<h2 id="72">7.2 分类数据聚类</h2>
+<p>分类（或离散）数据聚类的问题是具有挑战性的，因为数据聚类中的大多数基本操作（例如距离计算，代表性确定和密度估计）是针对数值型数据定义的。 一个突出的观察结果是，使用第2章中讨论的二进制化过程，分类数据总是可以转换为二进制数据。 使用二进制数据通常更容易，因为它也是数值型数据的特例。 但是，在这种情况下，算法需要根据二进制数据进行量身定制。</p>
+<p>本章将讨论聚类分类数据的各种算法。 将各种经典方法应用于分类数据所面临的问题以及所需的改进也将一起做详细讨论。</p>
+<h3 id="721">7.2.1 基于代表的算法</h3>
+<p>基于质心的代表性算法（例如k均值）需要重复确定聚类的质心以及确定质心和原始数据点之间的相似度。 正如前一章的第6.3节所讨论的那样，这些算法迭代地确定聚类的质心，然后将数据点分配给它们最接近的质心。在更高层次上，对于分类数据，这些步骤保持不变。然而，两者的具体步骤受到分类数据表示的影响，如下所示：</p>
+<ol>
+<li>分类数据集的质心：所有基于代表的算法都需要确定一组对象的中心代表。在数值数据的情况下，这通过平均非常自然地实现。但是，对于分类数据，等效质心是每个属性值的概率直方图。对于每个属性i和可能的值<span><span class="MathJax_Preview">v_j</span><script type="math/tex">v_j</script></span>，直方图值<span><span class="MathJax_Preview">p_{ij}</span><script type="math/tex">p_{ij}</script></span>表示属性i取值为<span><span class="MathJax_Preview">v_j</span><script type="math/tex">v_j</script></span>的集群中对象数量的分数。因此，对于d维数据集，点集群的质心是d个不同直方图的集合，表示集群中每个属性的分类值的概率分布。如果<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>是属性i的不同值的数量，那么这种方法将需要O（<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>）空间来表示第i个属性的质心。表7.1说明了一组具有属性“颜色”和“形状”的二维数据点。表7.2说明了颜色和形状属性的相应直方图。请注意，特定属性的概率值总是等于一个单位。</li>
+<li>计算与质心的相似性：在Sect中引入了一对分类记录之间的各种相似函数。 第3章第3.2.2节。 其中最简单的是基于匹配的相似性。 然而，在这种情况下，目标是确定概率直方图（对应于代表）和分类属性值之间的相似性。 如果属性i取值为特定数据记录的值<span><span class="MathJax_Preview">v_j</span><script type="math/tex">v_j</script></span>，则类似基于匹配的相似度是其基于直方图的概率<span><span class="MathJax_Preview">p_{ij}</span><script type="math/tex">p_{ij}</script></span>。 将这些概率汇总在不同的属性上以确定总体相似度。 每个数据记录被分配到具有最大相似性的质心。</li>
+</ol>
+<p>k-means算法的其他步骤与数字数据的情况相同。 k-means算法的有效性高度依赖于基础数据中属性值的分布。 例如，如果属性值高度倾斜，如在购物篮数据的情况下，基于匹配度量的基于直方图的变化可能表现不佳。 这是因为此度量均匀地处理所有属性值，但是，在这种情况下，应该更加重视罕见属性值。 这可以通过预处理阶段来实现，该阶段为每个分类属性值赋予一个权重，该分类属性值是其全局频率的倒数。 因此，分类数据记录现在具有与每个属性相关的权重。 这些权重的存在会影响概率直方图生成和基于匹配的相似度计算。</p>
+<h4 id="7211-k">7.2.1.1 k模式聚类</h4>
+<ul>
+<li>在k模式聚类中，代表性的每个属性值被选为聚类中该属性的分类值的模式。 一组分类值的模式为集合中频率最高的值。表7.1中列出了表7.1中10个簇的每个属性的模式。直观地说，这对应于频率直方图具有最大值p~ij的每个属性i的分类值<span><span class="MathJax_Preview">v_j</span><script type="math/tex">v_j</script></span>。 如果两个分类值具有相同的频率，则属性的模式可能不唯一。 在表7.2的情况下，模式的两个可能值是（蓝色，立方体）和（绿色，立方体）。 如果使用随机打破标准，任何这些都可以用作代表。 基于模式的代表可能不是从原始数据集中提取的，因为每个属性的模式是独立确定的。 因此，针对代表获得的d维模式的特定组合可能不属于原始数据。基于模式的方法的一个优点是，代表也是一个分类数据记录，而不是直方图。 因此，使用更丰富的相似度函数来计算数据点与其模式之间的距离会更容易。 例如，第3章中描述的基于逆频率的逆相似度函数可用于归一化属性值中的偏差。另一方面，当分类数据集中的属性值自然倾斜时，如在市场购物篮数据中，模式的使用可能不是信息性的。 例如，对于市场购物篮数据集，由于数据集的自然稀疏性，代表点的所有商品属性可以被设置为值0。 尽管如此，对于属性值更均匀分布的情况，可以有效地使用k模式方法。 在属性值分布不均匀的情况下，使k模式算法很好地工作的一种方法是将属性的特定簇频率除以其（全局）出现频率以确定归一化频率。 这基本上纠正了不同属性值的差异全局分布。使用这个标准化频率的模式。 最常用的相似性函数是基于匹配的相似性度量，在第3章第3.2.2节。 然而，对于有偏向的分类数据分布，如第3章所述，应该使用相反的出现频率来归一化相似函数。 这可以通过用对应属性值的逆出现频率对每个数据点的每个属性进行加权来间接实现。 使用与每个数据点的每个属性相关的标准化模式和权重，直接基于匹配的相似度计算将提供有效的结果。</li>
+</ul>
+<h4 id="7212-k">7.2.1.2 k中心点划分聚类</h4>
+<p>基于medoid的聚类算法更容易推广到分类数据集，因为代表性数据点是从输入数据库中选择的。 medoids方法的广泛描述与上一章的6.3.4节中描述的相同。 唯一的区别在于与数字数据相比，在一对分类数据点之间如何计算相似度。 第3章第3.2.2节中讨论的任何相似函数都可用于此目的。 与k模式聚类的情况一样，由于代表也是一个分类数据点（与直方图相对），所以直接使用第3章的分类相似度函数更容易。 这些包括使用基于逆频率的相似度函数，该函数针对不同属性值中的偏差进行归一化。</p>
+<h3 id="722">7.2.2 层次聚类</h3>
+<p>分层算法在第6章的6.4节中讨论。 凝聚式自下而上算法已成功用于分类数据。 第6.4节中的方法已用一般数值的距离矩阵进行了描述。 只要在分类属性的情况下可以定义距离（或相似度）矩阵，上一章中讨论的大多数算法都可以很容易地应用于这种情况。对分类数据有效的一种有趣的分层算法是ROCK。</p>
+<h4 id="7221-rock">7.2.2.1 ROCK</h4>
+<p>ROCK（使用链接的鲁棒性聚类）算法是基于凝聚式自下而上的方法，其中基于相似性标准对聚类进行合并。 ROCK算法使用基于共享最近邻居度量的标准。 因为凝聚方法有些昂贵，所以ROCK方法仅将方法应用于数据点样本以发现原型集群。 其余的数据点在最后一遍被分配给这些原型集群之一。ROCK算法的第一步是使用第2章中介绍的二值化方法将分类数据转换为二进制表示。 对于分类属性i的每个值<span><span class="MathJax_Preview">v_j</span><script type="math/tex">v_j</script></span>，只有当属性i取值为<span><span class="MathJax_Preview">v_j</span><script type="math/tex">v_j</script></span>时，才会创建一个新的伪项目，其值为1。 因此，如果d维分类数据集中的第i个属性具有<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>个不同的值，则这种方法将创建具有<span><span class="MathJax_Preview">\sum_{i=1}^d{n_i}</span><script type="math/tex">\sum_{i=1}^d{n_i}</script></span>个二元属性的二进制数据集。 当每个<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>的值很高时，这个二进制数据集将是稀疏的，它将类似于市场购物篮数据集。 因此，每个数据记录可以被视为二元交易或一组物品。 两个交易之间的相似性是通过使用相应集之间的Jaccard系数来计算的:
+$$
+Sim{(T_i,T_j)}=\frac{|T_i\cap T_j|}{|T_i\cup T_j|}\tag{7.1}
+$$</p>
+<p>随后，如果它们之间的相似性Sim(<span><span class="MathJax_Preview">T_i</span><script type="math/tex">T_i</script></span>,<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>)大于阈值θ，则将两个数据点<span><span class="MathJax_Preview">T_i</span><script type="math/tex">T_i</script></span>和<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>定义为邻居。 因此，邻居的概念隐含地定义了数据项上的图结构，其中节点对应于数据项，并且链接对应于邻域关系。 Link(<span><span class="MathJax_Preview">T_i</span><script type="math/tex">T_i</script></span>,<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>)表示共享最近邻居相似度函数，其等于<span><span class="MathJax_Preview">T_i</span><script type="math/tex">T_i</script></span>和<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>之间的共享最近邻的数量。</p>
+<p>相似度函数Link(<span><span class="MathJax_Preview">T_i</span><script type="math/tex">T_i</script></span>,<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>)为凝聚算法提供了合并准则。 该算法从每个数据点开始（来自最初选择的样本）在其自己的群集中，然后基于群集之间的相似性准则分层合并群集。 直观地说，如果<span><span class="MathJax_Preview">C_1</span><script type="math/tex">C_1</script></span>和<span><span class="MathJax_Preview">C_2</span><script type="math/tex">C_2</script></span>中的对象之间的共享最近邻居的累积数量很大，则应合并两个集群<span><span class="MathJax_Preview">C_1</span><script type="math/tex">C_1</script></span>和<span><span class="MathJax_Preview">C_2</span><script type="math/tex">C_2</script></span>。 因此，可以使用群集作为参数概括基于链接的相似性的概念，而不是单个数据点：
+$$
+GroupLink(C_i,C_j)=\sum_{T_u\in C_i,T_v\in C_j}Link(T_u,T_v)\tag{7.2}
+$$
+请注意，这个标准与前一章讨论的群体平均关联标准略有相似。 然而，由于大型集群之间的交叉链接的预期数量更多，因此该措施尚未正常化。 因此，必须通过一对集群之间交叉链接的预期数量来规范化，以确保大集群的合并并非不合理地受到欢迎。 因此，归一化联系准则V(<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>,<span><span class="MathJax_Preview">C_j</span><script type="math/tex">C_j</script></span>)如下：
+$$
+V(C_i,C_j)=\frac{GroupLink(C_i,C_j)}{E[CrossLinks(C_i,C_j)]}\tag{7.3}
+$$
+<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>和<span><span class="MathJax_Preview">C_j</span><script type="math/tex">C_j</script></span>之间的交叉链接的预期数量可以作为单个集群中的集群内链接Intra（·）的期望数量的函数来计算，如下所示：
+$$
+E[CrossLinks(C_i,C_j)]=E[Intra(C_i\cup C_j)]-E[Intra(C_i)]-E[Intra(C_j)]\tag{7.4}
+$$
+簇内链路的预期数目是特定于单个簇的，并且更容易估计为簇大小<span><span class="MathJax_Preview">q_i</span><script type="math/tex">q_i</script></span>和θ的函数。 包含<span><span class="MathJax_Preview">q_i</span><script type="math/tex">q_i</script></span>数据点的聚类中的簇内链路的数量通过ROCK算法被启发式地估计为<span><span class="MathJax_Preview">q_i^{1+ 2·f(θ)}</span><script type="math/tex">q_i^{1+ 2·f(θ)}</script></span>。 这里，函数f(θ)是数据集的一个属性，也是人们感兴趣的簇的种类。f(θ)的值按照如下启发式定义：
+$$
+f(θ)=\frac{1-θ}{1+θ}\tag{7.5}
+$$
+因此，通过代入式(7.3)中的交叉链接的期望数量，可以得到下面的合并准则V(<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>,<span><span class="MathJax_Preview">C_j</span><script type="math/tex">C_j</script></span>)：
+$$
+V(C_i,C_j)=\frac{GroupLink(C_i,C_j)}{(q_i+q_j)^{1+ 2·f(θ)}-q_i^{1+ 2·f(θ)}-q_j^{1+ 2·f(θ)}}\tag{7.6}
+$$
+分母通过惩罚较大的聚类明确地归一化正在合并的聚类的大小。 这种规范化的目标是防止不平衡的偏好逐步合并大型集群。</p>
+<p>合并会一直执行到总共k个群集保留在数据中。 因为凝聚方法仅适用于数据样本，所以仍然需要将其余数据点分配给其中一个群集。 这可以通过将每个磁盘驻留数据点分配给与其具有最大相似性的群集来实现。 这种相似性是使用公式7.6中的相同质量标准计算出来的，与用于群集合并时相同。 在这种情况下，通过将每个数据点视为一个单独的集群来计算集群和各个数据点之间的相似性。</p>
+<h3 id="723">7.2.3 概率算法</h3>
+<p>数据聚类的概率方法在第6章的第6.5节中介绍。 生成模型可以推广到几乎任何数据类型，只要可以为每个混合组件定义适当的生成概率分布。 这为将概率聚类算法适用于各种数据类型提供了前所未有的灵活性。 混合分布模型定义后，需要为相应的期望最大化（EM）方法定义E-步骤和M步骤。 数值聚类的主要区别在于，E步骤中的软分配过程和M步骤中的参数估计过程将取决于相应数据类型的相关概率分布模型。</p>
+<p>设混合物的k个分量为<span><span class="MathJax_Preview">G_1</span><script type="math/tex">G_1</script></span> ...$ G_k$。 然后，数据集D中每个点的生成过程使用以下两个步骤：</p>
+<ol>
+<li>选择具有先验概率αi的混合分量，其中i∈{1 ... k}。</li>
+<li>如果在第一步中选择了混合物的第m个组分，那么从<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>生成一个数据点。</li>
+</ol>
+<p><span><span class="MathJax_Preview">α_i</span><script type="math/tex">α_i</script></span>的值表示先验概率P(<span><span class="MathJax_Preview">G_i</span><script type="math/tex">G_i</script></span>)，其需要以数据驱动的方式与其他模型参数一起估计。数值情况的主要区别在于第m个聚类（或混合分量）<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的生成模型的数学形式，该数学形式现在是离散概率分布，而不是数字情况中使用的概率密度函数。这种差异反映了数据类型中的相应差异。 <span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>离散概率分布的一个合理选择是假设第i个属性的第j个分类值是由混合分量（聚类）m以概率<span><span class="MathJax_Preview">p_{ijm}</span><script type="math/tex">p_{ijm}</script></span>独立产生的。考虑包含属性值索引<span><span class="MathJax_Preview">j_1</span><script type="math/tex">j_1</script></span> ... <span><span class="MathJax_Preview">j_d</span><script type="math/tex">j_d</script></span>的数据点X的d维。换句话说，第r个属性会带有第<span><span class="MathJax_Preview">j_r</span><script type="math/tex">j_r</script></span>可能的分类值。为了方便起见，整套模型参数由通用符号Θ表示。然后，来自簇m的离散概率分布<span><span class="MathJax_Preview">g^{m,Θ(X)}</span><script type="math/tex">g^{m,Θ(X)}</script></span>，由以下表达式给出：
+$$
+g<sup>{m,Θ(\overline{X})}=\prod_{r=1}</sup>dp_{rj_rm}\tag{7.7}
+$$
+离散概率分布为<span><span class="MathJax_Preview">g^{m,Θ(·)}</span><script type="math/tex">g^{m,Θ(·)}</script></span>，它类似于前一章中EM模型的连续密度函数<span><span class="MathJax_Preview">f^{m,Θ(·)}</span><script type="math/tex">f^{m,Θ(·)}</script></span>。 相应地，可以如下估计已经生成观测数据点X的分量<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的后验概率P(<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>|<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>，Θ)：
+$$
+P(G_m|\overline{X_j}，Θ)=\frac{α_m·g<sup>{m,Θ(X)}}{\sum_{r=1}</sup>k{α_r·g^{r,Θ(X)}}}\tag{7.8}
+$$
+这为分类数据定义了E步骤，并且它为数据点提供了软集群的分配概率。</p>
+<p>在确定了软分配概率之后，M步对混合物的各个组分应用最大似然估计来估计概率<span><span class="MathJax_Preview">p_{ijm}</span><script type="math/tex">p_{ijm}</script></span>。 在估计簇m的参数时，假设记录的权重等于簇m的赋值概率P(<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span> |<span><span class="MathJax_Preview">\overline X</span><script type="math/tex">\overline X</script></span>，Θ)。 对于每个聚类m，估计属性i取其第j个可能分类值的数据点的加权数<span><span class="MathJax_Preview">w_{ijm}</span><script type="math/tex">w_{ijm}</script></span>。这等于对第j个值采用的数据点的分配概率（对于m）的总和。 通过将该值与所有数据点的聚合分配概率分为聚类m，可以如下估计概率<span><span class="MathJax_Preview">p_{ijm}</span><script type="math/tex">p_{ijm}</script></span>：
+$$
+p_{ijm}=\frac{w_{ijm}}{\sum_{\overline{X}\in D}P(G_m|\overline{X},Θ)}\tag{7.9}
+$$
+参数<span><span class="MathJax_Preview">α_m</span><script type="math/tex">α_m</script></span>被估计为数据点到群集m的平均分配概率。 上述用于估计的公式可以从最大似然估计方法中导出。 详细推导请参考书目注释。</p>
+<p>有时，公式7.9的估计可能不准确，因为可用数据可能有限，或者分类属性的特定值可能很少。 在这种情况下，某些属性值可能不会出现在群集中（或者<span><span class="MathJax_Preview">w_{ijm}</span><script type="math/tex">w_{ijm}</script></span>≈0）。 这可能会导致较差的参数估计或过度拟合。 拉普拉斯平滑方法通常用于解决这种病态概率。 这是通过给<span><span class="MathJax_Preview">w_{ijm}</span><script type="math/tex">w_{ijm}</script></span>的估计值增加一个小的正值β来实现的，其中β是平滑参数。 这通常会导致更稳健的估计。 当数据集非常小时，这种类型的平滑也用于估计先验概率<span><span class="MathJax_Preview">α_m</span><script type="math/tex">α_m</script></span>。 这完成了对M步骤的描述。 正如数值数据一样，E步和M步迭代收敛。</p>
+<h3 id="724">7.2.4 基于图形的算法</h3>
+<p>因为基于图的方法是元算法，所以这些算法的广泛描述对于分类数据和数字数据几乎保持相同。因此，前一章的第6.7节描述的方法也适用于这种情况。唯一的区别在于如何构建相似度图上的边和值。第一步是确定每个数据记录的k个最近邻居，并随后将相似度值分配给边缘。可以使用第3章第3.2.2节中描述的任何相似函数来计算沿图的边缘的相似度值。这些相似性度量可以包括第3章中讨论的逆出现频率度量，该度量纠正了不同属性值中的自然偏差。正如前一章所讨论的那样，基于图的算法的一个主要优点是，只要可以在该数据类型上定义相似性函数，就可以将它们用于几乎任何类型的数据类型。</p>
+<h2 id="73">7.3 可扩展数据的聚类</h2>
+<p>在许多应用程序中，数据的大小非常大。通常情况下，数据不能存储在主内存中，但它需要驻留在磁盘上。这是一个重要的挑战，因为它对聚类算法的算法设计施加了限制。本节将讨论CLARANS，BIRCH和CURE算法。这些算法都是前一章讨论的基本类型聚类算法之一的可扩展实现。例如，CLARANS方法是用于聚类的k-medoids算法的可扩展实现。 BIRCH算法是k-means算法的自顶向下分层泛化。 CURE算法是一种自下而上的凝聚式聚类方法。这些不同的算法继承了它们推广的算法基类的优点和缺点。例如，虽然CLARANS算法具有更容易推广到不同数据类型（数值型数据之外）的优势，但它继承了k-medoids方法的相对较高的计算复杂度。 BIRCH算法速度更快，因为它基于k均值方法，并且由于其自上而下的分区方法，可以严格控制其层次聚类结构。这对索引应用程序很有用。另一方面，BIRCH不适用于任意数据类型或任意形状的群集。由于其自下而上的分层方法，CURE算法可以确定任意形状的聚类。最合适的算法的选择取决于当前的应用。本节将概述这些不同的方法。</p>
+<h3 id="731-clarans">7.3.1 CLARANS</h3>
+<p>CLARA和CLARANS方法是k-medoids聚类方法的两个概括。 关于通用k-medoids方法的描述，请参阅前一章的第6.3.4节。 回想一下，k-medoids方法与一组代表一起工作，并且在每次迭代中迭代交换其中一个medoid与非medoid以提高聚类质量。 通用的k-medoids算法在决定如何执行这种交换时有相当大的灵活性。</p>
+<p>聚类大范围应用程序（CLARA）方法基于k-medoids方法的特定实例，称为Partitioning Around Medoids（PAM）。在这种方法中，为了扩大其他非中医药代表的范围，尝试使用所有可能的k·(n-k)对来改进聚类目标函数。选择这些对的最佳改进用于交换。该交换被执行直到算法收敛到局部最优值。交换过程需要O(k·<span><span class="MathJax_Preview">n^2</span><script type="math/tex">n^2</script></span>)个距离计算。因此，每次迭代需要O(k·<span><span class="MathJax_Preview">n^2</span><script type="math/tex">n^2</script></span>·d)时间用于广维数据集，这可能相当昂贵。由于复杂度在很大程度上取决于数据点的数量，因此可以通过将算法应用于较小的样本来降低复杂度。因此，CLARA方法将PAM应用于尺寸为f·n的较小采样数据集以发现中药。 f的值是一个小于1的采样分数。剩余的非采样数据点被分配给通过将PAM应用于较小样本而发现的最优中心点。这种整体方法被重复应用于独立选择的相同大小f·n的数据点样本。选择这些独立选择样本的最佳聚类作为最佳解决方案。由于每次迭代的复杂度为O(k·<span><span class="MathJax_Preview">f^2</span><script type="math/tex">f^2</script></span>·<span><span class="MathJax_Preview">n^2</span><script type="math/tex">n^2</script></span>·d + k·(n-k))，对于采样分数f的小值，该方法可能快几个数量级。 CLARA的主要问题发生在每个预先选择的样品不包含良好的冥冥中选择。</p>
+<p>基于随机搜索的聚类大应用程序（CLARANS）方法与完整的聚类数据集一起工作，以避免预选样本的问题。该方法迭代地尝试随机中药与随机非中药的交换。在随机选择的非medoid试图与随机选择的medoid交换后，检查质量是否改善。如果质量确实提高，那么这种交换是最终的。否则，计数不成功的交换尝试次数。据说当一个用户指定的失败尝试次数达到MaxAttempt时发现了一个局部最优解。这个发现局部最优化的整个过程重复进行用户指定的迭代次数，用MaxLocal表示。评估每个MaxLocal局部最优解的聚类目标函数。这些局部最优选择中最好的是最佳解决方案。 CLARANS相对于CLARA的优势在于探索更大的搜索空间多样性。</p>
+<p><img alt="" src="http://p6atp7tts.bkt.clouddn.com/1.png" /></p>
+<h3 id="732-birch">7.3.2 BIRCH</h3>
+<p>平衡迭代使用层次结构的减少和聚类（BIRCH）方法可以被看作自顶向下分层和k均值聚类的组合。 为了实现这一目标，该方法引入了一种称为CF-Tree的分层数据结构。 这是一个高度平衡的数据结构，它按层次组织集群。 每个节点具有至多B的分支因子，其对应于其（至多）B个子子集群。 这种结构与B-Treedatas结构通常用于数据库索引相关。 这是设计的原因，因为CF-Tree固有地被设计为支持动态插入层次聚类结构。 图7.1举例说明了CF-Tree。</p>
+<p>每个节点都包含其指向的最多B个子集群中每个子集的简要摘要。 这个简洁的集群摘要被称为集群特征（CF）或集群特征向量。 摘要包含三元组（<span><span class="MathJax_Preview">\overline{SS}</span><script type="math/tex">\overline{SS}</script></span>，<span><span class="MathJax_Preview">\overline{LS}</span><script type="math/tex">\overline{LS}</script></span>，m），其中<span><span class="MathJax_Preview">\overline{SS}</span><script type="math/tex">\overline{SS}</script></span>是包含群集中点的平方和的向量1（二阶矩），<span><span class="MathJax_Preview">\overline{LS}</span><script type="math/tex">\overline{LS}</script></span>是一个向量，其中包含点 簇（第一阶矩），m是簇中的点数（第零阶矩）。 因此，摘要的大小是（2·d + 1）维数据集，也被称为CF矢量。 集群特征向量因此包含至多2阶的所有时刻。该总结具有两个非常重要的特性：</p>
+<ol>
+<li>每个群集特征可以表示为各个数据点的群集特征的线性和。 此外，CFTree中父节点的集群特征是其子集的集群特征的总和。 合并群集的群集特征也可以计算为组成群集的群集特征之和。 因此，通过将数据点的聚类特征向量添加到聚类的特征向量，可以有效地实现聚类特征向量的增量更新。</li>
+<li>群集功能可用于计算群集的有用属性，例如其半径和质心。 请注意，这些是基于质心的算法所需的唯一两个计算，例如k-means或BIRCH。 这些计算在下面讨论。</li>
+</ol>
+<p>为了理解集群特征如何用于测量集群的半径，考虑一组数据点，用<span><span class="MathJax_Preview">\overline{X_1}</span><script type="math/tex">\overline{X_1}</script></span> ... <span><span class="MathJax_Preview">\overline{X_m}</span><script type="math/tex">\overline{X_m}</script></span>表示，其中<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span> =（<span><span class="MathJax_Preview">x^1_i</span><script type="math/tex">x^1_i</script></span>  ... <span><span class="MathJax_Preview">x^d_i</span><script type="math/tex">x^d_i</script></span>）。 任何一组点的均值和方差都可以用它们的第一和第二时刻表示。 很容易看出群集的质心（向量）只是<span><span class="MathJax_Preview">\overline{LS}</span><script type="math/tex">\overline{LS}</script></span> / m。 随机变量Z的方差定义为<span><span class="MathJax_Preview">E [Z^2]</span><script type="math/tex">E [Z^2]</script></span> -<span><span class="MathJax_Preview">{E [Z]}^ 2</span><script type="math/tex">{E [Z]}^ 2</script></span>，其中E [·]表示期望值。 因此，沿第i维的方差可以表示为<span><span class="MathJax_Preview">{SS}_i</span><script type="math/tex">{SS}_i</script></span> / m-<span><span class="MathJax_Preview">{（{LS}_i / m）}^2</span><script type="math/tex">{（{LS}_i / m）}^2</script></span>。 这里，<span><span class="MathJax_Preview">{SS}_i</span><script type="math/tex">{SS}_i</script></span>和<span><span class="MathJax_Preview">{LS}_i</span><script type="math/tex">{LS}_i</script></span>表示沿着第i维的对应矩矢量的分量。特定维数的特定维数是整个集群的方差。 此外，任何点到质心的距离都可以使用计算出的质心<span><span class="MathJax_Preview">\overline{LS}</span><script type="math/tex">\overline{LS}</script></span> / m使用聚类特征来计算。 因此，集群特征向量包含将数据点插入CF树所需的所有信息。</p>
+<p>CF-Tree中的每个叶节点都有一个直径阈值T.直径可以是集群的任何分布度量，例如其半径或方差，只要它可以直接从集群特征向量计算得出。 T的值调节聚类的粒度，树的高度以及叶节点处聚类的总数。 较低的T值会导致较大的细粒度数量。 由于CF-Tree总是被认为是主存驻留，所以数据集的大小通常会对T的值产生关键影响。较小的数据集将允许使用较小的阈值T，而较大的数据集 将需要阈值T的较大值。因此，诸如BIRCH的递增方法逐渐增加T的值以平衡随着数据大小增大对存储器的更大需求。 换句话说，只要树不能再保存在主内存中，T的值就需要增加。</p>
+<p>使用自顶向下的方法将数据点插入树中。具体而言，在每个级别选择最接近的质心插入树结构。这种方法与传统数据库索引（如B-Tree）中的插入过程类似。通过简单相加沿着树的相应路径更新聚类特征向量。只有当插入不会增加超过阈值T的簇直径时，叶节点才会将数据点插入到最近的簇中。否则，必须创建一个仅包含该数据点的新簇。如果该新节点尚未装满，则将该节点添加到叶节点中。如果叶节点已满，则需要将其分成两个节点。因此，需要将旧叶节点中的集群要素条目分配给两个新节点中的一个。叶节点中质心最远的两个簇特征可以作为分裂的种子。剩余的条目被分配到它们最接近的种子节点。结果，叶的父节点的分枝因子增加1.因此，分裂可能导致父代的分枝因子增加到B以外。如果是这种情况，则父亲需要被分割为以类似的方式。因此，分裂可以向上传播，直到所有节点的分枝因子都低于B.如果分裂一直传播到根节点，则CF树的高度增加1。</p>
+<p>这些重复的拆分有时可能会导致树耗尽主内存。 在这种情况下，需要通过增加阈值T来重建CF树，并将旧叶节点重新插入具有更高阈值T的新树中。通常，这种重新插入将导致一些较旧的簇合并成较大的簇 满足新的修改阈值T.因此，新树的内存要求较低。 由于使用集群特征向量重新插入旧叶节点，因此无需从磁盘读取原始数据库即可完成此步骤。 请注意，聚类特征向量允许计算两个聚类合并产生的直径，而不使用原始数据点。</p>
+<p>可选的群集优化阶段可用于将叶节点内的相关群集分组并删除小的异常群集。 这可以通过使用凝聚层次聚类算法来实现。 许多凝聚合并标准（如基于方差的合并标准（参见第6章的第6.4.1节））可以通过CF矢量轻松计算。 最后，可选的改进步骤将全部数据点重新分配到其最近的中心，如全局聚类步骤所产生的那样。 这需要额外扫描数据。 如果需要，可以在此阶段删除异常值。</p>
+<p>BIRCH算法速度非常快，因为基本方法（不需要精简）只需要对数据进行一次扫描，每次插入都是一种有效的操作，类似于传统索引结构中的插入操作。 它也高度适应底层主内存需求。 但是，它隐含地假设了底层群集的球形形状。</p>
+<h3 id="733-cure">7.3.3 CURE</h3>
+<p>使用代表的聚类（CURE）算法是一种凝聚式分层算法。回想一下第6章第6.4.1节的讨论，自底向上分层算法的单链接实现可以发现任意形状的聚类。如同所有凝聚方法一样，维持一组当前的聚类，它们基于聚类之间的单链接距离而相继合并。然而，该算法不是直接计算两个聚类中所有点对之间的距离进行凝聚合并，而是使用一组代表来实现更高的效率。这些代表被精心挑选以捕捉每个当前聚类的形状，因此即使使用较少数量的代表，也能保留凝聚方法捕捉任意形状的聚类的能力。第一个代表被选为距离聚类中心最远的一个数据点，第二个代表距离第一个最远，第三个代表选择距离两个代表最近的那个距离最远的数据点，以及等等。特别是，rth代表是距离当前（r-1）代表最近的一个数据点。因此，代表倾向于沿着集群的轮廓排列。通常，从每个集群中选择少量的代表（如十个）。这种距离最远的方法确实有不利影响选择异常值的不利影响。在选出代表后，他们会缩小到集群中心，以减少异常值的影响。这种缩小是通过将代表与集群中心代表连接代表的线段L上的新合成数据点替换代表来执行的。合成代表与原始代表之间的距离是线段L长度的一个分数α∈（0,1）。由于这种方法对噪声代表的敏感性，收缩在凝聚式聚类的单连接实现中特别有用在集群的边缘。这种喧闹的代表可能会将不相关的群集连接起来请注意，如果代表收缩得太远（α≈1），则该方法将减少到基于质心的合并，这也被称为效果不佳（请参阅第6章的第6.4.1节）。</p>
+<p>这些集群使用凝聚式自下而上的方法进行合并。 为了执行合并，使用任何一对代表性数据点之间的最小距离。 这是第6章第6.4.1节中的单链接方法，它最适合发现任意形状的聚类。 通过使用较少数量的代表性数据点，CURE算法能够显着降低凝聚层次算法中合并标准的复杂性。 合并可以被执行直到剩余的簇的数量等于k。 k的值是用户指定的输入参数。 CURE可以通过在合并过程中定期消除小群集来处理异常值。 这里的想法是，这些集群保持很小，因为它们大多包含异常值。</p>
+<p>为了进一步提高复杂度，CURE算法从底层数据中抽取一个随机样本，并对该随机样本执行聚类。 在算法的最后阶段，通过选择具有最接近的代表性数据点的聚类，将所有数据点分配给剩余聚类之一。</p>
+<p>更大的样本量可以有效地用于分区技巧。 在这种情况下，样本被进一步分成一组p个分区。 每个分区都进行分层聚类，直到达到所需数量的聚类，或者符合某些合并质量标准。 然后将这些中间群集（跨越所有分区）按层次结构重新聚集在一起，从采样数据中创建最终的k个群集。 最后的分配阶段适用于结果集群的代表。 因此，整个过程可以通过以下步骤来描述：</p>
+<ol>
+<li>从大小为n的数据库D取样s点。</li>
+<li>将样本划分为每个大小为s / p的p个分区。</li>
+<li>使用分层合并到每个分区中的<span><span class="MathJax_Preview">k^,</span><script type="math/tex">k^,</script></span>个群集，独立聚类每个分区。 跨越所有分区的簇的总数<span><span class="MathJax_Preview">k^,·p</span><script type="math/tex">k^,·p</script></span>仍然大于用户期望的目标k。</li>
+<li>在跨所有分区导出的<span><span class="MathJax_Preview">k^,·p</span><script type="math/tex">k^,·p</script></span>个集群上对用户期望的目标k执行分层聚类。</li>
+<li>将每个（n-s）个非示例数据点分配给包含最近代表的群集。</li>
+</ol>
+<p>与其他可扩展方法（如BIRCH和CLARANS）不同，CURE算法能够发现任意形状的簇。 实验结果表明，CURE也比这些方法更快。</p>
+<h2 id="74">7.4 高维度聚类</h2>
+<p>高维数据包含许多不相关的特征，这些特征在聚类过程中会产生噪音。 前一章的特征选择部分讨论了如何去除不相关的特征以提高聚类的质量。 当大量的特征不相关时，数据不能被分成有意义和有凝聚力的集群。 这种情况特别可能发生在功能彼此不相关时。 在这种情况下，所有数据点对之间的距离变得非常相似。 相应的现象称为距离集中。</p>
+<p>前一章中讨论的特征选择方法可以减少不相关特征的不利影响。 但是，当特征的最佳选择取决于基础数据局部性时，通常不可能先前删除任何特定的特征集。 考虑图a所示的情况。 在这种情况下，群集A存在于XY平面中，而群集B存在于YZ平面中。 因此，特征相关性是本地的，并且不再可能在不丢失某些数据位置的相关特征的情况下全局移除任何特征。 引入了预测聚类的概念来解决这个问题。</p>
+<p><img alt="" src="http://p6atp7tts.bkt.clouddn.com/2.png" /></p>
+<p>在传统的聚类方法中，每个聚类都是一组点。 在投影聚类中，每个聚类被定义为一组点和一组维（或子空间）。 例如，图a中的投影聚类A将被定义为其相关的一组点，以及对应于X和Y维度的子空间。 类似地，图a中的投影聚类B被定义为其相关的点集合，以及与Y和Z维度相对应的子空间。 因此，投影聚类被定义为对（<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>，<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>），其中<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>是一组点，而子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>是由一组维度定义的子空间。</p>
+<p>一个更具挑战性的情况如图b所示，其中集群不存在于轴平行子空间中，但它们存在于数据的任意方向的子空间中。这个问题也是第2章讨论的主成分分析（PCA）方法的推广，其中一个具有最大方差的全局投影被发现保留了关于数据的最大信息。在这种情况下，希望保留具有最小偏差的最佳局部投影，以确定每组数据点紧密聚集的子空间。这些类型的聚类被称为任意取向投影聚类，广义投影聚类或相关聚类。因此，每个群集<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>的子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>不能用原始维度集合来描述。此外，<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>的正交子空间提供了用于执行局部降维的子空间。这本身就是一个有趣的问题。由于局部选择用于降维的子空间，局部降维减少了数据维数。</p>
+<p>这个问题有两个不同的变化，分别被称为子空间聚类和投影聚类。</p>
+<ol>
+<li>子空间聚类：在这种情况下，在从不同聚类中绘制的点之间允许有重叠。 这个问题更接近于模式挖掘，其中关联模式是离散化后从数值数据中挖掘出来的。 因此，每个模式对应于数字数据子空间内的超立方体，并且此立方体内的数据点表示子空间聚类。 通常，开采的子空间群集的数量可能非常大，这取决于用户定义的参数（称为密度阈值）。</li>
+</ol>
+<p><img alt="" src="http://p6atp7tts.bkt.clouddn.com/3.png" /></p>
+<ol>
+<li>预测聚类：在这种情况下，从不同聚类中抽取的点之间不允许有重叠。 这个定义提供了一个简要的数据总结。 因此，这个模型原则上更接近数据汇总聚类框架的原始目标。</li>
+</ol>
+<p>在本节中，将描述三种不同的聚类算法。 其中第一个是CLIQUE，它是一种子空间聚类方法。 另外两个是PROCLUS和ORCLUS，它们分别是针对轴平行和相关版本的问题分别提出的第一个投影聚类方法。</p>
+<h3 id="741-clique">7.4.1 CLIQUE</h3>
+<p>任务中的聚类（CLIQUE）技术是前一章讨论的基于网格的方法的推广。该方法的输入是每个维度的网格范围p的数量和密度τ。该密度τ表示密集网格单元中的最小数量的数据点，并且也可以被视为网格单元的最小支持要求。和所有基于网格的方法一样，离散化的第一阶段用于创建网格结构。在基于全维网格的方法中，相关稠密区域基于所有维度上的离散化范围的交集。来自这些方法的CLIQUE的主要区别在于希望仅在密度大于τ的相关维度子集上确定范围。这与频繁模式挖掘问题相同，其中每个离散化范围被视为“项目”，并且支持被设置为τ。在原始的CLIQUE算法中，使用了Apriori方法，但原则上可以使用任何其他频繁模式挖掘方法。正如在通用的基于网格的方法中，相邻的网格单元（在相同的子空间中定义的）被放在一起。这个过程与通用的基于网格的方法相同，除了必须在同一个子空间上定义两个网格以使它们甚至被认为是相邻的。所有找到的模式都与数据点一起返回。 CLIQUE算法如图7.3所示。通过将每个k维连通网格区域分解成最小的k维超立方体集合，也可以生成易于理解的描述。这个问题是NP难的。有关有效的启发式方法，请参阅书目注释。</p>
+<p>严格地说，CLIQUE是一种定量的频繁模式挖掘方法，而不是一种聚类方法。 CLIQUE的输出可能非常大，有时可能大于数据集的大小，这在频繁模式挖掘中很常见。 聚类和频繁模式挖掘是相关的，但不同目标存在不同的问题。 频繁模式挖掘的主要目标是发现维度相关性，而聚类的主要目标是总结。 从这种语义角度来看，这种方法似乎并没有达到数据汇总的主要应用特定目标。 该方法的最坏情况复杂度和发现模式的数量可以与维度的数量呈指数关系。 该方法可能不会在密度（支持）阈值τ的低值处终止。</p>
+<h3 id="742-proclus">7.4.2 PROCLUS</h3>
+<p>投影聚类（PROCLUS）算法使用基于medoid的方法进行聚类。 该算法分三个阶段进行：初始化阶段，迭代阶段和群集精简阶段。 初始化阶段选择medoid的小候选集M，这限制了爬山的搜索空间。 换句话说，最终的medoid集合将是候选集合M的一个子集。迭代阶段使用基于medoid的技术来爬山，以获得更好的解决方案，直到收敛。 最后的补充阶段将数据点分配给最优化的medoids并去除异常值。</p>
+<p>在初始化过程中选择一个小的候选集合M，如下所示：</p>
+<ol>
+<li>选取大小与聚类数k成比例的随机样本M数据点。 设该子集的大小为A·k，其中A为大于1的常数。</li>
+<li>使用贪心方法将集合M的大小进一步减小到B·k，其中A&gt; B&gt; 1。 特别地，应用最远距离方法，其中通过选择距离先前选择的点的最近距离的数据点来迭代地选择点。</li>
+</ol>
+<p>尽管选择一个小候选medoid集合M大大降低了搜索空间的复杂度，但由于它距离最远的方法，它也往往包含许多异常值。 尽管如此，最远距离的方法确保良好分离的种子，这也倾向于很好地分离出簇。</p>
+<p>该算法首先从M中选择一个k个中心点的随机子集S，并通过用M中的新点迭代替换当前集合中的“坏”中心点来逐步提高中心点的质量。到目前为止发现的最佳中心点集是总是保存在<span><span class="MathJax_Preview">S_{best}</span><script type="math/tex">S_{best}</script></span>。 S中的每个中心点与基于本地数据点的统计分布的一组维度相关联。这组维度表示特定于相应聚类的子空间。该算法使用稍后描述的方法来确定<span><span class="MathJax_Preview">S_{best}</span><script type="math/tex">S_{best}</script></span>中的一组“坏”类中心点。从M中随机选择的替换点替换这些坏的中间体，并测量对目标函数的影响。如果目标函数改进，那么当前最佳的中心点集<span><span class="MathJax_Preview">S_{best}</span><script type="math/tex">S_{best}</script></span>被更新为S.否则，尝试另一个随机选择的替换集用于在下一次迭代中与<span><span class="MathJax_Preview">S_{best}</span><script type="math/tex">S_{best}</script></span>中的不良中心点交换。如果<span><span class="MathJax_Preview">S_{best}</span><script type="math/tex">S_{best}</script></span>中的中心点在预定数量的连续替换尝试中没有改善，那么算法终止。所有计算，如赋值和目标函数计算，都在与每个中心点相关的子空间中执行。整个算法如图7.4所示。接下来，我们提供每个上述步骤的详细描述。</p>
+<p><img alt="" src="http://p6atp7tts.bkt.clouddn.com/4.png" /></p>
+<p>确定一个中心点的预测尺寸：上述方法需要确定一组特定的中心点的质量。 这需要通过计算数据点到与第i个中心点有关的子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>中的每个中心点i的距离来将数据点分配给中心点。 首先定义S中每个中心点的局部性。 中心点的局部性被定义为位于半径等于到最近中心点距离的球体中的一组数据点。 计算从中心点到其局部点的每个维度的（统计归一化的）平均距离。 令<span><span class="MathJax_Preview">r_{ij}</span><script type="math/tex">r_{ij}</script></span>为中心点 i中的数据点到中心点 i沿j维的平均距离。平均值<span><span class="MathJax_Preview">μ_i=\sum_{j=1}^d{r_{ij}/d}</span><script type="math/tex">μ_i=\sum_{j=1}^d{r_{ij}/d}</script></span>，标准偏差<span><span class="MathJax_Preview">σ_i=\sqrt{\frac{\sum_{j=1}^d{(r_{ij}-μ_i})^2}{d-1}}</span><script type="math/tex">σ_i=\sqrt{\frac{\sum_{j=1}^d{(r_{ij}-μ_i})^2}{d-1}}</script></span>计算这些距离值<span><span class="MathJax_Preview">r_{ij}</span><script type="math/tex">r_{ij}</script></span>，具体到每个位置。 然后可以将其转换为统计标准化值<span><span class="MathJax_Preview">z_{ij}</span><script type="math/tex">z_{ij}</script></span>：
+$$
+z_{ij}=\frac{r_{ij}-μ_i}{σ_i}\tag{7.10}
+$$
+本地特定归一化的原因是不同的数据地点具有不同的自然尺寸，并且如果没有正常化比较来自不同地区的尺寸，则很难进行比较。 <span><span class="MathJax_Preview">z_{ij}</span><script type="math/tex">z_{ij}</script></span>的负值是特别理想的，因为它们表示中位数维数对的平均距离比期望值小。基本思想是选择<span><span class="MathJax_Preview">z_{ij}</span><script type="math/tex">z_{ij}</script></span>的最小（最负的）k·l值以确定相关的特定群集的维度。请注意，这可能会导致将不同数量的维度分配给不同的集群。与不同中心点相关的维度总数必须等于k·l。另一个约束是与中心点相关联的维数必须至少为2.为了实现这一点，所有的<span><span class="MathJax_Preview">z_{ij}</span><script type="math/tex">z_{ij}</script></span>值按升序排序，并且为每个中心点 i选择两个最小的值。然后，剩余的k·（1-2）中心点维数对从<span><span class="MathJax_Preview">z_{ij}</span><script type="math/tex">z_{ij}</script></span>的剩余值中贪婪地选择为最小的那个。</p>
+<p>数据点分配到聚类和聚类评估：给定这中心点及其相关维度集，数据点通过数据库一次性分配到中心点。 使用曼哈顿分段距离计算数据点到中心点的距离。 曼哈顿分段距离与曼哈顿距离相同，除了它与每个中心点相关联的不同维数标准化之外。 为了计算该距离，曼哈顿距离仅使用相关的维度集合计算，然后除以相关维度的数量。 将数据点分配给曼哈顿段距离最小的中心点。 在确定聚类之后，聚类的目标函数被评估为数据点到它们各自聚类的质心的平均曼哈顿分段距离。 如果聚类目标改善，则更新<span><span class="MathJax_Preview">S_{best}</span><script type="math/tex">S_{best}</script></span>。</p>
+<p>确定坏的中心点：从<span><span class="MathJax_Preview">S_{best}</span><script type="math/tex">S_{best}</script></span>中确定“坏”的中心点的方法如下：点数最少的聚类的中间体是坏的。 另外，小于（n / k）·min偏差点的任何群的中位数是不好的，其中min偏差是小于1的常数。典型值被设置为0.1。 这里的假设是bad 中心点具有小群集，或者是因为它们是异常值，或者是因为它们与另一个群集共享点。 将坏的中间体替换为候选中间体集M的随机点。</p>
+<p>细化阶段：找到最佳的中心点集合后，会对数据执行最后一遍以提高聚类的质量。与每个中心点相关的尺寸计算不同于迭代阶段。主要区别在于，为了分析与每个中心点相关的维度，使用迭代阶段结束时簇中点的分布，而不是中心点的地点。在计算新维度之后，根据曼哈顿段距离相对于新维度集重新分配点。在最终数据传递过程中也会处理异常值。对于每个中心点 i，其最接近的其他中心点是使用曼氏节段距离在中心点 i的相关子空间中计算的。相应的距离被称为影响范围。如果数据点到每个中心点的曼哈顿分段距离大于后者的影响范围，则数据点作为异常值被丢弃。</p>
+<p>细化阶段：找到最佳的中心点集合后，会对数据执行最后一遍以提高聚类的质量。与每个中心点相关的尺寸计算不同于迭代阶段。主要区别在于，为了分析与每个中心点相关的维度，使用迭代阶段结束时簇中点的分布，而不是中心点的地点。在计算新维度之后，根据曼哈顿段距离相对于新维度集重新分配点。在最终数据传递过程中也会处理异常值。对于每个中心点 i，其最接近的其他中心点是使用曼氏节段距离在中心点i的相关子空间中计算的。相应的距离被称为影响范围。如果数据点到每个中心点的曼哈顿分段距离大于后者的影响范围，则数据点作为异常值被丢弃。</p>
+<h3 id="743-orclus">7.4.3 ORCLUS</h3>
+<p>任意定向投影聚类（ORCLUS）算法在任意定向的子空间中找到聚类，如图b所示。 很明显，这些集群不能通过轴平行投影聚类找到。 这样的集群也被称为相关集群。 该算法使用聚类数k和每个子空间Ei的维数l作为输入参数。 因此，该算法返回k个不同的对（<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>，<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>），其中cluster<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>被定义在任意定向的子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>中。 另外，该算法报告一组异常值O. 这种方法也被称为相关聚类。 PROCLUS和ORCLUS模型之间的另一个区别是后者中的简化假设，即每个子空间的维数固定为相同的值l。 在前一种情况下，l的值就是群集特定子空间的平均维数。</p>
+<p>ORCLUS算法使用分层和k-均值聚类的组合以及子空间精化。 虽然分层合并算法通常更加有效，但它们代价很高。 因此，该算法使用连续合并的分层代表。 该算法以<span><span class="MathJax_Preview">k_c = k_0</span><script type="math/tex">k_c = k_0</script></span>初始种子开始，由S表示。</p>
+<p><img alt="" src="http://p6atp7tts.bkt.clouddn.com/0.png" /></p>
+<p>当前的种子数量<span><span class="MathJax_Preview">k_c</span><script type="math/tex">k_c</script></span>在连续的合并迭代中减少。 使用基于代表性聚类的方法将数据点分配给这些种子，除了在其相关子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>中测量数据点到其种子的距离。 最初，每个集群的当前维度<span><span class="MathJax_Preview">l_c</span><script type="math/tex">l_c</script></span>等于全部数据维度。 通过连续减少不同的迭代，值<span><span class="MathJax_Preview">l_c</span><script type="math/tex">l_c</script></span>逐渐减少到用户指定的维度l。 这种逐渐减少的想法是，在最初的几次迭代中，集群可能不一定非常好地对应于数据中的自然较低维子空间集群; 因此保留更大的子空间以避免信息丢失。 在后面的迭代中，聚类更加精确，因此可以提取较低等级的子空间。</p>
+<p>整个算法由多次迭代组成，每次迭代中，一系列合并操作与具有投影距离的k-means样式分配交替进行。 当前聚类的数量减少了α&lt;1的因子，并且在给定的迭代中当前聚类<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>的维数减少了β&lt;1。 前几次迭代对应于更高的维度，并且每个连续迭代继续剥离不同簇的更多和更多噪声子空间。 α和β的值以这样的方式相关，即从<span><span class="MathJax_Preview">k_0</span><script type="math/tex">k_0</script></span>到k集群的减少发生在与从<span><span class="MathJax_Preview">l_0</span><script type="math/tex">l_0</script></span> = d到l维度的减少相同的迭代次数中。 α的值为0.5，图7.5中显示了β的导出值。 该算法的总体描述也在此图中进行了说明。</p>
+<p>整个过程在每次迭代中使用分配，子空间重新计算和合并三个交替步骤。因此，该算法使用层次和k均值方法的概念以及子空间精简。分配步骤通过使用子空间Ei比较数据点与S中的第i个种子的投影距离，将每个数据点分配给其最近的种子。在赋值之后，S中的所有种子重新集中到相应簇的质心。此时，计算与每个簇<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>相关联的维度<span><span class="MathJax_Preview">l_c</span><script type="math/tex">l_c</script></span>的子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>。这是通过使用群集<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>上的PCA完成的。子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>由具有最小特征值的簇<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>的协方差矩阵的<span><span class="MathJax_Preview">l_c</span><script type="math/tex">l_c</script></span>正交特征向量来定义。为了执行合并，该算法计算相应的最小扩展子空间中两个聚类的并集的投影能量（方差）。选择能量最少的一对来执行合并。请注意，这是分层合并算法的方差标准的子空间泛化（参见第6章Sect.6.4.1）。</p>
+<p>当所有迭代的合并过程已将群集数量减少到k时，该算法终止。 此时，与簇集<span><span class="MathJax_Preview">C_i</span><script type="math/tex">C_i</script></span>关联的子空间Ei的维度<span><span class="MathJax_Preview">l_c</span><script type="math/tex">l_c</script></span>也等于1.该算法在数据库上执行一次最终遍历，以基于投影距离将数据点分配给它们最近的种子。 在最后阶段处理异常值。 当数据点到最接近的种子i的投影距离大于其他种子在子空间<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>中种子i的投影距离时，数据点被认为是离群值。</p>
+<p>一个主要的计算挑战，即加工技术要求对集群联合的原始向量进行计算，这些联合集合可以的代价很高。为了有效地实现合并，ORCLUS方法将集群特征向量的概念从BIRCH扩展到协方差矩阵。 这个想法不仅要存储聚类特征向量中的矩，还要存储每对维的属性值的乘积之和。 协方差矩阵可以从这个扩展的聚类特征向量中计算出来。 这种方法可以看作是第6章第6.4.1节的基于方差的合并实现的协方差和子空间泛化。 有关此优化的详细信息，请参阅书目部分。</p>
+<p>根据选择的<span><span class="MathJax_Preview">k_0</span><script type="math/tex">k_0</script></span>的值，时间复杂度由合并或分配来控制。 合并需要特征向量计算，这可能是昂贵的。 通过基于聚类特征向量的有效实现，可以在<span><span class="MathJax_Preview">O（k^2_0·d·（k_0 + d^2））</span><script type="math/tex">O（k^2_0·d·（k_0 + d^2））</script></span>时间内实现合并，而分配步骤总是需要<span><span class="MathJax_Preview">O（k^0·n·d）</span><script type="math/tex">O（k^0·n·d）</script></span>时间。 这可以通过使用优化的特征向量计算来加快。 对于<span><span class="MathJax_Preview">k_0</span><script type="math/tex">k_0</script></span>的较小值，该方法的计算复杂度更接近于k均值，而对于较大的<span><span class="MathJax_Preview">k_0</span><script type="math/tex">k_0</script></span>值，复杂度更接近等级方法。 ORCLUS算法不假定增量可更新的相似性矩阵的存在，如同自下而上的分层方法一样。 以额外的空间为代价，维护这样的相似性矩阵可以将<span><span class="MathJax_Preview">O（k^3_0·d）</span><script type="math/tex">O（k^3_0·d）</script></span>项减少为<span><span class="MathJax_Preview">O（k^2_0·log（k_0）·d）</span><script type="math/tex">O（k^2_0·log（k_0）·d）</script></span>。</p>
+<h2 id="75">7.5 半监督聚类</h2>
+<p>聚类的一个挑战是可以通过各种算法找到各种各样的替代解决方案。 取决于聚类标准和验证标准之间的一致性，这些替代聚类的质量可能会根据不同的内部验证标准进行不同的排名。 这是任何无监督算法的主要问题。 因此，半监督依赖外部应用程序特定的标准来指导聚类过程。</p>
+<p>了解不同集群可能不适用于特定应用的视角是非常重要的。毕竟，聚类结果的实用性基于能够有效地用于给定应用的能力。指导聚类结果朝向应用特定目标的一种方式是使用监督。例如，考虑分析师希望大致沿着开放目录项目（ODP）的方向分割一组文档的情况，用户已经在其中用户已经手动将文档标记为一组预定义的类别。一个可能希望使用该目录只是作为软指导原则，因为分析师集合中的集群及其主题的数量可能并不总是与ODP集群中的完全相同。合并监管的一种方式是从每个ODP类别下载示例文件，并将它们与需要群集的文件混合。这个新下载的文档集标有其类别，并提供有关特征如何与不同集群（类别）相关的信息。因此，添加的标签文档集合可以像教师引导学生走向特定目标一样，为集群过程提供监督。</p>
+<p>不同的情景是从背景知识中知道某些文档应该属于同一类，而其他文档不应该属于同一类。 相应地，在聚类中通常使用两种类型的半监督：</p>
+<ol>
+<li>点对点监督：标签与单个数据点相关联，并提供有关对象类别（或群集）的信息。 这个版本的问题与数据分类密切相关。</li>
+<li>成对监督：为各个数据点提供“必须链接”和“无法链接”限制。 这提供了有关允许成对对象位于同一群集中或禁止分别位于同一群集中的情况的信息。 这种监督形式有时也被称为约束聚类。</li>
+</ol>
+<p>对于这些变化中的每一个，在下面的章节中描述了许多简单的半监督聚类方法。</p>
+<h3 id="751">7.5.1 点对点监督</h3>
+<p>点对点监督比双向监控明显更容易解决，因为与数据点相关的标签可以更自然地与现有的聚类算法结合使用。 在软监控中，标签用作指导，但允许混合具有不同标签的数据点。 在严格的监督下，不允许混合具有不同标签的数据点。修改现有聚类算法的不同方法的一些示例如下：</p>
+<ol>
+<li>通过播种进行半监督聚类：在这种情况下，选择k均值算法的初始种子作为不同标签的数据点。这些用于执行标准的k-means算法。有偏差的初始化对最终结果有重大影响，即使允许带标记的数据点被分配给初始种子具有不同标签的软件簇（软监控）。在严格的监督下，群集显然与对应于其初始种子的标签相关联。标记数据点的分配受到限制，因此可以将这些点分配给具有相同标签的群集。在某些情况下，计算集群中心时会忽略未标记点的权重，以增加监督的影响。第二种形式的半监督与半监督分类密切相关，第11章讨论了这种分类。 EM算法使用类似的方法对带有标签和未标签数据进行半监督分类。有关此算法的讨论，请参见第11章第11.6节。为了更健壮的初始化，可以将无监督聚类分别应用于每个标记数据段以创建种子。</li>
+<li>EM算法：由于EM算法是k-means方法的软版本，因此EM方法所需的更改与kmeans方法所需的更改完全相同。 EM算法的初始化是在以标记的数据点为中心的混合下执行的。 此外，对于难以监督的情况，对于不属于同一标签的混合组分，标记数据点的后验概率始终设置为0。 此外，在计算模型参数期间，未标记的数据点被打折。 第11章第11.6节详细讨论了这种方法。</li>
+<li>凝聚算法：凝聚算法可以很容易地推广到半监督的情况。 在合并允许混合不同标签（软监督）的情况下，聚类期间聚类之间的距离函数可以通过向具有相同标签的聚类提供额外信用来合并跨合并的两个分量的类别标签分布中的相似性。 这种信用额度调节了监管水平。许多不同的选择也可用于更强烈地将监督纳入合并标准。 例如，合并标准可能要求只有包含相同标签的群集合并在一起（硬监督）。</li>
+<li>基于图形的算法：基于图形的算法可以通过改变相似性图形以纳入监督来修改，以在半监督场景中工作。 连接具有相同标签的数据点的边有额外的α权重。 α的值规定了监督的水平。 α的值越大越接近硬监督，而α的越小值越接近软监督。 聚类算法中的所有其他步骤保持相同。 一种称为集体分类的基于图表监督的不同形式被用于半监督分类问题（参见第19章第19.4节）。</li>
+</ol>
+<p>因此，逐点监督很容易在大多数聚类算法中使用。</p>
+<h3 id="752">7.5.2 成对监督</h3>
+<p>在成对监督中，“必须链接”和“无法链接”约束是在对象之间指定的。 一个直接的观察是，对于任意一组约束条件来说，没有必要存在可行和一致的解决方案。 考虑三个数据点A，B和C使得（A，B）和（A，C）都是“必须链接”对的情况，而（B，C）是“不可链接”对。 很明显，没有可行的聚类可以满足所有三个约束条件。 发现具有成对约束的聚类的问题通常比指定点对点约束的问题更为困难。 在只有“必须链接”约束的情况下，问题可以近似减少到逐点监督的情况。</p>
+<p>k-means算法可以很容易地修改以处理成对的监督。基本思想是从一组随机选择的质心开始。数据点以随机顺序处理以分配给种子。每个数据点都分配给其最近的种子，该种子不违反已经执行的分配所暗示的任何约束。如果数据点无法以一致的方式分配给任何群集，则该算法将终止。在这种情况下，报告找到可行解的最后一次迭代中的聚类。在某些情况下，即使在第一次迭代中也不可能找到可行的解决方案，这取决于种子的选择。因此，受限k-均值方法可以执行多次，并且报告这些执行的最佳解决方案。文献中提供了许多其他方法，包括指定的约束类型和解决方法方法。书目注释包含许多这些方法的指针。</p>
+<h2 id="76">7.6 人工视觉监督聚类</h2>
+<p>前一节讨论了如何将约束或标签形式的监督纳入输入数据。 结合监督的一种不同方式是在群集过程中使用来自用户的直接反馈，这基于对群集的可理解的总结。</p>
+<p>其核心思想是语义上有意义的集群通常难以使用完全自动化的方法进行隔离，其中严格的数学形式化被用作唯一标准。集群的实用性基于它们的应用特定可用性，它通常在语义上可解释。在这种情况下，需要人员参与，以便在集群发现过程中融入直观和语义上有意义的方面。聚类是一个既需要计算机计算能力又需要对人类直观理解的问题。因此，一个自然的解决方案是将群集任务分成这样的方式，即每个实体执行最适合的任务。在交互式方法中，计算机执行计算密集型分析，利用该分析为用户提供可直观理解的聚类结构摘要。用户利用这个总结来提供关于应该由聚类算法做出的关键选择的反馈。这种合作技术的结果是一个可以比人或计算机更好地执行聚类任务的系统。</p>
+<p>在聚类过程中有两种自然的方式提供反馈：</p>
+<ol>
+<li>语义反馈作为标准聚类算法中的中间过程：这种方法与对象在语义上可解释的域（例如文档或图像）相关，用户在进行关键选择时在聚类算法的特定阶段提供反馈。 例如，在k-means算法中，用户可以选择在每次迭代期间删除一些群集，并手动指定反映未覆盖数据段的新种子。</li>
+<li>专门设计用于人机交互的算法中的视觉反馈：在许多高维数据集中，属性的数量非常大，并且很难将直接语义解释性与对象关联起来。 在这种情况下，用户必须在不同的属性子集中提供数据聚类结构的可视表示。 用户可以利用这些代表向集群过程提供反馈。 这种方法可以被看作是投影聚类方法的交互式版本。</li>
+</ol>
+<p>在下面的章节中，将详细介绍这些不同类型的算法。</p>
+<h3 id="761">7.6.1 现有聚类算法的修改</h3>
+<p>大多数聚类算法都使用许多关键的决策步骤，在这些步骤中需要进行选择，例如在层次聚类算法中选择合并，或者在将数据点分配给聚类时解决紧密关系。 当这些选择是基于严格和预定义的聚类标准进行时，所得到的聚类可能不会反映数据中聚类的自然结构。 因此，这种方法的目标是在聚类过程中向用户提供与关键选择相对应的少量替代方案。 现有聚类算法简单修改的一些例子如下：</p>
+<ol>
+<li>对k均值和相关方法的修改：可以利用k均值算法中的许多关键决策点来改善聚类过程。 例如，在每次迭代之后，可以将来自每个群集的代表性数据点呈现给用户。 用户可以选择手动丢弃具有很少数据点的群集或与其他群集密切相关的群集。 相应的种子可以被丢弃并且在每次迭代中用随机选择的种子代替。 当呈现给用户的代表性数据点具有明确的语义解释性时，这种方法运作良好。 在诸如图像数据或文档数据的许多领域中都是如此。</li>
+<li>对分层方法的修改：在自下而上的分层算法中，通过选择最接近的对进行合并来连续合并聚类。 这里的关键在于，如果自下而上算法在合并过程中产生错误，则合并决策是最终的，导致质量较低的聚类。 因此，减少这种错误的一种方法是向用户提供对应于少量不同对集群的合并的一流选择。 这些选择可以由用户在语义解释的基础上进行。</li>
+</ol>
+<p>需要指出的是，用户可以提供反馈的关键步骤取决于基础集群中对象的语义解释水平。 在某些情况下，这种语义解释性可能不可用。</p>
+<h3 id="762">7.6.2 视觉聚类</h3>
+<p>视觉聚类对情景尤其有用，如高维数据，其中单个对象的语义解释性较低。 在这种情况下，可视化数据的低维投影以确定数据聚集的子空间。 发现这种较低维度投影的能力是基于计算机的计算能力和用户的直观反馈的组合。 IPCLUS是一种将交互式投影聚类方法与基于密度方法的可视化方法相结合的方法。</p>
+<p>高维聚类的一个挑战是，在不同的数据地点和子空间中，聚类的密度，分布和形状可能非常不同。此外，确定在任何特定子空间中分离簇的最佳密度阈值可能并不容易。即使对于任何特定密度阈值4可以合并群集或完全忽略群集的全维聚类算法，这也是一个问题。虽然像CLIQUE这样的子空间聚类方法通过报告大量重叠聚类来解决这些问题，但预测聚类方法（如PROCLUS）通过对如何最恰当地总结数据做出艰难决策来解决这些问题。显然，这些决策可以通过互动的用户探索这些不同的观点，并从这些不同的观点形成最终的共识来更有效地进行。涉及用户的好处是在提供给聚类过程的反馈质量方面有更大的直觉可用。这种合作技术的结果是一个可以比人或计算机更好地执行聚类任务的系统。</p>
+<p><img alt="" src="http://p6atp7tts.bkt.clouddn.com/5.png" /></p>
+<p>交互式投影聚类算法（IPCLUS）背后的想法是为用户提供一组较低维度投影中有意义的可视化，以及决定如何分离聚类的能力。 整个算法如图7.6所示。 交互式投影聚类算法工作在一系列迭代中; 在每一个中确定一个投影，其中存在可以清楚地彼此区分的不同组的点。 这种投影被称为极化。 在极化极好的投影中，用户更容易从其余数据中清楚地区分一组集合。 图7.7a和b分别显示了良好极化投影和极差极化投影的数据密度分布的例子。</p>
+<p>这些极化投影是通过从数据库中随机选择一组称为极化锚的k记录来确定的。 极化锚点k的数量是算法的输入之一。 数据的二维子空间被确定为使得数据聚集在每个这些极化锚点附近。 具体地说，选择二维子空间，以便将数据分配的平均平方半径指向作为锚的极化点被最小化。 用不同的采样锚重复确定不同的预测，用户可以在其中提供反馈。 然后根据用户在数据的多个子空间视图中生成的不同聚类来确定共识聚类。</p>
+<p>偏振子空间可以在轴平行子空间或任意子空间中确定，尽管前者提供了更好的解释性。确定极化子空间的整体方法以全维度开始，并迭代地减小当前子空间的维度直到获得二维子空间。这是通过在每次迭代中迭代分配数据点到其最接近的子空间特定锚点来实现的，同时在每次迭代中丢弃关于极化点的最大噪声（高方差）维度。维度在每次迭代中减少2倍。因此，这是一个k-medoids类型的方法，它减少了用于距离计算的子空间的维数，但是不是每次迭代中的种子。这通常导致发现围绕极化锚高度聚集的二维子空间。当然，如果极化锚不好采样，那么这将导致分离不良的簇。尽管如此，对极化点进行重复采样可确保在至少几次迭代中选择好的子空间。</p>
+<p><img alt="" src="http://p6atp7tts.bkt.clouddn.com/6.png" /></p>
+<p>在发现投影子空间之后，可以使用核密度估计技术来确定相关子空间中二维网格值中的每个点处的数据密度。这些网格点处的密度值用于创建曲面图。图7.7说明了这种情节的例子。因为集群对应于数据中的密集区域，所以它们由密度分布中的峰值表示。为了实际分离出簇，用户可以直观地指定密度值阈值，该阈值对应于簇可以彼此分离的噪声水平。特别地，一个簇可以被定义为空间中的连通区域，其密度高于用户指定的某个噪声阈值τ。这个簇可以是任意形状的，并且它内部的点可以被确定。请注意，当密度分布与局部性显着不同时，不同密度阈值会发现不同数量，形状和尺寸的簇。密度阈值的例子如图7.7c和7.7d所示，其中不同数量和形状的簇在不同的阈值下被发现。正是在这一步中，用户直觉是非常有用的，无论是在决定哪些极化投影是最相关的方面，也是在决定指定什么密度阈值方面。如果需要，用户可以完全放弃投影或指定多个阈值在相同的预测中发现了不同地方不同密度的聚类。密度阈值τ的指定不需要直接通过值来完成。借助图形界面，密度分离超平面可以在视觉上叠加在密度分布图上。</p>
+<p>用户的每个反馈都会导致在密度等值线内生成相连的点集。 这些点集可以被视为在数据点的“项目”空间上绘制的一个或多个二进制“事务”。 关键是从这些新创建的交易中确定对用户反馈进行编码的共识集群。 尽管从多个集群中找到共识集群的问题将在下一节中详细讨论，但这样做的一个非常简单的方法是使用频繁模式挖掘（找到重叠的集群）或对事务进行第二级集群 生成不重叠的集群。 由于这组新事务对用户偏好进行编码，所以使用这种方法发现的群集质量通常会非常高。</p>
+<h2 id="77">7.7 集成聚类</h2>
+<p>可以通过多种方式选择不同的合奏组件。 它们可以是基于模型的或基于数据选择的。 在基于模型的集合中，集合的不同组件反映了不同的模型，比如使用不同的聚类模型，相同模型的不同设置，或者由相同随机算法的不同运行提供的不同聚类。 一些例子如下：</p>
+<ol>
+<li>不同的组件可以是多种模型，例如分区方法，分层方法和基于密度的方法。 模型之间的定性差异将是数据集特定的。</li>
+<li>不同的组件可以对应相同算法的不同设置。 一个例子是对k-means或EM等算法使用不同的初始化，EM使用不同的混合模型，或者使用相同算法的不同参数设置，例如在DBSCAN中选择密度阈值。 整体方法很有用，因为参数设置的最佳选择在一个无监督的问题（如聚类）中很难确定。</li>
+<li>不同的组件可以从单一算法获得。 例如，应用于从谱聚类获得的一维嵌入的2均值聚类将为每个特征向量生成不同的聚类解决方案。 因此，最小的k个非平凡特征向量将提供k个不同的解决方案，这些解决方案由于特征向量的正交性而经常是不同的。</li>
+</ol>
+<p>选择组合的不同组件的第二种方法是使用数据选择。 数据选择可以用两种不同的方式进行：</p>
+<ol>
+<li>点选择：选择不同的数据子集，或者通过随机采样，或者通过系统选择聚类过程。</li>
+<li>维度选择：选择不同的维度子集来执行聚类。 一个例子是上一节讨论的IPCLUS方法。</li>
+</ol>
+<p>在构建单个集成组件之后，组合这些不同组件的结果以创建共识集群通常是一个挑战。</p>
+<h3 id="772">7.7.2 结合不同的整体组件</h3>
+<p>在获得不同的聚类解决方案后，希望从不同的解决方案中获得强大的共识。 在下面的章节中，描述了一些简单的方法，它们使用基础聚类作为生成最终聚类集合的输入。</p>
+<h4 id="7721">7.7.2.1 超图划分算法</h4>
+<p>数据中的每个对象都由一个顶点表示。 任何集合组件中的集群都表示为超边集。 超边是泛化的边缘概念，因为它连接了两个以上的完整团体形式的节点。 任何超帧聚类算法如HMETIS都可以用来确定最优分割。 添加约束以确保平衡分区。 超图划分的一个主要挑战是超边界可以通过多种不同方式进行划分来“破碎”，而不是所有方面在质量上都是等价的。 大多数超图分区算法使用一个不变的惩罚来打破一个超边距。从定性的角度来看，这有时是不可取的。</p>
+<h4 id="7722">7.7.2.2 元聚类算法</h4>
+<p>这也是一种基于图的方法，不同之处在于顶点与感知组件中的每个簇相关联。例如，如果<span><span class="MathJax_Preview">k_1 ... k_r</span><script type="math/tex">k_1 ... k_r</script></span>不同簇中的r个集合成分，则将创建总共<span><span class="MathJax_Preview">\sum_{i=1}^rk_i</span><script type="math/tex">\sum_{i=1}^rk_i</script></span>个顶点。因此每个顶点代表一组数据对象。如果相应对象集之间的Jaccard系数不为零，则会在一对顶点之间添加边。边的权重等于Jaccard系数。因此这是一个r-partite图，因为在同一个集成组件的两个顶点之间没有边。将图分区算法应用于此图以创建所需数量的集群。每个数据点有不同的实例对应于不同的集合组件。数据点的不同实例到元分区的成员资格分布可用于确定其元集群成员资格或软分配概率。平衡约束可以添加到元聚类阶段，以确保生成的聚类平衡。</p>
+<h2 id="78">7.8 应用</h2>
+<p>聚类可以被认为是一种特定类型的数据总结，其中数据点的总结是基于相似性构建的。 由于汇总是许多数据挖掘应用程序的第一步，因此汇总可能非常有用。 本节将讨论数据聚类的许多应用。</p>
+<h3 id="781">7.8.1 应用于其他数据挖掘问题</h3>
+<p>聚类与其他数据挖掘问题密切相关，并被用作这些情况下的第一个摘要步骤。 特别是，它经常用于异常值分析和分类的数据挖掘问题。 下面讨论这些特定的应用。</p>
+<h4 id="7811">7.8.1.1 数据汇总</h4>
+<p>虽然许多形式的数据汇总（例如采样，直方图和小波）适用于不同类型的数据，但聚类是基于相似性概念的唯一自然形式的汇总。 因为相似性的概念对于许多数据挖掘应用程序而言非常重要，所以这样的摘要对于基于相似性的应用程序非常有用。 特定的应用程序包括推荐分析方法，例如协作过滤。 这个应用程序将在本章的后面和Web挖掘的第18章中讨论。</p>
+<h4 id="7812">7.8.1.2 离群分析</h4>
+<p>异常值被定义为由不同于正常数据点的不同机制产生的数据点。 这可以被看作是聚类的补充问题，其目标是确定由相同机制生成的紧密相关的数据点组。 因此，异常值可能被定义为不在任何特定群集中的数据点。 这当然是一个简单的抽象，但作为一个起点，它仍然是一个强大的原则。 第8章第8.3节和第8.4节讨论了有多少孤立点分析算法可以看作是聚类算法的变体。</p>
+<h4 id="7813">7.8.1.3 分类</h4>
+<p>许多形式的聚类被用来提高分类方法的准确性。 例如，最近邻居分类器向给定测试实例报告最接近的一组训练数据点的类别标签。 集群可以通过替换属于特定类的细粒群集的数据点和中心来加速这一过程。此外，半监督方法也可用于在许多领域（如文本）中执行分类。 书目注释包含了这些方法的指针。</p>
+<h4 id="7814">7.8.1.4 降维</h4>
+<p>聚类方法，如非负矩阵分解，与降维问题有关。 事实上，这种算法的双重输出是一组概念，连同一组集合。 另一个相关的方法是概率潜在语义索引，第13章讨论挖掘文本数据。 这些方法显示了聚类和降维之间的密切关系，并且通用解决方案可以被这两个问题利用。</p>
+<h4 id="7815">7.8.1.5 相似性搜索和索引</h4>
+<p>至少从启发式角度来看，像CF-Tree这样的分层聚类有时可以用作索引。 对于任何给定的目标记录，只搜索最接近相关群集的树的分支，并返回最相关的数据点。 这在许多情况下非常有用，因为在保证准确性的情况下构建精确索引是不现实的。</p>
+<h3 id="782">7.8.2 客户细分和协作过滤</h3>
+<p>在客户细分应用中，类似的客户根据其在特定站点的配置文件或其他操作的相似性被分组在一起。 这种分割方法在数据分析自然集中于数据的相似部分的情况下非常有用。 一个具体的例子就是协作过滤应用程序，其中评级由不同的客户根据他们感兴趣的项目提供。 将类似的客户组合在一起，并根据特定组中的评级分布向集群中的客户提出建议。</p>
+<h3 id="783">7.8.3 文本应用</h3>
+<p>许多门户网站需要根据内容的相似性在网站上整理资料。 文本聚类方法可用于组织和浏览文本文档。 可以使用分层聚类方法将文档组织为易于浏览的树结构。 Web站点中的许多分层目录是用用户标签和半监督聚类方法的组合构建的。 层次式集群组织提供的语义见解在许多应用程序中非常有用。</p>
+<h3 id="784">7.8.4 多媒体应用</h3>
+<p>随着电子形式多媒体数据（如图像，照片和音乐）的日益普及，文献中设计了许多方法来寻找这种情况下的集群。 这种多媒体数据的集群还为用户提供了在包含这种数据的社交媒体网站中搜索相关对象的能力。 这是因为启发式索引可以使用聚类方法来构建。 这些索引对于有效的检索是有用的。</p>
+<h3 id="785">7.8.5 时间和序列应用</h3>
+<p>许多形式的时态数据（如时间序列数据）和Web日志可以进行聚类以进行有效的分析。 例如，Web日志中的序列集合提供了有关正常用户模式的见解。 这可以用来重新组织网站，或优化其结构。 在某些情况下，可以使用有关正常模式的信息来发现不符合正常交互模式的异常。 一个相关的领域是生物序列数据，其中序列的群集与其潜在的生物学特性相关。</p>
+<h3 id="786">7.8.6 社交网络分析</h3>
+<p>群集方法可用于在社交网站上查找相关用户社区。 这个问题被称为社区检测。 社区检测在网络科学中有很多其他应用，如异常检测，分类，影响分析和链接预测。 有关社交网络分析的第19章详细讨论了这些应用程序。</p>
+<h2 id="79">7.9 总结</h2>
+<p>本章讨论许多用于聚类分析的高级方案。 这些场景包括聚类高级数据类型，如分类数据，大规模数据和高维数据。 许多传统的聚类算法可以通过修改特定的标准（如相似函数或混合模型）进行修改，以处理分类数据。 可扩展算法需要改变算法设计以减少数据传递的次数。 高维数据是最困难的情况，因为底层数据中存在许多不相关的特征。</p>
+<p>由于聚类算法产生了许多替代解决方案，监督可以帮助指导群集发现过程。 这种监督可以是背景知识或用户互动的形式。 在某些情况下，可以将替代聚类组合在一起，以创建比从单个模型中获得的解决方案更加稳健的共识聚类。</p>
+<h2 id="710">7.10 书目注释</h2>
+<p>聚类分类数据的问题与发现合适的相似性度量密切相关[104,182]，因为许多聚类算法使用相似性度量作为子程序。 该算法的k模式和模糊版本可以在[135,278]中找到。 流行的聚类算法包括ROCK [238]，CACTUS [220]，LIMBO [75]和STIRR [229]。 本书讨论的三种可扩展聚类算法是CLARANS [407]，BIRCH [549]和CURE [239]。 本章讨论的高维聚类算法包括CLIQUE [58]，PROCLUS [19]和ORCLUS [22]。 在[32]中可以找到许多不同类型的分类，可伸缩和高维聚类算法的详细调查。</p>
+<p>在[80,81,94,329]中讨论了使用播种，约束，度量学习，概率学习和基于图形学习的半监督聚类方法。 本章介绍的IPCLUS方法首先在[43]中介绍。 另外两种能够通过可视化低维子空间发现聚类的工具包括HDEye [268]和RNavGraph [502]。 集群集成框架首先在[479]中提出。 在[302]中提出了用于集成聚类的超图分区算法HMETIS。 随后，该方法的实用性也已被证明用于高维数据[205]。</p>
+<h2 id="711">7.11 习题</h2>
+<ol>
+<li>实现k模式算法。 从UCI机器学习库下载KDD CUP 1999网络入侵数据集[213]，并将算法应用于数据集的分类属性。 根据类别标签计算簇的纯度。</li>
+<li>用ROCK算法的实现重复前面的练习。</li>
+<li>BIRCH算法使用Mahalanobis距离实现它需要做什么改变来计算数据点和质心之间的距离？ 簇的直径计算为RMS马哈拉诺比斯半径。</li>
+<li>讨论高维聚类算法（如PROCLUS和ORCLUS）与特征选择的包装模型之间的关系。</li>
+<li>演示如何创建允许群集协方差矩阵增量计算的群集特征向量的实现。 使用它可以创建Mahalanobis k-means算法的增量和可扩展版本。</li>
+<li>实现k-means算法，可以选择从原始数据中选择任何点作为种子。 将该方法应用于练习1中数据集的定量属性，并从每个类中选择一个数据点作为种子。 针对使用随机种子的实现来计算簇纯度。</li>
+<li>描述一种自动确定一组“必须链接”和“无限链接”约束是否一致的方法。</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../6/" title="第6章 聚类分析" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第6章 聚类分析
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../8/" title="第8章 异常值分析" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第8章 异常值分析
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
