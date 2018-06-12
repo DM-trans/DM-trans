@@ -1,4 +1,17 @@
 site_name: 《Data Mining》中文版
+site_description: 《Data Mining》中文版
+site_author: NUDT DM-trans group
+site_url: https://DM-trans.github.io/DM-trans/
+
+
+# Copyright
+copyright: 'Copyright &copy; 2018 NUDT DM-Trans Group'
+
+# Repository
+repo_name: 'DM-trans/DM-trans'
+repo_url: 'https://github.com/DM-trans/DM-trans'
+edit_uri: 'blob/master/docs/'
+
 
 # Contents
 pages:
@@ -29,7 +42,7 @@ theme:
   name: 'material'
   language: 'zh'
   palette:
-    primary: 'white'
+    primary: 'indigo'
     accent: 'red'
   logo:
     icon: 'school'
@@ -39,9 +52,12 @@ theme:
     text: 'Fira Sans'
     code: 'Fira Mono'
 
-#
+# Customization
 extra_javascript:
   - 'https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'
+
+extra_css:
+  - '_static/css/extra.css'
 # markdown_extensions
 
 
