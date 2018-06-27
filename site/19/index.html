@@ -1,0 +1,2011 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/19/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第19章 社交网络分析 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#19" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第19章 社交网络分析
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第19章 社交网络分析
+      </label>
+    
+    <a href="./" title="第19章 社交网络分析" class="md-nav__link md-nav__link--active">
+      第19章 社交网络分析
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#191" title="19.1 引言" class="md-nav__link">
+    19.1 引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#192" title="19.2 社交网络：起源和特性" class="md-nav__link">
+    19.2 社交网络：起源和特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1921" title="19.2.1 同质性" class="md-nav__link">
+    19.2.1 同质性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1922" title="19.2.2 三元闭包聚类系数" class="md-nav__link">
+    19.2.2 三元闭包聚类系数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1923" title="19.2.3 网络形成的动力学" class="md-nav__link">
+    19.2.3 网络形成的动力学
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1924" title="19.2.4 幂律分布" class="md-nav__link">
+    19.2.4 幂律分布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1925" title="19.2.5 中心节点的权值判定" class="md-nav__link">
+    19.2.5 中心节点的权值判定
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19251" title="19.2.5.1 等级中心和权重" class="md-nav__link">
+    19.2.5.1 等级中心和权重
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19252" title="19.2.5.2 距离中心和优先级权值" class="md-nav__link">
+    19.2.5.2 距离中心和优先级权值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19253" title="19.2.5.3 中介中心度" class="md-nav__link">
+    19.2.5.3 中介中心度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19254" title="19.2.5.4 等级中心和优先度" class="md-nav__link">
+    19.2.5.4 等级中心和优先度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#193" title="19.3 社团发现算法" class="md-nav__link">
+    19.3 社团发现算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1931-kernighan-lin" title="19.3.1 Kernighan-Lin算法" class="md-nav__link">
+    19.3.1 Kernighan-Lin算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19311-" title="19.3.1.1 加快可尼汉-林" class="md-nav__link">
+    19.3.1.1 加快可尼汉-林
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1932-girvan-newman" title="19.3.2 Girvan-Newman算法" class="md-nav__link">
+    19.3.2 Girvan-Newman算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1933-metis" title="19.3.3 多级图划分：Metis" class="md-nav__link">
+    19.3.3 多级图划分：Metis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1934" title="19.3.4 谱聚类" class="md-nav__link">
+    19.3.4 谱聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19341" title="19.3.4.1 重要观测结果和定性判断" class="md-nav__link">
+    19.3.4.1 重要观测结果和定性判断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19341_1" title="19.3.4.1 重要的观察和直觉" class="md-nav__link">
+    19.3.4.1 重要的观察和直觉
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#194" title="19.4集体分类" class="md-nav__link">
+    19.4集体分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1941" title="19.4.1迭代分类算法" class="md-nav__link">
+    19.4.1迭代分类算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1942" title="19.4.2随机游动的标签传播" class="md-nav__link">
+    19.4.2随机游动的标签传播
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19421" title="19.4.2.1迭代标号传播：谱解释" class="md-nav__link">
+    19.4.2.1迭代标号传播：谱解释
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1943" title="19.4.3 监督谱方法" class="md-nav__link">
+    19.4.3 监督谱方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19431" title="19.4.3.1 带谱嵌入的监督特征生成" class="md-nav__link">
+    19.4.3.1 带谱嵌入的监督特征生成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19432" title="19.4.3.2 图正则化方法" class="md-nav__link">
+    19.4.3.2 图正则化方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19433" title="19.4.3.3 与随机游走方法的联系" class="md-nav__link">
+    19.4.3.3 与随机游走方法的联系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#195" title="19.5 链接预测" class="md-nav__link">
+    19.5 链接预测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1951" title="19.5.1 基于邻里的措施" class="md-nav__link">
+    19.5.1 基于邻里的措施
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1952-katzkatz" title="19.5.2 KatzKatz措施" class="md-nav__link">
+    19.5.2 KatzKatz措施
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1953" title="19.5.3 基于随机步行的措施" class="md-nav__link">
+    19.5.3 基于随机步行的措施
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1954" title="19.5.4 链接预测作为分类问题" class="md-nav__link">
+    19.5.4 链接预测作为分类问题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1955" title="19.5.5 缺失值估计问题的链路预测" class="md-nav__link">
+    19.5.5 缺失值估计问题的链路预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1956" title="19.5.6 讨论" class="md-nav__link">
+    19.5.6 讨论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#196" title="19.6 社会影响分析" class="md-nav__link">
+    19.6 社会影响分析
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1961" title="19.6.1 线性阈值模型" class="md-nav__link">
+    19.6.1 线性阈值模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1962" title="19.6.2 独立级联模型" class="md-nav__link">
+    19.6.2 独立级联模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1963" title="19.6.3 影响功能评价" class="md-nav__link">
+    19.6.3 影响功能评价
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#197" title="19.7 总结" class="md-nav__link">
+    19.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#198" title="19.8 书目说明" class="md-nav__link">
+    19.8 书目说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#199" title="19.9 练习" class="md-nav__link">
+    19.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#191" title="19.1 引言" class="md-nav__link">
+    19.1 引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#192" title="19.2 社交网络：起源和特性" class="md-nav__link">
+    19.2 社交网络：起源和特性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1921" title="19.2.1 同质性" class="md-nav__link">
+    19.2.1 同质性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1922" title="19.2.2 三元闭包聚类系数" class="md-nav__link">
+    19.2.2 三元闭包聚类系数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1923" title="19.2.3 网络形成的动力学" class="md-nav__link">
+    19.2.3 网络形成的动力学
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1924" title="19.2.4 幂律分布" class="md-nav__link">
+    19.2.4 幂律分布
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1925" title="19.2.5 中心节点的权值判定" class="md-nav__link">
+    19.2.5 中心节点的权值判定
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19251" title="19.2.5.1 等级中心和权重" class="md-nav__link">
+    19.2.5.1 等级中心和权重
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19252" title="19.2.5.2 距离中心和优先级权值" class="md-nav__link">
+    19.2.5.2 距离中心和优先级权值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19253" title="19.2.5.3 中介中心度" class="md-nav__link">
+    19.2.5.3 中介中心度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19254" title="19.2.5.4 等级中心和优先度" class="md-nav__link">
+    19.2.5.4 等级中心和优先度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#193" title="19.3 社团发现算法" class="md-nav__link">
+    19.3 社团发现算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1931-kernighan-lin" title="19.3.1 Kernighan-Lin算法" class="md-nav__link">
+    19.3.1 Kernighan-Lin算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19311-" title="19.3.1.1 加快可尼汉-林" class="md-nav__link">
+    19.3.1.1 加快可尼汉-林
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1932-girvan-newman" title="19.3.2 Girvan-Newman算法" class="md-nav__link">
+    19.3.2 Girvan-Newman算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1933-metis" title="19.3.3 多级图划分：Metis" class="md-nav__link">
+    19.3.3 多级图划分：Metis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1934" title="19.3.4 谱聚类" class="md-nav__link">
+    19.3.4 谱聚类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19341" title="19.3.4.1 重要观测结果和定性判断" class="md-nav__link">
+    19.3.4.1 重要观测结果和定性判断
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19341_1" title="19.3.4.1 重要的观察和直觉" class="md-nav__link">
+    19.3.4.1 重要的观察和直觉
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#194" title="19.4集体分类" class="md-nav__link">
+    19.4集体分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1941" title="19.4.1迭代分类算法" class="md-nav__link">
+    19.4.1迭代分类算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1942" title="19.4.2随机游动的标签传播" class="md-nav__link">
+    19.4.2随机游动的标签传播
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19421" title="19.4.2.1迭代标号传播：谱解释" class="md-nav__link">
+    19.4.2.1迭代标号传播：谱解释
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1943" title="19.4.3 监督谱方法" class="md-nav__link">
+    19.4.3 监督谱方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#19431" title="19.4.3.1 带谱嵌入的监督特征生成" class="md-nav__link">
+    19.4.3.1 带谱嵌入的监督特征生成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19432" title="19.4.3.2 图正则化方法" class="md-nav__link">
+    19.4.3.2 图正则化方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19433" title="19.4.3.3 与随机游走方法的联系" class="md-nav__link">
+    19.4.3.3 与随机游走方法的联系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#195" title="19.5 链接预测" class="md-nav__link">
+    19.5 链接预测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1951" title="19.5.1 基于邻里的措施" class="md-nav__link">
+    19.5.1 基于邻里的措施
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1952-katzkatz" title="19.5.2 KatzKatz措施" class="md-nav__link">
+    19.5.2 KatzKatz措施
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1953" title="19.5.3 基于随机步行的措施" class="md-nav__link">
+    19.5.3 基于随机步行的措施
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1954" title="19.5.4 链接预测作为分类问题" class="md-nav__link">
+    19.5.4 链接预测作为分类问题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1955" title="19.5.5 缺失值估计问题的链路预测" class="md-nav__link">
+    19.5.5 缺失值估计问题的链路预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1956" title="19.5.6 讨论" class="md-nav__link">
+    19.5.6 讨论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#196" title="19.6 社会影响分析" class="md-nav__link">
+    19.6 社会影响分析
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1961" title="19.6.1 线性阈值模型" class="md-nav__link">
+    19.6.1 线性阈值模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1962" title="19.6.2 独立级联模型" class="md-nav__link">
+    19.6.2 独立级联模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1963" title="19.6.3 影响功能评价" class="md-nav__link">
+    19.6.3 影响功能评价
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#197" title="19.7 总结" class="md-nav__link">
+    19.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#198" title="19.8 书目说明" class="md-nav__link">
+    19.8 书目说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#199" title="19.9 练习" class="md-nav__link">
+    19.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/19.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="19">19 社交网络分析</h1>
+<!--本章由赵纳森、王建秋提供翻译-->
+
+<blockquote>
+<p>“我希望我们能够利用网络跨越障碍，连接文化。” - Tim Berners-Lee</p>
+</blockquote>
+<h2 id="191">19.1 引言</h2>
+<p>人与人之间相互联系的趋势是在网络和互联网技术出现之前的根深蒂固的社会需求。过去，通过面对面接触，邮件和电信技术实现社交互动。与人类历史相比，其中最后一个也是相对较新的。但是，网络和互联网技术的普及开辟了全新的途径，以实现地理上分散的参与者的无缝互动。 Web的这种非凡的潜力在其有远见的创始人的初期就被观察到。但是，它需要十年才能实现Web的真正社会潜力。即使在今天，基于Web的社交应用程序也在不断发展，并创造出越来越多的数据。这些数据是关于用户偏好，他们之间的联系以及他们对他人影响的信息的宝库。因此，利用这些数据作为分析见解是很自然的。</p>
+<p>​   虽然社交网络在Twitter，LinkedIn和Facebook等大型在线网络的背景下广为人知，但这些网络仅代表了Web所支持的少数交互机制。事实上，传统的社会网络分析在社会学领域的研究早于技术的普及启用机制。本章中的大部分讨论都适用于超越流行的在线社交网络概念的社交网络。 </p>
+<p><strong>一些例子如下：</strong></p>
+<ul>
+<li>社会网络已经在社会学领域进行了一个多世纪的广泛研究，但并未从网络的角度进行研究。由于缺乏足够的技术机制，数据收集在这些情况下相当困难。因此，这些研究往往是用艰苦而费力的手工数据收集方法进行的。这种努力的一个例子是斯坦利米尔格拉姆六十年代着名的六度分离实验，它使用参与者之间的邮件来测试地球上的两个任意人类是否可以通过六条关系链连接起来。由于难以验证邮件的本地转发，这种实验往往难以以可靠的方式进行。 尽管如此，尽管实验环境存在明显的缺陷，但这些结果最近已被证明适用于在线社交网络，其中个人之间的关系更容易量化。</li>
+<li>许多技术支持者，如电信，电子邮件和电子聊天信使可以被视为社交网络的间接形式。这些促成因素会导致不同个体之间的沟通，因此它们具有自然的社会方面。</li>
+<li>用于共享在线媒体内容的网站（例如Flickr，YouTube或Delicious）也可以被视为社交网络的间接形式，因为它们允许广泛的用户互动。 此外，社交媒体还为用户提供了许多独特的互动方式。 示例包括发布博客或标记对方的图片。 在这些情况下，交互是围绕特定服务（例如内容共享） 但社交网络的许多基本原则都适用。 从采矿应用的角度来看，这样的社交网络非常丰富。 它们包含大量内容，如文本，图像，音频或视频。</li>
+<li>一些社交网络可以从专业社区的特定种类的互动中构建出来。 科学界被组织成书目和引文网 络。 这些网络内容丰富，因为它们围绕着出版物进行组织。</li>
+</ul>
+<p>​        很明显，这些不同类型的网络说明了社交网络分析的不同方面。本章中讨论的许多基本问题适用于这些不同的情况，但在不同的环境中。数据挖掘中的大多数传统问题（如聚类和分类）也可以扩展到社交网络分析。此外，由于网络与其他类型的数据相比更加复杂，因此可能会出现一些更复杂的问题定义，例如链接预测和社会影响分析。
+        本章安排如下。第19.2节讨论了社交网络分析的一些基本属性。第19.3节解释了社区检测问题。集体分类问题在第19.4节讨论。第19.5节讨论了链接预测问题。第19.6节讨论了社会影响分析问题。本章小结在第19.7节中介绍。</p>
+<h2 id="192">19.2 社交网络：起源和特性</h2>
+<p>​        假定社交网络可以被构造为图 <span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>，其中<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>是节点集合并且A是边缘集合。 社交网络中的每个人都由N中的节点表示，并且也被称为演员。 边缘表示不同参与者之间的联系。 在诸如Facebook这样的社交网络中，这些边缘对应于友情链接。 通常，这些链接是不受引导的，尽管一些“基于追随者”的社交网络（如Twitter）也有可能定向链接。 默认情况下，假设网络 <span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>是无向的，除非另有规定。在一些情况下，<span><span class="MathJax_Preview">N</span><script type="math/tex">N</script></span>中的节点可能具有与它们相关的内容。 此内容可能内容可能对应于社交网络用户发布的评论或其他文档。 假设社交网络包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点和<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个边。 下面将讨论社交网络的一些关键属性。</p>
+<h3 id="1921">19.2.1 同质性</h3>
+<p><span><span class="MathJax_Preview">同质性</span><script type="math/tex">同质性</script></span>是许多应用程序中使用的社交网络的基本属性，例如节点分类。同质性的基本思想是，彼此连接的节点更可能具有相似的属性。例如，Facebook中的一个人的友谊链接可能来自以前在学校和工作中的熟人。除了共同背景之外，友情链接往往意味着双方的共同利益。因此，相关联的个人可能经常会分享共同的信仰，背景，教育，兴趣爱好或兴趣。用古老的谚语表达就是：</p>
+<p><em>物以类聚</em></p>
+<p>许多以网络为中心的应用程序都利用这个属性。</p>
+<h3 id="1922">19.2.2 三元闭包聚类系数</h3>
+<p>​直观地说，三元闭包可以被认为是现实世界网络聚集的固有趋势。 三方闭包的原则如下：</p>
+<p><em>如果社交网络中的两个人有一个共同的朋友，那么他们更有可能在本来就有联系或者将在未来建立联系。</em></p>
+<p>​三元闭合原理指出了网络边缘结构的固有关联。这是一个根据实际情况的来的自然结果，即联系到同一个人的两个人更有可能具有相似的背景，并且有更多的机会与彼此进行交互。 三元封闭的概念与同质性有关。 正如连通个体的背景中的相似性使他们的属性相似，它也使得它们更可能与同一组成员相连。 虽然homphily通常表现为节点属性的内容属性，但三元封闭可被视为同质结构版本。 三元闭包的概念直接关系到网络的聚类系数。</p>
+<p>​聚类系数可以视为衡量网络聚集的内在趋势。 这与多维数据的霍普金斯统计量类似（参见第6章第6.2.1.4节）。 假设<span><span class="MathJax_Preview">S_i⊆N</span><script type="math/tex">S_i⊆N</script></span>是无向网络<span><span class="MathJax_Preview">G =（N，A）</span><script type="math/tex">G =（N，A）</script></span>中与节点<span><span class="MathJax_Preview">i∈N</span><script type="math/tex">i∈N</script></span>连接的节点集。 让<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>的基数为<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>。 有<span><span class="MathJax_Preview">{n_i \choose 2}</span><script type="math/tex">{n_i \choose 2}</script></span><span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>中节点之间可能的边缘。 节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的局部聚类系数<span><span class="MathJax_Preview">η(i)</span><script type="math/tex">η(i)</script></span>是在它们之间具有边缘的这些对的分数。</p>
+<div>
+<div class="MathJax_Preview">\eta(i)=\frac{(j,k)\in A:j\in Si,k\in si}{{ni\choose 2}}\tag{19.1}</div>
+<script type="math/tex; mode=display">\eta(i)=\frac{(j,k)\in A:j\in Si,k\in si}{{ni\choose 2}}\tag{19.1}</script>
+</div>
+<p>Watts-Strogatz网络平均聚类系数是网络中所有节点上<span><span class="MathJax_Preview">η(i)</span><script type="math/tex">η(i)</script></span>的平均值。 不难看出，三元闭包性质增加了现实世界网络的聚类系数。</p>
+<h3 id="1923">19.2.3 网络形成的动力学</h3>
+<p>网络的许多真实属性受其形成方式的影响。诸如万维网和社交网络等网络随着时间的推移不断增长，新的节点和边缘不断增加。有趣的是，来自多个域的网络在它们增长的动态过程中共享许多共同的特征。将新边缘和节点添加到网络的方式直接影响到网络的最终结构和有效挖掘技术的选择。因此，下面将讨论真实世界网络的一些共同特性：</p>
+<p><strong>特性</strong></p>
+<ol>
+<li>优先附件：在不断增长的网络中，节点接收新边缘的可能性随着其程度而增加。 这是一个事实的自然结果，高度关联的个人通常会发现更容易建立新的关系。 如果<span><span class="MathJax_Preview">π(i)</span><script type="math/tex">π(i)</script></span>是新增节点附加到网络中现有节点i的概率，则根据节点i的程度概率<span><span class="MathJax_Preview">π(i)</span><script type="math/tex">π(i)</script></span>的模型如下：</li>
+</ol>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\pi(i)\propto Degree(i)^a\tag{19.2}</span><script type="math/tex">\pi(i)\propto Degree(i)^a\tag{19.2}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\pi(i)\propto Degree(i)^a\tag{19.2}</span><script type="math/tex">\pi(i)\propto Degree(i)^a\tag{19.2}</script></span></script></span></p>
+<p>参数α的值取决于网络的绘制领域，例如生物网络或社交网络。 在许多以Web为中心的领域中，使用了无标度的假设。 这个假设表明<span><span class="MathJax_Preview">α≈1</span><script type="math/tex">α≈1</script></span>，因此比例是线性的。 这种网络被称为无标度网络。 这个模型也被称为Barabasi-Albert模型。 许多网络，例如万维网，社交网络和生物网络，都被推测是无标度的，尽管这个假设显然是一种近似。 事实上，真实网络的许多属性并不完全符合无标度假设。</p>
+<ol>
+<li>
+<p>小世界属性：大多数真实网络被假定为“小世界”。这意味着任何节点对之间的平均路径长度都很小。 实际上，Milgram在六十年代的实验推测任何一对节点之间的距离大约是六。 通常，对于在时间<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>包含<span><span class="MathJax_Preview">n(t)</span><script type="math/tex">n(t)</script></span>个节点的网络，许多模型假设平均路径长度增长为<span><span class="MathJax_Preview">log(n(t))</span><script type="math/tex">log(n(t))</script></span>。 这是一个很小的数字，即使是非常大的网络。 最近的实验已经证实，诸如因特网聊天网络的大规模网络的平均路径长度非常小。 如下所述，动态变化的直径已经被实验证明比（模拟的）<span><span class="MathJax_Preview">log(n(t))</span><script type="math/tex">log(n(t))</script></span>增长速率暗示的假设更加收缩。</p>
+</li>
+<li>
+<p>致密化：几乎所有真实世界的网络，例如网络和社交网络，都会随着时间的推移添加更多的节点和边缘，而不会被删除。 添加新边的影响通常主宰添加新节点的影响。 这意味着随着时间的推移，图形逐渐变得密集，边缘的数量与节点的数量呈超线性增长。 如果<span><span class="MathJax_Preview">n(t)</span><script type="math/tex">n(t)</script></span>是时间<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>时网络中的节点数量，<span><span class="MathJax_Preview">e(t)</span><script type="math/tex">e(t)</script></span>是边缘的数量，则网络呈现下列致密化幂律:</p>
+</li>
+</ol>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">e(t)\propto n(t)^\beta\tag{19.3}</span><script type="math/tex">e(t)\propto n(t)^\beta\tag{19.3}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">e(t)\propto n(t)^\beta\tag{19.3}</span><script type="math/tex">e(t)\propto n(t)^\beta\tag{19.3}</script></span></script></span></p>
+<p>指数<span><span class="MathJax_Preview">β</span><script type="math/tex">β</script></span>是1和2之间的值.<span><span class="MathJax_Preview">β= 1</span><script type="math/tex">β= 1</script></span>的值对应于网络的平均程度不受网络增长影响的网络。 <span><span class="MathJax_Preview">β= 2</span><script type="math/tex">β= 2</script></span>的值对应于当<span><span class="MathJax_Preview">n(t)</span><script type="math/tex">n(t)</script></span>增加时边<span><span class="MathJax_Preview">e(t)</span><script type="math/tex">e(t)</script></span>的总数保持为<span><span class="MathJax_Preview">n(t)</span><script type="math/tex">n(t)</script></span>个节点的完整图的恒定分数的网络。</p>
+<ol>
+<li>
+<p>缩小直径：在大多数现实世界的网络中，随着网络密集化，节点之间的平均距离随时间缩短。 这个实验观察结果与传统模型相反，表明直径应该增加为<span><span class="MathJax_Preview">log（n(t)）</span><script type="math/tex">log（n(t)）</script></span>。 这种意外的行为是由于添加新边缘主导新节点的添加这一事实的结果。 请注意，如果添加新节点的影响占主导地位，那么节点之间的平均距离将随着时间的推移而增加。</p>
+</li>
+<li>
+<p>巨型连接组件：随着网络逐渐密集化，出现一个巨大的连接组件。 巨型连通组件的出现与优先连接的原则是一致的，其中新进入的边缘更可能将自己附着到网络中密集连接的高度节点上。 这个属性对网络聚类算法也有混杂的影响，因为它通常会导致不平衡的群集，除非这些算法是精心设计的。</p>
+</li>
+</ol>
+<p>预先连接也对在线网络的典型结构产生重大影响。 它导致了少量的高度节点，也被称为集线器。 集线器节点通常连接到网络的许多不同区域，因此对许多网络集群算法产生混淆影响。 正如这里所讨论的，集线器的概念与HITS算法中讨论的集线器的概念有细微的差别，因为它不是特定于查询或主题。 尽管如此，直观的节点是网络连接的中心点，在这两种情况下都保留下来。</p>
+<h3 id="1924">19.2.4 幂律分布</h3>
+<p>优惠依附的结果是少数高度节点继续吸引大部分新增节点。 可以看出，具有度<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的节点<span><span class="MathJax_Preview">P(k)</span><script type="math/tex">P(k)</script></span>的数量由以下幂律度分布来调节：</p>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">P(k)\propto k^{-\gamma}\tag{19.4}</span><script type="math/tex">P(k)\propto k^{-\gamma}\tag{19.4}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">P(k)\propto k^{-\gamma}\tag{19.4}</span><script type="math/tex">P(k)\propto k^{-\gamma}\tag{19.4}</script></span></script></span>
+参数γ的值在2和3之间。值得注意的是，较大的γ值导致更小的节点。 例如，当<span><span class="MathJax_Preview">γ</span><script type="math/tex">γ</script></span>的值为3时，网络中绝大多数节点的度数为1.另一方面，当<span><span class="MathJax_Preview">γ</span><script type="math/tex">γ</script></span>的值较小时，度分布偏斜较小。</p>
+<h3 id="1925">19.2.5 中心节点的权值判定</h3>
+<p>网络中心的节点对网络的属性（如密度，成对最短路径距离，连接性和群集行为）有重大影响。 这些节点中有许多是集线器节点，具有高度的自然结果，这是大型网络生成的动态过程的结果。 这些演员往往更加突出，因为他们与许多演员有联系，并处于更有影响力的位置。 它们对网络挖掘算法的影响也非常显着。 中心性的相关概念是威望，这与定向网络相关。 例如，在Twitter上，拥有更多追随者的演员拥有更高的声望。 另一方面，大量的个人并没有带来任何威望，而是表现了演员的合群性。在前一章中讨论过的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>的概念通常被用来衡量威望。</p>
+<p>对于无向网络自然定义中心性的度量，而威望度量则是针对有向网络而设计的。 但是，可以将中心性度量概括为定向网络。 在下文中，将为无向网络定义中心性度量，而针对有向网络定义威望度量</p>
+<h4 id="19251">19.2.5.1 等级中心和权重</h4>
+<p>无向网络的节点i的度中心度<span><span class="MathJax_Preview">CD（i）</span><script type="math/tex">CD（i）</script></span>等于节点的度数除以节点的最大可能度。网络中节点的最大可能度比网络中节点的数量少一个。因此，如果度<span><span class="MathJax_Preview">（i）</span><script type="math/tex">（i）</script></span>是节点i的度数，则节点i的度数中心度<span><span class="MathJax_Preview">CD（i）</span><script type="math/tex">CD（i）</script></span>定义如下：</p>
+<div>
+<div class="MathJax_Preview">C_D(i)=\frac{Degree(i)}{n-1}\tag {19.5}</div>
+<script type="math/tex; mode=display">C_D(i)=\frac{Degree(i)}{n-1}\tag {19.5}</script>
+</div>
+<p>由于度数较高的节点通常是集线器节点，因此它们往往对网络更加重要，并将网络的较远部分拉近在一起。程度中心性的主要问题在于，它并不认为节点超出了给定节点i的直接邻域之外的节点。因此，网络的整体结构在一定程度上被忽略。例如，在图19.1a中，节点1具有最高的中心性，但它不能被看作是网络本身的核心。事实上，节点1更靠近网络的外围。学位声望仅针对有向网络定义，并使用节点的indegree而不是其度数。这个想法是，只有高度的不完整性才能提高声望，因为节点的不完整性可以被看作是节点受欢迎程度的投票，类似于<span><span class="MathJax_Preview">PageRank。因此，节点</span><script type="math/tex">PageRank。因此，节点</script></span><span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的程度威望<span><span class="MathJax_Preview">PD（i）</span><script type="math/tex">PD（i）</script></span>定义如下</p>
+<div>
+<div class="MathJax_Preview">P_D(i)=\frac{Indegree(i)}{n-1}\tag{19.6}</div>
+<script type="math/tex; mode=display">P_D(i)=\frac{Indegree(i)}{n-1}\tag{19.6}</script>
+</div>
+<p>例如，节点1在图19.1b中拥有最高的威望。 通过考虑指向节点的节点的声望而不仅仅是节点的数量，递归地概括描述概念是可能的。 这对应于等级声望，这将在本节稍后讨论。 中心性的概念也可以扩展到节点<span><span class="MathJax_Preview">outdegree</span><script type="math/tex">outdegree</script></span>。 这被定义为节点的合群性。 因此，节点i的合群<span><span class="MathJax_Preview">(i)</span><script type="math/tex">(i)</script></span>定义如下</p>
+<div>
+<div class="MathJax_Preview">G_D(i)=\frac{Outdegree(i)}{n-1}\tag{19.7}</div>
+<script type="math/tex; mode=display">G_D(i)=\frac{Outdegree(i)}{n-1}\tag{19.7}</script>
+</div>
+<p>节点的合群性定义了一种与声望不同的定性概念，因为它量化了个人寻找新连接的倾向（例如跟随Twitter中的许多其他角色），而不是他或她对其他演员的流行程度。</p>
+<h4 id="19252">19.2.5.2 距离中心和优先级权值</h4>
+<p>图中的例子。19.1a表明，程度中心度准则不考虑节点与其他节点的间接关系，更容易选择网络外围节点，在这种情况下，贴近中心性更有效。 </p>
+<p><center><img alt="figure19.1" src="http://p6atp7tts.bkt.clouddn.com/figure19.1.png" />
+Figure 19.1:Illustration of centrality and prestige</center></p>
+<p>封闭中心性的概念是对无向和连通的网络有意义的定义的。从节点i开始的平均最短路径距离由<span><span class="MathJax_Preview">AvDist(i)</span><script type="math/tex">AvDist(i)</script></span>表示，定义为节点i和j之间成对的最短路径距离<span><span class="MathJax_Preview">Dist(i，j)</span><script type="math/tex">Dist(i，j)</script></span>，如下所示 </p>
+<div>
+<div class="MathJax_Preview">AvDist(i)=\frac{\sum_{j=1}^nDist(1,j)}{n-1}\tag{19.8}</div>
+<script type="math/tex; mode=display">AvDist(i)=\frac{\sum_{j=1}^nDist(1,j)}{n-1}\tag{19.8}</script>
+</div>
+<p>贴近度中心只是其他节点到节点I的平均距离的倒数。 </p>
+<div>
+<div class="MathJax_Preview">C_C(i)=1/AvDist(i)\tag{19.9}</div>
+<script type="math/tex; mode=display">C_C(i)=1/AvDist(i)\tag{19.9}</script>
+</div>
+<p>因为AvDist(I)的值至少为1，此度量值介于0到1之间。在图19.1a的情况下，节点3具有最高的接近中心性，因为它与其他节点的平均距离最低。</p>
+<p>一种称为邻近威望的度量可以用来测量有向网络中的威望。为了计算节点I的邻近声望，计算出从所有其他节点到节点i的最短路径距离。与无向网络不同，计算中的一个混淆因素是，从其他节点到节点I之间可能不存在有向路径。例如，图19.1b中的节点7不存在路径。因此，第一步是确定可以用有向路径到达节点I的一组节点影响(I)。例如，在Twitter网络中，影响力(I)对应于节点I的所有递归定义的追随者。节点1的影响集的示例如图19.1b所示。<span><span class="MathJax_Preview">AvDist(i)</span><script type="math/tex">AvDist(i)</script></span>的值现在只能根据影响集影响<span><span class="MathJax_Preview">(i)</span><script type="math/tex">(i)</script></span>来计算。 </p>
+<div>
+<div class="MathJax_Preview">AvDist(i)=\frac{\sum{j\sub Influence(i)}Dist(j,i)}{|Influence(i)|}\tag{19.10}</div>
+<script type="math/tex; mode=display">AvDist(i)=\frac{\sum{j\sub Influence(i)}Dist(j,i)}{|Influence(i)|}\tag{19.10}</script>
+</div>
+<p>请注意，距离是从节点j到i计算的，而不是反之亦然，因为我们计算的是声望度量，而不是聚集度量。影响集的大小和到影响集的平均距离在定义邻近威望方面都起着重要作用。虽然像以前的情况一样，使用平均距离的反比是很有诱惑力的，但这是不公平的。影响较小的节点应受到惩罚。例如，在图19.1b中，节点6具有从节点7到节点7的最小可能距离值1，这也是它影响的唯一节点。虽然它与影响力集的低平均距离意味着较高的威望，但它的小影响集表明它不能被认为是一个高威望的节点。为了说明这一点，在对应于节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的影响集的分数大小的测度中包含了乘积惩罚因子。 </p>
+<div>
+<div class="MathJax_Preview">InfulenceFraction(i)=\frac{|Influence(i)|}{n-1}\tag{19.11}</div>
+<script type="math/tex; mode=display">InfulenceFraction(i)=\frac{|Influence(i)|}{n-1}\tag{19.11}</script>
+</div>
+<p>然后距离期望可以定义为：</p>
+<div>
+<div class="MathJax_Preview">P_P(i)=\frac{InfluenceFraction(i)}{AvDist(i)}\tag{19.12}</div>
+<script type="math/tex; mode=display">P_P(i)=\frac{InfluenceFraction(i)}{AvDist(i)}\tag{19.12}</script>
+</div>
+<p>这个值也在0到1之间。更高的值意味着更高的期望。最高接近威望值1实现在一个完美的星型网络的中心节点，与单一的中央演员和所有其他行动者作为其(在链接)辐条。</p>
+<p>​在图1的情况下, 19.1b，节点1具有4/6的影响分数，以及从到达其的四个节点的平均距离5/4。 因此，其邻近威望为4*4/(5*6)=16/30。 另一方面，节点6对于到达它的唯一节点具有更好的平均距离1。 然而，由于其影响分数仅为&#8537;，其接近度也为&#8537;。 这表明节点1比节点6具有更好的接近度。 这与我们先前陈述的直觉匹配，即节点6不是非常有影响的节点。 </p>
+<h4 id="19253">19.2.5.3 中介中心度</h4>
+<p>虽然封闭中心性是基于距离的概念，但它并不考虑节点通过的最短路径数的临界性。这种关键性的概念对于确定社会网络中其他行为者之间信息流动的最大控制权至关重要。例如，虽然节点3具有最高的紧密性中心性，但对于不同节点对之间的最短路径而言，并不像图19.1a中的节点4那样关键。节点4可以显示为更关键，因为它还参与了直接发生在其上的节点对之间的最短路径，而节点3不参与这些对。在这两种情况下，其他对几乎是相同的。因此，节点4控制节点3不控制的节点12和17之间的信息流。设<span><span class="MathJax_Preview">q_{jk}</span><script type="math/tex">q_{jk}</script></span>表示节点j和k之间的最短路径数。对于不是树的图，在节点对之间通常会有多条最短路径。设qjk(I)是通过节点i的这些对的数目。然后，由<span><span class="MathJax_Preview">f_{jk}(i)=q_{jk}(i)/q_{jk}</span><script type="math/tex">f_{jk}(i)=q_{jk}(i)/q_{jk}</script></span>给出通过节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的对<span><span class="MathJax_Preview">f_{jk}(i)</span><script type="math/tex">f_{jk}(i)</script></span>的分数。直观地说，<span><span class="MathJax_Preview">f_{jk}(i)</span><script type="math/tex">f_{jk}(i)</script></span>是表示节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>对节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>和<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>之间的信息流的控制水平的分数。然后，中间中心度<span><span class="MathJax_Preview">C_B(i)</span><script type="math/tex">C_B(i)</script></span>是该分数在所有<span><span class="MathJax_Preview">{n\choose 2}</span><script type="math/tex">{n\choose 2}</script></span>对节点上的平均值。</p>
+<div>
+<div class="MathJax_Preview">C_B(i)=\frac{\sum_{j&lt;k} f_{jk}(i)}{n\choose 2 }\tag{19.13}</div>
+<script type="math/tex; mode=display">C_B(i)=\frac{\sum_{j<k} f_{jk}(i)}{n\choose 2 }\tag{19.13}</script>
+</div>
+<p>中间中心度也在0到1之间，较高的值表示中间中心度更好。与封闭中心性不同，中间中心度也可以定义为断开的网络。虽然上述中间中心度的概念是为节点设计的，但它可以通过使用通过边缘的最短路径数(而不是节点)来推广到边缘。例如，图中连接到中心节点的边缘。19.2具有高度中间性的边缘往往连接图中不同簇的节点，因此，这些中间性概念在许多社区检测算法中使用，例如Girvan-Newman算法。事实上，关于Girvan-Newman算法的第19.4节描述了节点和边缘之间值的计算。</p>
+<h4 id="19254">19.2.5.4 等级中心和优先度</h4>
+<p>等级中心性和威望的概念是由随机冲浪者模型定义的。<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>评分可以被认为是无向网络中的等级中心性评分，在有向网络中可以被认为是等级威望评分。请注意，<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>分数是社会网络随机游动转移矩阵中最大左特征向量的组成部分。如果直接用邻接矩阵代替过渡矩阵来计算最大特征向量，则得到的分数称为特征向量中心分数。特征向量中心性分数通常不像<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>分数那么理想，因为高度节点对相邻节点中心性分数的影响过大。因为这些分数的计算已经在第18章中详细讨论过了，所以不会在这里再讨论。这里的想法是，一个节点被另一个节点引用(比如Twitter中的一个追随者)是威望的象征。虽然这也是由度威望捕获的，但后者并不捕获发生在其上的节点的威望。<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>计算可以被认为是度威望的精化版本，其中在计算特定节点I时使用节点事件的质量来计算它的威望。</p>
+<h2 id="193">19.3 社团发现算法</h2>
+<p>“社区检测”一词是社会网络分析中“聚类”的近似同义词。在传统的网络分析工作中，网络和图的聚类有时也被称为“图划分”。因此，这方面的文献十分丰富，包括了许多不同领域的工作。关于图划分的许多工作都是在对社会网络分析的正式研究之前进行的。然而，它仍然与社会网络领域有关。社区检测是社会网络分析中最基本的问题之一。毕竟，对密切相关的社会群体的总结是描述社会结构的最简洁和最容易理解的方式之一。</p>
+<p>在社会网络领域，由于典型社会网络的一些自然特性，网络聚类算法往往难以清晰地分离出不同的聚类。</p>
+<ul>
+<li>多维聚类方法，如基于距离的k均值算法，很难推广到网络中.在小世界网络中，不同节点对之间的距离是一个小数目，无法提供足够细粒度的相似性指示符。更重要的是，在聚类过程中使用真实网络的三进闭包属性，显式或隐式。 </li>
+<li>虽然社会网络通常有不同的社区结构，但高级别的枢纽节点将不同的社区连接起来，从而将它们结合在一起。图19.2说明了连接不同社区的此类枢纽节点的示例。在这种情况下，节点A、B和C是连接不同社区的集线器。在真实的社会网络中，结构可能更加复杂，其中一些高度节点属于特定的重叠社区集合<center></li>
+</ul>
+<p><center>
+<img alt="figure19.2" src="http://p6atp7tts.bkt.clouddn.com/figure19.2.png" />
+Figure 19.2: Impact of hubs on communities</center></p>
+<ul>
+<li>社会网络的不同部分具有不同的边缘密度。换句话说，社会网络中不同部分的局部聚类系数通常是完全不同的。因此，当使用特定的参数选择来对集群进行全局量化时，由于单个全局参数选择在许多网络区域中不相关，因此会导致簇的不平衡。</li>
+<li>真正的社交网络往往有一个巨大的组成部分，是紧密相连的。这进一步助长了社区检测算法产生不平衡簇的趋势，其中单个集群是网络中大多数节点的受益者。 </li>
+</ul>
+<p>许多网络聚类算法都内置了解决这些问题的机制。在下面，将讨论一些最著名的网络聚类算法。</p>
+<p>假定无向网络由<span><span class="MathJax_Preview">G=(N，A)</span><script type="math/tex">G=(N，A)</script></span>表示。节点i和j之间的边(i，j)的权重由<span><span class="MathJax_Preview">w_j=w_{ji}</span><script type="math/tex">w_j=w_{ji}</script></span>表示。在某些情况下，边成本(或长度)的逆概念被指定，而不是权值。在这种情况下，我们假设边缘成本由CIJ表示。这些值可以通过使用<span><span class="MathJax_Preview">w_{ij}=1/c_{ij}</span><script type="math/tex">w_{ij}=1/c_{ij}</script></span>或适当选择的核函数相互转换。</p>
+<p>网络聚类或社区检测问题是将网络划分为k个节点集的问题，从而最小化了在不同分区中具有端点的边的权重之和。这一基本目标函数的许多变体被用于实践，能够实现不同的应用特定目标，例如分区平衡，其中不同的集群有相似的节点数。</p>
+<p>网络聚类或社区检测问题是将网络划分为k个节点集的问题，从而最小化了在不同分区中具有端点的边的权重之和。这一基本目标函数的许多变体被用于实践，能够实现不同的应用特定目标，例如分区平衡，其中不同的集群有相似的节点数。</p>
+<h3 id="1931-kernighan-lin">19.3.1 Kernighan-Lin算法</h3>
+<p>Kernighan-Lin算法是平衡双向图划分的经典方法.其基本思想是首先将图划分为两个等于1的节点子集。然后，该算法迭代地改进这个分区，直到它收敛到最优解为止。该解不一定是全局最优解，但通常是一种很好的启发式逼近。这种迭代改进是通过确定分区之间的节点交换序列来执行的，从而尽可能地改进了聚类目标函数。为了通过执行一对节点之间的交换来评估聚类目标函数的改进，需要在每个节点上持续跟踪一些精心选择的度量。下文将讨论这些问题</p>
+<p>节点<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>的内部代价<span><span class="MathJax_Preview">II</span><script type="math/tex">II</script></span>是<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>上的边的权重之和，其另一端与节点<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>位于同一分区中。节点I的外部代价<span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>是<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>上的边的权值之和，其另一端与节点I位于不同的分区中。将节点从一个分区移动到另一个分区将其外部成本更改为内部成本，反之亦然。因此，通过将节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>从一个分区移动到另一个分区，增益di由外部成本和内部成本之间的差异给出。 </p>
+<div>
+<div class="MathJax_Preview">D_i=E_i-I_i\tag{19.14}</div>
+<script type="math/tex; mode=display">D_i=E_i-I_i\tag{19.14}</script>
+</div>
+<p>当然，我们不想简单地将节点从一个分区移动到另一个分区，而是在两个分区之间交换一对节点i和j。然后，交换节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的增益<span><span class="MathJax_Preview">J_{ij}</span><script type="math/tex">J_{ij}</script></span>由以下内容给出：</p>
+<div>
+<div class="MathJax_Preview">J_{ij}=D_i+D_j-2*w_{ij}\tag{19.15}</div>
+<script type="math/tex; mode=display">J_{ij}=D_i+D_j-2*w_{ij}\tag{19.15}</script>
+</div>
+<p>这只是将节点i和j移动到不同分区的 收益之和，并对边界<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的影响进行了特殊调整，由于交换，边缘<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>仍然是两个节点外部成本的一部分。因此，Jij的值量化了通过交换节点i和j可以获得的增益。<span><span class="MathJax_Preview">J_{ij}</span><script type="math/tex">J_{ij}</script></span>的正值导致了目标函数的改进 </p>
+<p>整个算法在两个分区之间使用最多<span><span class="MathJax_Preview">(n/2)</span><script type="math/tex">(n/2)</script></span>启发式交换的重复序列，以优化交换的总增益。每一个最多<span><span class="MathJax_Preview">(n/2)</span><script type="math/tex">(n/2)</script></span>的交换序列都会被称为一个时代。每个时代的进展如下。发现一对节点，使得交换导致目标函数值的最大改善。这对节点将被标记，尽管没有实际执行交换。然而，不同节点的<span><span class="MathJax_Preview">D_i</span><script type="math/tex">D_i</script></span>值将被重新计算，就好像已经执行了交换一样。然后，用<span><span class="MathJax_Preview">D_i</span><script type="math/tex">D_i</script></span>的这些重新计算的值确定下一对未标记的节点，交换导致目标函数值的最大改进。应该指出的是，随着进一步的潜在交流的确定，收益不会总是减少。此外，一些中间潜在交易所甚至可能有负收益，而以后的潜在交易所可能有正收益。确定潜在交换对的过程是重复的，直到所有的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点都成对。<span><span class="MathJax_Preview">k-≤n/2</span><script type="math/tex">k-≤n/2</script></span>连续势对的任何序列，从第一对开始，按照它们被确定的顺序，被认为是两个分区之间的有效势k-交换。在这些不同的可能性中，找到了最大总收益的潜在k-交换.如果增益为正，则执行潜在的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>交换.这个<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>交换的整个过程被称为一个时代.该算法反复执行这样的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>交换时代。如果找不到具有正增益的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>交换，则该算法终止.整个算法如图19.3所示。</p>
+<p><center>
+<img alt="figure19.3" src="http://p6atp7tts.bkt.clouddn.com/figure19.3.png" />
+Figure 19.3: The Kernighan–Lin algorithm</center></p>
+<p>Kernighan-Lin算法快速收敛到局部最优.事实上，算法终止可能需要极少量的时间(少于5个)。当然，考虑到问题是NP难的，对于所需的历次，没有任何保证。每个历元的运行时间可摊为<span><span class="MathJax_Preview">O(m·log(N))</span><script type="math/tex">O(m·log(N))</script></span>时间，其中<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>为边数，<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>为节点数。提出了算法的变体，大大加快了算法的速度。</p>
+<h4 id="19311-">19.3.1.1 加快可尼汉-林</h4>
+<p>克尼汉-林的一个快速变体是基于菲杜西亚和马修斯的修改。此版本还可以处理与节点和边缘相关联的权重。此外，该方法允许将两个分区之间的平衡级别指定为比率。一个节点可以简单地将一个节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>从一个分区移动到另一个分区，而不是在一个时代中对节点进行交换，从而使方程19.14的增益<span><span class="MathJax_Preview">d_i</span><script type="math/tex">d_i</script></span>尽可能大。只有能够在不违反平衡约束的情况下移动的节点才有资格在每个步骤中移动。移动节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>后，将其标记为在当前时代不再考虑它。更新另一个顶点<span><span class="MathJax_Preview">j∈N</span><script type="math/tex">j∈N</script></span>上的<span><span class="MathJax_Preview">d_j</span><script type="math/tex">d_j</script></span>值以反映这一变化。这个过程会被重复，直到所有的节点都被认为是在一个时代中移动，或者平衡准则阻止了进一步的移动。当所需的分区比不平衡或节点不具有单位权重时，后者是可能的。请注意，在一个时代，许多潜在的移动可能会有负收益。因此，与原来的KernighanLIN算法一样，只有在一个时代中创建的最佳分区才是最终的，其余的移动将被撤消。Fiduccia和Mattheyses还引入了一种特殊的数据结构来实现<span><span class="MathJax_Preview">O(M)</span><script type="math/tex">O(M)</script></span>时间中的每个时代，其中<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>是边的个数。在实践中，在大多数现实世界的网络中，通常需要少量的历元才能收敛，尽管并不能保证所需的历元数。</p>
+<h3 id="1932-girvan-newman">19.3.2 Girvan-Newman算法</h3>
+<p>该算法使用边缘长度<span><span class="MathJax_Preview">C_{ij}</span><script type="math/tex">C_{ij}</script></span>，而不是边缘权重<span><span class="MathJax_Preview">W_{ij}</span><script type="math/tex">W_{ij}</script></span>。边缘长度可以看作是边权值的反比。在指定边缘权重的情况下，可以使用<span><span class="MathJax_Preview">c_{ij}=1/w_{ij}</span><script type="math/tex">c_{ij}=1/w_{ij}</script></span>或适当的特定于应用程序的函数来启发式地将其转换为边缘长度。</p>
+<p>Geavang-NeWman算法是基于直觉的，具有高中间性的边有连接不同簇的倾向。例如，入射到图19.2中的集线器节点的边具有高的中间性。它们之间的高介数是通过这些边缘的不同社区的节点之间的成对最短路径的结果。因此，这些边缘的断开将导致与原始图中的自然簇相对应的一组连接分量。这种断开方法形成了GeWaun-Neman算法的基础。</p>
+<p>Girvan-Newman算法是一种自上而下的分层聚类算法，它通过连续删除具有最高中间度的边来创建聚类，直到图被断开到所需的连通分量数。因为每一次边缘去除都会影响其他一些边缘的间度值，因此需要在每次去除后重新计算这些边缘的中间度值。Girvan-Newman算法如图19.4所示. </p>
+<p>Girvan-Newman算法的主要挑战是计算边间值.节点间度值的计算是边距计算中的中间环节.回想一下，所有节点和边缘之间的中心性值都被定义为所有源-接收器对之间的一组最短路径的函数。因此，这些中间度中心值可以分解为几个可加的分量，其中每个分量由源节点的最短路径子集定义。为了计算这些中间性组件，对每个可能的源节点采用两步方法：</p>
+<ol>
+<li>计算从源节点<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>到每个其他节点的最短路径的数目。</li>
+<li>第一步中的计算用于计算节点I的节点中间度中心性的分量<span><span class="MathJax_Preview">B(i)</span><script type="math/tex">B(i)</script></span>和边缘<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的边缘中间中心度的分量<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>，它们对应于来自特定源节点的最短路径的子集。</li>
+</ol>
+<p><center>
+<img alt="" src="http://p6atp7tts.bkt.clouddn.com/15257010763295.jpg" />
+图19.4：Girvan-Newman算法 </center></p>
+<p>然后可以将这些源节点特定的中间性中心分量添加到所有可能的源节点上，以计算整体的中间性中心值。</p>
+<p>中间中心度计算的第一步是创建一个边缘图，该图位于从节点到其他节点的至少一条最短路径上。这种边缘被称为源节点的紧边。只有当特定源节点的边缘紧固时，特定源节点的边缘的中间值分量才能为非零。<span><span class="MathJax_Preview">Dijkstra</span><script type="math/tex">Dijkstra</script></span>算法，在第三节中描述。3.5.1.1第一章。3，用于确定从源节点s到节点j的最短路径距离<span><span class="MathJax_Preview">SP(j)</span><script type="math/tex">SP(j)</script></span>。为了使边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>紧，必须具备以下条件：</p>
+<div>
+<div class="MathJax_Preview">SP(j)=SP(i)+c_ij\tag{19.16}</div>
+<script type="math/tex; mode=display">SP(j)=SP(i)+c_ij\tag{19.16}</script>
+</div>
+<p>因此，确定了紧边的有向子图<span><span class="MathJax_Preview">G^s=(N，A^s)</span><script type="math/tex">G^s=(N，A^s)</script></span>，其中，作为<span><span class="MathJax_Preview">A^s\subseteq A</span><script type="math/tex">A^s\subseteq A</script></span>，边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的方向是<span><span class="MathJax_Preview">SP(j)&gt;SP(i)</span><script type="math/tex">SP(j)>SP(i)</script></span>。因此，紧边的子图是有向无圈图。图19.5说明了基图及其紧边子图的一个例子。边用长度标注。在这种情况下，节点0被假定为源节点。紧边的子图随源节点的选择而有明显的变化。从源节点0到节点i的最短路径距离<span><span class="MathJax_Preview">SP(I)</span><script type="math/tex">SP(I)</script></span>通过对图19.5b中的节点进行注释的数字的第一分量来示出。</p>
+<p>从源节点s到给定节点j的最短路径NS(J)的数目相对容易从紧边的子图中确定。这是因为到给定节点的路径数等于发生在其上的节点的路径数之和。</p>
+<div>
+<div class="MathJax_Preview">N_s(j)=\sum_{i:(i,j)\sub A^s}N_s(i)\tag{19.17}</div>
+<script type="math/tex; mode=display">N_s(j)=\sum_{i:(i,j)\sub A^s}N_s(i)\tag{19.17}</script>
+</div>
+<p>该算法首先为源节点设置<span><span class="MathJax_Preview">N_s(s)=1</span><script type="math/tex">N_s(s)=1</script></span>。随后，该算法首先对紧边子图进行宽度搜索，从源节点开始。每个节点的路径数计算为紧边有向无圈图中到其祖先的路径之和，根据公式19.17，在图19.5中用一对数字对每个节点的注释的第二个组成部分说明了从0节点到到每个节点最短路线的数量。</p>
+<p><center>
+<img alt="figure19.5" src="http://p6atp7tts.bkt.clouddn.com/figure19.5.png" />
+图片19.5：原始图和子图的边</center></p>
+<p>下一步是计算节点和边缘之间的中间中心性的分量，从源节点的节点开始。设<span><span class="MathJax_Preview">f_{sk}(i)</span><script type="math/tex">f_{sk}(i)</script></span>是节点s和k之间通过节点i的最短路径的分数。设<span><span class="MathJax_Preview">F_{sk}(i，j)</span><script type="math/tex">F_{sk}(i，j)</script></span>是节点s和k之间通过边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的最短路径的分数。特定于节点s的节点间中心性和边缘中心性的相应组成部分以<span><span class="MathJax_Preview">B(i)</span><script type="math/tex">B(i)</script></span>和<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>表示，它们的定义如下：</p>
+<div>
+<div class="MathJax_Preview">B_s(i)=\sum_{k\ne s}f_{sk}(i)\tag{19.18}</div>
+<script type="math/tex; mode=display">B_s(i)=\sum_{k\ne s}f_{sk}(i)\tag{19.18}</script>
+</div>
+<div>
+<div class="MathJax_Preview">b_s(i,j)=\sum_{k\ne s}F_{sk}(i,j)\tag{19.19}</div>
+<script type="math/tex; mode=display">b_s(i,j)=\sum_{k\ne s}F_{sk}(i,j)\tag{19.19}</script>
+</div>
+<p>很容易看出，通过对不同源节点<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>上的<span><span class="MathJax_Preview">B(i)</span><script type="math/tex">B(i)</script></span>和<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>中的每一个节点分别进行求和，可以得到I和<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>之间节点之间的非归一化值。用紧边图<span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>来计算这些值。关键是在<span><span class="MathJax_Preview">b_s(i)</span><script type="math/tex">b_s(i)</script></span>和<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>之间建立递归关系，如下所示：</p>
+<div>
+<div class="MathJax_Preview">B_s(j)=\sum_{i:(i,j)\sub A^s}b_s(i,j)\tag{19.20}</div>
+<script type="math/tex; mode=display">B_s(j)=\sum_{i:(i,j)\sub A^s}b_s(i,j)\tag{19.20}</script>
+</div>
+<div>
+<div class="MathJax_Preview">B_s(i)=1+\sum_{j:(i,j)\sub A^s}b_s(i,j)\tag{19.21}</div>
+<script type="math/tex; mode=display">B_s(i)=1+\sum_{j:(i,j)\sub A^s}b_s(i,j)\tag{19.21}</script>
+</div>
+<p>这些关系源于这样一个事实：通过特定节点的最短路径总是通过其传入和传出的边缘之一，除非它们在该节点结束。第二个方程的附加信贷为1，说明了节点I处的路径，对该路径，<span><span class="MathJax_Preview">f_{si}(i)=1</span><script type="math/tex">f_{si}(i)=1</script></span>给出了<span><span class="MathJax_Preview">B_s(i)</span><script type="math/tex">B_s(i)</script></span>。</p>
+<p>源节点<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>总是被分配一个<span><span class="MathJax_Preview">B_s(s)=0</span><script type="math/tex">B_s(s)=0</script></span>的中间得分。有向无圈紧图<span><span class="MathJax_Preview">G^s</span><script type="math/tex">G^s</script></span>的节点和边被处理为“自下而上”，从节点开始，没有任何传出边。节点I的分数B(I)只有在其所有传出边缘上的分数最后确定之后才能最终确定。同样，边缘<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的得分<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>仅在节点j的得分<span><span class="MathJax_Preview">B(j)</span><script type="math/tex">B(j)</script></span>最后确定之后才最终确定。该算法首先将所有没有任何传出边的节点j设置为<span><span class="MathJax_Preview">B_(j)=f_{sj}(j)=1</span><script type="math/tex">B_(j)=f_{sj}(j)=1</script></span>。这是因为这样的节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>没有传出边，是<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的中间节点，但它不能是<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>和任何其他节点之间的中间节点。然后，该算法迭代更新自下而上遍历中的数十个节点和边，如下所示： </p>
+<ul>
+<li>边间更新：每个边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>被分配一个分数<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>，该分数<span><span class="MathJax_Preview">b(i，j)</span><script type="math/tex">b(i，j)</script></span>是基于基于公式19.20将分数<span><span class="MathJax_Preview">B(j)</span><script type="math/tex">B(j)</script></span>划分成所有传入边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的。<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>的值与前面计算的<span><span class="MathJax_Preview">N_s(i)</span><script type="math/tex">N_s(i)</script></span>成正比。因此，<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>被计算如下。</li>
+</ul>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">b_s(i,j)=\frac{N_s(i)*B_s(j)}{\sum_{k:(k,j)\sub A^s}N_s(k)}\tag{19.22}</span><script type="math/tex">b_s(i,j)=\frac{N_s(i)*B_s(j)}{\sum_{k:(k,j)\sub A^s}N_s(k)}\tag{19.22}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">b_s(i,j)=\frac{N_s(i)*B_s(j)}{\sum_{k:(k,j)\sub A^s}N_s(k)}\tag{19.22}</span><script type="math/tex">b_s(i,j)=\frac{N_s(i)*B_s(j)}{\sum_{k:(k,j)\sub A^s}N_s(k)}\tag{19.22}</script></span></script></span></p>
+<ul>
+<li>节点间更新：<span><span class="MathJax_Preview">B(i)</span><script type="math/tex">B(i)</script></span>的值是通过求和所有出站边的<span><span class="MathJax_Preview">b_s(i，j)</span><script type="math/tex">b_s(i，j)</script></span>值，然后根据方程添加1来计算的。</li>
+</ul>
+<p>整个过程在所有源节点上重复，并且将这些值相加。注意，这提供了节点和边缘间的未缩放的值，其范围可以从0到<span><span class="MathJax_Preview">n*（n＝1）</span><script type="math/tex">n*（n＝1）</script></span>。<span><span class="MathJax_Preview">B_s（I）</span><script type="math/tex">B_s（I）</script></span>在所有源节点<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>上的（聚集）值可以通过将其与<span><span class="MathJax_Preview">n*（n－1）</span><script type="math/tex">n*（n－1）</script></span>相除除而转化为方程<span><span class="MathJax_Preview">（i）</span><script type="math/tex">（i）</script></span></p>
+<p>在Girvan-Newman算法中，边缘去除后，可以更有效地计算中间度值。这是因为使用增量最短路径算法可以更有效地计算紧边图。书目注释中包含了这些方法的指针。由于大多数之间的计算是增量的，它们不需要从头开始执行，这使得算法更高效。然而，在实际应用中，该算法开销仍然很大。 </p>
+<h3 id="1933-metis">19.3.3 多级图划分：Metis</h3>
+<p>在实际应用中，上述算法大多比较缓慢。即使是本节后面讨论的谱算法，也是相当慢的。METIS算法旨在为获得高质量的解决方案提供一个快速的替代方案.METIS算法允许在聚类过程中指定节点和边缘的权重。因此，假设图<span><span class="MathJax_Preview">G=(N，A)</span><script type="math/tex">G=(N，A)</script></span>的每个边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>上的权重由<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>表示，而节点I上的权重则由<span><span class="MathJax_Preview">v_i</span><script type="math/tex">v_i</script></span>表示。</p>
+<p>METIS算法可用于执行<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>路分区或双向分区.k-路多层图划分方法是基于自顶向下的双向递归二分法来生成<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>路划分，尽管执行直接k-路划分的变量也是存在的。因此，下面的讨论将集中在图的双向二分法上。</p>
+<p>METIS算法利用图的粗化表示可以有效地求出原图的近似划分的原理。图的粗化表示是通过将一些相邻的节点收缩成一个节点来得到的。收缩可能导致自环被移除。这种自环也被称为折叠边.收缩节点的权重等于原图中各组成节点的权重之和。类似地，跨收缩节点的平行边被合并成一个单一的边，并将组成边的权重相加在一起。图19.6举例说明了图的粗化表示，其中压缩了一些相邻节点的对。</p>
+<p><center>
+<img alt="figure19.6" src="http://p6atp7tts.bkt.clouddn.com/figure19.6.png" />
+图19.6：粗化和分区继承在非粗化中的说明 </center></p>
+<p>相应的节点权重和边缘权重也在相同的图中示出。 这种较小的粗化图的良好划分映射到原始图的近似划分。 因此，一种可能的方法是通过使用粗化试探将原始图压缩为小图，然后用任何现成算法更有效地分割该较小图，最后将该分区映射到原始图上。 在图中还示出了将粗化图上的分区映射到原始图的示例。 19.6. 所得到的分区可以用算法(例如Kernian-lin算法)来细化。 多级方案通过多级粗化和细化提高了这种基本方法，以在质量和效率之间获得良好的折衷。 多级分区方案使用三个阶段:</p>
+<ol>
+<li>
+<p>粗化阶段：在原始图<span><span class="MathJax_Preview">G=G_0</span><script type="math/tex">G=G_0</script></span>中精心选择的一组节点集合收缩成一系列连续较小的图，<span><span class="MathJax_Preview">G_0、G_1、G_2…G_r.</span><script type="math/tex">G_0、G_1、G_2…G_r.</script></span>为了执行从<span><span class="MathJax_Preview">G_{m−1}</span><script type="math/tex">G_{m−1}</script></span>到<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的单步粗化，识别出一小组不重叠和紧密互联的节点。每一组紧密互联的节点都收缩成一个节点。稍后将详细讨论识别这些节点集的启发式方法。最后的图<span><span class="MathJax_Preview">G_r</span><script type="math/tex">G_r</script></span>通常小于100个节点。在第二个分区阶段中，这个最终图的小大小非常重要。这个阶段产生的不同程度的粗化为以后的非粗化阶段创造了重要的参考点。 </p>
+</li>
+<li>
+<p>分区阶段：任何现成的算法都可以用来从图Gr创建高质量的平衡分区。例子包括SECTION的谱方法。19.3.4和Kernighan-Lin算法。用一个小图获得高质量的分区要容易得多。这种高质量的分区为在非粗化阶段进行细化提供了一个很好的起点。即使是这个最粗的图的相对较差的分块，也常常映射到非收缩图上的好的分块，因为粗化过程中的折叠边在这个阶段是不合格的。</p>
+</li>
+<li>
+<p>不粗化阶段(精化)：在这个阶段，图被扩展回它们的更大版本<span><span class="MathJax_Preview">G_r，G_{r−1}…G_0</span><script type="math/tex">G_r，G_{r−1}…G_0</script></span>。每当将图<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>扩展到<span><span class="MathJax_Preview">G_{m−1}</span><script type="math/tex">G_{m−1}</script></span>时，<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>就继承了<span><span class="MathJax_Preview">G_m</span><script type="math/tex">G_m</script></span>的分区。图19.6说明了这一继承。克尼汉-林方案的快速变体，在第一节中讨论过。19.3.1.1适用于<span><span class="MathJax_Preview">G_{m−1}</span><script type="math/tex">G_{m−1}</script></span>的这一划分，以便在进一步扩展到<span><span class="MathJax_Preview">G_{m−2}</span><script type="math/tex">G_{m−2}</script></span>之前进一步改进它。因此，图<span><span class="MathJax_Preview">G_{m−2}</span><script type="math/tex">G_{m−2}</script></span>继承了<span><span class="MathJax_Preview">G_{m−1}</span><script type="math/tex">G_{m−1}</script></span>的细化分区。通常，细化阶段是非常快的，因为<span><span class="MathJax_Preview">KL</span><script type="math/tex">KL</script></span>算法是从<span><span class="MathJax_Preview">G_{m−1}</span><script type="math/tex">G_{m−1}</script></span>的非常高质量的近似划分开始的。 
+<center><img alt="figure19.7" src="http://p6atp7tts.bkt.clouddn.com/figure19.7.png" />
+图19.7：METIS的多级框架[301]</center></p>
+</li>
+</ol>
+<p>在图19.7中提供了基于[301]中的说明的多级方案的图像表示。请注意，第二和第三阶段使用现成的方案，在本章的其他部分讨论。因此，下面的讨论将只集中在粗化的第一阶段。许多技术被用于不同程度的复杂程度的粗化。在下面，描述了一些简单的方案，这些方案只通过匹配给定阶段的节点对来实现粗化。为了匹配一对节点，它们必须始终与边缘连接。粗化图的节点数至少是原始图的一半。尽管这些粗化方法很简单，但在整个聚类算法的背景下，这些方案是非常有效的。</p>
+<ol>
+<li>
+<p>随机边缘匹配：随机选择一个节点I，并匹配到一个邻接连接的非匹配节点，该节点也是随机选择的。如果不存在这样的不匹配节点，则顶点将保持不匹配。将执行匹配，直到图中没有(相邻的)不匹配对。 </p>
+</li>
+<li>
+<p>重边缘匹配：与随机边缘匹配一样，随机选择节点I并与相邻连接的不匹配节点匹配。然而，区别在于最大的权重入射边缘(i，j)被用来选择不匹配的节点j。直觉是，更好的是收缩沉重的边缘，因为它们不太可能是最优划分的一部分。</p>
+</li>
+<li>
+<p>重团匹配：图中密集连接的节点集的收缩将使折叠边的数目最大化。该方法跟踪节点i的权重<span><span class="MathJax_Preview">v_i</span><script type="math/tex">v_i</script></span>，它对应于它所代表的收缩节点的数量。此外，表示法si表示先前收缩阶段节点I(或其前兆)处折叠边的权重之和。注意，如果收缩节点i表示原始图中的一个团，那么<span><span class="MathJax_Preview">s_i</span><script type="math/tex">s_i</script></span>将接近<span><span class="MathJax_Preview">v_i·(v_i−1)/2</span><script type="math/tex">v_i·(v_i−1)/2</script></span>。由于收缩致密的成分是可取的，因此必须设法确保收缩所产生的<span><span class="MathJax_Preview">s_i</span><script type="math/tex">s_i</script></span>值接近其上限。这是通过计算边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的边密度<span><span class="MathJax_Preview">μ_{ij}\subset(0，1)</span><script type="math/tex">μ_{ij}\subset(0，1)</script></span>来实现的：</p>
+</li>
+</ol>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\mu_{ij}=\frac{2*(s_i+s_j+w_{ij})}{(v_i+v_j)*(v_i+v_j-1)}\tag{19.23}</span><script type="math/tex">\mu_{ij}=\frac{2*(s_i+s_j+w_{ij})}{(v_i+v_j)*(v_i+v_j-1)}\tag{19.23}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">\mu_{ij}=\frac{2*(s_i+s_j+w_{ij})}{(v_i+v_j)*(v_i+v_j-1)}\tag{19.23}</span><script type="math/tex">\mu_{ij}=\frac{2*(s_i+s_j+w_{ij})}{(v_i+v_j)*(v_i+v_j-1)}\tag{19.23}</script></span></script></span></p>
+<p>当跨越高密度边缘的节点收缩时，通常对应于原始图<span><span class="MathJax_Preview">G=G_0</span><script type="math/tex">G=G_0</script></span>中的团，如果不加权的话。即使对于加权图，高边密度的使用通常也是相当有效的.图的节点按随机顺序访问。对于每个节点，选择其最高密度不匹配的邻居进行匹配。与重边缘匹配不同的是，重团匹配方法对算法前几个阶段发生的收缩不是视而不见的。</p>
+<p>多级聚类由于其分层方法的优点，使得粗图的早期聚类保证了对二分的良好的初始全局结构。换句话说，图的关键组件在早期以粗化节点的形式分配给适当的分区。然后，在细化阶段对此分区进行连续改进。这种方法更有效地避免了局部最优，因为它的“全局”聚类方法。</p>
+<h3 id="1934">19.3.4 谱聚类</h3>
+<p>假设节点是未加权的，尽管边缘<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>与权重<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>相关联。 权重的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>矩阵由<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>表示。 频谱方法采用图形嵌入方法，通过将节点嵌入多维空间来保持网络的局部聚类结构。 该思想是创建该图的多维表示，从而可以在变换的表示上使用标准<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>均值算法。 首先讨论将节点映射到1维空间上的更简单的问题。 对k维情形的概括是相对简单的。 我们希望将N中的节点映射成1维实值<span><span class="MathJax_Preview">y_1,y_2,...y_n</span><script type="math/tex">y_1,y_2,...y_n</script></span>，使得这些点之间的距离反映节点之间的连接性。 因此，与要被映射到该线上的较远点上的高权重边缘连接的节点是不期望的。 这可以通过确定Yi的值来实现，对于该值，以下目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>被最小化：</p>
+<div>
+<div class="MathJax_Preview">O=\sum_{i=1}^{n}\sum_{j=1}^nw_{ij}*(y_i-y_j)^2\tag{19.24}</div>
+<script type="math/tex; mode=display">O=\sum_{i=1}^{n}\sum_{j=1}^nw_{ij}*(y_i-y_j)^2\tag{19.24}</script>
+</div>
+<p>这个目标函数用加权与<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>成正比的权重来惩罚<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>和<span><span class="MathJax_Preview">y_j</span><script type="math/tex">y_j</script></span>之间的距离。因此，当<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>非常大时，<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>和<span><span class="MathJax_Preview">y_j</span><script type="math/tex">y_j</script></span>的数据点在嵌入式空间中更有可能更接近对方。目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>可以用加权矩阵<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>的<span><span class="MathJax_Preview">Laplacian</span><script type="math/tex">Laplacian</script></span>矩阵<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>重写，其中<span><span class="MathJax_Preview">Laplacian</span><script type="math/tex">Laplacian</script></span>矩阵<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>定义为<span><span class="MathJax_Preview">Λ−W</span><script type="math/tex">Λ−W</script></span>，其中<span><span class="MathJax_Preview">Λ</span><script type="math/tex">Λ</script></span>是满足<span><span class="MathJax_Preview">Λ_{ii}=\sum_{j=1}^{n}w_{ij}</span><script type="math/tex">Λ_{ii}=\sum_{j=1}^{n}w_{ij}</script></span>的对角矩阵。设嵌入值的n维列向量用<span><span class="MathJax_Preview">\overline y=(y_1...y_n)^T</span><script type="math/tex">\overline y=(y_1...y_n)^T</script></span>表示。它可以在方程的一些代数重排后表示。19.24可根据拉普拉斯矩阵重写目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>：</p>
+<div>
+<div class="MathJax_Preview">O=2\overline y^TL\overline y\tag{19.25}</div>
+<script type="math/tex; mode=display">O=2\overline y^TL\overline y\tag{19.25}</script>
+</div>
+<p>矩阵<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>是半正定的，具有非负的特征值，因为平方和目标函数<span><span class="MathJax_Preview">O</span><script type="math/tex">O</script></span>总是非负的。我们需要合并一个缩放约束，以确保优化解决方案不选择所有<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的平凡值<span><span class="MathJax_Preview">y_i=0</span><script type="math/tex">y_i=0</script></span>。一个可能的缩放约束如下：</p>
+<div>
+<div class="MathJax_Preview">\overline y^T\Lambda\overline y=1\tag{19.26}</div>
+<script type="math/tex; mode=display">\overline y^T\Lambda\overline y=1\tag{19.26}</script>
+</div>
+<p>将矩阵<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>引入到等式的约束中。19.26实现标准化，使所产生的集群在分区之间更加平衡。如果约束中不使用<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>，则将结果称为非归一化谱聚类。在实践中，这种规范化的效果是低度节点倾向于清晰地“挑选”具有大的正值或大负值的“边”，而非常高度的节点(也可能是中心节点)将被嵌入到靠近原点的中心区域(见练习7)。请注意，每个对角线入口ΛII，即节点i上入射边缘的权重之和，可视为节点i处网络的局部密度。还可以证明，在约束中加入<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>近似于一个未归一化嵌入，其中边权值<span><span class="MathJax_Preview">w_j=w_{ji}</span><script type="math/tex">w_j=w_{ji}</script></span>被其端点的局部密度的几何平均$\sqrt{\Lambda_{ii}·\Lambda_{jj}} $除以(见练习8)。如第三章所述。3、用局部密度对距离或相似值进行归一化，往往有助于获得高质量的结果，而这些结果在其本地环境中更为准确。 </p>
+<p>该约束优化公式可通过将其拉格朗日松弛<span><span class="MathJax_Preview">\overline{y}^TL\overline{y}−\lambda(\overline{y}^T\Lambda \overline y−1)</span><script type="math/tex">\overline{y}^TL\overline{y}−\lambda(\overline{y}^T\Lambda \overline y−1)</script></span>的梯度设置为0来求解。结果表明，优化条件为<span><span class="MathJax_Preview">\Lambda^{−1}L\overline y=\lambda \overline y</span><script type="math/tex">\Lambda^{−1}L\overline y=\lambda \overline y</script></span>，其中λ为拉格朗日参数。换句话说，y是<span><span class="MathJax_Preview">\Lambda^{−1}L</span><script type="math/tex">\Lambda^{−1}L</script></span>的特征向量，<span><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span>是特征值。此外，该优化条件可以方便地证明，对于满足该条件的特征向量<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>，目标函数<span><span class="MathJax_Preview">O=2\overline y^TL\overline y</span><script type="math/tex">O=2\overline y^TL\overline y</script></span>的计算值为特征值<span><span class="MathJax_Preview">\lambda</span><script type="math/tex">\lambda</script></span>的两倍。因此，在y的替代特征向量解中，最优解是归一化Laplacian<span><span class="MathJax_Preview">\Lambda^{−1}L</span><script type="math/tex">\Lambda^{−1}L</script></span>的最小非平凡特征向量。<span><span class="MathJax_Preview">\Lambda^{−1}L</span><script type="math/tex">\Lambda^{−1}L</script></span>的最小特征值总是0，它对应于节点嵌入<span><span class="MathJax_Preview">\overline y</span><script type="math/tex">\overline y</script></span>与<span><span class="MathJax_Preview">(1，1，…)^T</span><script type="math/tex">(1，1，…)^T</script></span>成正比的平凡解。这样一个微不足道的一维嵌入对应于将每个节点映射到同一点.因此，它可以被丢弃，并且不用于分析。然后，第二最小特征向量提供了一个信息更丰富的最优解。 </p>
+<p>该模型可推广到<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维嵌入，建立了一个类似的优化公式，其决策变量为<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>，<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>列向量<span><span class="MathJax_Preview">Y=[\overline {y_1}...\overline {y_k}]</span><script type="math/tex">Y=[\overline {y_1}...\overline {y_k}]</script></span>表示嵌入的每个维数。该优化公式使<span><span class="MathJax_Preview">k×k</span><script type="math/tex">k×k</script></span>矩阵<span><span class="MathJax_Preview">Y^TLY</span><script type="math/tex">Y^TLY</script></span>在规范约束<span><span class="MathJax_Preview">Y^T\Lambda Y=I</span><script type="math/tex">Y^T\Lambda Y=I</script></span>下的轨迹最小化。由于约束中存在<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>，<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的列不一定是正交的。这些<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>列向量的最优解与不对称矩阵<span><span class="MathJax_Preview">\Lambda^{−1}L</span><script type="math/tex">\Lambda^{−1}L</script></span>的(不一定正交)右特征向量的逐次方向成正比。在丢弃特征值<span><span class="MathJax_Preview">\lambda _1=0</span><script type="math/tex">\lambda _1=0</script></span>的第一平凡特征向量<span><span class="MathJax_Preview">\overline {e_1}</span><script type="math/tex">\overline {e_1}</script></span>后，得到一组<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>特征向量<span><span class="MathJax_Preview">\overline {e_2}，\overline {e_3}…\overline {e_{k+1}}</span><script type="math/tex">\overline {e_2}，\overline {e_3}…\overline {e_{k+1}}</script></span>，对应的特征值<span><span class="MathJax_Preview">\lambda_2\le\lambda_3…\le\lambda_{k+1}</span><script type="math/tex">\lambda_2\le\lambda_3…\le\lambda_{k+1}</script></span>。由于选择了<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个特征向量，该方法生成一个<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵<span><span class="MathJax_Preview">D_k=Y</span><script type="math/tex">D_k=Y</script></span>，对应于<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点的k维嵌入。注意，尽管规范化约束<span><span class="MathJax_Preview">Y^T\Lambda Y=I</span><script type="math/tex">Y^T\Lambda Y=I</script></span>不会导致<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>列的<span><span class="MathJax_Preview">L_2</span><script type="math/tex">L_2</script></span>范数为1，但作为后处理的4步，<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>的每一列(特征向量)都被缩放为<span><span class="MathJax_Preview">L_2</span><script type="math/tex">L_2</script></span>范数1。由于这种列标度，<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>不能准确地反映原优化公式的<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>值。由此得到的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维嵌入保留了节点的聚类结构，因为<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的优化公式试图最小化高度连通节点之间的距离。因此，在第六章中讨论的任何多维聚类算法。如<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>均值，可以应用于这种嵌入式表示，生成节点上的簇。这个公式有时也被称为光谱聚类的随机游动版本，因为它是对随机游动的解释。值得注意的是，归一化拉普拉斯<span><span class="MathJax_Preview">\Lambda^{−1}L</span><script type="math/tex">\Lambda^{−1}L</script></span>的小特征向量与随机转移矩阵<span><span class="MathJax_Preview">\Lambda^{−1}W</span><script type="math/tex">\Lambda^{−1}W</script></span>的大特征向量相同(见练习15)。</p>
+<p>建立谱聚类模型的一种等价方法是将决策变量<span><span class="MathJax_Preview">\overline z=\sqrt \Lambda \overline y</span><script type="math/tex">\overline z=\sqrt \Lambda \overline y</script></span>的相关向量用于EQ的优化计算。19.25和19.26。这一相关版本被称为谱聚类模型的对称版本，尽管它仅在决策变量的尺度方面不同于随机游走版本。通过设置<span><span class="MathJax_Preview">\overline z=\sqrt \Lambda \overline y</span><script type="math/tex">\overline z=\sqrt \Lambda \overline y</script></span>，证明了在<span><span class="MathJax_Preview">\overline z^T\overline z=1</span><script type="math/tex">\overline z^T\overline z=1</script></span>的条件下，原公式等价于优化<span><span class="MathJax_Preview">\overline z^T\Lambda^{−1/2}L\Lambda^{−1/2}\overline z</span><script type="math/tex">\overline z^T\Lambda^{−1/2}L\Lambda^{−1/2}\overline z</script></span>。我们确定了对称归一化Laplacian<span><span class="MathJax_Preview">\Lambda^{−1/2}L\Lambda^{−1/2}</span><script type="math/tex">\Lambda^{−1/2}L\Lambda^{−1/2}</script></span>的最小<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>(正交)特征向量，不包括第一特征向量。该矩阵的每个特征向量也可以通过将随机游程公式的上述解<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>与对角矩阵<span><span class="MathJax_Preview">\sqrt \Lambda</span><script type="math/tex">\sqrt \Lambda</script></span>相乘得到(成比例)。这种关系也反映了<span><span class="MathJax_Preview">\overline z</span><script type="math/tex">\overline z</script></span>和<span><span class="MathJax_Preview">\overline y</span><script type="math/tex">\overline y</script></span>之间的关系。两种情况下的特征值是相同的。例如，第一个特征值为0的特征向量将不再是1s的向量，但各种项将与<span><span class="MathJax_Preview">(\sqrt{\Lambda_{11}}...\sqrt{\Lambda_{nn}})^T</span><script type="math/tex">(\sqrt{\Lambda_{11}}...\sqrt{\Lambda_{nn}})^T</script></span>成正比。由于不同节点的微分缩放，高次节点在对称版本中往往具有较大的(绝对值)坐标值。通过选择最小的k特征向量，可以生成整个<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点集的<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>多维表示<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>。就像随机游动版本在最后一步将<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>的每一列缩放到单位范数一样，对称版本将<span><span class="MathJax_Preview">D_k</span><script type="math/tex">D_k</script></span>的每一行标度到单位范数。行标度的最后一步是对不同程度的节点的微分尺度进行调整的启发式增强，而不是优化公式的一部分。有趣的是，即使随机游动解<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的行被缩放为单位范数(而不是将列缩放为单位范数)，也将获得与将对称解Z的行缩放为单位范数所得到的解完全相同的解(见练习13)。 </p>
+<p>虽然两种不同的谱聚类方法在求解优化问题时是等价的，但在启发式尺度调整方面存在差异。比例关系如图19.8所示。从图19.8中可以明显看出，这两种方法之间的主要实际差异仅通过最后阶段使用的启发式标度来调节，而不是它们各自的优化模型。由于尺度的变化，在这两种情况下得到的簇数将不完全相同。相对质量将取决于手头的数据集。这些优化问题也可以理解为平衡最小割集问题整数规划公式的线性规划松弛。然而，由于特征向量既有正分量，也有负分量，所以最小割集的解释不能直观地推广到问题的放松版本。 </p>
+<p><center>
+<img alt="figure19.8" src="http://p6atp7tts.bkt.clouddn.com/figure19.8.png" />
+图19.8：随机游动与谱聚类的对称版本之间的比例关系  </center></p>
+<h4 id="19341">19.3.4.1 重要观测结果和定性判断</h4>
+<p>关于光谱聚类、PageRank和特征向量分析之间的关系，值得注意的是：</p>
+<ol>
+<li>归一化随机游动Laplacian：<span><span class="MathJax_Preview">\Lambda^{−1}L=\Lambda^{−1}(\Lambda−W)=I−P</span><script type="math/tex">\Lambda^{−1}L=\Lambda^{−1}(\Lambda−W)=I−P</script></span>的最小右特征向量用于随机游动嵌入，其中P是图的随机转移矩阵<span><span class="MathJax_Preview">I−P</span><script type="math/tex">I−P</script></span>的最小右特征向量与<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的最大右特征向量相同，<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的最大右特征向量具有特征值1。值得注意的是，<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的最大左特征向量，也有特征值1，得到了 图的PageRank。因此，随机转移矩阵P的左、右特征向量对网络产生了不同的洞察力。</li>
+<li>归一化对称Laplacian：对称Laplacian<span><span class="MathJax_Preview">\Lambda^{−1/2}(\Lambda−W)\Lambda^{-1/2}</span><script type="math/tex">\Lambda^{−1/2}(\Lambda−W)\Lambda^{-1/2}</script></span>的最小特征向量与对称矩阵Λ−&frac12;WΛ−&frac12;的最大特征向量相同。矩阵<span><span class="MathJax_Preview">\Lambda^{−1/2}W\Lambda^{-1/2}</span><script type="math/tex">\Lambda^{−1/2}W\Lambda^{-1/2}</script></span>可以看作是图的规范化和稀疏的相似矩阵。大多数形式的非线性嵌入，如SVD，核主元分析，和ISO MAP被提取为相似矩阵的大特征向量(见第二章表2.3）正是相似性矩阵的选择，决定了这些不同嵌入的性质的变化。</li>
+<li>归一化目标：当未归一化的Laplacian <span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>用节点度矩阵Λ进行归一化时，谱聚类更有效。虽然可以用谱聚类的切分解释来解释这种行为，但直觉并不容易推广到具有正、负特征向量分量的连续嵌入。一种更简单的理解归一化的方法是检查相似度矩阵<span><span class="MathJax_Preview">\Lambda^{−1/2}W\Lambda^{-1/2}</span><script type="math/tex">\Lambda^{−1/2}W\Lambda^{-1/2}</script></span>，其大的特征向量产生归一化谱嵌入。在该矩阵中，边缘相似性是通过节点端点的几何平均度进行归一化的。这可以被看作是边缘相似性与网络密度的局部度量的归一化。如第三章所述。3、在多维数据挖掘应用中，用局部密度对相似度和距离函数进行归一化也是很有帮助的。多维数据中最著名的离群点分析算法之一，称为LOF，</li>
+</ol>
+<p><center>
+<img alt="图19.8" src="http://p6atp7tts.bkt.clouddn.com/图19.8.png" />
+图19.8：随机游动与谱聚类的对称版本之间的比例关系
+</center></p>
+<p>直观地推广到问题的放松版本，因为特征向量既有正分量，也有负分量。</p>
+<h4 id="19341_1">19.3.4.1 重要的观察和直觉</h4>
+<p>关于光谱聚类、<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>和特征向量分析之间的关系，值得注意的是：</p>
+<p>1.归一化随机游动低量算：<span><span class="MathJax_Preview">\Lambda^{-1}L=\Lambda^{-1}(\Lambda-W)=I-P</span><script type="math/tex">\Lambda^{-1}L=\Lambda^{-1}(\Lambda-W)=I-P</script></span> 的最小右特征向量用于随机游动嵌入，其中<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>是图的随机转移矩阵，其最小右特征向量<span><span class="MathJax_Preview">I-P</span><script type="math/tex">I-P</script></span>与<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的最大右特征向量相同<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的最大右特征向量有特征值1。值得注意的是<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的最大左特征向量(也有特征值1)产生了图的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>，因此随机转移矩阵<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的左、右特征向量对网络产生了不同的洞察力。</p>
+<p>2.归一化对称拉普拉斯矩阵：对称拉普拉斯$ \Lambda<sup>{-&frac12;}L=\Lambda(\Lambda-W)\Lambda</sup>{-&frac12;}$ 的最小特征向量与对称矩阵$ \Lambda<sup>{-&frac12;}L=\Lambda(W)\Lambda</sup>{-&frac12;}<span><span class="MathJax_Preview">的最大特征向量相同。矩阵</span><script type="math/tex">的最大特征向量相同。矩阵</script></span> \Lambda<sup>{-&frac12;}L=\Lambda(W)\Lambda</sup>{-&frac12;}<span><span class="MathJax_Preview">可以看作是图的规范化和稀疏的相似矩阵。大多数非线性嵌入形式，如</span><script type="math/tex">可以看作是图的规范化和稀疏的相似矩阵。大多数非线性嵌入形式，如</script></span>SVD<span><span class="MathJax_Preview">、核主成分分析</span><script type="math/tex">、核主成分分析</script></span>PCA<span><span class="MathJax_Preview">和</span><script type="math/tex">和</script></span>ISOMAP$，都被提取为相似矩阵的大特征向量(见第二章表2.3)。正是相似性矩阵的选择，决定了这些不同嵌入的性质的变化。</p>
+<p>3.归一化目标：当未归一化的低量算符<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>用节点度矩阵<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>归一化时，谱聚类更有效，虽然可以用谱聚类的割裂解释来解释这种行为，但直觉并不容易推广到具有正、负特征向量分量的连续嵌入。一种更简单的理解归一化的方法是通过检查相似度矩阵<span><span class="MathJax_Preview">\Lambda^{-1/2}W\Lambda^{-1/2}</span><script type="math/tex">\Lambda^{-1/2}W\Lambda^{-1/2}</script></span>。特征向量产生归一化谱嵌入，在该矩阵中，边缘相似点通过节点端点的几何均值进行归一化，这可以看作是边缘相似性的归一化和网络密度的局部度量，如第三章所讨论的准化相似也使用这个原则。归一化将在网络上产生更均衡的簇，密度变化很大。多维数据中最著名的离群点分析算法之一，称为<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>也使用这个原则。归一化将在网络上产生更均衡的簇，密度变化很大。</p>
+<p><center>
+<img alt="图19.9" src="http://p6atp7tts.bkt.clouddn.com/图19.9.png" />
+图19.9：集体分类中的标签稀疏问题</center></p>
+<h2 id="194">19.4集体分类</h2>
+<p>在许多社交网络应用中，标签可能与节点相关联。例如，考虑一下社交网络应用程序的情况，其中希望确定对高尔夫感兴趣的所有个人。少数参与者的标签可能已经可用。最好使用可用的标签来对不知道标签的节点进行分类。</p>
+<p>这个模型的解依赖于同质性的概念。因为具有相似属性的节点通常是连接的，所以有理由假定节点标签也是如此。这个问题的一个简单的解决方案是检查给定节点附近的k标记节点并报告大多数标记。这种方法实际上是最近的网络模拟。然而，由于节点标签的稀疏性，这种方法在集体分类中通常是不可能的。图中举例说明了一个网络图19.9，其中这两个类被标记为a和b。其余的节点未标记为图19.9中的测试节点，很明显，它通常更接近于网络结构中的a实例，但是没有直接连接到测试实例的标记节点。</p>
+<p>由此可见，人们不仅必须使用与标记节点的直接连接，而且还必须通过未标记节点使用间接连接。因此，网络中的集体分类总是在一个传感器半调理环境中进行，其中测试实例和训练实例是联合分类的。事实上，正如在第一节中所讨论的那样。第11.6.3章,通过将数据转化为相似图，可以将集体分类方法应用于任意数据类型的半调理分类，因此，集体分类问题不仅从社会网络分析的角度，而且对于任何数据类型的半完备分类都是非常重要的。</p>
+<h3 id="1941">19.4.1迭代分类算法</h3>
+<p>迭代分类算法(<span><span class="MathJax_Preview">ICA</span><script type="math/tex">ICA</script></span>)是文献中最早的分类算法之一，已广泛应用于各种数据领域，该算法具有利用与节点相关联的内容进行分类的能力，这是很重要的，因为许多社交网络都有以用户帖子的形式与节点相关联的文本内容。此外，此外，在对具有相似图的关系数据使用此框架进行半调理分类的情况下，在更有效的分类方面，这些关系特征在节点上继续可用。</p>
+<p><div class="highlight"><pre><span></span>Algorithm ICA(Graph G = (N,A), Weights: [wij ], Node Class Labels: C,
+Base Classifier: A, Number of Iterations: T)
+begin
+repeat
+Extract link features at each node with current training data;
+Train classifier A using both link and content features of
+current training data and predict labels of test nodes;
+Make (predicted) labels of most “certain” nt/T
+test nodes final, and add these nodes to training
+data, while removing them from test data;
+until T iterations;
+end
+</pre></div>
+​                                                       <center>图19.10：迭代分类算法(<span><span class="MathJax_Preview">ICA</span><script type="math/tex">ICA</script></span>)</center></p>
+<p>考虑具有类标签的(无向)网络<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>是从<span><span class="MathJax_Preview">(1……K)</span><script type="math/tex">(1……K)</script></span>中提取的。每个边<span><span class="MathJax_Preview">(i，j)∈A</span><script type="math/tex">(i，j)∈A</script></span>与权重<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>相关<span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>联。此外，节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的内容<span><span class="MathJax_Preview">{X_i}</span><script type="math/tex">{X_i}</script></span>以多维特征向量的形式提供。节点总数用<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>表示，其中<span><span class="MathJax_Preview">n_t</span><script type="math/tex">n_t</script></span>节点是未标记的测试节点。</p>
+<p><span><span class="MathJax_Preview">ICA</span><script type="math/tex">ICA</script></span>算法的一个重要步骤是，除了得到十一中的可用内容特征外，还导出一组链接特征。最重要的链接特征对应于节点附近的类的分布。因此，为每个类生成一个特征，其中包含属于该类的事件节点的部分。对于每个节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，其相邻节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>。按<span><span class="MathJax_Preview">w_{ij}</span><script type="math/tex">w_{ij}</script></span>加权，以计算其对相关类的信用。原则上，还可以根据该图的结构属性(如节点的程度、<span><span class="MathJax_Preview">pageRank</span><script type="math/tex">pageRank</script></span>值、涉及该节点的封闭三角形的数目或连接特性)导出其他链接特征。这些链接特征可以根据特定应用的理解来导出。</p>
+<p>基本<span><span class="MathJax_Preview">ICA</span><script type="math/tex">ICA</script></span>被构造为一种元算法。基分类器<span><span class="MathJax_Preview">\mathcal{A}</span><script type="math/tex">\mathcal{A}</script></span>在一个迭代框架内被利用。许多不同的基分类器被用于不同的实现，例如朴素贝叶斯分类器、逻辑回归分类器和邻域投票分类器。主要要求是这些分类器应该能够输出一个数字分数，量化属于特定类的节点的可能性。该框架独立于分类器的具体选择，由于朴素贝叶斯分类器的数值分数被解释为概率，所以使用朴素贝叶斯分类器尤为普遍。因此，下面的讨论将假设算法<span><span class="MathJax_Preview">\mathcal{A}</span><script type="math/tex">\mathcal{A}</script></span>被实例化为朴素贝叶斯分类器。</p>
+<p>链接和内容特征被用来训练朴素贝叶斯分类器。对于许多节点来说，很难可靠地估计重要的特定于类的特征，例如不同类在其邻域中的小数存在。这是标签稀疏性的直接结果，使得这类节点的类预测不可靠。因此，采用迭代方法来增强训练数据集。在每次迭代中，该方法使<span><span class="MathJax_Preview">n_t/T</span><script type="math/tex">n_t/T</script></span>(Test)节点标签“确定”，其中<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>是用户定义的控制最大迭代次数的参数，选择<span><span class="MathJax_Preview">Bayes</span><script type="math/tex">Bayes</script></span>分类器显示最高类成员概率的测试节点作为最终结果。这些标签测试点可以将分类器添加到训练数据中，再用增广训练数据集提取链路特征对分类器进行再训练。该方法被重复，直到所有节点的标签最终确定为止。由于<span><span class="MathJax_Preview">n_t/T</span><script type="math/tex">n_t/T</script></span>节点的标签在每次迭代中最后确定，整个过程在完全<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>迭代中终止。图19.10中示出了整个伪码。
+<center>
+<img alt="图19.11" src="http://p6atp7tts.bkt.clouddn.com/图19.11.png" />
+图19.11：从图中的无向图创建有向转换图19.9</center></p>
+<p><span><span class="MathJax_Preview">ICA</span><script type="math/tex">ICA</script></span>的一个优点是它可以在分类过程中无缝地使用内容和结构。分类器可以使用第10章中讨论的现成的特征选择算法自动地选择最相关的特征。这种方法也有优点，它不是强烈依赖于同质的概念，因此，可以用于域以外的社会网络分析。考虑一个敌对关系网络，其中通过链路连接的节点可能具有不同的标签。在这种情况下，<span><span class="MathJax_Preview">ICA</span><script type="math/tex">ICA</script></span>算法将自动学习相邻类分布的正确重要性，因此它将产生精确的结果。这个属性对于大多数其他明确的依赖性的集体分类方法是不正确的。</p>
+<h3 id="1942">19.4.2随机游动的标签传播</h3>
+<p>标签传播方法在无向网络结构<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>上直接使用随机游动<span><span class="MathJax_Preview">(i,j)</span><script type="math/tex">(i,j)</script></span>的权重由<span><span class="MathJax_Preview">w_{ij}=w_{ji}</span><script type="math/tex">w_{ij}=w_{ji}</script></span>表示。为了对未标记节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>进行分类，从节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>开始执行随机游走，在遇到第一个标记节点时终止。随机游动具有最高终止概率的类被报告为预测的标签。对于节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，这种方法的直觉是在节点I附近的标记节点处更有可能终止，因此，当某个特定类的多个节点位于其邻近位置时，节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>更有可能被标记为该类。</p>
+<p>一个重要的假设是，图需要标号连接。换句话说，每个未标记节点都需要能够到达随机行走中的一个标记节点。对于无向图<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>，这意味着图的每个连通部分至少需要包含一个标记节点。在下面讨论中，将假定图<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>是无向和标签连接的。</p>
+<p>第一步是建立随机游动的模型，使其始终在到达标记节点时终止。这可以通过从标记节点中移除出边并替换为自环来实现。此外，为了使用随机游走方法，我们需要将无向图<span><span class="MathJax_Preview">G’=(N,A^{'})</span><script type="math/tex">G’=(N,A^{'})</script></span>转换为一个具有<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>转移矩阵<span><span class="MathJax_Preview">P=[p_{ij}]</span><script type="math/tex">P=[p_{ij}]</script></span>的有向图<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>：</p>
+<ol>
+<li>对于每个无向边<span><span class="MathJax_Preview">(i，j)∈a</span><script type="math/tex">(i，j)∈a</script></span>，有向边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>和<span><span class="MathJax_Preview">(j，i)</span><script type="math/tex">(j，i)</script></span>被加到相应节点之间的<span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>中。<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>的转移概率<span><span class="MathJax_Preview">p_{ij}</span><script type="math/tex">p_{ij}</script></span>定义如下：</li>
+</ol>
+<div>
+<div class="MathJax_Preview">p_{ij} = \frac{w_{ij}}{\sum_{k=1}^{n}w_{ik}}\tag{19.27}</div>
+<script type="math/tex; mode=display">p_{ij} = \frac{w_{ij}}{\sum_{k=1}^{n}w_{ik}}\tag{19.27}</script>
+</div>
+<p>边界<span><span class="MathJax_Preview">(j，i)</span><script type="math/tex">(j，i)</script></span>的转移概率<span><span class="MathJax_Preview">p_{ji}</span><script type="math/tex">p_{ji}</script></span>定义如下：</p>
+<div>
+<div class="MathJax_Preview">p_{ji} = \frac{w_{ji}}{\sum_{k=1}^{n}w_{jk}}\tag{19.28}</div>
+<script type="math/tex; mode=display">p_{ji} = \frac{w_{ji}}{\sum_{k=1}^{n}w_{jk}}\tag{19.28}</script>
+</div>
+<p>例如，从图的无向图创建的有向过渡图。19.9如图所示。19.11a.</p>
+<p>2.从上一步构造的图<span><span class="MathJax_Preview">G'</span><script type="math/tex">G'</script></span>中删除标记节点的所有输出边，并替换为自循环的转移概率1。这些节点被称为吸收节点，因为它们在传入传递后捕获随机游走。图中示出了最终过渡图的示例。19.11b.因此，对于每个吸收节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>行被替换为恒等矩阵的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>行。</p>
+<p>假设最后的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>转移矩阵用<span><span class="MathJax_Preview">P=[p_{ij}]</span><script type="math/tex">P=[p_{ij}]</script></span>表示，对于任何吸收节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，只有当<span><span class="MathJax_Preview">i=k</span><script type="math/tex">i=k</script></span>时，<span><span class="MathJax_Preview">p_{ik}</span><script type="math/tex">p_{ik}</script></span>的值为1，反之，则为0。由于吸收分量的存在，转移矩阵<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>不具有唯一的稳态概率分布(或<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>向量)。稳态概率分布取决于随机状态的起始状态。例如，从图中的测试节点x开始的随机游动。19.11b最终总是以标签a结束，而以节点y开始的游走可能以标记a或B结束，值得注意的是，节的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>计算。18.4.1见第二章。18通过使用隐形传态来隐式创建一个强连接的过渡图来确保唯一的稳态概率。</p>
+<p>对于任何给定的起始节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，稳态概率分布只有在标记节点处才有正值，这是因为随机游动最终会到达标签连通图中的吸收节点，并且它永远不会从该节点中出现。因此，如果能够估计起始节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的稳态概率分布，那么每个类中的标记节点的概率值就可以聚合。以最高的概率报告为节点i的相关标签。</p>
+<p>如何计算特定起始节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的稳态概率？设<span><span class="MathJax_Preview">\overlineπ^{(t)}</span><script type="math/tex">\overlineπ^{(t)}</script></span>表示从特定初始状态<span><span class="MathJax_Preview">\overlineπ^{(0)}</span><script type="math/tex">\overlineπ^{(0)}</script></span>开始的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维(行)概率向量，当起始状态为节点I时，<span><span class="MathJax_Preview">\overlineπ^{(0)}</span><script type="math/tex">\overlineπ^{(0)}</script></span>的值对于该向量的第一个分量为1，而在其他情况下为0。那么，当起始状态为节点i时，<span><span class="MathJax_Preview">\overlineπ^{(0)}</span><script type="math/tex">\overlineπ^{(0)}</script></span>的值为1。</p>
+<div>
+<div class="MathJax_Preview">\overlineπ^{(t)}=\overlineπ^{(t-1)}P\tag{19.29}</div>
+<script type="math/tex; mode=display">\overlineπ^{(t)}=\overlineπ^{(t-1)}P\tag{19.29}</script>
+</div>
+<p>通过递归地应用上述条件<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>次,然后设置<span><span class="MathJax_Preview">t=∞</span><script type="math/tex">t=∞</script></span>,可以显示以下内容:</p>
+<div>
+<div class="MathJax_Preview">\overlineπ^{(t)}=\overlineπ^{(0)}P^{t}\tag{19.30}</div>
+<script type="math/tex; mode=display">\overlineπ^{(t)}=\overlineπ^{(0)}P^{t}\tag{19.30}</script>
+</div>
+<div>
+<div class="MathJax_Preview">\overlineπ^{(∞)}=\overlineπ^{(0)}P^{∞}\tag{19.31}</div>
+<script type="math/tex; mode=display">\overlineπ^{(∞)}=\overlineπ^{(0)}P^{∞}\tag{19.31}</script>
+</div>
+<p>如何计算稳态转移矩阵<span><span class="MathJax_Preview">P^{∞}</span><script type="math/tex">P^{∞}</script></span>？一个关键的观察是随机矩阵的最大特征值总是1(见CHAP的练习7)。18).因此，<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>可表示如下:</p>
+<div>
+<div class="MathJax_Preview">P = V ΔV^{-1}\tag{19.32}</div>
+<script type="math/tex; mode=display">P = V ΔV^{-1}\tag{19.32}</script>
+</div>
+<p>这里，<span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>是一个<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>矩阵，它的列包含特征向量，<span><span class="MathJax_Preview">Δ</span><script type="math/tex">Δ</script></span>是包含特征值的对角线矩阵，所有特征值都不大于1。请注意，具有吸收分量的随机矩阵对于每个吸收分量都有一个特征向量和单位特征值。然后，通过将<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>与其自身<span><span class="MathJax_Preview">(t−1)</span><script type="math/tex">(t−1)</script></span>乘以得到：</p>
+<div>
+<div class="MathJax_Preview">P^t = V Δ^tV^{-1}\tag{19.33}</div>
+<script type="math/tex; mode=display">P^t = V Δ^tV^{-1}\tag{19.33}</script>
+</div>
+<p>在<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>接近无穷大的极限条件下，<span><span class="MathJax_Preview">Δ^t</span><script type="math/tex">Δ^t</script></span>只包含0或1的对角线值。原始矩阵δ中任何小于1的特征值在<span><span class="MathJax_Preview">Δ^∞</span><script type="math/tex">Δ^∞</script></span>中都会接近0。换句话说，<span><span class="MathJax_Preview">Δ^∞</span><script type="math/tex">Δ^∞</script></span>可以很容易地从<span><span class="MathJax_Preview">Δ</span><script type="math/tex">Δ</script></span>计算出来。因此，如果计算了<span><span class="MathJax_Preview">v</span><script type="math/tex">v</script></span>，那么<span><span class="MathJax_Preview">P^∞</span><script type="math/tex">P^∞</script></span>也可以很容易地计算。进一步的优化是：稳态转移矩阵<span><span class="MathJax_Preview">P^∞</span><script type="math/tex">P^∞</script></span>可以通过只确定<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的<span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>前导特征向量来有效计算，其中<span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>是标记(吸收)节点的数目。有关此优化的更多细节，请参考参考书目注释。</p>
+<p>在计算<span><span class="MathJax_Preview">P^∞</span><script type="math/tex">P^∞</script></span>后，在节点<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>处开始随机游动的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维节点概率向量<span><span class="MathJax_Preview">\overlineπ^{(∞)}</span><script type="math/tex">\overlineπ^{(∞)}</script></span>的计算相对简单。当起始状态为(未标记)节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>时，起始状态<span><span class="MathJax_Preview">\overlineπ^{(0)}</span><script type="math/tex">\overlineπ^{(0)}</script></span>的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维向量包含第1分量中的1，以及0，根据我们先前的讨论，可以计算<span><span class="MathJax_Preview">\overlineπ^{(∞)}=\overlineπ^{(0)}</span><script type="math/tex">\overlineπ^{(∞)}=\overlineπ^{(0)}</script></span>。注意，<span><span class="MathJax_Preview">\overlineπ^{(∞)}</span><script type="math/tex">\overlineπ^{(∞)}</script></span>只包含对标记节点的正概率，这些节点也吸收状态。通过总结属于每个类的标记节点在<span><span class="MathJax_Preview">\overlineπ^{(∞)}</span><script type="math/tex">\overlineπ^{(∞)}</script></span>中的概率，可以得到未标记节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的每个类的概率。</p>
+<p>然而，有一种更简单的方法来计算所有未标记节点的类概率分布，而不必显式计算<span><span class="MathJax_Preview">P^∞</span><script type="math/tex">P^∞</script></span>，然后尝试不同的<span><span class="MathJax_Preview">\overlineπ^{(0)}</span><script type="math/tex">\overlineπ^{(0)}</script></span>起始向量。对于每个<span><span class="MathJax_Preview">c∈{(1…K)}</span><script type="math/tex">c∈{(1…K)}</script></span>，让<span><span class="MathJax_Preview">N_c⊆N</span><script type="math/tex">N_c⊆N</script></span>是属于该类的标记节点集。对于<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类，从节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>开始的步行必须以<span><span class="MathJax_Preview">N_c</span><script type="math/tex">N_c</script></span>结尾，这个事件的概率由<span><span class="MathJax_Preview">\sum_{j∈N_c}[P^∞]_{ij}</span><script type="math/tex">\sum_{j∈N_c}[P^∞]_{ij}</script></span>.设<span><span class="MathJax_Preview">\overline{Y_c}</span><script type="math/tex">\overline{Y_c}</script></span>是一个列向量，其中包含<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个条目，使得第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>条目为1，如果节点属于<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类，则<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>为0。那么，很容易看到列的第一个条目。向量<span><span class="MathJax_Preview">\overline{Z_c}=P^∞\overline{Y_c}</span><script type="math/tex">\overline{Z_c}=P^∞\overline{Y_c}</script></span>等价于<span><span class="MathJax_Preview">\sum_{j∈N_c}[P^∞]_{ij}</span><script type="math/tex">\sum_{j∈N_c}[P^∞]_{ij}</script></span>，它是从未标记节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>开始的行走概率之和，终止于属于<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类的各个节点。</p>
+<p>因此，我们需要对每一类<span><span class="MathJax_Preview">c∈{(1…K)}</span><script type="math/tex">c∈{(1…K)}</script></span>计算<span><span class="MathJax_Preview">Z_c</span><script type="math/tex">Z_c</script></span>，设<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>是一个<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵，其中<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>列是<span><span class="MathJax_Preview">\overline{Y_c}</span><script type="math/tex">\overline{Y_c}</script></span>。同样，设<span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>是一个<span><span class="MathJax_Preview">n×</span><script type="math/tex">n×</script></span>矩阵，其中<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>列是<span><span class="MathJax_Preview">\overline{Z_c}</span><script type="math/tex">\overline{Z_c}</script></span>，则可以通过<span><span class="MathJax_Preview">P^∞</span><script type="math/tex">P^∞</script></span>和<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>之间的简单矩阵乘法得到<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>.</p>
+<div>
+<div class="MathJax_Preview">Z=P^∞Y\tag{19.34}</div>
+<script type="math/tex; mode=display">Z=P^∞Y\tag{19.34}</script>
+</div>
+<p>未标记节点(行)<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>在<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>中的最大概率的类可以作为它的类标签来报告。这种方法也被称为标签传播的会合方法。</p>
+<p>我们做了一些重要的观察。如果<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的第行<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>是吸收的，那么它与身份矩阵的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>行相同。因此，预乘<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>与<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的任何次数都不会改变<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的第行。换句话说<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，对应于标记节点的<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>行将被固定到<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的相应行。因此，标记节点的预测被固定到它们的训练标签。对于未标记的节点，在标签连接的网络中，<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的行总是总和为1。这是因为<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>中的行<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的值之和等于从节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>开始的随机游走达到吸收状态的概率。在标签连接网络中，每个随机游走最终将达到吸收状态。</p>
+<h4 id="19421">19.4.2.1迭代标号传播：谱解释</h4>
+<p>方程19.34提出了一种计算<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>中标号概率的简单迭代方法，而不是<span><span class="MathJax_Preview">P^∞</span><script type="math/tex">P^∞</script></span>，它可以初始化<span><span class="MathJax_Preview">Z^{0}=Y</span><script type="math/tex">Z^{0}=Y</script></span>，然后重复使用下面的更新来增加迭代索引<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的值。</p>
+<div>
+<div class="MathJax_Preview">Z^{(t+1)} = PZ^{(t)}\tag{19.35}</div>
+<script type="math/tex; mode=display">Z^{(t+1)} = PZ^{(t)}\tag{19.35}</script>
+</div>
+<p>很容易看出<span><span class="MathJax_Preview">Z^{(∞)}</span><script type="math/tex">Z^{(∞)}</script></span>与等式19.34.中<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的值相同。对于标记(吸收)节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的第1行将始终不受更新的影响，因为<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的第1行与标识矩阵的第1行相同。标签传播更新是为了收敛而执行的。在实践中，需要相对较少的迭代才能达到收敛。</p>
+<p>可以重新排列标签传播更新以显示最终解决方案<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>将满足以下收敛关系：</p>
+<div>
+<div class="MathJax_Preview">(I − P)Z = 0\tag{19.36}</div>
+<script type="math/tex; mode=display">(I − P)Z = 0\tag{19.36}</script>
+</div>
+<p>请注意，<span><span class="MathJax_Preview">I−P</span><script type="math/tex">I−P</script></span>只是具有吸收状态的网络<span><span class="MathJax_Preview">G'</span><script type="math/tex">G'</script></span>的邻接矩阵的归一化(随机游动)拉普拉斯，而且<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的每一列都是特征值0的拉普拉斯矩阵的特征向量，在无监督谱聚类中，第一个特征值0的特征向量由于没有信息而被丢弃。但是，在集体分类中，<span><span class="MathJax_Preview">I−P</span><script type="math/tex">I−P</script></span>有附加的特征向量其值为0。由于存在吸收状态，<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的每个类特定列都包含一个特征值为0的特征向量。事实上，标签传播解也可以用一个类似于原始无向图<span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>上的谱聚类的优化公式得到。在这种情况下，优化公式使用类似的目标<span><span class="MathJax_Preview">f</span><script type="math/tex">f</script></span>。</p>
+<h3 id="1943">19.4.3 监督谱方法</h3>
+<p>谱方法可以用两种不同的方法对图形进行集体分类。第一种方法直接将图转换成多维数据，以便于使用多维分类器，如<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>最近邻分类器。嵌入方法与谱聚类方法相同，只是将类信息合并到嵌入中。第二种方法直接学习<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>类概率矩阵<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>，并给出了与谱簇相关的优化公式，这类概率矩阵<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>与标号传播中的概率矩阵<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>相似，有趣的是，第二种方法也与标签传播密切相关。</p>
+<h4 id="19431">19.4.3.1 带谱嵌入的监督特征生成</h4>
+<p>设<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>是具有权矩阵<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>的无向图，该方法由以下步骤组成，第一个步骤是用基于类的监督来增加<span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>：</p>
+<p>1.在<span><span class="MathJax_Preview">G</span><script type="math/tex">G</script></span>中每对具有相同标签的节点之间添加一个权重为<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>的边，如果在这两个节点之间已经存在一个边，则通过将<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>添加到现有边的权重中来合并这两个边。生成的图由<span><span class="MathJax_Preview">G^+</span><script type="math/tex">G^+</script></span>表示。参数<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>控制来自现有标签的监督级别。</p>
+<p>2.使用<span><span class="MathJax_Preview">Sects</span><script type="math/tex">Sects</script></span>的谱嵌入方法。19.3.4生成增广图<span><span class="MathJax_Preview">G^+</span><script type="math/tex">G^+</script></span>的<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>维嵌入。</p>
+<p>3.在嵌入的数据上应用任何多维分类器，例如最近邻分类器。</p>
+<p><span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>的值可以随着交叉验证的使用而调整。注意，这种方法并不直接学习类的概率，而是创建了一个特征表示，它隐式地结合了同质性效果和现有的标签信息，这种特征表示对网络局部性和标签分布都很敏感，因此可以用来设计一个有效的多维分类器。</p>
+<h4 id="19432">19.4.3.2 图正则化方法</h4>
+<p>图正则化方法直接用与谱簇相关的优化公式学习节点的标号。设<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>是优化变量的<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵，其中<span><span class="MathJax_Preview">(i,c)</span><script type="math/tex">(i,c)</script></span>条目表示节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>属于标号<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>的倾向。当<span><span class="MathJax_Preview">(i,c)</span><script type="math/tex">(i,c)</script></span>条目较大时，说明节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>更有可能属于标号<span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span>。列向量<span><span class="MathJax_Preview">\overline{Z_c}</span><script type="math/tex">\overline{Z_c}</script></span>表示<span><span class="MathJax_Preview">c∈{(1.k)}</span><script type="math/tex">c∈{(1.k)}</script></span>的<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>列，并且<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>是包含标签信息的<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>二进制矩阵。如果第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>节点有标记，那么在<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的第一行中只有一个条目是1，对应于相关的类标签。其他条目为0。对于未标记的节点，对应的<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>行中的所有条目都是0。<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>列由列向量<span><span class="MathJax_Preview">\overline{Y_c}</span><script type="math/tex">\overline{Y_c}</script></span>表示。</p>
+<p>这种方法直接使用无向图<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>的加权矩阵<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>(例如图(19.9))。矩阵<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>中的变量不是有向转移图，而是用一个与谱簇有关的优化公式导出的，每个<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维向量<span><span class="MathJax_Preview">\overline{Z_c}</span><script type="math/tex">\overline{Z_c}</script></span>被看作是<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个节点的一维嵌入，该优化公式的目标是两倍，这反映在目标函数的两个加性项中:</p>
+<p>1.光滑性(同质性)目标：对于每一类<span><span class="MathJax_Preview">c∈{(1.k)}</span><script type="math/tex">c∈{(1.k)}</script></span>，与高权重边连接的节点应映射到<span><span class="MathJax_Preview">\overline{Z_c}</span><script type="math/tex">\overline{Z_c}</script></span>中的相似值。这个目标与谱簇中的无监督目标函数相同。在这种情况下，对称低量算符<span><span class="MathJax_Preview">L^s</span><script type="math/tex">L^s</script></span>由于其较好的收敛性而被使用：</p>
+<div>
+<div class="MathJax_Preview">L^s=I-\Lambda^{-1/2}W\Lambda^{-1/2}\tag{19.37}</div>
+<script type="math/tex; mode=display">L^s=I-\Lambda^{-1/2}W\Lambda^{-1/2}\tag{19.37}</script>
+</div>
+<p>这里，<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>是一个对角矩阵，其中第1对角项包含<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>权矩阵<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>的第1行项之和，为了简洁起见，我们用<span><span class="MathJax_Preview">S=\Lambda^{-1/2}W\Lambda^{-1/2}</span><script type="math/tex">S=\Lambda^{-1/2}W\Lambda^{-1/2}</script></span>表示归一化权矩阵，因此，目标函数中的光滑项<span><span class="MathJax_Preview">O_s</span><script type="math/tex">O_s</script></span>可以写成如下：</p>
+<div>
+<div class="MathJax_Preview">O_s=\sum_{c=1}^{k}\overline{Z}^{T}L^s\overline{Z_c}=\sum_{c=1}^{k}\overline{Z}^{T}(I-S))\overline{Z_c}\tag{19.38}</div>
+<script type="math/tex; mode=display">O_s=\sum_{c=1}^{k}\overline{Z}^{T}L^s\overline{Z_c}=\sum_{c=1}^{k}\overline{Z}^{T}(I-S))\overline{Z_c}\tag{19.38}</script>
+</div>
+<p>这个术语被称为平滑项，因为它确保了预测的标签倾向<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>沿边平滑地变化，特别是当边的权重很大时。这个术语也可以被看作是局部一致性项。</p>
+<p>2.标签拟合目标：由于嵌入<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>是为了尽可能地模拟<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>，所以<span><span class="MathJax_Preview">||\overline{Z_c}-\overline{Y_c}||^2</span><script type="math/tex">||\overline{Z_c}-\overline{Y_c}||^2</script></span>的值应该尽可能小。请注意，<span><span class="MathJax_Preview">||\overline{Z_c}-\overline{Y_c}||^2</span><script type="math/tex">||\overline{Z_c}-\overline{Y_c}||^2</script></span>中包含了未标记的节点，对于这些节点，这个术语是正则化的。正则化器的目标是在优化模型中避免7种病态的解和过度拟合。</p>
+<div>
+<div class="MathJax_Preview">O_f=\sum_{c=1}^{k}||\overline{Y_c}-\overline{Z_c}||^2\tag{19.39}</div>
+<script type="math/tex; mode=display">O_f=\sum_{c=1}^{k}||\overline{Y_c}-\overline{Z_c}||^2\tag{19.39}</script>
+</div>
+<p>这个术语也可以被看作是一个全局一致性术语。</p>
+<p>总体目标函数可以构造为<span><span class="MathJax_Preview">O=O_s+μO_f</span><script type="math/tex">O=O_s+μO_f</script></span>，其中<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>定义了标签拟合项的权重。参数<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>反映了这两个准则之间的权衡。因此，总体目标函数可以写成如下</p>
+<div>
+<div class="MathJax_Preview">O =\sum_{c=1}^{k}\overline{Z}^{T}(I-S))\overline{Z_c}+μ\sum_{c=1}^{k}||\overline{Y_c}-\overline{Z_c}||^2\tag{19.40}</div>
+<script type="math/tex; mode=display">O =\sum_{c=1}^{k}\overline{Z}^{T}(I-S))\overline{Z_c}+μ\sum_{c=1}^{k}||\overline{Y_c}-\overline{Z_c}||^2\tag{19.40}</script>
+</div>
+<p>要优化这个目标函数，必须对<span><span class="MathJax_Preview">\overline{Z_c}</span><script type="math/tex">\overline{Z_c}</script></span>中的不同决策变量使用偏导数，并将其设置为零。这产生了以下条件：</p>
+<div>
+<div class="MathJax_Preview">(I − S)\overline{Z_c} +μ( \overline{Z_c}-\overline{Y_c})=0\quad\forall{c}∈{(1.k)}\tag{19.41}</div>
+<script type="math/tex; mode=display">(I − S)\overline{Z_c} +μ( \overline{Z_c}-\overline{Y_c})=0\quad\forall{c}∈{(1.k)}\tag{19.41}</script>
+</div>
+<p>因为对于每个<span><span class="MathJax_Preview">c∈{(1..K)}</span><script type="math/tex">c∈{(1..K)}</script></span>，这个条件都是正确的，所以也可以用矩阵的形式写出上述条件。</p>
+<div>
+<div class="MathJax_Preview">(I − S)Z + μ(Z − Y ) = 0\tag{19.42}</div>
+<script type="math/tex; mode=display">(I − S)Z + μ(Z − Y ) = 0\tag{19.42}</script>
+</div>
+<p>可以按照以下方式重新安排这种优化条件：</p>
+<div>
+<div class="MathJax_Preview">Z =\frac{SZ}{1+μ}+\frac{μ}{1+μ}Y\tag{19.43}</div>
+<script type="math/tex; mode=display">Z =\frac{SZ}{1+μ}+\frac{μ}{1+μ}Y\tag{19.43}</script>
+</div>
+<p>目标是确定这个优化条件的解<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span></script></span>。这可以通过初始化<span><span class="MathJax_Preview">Z^{(0)}=Y</span><script type="math/tex">Z^{(0)}=Y</script></span>，然后迭代地从<span><span class="MathJax_Preview">Z^{(t)}</span><script type="math/tex">Z^{(t)}</script></span>中更新<span><span class="MathJax_Preview">Z^{(t+1)}</span><script type="math/tex">Z^{(t+1)}</script></span>来实现，如下所示</p>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Z^{(t+1)} =\frac{SZ^{(t)}}{1+μ}+\frac{μ}{1+μ}Y\tag{19.44}</span><script type="math/tex">Z^{(t+1)} =\frac{SZ^{(t)}}{1+μ}+\frac{μ}{1+μ}Y\tag{19.44}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Z^{(t+1)} =\frac{SZ^{(t)}}{1+μ}+\frac{μ}{1+μ}Y\tag{19.44}</span><script type="math/tex">Z^{(t+1)} =\frac{SZ^{(t)}}{1+μ}+\frac{μ}{1+μ}Y\tag{19.44}</script></span></script></span>
+此解决方案被迭代为收敛。可以显示该方法收敛到以下解决方案：</p>
+<div>
+<div class="MathJax_Preview">Z^{(∞)}=\frac{μ}{1+μ}(I+\frac{S}{1+μ}+(\frac{S}{1+μ})^2+...)Y=\frac{μ}{1+μ}(I-\frac{S}{1+μ})^{-1}Y\tag{19.45}</div>
+<script type="math/tex; mode=display">Z^{(∞)}=\frac{μ}{1+μ}(I+\frac{S}{1+μ}+(\frac{S}{1+μ})^2+...)Y=\frac{μ}{1+μ}(I-\frac{S}{1+μ})^{-1}Y\tag{19.45}</script>
+</div>
+<p>直观地，矩阵<span><span class="MathJax_Preview">(I-\frac{S}{1+μ})^{-1}=(I+\frac{S}{1+μ}+(\frac{S}{1+μ})^2+...)</span><script type="math/tex">(I-\frac{S}{1+μ})^{-1}=(I+\frac{S}{1+μ}+(\frac{S}{1+μ})^2+...)</script></span> 是一节点之间对加权<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>系数的<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>矩阵.换句话说，将属于<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>类的节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的倾向预测为其加权<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>系数与<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>类标记节点的之和，因为<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>测度可以预测链接在节点之间(参见Sect.19.5)，这种方法说明了集合分类和链接预测之间的联系.</p>
+<p>可以通过交叉验证来了解<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>的最优值。值得注意的是，与前面提到的具有吸收状态的标签传播算法不同，这种方法只对标签进行<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>偏倚，并且不限制<span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span>中的行与相应的<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>行对应的标记节点相同。事实上，矩阵<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>可以为标记节点提供标签预测。已经标记的节点与其原始的训练标签不同。当训练数据中的原始标记容易出错和噪声时，这种情况很可能发生。因此，正则化方法对于含有噪声和容易出错的训练标签的网络来说更加灵活和健壮。</p>
+<h4 id="19433">19.4.3.3 与随机游走方法的联系</h4>
+<p>尽管图正则化方法是用谱方法导出的，但它也与随机游动法有关。基于<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵的更新方程。19.44可分解为个不同的矢量更新方程，每个的维列都有一个。</p>
+<div>
+<div class="MathJax_Preview">\overline{Z_c}=\frac{S\overline{Z_c}}{1+μ}+\frac{μ}{1+μ}\overline{Y_c}\quad\forall{c}∈{(1...k)}\tag{19.46}</div>
+<script type="math/tex; mode=display">\overline{Z_c}=\frac{S\overline{Z_c}}{1+μ}+\frac{μ}{1+μ}\overline{Y_c}\quad\forall{c}∈{(1...k)}\tag{19.46}</script>
+</div>
+<p>这些更新方程在代数上类似于一个个人化的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>方程，其中<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>替换了转移矩阵，在属于特定类别的<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>标记节点处，重启概率为<span><span class="MathJax_Preview">\frac{μ}{1+μ}</span><script type="math/tex">\frac{μ}{1+μ}</script></span>。向量<span><span class="MathJax_Preview">\overline{Y_c}</span><script type="math/tex">\overline{Y_c}</script></span>类似于<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类的个性化重启向量乘以<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类中的训练节点数。类似地，向量<span><span class="MathJax_Preview">\overline{Z_c}</span><script type="math/tex">\overline{Z_c}</script></span>类似于个性化<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>向量。<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类的训练节点数乘以<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类中的训练节点数，因此，类特定的方程。19.46可以看作是一个个人化的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>方程，它与<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类的先验概率成比例，当然，对称矩阵<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>并不是真正的随机转移矩阵，因为它的列不等于1。因此，这个结果不能被正式看作是个性化的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>概率。</p>
+<p>类似于标号传播的一类密切相关的随机游动方法。例如，人们可以使用随机转移矩阵<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>，而不是使用从谱聚类导出的非随机矩阵。用19.27和19.28推导出<span><span class="MathJax_Preview">P=\Lambda^{-1}W</span><script type="math/tex">P=\Lambda^{-1}W</script></span>.然而，与标签传播方法中使用的过渡矩阵<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>的一个不同之处是网络结构不被改变以产生吸收状态。换句话说，图的有向过渡图。用19.11a代替无花果。19.11b求出<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>.在等式19.46中用<span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>代替<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>。导致一个变化的标签传播更新(参见等式19.35)，其中标记的节点不再被约束为被预测到它们的原始标签。</p>
+<p>在等式19.46中用<span><span class="MathJax_Preview">P^T</span><script type="math/tex">P^T</script></span>替换<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>导致了（类预先缩放）个性化<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>方程。这相当于执行个性化的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>算法<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>次，其中<span><span class="MathJax_Preview">CTH</span><script type="math/tex">CTH</script></span>执行的个性化向量在属于第<span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span>类的标记节点重新开始。每一类特定的个性化<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>概率乘以该类的先验概率，或等价地，在该类中标记的训练节点的数目。对于每个节点，报告产生最高（先前缩放）个性化<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>概率的类索引。这些替代方法的性能取决于手上的数据集。</p>
+<h2 id="195">19.5 链接预测</h2>
+<p>在许多社交网络中，人们希望预测网络中节点对之间的未来链接。例如，商业社交网络，如<span><span class="MathJax_Preview">Facebook</span><script type="math/tex">Facebook</script></span>，通常推荐用户作为潜在的朋友。一般来说，结构和内容的相似性都可以用来预测节点之间的链接。下面将讨论这些标准：</p>
+<p>​结构度量：结构度量通常使用三进闭包的原理来进行预测。其思想是，如果两个节点在自己的社区中共享相似的节点，那么它们在将来更有可能连接起来，如果它们还没有连接起来的话。</p>
+<p>基于内容的度量：在这些情况下，使用同质性原理进行预测。其思想是，具有类似内容的节点更有可能链接。例如，在包含科学合著者关系的书目网络中，包含关键字“数据挖掘”的节点更有可能连接到包含关键字“机器学习”的另一个节点。</p>
+<p>虽然基于内容的措施在增强链接预测方面有潜力，但其结果对手头的网络相当敏感。例如，在<span><span class="MathJax_Preview">twitter</span><script type="math/tex">twitter</script></span>这样的网络中，内容是带有许多非标准首字母缩略词的短而有噪音的<span><span class="MathJax_Preview">tweet</span><script type="math/tex">tweet</script></span>形式，基于内容的度量并不特别有效。此外，虽然结构连接通常意味着基于内容的同质性，但相反的情况并不总是正确的。因此，使用基于内容的措施并不特别有效。在不同的网络领域中，内容相似度的结果好坏参半。另一方面，结构度量在不同类型的网络中几乎总是有效的，这是因为三进闭包普遍存在于不同的网络领域，并且对链接预测具有更直接的适用性。</p>
+<h3 id="1951">19.5.1 基于邻里的措施</h3>
+<p>基于邻域的度量方法以不同的方式使用一对节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的公共邻居数来量化它们之间未来链路的可能性。例如，在图19.12a中、艾丽斯和鲍勃共有四个邻里，因此，可以合理地推测，他们之间可能最终形成联系。除了他们的共同邻居外，他们还有自己不相交的一组邻里。有不同的基于邻里关系的措施来说明不同邻居的数目和相对重要性。下面将讨论这些问题。</p>
+<p><strong>定义19.5.1(公共邻居测度)节点</strong><span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的公共邻居测度等于节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的公共邻居数，换句话说，如果<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>是节点的邻居集，<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>而<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>是节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的邻居集，则共同邻居测度的定义如下:</p>
+<div>
+<div class="MathJax_Preview">CommonNeighbors(i, j) = |S_i ∩ S_j |\tag{19.47}</div>
+<script type="math/tex; mode=display">CommonNeighbors(i, j) = |S_i ∩ S_j |\tag{19.47}</script>
+</div>
+<p>公共邻居度量的主要缺点是，与其他连接的数量相比，它没有考虑到它们之间的公共邻居的相对数量。在图19.12a中的例子中，<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>都有一个相对较小的节点度。考虑一个不同的情况：<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>要么是垃圾邮件发送者，要么是非常受欢迎的公众人物，他们与大量其他演员连接在一起。在这种情况下，<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>可能很容易有许多邻居，只是通过机会。<span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>度量是为不同程度的分布而设计的。</p>
+<p>定义19.5.2(<span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>测度)基于<span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>的节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的链路预测测度分别等于相邻集<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>和<span><span class="MathJax_Preview">S_j</span><script type="math/tex">S_j</script></span>之间的<span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>系数。</p>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">JaccardPredict(i, j) =\frac{|S_i ∩ S_j |}{|S_i ∪ S_j |}\tag{19.48}</span><script type="math/tex">JaccardPredict(i, j) =\frac{|S_i ∩ S_j |}{|S_i ∪ S_j |}\tag{19.48}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">JaccardPredict(i, j) =\frac{|S_i ∩ S_j |}{|S_i ∪ S_j |}\tag{19.48}</span><script type="math/tex">JaccardPredict(i, j) =\frac{|S_i ∩ S_j |}{|S_i ∪ S_j |}\tag{19.48}</script></span></script></span>
+图19.12(A)中爱丽丝和鲍勃之间的雅卡德度为4/9。如果<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>或<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>的度增加，它们之间的<span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>系数就会降低。这种归一化是很重要的，因为节点的幂律度分布。</p>
+<p><span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>测度对测量链路预测的节点的度的变化进行了更好的调整。但是，它不能很好地调整它们中间邻域的程度。例如，在图19.12a中，<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>的共同邻居是<span><span class="MathJax_Preview">Jack、John、Jill</span><script type="math/tex">Jack、John、Jill</script></span>和<span><span class="MathJax_Preview">Mary</span><script type="math/tex">Mary</script></span>。然而，所有这些共同邻居都可能是非常受欢迎的公众人物，而且程度很高。因此，这些节点在统计上更有可能作为许多节点的共同邻居出现。这使得它们在链路预测度量中的重要性不那么重要。不同的公共邻域。它可以看作是公共邻居度量的加权版本，其中公共邻居的权重。在<span><span class="MathJax_Preview">adam-adar</span><script type="math/tex">adam-adar</script></span>测度中使用的典型函数是逆对数，在这种情况下，索引<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的公共邻居的权重设置为<span><span class="MathJax_Preview">1/log(S_k)</span><script type="math/tex">1/log(S_k)</script></span>，其中<span><span class="MathJax_Preview">S_k</span><script type="math/tex">S_k</script></span>是节点<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的邻域集。</p>
+<p>定义19.5.3(<span><span class="MathJax_Preview">Adama-adar</span><script type="math/tex">Adama-adar</script></span>测度)节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的公共邻居测度等于节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的公共邻居加权数，定义节点<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的权重为<span><span class="MathJax_Preview">1/log(S_k)</span><script type="math/tex">1/log(S_k)</script></span>。</p>
+<div>
+<div class="MathJax_Preview">AdamicAdar(i, j) =sum_{k∈S_i∩S_j}\frac{1}{log(|S_k|)}\tag{19.49}</div>
+<script type="math/tex; mode=display">AdamicAdar(i, j) =sum_{k∈S_i∩S_j}\frac{1}{log(|S_k|)}\tag{19.49}</script>
+</div>
+<p>在以前的定义中，对数的基数并不重要，只要对所有节点一致地选择它。图19.12a中的<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>之间的阿达玛度量是：</p>
+<div>
+<div class="MathJax_Preview">\frac{1}{log(4)}+\frac{1}{log(2)}+\frac{1}{log(2)}+\frac{1}{log(4)}=\frac{3}{log(2)}</div>
+<script type="math/tex; mode=display">\frac{1}{log(4)}+\frac{1}{log(2)}+\frac{1}{log(2)}+\frac{1}{log(4)}=\frac{3}{log(2)}</script>
+</div>
+<p><center>
+<img alt="图19.12" src="http://p6atp7tts.bkt.clouddn.com/图19.12.png" />
+图19.12：不同链接预测措施的不同有效性示例
+</center></p>
+<h3 id="1952-katzkatz">19.5.2 <span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>措施</h3>
+<p>虽然基于邻域的度量提供了对一对节点之间形成链路的可能性的稳健估计，但是当一对节点之间的共享邻居数量较少时，它们就不那么有效了。例如，在图19.12b中，<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Bob</span><script type="math/tex">Bob</script></span>共有一个邻居。<span><span class="MathJax_Preview">Alice</span><script type="math/tex">Alice</script></span>和<span><span class="MathJax_Preview">Jim</span><script type="math/tex">Jim</script></span>也有一个邻居。因此，在这些情况下，基于邻域的度量很难区分不同的成对预测强度。然而，在这些情况下，通过较长的路径似乎也存在显著的间接连接。在这种情况下，基于步行的度量更合适。通常用于测量链接预测强度的一种特定的基于步行的度量是<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>度量。</p>
+<p>定义19.5.4(<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>测度)，<span><span class="MathJax_Preview">n^{(t)}_{ij}</span><script type="math/tex">n^{(t)}_{ij}</script></span>是节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间长度<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的步数，然后，对于用户定义的参数<span><span class="MathJax_Preview">β&lt;1</span><script type="math/tex">β<1</script></span>，节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>测度定义如下:</p>
+<div>
+<div class="MathJax_Preview">Katz(i, j) =\sum_{t=1}^{∞}β^t · n^{(t)}_{ij}\tag{19.50}</div>
+<script type="math/tex; mode=display">Katz(i, j) =\sum_{t=1}^{∞}β^t · n^{(t)}_{ij}\tag{19.50}</script>
+</div>
+<p><span><span class="MathJax_Preview">β</span><script type="math/tex">β</script></span>的值是一个折扣因子，它不强调长度较长的游动，对于足够小的<span><span class="MathJax_Preview">β</span><script type="math/tex">β</script></span>值，则表示方程的无限和。如果<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>是无向网络的对称邻接矩阵，则<span><span class="MathJax_Preview">n×n</span><script type="math/tex">n×n</script></span>成对的<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>系数矩阵<span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span>可计算如下：</p>
+<div>
+<div class="MathJax_Preview">K =\sum_{i=1}^{∞}(βA)^i = (I − βA)^{-1} − I\tag{19.51}</div>
+<script type="math/tex; mode=display">K =\sum_{i=1}^{∞}(βA)^i = (I − βA)^{-1} − I\tag{19.51}</script>
+</div>
+<p><span><span class="MathJax_Preview">A^k</span><script type="math/tex">A^k</script></span>的特征值是<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>(参考等式19.33)的特征值的<span><span class="MathJax_Preview">KTH</span><script type="math/tex">KTH</script></span><span><span class="MathJax_Preview">幂。</span><script type="math/tex">幂。</script></span><span><span class="MathJax_Preview">β</span><script type="math/tex">β</script></span>值应始终小于<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>的最大特征值的逆值，以确保无穷和的收敛性。度量的加权版本能通过用图的权重矩阵替换<span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span>来计算，<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>测度通常提供优质的预测结果。</p>
+<p>值得注意的是，节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>相对于其他节点的<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>系数之和被称为它的<span><span class="MathJax_Preview">Katz</span><script type="math/tex">Katz</script></span>集度。其他度量中心性的机制，如密切度和<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>，也被用于修正形式的链路预测。中心性和链路预测度量之间的这种联系的原因是，高度中心节点具有与多个节点形成链路的倾向。</p>
+<h3 id="1953">19.5.3 基于随机步行的措施</h3>
+<p>基于随机游走的度量是定义节点对之间连通性的另一种方法。这两种度量分别是<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>和<span><span class="MathJax_Preview">SimRank</span><script type="math/tex">SimRank</script></span>。因为这些方法在第一章18.4.1.2中有详细的描述,在此将不详细讨论这些问题。</p>
+<p>计算节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间相似性的第一种方法是使用节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的个性化，其<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>中重新启动是在节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>执行的。其思想是，如果<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>是<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的结构邻近，它将具有非常高的个性化度量，当重新<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>启动在节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>执行时，这表明节点之间的链路预测强度更高。个性化<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>是节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之间的一种非对称测度。由于本节讨论的是无向图的情况，所以可以使用个人化<span><span class="MathJax_Preview">Pagerank(i，j)</span><script type="math/tex">Pagerank(i，j)</script></span>和个人化<span><span class="MathJax_Preview">Pagerank(j，i)</span><script type="math/tex">Pagerank(j，i)</script></span>值的平均值。另一种可能是已经是对称<span><span class="MathJax_Preview">SimRank</span><script type="math/tex">SimRank</script></span>测度。该测度计算两个随机冲浪者在同一点向后移动所需的步行长度的反函数。相应的值被报告为链接预测度量。读者可以参考第一章18.4.1.2,18章提供关于简单计算的细节。</p>
+<h3 id="1954">19.5.4 链接预测作为分类问题</h3>
+<p>上述措施是无监督的启发式措施。对于给定的网络，其中一种措施可能更有效，而另一种措施可能对不同的网络更有效。如何才能解决这一困境，并选择对给定网络最有效的措施？</p>
+<p>链路预测问题可以看作是通过将一对节点之间的链路的存在或不存在作为二进制类指示符来处理的分类问题。因此，可以为每对节点提取多维数据记录。这种多维记录的特征包括基于节点的所有基于邻域的、基于卡茨的或基于基于步行的相似性。此外，还使用了许多其他优先附加特性，如对中每个节点的节点度，因此，对于每个节点对，将构造一个多维数据记录。结果是一个正-未标记的分类问题，其中带边的节点对为正示例，其余的对为未标记的示例。为了训练目的，未标记的示例可以近似地作为负数来处理。因为在大型和稀疏的网络中有太多的负示例对，所以只使用了一个负数样本。因此，有监督的链路预测算法的工作如下：</p>
+<p>1.训练阶段：生成多维数据集，该数据集包含一对具有边缘的节点的数据记录，并从它们之间没有边缘的节点对中生成一个数据记录样本，这些特征对应于提取的节点对之间的相似性和结构特征，类标签是在对之间是否存在一个边缘。在数据上构造一个训练模型。</p>
+<p>2.测试阶段：将每个测试节点对转换为多维记录。使用任何常规多维分类器进行标签预测。</p>
+<p>第十章10.6的<span><span class="MathJax_Preview">Logistic</span><script type="math/tex">Logistic</script></span>回归方法是基本分类器的常见选择。由于潜在分类问题的不平衡性质，各种分类器的成本敏感版本被普遍使用。</p>
+<p>这种方法的一个优点是可以无缝地使用内容特征。例如，可以使用一对节点之间的内容相似性。分类器将自动学习这些特征在训练过程中的相关性。此外，与许多链接预测方法不同，该方法还可以通过不对称方式提取特征来处理有向网络。例如，可以使用索引和外部度作为特征，而不是使用节点度。在有向网络上，也可以不对称地定义随机游动特征，例如计算节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>的<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>，在节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>处重新启动，以及在第一节中重新启动。一般来说，有监督的模型更灵活，因为它能够学习各种类型的链接和特征之间的关系。</p>
+<h3 id="1955">19.5.5 缺失值估计问题的链路预测</h3>
+<p>第一章第18.5.3节。18讨论如何将链接预测应用于推荐用户项图，一般认为推荐问题和链接预测问题都可以看作是不同类型矩阵缺失值估计的实例。推荐算法应用于用户项效用矩阵，而链路预测算法则应用于不完全邻接矩阵，矩阵中的所有1<span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span>都对应于边。仅将其余条目的一个小随机样本设置为0，而其他条目则假定为未指定的。第18.5章节中讨论的任何一种缺失值估计方法可用于估计缺失条目的值。在这类方法中，矩阵因式分解方法是最常用的方法之一。使用这些方法的一个优点是指定的矩阵不需要对称。换句话说，这种方法也可以用于有向图具体参考书目注释。</p>
+<h3 id="1956">19.5.6 讨论</h3>
+<p>不同的度量在不同的数据集上具有不同的有效性。基于邻域的度量的优点是它们可以对非常大的数据集进行有效的计算。而且，它们的性能几乎与其他无监督的度量一样。然而，基于随机游走和基于<span><span class="MathJax_Preview">katz</span><script type="math/tex">katz</script></span>的度量对于非常稀疏的网络特别有用，因为在这种网络中，公共邻居的数量不能被可靠地测量。尽管监督提供了更好的准确性，但它在计算上是昂贵的。然而，监管在社交网络的各个领域提供了最大的适应性，并提供了诸如内容特性等可用的侧信息。</p>
+<p>近年来，内容也被用来增强链路预测，虽然内容可以显著改善链路预测，但必须指出的是，结构度量要强大得多，这是因为结构度量直接利用了真实网络的三元特性。网络的三进特性在几乎所有的数据领域都是真实的。另一方面，基于内容的度量是基于“反向同质性”的，在这种情况下，类似或链接相关的内容被用来预测链接。这种方法的有效性是高度特定于网络领域的。因此，基于内容的度量通常用于帮助链路预测，很少单独用于预测过程。</p>
+<h2 id="196">19.6 社会影响分析</h2>
+<p>所有的社会交往都会导致个体之间的不同程度的影响。在传统的社会交往中，这有时被称为“口碑”的影响。这个一般原则也适用于在线社交网络。例如，当一个演员在推特上推一条消息时，演员的追随者就暴露在消息中。追随者可能经常在网络中转发消息。这导致了信息、观念和观点在社交网络中的传播。许多公司认为这种信息传播是有价值的广告渠道。通过向合适的参与者发一条流行的信息，如果广告在社交网络中作为级联传播，那么就可以产生价值数百万美元的广告。一个例子是著名的奥利奥超级碗推特，在2013年2月3日，在旧金山49人队和巴尔的摩乌鸦队之间的超级碗比赛中停电。奥利奥利用这一机会在34分钟的中断过程中发布了以下信息，以及奥利奥饼干的照片：“断电？没问题。你仍然可以在黑暗中灌篮。”观众喜欢奥利奥的信息，并转发了数千次。因此，奥利奥能够以零成本创造数百万美元的广告，而且显然比超级碗期间付费电视广告的影响力更大。不同的演员在社交网络中影响同龄人的能力不同。制约演员影响力的两个最常见的因素如下：</p>
+<p>1.它们在社会网络结构中的中心性是其影响程度的关键因素。例如，具有高度中心性的演员更有可能是有影响力的。在有向网络中，具有较高威望的行为者更有可能受到影响。这些措施在第一节19.2中作了讨论。</p>
+<p>2。网络中的边缘通常与权重相关，权重取决于相应的一对演员可以相互影响的可能性。根据所使用的扩散模型，这些权重有时可以直接解释为影响传播概率。有几个因素可能决定了这些可能性。例如，一个有名的人可能比不太知名的人有更大的影响力。同样地，两个已经成为朋友很长时间的人更有可能相互影响。尽管最近的一些方法显示了如何以数据驱动的方式估计这些概率，但人们经常认为影响传播概率已经可以用于分析目的。</p>
+<p>使用影响传播模型量化了上述因素的精确影响。这些模型也被称为扩散模型。这些模型的主要目的是确定网络中的一组种子节点，信息传播最大限度地发挥影响力。因此，影响最大化问题如下：</p>
+<p>定义19.6.1(影响最大化)给定一个社会网络<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>，确定一组<span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span>个种子节点<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>，影响将使网络中影响的总体扩散最大化。</p>
+<p><span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span>的值可以看作是允许初始影响的种子节点的数量的预算。这与现实生活中的模式非常一致，广告商在最初的广告能力上面临着预算问题。社会影响分析的目的是通过口口相传的方法扩展这一最初的广告能力。</p>
+<p>每个模型或启发式都可以使用<span><span class="MathJax_Preview">f(·)</span><script type="math/tex">f(·)</script></span>表示的<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>函数来量化节点的影响程度。该函数将节点子集映射为表示影响值的实数，因此，在选择模型量化给定集的影响<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>后，优化问题是确定使<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>最大化的集合<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>，大量影响分析模型的一个有趣的性质是优化函数<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>是子模的。</p>
+<p>子模块化意味着什么？它是表示收益递减的自然规律的一种数学方法，适用于集合。换句话说，如果<span><span class="MathJax_Preview">S⊆T</span><script type="math/tex">S⊆T</script></span>，那么添加一个个体来设置<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>所获得的附加影响不能大于添加同一个个体来设置<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的附加影响。集合的子模块性正式定义如下：</p>
+<p>定义19.6.2(子模块性)函数<span><span class="MathJax_Preview">f(·)</span><script type="math/tex">f(·)</script></span>称为子模，如果对任意一对集<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>，<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>满足<span><span class="MathJax_Preview">S⊆T</span><script type="math/tex">S⊆T</script></span>，以及任何集合元素<span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>，则下列情况为真：</p>
+<div>
+<div class="MathJax_Preview">f(S\cup{\{e}\})-f(S)\ge f(T\cup{\{e}\})-f(T)\tag{19.52}</div>
+<script type="math/tex; mode=display">f(S\cup{\{e}\})-f(S)\ge f(T\cup{\{e}\})-f(T)\tag{19.52}</script>
+</div>
+<p>几乎所有用于量化影响的自然模型都是子模的，子模性在算法上是很方便的，因为存在一种非常有效的贪婪优化算法来最大化子模函数，只要<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>可以对给定的<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>值进行求值。该算法通过设置<span><span class="MathJax_Preview">S={\{}\}</span><script type="math/tex">S={\{}\}</script></span>而开始，并以尽可能多的方式递增地添加增加F值的节点。 重<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>复该过程，直到集合<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>包含所需数量的影响器<span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span>。 这种试探的近似水平是基于对子模块函数的优化的公知的经典结果。</p>
+<p>引理 19.6.1求子模函数最大化的贪婪算法提供了一个目标函数值的解，该目标函数值至少为最优值<span><span class="MathJax_Preview">(\frac{e−1}{e})</span><script type="math/tex">(\frac{e−1}{e})</script></span>的一个分式.这里，<span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>是自然对数的基.</p>
+<p>这些结果表明，只要对给定的节点集定义适当的子模影响函数<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>，就有可能对进<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>行有效的优化。定义一组节点的影<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>响函数的两种<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>常用方法是线性阈值模型和独立级联模型，这两种扩散模型都是最早在社会影响分析方面提出的，这些扩散模型的一般操作假设是节点处于活动状态或非活动状态。直观地说，一个活动节点是一个已经受到期望行为集合影响的节点。一旦一个节点移动到一个活动状态，它就永远不会停止活动。根据模型，一个活动节点可能在单个时间或更长的周期内触发相邻节点的激活。节点被连续激活，直到在给定的迭代中没有更多的节点被激活,其值被<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>评估，终止时激活节点的总数。</p>
+<h3 id="1961">19.6.1 线性阈值模型</h3>
+<p>在该模型中，该算法首先从一组活跃的种子节点开始，然后根据相邻活动节点的影响迭代增加活动节点的数量，允许主动节点在算法执行过程中多次迭代时影响其邻居，直到没有更多的节点被激活为止。相邻节点的影响是使用特定于边缘的权值<span><span class="MathJax_Preview">b_{ij}</span><script type="math/tex">b_{ij}</script></span>对线性函数进行量化。对于网络<span><span class="MathJax_Preview">G=(N,A)</span><script type="math/tex">G=(N,A)</script></span>中的每个节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，假定以下内容为真：</p>
+<div>
+<div class="MathJax_Preview">\sum_{j:(i,j)∈A}b_{ij}\le1\tag{19.53}</div>
+<script type="math/tex; mode=display">\sum_{j:(i,j)∈A}b_{ij}\le1\tag{19.53}</script>
+</div>
+<p>每个节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>与一个随机门限<span><span class="MathJax_Preview">θ_i∼U[0，1]</span><script type="math/tex">θ_i∼U[0，1]</script></span>相关联，该随机门限预先固定，并在算法过程中保持不变，节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的活动邻居在给定时刻对它的总影响<span><span class="MathJax_Preview">I(i)</span><script type="math/tex">I(i)</script></span>被计算为<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的所有活动邻居的权重<span><span class="MathJax_Preview">b_{ij}</span><script type="math/tex">b_{ij}</script></span><span><span class="MathJax_Preview">比</span><script type="math/tex">比</script></span><span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>之和.</p>
+<div>
+<div class="MathJax_Preview">\sum_{j:(i,j)∈A,j \quad is\quad active}b_{ij}\tag{19.54}</div>
+<script type="math/tex; mode=display">\sum_{j:(i,j)∈A,j \quad is\quad active}b_{ij}\tag{19.54}</script>
+</div>
+<p>当<span><span class="MathJax_Preview">I(i)≥θ_i</span><script type="math/tex">I(i)≥θ_i</script></span>时，节点<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>在一个步骤中变为活动。此过程被重复，直到没有进一步的节点被激活为止。总影响<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>可以测量为由给定的种子集<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>激活的节点数。通常用模拟方法计算给定种子集<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的影响<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>。</p>
+<h3 id="1962">19.6.2 独立级联模型</h3>
+<p>在上述线性阈值模型中，一旦节点变得活跃，它就有多个机会来影响它的邻居。随机变量<span><span class="MathJax_Preview">\theta_{i}</span><script type="math/tex">\theta_{i}</script></span>与一个节点相关，以阈值的形式存在。另一方面，在独立级联模型中，在节点变得活跃之后，它仅获得激活邻居的单个机会，并且与边缘相关联的传播概率。与边缘相关的传播概率用<span><span class="MathJax_Preview">p_{ij}</span><script type="math/tex">p_{ij}</script></span>来表示。在每次迭代中，只允许新活动的节点影响它们尚未被激活的邻居。对于给定的节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>，连接到它的新活动邻居的每一个边<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>，我以成功的概率<span><span class="MathJax_Preview">p_{ij}</span><script type="math/tex">p_{ij}</script></span>独立地抛硬币。如果硬币抛出边缘<span><span class="MathJax_Preview">(i，j)</span><script type="math/tex">(i，j)</script></span>导致成功，则节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>被激活。如果节点<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>被激活，它将在下一次迭代中获得影响其邻域的一次机会。如果在迭代中没有新激活的节点，则算法终止。影响函数值等于终端处的活动节点数。因为允许节点。为了在算法的过程中只影响他们的邻居一次，在算法的过程中，每个边最多会被抛出一枚硬币。</p>
+<h3 id="1963">19.6.3 影响功能评价</h3>
+<p>设计了线性门限模型和独立级联模型，用模型计算影响函数<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>，通常通过仿真实现的<span><span class="MathJax_Preview">f(S)</span><script type="math/tex">f(S)</script></span>估计。</p>
+<p>例如，考虑线性阈值模型的情况。对于给定的种子节点集<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>，可以使用随机数生成器来设置节点处的阈值。在设置阈值之后，可以使用从种<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>子节点开始的任何确定性的图形搜索算法来标记活动节点，并且当满足阈值条件时，逐步激活节点。可以在不同的随机生成阈值集合上重复计算，并且可以对结果进行平均以获得更稳健的估计。</p>
+<p>在独立的级联模型中，可以使用不同的模拟。每一个边都可以翻转一个概率为<span><span class="MathJax_Preview">p_{ij}</span><script type="math/tex">p_{ij}</script></span>的硬币。如果抛硬币成功的话，边被指定为活的。可以显示，节点最终将被独立的级联模型激活,当一个活边路径存在时，从至少一个节点到另一个节点，这可以通过模拟来估计(最终)活动集的大小。计算在不同的运行中重复，结果被平均。</p>
+<p>线性阈值模型和独立级联模型是子模优化问题的证明可以在书目中的指标中找到，但这种性质并不是这些模型所特有的。子模块性是收益递减规律的一个非常自然的结果，适用于个体影响在较大群体中的增量影响，因此，大多数合理的影响分析模型都将满足子模块性。</p>
+<h2 id="197">19.7 总结</h2>
+<p>近年来，社交网络变得越来越流行，因为它们能够连接地理上和文化上不同的参与者。 由于社交网络参与者的行为而创建了大量的数据。 这些数据中的大部分是结构性的，以不同个体之间的关系的形式。</p>
+<p>由于其形成的自然动力学，社交网络结构表现出许多典型的性质。 最重要的基于相似性的属性包括三进闭合和同音。 典型地，社交网络是通过优先附接形成的，并且它们表现出幂律分布。</p>
+<p>由于集线器节点的存在以及社交网络聚类成一个大群的自然趋势，社会网络的聚类问题具有挑战性。因此，大多数社区检测算法都有内置的机制来保证底层的集群是平衡的。聚类方法有时也被称为图划分。最早的聚类方法之一是<span><span class="MathJax_Preview">Kernighan-Lin</span><script type="math/tex">Kernighan-Lin</script></span>方法，它采用迭代的聚类方法，在分区间反复交换节点，迭代地提高目标函数的值。<span><span class="MathJax_Preview">Girvan-Newman</span><script type="math/tex">Girvan-Newman</script></span>算法使用中间中心性的概念生成聚类，<span><span class="MathJax_Preview">Metis</span><script type="math/tex">Metis</script></span>算法通过粗化生成有效的划分，然后在粗化的表示上创建分区。谱方法使用多维嵌入来生成簇。</p>
+<p>在集体分类中，我们的目标是从顶点的一个子集从先前存在的标签中推断出标签。这是一个具有双重适用性的问题，适用于社会网络分析和半自动学习。多维数据集可以转换成相似图来应用集体分类方法。用于集体分类的最常用的方法包括迭代方法、基于随机步态的标签传播方法和谱方法。</p>
+<p>在链接预测问题中，目标是从网络中现有的结构和内容中预测链接。结构度量通常比基于内容的度量更有效。结构方法使用局部聚类方法，例如<span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>测度或个性化<span><span class="MathJax_Preview">PageRank</span><script type="math/tex">PageRank</script></span>值来进行预测。有监督的方法能够鉴别地确定链接预测的最相关特征。</p>
+<p>社会网络通常被用来影响个人使用“口碑”技术。通常，中心位置的行为者在网络中更有影响力。扩散模型被用来描述社会网络中的信息流。这类模型的两个例子包括线性阈值模型和独立级联模型。</p>
+<h2 id="198">19.8 书目说明</h2>
+<p>社会网络分析在社会学[508]的背景下得到了广泛的研究，尽管最近的工作集中在在线社交网络[6，192，532]中。[6，192，508，532]中详细讨论了邻近性和中心性措施，社会网络形成的动态可以在优秀的调查论文[69]中找到。在[70]中提出了无标度模型，[201]详细研究了<span><span class="MathJax_Preview">Internet</span><script type="math/tex">Internet</script></span>拓扑中的幂律，[342]对图的致密化和收缩直径进行了研究，在[196，509]中讨论了其他随机图模型，如<span><span class="MathJax_Preview">Erdos-Renyi</span><script type="math/tex">Erdos-Renyi</script></span>模型和<span><span class="MathJax_Preview">Watts-Stgoratz</span><script type="math/tex">Watts-Stgoratz</script></span>小世界模型。</p>
+<p>在[212]中对社区检测方法进行了详细的综述，对于一些特殊情况，最小割集问题是多项式可解的，例如，无平衡约束的非加权双向割集问题是多项式可解的，在[312]中给出了原<span><span class="MathJax_Preview">Kernighan-Lin</span><script type="math/tex">Kernighan-Lin</script></span>算法，并在[206，301]中讨论了对<span><span class="MathJax_Preview">Kernighan-Lin</span><script type="math/tex">Kernighan-Lin</script></span>算法的改进。本章讨论的<span><span class="MathJax_Preview">Girvan-Newman</span><script type="math/tex">Girvan-Newman</script></span>算法是在[230]中提出的，<span><span class="MathJax_Preview">Metis</span><script type="math/tex">Metis</script></span>算法是在[301]中提出的，本章讨论了谱聚类的归一化割集方法，[405]提出了归一化对称方法，并在[152，371]中详细介绍了谱图论和聚类方法。本章使用谱聚类的<span><span class="MathJax_Preview">Laplacian</span><script type="math/tex">Laplacian</script></span>特征图解释[90]，而不是更常用的裁剪解释，因为它对非整数和可能的负特征向量分量进行了全面的解释。</p>
+<p>**ICA**是在文档数据[128]和关系数据[404]等不同数据领域中提出的，在该框架中使用了多个基分类器，如<span><span class="MathJax_Preview">Logistic</span><script type="math/tex">Logistic</script></span>回归[370]和加权投票分类器[373]，本章的讨论是基于[404]，[554]提出的迭代标签传播方法，吸收性随机游走解释是从[78]中引入的。迭代标号传播方法[554]最初是在谱解释的基础上提出的，但在同一工作中也对随机游动解释作了简要的讨论，大多数随机游动方法也可以被描述为谱嵌入的监督版本[530，551，554]，并在[551]中讨论了集体分类的正则化框架。在[552]中讨论了有向图的集体分类，在[44]中讨论了在随机游动框架中包含内容的方法，在[93，368]中对节点分类方法进行了详细的调查，并在[427]中找到了一个集体分类工具包。</p>
+<p>[353]提出了社交网络的链路预测问题，本章所讨论的措施就是在此基础上提出的。自那以后，在链接预测过程中已经做了大量的工作，使用内容进行链接预测的方法可以在[49，64，354，484，489]中找到。在[354]中讨论了有监督方法的优点，在[383]中讨论了矩阵因式分解方法。最近，人们在[428]中展示了如何使用多个网络的链路预测。关于社交网络分析中的链接预测方法的调查见[63]。</p>
+<p>[304]提出了社会网络中的影响分析问题，提出了线性门限和独立级联模型，在[142]中提出了度折中启发式，并在[403]中对子模块性进行了讨论。[45，143，144，362，488]讨论了社会网络影响分析的其他模型。社会影响模型的主要问题之一是学习影响传播概率的困难。虽然最近有一些焦点关于这一问题[235]。最近的工作还显示了如何可以直接从社会流进行影响分析〔234, 482〕。对社会影响分析的模型和算法的研究可以在〔483〕中找到。</p>
+<h2 id="199">19.9 练习</h2>
+<p>1.对于示例19.1a中的图，计算最高度中心度、贴近度中心度和中间度集中度。图中已经标记了这些最高值的节点。</p>
+<p>2.实现确定度中心性、贴近中心性和中间中心性的算法。</p>
+<p>3.实现<span><span class="MathJax_Preview">Kernighan-Lin</span><script type="math/tex">Kernighan-Lin</script></span>算法。</p>
+<p>4.为什么在社区检测算法中，平衡约束比多维聚类算法更重要？在一个典型的真实网络中，无约束的最小双向分割是什么样的？</p>
+<p>5.考虑<span><span class="MathJax_Preview">GeWang-NeWman</span><script type="math/tex">GeWang-NeWman</script></span>算法的一个变种，其中边缘从网络中随机断开，而与高中间度的中心相反。解释这种变化对算法的负面影响。你能对断开标准做些小的改动来改善这种影响吗？</p>
+<p>6.为最小双向割集问题编写整数规划公式，使割集在节点数目上保持平衡。</p>
+<p>7.对于谱聚类算法的随机游走公式，请说明为什么以下是正确的：</p>
+<p>(a)所有非平凡特征向量<span><span class="MathJax_Preview">\overline{y}</span><script type="math/tex">\overline{y}</script></span>都有正分量和负分量。</p>
+<p>(b)直观地解释了为什么约束<span><span class="MathJax_Preview">\overline{y}^{T}\Lambda\overline{y}=1</span><script type="math/tex">\overline{y}^{T}\Lambda\overline{y}=1</script></span>中的归一化因子<span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span>增加了低次节点远离原点而高次节点嵌入在原点附近的倾向。</p>
+<p>8.假设所有的边权值<span><span class="MathJax_Preview">W_{ij}</span><script type="math/tex">W_{ij}</script></span>在其端点处按加权节点度的几何均值折现，根据这些归一化权值写出谱聚类的非归一化公式，以发现一维嵌入。加权归一化对嵌入有什么影响？从谱簇的对称归一化公式出发，描述该公式的代数相似性和不同点，讨论为什么得到的特征向量往往与谱聚类的对称表示形式相似。</p>
+<p>9.说明随机游动标签传播与图正则化算法的关系</p>
+<p>10.讨论链路预测问题与网络聚类之间的联系。</p>
+<p>11.创建一个链接预测度量，它可以执行<span><span class="MathJax_Preview">Jaccard</span><script type="math/tex">Jaccard</script></span>度量和<span><span class="MathJax_Preview">Adam-adar</span><script type="math/tex">Adam-adar</script></span>度量所执行的度规范化。</p>
+<p>12.实现线性阈值和独立级联模型的影响分析。</p>
+<p>13.本章利用列向量<span><span class="MathJax_Preview">\overline{z}</span><script type="math/tex">\overline{z}</script></span>给出了对称版本的一维公式，利用<span><span class="MathJax_Preview">n×k</span><script type="math/tex">n×k</script></span>矩阵<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>建立了对称版本的广义公式。</p>
+<p>（a）<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>是本章中讨论的随机游走公式的决策变量。表明<span><span class="MathJax_Preview">Z＝\sqrt{\Lambda}Y</span><script type="math/tex">Z＝\sqrt{\Lambda}Y</script></span>。</p>
+<p>(B)证明<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>和<span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span>的单位范数缩放行是相同的。</p>
+<p>14.众所周知，对称矩阵总是有实特征值，利用这个结果证明无向图的随机转移矩阵总是有实特征值。</p>
+<p>15.证明如果<span><span class="MathJax_Preview">(\overline{y}，λ)​</span><script type="math/tex">(\overline{y}，λ)​</script></span>是归一化低量算符<span><span class="MathJax_Preview">\Lambda^{-1}(\Lambda-W)​</span><script type="math/tex">\Lambda^{-1}(\Lambda-W)​</script></span>的特征向量-特征值对，则<span><span class="MathJax_Preview">(\overline{y}，1-λ)​</span><script type="math/tex">(\overline{y}，1-λ)​</script></span>是归一化权矩阵<span><span class="MathJax_Preview">\Lambda^{-1}W​</span><script type="math/tex">\Lambda^{-1}W​</script></span>的特征向量-特征值对，这里<span><span class="MathJax_Preview">\Lambda​</span><script type="math/tex">\Lambda​</script></span>是包含加权邻接矩阵<span><span class="MathJax_Preview">W​</span><script type="math/tex">W​</script></span>中每一行和的对角矩阵。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../18/" title="第18章 Web数据挖掘" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第18章 Web数据挖掘
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第20章 数据挖掘中的隐私保护
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2018 NUDT DM-Trans Group
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

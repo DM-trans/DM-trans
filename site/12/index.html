@@ -1,0 +1,1765 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/12/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第12章 数据流挖掘 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#12" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第12章 数据流挖掘
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第12章 数据流挖掘
+      </label>
+    
+    <a href="./" title="第12章 数据流挖掘" class="md-nav__link md-nav__link--active">
+      第12章 数据流挖掘
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121" title="12.1 介绍" class="md-nav__link">
+    12.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122" title="12.2 数据挖掘过程" class="md-nav__link">
+    12.2 数据挖掘过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1221" title="12.2.1 蓄水池算法" class="md-nav__link">
+    12.2.1 蓄水池算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12211" title="12.2.1.1 解决概念漂移" class="md-nav__link">
+    12.2.1.1 解决概念漂移
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12212" title="12.2.1.2 有用的抽样理论" class="md-nav__link">
+    12.2.1.2 有用的抽样理论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1222" title="12.2.2 海量域场景的概要结构" class="md-nav__link">
+    12.2.2 海量域场景的概要结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12221" title="12.2.2.1 布隆过滤器" class="md-nav__link">
+    12.2.2.1 布隆过滤器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12222-count-min" title="12.2.2.2 *count-min*草图" class="md-nav__link">
+    12.2.2.2 *count-min*草图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12223-ams" title="12.2.2.3 AMS草图" class="md-nav__link">
+    12.2.2.3 AMS草图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12224flajolet-martin" title="12.2.2.4用于不同元素计数的Flajolet-Martin算法" class="md-nav__link">
+    12.2.2.4用于不同元素计数的Flajolet-Martin算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123" title="12.3 数据流中的频繁模式挖掘" class="md-nav__link">
+    12.3 数据流中的频繁模式挖掘
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1231" title="12.3.1 利用简介结构" class="md-nav__link">
+    12.3.1 利用简介结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12311" title="12.3.1.1 油藏采样" class="md-nav__link">
+    12.3.1.1 油藏采样
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12312" title="12.3.1.2草图" class="md-nav__link">
+    12.3.1.2草图
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1232" title="12.3.2有损计数算法" class="md-nav__link">
+    12.3.2有损计数算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124" title="12.4 聚集数据流" class="md-nav__link">
+    12.4 聚集数据流
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1241" title="12.4.1 流算法" class="md-nav__link">
+    12.4.1 流算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1242-clustream" title="12.4.2 CluStream算法" class="md-nav__link">
+    12.4.2 CluStream算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12421" title="12.4.2.1 微聚的定义" class="md-nav__link">
+    12.4.2.1 微聚的定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12422" title="12.4.2.2 微聚算法" class="md-nav__link">
+    12.4.2.2 微聚算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12423" title="12.4.2.3 金字塔时间框架" class="md-nav__link">
+    12.4.2.3 金字塔时间框架
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1243" title="12.4.3 大规模流聚类" class="md-nav__link">
+    12.4.3 大规模流聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" title="12.5 流异常检测" class="md-nav__link">
+    12.5 流异常检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1251" title="12.5.1 个别数据点为异常值" class="md-nav__link">
+    12.5.1 个别数据点为异常值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1252" title="12.5.2 汇总变化点为异常值" class="md-nav__link">
+    12.5.2 汇总变化点为异常值
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" title="12.6 流分类" class="md-nav__link">
+    12.6 流分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1261-vfdt" title="12.6.1 VFDT族" class="md-nav__link">
+    12.6.1 VFDT族
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1262" title="12.6.2 监督微群集方法" class="md-nav__link">
+    12.6.2 监督微群集方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1263" title="12.6.3 集合方法" class="md-nav__link">
+    12.6.3 集合方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1264" title="12.6.4 大规模流媒体分类" class="md-nav__link">
+    12.6.4 大规模流媒体分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127" title="12.7 总结" class="md-nav__link">
+    12.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128" title="12.8 书目注释" class="md-nav__link">
+    12.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#129" title="12.9 练习" class="md-nav__link">
+    12.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121" title="12.1 介绍" class="md-nav__link">
+    12.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122" title="12.2 数据挖掘过程" class="md-nav__link">
+    12.2 数据挖掘过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1221" title="12.2.1 蓄水池算法" class="md-nav__link">
+    12.2.1 蓄水池算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12211" title="12.2.1.1 解决概念漂移" class="md-nav__link">
+    12.2.1.1 解决概念漂移
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12212" title="12.2.1.2 有用的抽样理论" class="md-nav__link">
+    12.2.1.2 有用的抽样理论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1222" title="12.2.2 海量域场景的概要结构" class="md-nav__link">
+    12.2.2 海量域场景的概要结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12221" title="12.2.2.1 布隆过滤器" class="md-nav__link">
+    12.2.2.1 布隆过滤器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12222-count-min" title="12.2.2.2 *count-min*草图" class="md-nav__link">
+    12.2.2.2 *count-min*草图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12223-ams" title="12.2.2.3 AMS草图" class="md-nav__link">
+    12.2.2.3 AMS草图
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12224flajolet-martin" title="12.2.2.4用于不同元素计数的Flajolet-Martin算法" class="md-nav__link">
+    12.2.2.4用于不同元素计数的Flajolet-Martin算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123" title="12.3 数据流中的频繁模式挖掘" class="md-nav__link">
+    12.3 数据流中的频繁模式挖掘
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1231" title="12.3.1 利用简介结构" class="md-nav__link">
+    12.3.1 利用简介结构
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12311" title="12.3.1.1 油藏采样" class="md-nav__link">
+    12.3.1.1 油藏采样
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12312" title="12.3.1.2草图" class="md-nav__link">
+    12.3.1.2草图
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1232" title="12.3.2有损计数算法" class="md-nav__link">
+    12.3.2有损计数算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124" title="12.4 聚集数据流" class="md-nav__link">
+    12.4 聚集数据流
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1241" title="12.4.1 流算法" class="md-nav__link">
+    12.4.1 流算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1242-clustream" title="12.4.2 CluStream算法" class="md-nav__link">
+    12.4.2 CluStream算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12421" title="12.4.2.1 微聚的定义" class="md-nav__link">
+    12.4.2.1 微聚的定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12422" title="12.4.2.2 微聚算法" class="md-nav__link">
+    12.4.2.2 微聚算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12423" title="12.4.2.3 金字塔时间框架" class="md-nav__link">
+    12.4.2.3 金字塔时间框架
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1243" title="12.4.3 大规模流聚类" class="md-nav__link">
+    12.4.3 大规模流聚类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" title="12.5 流异常检测" class="md-nav__link">
+    12.5 流异常检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1251" title="12.5.1 个别数据点为异常值" class="md-nav__link">
+    12.5.1 个别数据点为异常值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1252" title="12.5.2 汇总变化点为异常值" class="md-nav__link">
+    12.5.2 汇总变化点为异常值
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" title="12.6 流分类" class="md-nav__link">
+    12.6 流分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1261-vfdt" title="12.6.1 VFDT族" class="md-nav__link">
+    12.6.1 VFDT族
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1262" title="12.6.2 监督微群集方法" class="md-nav__link">
+    12.6.2 监督微群集方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1263" title="12.6.3 集合方法" class="md-nav__link">
+    12.6.3 集合方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1264" title="12.6.4 大规模流媒体分类" class="md-nav__link">
+    12.6.4 大规模流媒体分类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127" title="12.7 总结" class="md-nav__link">
+    12.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128" title="12.8 书目注释" class="md-nav__link">
+    12.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#129" title="12.9 练习" class="md-nav__link">
+    12.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/12.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="12">12 数据流挖掘</h1>
+<blockquote>
+<p>“你永远不会两次进入同一个流。” - Heraclitus</p>
+</blockquote>
+<h2 id="121">12.1 介绍</h2>
+<p>硬件技术的进步已经衍生出以比以前更快的速度收集数据的新方法。 例如，许多日常生活交易（例如使用信用卡或电话）导致自动收集数据。 同样，收集数据的新方法（例如可穿戴式传感器和移动设备）也增加了动态可用数据的洪流。 这些数据收集形式的一个重要假设是，数据*以一个很快的速度随时间不断积累*。这些动态数据集被称为*数据流*。</p>
+<p>流式范例中的一个关键假设是，它不再继续存储所有的数据都是因为资源限制。 虽然可以使用分布式“大数据”框架对这些数据进行归档，但这种方法的代价是会造成巨大的存储成本和实时处理能力的损失。 在许多情况下，由于成本高昂和其他分析考虑因素，此类框架并不实用。 流式框架提供了一种替代方法，通常可以使用精心设计的算法执行实时分析，而不需要对专用基础架构进行重大投资。 与流数据相关的应用领域的一些例子如下：</p>
+<ol>
+<li><em>交易流</em>：交易流通常由客户购买活动创建。 一个例子是通过使用信用卡，超市的销售点交易或在线购买物品创建的数据。</li>
+<li>Web <em>点击流</em>：流行网站上用户的活动会创建一个Web点击流。 如果该网站足够流行，数据生成的速率可能足够大，从而需要流式传输方法。</li>
+<li>社交流：Twitter等在线社交网络因用户活动而不断产生大量文本流。 流的速度和影响力通常与社交网络中演员的数量成超线性关系。</li>
+<li>网络流：通信网络包含大量的业务流。 这些流往往因侵入，离群或其他不寻常的活动而被开采。</li>
+</ol>
+<p>由于大量连续到达的数据相关的处理限制，数据流提出了许多特有的挑战。 具体而言，数据流算法通常需要在以下约束条件下运行，其中至少有几个总是存在的，而另一些偶尔存在：</p>
+<ol>
+<li><em>单程约束</em>：由于数据量连续快速生成，因此假定数据只能处理一次。 这是所有流式传输模型中的一个硬约束条件。 这些数据几乎从未被假定为将来处理的存档。 这对流式应用程序中的算法开发具有重大影响。特别是，许多数据挖掘算法本质上是迭代的，并且需要对数据进行多次传递。 这些算法需要适当修改以便在流模型的上下文中可用。</li>
+<li><em>概念漂移</em>：在大多数应用中，数据可能会随着时间的推移而发展。 这意味着各种统计属性（如属性之间的相关性，属性与类标签之间的相关性以及群集分布）可能随时间而改变。 数据流的这一方面几乎总是存在于实际应用中，但不一定是所有算法的通用假设。</li>
+<li><em>资源限制</em>：数据流通常由外部程序生成，用户可能无法控制该进程。 因此，用户对流的到达率几乎无法控制。 在到达率随时间变化的情况下，在高峰期间可能难以连续执行在线处理。 在这些情况下，可能需要删除无法及时处理的元组。 这被称为*甩负荷*。 尽管资源限制差不多 通用的流式范例，令人惊讶的是几乎没有算法能将它们合并。</li>
+<li><em>大规模域约束</em>：在某些情况下，当属性值是离散的时，它们可能有大量不同的值。 例如，考虑一个场景，在该场景中，需要分析电子邮件网络中的成对通信。 电子邮件网络中具有108个参与者的不同对电子邮件地址的数量为1016个。如果以所需存储的形式表示，则可能性的数量很容易超过PB级订单。 在这种情况下，即使存储简单的统计数据（例如计数或不同的流元素的数量）也非常具有挑战性。 因此，已经设计了许多用于大规模数据流概要构建的专门数据结构。</li>
+</ol>
+<p>由于大量的数据流，实际上所有的流式传输方法在挖掘过程中都使用在线简介构建方法。 基本思想是创建一个在线简介用于挖掘。 这取决于手头的应用，可以构建许多不同类型的概要。 大纲的性质极大地影响了可以从中挖掘的见解的类型。 摘要结构的一些示例包括随机样本，布隆过滤器，草图以及不同的元素计数数据结构。 另外，可以利用一些传统的数据挖掘应用程序，比如聚类，来从数据中创建有效的概要。</p>
+<p>本章安排如下。 第12.2节介绍了各种类型的数据流摘要构建方法。 第12.3节讨论数据流的频繁模式挖掘方法。 聚类方法在第二节讨论。 12.4，异常值分析方法在第12节讨论12.5。 分类方法介绍在12.6节。 第12.7节给出了一个总结。</p>
+<h2 id="122">12.2 数据挖掘过程</h2>
+<p>为不同的应用设计了不同的概要数据结构。现代数据结构有两种类型：：</p>
+<ol>
+<li>
+<p><em>通用的</em>：在这种情况下，概要可以直接用于大多数应用程序。 唯一这样的概要是数据点的随机样本，尽管它不能用于某些应用程序，比如特殊的元素计数。 在数据流的背景下，从数据中维护随机样本的过程也称为油藏采样。</p>
+</li>
+<li>
+<p><em>特殊的</em>：在这种情况下，概要是为特定任务设计的，如频繁元素计数或不同元素计数。 这种数据结构的例子包括用于不同元素计数的Flajolet-Martin数据结构，以及用于频繁元素计数或时刻计算的草图。
+接下来我们将讨论不同类型的概要结构。</p>
+</li>
+</ol>
+<h3 id="1221">12.2.1 蓄水池算法</h3>
+<p>采样是流式汇总最灵活的方法之一。 采样优于其他概要数据结构的主要优点是它可以用于任意应用程序。 从数据中提取点数样本后，几乎可以将任何离线算法应用于样本。默认情况下，采样应该被视为流式场景中选择的方法，尽管它对少数应用程序（如独立元素计数）有限制。在数据流的情况下，用于从数据中维护动态样本的方法被称为蓄水池采样。 所得到的样品被称为蓄水池样品。在第二部分2.4.1.2章节中主要介绍了蓄水池算法。</p>
+<p>流式场景为诸如采样等简单问题带来了一些有趣的挑战。由于不能将整个数据流存储在磁盘上进行采样，这一事实带来了挑战。在油藏采样中，目标是从数据流中持续维护动态更新的k个点的样本，而无需在任何给定时间点将数据流明确存储在磁盘上。因此，对于流中的每个传入数据点，必须使用一组有效实现的操作来维护样本。在静态情况下，样本中包含数据点的概率为<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>，其中<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>是样本大小，<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>是数据集中的点数。在流场景中，“数据集”不是静态的，n的值会随着时间的推移而不断增加。此外，以前到达的数据点，不包括在样本中，已经不可挽回地丢失。因此，采样方法在任何特定时刻都不清楚流的以前历史。换句话说，对于流中的每个输入数据点，需要动态地做出两个简单的准入控制决策：</p>
+<ol>
+<li>
+<p>应使用什么采样规则来决定是否将样本中的传入数据点包括在内？</p>
+</li>
+<li>
+<p>应该使用什么规则来决定如何从样本中弹出数据点以便为新插入的数据点“腾出空间”？</p>
+</li>
+</ol>
+<p>储层采样算法如下进行。 对于大小为<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的储层，储层中始终包含流体中的前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据点。 随后，对于第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个输入流数据点，应用以下两个准入控制决定。</p>
+<ol>
+<li>以概率<span><span class="MathJax_Preview">k / n</span><script type="math/tex">k / n</script></span>将第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个输入流数据点插入水库。</li>
+<li>如果插入新输入的数据点，则随机弹出储存层中的旧<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据点之一，为新到达的点腾出空间。</li>
+</ol>
+<p>可以证明，上述规则保留了来自数据流的无偏储存样本。
+<strong>引理12.2.1</strong> 在n个流点到达后，任何流点包含在蓄水池中的概率是相同的，并且等于<span><span class="MathJax_Preview">k / n</span><script type="math/tex">k / n</script></span>。
+**证明：**这个结果通过归纳法很容易证明出来出来。 对于初始的前<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个数据点时，定理是非常正确的。 让我们（归纳地）假设在<span><span class="MathJax_Preview">(n-1)</span><script type="math/tex">(n-1)</script></span>个数据点被接收后它也是如此。 因此，每个点包含在水库中的概率为<span><span class="MathJax_Preview">k /(n-1)</span><script type="math/tex">k /(n-1)</script></span>。 引理对于到达的数据点是非常正确的，因为它被包含在流中的概率是<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>。它仍然需要证明数据流中剩余点的结果。对于一个输入数据点可能会出现两个不相交的情况事件，并且一个点被包含在水库中的最终概率是这两种情况的总和：</p>
+<p>Ⅰ. 传入的数据点未插入储存器。 这是可能性<span><span class="MathJax_Preview">(N-K)/ N</span><script type="math/tex">(N-K)/ N</script></span>。 因为任何一点被包括在水库中的原始概率 通过归纳假设，<span><span class="MathJax_Preview">k /(n - 1)</span><script type="math/tex">k /(n - 1)</script></span>是一个点的总体概 包括在水库和案例I事件的发生，是乘法值的<span><span class="MathJax_Preview">p_1 =\frac{ k（n-k）}{n（n-1)}</span><script type="math/tex">p_1 =\frac{ k（n-k）}{n（n-1)}</script></span>。</p>
+<p>Ⅱ. 传入的数据点被插入到储存器中。 情况II的概率等于传入数据点的插入概率<span><span class="MathJax_Preview">k/n</span><script type="math/tex">k/n</script></span>随后，现有的储层点以概率<span><span class="MathJax_Preview">（k-1）/k</span><script type="math/tex">（k-1）/k</script></span>保留，因为其中只有一个被喷出。 由于归纳假设意味着流中的任何早期点最初以概率<span><span class="MathJax_Preview">k/（n-1）</span><script type="math/tex">k/（n-1）</script></span>存在于储层中，这意味着储层中包含的点的概率和情况II事件由 上述三种概率的乘积<span><span class="MathJax_Preview">p_2</span><script type="math/tex">p_2</script></span>：</p>
+<div>
+<div class="MathJax_Preview">p_2=(\frac{k}{n})(\frac{k-1}{k})(\frac{k}{n-1})=\frac{k(k-1)}{n(n-1)}\tag{12.1}</div>
+<script type="math/tex; mode=display">p_2=(\frac{k}{n})(\frac{k-1}{k})(\frac{k}{n-1})=\frac{k(k-1)}{n(n-1)}\tag{12.1}</script>
+</div>
+<p>因此，在第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个数据点到达之后，流点保留在储层中的总概率由<span><span class="MathJax_Preview">p_1</span><script type="math/tex">p_1</script></span>和<span><span class="MathJax_Preview">p_2</span><script type="math/tex">p_2</script></span>的和给出。 可以证明这等于<span><span class="MathJax_Preview">k / n</span><script type="math/tex">k / n</script></span>。
+这种方法的主要问题是它不能处理概念漂移，因为数据是均匀采样而不会衰减的。</p>
+<h4 id="12211">12.2.1.1 解决概念漂移</h4>
+<p>在流式场景中，最新的数据通常被认为比旧数据更重要。 这是因为数据生成过程可能会随着时间而改变，而从分析见解的角度来看，旧数据往往被认为是“过时的”。 来自蓄水池的统一随机样本将包含随时间推移均匀分布的数据点。 通常，大多数流媒体应用程序都使用基于衰减的框架来调节数据点的相对重要性，因此较新的数据点可能会包含在样本中。 这是通过使用*偏置函数*实现的。
+与第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个数据点相关的偏差函数在第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个数据点到达时由<span><span class="MathJax_Preview">f（r，n）</span><script type="math/tex">f（r，n）</script></span>给出。 该函数与第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个数据点到达时属于储层的第<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>个数据点的概率<span><span class="MathJax_Preview">p（r，n）</span><script type="math/tex">p（r，n）</script></span>有关。 换句话说，<span><span class="MathJax_Preview">p（r，n）</span><script type="math/tex">p（r，n）</script></span>的值与<span><span class="MathJax_Preview">f（r，n）</span><script type="math/tex">f（r，n）</script></span>成正比。 假设函数<span><span class="MathJax_Preview">f（r，n）</span><script type="math/tex">f（r，n）</script></span>随着<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>（对于固定的<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>）单调下降并且随着<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>（对于固定的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>）单调增加是合理的。 换句话说，最近的数据点具有较高的归属水库的可能性。 这种采样会产生一个对数据点敏感的样本<span><span class="MathJax_Preview">S（n）</span><script type="math/tex">S（n）</script></span>。
+<strong>定义12.2.1</strong> <em>设<span><span class="MathJax_Preview">f（r，n）</span><script type="math/tex">f（r，n）</script></span>是当第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>点到达时的第<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>点的偏差函数。 在流中的第<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个点到达时的偏置样本<span><span class="MathJax_Preview">S（n）</span><script type="math/tex">S（n）</script></span>被定义为样本，使得属于样本<span><span class="MathJax_Preview">S（n）</span><script type="math/tex">S（n）</script></span>的第<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>个点的相对概率<span><span class="MathJax_Preview">p（r，n）</span><script type="math/tex">p（r，n）</script></span>（对于尺寸<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>来说）正比于<span><span class="MathJax_Preview">f（r，n）</span><script type="math/tex">f（r，n）</script></span>。</em>
+一般来说，用任意偏置函数执行油藏采样是一个开放的问题。 但是，对于常用指数偏差函数的情况存在方法：</p>
+<div>
+<div class="MathJax_Preview">f(r,n)=e^{-\lambda(n-r)}\tag{12.2}</div>
+<script type="math/tex; mode=display">f(r,n)=e^{-\lambda(n-r)}\tag{12.2}</script>
+</div>
+<p>参数<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>定义了偏差率，通常在<span><span class="MathJax_Preview">[0,1]</span><script type="math/tex">[0,1]</script></span>的范围内。 通常，该参数<span><span class="MathJax_Preview">λ</span><script type="math/tex">λ</script></span>的选择与特定的应用程序有关。 <span><span class="MathJax_Preview">λ= 0</span><script type="math/tex">λ= 0</script></span>代表无偏的情况。 指数偏差函数定义了无记忆函数的类别，其中保留蓄水池中当前点的未来概率独立于其过去的历史或到达时间。 可以证明，这个问题仅在有限空间的场景中才是有意义的，其中储层<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的尺寸严格小于<span><span class="MathJax_Preview">1 /λ</span><script type="math/tex">1 /λ</script></span>。 这是因为它可以表明[35]从无限长度的流中指数偏置的样本在预期的大小中不会超过<span><span class="MathJax_Preview">1 /λ</span><script type="math/tex">1 /λ</script></span>。 这也被称为最大水库需求量。 以下讨论基于<span><span class="MathJax_Preview">k &lt;1 /λ</span><script type="math/tex">k <1 /λ</script></span>的假设。
+算法从一个空的容器开始。以下更换政策用于填补水库。假定在第n个点到达的时刻（即将到达之前），所填充的容器的分数为<span><span class="MathJax_Preview">F(n)\in[0,1]</span><script type="math/tex">F(n)\in[0,1]</script></span>。当第<span><span class="MathJax_Preview">（n +1）</span><script type="math/tex">（n +1）</script></span>个点到达时，它以插入概率<span><span class="MathJax_Preview">λ·k</span><script type="math/tex">λ·k</script></span>插入到油藏中。然而，水库中的一个老点不一定被删除，因为水库只有部分已满。硬币翻转成功概率<span><span class="MathJax_Preview">F（n）</span><script type="math/tex">F（n）</script></span>。在成功的情况下，水库中的一个点是随机选择的，并用输入<span><span class="MathJax_Preview">（n + 1）</span><script type="math/tex">（n + 1）</script></span>点替换。如果发生故障，则不会删除，并且第<span><span class="MathJax_Preview">（n+1）</span><script type="math/tex">（n+1）</script></span>个点将添加到油藏中。在后一种情况下，水库中的点数（当前样本量）增加1。在这种方法中，水库在流程的早期填满，但随后趋于平稳，因为它接近其容量。读者参考书目注释以证明这种方法的正确性。同样的工作也讨论了这种方法的一个变体，它可以更快地填充水库。</p>
+<h4 id="12212">12.2.1.2 有用的抽样理论</h4>
+<p>虽然蓄水池方法提供了数据样本，但通常需要获取使用采样过程获得的结果的质量范围。 抽样的一个常见应用是用储层样本估计统计总量。 通常使用*尾部不等式*来量化这些类簇的准确性。
+最简单的尾部不等式是马尔可夫不等式。 这个不等式定义为只承担非负值的概率分布。 设<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>是一个随机变量，其概率分布为<span><span class="MathJax_Preview">f_X（x）</span><script type="math/tex">f_X（x）</script></span>，均值为<span><span class="MathJax_Preview">E [X]</span><script type="math/tex">E [X]</script></span>，方差为<span><span class="MathJax_Preview">Var [X]</span><script type="math/tex">Var [X]</script></span>。
+<strong>定理12.2.1（马尔科夫不等式）</strong> 设<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>是一个随机变量，它只取非负的随机值。 那么，对于任何满足<span><span class="MathJax_Preview">E [X] &lt;α</span><script type="math/tex">E [X] <α</script></span>的常数<span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span>，下列情况是正确的：</p>
+<div>
+<div class="MathJax_Preview">P(X &gt;α) \leq E[X|/α\tag{12.3}</div>
+<script type="math/tex; mode=display">P(X >α) \leq E[X|/α\tag{12.3}</script>
+</div>
+<p><strong>证明</strong>：令<span><span class="MathJax_Preview">f_X（x）</span><script type="math/tex">f_X（x）</script></span>代表随机变量<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的概率密度函数。然后，我们得到：</p>
+<div>
+<div class="MathJax_Preview">\begin{align*}
+E[X] &amp; =\int_x xf_X(x)dx \\ 
+  &amp;=\int_{0\leq x \leq \alpha}xf_X(x)dx + \int_{x&gt;\alpha}xf_X(x)dx\\
+  &amp;\geq\int_{x&gt;\alpha}xf_X(x)dx\\
+  &amp;\geq\int_{x&gt;\alpha}\alpha f_X(x)dx
+\end{align*}</div>
+<script type="math/tex; mode=display">\begin{align*}
+E[X] & =\int_x xf_X(x)dx \\ 
+  &=\int_{0\leq x \leq \alpha}xf_X(x)dx + \int_{x>\alpha}xf_X(x)dx\\
+  &\geq\int_{x>\alpha}xf_X(x)dx\\
+  &\geq\int_{x>\alpha}\alpha f_X(x)dx
+\end{align*}</script>
+</div>
+<p>第一个不等式是从<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>的非负部分开始的，第二个不等式是根据仅在<span><span class="MathJax_Preview">x&gt;α</span><script type="math/tex">x>α</script></span>的情况下计算积分的事实。 最后一行右侧的项恰好等于<span><span class="MathJax_Preview">αP(X&gt;α)</span><script type="math/tex">αP(X>α)</script></span>。 因此，下面这个是实际上的问题：</p>
+<div>
+<div class="MathJax_Preview">E[X]\geq \alpha P(X&gt;\alpha)\tag{12.4}</div>
+<script type="math/tex; mode=display">E[X]\geq \alpha P(X>\alpha)\tag{12.4}</script>
+</div>
+<p>上述不等式可以重新排列以获得最终结果。
+马尔可夫不等式仅限于非负值的概率分布，并且仅在高尾上提供界限。 在实践中，通常希望限制概率分布的两个正值和负值。
+**定理12.2（切比雪夫不等式）：**设<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>为任意变量，则对于所有常量<span><span class="MathJax_Preview">\alpha</span><script type="math/tex">\alpha</script></span>，下式成立：</p>
+<div>
+<div class="MathJax_Preview">P(|X-E(X)|&gt;\alpha)\leq Var[X]/\alpha^2 \tag{12.5}</div>
+<script type="math/tex; mode=display">P(|X-E(X)|>\alpha)\leq Var[X]/\alpha^2 \tag{12.5}</script>
+</div>
+<p>**证明:**不等式<span><span class="MathJax_Preview">| X -E [X] | &gt;\alpha</span><script type="math/tex">| X -E [X] | >\alpha</script></span>当且仅当<span><span class="MathJax_Preview">（X -E [X]）^2&gt;α^2</span><script type="math/tex">（X -E [X]）^2>α^2</script></span>时成立。 令<span><span class="MathJax_Preview">Y =（X-E [X]）^2</span><script type="math/tex">Y =（X-E [X]）^2</script></span>为X的（非负）导数随机变量，很容易看出<span><span class="MathJax_Preview">E [Y] = V ar [X]</span><script type="math/tex">E [Y] = V ar [X]</script></span>。 然后，定理陈述左边的表达式与确定概率<span><span class="MathJax_Preview">P（Y&gt;α^2）</span><script type="math/tex">P（Y>α^2）</script></span>相同。 通过将马尔可夫不等式应用于随机变量<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>，可以获得期望的结果。
+上述证明中使用的主要技巧是将马尔可夫不等式应用于随机变量的非负函数。 当X的分布具有特定的形式（例如伯努利随机变量的和）时，这种技术对于证明其他种类的边界通常是非常有用的。 在这种情况下，可以使用随机变量的参数化函数来获得参数化边界。 然后可以对最基本的参数进行优化以实现最严格的可能界限。 使用这种方法推导出几个众所周知的边界，如*切尔诺夫边界*和*霍夫丁不等式*。 这样的边界比马尔科夫和切比切夫不等式（更弱）要严格得多。 这是因为参数优化过程隐含地创建了针对随机变量<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的相应概率分布的特殊形式而优化的边界。</p>
+<p>使用特殊的随机变量系列可以捕捉到许多实际情景。 一个特例是其中一个随机变量<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>可以表示为其他独立有界随机变量的和。 例如，考虑数据点具有与它们相关联的二元类标签的情况，并且希望使用流样本来估计属于每个类的例子的分数。 虽然属于一个类别的样本中的点的分数提供了一个估计，但是如何限制这个约束的概率精度？ 请注意，估计分数可表示为独立同分布（i.i.d.）二元随机变量的（缩放）总和，具体取决于与每个样本实例关联的二进制类。 *切尔诺夫界*对估计的准确性提供了极好的界限。</p>
+<p>首先，将引入切尔诺夫界限。 由于较低尾巴和较高尾巴的表情略有不同，因此将分开处理。 下面介绍低尾切尔诺夫边界。</p>
+<p>**定理12.2.3：**设<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>是一个随机变量，可以表示为<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个独立二元（伯努利）随机变量的总和，每个随机变量的概率都为<span><span class="MathJax_Preview">p_i</span><script type="math/tex">p_i</script></span>，其值为1。</p>
+<div>
+<div class="MathJax_Preview">X=\sum_{i=1}^n X_i</div>
+<script type="math/tex; mode=display">X=\sum_{i=1}^n X_i</script>
+</div>
+<p><em>然后对于所有<span><span class="MathJax_Preview">\delta\in(0,1)</span><script type="math/tex">\delta\in(0,1)</script></span>，可以得到如下公式：</em></p>
+<div>
+<div class="MathJax_Preview">P(X&lt;(1-\delta)E[X])&lt;e^{-E[X]\delta^2/2}\tag{12.6}</div>
+<script type="math/tex; mode=display">P(X<(1-\delta)E[X])<e^{-E[X]\delta^2/2}\tag{12.6}</script>
+</div>
+<p><em>其中<span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>是自然对数底。</em></p>
+<p>**证明：**第一步如下式所示：</p>
+<div>
+<div class="MathJax_Preview">P(X&lt;(1-\delta)E[X])&lt;\left( \frac{e^{-\delta}}{(1-\delta)^{(1-\delta)}} \right)^{E(X)}\tag{12.7}</div>
+<script type="math/tex; mode=display">P(X<(1-\delta)E[X])<\left( \frac{e^{-\delta}}{(1-\delta)^{(1-\delta)}} \right)^{E(X)}\tag{12.7}</script>
+</div>
+<p>引入未知参数<span><span class="MathJax_Preview">t&gt; 0</span><script type="math/tex">t> 0</script></span>来创建参数化边界。 <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>的低尾不等式被转化为<span><span class="MathJax_Preview">e^{-tX}</span><script type="math/tex">e^{-tX}</script></span>上的高尾不等式。 这可以受马尔可夫不等式的限制，并且它提供了一个作为t的函数的界。这个<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的函数可以被优化，以获得最严格的可能界。 通过使用指数形式的马尔可夫不等式，可以得出以下结果：</p>
+<div>
+<div class="MathJax_Preview">P(X&lt;(1-\delta)E[X])\leq\frac{E(e^{-tX})}{e^{-t(1-\delta)E(X)}}</div>
+<script type="math/tex; mode=display">P(X<(1-\delta)E[X])\leq\frac{E(e^{-tX})}{e^{-t(1-\delta)E(X)}}</script>
+</div>
+<p>把指数项展开为<span><span class="MathJax_Preview">X=\Sigma_{i=1}^{n}X_i</span><script type="math/tex">X=\Sigma_{i=1}^{n}X_i</script></span>,可以得到如下公式：</p>
+<div>
+<div class="MathJax_Preview">P(X&lt;(1-\delta)E[X])\leq\frac{\Pi_i{E(e^{-tX_i})}}{e^{-t(1-\delta)E(X)}}\tag{12.8}</div>
+<script type="math/tex; mode=display">P(X<(1-\delta)E[X])\leq\frac{\Pi_i{E(e^{-tX_i})}}{e^{-t(1-\delta)E(X)}}\tag{12.8}</script>
+</div>
+<p>上述通过使用了自变量乘积的期望等于预期乘积简化形式。 因为每个<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>都是伯努利，所以可以通过汇总<span><span class="MathJax_Preview">Xi = 0</span><script type="math/tex">Xi = 0</script></span>和<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>时的概率来显示以下内容：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">E(e^{-tX_i})=1+E[X_i](e^{-t}-1)&lt;e^{E[X_i](e^{-t}-1)}</span><script type="math/tex">E(e^{-tX_i})=1+E[X_i](e^{-t}-1)<e^{E[X_i](e^{-t}-1)}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">E(e^{-tX_i})=1+E[X_i](e^{-t}-1)&lt;e^{E[X_i](e^{-t}-1)}</span><script type="math/tex">E(e^{-tX_i})=1+E[X_i](e^{-t}-1)<e^{E[X_i](e^{-t}-1)}</script></span></script></span>
+第二个不等式遵循<span><span class="MathJax_Preview">e^{E（e^{-t}-1）}</span><script type="math/tex">e^{E（e^{-t}-1）}</script></span>的多项式展开式。 通过将这个不等式代入方程 <span><span class="MathJax_Preview">12.8</span><script type="math/tex">12.8</script></span>，并且使用<span><span class="MathJax_Preview">E [X] = \Sigma_i E [X_i]</span><script type="math/tex">E [X] = \Sigma_i E [X_i]</script></span>，可以获得以下内容：</p>
+<div>
+<div class="MathJax_Preview">P(X&lt;(1-\delta)E[X])\leq\frac{e^{E(X)(e^{-t}-1)}}{e^{-t(1-\delta)E(X)}}</div>
+<script type="math/tex; mode=display">P(X<(1-\delta)E[X])\leq\frac{e^{E(X)(e^{-t}-1)}}{e^{-t(1-\delta)E(X)}}</script>
+</div>
+<p>对于<span><span class="MathJax_Preview">t&gt; 0</span><script type="math/tex">t> 0</script></span>的任何值，右边的表达式都是正确的。希望选择提供最严格可能边界的值<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>。 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的这种值可以通过使用关于<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的表达式的导数的标准优化过程来获得。 通过计算这个优化过程的细节可以证明<span><span class="MathJax_Preview">t = t^*</span><script type="math/tex">t = t^*</script></span>的最优值如下：</p>
+<div>
+<div class="MathJax_Preview">t^* = ln(1/(1-\delta))\tag{12.9}</div>
+<script type="math/tex; mode=display">t^* = ln(1/(1-\delta))\tag{12.9}</script>
+</div>
+<p>通过在上述不等式中使用这个<span><span class="MathJax_Preview">t^*</span><script type="math/tex">t^*</script></span>值，可以证明它等价于方程<span><span class="MathJax_Preview">12.7</span><script type="math/tex">12.7</script></span>。 这完成了证明的第一部分。
+取<span><span class="MathJax_Preview">（1-δ）ln（1-δ）</span><script type="math/tex">（1-δ）ln（1-δ）</script></span>中对数项的泰勒展开的前两项可以展开以表明<span><span class="MathJax_Preview">(1-δ)^{(1-δ)}&gt; e^{-δ+δ2/ 2}</span><script type="math/tex">(1-δ)^{(1-δ)}> e^{-δ+δ2/ 2}</script></span>。 通过用公式12.7中的分母代入这个不等式，就可以得到期望的结果。
+可以获得具有形式略微不同的上尾切诺夫界限的类似结果。
+<strong>定理12.2.4（上尾Chernoff界）</strong> <em>令<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>是一个随机变量，可以表示为<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个独立的二元（伯努利）随机变量之和，其中每个随机变量的概率都为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>。</em></p>
+<div>
+<div class="MathJax_Preview">X=\sum_{i=1}^n X_i</div>
+<script type="math/tex; mode=display">X=\sum_{i=1}^n X_i</script>
+</div>
+<p>然后对于任意<span><span class="MathJax_Preview">\delta\in(0,2e-1)</span><script type="math/tex">\delta\in(0,2e-1)</script></span>,有以下公式：</p>
+<div>
+<div class="MathJax_Preview">P(X&gt;(1+\delta)E[X])&lt;e^{-E[X]\delta^2/4}\tag{12.10}</div>
+<script type="math/tex; mode=display">P(X>(1+\delta)E[X])<e^{-E[X]\delta^2/4}\tag{12.10}</script>
+</div>
+<p><span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>是自然对数底
+**证明：**证明的第一步如下所示：</p>
+<div>
+<div class="MathJax_Preview">P(X&lt;(1+\delta)E[X])&lt;\left( \frac{e^{\delta}}{(1+\delta)^{(1+\delta)}} \right)^{E(X)}\tag{12.11}</div>
+<script type="math/tex; mode=display">P(X<(1+\delta)E[X])<\left( \frac{e^{\delta}}{(1+\delta)^{(1+\delta)}} \right)^{E(X)}\tag{12.11}</script>
+</div>
+<p>如上所述，这可以通过引入未知参数<span><span class="MathJax_Preview">t&gt; 0</span><script type="math/tex">t> 0</script></span>，并将X上的上尾不等式转换为<span><span class="MathJax_Preview">e^{tX}</span><script type="math/tex">e^{tX}</script></span>上的不等式来完成。 这可以受马尔可夫不等式的限制，并且它提供了一个作为<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的函数的界限。 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的这个函数可以被优化以获得最紧密的可能界限。
+通过代数简化可以进一步表明， 当<span><span class="MathJax_Preview">\delta\in(0，2e - 1)</span><script type="math/tex">\delta\in(0，2e - 1)</script></span>时，式<span><span class="MathJax_Preview">12.11</span><script type="math/tex">12.11</script></span>提供了期望的结果。
+接下来，将介绍霍夫丁不等式。 霍夫丁不等式是一个比切尔诺夫界更一般的尾部不等式，因为它不要求基础数据值是伯努利。 在这种情况下，第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个数据值需要从有界区间<span><span class="MathJax_Preview">[l_i，u_i]</span><script type="math/tex">[l_i，u_i]</script></span>中绘制。 相应的概率界限以参数<span><span class="MathJax_Preview">l_i</span><script type="math/tex">l_i</script></span>和<span><span class="MathJax_Preview">u_i</span><script type="math/tex">u_i</script></span>表示。 因此，切尔诺夫界的情景是霍夫丁不平等的特例。 我们在下面陈述Hoeffding不等式，其中上部和下部尾部不等式是相同的。
+<strong>定理12.2.5（霍夫丁不等式）</strong> <em>令<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>是一个随机变量，可以表示为<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个独立的随机变量之和，每个随机变量的范围都是<span><span class="MathJax_Preview">[l_i，u_i]</span><script type="math/tex">[l_i，u_i]</script></span>。
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">X=\sum_{i=1}^n X_i</span><script type="math/tex">X=\sum_{i=1}^n X_i</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">X=\sum_{i=1}^n X_i</span><script type="math/tex">X=\sum_{i=1}^n X_i</script></span></script></span></em>
+对于任意<span><span class="MathJax_Preview">\theta&gt;0</span><script type="math/tex">\theta>0</script></span>,下列方程成立：</p>
+<div>
+<div class="MathJax_Preview">P(X-E[X]&gt;\theta)\leq e^{-\frac{2\theta^2}{\Sigma_{i=1}{n}(u_i-l_i)^2}}\tag{12.2}$$
+$$P(E[X]-X&gt;\theta)\leq e^{-\frac{2\theta^2}{\Sigma_{i=1}{n}(u_i-l_i)^2}}\tag{12.3}</div>
+<script type="math/tex; mode=display">P(X-E[X]>\theta)\leq e^{-\frac{2\theta^2}{\Sigma_{i=1}{n}(u_i-l_i)^2}}\tag{12.2}$$
+$$P(E[X]-X>\theta)\leq e^{-\frac{2\theta^2}{\Sigma_{i=1}{n}(u_i-l_i)^2}}\tag{12.3}</script>
+</div>
+<p>证明：这里将简要描述上尾的证明。 低尾不平等的证明是相同的。 对于未知的参数<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>，得到下面这个式子：</p>
+<div>
+<div class="MathJax_Preview">P(X-E[X]&gt;\theta)=P(e^{t(X-E[X])}&gt;e^{t\theta})\tag{12.14}</div>
+<script type="math/tex; mode=display">P(X-E[X]>\theta)=P(e^{t(X-E[X])}>e^{t\theta})\tag{12.14}</script>
+</div>
+<p>马尔可夫不等式可以用来表明右手概率至多是<span><span class="MathJax_Preview">E [e^{(X-E [X])}] e^{-tθ}</span><script type="math/tex">E [e^{(X-E [X])}] e^{-tθ}</script></span>。 <span><span class="MathJax_Preview">E [e^{(X-E [X])}]</span><script type="math/tex">E [e^{(X-E [X])}]</script></span>内的表达式可以根据单个组件<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>进行扩展。 由于产品的期望等于独立随机变量期望的乘积，因此可以表示如下：</p>
+<div>
+<div class="MathJax_Preview">P(X-E[X]&gt;\theta)=e^{-tθ}\prod_iE[e^{(X_i-E [X_i])}]\tag{12.15}</div>
+<script type="math/tex; mode=display">P(X-E[X]>\theta)=e^{-tθ}\prod_iE[e^{(X_i-E [X_i])}]\tag{12.15}</script>
+</div>
+<p>关键在于证明<span><span class="MathJax_Preview">E[e^{t(Xi-Exi)}]</span><script type="math/tex">E[e^{t(Xi-Exi)}]</script></span>的值至多等于<span><span class="MathJax_Preview">e^{t^2(u_i-l_i)^2/8}</span><script type="math/tex">e^{t^2(u_i-l_i)^2/8}</script></span>。 这可以利用使用指数函数<span><span class="MathJax_Preview">e^{t(X_i-E[X_i])}</span><script type="math/tex">e^{t(X_i-E[X_i])}</script></span>的凸性结合泰勒定理的参数来显示（参见练习12）。
+因此可以推导出下式：</p>
+<div>
+<div class="MathJax_Preview">P(X-E[X]&gt;\theta)=e^{-tθ}\prod_i e^{t^2(u_i-l_i)^2/8}\tag{12.16}</div>
+<script type="math/tex; mode=display">P(X-E[X]>\theta)=e^{-tθ}\prod_i e^{t^2(u_i-l_i)^2/8}\tag{12.16}</script>
+</div>
+<p><center>表格12.1 约束尾概率的几种算法比较</center>
+|结果|适用场景|性能|
+|:-:|:-:|:-:|
+|切比雪夫|任意随机变量|弱|
+|马尔科夫|非负随机变量|弱|
+|霍夫丁|独立有界随机变量的和|强|
+|切尔诺夫|伯努利随机变量之和|强|</p>
+<p>该不等式适用于任何非负值<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>。因此，为了找到最严格的界，需要确定最小化上述方程的右侧的<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的值。<span><span class="MathJax_Preview">t＝t^*</span><script type="math/tex">t＝t^*</script></span>的最佳值可以表示为：</p>
+<div>
+<div class="MathJax_Preview">t^*=\frac{4\theta}{\Sigma_{i=1}^{n} (u_i-l_i)^2}\tag{12.17}</div>
+<script type="math/tex; mode=display">t^*=\frac{4\theta}{\Sigma_{i=1}^{n} (u_i-l_i)^2}\tag{12.17}</script>
+</div>
+<p>通过在等式12.16中替换<span><span class="MathJax_Preview">t＝t^*</span><script type="math/tex">t＝t^*</script></span>的值，可以得到期望的结果。较低的尾界可以通过将上述步骤应用到<span><span class="MathJax_Preview">P(E [X]-X)＞\theta)</span><script type="math/tex">P(E [X]-X)＞\theta)</script></span>而不是<span><span class="MathJax_Preview">P(X-E(X)&gt;\theta)</span><script type="math/tex">P(X-E(X)>\theta)</script></span>。
+因此，不同的不等式可能适用于不同一般性的情形，并且它们也可能具有不同的性能级别。这些不同的场景如表12.1所示。</p>
+<h3 id="1222">12.2.2 海量域场景的概要结构</h3>
+<p>正如在引言中所讨论的，许多流应用程序包含离散属性，其属性绘制在大量不同的值上。一个经典的例子是网络流中的IP地址的值，或者电子邮件流中的电子邮件地址。这样的场景在数据流中更常见，因为流中的大量数据项通常与不同类型的离散标识符相关。电子邮件地址和IP地址就是这样的标识符的例子。流对象通常与标识符对相关联。例如，电子邮件流的每个元素都可以有发送者和接收者。在某些应用中，可能需要使用成对的标识符存储统计，因此成对组合被视为单个集成属性。可能值的域可以相当大。例如，对于具有超过一亿个不同发送者和接收者的电子邮件应用，可能的成对组合的数目是<span><span class="MathJax_Preview">10^{16}</span><script type="math/tex">10^{16}</script></span>。在这种情况下，即使存储简单的汇总统计数据，如集合成员资格、频繁项计数和不同的元素计数，从空间约束的角度变得更具挑战性。
+如果不同元素的数量很小，则可以简单地使用数组，并更新这些数组中的计数，以便创建有效的摘要。这样的摘要可以解决所有上述查询。然而，这样的方法在大规模域场景中是不实用的，因为具有<span><span class="MathJax_Preview">10^{16}</span><script type="math/tex">10^{16}</script></span>个元素的阵列将需要超过10PB。此外，对于许多查询，如集成员和不同元素计数，水库样本将不能很好地工作。这是因为绝大多数的流可能包含不频繁的元素，并且该库将不成比例地过度表示对于绝对频率不可知的查询的频繁元素。集合成员和不同元素计数是此类查询的例子。
+创建可解决所有查询的单个摘要结构通常很困难。 因此，针对不同类别的查询设计不同的摘要结构。 下面将描述许多不同的概要结构。 这些概要结构中的每一个都针对不同类型的查询进行了优化。 对于本章讨论的每个概要结构，还将描述相关查询和查询处理方法。</p>
+<h4 id="12221">12.2.2.1 布隆过滤器</h4>
+<p>布隆过滤器是为离散元素的集合成员查询而设计的。设置成员查询如下：
+<em>给定一个特定的元素，它是否曾经出现在数据流中？</em>
+布隆过滤器提供了一种维护流的概要的方法，以便可以用准确性的概率性约束来解决该查询。 这种数据结构的一个特点是可能出现误报，但是否定的情况并非如此。 换句话说，如果布隆过滤器报告一个元素不属于这个流，那么情况总是如此。 布隆过滤器被称为“过滤器”，因为它们可以用于实时在流中做出重要的选择决策。 这是因为对一组流元素中的项的成员关系知识在过滤决策中发挥重要作用，例如删除重复项。 这将在稍后更详细地讨论。 首先，将讨论流成员查询的简单情况。
+布隆过滤器是长度为m的二进制位数组。 因此，布隆过滤器的空间需求是<span><span class="MathJax_Preview">m/8</span><script type="math/tex">m/8</script></span>个字节。位数组的元素索引从0开始到<span><span class="MathJax_Preview">(m-1)</span><script type="math/tex">(m-1)</script></span>结束。 因此，索引范围是<span><span class="MathJax_Preview">\{0,1,2，...m-1\}</span><script type="math/tex">\{0,1,2，...m-1\}</script></span>。 布隆过滤器与由表示的一组w个独立的哈希函数<span><span class="MathJax_Preview">{h1()...hw()}</span><script type="math/tex">{h1()...hw()}</script></span>相关联。 每个散列函数的参数都是数据流的一个元素。 哈希函数随机地统一映射到范围<span><span class="MathJax_Preview">\{0...m-1\}</span><script type="math/tex">\{0...m-1\}</script></span>的整数。
+考虑一系列离散元素。 这些离散元素可以是电子邮件地址（单独或发送者 - 接收者对），IP地址或在可能值的大量域上绘制的另一组离散值。 布隆过滤器上的位用于跟踪所遇到的不同值。 散列函数用于将流元素映射到布隆过滤器中的位。 对于下面的讨论，将假定布隆过滤器数据结构由<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>表示。
+布隆过滤器由如下值的流<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>构建。 布隆过滤器中的所有位都初始化为<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>。对于每个传入流元素<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>，函数<span><span class="MathJax_Preview">h_1(x)...h_w(x)</span><script type="math/tex">h_1(x)...h_w(x)</script></span>应用于它。 对于每个<span><span class="MathJax_Preview">i\in\{1...w\}</span><script type="math/tex">i\in\{1...w\}</script></span>布隆过滤器中的元<span><span class="MathJax_Preview">h_i(x)</span><script type="math/tex">h_i(x)</script></span>被设置为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>。在许多情况下，这些位中的某些位的值可能已经是<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>。在这种情况下，该值不需要被改变。 图12.1说明了布隆过滤器和更新过程的图形表示。 整个更新过程的伪代码如图12.2所示。 在伪代码中，流由<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>表示，布隆过滤器数据结构由<span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span>表示。输入参数包括布隆过滤器的大小<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>和散列函数<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>的数量。 需要注意的是，多个元素可映射到布隆过滤器中的相同位。 这被称为碰撞。 如后面所讨论的，冲突可能导致集合成员资格检查中的误报。
+布隆过滤器可用于检查数据流中项目y的成员资格。 第一步是计算散列函数<span><span class="MathJax_Preview">h_1(y)...h_w(y)</span><script type="math/tex">h_1(y)...h_w(y)</script></span>。 然后，检查<span><span class="MathJax_Preview">h_i(y)</span><script type="math/tex">h_i(y)</script></span>个元素是否为1.如果这些值中的至少一个是<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>，那么我们保证数据流中没有发生该元素。 这是因为，如果该元素发生在流中，则该条目已经被设置为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>。</p>
+<p>因此，布隆过滤器不可能出现假阴性。 另一方面，如果所有条目<span><span class="MathJax_Preview">h_1(y)...h_w(y)</span><script type="math/tex">h_1(y)...h_w(y)</script></span> 位数组中的的值为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>，则报告y已经发生在数据流中。 通过对与索引<span><span class="MathJax_Preview">h_1(y)...h_w(y)</span><script type="math/tex">h_1(y)...h_w(y)</script></span>相对应的所有位条目应用“与”逻辑运算符，可以有效地检查这一点 在位数组中。 会员检查的整个程序如图12.3所示。 用于检查成员资格的决策问题的二进制结果由变量布尔标志跟踪。 这个二进制标志在过程结束时被报告。</p>
+<p><center>
+<img alt="图12.1" src="https://raw.githubusercontent.com/zhw1302/data-mining/master/image12.1.png" />
+</center>
+<center>图12.1 布隆滤波器</center></p>
+<p><center>
+<img alt="图12.2" src="https://raw.githubusercontent.com/zhw1302/data-mining/master/image12.2.png" />
+</center>
+<center>图12.2 更新布隆滤波器</center></p>
+<p>布隆过滤器方法可能会导致误报，但不会导致错误的否定。 如果所有<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>个不同的布隆过滤器阵列元素<span><span class="MathJax_Preview">h_i（y）</span><script type="math/tex">h_i（y）</script></span>对于<span><span class="MathJax_Preview">i\in\{1...w\}</span><script type="math/tex">i\in\{1...w\}</script></span>已被y以外的某个虚假元素设置为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>。 这是碰撞的直接结果。 随着数据流中元素的数量增加，布隆过滤器中的所有元素最终都会设置为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>.在这种情况下，所有集合成员查询将产生肯定的响应。 当然，这并不是布隆过滤器的有用应用。 因此，根据过滤器的大小和数据流中不同元素的数量来限制假阳性概率是有益的。</p>
+<p>**引理12.2.2**考虑有<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个元素的布隆过滤器，以及不同的哈希函数。 设<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>是到目前为止流<span><span class="MathJax_Preview">S中不同元素的数量。 考虑一个元素y</span><script type="math/tex">S中不同元素的数量。 考虑一个元素y</script></span>，它迄今尚未出现在流中。 那么，元素<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>被报告为误报的概率F由下式给出：</p>
+<div>
+<div class="MathJax_Preview">F = \left[1-\left(1-\frac{1}{m}\right)^{w.n}\right]^{w}\tag{12.18}</div>
+<script type="math/tex; mode=display">F = \left[1-\left(1-\frac{1}{m}\right)^{w.n}\right]^{w}\tag{12.18}</script>
+</div>
+<p><center>
+<img alt="图12.3" src="https://raw.githubusercontent.com/zhw1302/data-mining/master/image12.3.png" />
+</center>
+<center>图12.3 布隆滤波器成员检查</center></p>
+<p>证明：对于索引<span><span class="MathJax_Preview">r\in\{1...w\}</span><script type="math/tex">r\in\{1...w\}</script></span>某个固定值，考虑对应于位数组元素<span><span class="MathJax_Preview">h_r(y)</span><script type="math/tex">h_r(y)</script></span>的特定位 每个元素<span><span class="MathJax_Preview">x\in S</span><script type="math/tex">x\in S</script></span>设置不同的位<span><span class="MathJax_Preview">h_1(x)...h_w(x)</span><script type="math/tex">h_1(x)...h_w(x)</script></span>为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>.这些比特中没有一个与<span><span class="MathJax_Preview">h_r（y）</span><script type="math/tex">h_r（y）</script></span>相同的概率由<span><span class="MathJax_Preview">（1-1 / m）^w</span><script type="math/tex">（1-1 / m）^w</script></span>给出。 在n个不同的流元素中，这个概率是<span><span class="MathJax_Preview">（1-1 / m）^{w·n}</span><script type="math/tex">（1-1 / m）^{w·n}</script></span>。 因此，由<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>中的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个寄生元素中的至少一个寄生元素将比特阵列索引<span><span class="MathJax_Preview">h_r（y）</span><script type="math/tex">h_r（y）</script></span>设置为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>的概率由<span><span class="MathJax_Preview">Q = 1-（1-1 / m）^{w·n}</span><script type="math/tex">Q = 1-（1-1 / m）^{w·n}</script></span>给出。 当所有位阵列索引<span><span class="MathJax_Preview">h_r（y）</span><script type="math/tex">h_r（y）</script></span>（在<span><span class="MathJax_Preview">r\in \{1...w\}</span><script type="math/tex">r\in \{1...w\}</script></span>变化值上）已经被设置为<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>时，发生假阳性。其概率为<span><span class="MathJax_Preview">F = Q^w</span><script type="math/tex">F = Q^w</script></span>。 结果如下。</p>
+<p>虽然假阳性概率是按照不同流元素的数量表示的，但对于流元素的总数（包括重复）来说，作为上限是平凡的。
+通过观察<span><span class="MathJax_Preview">(1-1/m)m\approx e^{-1}</span><script type="math/tex">(1-1/m)m\approx e^{-1}</script></span>，其中<span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>是自然对数的基数，可以简化上述引理中的表达式。 相应地，表达式可以被重写如下：</p>
+<div>
+<div class="MathJax_Preview">F=(1-e^{-n.w/m})^w\tag{12.19}</div>
+<script type="math/tex; mode=display">F=(1-e^{-n.w/m})^w\tag{12.19}</script>
+</div>
+<p><span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>值太小或太大会导致性能下降。<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>的值需要根据<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>和<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>进行最优选择，以最小化误报的数量。 当<span><span class="MathJax_Preview">w = m·ln（2）/ n</span><script type="math/tex">w = m·ln（2）/ n</script></span>时，误报的数量被最小化。 用等式12.19中的这个值代替，可以证明最佳散列函数的误报概率为：</p>
+<div>
+<div class="MathJax_Preview">F=2^{-m.ln(2)/n}\tag{12.20}</div>
+<script type="math/tex; mode=display">F=2^{-m.ln(2)/n}\tag{12.20}</script>
+</div>
+<p>上面的表达式可以纯粹写成<span><span class="MathJax_Preview">m/n</span><script type="math/tex">m/n</script></span>的表达式。 因此，对于假阳性概率<span><span class="MathJax_Preview">F</span><script type="math/tex">F</script></span>的固定值，布隆过滤器<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>的长度需要与数据流中不同元素n的数量成比例。 此外，特定的假阳性概率<span><span class="MathJax_Preview">F</span><script type="math/tex">F</script></span>的比例常数可以表示为<span><span class="MathJax_Preview">\frac{m}{n} = \frac{ln(1/F)}{(ln（2))^2}</span><script type="math/tex">\frac{m}{n} = \frac{ln(1/F)}{(ln（2))^2}</script></span>。 虽然这看起来不像是一个重要的压缩，但需要指出的是布隆滤波器使用基本位来跟踪任意元素（如字符串）的成员。 此外，由于按位操作，可以通过低级实现非常有效地实现，所以整体方法通常非常高效。
+需要记住的是，对于许多应用来说，<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的值并不是事先知道的。 因此，一种策略是使用布隆过滤器的级联来几何增加<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>的值，并且在不同的布隆过滤器上使用成员查询结果的逻辑与运算。 这是一种实用的方法，可在数据流的整个生命周期内提供更稳定的性能。
+布隆过滤器被称为“过滤器”，因为它通常用于在数据流满足成员条件时决定从数据流中排除哪些元素。例如，如果想要过滤来自数据流的所有副本 布隆过滤器是一种有效的策略。 另一种策略是过滤来自一系列值的禁止元素，例如电子邮件流中的一组垃圾邮件电子邮件地址。 在这种情况下，布隆过滤器需要与垃圾邮件地址一起构建。
+ 基本布隆过滤策略的许多变体提供了不同的功能和权衡：
+ 1. 布隆过滤器可用于近似数据流中不同元素的数量。 如果<span><span class="MathJax_Preview">m_0&lt;m</span><script type="math/tex">m_0<m</script></span>是布隆过滤器中值为<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>的位数，则可以如下估计不同元素<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的数量（请参阅练习13）：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">n\approx\frac{m.ln(m/m_0)}{w}\tag{12.21}</span><script type="math/tex">n\approx\frac{m.ln(m/m_0)}{w}\tag{12.21}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">n\approx\frac{m.ln(m/m_0)}{w}\tag{12.21}</span><script type="math/tex">n\approx\frac{m.ln(m/m_0)}{w}\tag{12.21}</script></span></script></span>,随着布隆过滤器填满，此估算的准确性急剧下降。 当<span><span class="MathJax_Preview">m_0=0</span><script type="math/tex">m_0=0</script></span>时，<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的估计值为<span><span class="MathJax_Preview">\infty</span><script type="math/tex">\infty</script></span>，因此估计实际上是无用的。
+ 2. 布隆过滤器可用于通过为每个流创建一个布隆过滤器来估计与不同流相对应的集合的交集和联合的大小。 为了确定联合的大小，确定两个过滤器的按位或。 可以显示过滤器的按位或与两组联合的布隆过滤器表示完全相同。 然后，使用公式12.21。 但是，这种方法不能用于确定交叉点的大小。 虽然可以通过对两个滤波器使用按位“与”运算来近似两组的交集，但滤波器中得到的比特位置不会与通过直接在交叉点上构建滤波器所获得的比特位置相同。 由此产生的过滤器可能包含错误的否定，因此这种方法是有损的。 要估计交叉点的大小，可以首先估计联合的大小然后使用以下简单的关系：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">|S_1\cap S_2|=|S_1|+|S_2|-|S_1-S_2|\tag{12.22}</span><script type="math/tex">|S_1\cap S_2|=|S_1|+|S_2|-|S_1-S_2|\tag{12.22}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">|S_1\cap S_2|=|S_1|+|S_2|-|S_1-S_2|\tag{12.22}</span><script type="math/tex">|S_1\cap S_2|=|S_1|+|S_2|-|S_1-S_2|\tag{12.22}</script></span></script></span>
+ 3. 布隆过滤器主要是为成员查询而设计的，当纯粹用于不同的元素计数时，并不是最节省空间的数据结构。 在后面的章节中，将会讨论一种称为Flajolet-Martin算法的节省空间的技术。
+ 4. 当元素被删除时，布隆过滤器可以通过将相应的位元素设置为零来允许有限（一次性）的删除跟踪。 在这种情况下，假阴性也是可能发生的。
+ 5. 可以设计布隆过滤器的变体，其中<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>个哈希函数可以映射到单独的位阵列上。 此原则的进一步推广是跟踪元素的计数而不是简单的二进制位值，以实现更丰富的查询。 下一节讨论的这种权力下放也被称为*count-min*草图。
+布隆过滤器通常用于文本域中的许多流式传输设置。
+<center>
+<img alt="图12.4" src="https://raw.githubusercontent.com/zhw1302/data-mining/master/image12.4.png" />
+ </center>
+<center>图12.4 *count-min*草图</center></p>
+<h4 id="12222-count-min">12.2.2.2 *count-min*草图</h4>
+<p>虽然布隆过滤器对集合成员查询有效，但它并不适用于需要*基于计数*的摘要的方法。这是因为布隆过滤器只跟踪二进制值。 计数 - 分钟草图旨在解决此类查询，并直观地与布隆过滤器相关。计数 - 分钟草图由一组<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>个不同的数组组成，每个数组的长度均为<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>。 因此，计数 - 分钟草图的空间需求等于包含数值的<span><span class="MathJax_Preview">m·w</span><script type="math/tex">m·w</script></span>个单元格。 每个w数值数组的元素索引从<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>开始，对应索引范围<span><span class="MathJax_Preview">{0...m - 1}</span><script type="math/tex">{0...m - 1}</script></span>。计数 - 分钟草图也可以看作是一个<span><span class="MathJax_Preview">w×m</span><script type="math/tex">w×m</script></span>的二维单元阵列。
+每个w数字数组都对应一个哈希函数。 第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个数字数组对应于第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个哈希函数<span><span class="MathJax_Preview">h_i(.)</span><script type="math/tex">h_i(.)</script></span>。 散列函数具有以下属性：
+1. 第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个哈希函数<span><span class="MathJax_Preview">h_i(.)</span><script type="math/tex">h_i(.)</script></span>将流元素映射到范围<span><span class="MathJax_Preview">[0...m-1]</span><script type="math/tex">[0...m-1]</script></span>中的整数。 该映射也可以被视为第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个数字数组中的一个索引值。
+2.  <span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>散列函数<span><span class="MathJax_Preview">h_1(·)... h_w(·)</span><script type="math/tex">h_1(·)... h_w(·)</script></span>完全独立于另一个，但是在不同的参数上是成对的独立的。 换句话说，对于任何两个值<span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span>和<span><span class="MathJax_Preview">x_2</span><script type="math/tex">x_2</script></span>，<span><span class="MathJax_Preview">h_i(x_1)</span><script type="math/tex">h_i(x_1)</script></span>和<span><span class="MathJax_Preview">h_i(x_2)</span><script type="math/tex">h_i(x_2)</script></span>是独立的。
+ 这是时间-分钟草图的一个方便的性质是成对独立要求比完全独立要求弱，因为构造成对独立的散列函数通常比完全独立的散列函数更容易。
+更新草图的步骤如下。*count-min*草图中的所有<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>？<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>条目都被初始化为<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>.对于每个输入流元素<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>，函数<span><span class="MathJax_Preview">h_1(x)...h_w(x)</span><script type="math/tex">h_1(x)...h_w(x)</script></span>应用于它。对于第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个数组，元素<span><span class="MathJax_Preview">h_i(x)</span><script type="math/tex">h_i(x)</script></span>增加<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>.因此，如果*count-min*草图<span><span class="MathJax_Preview">CM</span><script type="math/tex">CM</script></span>可视化为二维<span><span class="MathJax_Preview">w×m</span><script type="math/tex">w×m</script></span>数组数组，则元素<span><span class="MathJax_Preview">(i，h_i(x))</span><script type="math/tex">(i，h_i(x))</script></span>增加<span><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span>。请注意，<span><span class="MathJax_Preview">hi(x)</span><script type="math/tex">hi(x)</script></span>的值映射到<span><span class="MathJax_Preview">[0，m-1]</span><script type="math/tex">[0，m-1]</script></span>范围内的整数。这也是每个数值数组的索引范围。图12.4提供了*count-min*草图和相应更新过程的图示。整个更新过程的伪代码如图12.5所示。在伪代码中，流由<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>表示，*count-min*草图数据结构由<span><span class="MathJax_Preview">CM</span><script type="math/tex">CM</script></span>表示。算法的输入是流<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>和两个参数<span><span class="MathJax_Preview">(w，m)</span><script type="math/tex">(w，m)</script></span>，用于指定计数最小草图的二维数组的大小。将所有值设置为<span><span class="MathJax_Preview">0</span><script type="math/tex">0</script></span>来初始化<span><span class="MathJax_Preview">2</span><script type="math/tex">2</script></span>维<span><span class="MathJax_Preview">w×m</span><script type="math/tex">w×m</script></span>阵列<span><span class="MathJax_Preview">CM</span><script type="math/tex">CM</script></span>。
+对于每个输入流元素，所有单元<span><span class="MathJax_Preview">(i，h_i(x))</span><script type="math/tex">(i，h_i(x))</script></span>的计数都更新为<span><span class="MathJax_Preview">i\in\{1...w\}</span><script type="math/tex">i\in\{1...w\}</script></span> 在伪代码描述中，生成的草图<span><span class="MathJax_Preview">CM</span><script type="math/tex">CM</script></span>在处理完所有流元素后返回。 实际上，可以在流<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>的进展期间的任何时间使用*count-min*草图。与布隆过滤器的情况一样，可以将多个流元素映射到*count-min*草图中的相同单元格。 因此，不同的流元素将增加同一个单元格，并且生成的单元格计数总是高估一个或多个流元素计数。</p>
+<p><center>
+<img alt="图12.5" src="https://raw.githubusercontent.com/zhw1302/data-mining/master/image12.5.png" />
+</center></p>
+<p><center>图12.5 *count-min*草图更新算法</center></p>
+<p><center>
+<img alt="图12.5" src="https://raw.githubusercontent.com/zhw1302/data-mining/master/image12.6.png" />
+</center></p>
+<p><center>图12.6 *count-min*频率查询算法</center></p>
+<p>*count-min*草图可用于许多不同的查询。 最简单的查询是确定元素<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>的频率。 第一步是计算散列函数<span><span class="MathJax_Preview">h_1(y)...h_w(y)</span><script type="math/tex">h_1(y)...h_w(y)</script></span>。 对于<span><span class="MathJax_Preview">CM</span><script type="math/tex">CM</script></span>中的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个数字数组，检索<span><span class="MathJax_Preview">(i，h_i(y))</span><script type="math/tex">(i，h_i(y))</script></span>数组元素的值<span><span class="MathJax_Preview">V_i(y)</span><script type="math/tex">V_i(y)</script></span>。 由于潜在的碰撞，每个值<span><span class="MathJax_Preview">V_i(y)</span><script type="math/tex">V_i(y)</script></span>都高估了<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>的真实频率。 因此，通过使用不同散列函数上的最小值<span><span class="MathJax_Preview">min_i \{V_i(y)\}</span><script type="math/tex">min_i \{V_i(y)\}</script></span>可以获得最紧密的可能估计。 频率估计的整个过程如图12.6所示。
+*count-min*草图会导致频率值的高估，因为不同流项目的非负频率计数发生冲突。 因此确定估计质量的上限是有帮助的。
+<strong>引理12.2.3</strong> 设<span><span class="MathJax_Preview">E(y)</span><script type="math/tex">E(y)</script></span>为项目<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>频率的估计值，使用尺寸<span><span class="MathJax_Preview">w×m</span><script type="math/tex">w×m</script></span>的*count-min*草图。 设<span><span class="MathJax_Preview">n_f</span><script type="math/tex">n_f</script></span>为迄今收到的所有项目的总频率，<span><span class="MathJax_Preview">G(y)</span><script type="math/tex">G(y)</script></span>为项目<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>的真实频率。 然后，以至少<span><span class="MathJax_Preview">1-e^{-w}</span><script type="math/tex">1-e^{-w}</script></span>的概率，估计<span><span class="MathJax_Preview">E(y)</span><script type="math/tex">E(y)</script></span>的上界如下：</p>
+<div>
+<div class="MathJax_Preview">E(y)\leq G(y)+\frac{n_f.e}{m}\tag{12.23}</div>
+<script type="math/tex; mode=display">E(y)\leq G(y)+\frac{n_f.e}{m}\tag{12.23}</script>
+</div>
+<p><span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>是自然对数底
+证明：如果所有虚假项目随机散列到不同的单元格，则散列到属于项目y的单元格的预期虚假项目数大约为<span><span class="MathJax_Preview">nf/m</span><script type="math/tex">nf/m</script></span>。 此结果使用散列函数的成对独立性，因为它依赖于<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>到单元格的映射不影响其单元格中另一个虚假项目的分布的事实。 任何属于<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>的<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>个单元中的虚项数超过<span><span class="MathJax_Preview">nf·e/m</span><script type="math/tex">nf·e/m</script></span>的概率至多由<span><span class="MathJax_Preview">e^{-1}</span><script type="math/tex">e^{-1}</script></span>给出马尔可夫不等式。 对于<span><span class="MathJax_Preview">E(y)</span><script type="math/tex">E(y)</script></span>超出方程12.23的上界。需要对<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>映射到的所有<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>个单元重复这种违规行为。 因此违反公式12.23的概率是<span><span class="MathJax_Preview">e^{-w}</span><script type="math/tex">e^{-w}</script></span>。 结果如下。
+在很多情况下，直接控制错误级别是可取的<span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>和错误概率<span><span class="MathJax_Preview">δ</span><script type="math/tex">δ</script></span>。 通过设置<span><span class="MathJax_Preview">m = e/\epsilon</span><script type="math/tex">m = e/\epsilon</script></span> 和<span><span class="MathJax_Preview">w =ln(1/δ)</span><script type="math/tex">w =ln(1/δ)</script></span>，可以将误差与用户定义的容差<span><span class="MathJax_Preview">n_f·\epsilon</span><script type="math/tex">n_f·\epsilon</script></span> 并且概率至少为<span><span class="MathJax_Preview">1-δ</span><script type="math/tex">1-δ</script></span>。 点查询的两种自然概括可以如下实现：
+1. 如果流元素具有与它们相关的任意正频率，则唯一需要的更改是更新操作，其中计数递增相关频率。 频率范围与方程12.23，其中<span><span class="MathJax_Preview">n_f</span><script type="math/tex">n_f</script></span>代表流项目的频率总和。
+2. 如果流元素具有与它们相关的正频率或负频率，则查询过程需要进一步的改变。 在这种情况下，报告计数的中位数。 现在需要修改公式12.23的相应误差范围。 在概率至少为<span><span class="MathJax_Preview">1-e^{-w}/ 4</span><script type="math/tex">1-e^{-w}/ 4</script></span>的情况下，项目<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>的估计频率<span><span class="MathJax_Preview">E(y)</span><script type="math/tex">E(y)</script></span>位于以下范围内：</p>
+<div>
+<div class="MathJax_Preview">G(y)-\frac{3n_f.e}{e}\leq E(y)\leq G(y)+\frac{3n_f.e}{e}\tag{12.24}</div>
+<script type="math/tex; mode=display">G(y)-\frac{3n_f.e}{e}\leq E(y)\leq G(y)+\frac{3n_f.e}{e}\tag{12.24}</script>
+</div>
+<p>在这种情况下，<span><span class="MathJax_Preview">n_f</span><script type="math/tex">n_f</script></span>表示数据流中传入项目的绝对频率的总和。这种情况的边界要比非负边界要素弱得多。
+一个有用的应用是确定两个数据流中离散属性值的频率计数的点积。这在估计两个数据流中的大量域属性上的连接大小方面有用。一对非负数据流中项目的频率计数之间的点积可以通过首先在单独的<span><span class="MathJax_Preview">w×m</span><script type="math/tex">w×m</script></span> *count-min*数据结构中构建两个数据流中的每一个的*count-min*草图表示来估计。两个草图都使用相同的散列函数。计算每个散列函数对应的*count-min*数组的点积。报告<span><span class="MathJax_Preview">w</span><script type="math/tex">w</script></span>个不同阵列上的点积的最小值作为估计值。和前面的情况一样，这是高估的，估计的上限可以用至少<span><span class="MathJax_Preview">1-e^{-w}</span><script type="math/tex">1-e^{-w}</script></span>的概率获得。相应的上限误差容限为<span><span class="MathJax_Preview">n^1_f·n^2_f·e /m</span><script type="math/tex">n^1_f·n^2_f·e /m</script></span>，其中<span><span class="MathJax_Preview">n^1_f</span><script type="math/tex">n^1_f</script></span>和<span><span class="MathJax_Preview">n^2_f</span><script type="math/tex">n^2_f</script></span>是两个流中各个项目的聚合频率。使用*count-min*草图的其他有用查询包括确定分位数和频繁元素。频繁的元素也被称为重击者。书目注释包含指向各种查询和应用程序的指针，可以使用*count-min*草图进行处理。</p>
+<h4 id="12223-ams">12.2.2.3 AMS草图</h4>
+<p>正如本节开头所讨论的，不同的摘要结构是针对不同类型的查询而设计的。 虽然布隆滤波器和*count-min*草图可以很好地估计各种查询，但使用*Alon-Matias-Szegedy（AMS）*草图可以更好地解决一些查询，如第二时刻。 在*AMS*草图中，通过将散列函数应用于流元素，为每个流元素从<span><span class="MathJax_Preview">\{-1,1\}</span><script type="math/tex">\{-1,1\}</script></span>生成随机二进制值。 这些二进制值被假定为4位独立。 这意味着，如果从同一散列函数生成的最多四个值被采样，则它们将在统计上彼此独立。 与完全独立的散列函数相比，设计4个独立的散列函数更容易。 4方面独立散列函数的细节可以在书目注释中找到。
+考虑一个流，其中第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个流元素与聚合频率<span><span class="MathJax_Preview">f_i</span><script type="math/tex">f_i</script></span>相关联。 对于具有<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个不同元素的流，数据流的二阶矩<span><span class="MathJax_Preview">F_2</span><script type="math/tex">F_2</script></span>定义如下：</p>
+<div>
+<div class="MathJax_Preview">F_2=\sum_{i=0}^{n}f_i^2\tag{12.25}</div>
+<script type="math/tex; mode=display">F_2=\sum_{i=0}^{n}f_i^2\tag{12.25}</script>
+</div>
+<p>在大量域情况下，不同元素的数量很大，这个数量很难估计，因为频率<span><span class="MathJax_Preview">f_i</span><script type="math/tex">f_i</script></span>的运行计数不能用数组维持。 但是，可以使用AMS草图进行有效估计。 作为一个实际应用，二阶矩产生一个数据流相对于海量属性的自连接大小的估计值。 二阶矩也可以看作是基尼指数的变体，它可以测量数据流中不同项目的频率偏移水平。 当偏斜很大时，<span><span class="MathJax_Preview">F_2</span><script type="math/tex">F_2</script></span>的值很大，并且非常接近其上限<span><span class="MathJax_Preview">(\Sigma_{i=0}^{n}f_i)^2</span><script type="math/tex">(\Sigma_{i=0}^{n}f_i)^2</script></span>
+*AMS*草图包含<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个不同的草图组件，每个草图组件都与一个独立的散列函数相关联。 每个哈希函数如下生成其相应的草图组件。 为输入流元素生成一个随机二进制值，两个实现的概率相同。 该二进制值由<span><span class="MathJax_Preview">r∈\{-1,1\}</span><script type="math/tex">r∈\{-1,1\}</script></span>表示，并使用该组件的散列函数生成。 每个输入流元素的频率乘以<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>，并添加到草图的相应组件。 令<span><span class="MathJax_Preview">r_i∈\{-1,1\}</span><script type="math/tex">r_i∈\{-1,1\}</script></span>为由第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>不同元素的特定散列函数生成的随机值。 然后，对于具有总计频率<span><span class="MathJax_Preview">f_1...f_n</span><script type="math/tex">f_1...f_n</script></span>的<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个不同元素的流，草图的对应分量<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>可以被示出为等于以下值：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Q=\sum_{i=0}^{n}f_i.r_i\tag{12.26}</span><script type="math/tex">Q=\sum_{i=0}^{n}f_i.r_i\tag{12.26}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Q=\sum_{i=0}^{n}f_i.r_i\tag{12.26}</span><script type="math/tex">Q=\sum_{i=0}^{n}f_i.r_i\tag{12.26}</script></span></script></span></p>
+<p>这种关系是因为每次接收到一个流项时<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的更新方式。 请注意，<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的值是一个随机变量，取决于哈希函数如何生成二进制随机值<span><span class="MathJax_Preview">r_1...r_n</span><script type="math/tex">r_1...r_n</script></span>。 <span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的价值在估计第二时刻是有用的。</p>
+<p><strong>引理12.2.4</strong> <em>数据流的第二个时刻可以通过AMS草图组件<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的平方来估计</em>：</p>
+<div>
+<div class="MathJax_Preview">F_2=E[Q^2]\tag{12.27}</div>
+<script type="math/tex; mode=display">F_2=E[Q^2]\tag{12.27}</script>
+</div>
+<p><strong>证明：**很容易发现<span><span class="MathJax_Preview">Q^2=\Sigma_{i=1}{n}{f_i^2.r_i^2}+2\Sigma_{i=1}{n}\Sigma_{j=1}{n}{f_i.f_j.r_i.r_j}.</span><script type="math/tex">Q^2=\Sigma_{i=1}{n}{f_i^2.r_i^2}+2\Sigma_{i=1}{n}\Sigma_{j=1}{n}{f_i.f_j.r_i.r_j}.</script></span>对于任意哈希值<span><span class="MathJax_Preview">r_i,r_j</span><script type="math/tex">r_i,r_j</script></span>，可以得到<span><span class="MathJax_Preview">r_i^2=r_j^2=1</span><script type="math/tex">r_i^2=r_j^2=1</script></span>和<span><span class="MathJax_Preview">E[r_i.r_j]=E[r_i].E[r_j]=0</span><script type="math/tex">E[r_i.r_j]=E[r_i].E[r_j]=0</script></span>。这些结果中的最后一个使用2方式独立性，这是4方式独立性所隐含的。因此，<span><span class="MathJax_Preview">E[Q^2]=\Sigma_{i=1}{n}{f_i^2}=F_2</span><script type="math/tex">E[Q^2]=\Sigma_{i=1}{n}{f_i^2}=F_2</script></span>。
+4依赖的独立性也可以用来限制估计的方差（参见练习16）。
+**引理12.2.5</strong> <em>AMS草图的分量<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>的平方的方差以频率矩的两倍为界。</em></p>
+<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Var[Q^2]=\leq 2.F_2^2\tag{12.28}</span><script type="math/tex">Var[Q^2]=\leq 2.F_2^2\tag{12.28}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Var[Q^2]=\leq 2.F_2^2\tag{12.28}</span><script type="math/tex">Var[Q^2]=\leq 2.F_2^2\tag{12.28}</script></span></script></span>
+通过对<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个不同草图组件<span><span class="MathJax_Preview">Q_1...Q_m</span><script type="math/tex">Q_1...Q_m</script></span>进行平均，可以进一步降低方差的界限。 减少的方差可用于利用切比雪夫不等式创建二阶矩估计质量的（弱）概率估计。 这可以通过使用这种概率分析中常用的*“平均 - 中值组合技巧”*进一步收紧。 只要它的方差不大于其期望值平方的适度因子，这个技巧就可以用来鲁棒地估计一个随机变量。 这是随机变量<span><span class="MathJax_Preview">Q^2</span><script type="math/tex">Q^2</script></span>的情况。
+中位数组合技巧的工作原理如下。 期望以至少<span><span class="MathJax_Preview">(1-δ)</span><script type="math/tex">(1-δ)</script></span>的概率建立一个界限，即二阶矩可以估计为<span><span class="MathJax_Preview">1±\epsilon</span><script type="math/tex">1±\epsilon</script></span>的乘法因子。 令<span><span class="MathJax_Preview">Q_1...Q_m</span><script type="math/tex">Q_1...Q_m</script></span>为<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个不同的草图组件，每个草图组件都使用不同的散列函数生成。 <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>的值选择为<span><span class="MathJax_Preview">O(ln(1 /δ)/ \epsilon^2)</span><script type="math/tex">O(ln(1 /δ)/ \epsilon^2)</script></span>。 这些m个草图组件被进一步分成<span><span class="MathJax_Preview">O(ln(1 /δ))</span><script type="math/tex">O(ln(1 /δ))</script></span>个不同的大小为<span><span class="MathJax_Preview">O(1 /\epsilon^2)</span><script type="math/tex">O(1 /\epsilon^2)</script></span>的组。 每组中的草图值取平均值。 报告这些<span><span class="MathJax_Preview">O(ln(1 /δ))</span><script type="math/tex">O(ln(1 /δ))</script></span>平均值的中位数。切比雪夫不等式和切尔诺夫界限的组合可用于显示以下结果：</p>
+<p><strong>引理12.2.6</strong> <em>通过选择<span><span class="MathJax_Preview">O_i(1 /\epsilon^2)</span><script type="math/tex">O_i(1 /\epsilon^2)</script></span>个拷贝的<span><span class="MathJax_Preview">O(ln(1 /δ))</span><script type="math/tex">O(ln(1 /δ))</script></span>平均值的平均值，可以保证基于草图的二阶矩近似的精度在<span><span class="MathJax_Preview">1 ±\epsilon</span><script type="math/tex">1 ±\epsilon</script></span> 概率至少为<span><span class="MathJax_Preview">1 - δ</span><script type="math/tex">1 - δ</script></span>。</em>
+<strong>证明</strong>：根据引理12.2.5，每个草图元素的方差最多为<span><span class="MathJax_Preview">2·F_2^2</span><script type="math/tex">2·F_2^2</script></span>。 通过使用<span><span class="MathJax_Preview">16/ \epsilon^2</span><script type="math/tex">16/ \epsilon^2</script></span>个独立草图分量的平均值，平均估计的方差可以减小到<span><span class="MathJax_Preview">F_2^2·2/8</span><script type="math/tex">F_2^2·2/8</script></span>。 在这种情况下，切比雪夫不等式表明平均估计违反了<span><span class="MathJax_Preview">σ</span><script type="math/tex">σ</script></span>-约束，其概率至多为<span><span class="MathJax_Preview">1/8</span><script type="math/tex">1/8</script></span>。 假设总共有<span><span class="MathJax_Preview">4·ln(1 /δ)</span><script type="math/tex">4·ln(1 /δ)</script></span>这样的平均和独立估计是可用的。 随机变量<span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>被定义为在这些<span><span class="MathJax_Preview">q = 4·ln(1 /δ)</span><script type="math/tex">q = 4·ln(1 /δ)</script></span>平均值上的<span><span class="MathJax_Preview">α-</span><script type="math/tex">α-</script></span>连接违反的伯努利指示变量的总和。 <span><span class="MathJax_Preview">Y</span><script type="math/tex">Y</script></span>的期望值是<span><span class="MathJax_Preview">q/8=ln(1 /δ)/ 2</span><script type="math/tex">q/8=ln(1 /δ)/ 2</script></span>。 切尔诺夫界限用于显示以下内容：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">P(Y&gt;q/2)=P(Y&gt;(1+3).q/8)=P(Y&gt;(1+3)E[Y])\leq e^{-3^2.ln(1/\delta)/8}=\delta^{9/8}\leq\delta.</span><script type="math/tex">P(Y>q/2)=P(Y>(1+3).q/8)=P(Y>(1+3)E[Y])\leq e^{-3^2.ln(1/\delta)/8}=\delta^{9/8}\leq\delta.</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">P(Y&gt;q/2)=P(Y&gt;(1+3).q/8)=P(Y&gt;(1+3)E[Y])\leq e^{-3^2.ln(1/\delta)/8}=\delta^{9/8}\leq\delta.</span><script type="math/tex">P(Y>q/2)=P(Y>(1+3).q/8)=P(Y>(1+3)E[Y])\leq e^{-3^2.ln(1/\delta)/8}=\delta^{9/8}\leq\delta.</script></span></script></span>
+只有超过平均数的一半时，中位数才能违反<span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>-界限。 这个事件的概率恰好是<span><span class="MathJax_Preview">P(Y&gt; q / 2)</span><script type="math/tex">P(Y> q / 2)</script></span>。 因此，中位数至多以<span><span class="MathJax_Preview">δ</span><script type="math/tex">δ</script></span>概率违反<span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>-界限。
+AMS草图可用于以相似的方式估计许多其他值，并具有相应的质量范围。 例如，考虑具有草图组件<span><span class="MathJax_Preview">Q_i</span><script type="math/tex">Q_i</script></span>和<span><span class="MathJax_Preview">R_i</span><script type="math/tex">R_i</script></span>的两个流。</p>
+<ol>
+<li>一对流中项目的频率计数之间的点积被估计为相应草图组件<span><span class="MathJax_Preview">Q_i</span><script type="math/tex">Q_i</script></span>和<span><span class="MathJax_Preview">R_i</span><script type="math/tex">R_i</script></span>的乘积。 通过使用<span><span class="MathJax_Preview">Q_i·R_i</span><script type="math/tex">Q_i·R_i</script></span>的不同集合的<span><span class="MathJax_Preview">O(1 /\epsilon^2)</span><script type="math/tex">O(1 /\epsilon^2)</script></span>值的<span><span class="MathJax_Preview">O(ln(1 /δ))</span><script type="math/tex">O(ln(1 /δ))</script></span>平均值的平均值，可以将概率至少<span><span class="MathJax_Preview">1-δ</span><script type="math/tex">1-δ</script></span>的近似值限制在<span><span class="MathJax_Preview">1±\epsilon</span><script type="math/tex">1±\epsilon</script></span>内。 这个估计也可以使用*count-min*草图进行，尽管具有不同的界限。</li>
+<li>一对流的频率计数之间的欧几里得距离可以被估计为<span><span class="MathJax_Preview">Q^2_i + R^2_i-2Q_i·R_i</span><script type="math/tex">Q^2_i + R^2_i-2Q_i·R_i</script></span>。 欧几里得距离可以被看作是两个流的频率计数之间的三种不同点产物（包括自我产物）的线性组合。 因为每个点积本身都使用上面讨论的“中值平均技巧”来限定，所以这种方法也可以用来确定类似的质量边界。</li>
+<li>像*count-min*草图一样，AMS草图可用于估计频率值。 对于具有频率<span><span class="MathJax_Preview">f_j</span><script type="math/tex">f_j</script></span>的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个不同的流元素，随机变量<span><span class="MathJax_Preview">r_j</span><script type="math/tex">r_j</script></span>和<span><span class="MathJax_Preview">Q_i</span><script type="math/tex">Q_i</script></span>的乘积提供频率的估计。</li>
+</ol>
+<div>
+<div class="MathJax_Preview">E[f_j]=r_j.Q_j\tag{12.29}</div>
+<script type="math/tex; mode=display">E[f_j]=r_j.Q_j\tag{12.29}</script>
+</div>
+<p>可以将这些值在不同草图组件<span><span class="MathJax_Preview">Q_i</span><script type="math/tex">Q_i</script></span>上的平均值，中值或平均值中值组合报告为可靠估计。 AMS草图也可以用来识别来自数据流的重击者。
+AMS和*count-min*草图所解决的一些查询类似，但其他查询则不同。 这两种技术提供的边界也不同，尽管在所有情况下它们都没有严格优于其他边界。 由于其自然散列表数据结构，*count-min*草图具有直观易于解释的优点。 因此，它可以更自然地以无缝方式集成到数据挖掘应用程序中，如聚类和分类。</p>
+<h4 id="12224flajolet-martin">12.2.2.4用于不同元素计数的Flajolet-Martin算法</h4>
+<p>草图用于确定频繁项目的大集合信号占优势的流统计。 但是，它们并未针对以不常出现的项目为主的流量统计进行优化。 诸如不同元素计数之类的问题更直接地受到数据流中大量罕见项目的影响。 使用Flajolet-Martin算法可以有效地执行不同的元素计数。
+Flajolet-Martin算法使用散列函数<span><span class="MathJax_Preview">h(.)</span><script type="math/tex">h(.)</script></span>来渲染数据流中给定元素<span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>到范围<span><span class="MathJax_Preview">[0,2^L-1]</span><script type="math/tex">[0,2^L-1]</script></span>内的整数的映射。 <span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>的值被选择得足够大，所以<span><span class="MathJax_Preview">2^L</span><script type="math/tex">2^L</script></span>是不同元素数量的上限。通常，为了实现方便，值<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>被选择为64，并且因为对于大多数实际应用，值264足够大。因此，整数<span><span class="MathJax_Preview">h(x)</span><script type="math/tex">h(x)</script></span>的二进制表示将具有长度<span><span class="MathJax_Preview">L</span><script type="math/tex">L</script></span>.确定整数<span><span class="MathJax_Preview">h(x)</span><script type="math/tex">h(x)</script></span>的二进制表示的最右边1位的位置<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>。因此，<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>的值表示这个二进制表示中尾随零的数量。设<span><span class="MathJax_Preview">R_{max}</span><script type="math/tex">R_{max}</script></span>是所有流元素上R的最大值。通过将散列函数应用于每个输入流元素，确定其最右边的位，然后更新<span><span class="MathJax_Preview">R_{max}</span><script type="math/tex">R_{max}</script></span>，可以在流式场景中递增地维护<span><span class="MathJax_Preview">R_{max}</span><script type="math/tex">R_{max}</script></span>的值。 Flajolet-Martin算法的关键思想是，动态维护的<span><span class="MathJax_Preview">R_{max}</span><script type="math/tex">R_{max}</script></span>值与流中迄今为止遇到的不同元素的数量呈对数关系。</p>
+<p>这个结果背后的直觉很简单。 对于均匀分布的散列函数，流元素的二进制表示中的R尾随零的概率等于<span><span class="MathJax_Preview">2^{-R-1}</span><script type="math/tex">2^{-R-1}</script></span>。 因此，对于<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个不同的元素和一个固定的<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>值，达到完全R尾随零的预期次数等于<span><span class="MathJax_Preview">2^{-R-1}·n</span><script type="math/tex">2^{-R-1}·n</script></span>。 因此，对于<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>值大于<span><span class="MathJax_Preview">log(n)</span><script type="math/tex">log(n)</script></span>的值，这种位串的预期数量按指数函数小于1。当然，在我们的应用中，<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>的值不是固定的，而是一个随机变量，它是由散列函数生成的的结果。 已经严格地表明，所有流元素上的<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>的最大值的期望值<span><span class="MathJax_Preview">E[R_{max}]</span><script type="math/tex">E[R_{max}]</script></span>与如下的不同元素的数量呈对数关系：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">E[R_{max}] = log_2(\phi n),  \phi= 0.77351.\tag{12.30}</span><script type="math/tex">E[R_{max}] = log_2(\phi n),  \phi= 0.77351.\tag{12.30}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">E[R_{max}] = log_2(\phi n),  \phi= 0.77351.\tag{12.30}</span><script type="math/tex">E[R_{max}] = log_2(\phi n),  \phi= 0.77351.\tag{12.30}</script></span></script></span></p>
+<p>标准偏差是<span><span class="MathJax_Preview">\sigma(R_{max})= 1.12</span><script type="math/tex">\sigma(R_{max})= 1.12</script></span>。 因此，<span><span class="MathJax_Preview">2^{R_{max}} /\phi</span><script type="math/tex">2^{R_{max}} /\phi</script></span>的值提供了不同元素数目<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的估计值。 为了进一步改进<span><span class="MathJax_Preview">R_{max}</span><script type="math/tex">R_{max}</script></span>的估计，可以使用以下技术：
+1. 可以使用多个散列函数，并且使用不同散列函数的<span><span class="MathJax_Preview">R_{max}</span><script type="math/tex">R_{max}</script></span>的平均值。
+2. 平均数仍然有些变化很大。 因此，可以使用“平均中位技巧”。 报告一组平均值的中位数。 请注意，这与AMS草图中使用的技巧类似。 正如在这种情况下，可以使用切比雪夫不等式和切尔诺夫界限的组合来建立定性保证。
+应该指出，布隆过滤器也可以用来估计不同元素的数量。 但是，当不需要设置成员查询时，布隆过滤器不是一种空间高效的方法来计算不同元素的数量。</p>
+<h2 id="123">12.3 数据流中的频繁模式挖掘</h2>
+<p>数据流中的频繁模式挖掘问题在两种不同情况下进行研究。第一种情况是大规模的场景，其中可能的项目数量非常大。在这种情况下，即使找到频繁项目的问题也变得困难。频繁的项目也被称为重击者。第二种情况是传统的情况，即大量（但可管理）的数量适合主内存的项目。在这种情况下，频繁项目问题不再那么有趣，因为频繁计数可以直接维护在一个数组中。在这种情况下，人们对确定频繁模式更感兴趣。这是一个困难的问题，因为最频繁的模式挖掘算法需要在整个数据集上进行多次传递。流式场景的单通约束使得这很难。在下文中，将描述两种不同的方法。第一种方法利用通用概要结构与传统的频繁模式挖掘算法结合使用，第二种设计使用频繁模式挖掘算法的流式版本。</p>
+<h3 id="1231">12.3.1 利用简介结构</h3>
+<p>概要结构可以在大多数流数据挖掘问题中有效使用，包括频繁模式挖掘。 在频繁模式挖掘方法的情况下，由于能够使用更广泛的算法或将时间衰减纳入频繁模式挖掘过程，故事摘要结构特别具有吸引力。</p>
+<h4 id="12311">12.3.1.1 油藏采样</h4>
+<p>油藏采样是数据流中频繁模式挖掘最灵活的方法。它可以用于频繁项目挖掘（在大规模领域情景中）或用于频繁模式挖掘。使用油藏采样的基本思想很简单：</p>
+<p>1.从数据流中维护一个储层样本S。</p>
+<p>2.将频繁模式挖掘算法应用于水库样本S并报告图案。</p>
+<p>有可能对作为函数开采的频繁模式进行定性保证的样本大小S.可以确定模式为假阳性的概率通过使用切尔诺夫界。通过适度降低支持阈值，也是可能的以保证减少漏报数量。书目记录包含指向这些保证的指针。油藏采样具有几个灵活性优势因为它将采样和采矿过程分开。实际上，任何高效的频繁模式挖掘算法可用于驻留内存的储层样品。此外，模式挖掘算法的不同变体，如约束模式挖掘或有趣的模式挖掘也可以应用。概念漂移也是相对容易解决。使用现货供应的具有衰减偏差的油藏样本频繁模式挖掘方法转化为支持的衰减加权定义。</p>
+<h4 id="12312">12.3.1.2草图</h4>
+<p>草图可用于确定频繁项目，尽管它们不能用于轻松确定频繁项目集。 核心思想是草图通常很多更好地在相对基础上准确估计更频繁项目的计数。 这个是因为任何项目的频率估计的界限是绝对的，其中错误取决于流项目的总频率而不是项目的总频率项目本身。 从引理12.2.3可以看出这一点。 结果，重击者的频率通常可以在相对基础上更准确地估计。 AMS草图和计数 - 分钟草图可用于确定重击者。 书目记录包含一些这些算法的指针。</p>
+<h3 id="1232">12.3.2有损计数算法</h3>
+<p>有损计数算法可用于频繁项目或频繁项目集数数。该方法将流划分为<span><span class="MathJax_Preview">S_1...S_i...</span><script type="math/tex">S_1...S_i...</script></span>这样每个细分市场<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>的大小为<span><span class="MathJax_Preview">w=\lfloor\epsilon\rfloor</span><script type="math/tex">w=\lfloor\epsilon\rfloor</script></span>是所需精度的用户定义公差。
+首先，将描述频繁项目挖掘的较容易的问题。该算法维护数组中所有项目的频率，并在新项目到达时递增它们。如果不同项目的数量不是很大，那么可以保留所有的计数和报告频繁的。当总可用空间小于这时，问题就出现了需要维护不同项目的计数。在这种情况下，只要有边界的一个细分市场<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>达到了，不常见的项目被丢弃。这导致删除很多项目，因为流中绝大多数项目在实践中很少。如何决定应该放弃哪些项目，以保持质量近似？为此，使用了一个递减技巧。</p>
+<p>每当到达段<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>的边界时，每个项目的频率计数就是数组减1，减少后，删除零频率的项目。阵列。考虑已经处理了n件物品的情况。 因为每个段包含w个项目，总共有<span><span class="MathJax_Preview">r = O（n / w）= O（n·\epsilon）</span><script type="math/tex">r = O（n / w）= O（n·\epsilon）</script></span>段已被处理。这意味着任何特定的项目在最多<span><span class="MathJax_Preview">r=O(n·\epsilon)</span><script type="math/tex">r=O(n·\epsilon)</script></span>次时已经递减。因此，如果<span><span class="MathJax_Preview">\lfloor n·\epsilon\rfloor</span><script type="math/tex">\lfloor n·\epsilon\rfloor</script></span>在处理n个项目之后被添加到项目的计数中数不会被低估。 此外，这是一个很好的高估频率这与用户定义的容差成正比。 如果频繁项目被报告这种高估的使用，可能会导致一些误报，但不会产生误报。在一些均匀性假设下，已经表明有损计数算法需要<span><span class="MathJax_Preview">O(1/\epsilon)</span><script type="math/tex">O(1/\epsilon)</script></span>空间。</p>
+<p>这种方法可以推广到频繁模式的情况下通过分批多次段，每个段的大小为<span><span class="MathJax_Preview">w=\lfloor1/\epsilon\rfloor</span><script type="math/tex">w=\lfloor1/\epsilon\rfloor</script></span>。在这种情况下，包含模式计数的数组（而不是比项目）保持不变。但是，模式显然不能有效生成来自个人交易。这里的想法是将η段读入主文件中记忆。 η的值取决于内存的可用性。当η段已被读入，至少η的（绝对）支持的频繁模式被确定使用任何基于内存的频繁模式挖掘算法。首先，所有的旧计数数组递减η，然后从相应的模式计数当前段被添加到数组中。那些零或负支持的项目集是从阵列中移除。在长度为n的流的整个处理中，计数为任何项目集最多减少<span><span class="MathJax_Preview">\lfloor\epsilon·n\rfloor</span><script type="math/tex">\lfloor\epsilon·n\rfloor</script></span>。因此，通过加入<span><span class="MathJax_Preview">\lfloor\epsilon·n\rfloor</span><script type="math/tex">\lfloor\epsilon·n\rfloor</script></span>到所有数组计数在这个过程结束时，不会低估计数。过高估计是一样的如前面的情况一样。因此，可以报告没有错误的频繁模式消极因素和误报是由用户定义的宽容来调节的。从概念上讲，这个算法对频繁项目集计数的主要区别在前面提到过频繁项目计数的算法是使用批处理。配料的主要目标是减少在支持度η期间产生的频繁模式的数量应用频繁模式挖掘算法。如果没有使用配料，那么很大不相关的频繁模式数量将在1的绝对支持级别生成。有损计数的主要缺点是它无法适应概念漂移。在这感觉，油藏采样相对于有损计数算法具有许多优点。</p>
+<h2 id="124">12.4 聚集数据流</h2>
+<p>由于数据流的情况，集群问题在数据流方案中尤其重要能够提供数据流的简洁概要。数据流的聚类通常可以用作储层采样的启发式替代品，特别是在细粒度的情况下使用聚类。由于这些原因，流聚类经常被用作其他的前兆诸如流分类等应用。在下面，几个代表性的流将讨论聚类算法。</p>
+<h3 id="1241">12.4.1 流算法</h3>
+<p>流算法基于k-center聚类方法学。核心思想是将流分解成更小的内存驻留段。 因此，原始数据流S被分成段<span><span class="MathJax_Preview">S_1...S_i...</span><script type="math/tex">S_1...S_i...</script></span>。每个段最多包含m个数据点。该m的值是根据预定义的内存预算确定的。</p>
+<p>&#8194;&#8194;&#8194;&#8194;因为每个片段Si适合主存储器，所以更复杂的聚类算法可以应用于它，而不必担心单通约束。可以使用多种用于此目的的不同的k-medians5样式算法。在k-中值算法中，一组选择来自每个块<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>的k个代表中的Y，并且将<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>中的每个点分配给其最接近的代表。 目标是选择代表来最小化总和分配给这些代表的数据点的平方距离（SSQ).对于一组m个数据点<span><span class="MathJax_Preview">\overline X_i...\overline X_m</span><script type="math/tex">\overline X_i...\overline X_m</script></span>段S中的<span><span class="MathJax_Preview">X_m</span><script type="math/tex">X_m</script></span>和一组<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>代表<span><span class="MathJax_Preview">Y=\overline Y_1...\overline Y_k</span><script type="math/tex">Y=\overline Y_1...\overline Y_k</script></span>目标函数定义如下: 
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Objective(S,Y)=\sum_{\overline X_i\varepsilon S,\overline X_i\Leftarrow \overline y_i}dist(\overline X_i,\overline Y_{ji})\tag{12.31}</span><script type="math/tex">Objective(S,Y)=\sum_{\overline X_i\varepsilon S,\overline X_i\Leftarrow \overline y_i}dist(\overline X_i,\overline Y_{ji})\tag{12.31}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Objective(S,Y)=\sum_{\overline X_i\varepsilon S,\overline X_i\Leftarrow \overline y_i}dist(\overline X_i,\overline Y_{ji})\tag{12.31}</span><script type="math/tex">Objective(S,Y)=\sum_{\overline X_i\varepsilon S,\overline X_i\Leftarrow \overline y_i}dist(\overline X_i,\overline Y_{ji})\tag{12.31}</script></span></script></span>赋值运算符用上面的“⇐”表示。 数据之间的平方距离并且其分配的聚类中心由<span><span class="MathJax_Preview">dist（\overline X_i，\overline Y_{ji}）</span><script type="math/tex">dist（\overline X_i，\overline Y_{ji}）</script></span>表示，其中数据记录<span><span class="MathJax_Preview">\overline X_ i</span><script type="math/tex">\overline X_ i</script></span>是分配给代表<span><span class="MathJax_Preview">\overline Y_{ji}</span><script type="math/tex">\overline Y_{ji}</script></span>。 原则上，任何分割算法，例如<span><span class="MathJax_Preview">k-means</span><script type="math/tex">k-means</script></span>或<span><span class="MathJax_Preview">k-medoids</span><script type="math/tex">k-medoids</script></span>，可以应用到段<span><span class="MathJax_Preview">S_i</span><script type="math/tex">S_i</script></span>以确定代表<span><span class="MathJax_Preview">\overline Y_1</span><script type="math/tex">\overline Y_1</script></span>...<span><span class="MathJax_Preview">\overline Y_K</span><script type="math/tex">\overline Y_K</script></span>。为了讨论的目的，这个算法将被视为一个黑匣子。</p>
+<p>&#8194;&#8194;&#8194;&#8194;在处理完第一个段<span><span class="MathJax_Preview">S_1</span><script type="math/tex">S_1</script></span>之后，我们现在有一组k中值储存起来。分配给每个代表的点数被存储为“重量”为那个代表。这些代表被认为是一级代表。下一个段<span><span class="MathJax_Preview">S_2</span><script type="math/tex">S_2</script></span>被独立处理以找到其最优的中值代表。从而，在处理第二部分结束时，将会有<span><span class="MathJax_Preview">2·k</span><script type="math/tex">2·k</script></span>个这样的代表。从而，存储代表的内存需求也随着时间的增加而增加处理r段，其中一个将总共有<span><span class="MathJax_Preview">r·k</span><script type="math/tex">r·k</script></span>个代表。当号码的代表超过m，则对这组r·k应用第二级聚类除了代表中存储的权重也用于聚类之外处理。由此产生的代表被存储为2级代表。一般来说，当级别p的代表人数达到m，他们被转换为k级别<span><span class="MathJax_Preview">（p + 1）</span><script type="math/tex">（p + 1）</script></span>代表。因此，这一过程将导致代表人数的增加尽管上级代表人数将呈指数级增长比较低层的那些要慢。在处理整个数据流（或当出现聚类结果的特定需求时），所有剩余的代表不同级别聚集在<span><span class="MathJax_Preview">k-medians</span><script type="math/tex">k-medians</script></span>子例程的最后一个应用程序中。
+&#8194;&#8194;&#8194;&#8194;用于k-中值问题的算法的具体选择对确保至关重要高质量的集群。影响最终产出质量的另一个因素是将问题分解成分块，然后进行分层聚类。怎么样这样的问题分解是否会影响产出的最终质量？它已被证明在STREAM论文[240]中，输出的最终质量不能是任意的比在中间阶段用于<span><span class="MathJax_Preview">k-medians</span><script type="math/tex">k-medians</script></span>的特定子程序更差集群。</p>
+<p>**引理12.4.1**让STREAM算法中用于<span><span class="MathJax_Preview">k-median</span><script type="math/tex">k-median</script></span>聚类的子程序有一个近似因子c。 然后，STREAM算法将具有不差于<span><span class="MathJax_Preview">5·c</span><script type="math/tex">5·c</script></span>的近似因子。</p>
+<p><span><span class="MathJax_Preview">k-medians</span><script type="math/tex">k-medians</script></span>问题可能有多种解决方案。 原则上，几乎任何近似算法可以用作黑盒子。 特别有效的解决方案是基于设施位置的问题。 读者可以参考书目笔记为相关方法的指针。</p>
+<p>STREAM算法的一个主要限制是它不是特别敏感到底层数据流的演化。 在很多情况下，底层的模式流可能演变和显着变化。 因此，这对群集过程至关重要能够适应这种变化并提供不同时间范围的见解。 在这感觉，CluStream算法能够在不同的情况下提供更好的洞察力时间粒度水平。</p>
+<h3 id="1242-clustream">12.4.2 CluStream算法</h3>
+<p>随着时间的推移，演进中的数据流中的概念漂移会显着改变群集。过去一天的集群与过去一个月的集群非常不同。 在许多数据挖掘应用程序，分析师可能希望有灵活性来确定基于一个或多个时间范围的聚类，这在一开始就是未知的流聚类过程。 因为流数据自然会对单通约束产生影响算法的设计，很难计算不同时间范围的集群使用传统算法。 将STREAM算法直接扩展到这样一个情况下需要同时维护聚类的中间结果算法在所有可能的时间范围内。 这种方法的计算负担随着数据流的进展而增加，并且可能迅速成为在线的瓶颈实现。</p>
+<p>&#8194;&#8194;&#8194;&#8194;解决此问题的一种自然方法是将群集过程与两种方法一起应用，包括在线微群集阶段和离线宏群集阶段。 在线微集群阶段可以实时处理流维护流的汇总但详细的群集统计信息。 这些被提及作为微簇。 离线宏群集阶段进一步总结了这些详细的群集，以便为用户提供对不同群集的更加简洁的理解时间范围和时间粒度水平。 这是通过充分保留来实现的详细的统计数据在微集群中，这样就有可能将这些细节重新聚类在用户指定的时间范围内的表示。</p>
+<h4 id="12421">12.4.2.1 微聚的定义</h4>
+<p>假定数据流中的多维记录由表示<span><span class="MathJax_Preview">\overline X_1...\overline X_k...</span><script type="math/tex">\overline X_1...\overline X_k...</script></span> ，到达时间戳<span><span class="MathJax_Preview">T_1...T_k...</span><script type="math/tex">T_1...T_k...</script></span> 每个<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>都是一个多维的记录包含由<span><span class="MathJax_Preview">\overline Xi =</span><script type="math/tex">\overline Xi =</script></span><span><span class="MathJax_Preview">（x_1^i ...</span><script type="math/tex">（x_1^i ...</script></span>$ x_d^i）$表示的d维。 微簇捕获数据流的汇总统计，以便于不同的聚类和分析时间范围。 这些汇总统计信息由以下结构定义：</p>
+<p>1.微型集群：微型集群被定义为集群的时间扩展在Chap的BIRCH算法中使用的特征向量。 7.这个概念可以被看到作为专门为其设计的CF矢量的时间优化表示流媒体场景。 为了实现这一目标，微集群包含时态统计除了功能统计之外。</p>
+<p>2.金字塔时间范围：微群集在随后的时间存储在快照中金字塔形图案。 这种模式提供了存储之间的有效折衷要求以及从不同时间范围回忆总结统计数据的能力。这对于启用在不同时间重新聚集数据的能力非常重要视野。</p>
+<p>微聚的定义如下：
+定义12.4.1一组d维点Xi1的微簇。。。 辛随时间邮票<span><span class="MathJax_Preview">T_{i1}...T_{in}</span><script type="math/tex">T_{i1}...T_{in}</script></span>是<span><span class="MathJax_Preview">(2·d + 3)</span><script type="math/tex">(2·d + 3)</script></span>元组<span><span class="MathJax_Preview">（\overline {CF2^x}，\overline {CF1x}，CF2_t，CF1_t，n)</span><script type="math/tex">（\overline {CF2^x}，\overline {CF1x}，CF2_t，CF1_t，n)</script></span>，其中<span><span class="MathJax_Preview">\overline {CF2^x}</span><script type="math/tex">\overline {CF2^x}</script></span>和每个<span><span class="MathJax_Preview">\overline {CF_2^x}</span><script type="math/tex">\overline {CF_2^x}</script></span>对应于d个条目的向量。 每个条目的定义如下如下：</p>
+<p>1.对于每个维度，数据值的总和保持在<span><span class="MathJax_Preview">CF 2_x</span><script type="math/tex">CF 2_x</script></span>中。 因此，<span><span class="MathJax_Preview">CF 2_x</span><script type="math/tex">CF 2_x</script></span>包含d值。 <span><span class="MathJax_Preview">CF 1^x</span><script type="math/tex">CF 1^x</script></span>的第p个条目等于<span><span class="MathJax_Preview">\sum_{j = 1}^n(x^p_{i_j})^2</span><script type="math/tex">\sum_{j = 1}^n(x^p_{i_j})^2</script></span>。
+2.对于每个维度，数据值的总和保持在<span><span class="MathJax_Preview">CF 1^x</span><script type="math/tex">CF 1^x</script></span>中。 因此，<span><span class="MathJax_Preview">CF 1^x</span><script type="math/tex">CF 1^x</script></span>包含d值。 <span><span class="MathJax_Preview">CF 1^x</span><script type="math/tex">CF 1^x</script></span>的第p个条目等于<span><span class="MathJax_Preview">\sum_{j = 1}^n(x^p_{i_j})</span><script type="math/tex">\sum_{j = 1}^n(x^p_{i_j})</script></span>。
+3.时间戳<span><span class="MathJax_Preview">T_{i1}...T_{in}</span><script type="math/tex">T_{i1}...T_{in}</script></span>的平方和在<span><span class="MathJax_Preview">CF 2t</span><script type="math/tex">CF 2t</script></span>中维持。
+4.时间戳<span><span class="MathJax_Preview">T_{i1}...T_{in}</span><script type="math/tex">T_{i1}...T_{in}</script></span>的总和在<span><span class="MathJax_Preview">CF 1t</span><script type="math/tex">CF 1t</script></span>中维持。
+5.数据点的数量保持为n</p>
+<p>微簇的一个重要特性是它们是可加性的。 换句话说，微型群集可以通过纯粹的加法操作来更新。请注意，微簇的<span><span class="MathJax_Preview">2·d +3</span><script type="math/tex">2·d +3</script></span>分量中的每一个都可以表示为组分上线性可分的总和数据点在微簇中。 这是实现高效的重要特性在线流场景中的微集群维护。 当数据点<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>是添加到一个microcluster中，需要添加数据点Xi的相应统计量<span><span class="MathJax_Preview">（2·d + 3）</span><script type="math/tex">（2·d + 3）</script></span>分量中的每一个。 同样，流时期的微型群集<span><span class="MathJax_Preview">（t_1，t_2）</span><script type="math/tex">（t_1，t_2）</script></span>可以通过从时刻t2的时刻t1减去时刻t1的微集群而得到。此属性对于启用更高级别宏群集的计算非常重要在来自不同时间存储的微簇的任意时间范围<span><span class="MathJax_Preview">（t_1，t_2）</span><script type="math/tex">（t_1，t_2）</script></span>内。</p>
+<h4 id="12422">12.4.2.2 微聚算法</h4>
+<p>数据流聚类算法可以从当前时刻在任何用户指定的历史记录长度中生成近似群集。这是通过在流中的特定时刻将微集群存储在被称为快照的位置来实现的。 在同时，Microclusters的当前快照始终由算法维护。添加属性可用于从任何时间范围提取微簇。该宏聚集阶段应用于此表示。</p>
+<p>&#8194;&#8194;&#8194;&#8194;算法的输入是微型群集的数量，用k表示。在线通过始终保持当前集合，算法的阶段以迭代的方式工作的微簇。只要有新的数据点Xi到达，微簇就会被更新以反映这些变化。每个数据点或者需要被微团簇吸收，或者需要将其放入其自己的集群中。首选是吸收数据指向当前存在的微群集。数据点到当前的距离微团簇质心<span><span class="MathJax_Preview">M_1... M_K</span><script type="math/tex">M_1... M_K</script></span>确定。数据点Xi的距离值到微簇<span><span class="MathJax_Preview">M_j</span><script type="math/tex">M_j</script></span>的质心由<span><span class="MathJax_Preview">dist（M_j，\overline X_i）</span><script type="math/tex">dist（M_j，\overline X_i）</script></span>表示。因为质心微簇可以从簇特征向量中导出，这个距离值可以是轻松计算。确定最接近的质心<span><span class="MathJax_Preview">M_p</span><script type="math/tex">M_p</script></span>。数据点<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>被分配给其最接近的集群<span><span class="MathJax_Preview">M_p</span><script type="math/tex">M_p</script></span>，除非认为数据点不是“自然”属于的到那个（或任何其他）微簇。在这种情况下，数据点<span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>需要分配一个（新）microcluster它自己。因此，在将数据点分配给微群集之前，首先需要确定它是否自然地属于其最接近的微团簇质心<span><span class="MathJax_Preview">M_p</span><script type="math/tex">M_p</script></span>。</p>
+<p>&#8194;&#8194;&#8194;&#8194;为了做出这个决定，使用Mp的聚类特征向量来确定这个数据点落入微团簇<span><span class="MathJax_Preview">M_p</span><script type="math/tex">M_p</script></span>的最大边界内。如果是这样，那么数据点<span><span class="MathJax_Preview">\overline X_i</span><script type="math/tex">\overline X_i</script></span>通过使用微型群集的可加性属性添加到微型群集<span><span class="MathJax_Preview">M_p</span><script type="math/tex">M_p</script></span>中。该微簇<span><span class="MathJax_Preview">M_p</span><script type="math/tex">M_p</script></span>最大边界被定义为均方根的因子<span><span class="MathJax_Preview">t,Mp</span><script type="math/tex">t,Mp</script></span>中的数据点与质心的偏差。 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>的值是用户定义的参数，它通常设置为3。</p>
+<p>&#8194;&#8194;&#8194;&#8194;如果数据点不在最近的微团簇的最大边界内，那么必须创建一个包含数据点Xi的新的微簇。但是，要创建这个新的微团体，其他微团体的数量必须减少1个以释放内存可用性。这可以通过删除旧的微型群集或合并来实现两个较旧的集群。这个决定是通过检查不同的陈旧性来做出的集群以及它们中的点数。微型集群的时间统计信息进行检查，以确定它们中的一个是否“充分”陈旧以值得去除。如果情况并非如此，那么就会启动两个微型集群的合并。</p>
+<p>&#8194;&#8194;&#8194;&#8194;Microcluster的陈旧程度如何确定？微簇用于估计簇<span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span>最后<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个数据点的平均时间戳。该值为由于最后的<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个数据点未按顺序明确保留，因此未明确知道尽量减少内存需求。中的时间戳的均值<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>和方差<span><span class="MathJax_Preview">σ^2</span><script type="math/tex">σ^2</script></span>。microcluster可以与分布的正态分布假设一起使用的时间戳来估计这个值。因此，如果群集包含<span><span class="MathJax_Preview">m_0&gt; m</span><script type="math/tex">m_0> m</script></span>个数据点，则具有均值<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>和方差<span><span class="MathJax_Preview">σ^2</span><script type="math/tex">σ^2</script></span>的正态分布的<span><span class="MathJax_Preview">m /（2·m_0）</span><script type="math/tex">m /（2·m_0）</script></span>个百分点可以被用作估计。这个值被称为集群M的相关标记可以从集群特征向量的时间分量计算<span><span class="MathJax_Preview">μ</span><script type="math/tex">μ</script></span>和<span><span class="MathJax_Preview">σ^2</span><script type="math/tex">σ^2</script></span>。当任何microcluster的最小这样的相关标记低于用户定义的时候阈值<span><span class="MathJax_Preview">δ</span><script type="math/tex">δ</script></span>，可以消除。如果不能安全删除微型群集，最近的微型集群被合并。合并操作可以被有效地执行因为集群特征向量的存在。微簇之间的距离可以可以使用群集特征向量轻松计算。当两个微型集群合并时，由于microclusters的可加性属性，它们的统计信息被添加在一起。</p>
+<h4 id="12423">12.4.2.3 金字塔时间框架</h4>
+<p>Microclusters统计数据会定期存储以启用对该数据的水平分析集群。 该维护在微聚类阶段进行。 在这种方法中microcluster快照根据不同的粒度级别进行存储快照的新近程度。 快照分为不同的顺序，可以从1变化记录（T），其中T是自流开始以来流逝的时间。 命令根据一个快照调整它存储的时间粒度级别以下规则：</p>
+<p>1、第i个订单的快照以<span><span class="MathJax_Preview">α_i</span><script type="math/tex">α_i</script></span>的时间间隔存储，其中<span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span>是整数并且<span><span class="MathJax_Preview">α≥1</span><script type="math/tex">α≥1</script></span>。具体而言，当时钟值存储时，第i个订单的每个快照都被存储<span><span class="MathJax_Preview">α_i</span><script type="math/tex">α_i</script></span>可以完全整除。
+2、在任何给定时间，仅存储订单i的最后<span><span class="MathJax_Preview">α_l+ 1</span><script type="math/tex">α_l+ 1</script></span>快照。</p>
+<p>&#8194;&#8194;&#8194;&#8194;上述定义允许在快照存储方面存在相当大的冗余。例如，8的时钟时间可被<span><span class="MathJax_Preview">2^0,2^1,2^2和2^3</span><script type="math/tex">2^0,2^1,2^2和2^3</script></span>（其中<span><span class="MathJax_Preview">α= 2</span><script type="math/tex">α= 2</script></span>）整除。 因此，在8时钟时间的微集群的状态同时对应于0阶，订单1，订单2和订单3快照。 从实现的角度来看，快照只需要维护一次。</p>
+<p>&#8194;&#8194;&#8194;&#8194;为了说明快照，将使用一个示例。 考虑流的情况已经在时钟时间1开始运行，并且使用<span><span class="MathJax_Preview">α=2</span><script type="math/tex">α=2</script></span>和<span><span class="MathJax_Preview">l=2</span><script type="math/tex">l=2</script></span>。因此，存储每个订单的<span><span class="MathJax_Preview">22 + l = 5</span><script type="math/tex">22 + l = 5</script></span>个快照。 然后，在55时钟时间，快照在存储表12.2中所示的时钟时间。 虽然一些快照是多余的在这种情况下，它们不是以冗余方式存储的。 相应的存储模式如图12.7所示。 很明显，最近的快照存储更频繁金字塔图案的存储。以下观察结果在数据过程中的任何时刻都是如此：</p>
+<p>1、自从开始以T时间单位存储的任何快照的最大顺序流挖掘过程是<span><span class="MathJax_Preview">log_α（T）</span><script type="math/tex">log_α（T）</script></span>。
+2、自开始以T时间单位维护的最大快照数<span><span class="MathJax_Preview">（α_1+ 1）·log_α（T）</span><script type="math/tex">（α_1+ 1）·log_α（T）</script></span>。
+3、对于任何用户指定的时间范围h，至少可以找到一个存储的快照，其中对应于期望的因子<span><span class="MathJax_Preview">（1 + 1 /α^{l-1}）</span><script type="math/tex">（1 + 1 /α^{l-1}）</script></span>个单位内的长度范围值为h。 此属性非常重要，因为时间范围的微群集统计数据<span><span class="MathJax_Preview">（t_c -h，t_c）</span><script type="math/tex">（t_c -h，t_c）</script></span>可以通过从时间<span><span class="MathJax_Preview">（t_c-h）</span><script type="math/tex">（t_c-h）</script></span>中减去统计值来构造在时间<span><span class="MathJax_Preview">t_c</span><script type="math/tex">t_c</script></span>。 因此，微团簇在时间的近似范围内<span><span class="MathJax_Preview">（t_c - h）</span><script type="math/tex">（t_c - h）</script></span>可以用来代替。 这使得数据流的近似集群成为可能从存储的金字塔形图案中任意时间范围内<span><span class="MathJax_Preview">（t_c-h，t_c）</span><script type="math/tex">（t_c-h，t_c）</script></span>点的microcluster统计。</p>
+<p>&#8194;&#8194;&#8194;&#8194;对于较大的<span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>值，时间范围可以近似地按照期望近似。它是指导性地使用示例来说明快照存储的金字塔模式实现的有效性和紧凑性的组合。例如，通过选择<span><span class="MathJax_Preview">l = 10</span><script type="math/tex">l = 10</script></span>，可以在0.2％内近似任何时间范围。同时，总共仅为<span><span class="MathJax_Preview">（2^{10} + 1）·</span><script type="math/tex">（2^{10} + 1）·</script></span>$log_2（100 * $<span><span class="MathJax_Preview">365 * <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">24 * 60 *60）≈32</span><script type="math/tex">24 * 60 *60）≈32</script></span>，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为</span><script type="math/tex"><span><span class="MathJax_Preview">24 * 60 *60）≈32</span><script type="math/tex">24 * 60 *60）≈32</script></span>，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为</script></span>k·（2·d + 3）k·（2·d + 3）</span><script type="math/tex">365 * <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">24 * 60 *60）≈32</span><script type="math/tex">24 * 60 *60）≈32</script></span>，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为</span><script type="math/tex"><span><span class="MathJax_Preview">24 * 60 *60）≈32</span><script type="math/tex">24 * 60 *60）≈32</script></span>，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为，流需要343个快照时钟粒度为1秒，运行时间超过100年。如果大小为</script></span>k·（2·d + 3）k·（2·d + 3）</script></span>的每个快照需要少于兆字节的存储空间，所需的总体存储空间是少数几个千兆字节。因为历史快照可以存储在磁盘上并仅存储当前快照需要在主内存中维护，从实际的角度来看这个要求是适度的看法。随着聚类算法的进展，只有根据。的相关快照金字塔时间框架得以维持。剩下的快照被丢弃。这使能以适度的存储成本计算水平特定的集群。</p>
+<h3 id="1243">12.4.3 大规模流聚类</h3>
+<p>正如前面所讨论的那样，大规模域场景在流上下文中无处不在。 在很多情况下，可能需要使用多维数据流，其中包含多维数据流个体属性是在可能的价值的一个巨大领域上绘制的。 在这种情况下，流分析变得困难得多，因为这些集群的“简明”摘要成了更多的空间密集型这也是许多概要结构的动机，例如布隆过滤器，计数 - 分钟草图，AMS草图以及Flajolet-Martin算法。</p>
+<p>数据聚类问题在大规模领域的情况下也变得更具挑战性，因为难以保持聚类的简明统计。 最近方法CSketch被设计用于聚集大量域数据流。 这个想法在此方法是使用计数 -分钟草图来存储每个群集中属性值组合的频率。 因此，所使用的count-min草图的数量等于该数量的集群。 应用在线k-means风格聚类，其中使用草图作为代表群集中的（离散的）属性。 对于任何传入的数据点，a点产品是针对每个集群计算的。</p>
+<p>计算如下进行。 对于d维中的每个属性 - 值组合，哈希函数<span><span class="MathJax_Preview">h_r（·）</span><script type="math/tex">h_r（·）</script></span>将应用于它的特定r值。频率确定相应的草图单元格。 所有相关草图的频率将不同维度的单元格加在一起。 这提供了一个估计点产品。 要获得更严格的估计值，请使用不同散列函数的最小值（不同的r值）。 点积除以项目的总频率集群，以避免对具有许多数据项的集群造成偏见。</p>
+<p>该计算可以准确执行，因为计数 - 分钟草图可以在小空间内精确计算点积。 数据点分配给群集它具有最大的点积。 代表该特定群集的草图中的统计数据随即更新。因此，这种方法与一个共同的特点按照数据点如何增量分配到集群的方式进行微集群。 然而，它不执行合并和删除步骤。 此外，使用草图表示而不是用于群集统计信息维护的微群集表示。关于聚类质量，可以显示理论保证有无限的空间可用性。 书目注释包含了这些结果的指针。</p>
+<h2 id="125">12.5 流异常检测</h2>
+<p>流式异常检测的问题通常出现在多维数据或时间序列数据流的背景下。 多维数据中的异常值检测流与时间序列异常值检测通常非常不同。在后一种情况下，每个时间序列被视为一个单位，而时间相关性则弱得多多维数据。 本章将只涉及多维流式异常检测，而时间序列方法将在第14章中讨论。</p>
+<p>&#8194;&#8194;&#8194;&#8194;多维流情景类似于静态多维异常值分析。 不过，唯一的区别是在分析中增加了时间分量这个时间分量比时间序列数据弱得多。 在上下文中的多维数据流，效率是一个重要的问题，因为异常值需要迅速发现。 在上下文中可能会出现两种异常值的多维数据流。</p>
+<p>1、一种是基于个体记录的异常值检测。 例如，第一条新闻关于特定主题的故事代表了这种类型的异常。 这种异常也是被称为新奇事物。</p>
+<p>2、其次是基于多维数据总趋势的变化。例如，恐怖袭击等不寻常事件可能会导致爆发关于特定主题的新闻报道。 这代表基于a的汇总异常值具体的时间窗口。 第二种变化点几乎总是以一个开始第一类个体异常值。然而，第一种类型的个体异常值可能并不总是发展成一个综合变化点。 这与此密切相关概念漂移的概念。 虽然概念漂移一般是温和的，但是是突然的变化可能被视为异常值，而不是异常数据点。</p>
+<h3 id="1251">12.5.1 个别数据点为异常值</h3>
+<p>将个别数据点检测为异常值的问题与问题密切相关无监督的新颖性检测，特别是当数据流的整个历史是用过的。 这个问题在问题的上下文中被广泛研究第一个故事检测。这些新奇事物往往是趋势制定者，并可能最终成为一种趋势正常数据的一部分。 然而，当一个单独的记录被宣布为异常时数据点的窗口的上下文，它可能不一定是新奇的。 在这方面，基于邻近度的算法特别容易推广到增量式场景通过将相应的算法几乎直接应用到数据点的窗口。基于距离的算法可以很容易地推广到流场景。 原始基于距离的异常值定义按以下方式修改：</p>
+<p>数据点的离群值分数是根据其最近邻距离定义的到长度为<span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span>的时间窗口中的数据点。</p>
+<p>&#8194;&#8194;&#8194;&#8194;请注意，这是对基于原始距离的相对直接修改定义。 当整个窗口的数据点可以保存在主存储器中时，它通过计算每个数据点的分数来确定异常值是相当容易的窗口。 但是，对数据点分数的增量维护更具挑战性因为从窗口添加和删除数据点。 此外，一些诸如LOF的算法需要重新计算统计数据，例如可达性距离。 LOF算法已扩展到增量场景。两个步骤是在此过程中执行：</p>
+<p>1、计算新插入的数据点的统计信息，例如其可达性距离和LOF分数。</p>
+<p>2、窗口中现有点的LOF分数随其更新密度和可达性距离。 换句话说，许多现有的分数数据点需要更新，因为它们受到新增内容的影响数据点。 但是，并非所有的分数都需要更新，因为只有地区新数据点受到影响。 同样，当数据点被删除时，只有LOF删除点位置的分数会受到影响。</p>
+<p>&#8194;&#8194;&#8194;&#8194;因为众所周知基于距离的方法在计算上是昂贵的，所以许多方法都是如此上述方法在数据流的情况下仍然非常昂贵。因此，异常检测过程的复杂性可以通过使用而大大提高一种基于在线聚类的方法。 本文前面讨论的微聚类方法章节会自动发现异常值以及群集。</p>
+<p>&#8194;&#8194;&#8194;&#8194;尽管数据数量通常不建议使用基于聚类的方法点数有限，流式分析不是这种情况。在数据的背景下流，通常有足够数量的数据点可用于维护群集在一个非常高的粒度水平。在流聚类算法的情况下，新簇的形成通常与无监督的新颖性相关联。例如，CluStream算法明确规定了数据流中新簇的创建当传入的数据点不在现有的指定统计半径内时在数据中聚类。这些数据点可能被视为异常值。在很多情况下，这是一个新趋势的开始，因为更多的数据点被添加到集群的后期阶段算法。在某些情况下，这些数据点可能对应于新奇事物，并且在其他情况下，它们可能对应于很久以前看到的趋势，但不再反映在当前的集群中。无论哪种情况，这些数据点都是有趣的异常值。但是，它除非有人愿意，否则不可能区分这些不同种类的异常值以允许流中的群集数目随时间增加。</p>
+<h3 id="1252">12.5.2 汇总变化点为异常值</h3>
+<p>通常情况下，基础数据总的本地和全球趋势突然变化指示数据中的异常事件。 许多方法也提供了统计方法量化底层数据流中的变化水平。 一种测量方法概念漂移是使用速度密度的概念。 速度密度估计的想法是构建数据的基于密度的速度分布。 这与这个概念类似静态数据集中的核密度估计。 <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的核密度估计<span><span class="MathJax_Preview">\overline f(\overline X)</span><script type="math/tex">\overline f(\overline X)</script></span>数据点和内核函数<span><span class="MathJax_Preview">K^,_h</span><script type="math/tex">K^,_h</script></span>定义如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">f(\overline x)=\frac {1}{n}\sum_{i=1}^{n}K_h^,(\overline X-\overline X_i)</span><script type="math/tex">f(\overline x)=\frac {1}{n}\sum_{i=1}^{n}K_h^,(\overline X-\overline X_i)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">f(\overline x)=\frac {1}{n}\sum_{i=1}^{n}K_h^,(\overline X-\overline X_i)</span><script type="math/tex">f(\overline x)=\frac {1}{n}\sum_{i=1}^{n}K_h^,(\overline X-\overline X_i)</script></span></script></span>使用的核函数是宽度为h的高斯核函数。$$K_h^,(\overline X-\overline X_i)\propto e^{- \parallel \overline X-\overline X_i \parallel<sup>2/2h</sup>2} $$估计误差由以数据驱动方式选择的内核宽度h定义基于西尔弗曼的近似规则[471]。</p>
+<p>速度密度计算是在大小为<span><span class="MathJax_Preview">h_t</span><script type="math/tex">h_t</script></span>的时间窗口上执行的。直观上，<span><span class="MathJax_Preview">h_t</span><script type="math/tex">h_t</script></span>的值定义了测量演化的时间范围。因此，如果选择<span><span class="MathJax_Preview">h_t</span><script type="math/tex">h_t</script></span>较大，那么速度密度估计技术提供长期趋势，而如果选择<span><span class="MathJax_Preview">h_t</span><script type="math/tex">h_t</script></span>小，那么趋势相对较短术语。 这为用户提供了分析不同数据变化的灵活性时间范围。 另外，使用类似于的空间平滑参数<span><span class="MathJax_Preview">h_s</span><script type="math/tex">h_s</script></span>传统核密度估计中的核宽度<span><span class="MathJax_Preview">h</span><script type="math/tex">h</script></span>。</p>
+<p>设t为当前时刻，S为已到达的数据点集合时间窗口<span><span class="MathJax_Preview">（t - h_t，t）</span><script type="math/tex">（t - h_t，t）</script></span>。 空间位置<span><span class="MathJax_Preview">\overline X</span><script type="math/tex">\overline X</script></span>和时间的密度增加率t用两种测量方法估计前向时间片密度估计值和反向值时间片密度估计。 直观上，前向时间片估计度量密度基于具有的一组数据点，在给定时间t处针对所有空间位置的函数在过去的时间窗口<span><span class="MathJax_Preview">（t-h_t，t）</span><script type="math/tex">（t-h_t，t）</script></span>抵达。 同样，反向时间片估计措施在给定时间t的密度函数基于将要到达的一组数据点未来时间窗口<span><span class="MathJax_Preview">（t，t + ht）</span><script type="math/tex">（t，t + ht）</script></span>。 显然，直到这些点才能计算出这个值实际上已经到了。</p>
+<p>假设S中的第i个数据点用<span><span class="MathJax_Preview">（X_i，t_i）</span><script type="math/tex">（X_i，t_i）</script></span>表示，其中<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>从<span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>变化到<span><span class="MathJax_Preview">| S |</span><script type="math/tex">| S |</script></span>。然后，集合<span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span>在空间位置的前向时间片估计<span><span class="MathJax_Preview">F（h_s，h_t）（X，t）</span><script type="math/tex">F（h_s，h_t）（X，t）</script></span>,<span><span class="MathJax_Preview">\overline X</span><script type="math/tex">\overline X</script></span>和时间<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>由下式给出：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">F_{(h_s，h_t)}(\overline X,t)=C_f\sum_{i=1}^{\shortmid S \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t-t_i)</span><script type="math/tex">F_{(h_s，h_t)}(\overline X,t)=C_f\sum_{i=1}^{\shortmid S \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t-t_i)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">F_{(h_s，h_t)}(\overline X,t)=C_f\sum_{i=1}^{\shortmid S \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t-t_i)</span><script type="math/tex">F_{(h_s，h_t)}(\overline X,t)=C_f\sum_{i=1}^{\shortmid S \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t-t_i)</script></span></script></span>这里<span><span class="MathJax_Preview">K_{(h_s,h_t)}</span><script type="math/tex">K_{(h_s,h_t)}</script></span><span><span class="MathJax_Preview">(·,·)</span><script type="math/tex">(·,·)</script></span>是一个时空内核平滑函数<span><span class="MathJax_Preview">h_s</span><script type="math/tex">h_s</script></span>是空间内核向量, <span><span class="MathJax_Preview">h_t</span><script type="math/tex">h_t</script></span>是时间内核宽度。 核函数K<span><span class="MathJax_Preview">（h_s，h_t）</span><script type="math/tex">（h_s，h_t）</script></span><span><span class="MathJax_Preview">(X-X_i，t-t_i)</span><script type="math/tex">(X-X_i，t-t_i)</script></span>是a平滑分布随<span><span class="MathJax_Preview">t-t_i</span><script type="math/tex">t-t_i</script></span>值的增加而减小。 <span><span class="MathJax_Preview">C_f</span><script type="math/tex">C_f</script></span>的价值是a适当选择归一化常数，以便在空间平面上的整个密度是一个单位。 因此，<span><span class="MathJax_Preview">C_f</span><script type="math/tex">C_f</script></span>被定义如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">\int_{All X}F_{h_s,h_t}(\overline X,t)\delta X=1 <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</span><script type="math/tex"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</script></span>中的点集表示为中的点集表示为</span><script type="math/tex">\int_{All X}F_{h_s,h_t}(\overline X,t)\delta X=1 <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</span><script type="math/tex"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</script></span>中的点集表示为中的点集表示为</script></span>UU</span><script type="math/tex"><span><span class="MathJax_Preview">\int_{All X}F_{h_s,h_t}(\overline X,t)\delta X=1 <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</span><script type="math/tex"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</script></span>中的点集表示为中的点集表示为</span><script type="math/tex">\int_{All X}F_{h_s,h_t}(\overline X,t)\delta X=1 <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</span><script type="math/tex"><span><span class="MathJax_Preview">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</span><script type="math/tex">反向时间片密度估计值与前向时间片不同密度估计。 假定时间间隔</script></span>（t，t + h_t）（t，t + h_t）</script></span>中的点集表示为中的点集表示为</script></span>UU</script></span>。如前所述，将<span><span class="MathJax_Preview">C_r</span><script type="math/tex">C_r</script></span>的值选择为归一化常数。 相应地，反时间片密度估计<span><span class="MathJax_Preview">R_{(h_s,h_t)}(\overline X，t)</span><script type="math/tex">R_{(h_s,h_t)}(\overline X，t)</script></span>定义如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">R_{(h_s,h_t)}(\overline X，t)=C_r\sum_{i=1}^{\shortmid U \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t_i-t)</span><script type="math/tex">R_{(h_s,h_t)}(\overline X，t)=C_r\sum_{i=1}^{\shortmid U \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t_i-t)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">R_{(h_s,h_t)}(\overline X，t)=C_r\sum_{i=1}^{\shortmid U \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t_i-t)</span><script type="math/tex">R_{(h_s,h_t)}(\overline X，t)=C_r\sum_{i=1}^{\shortmid U \shortmid}K_{(h_s,h_t)}(\overline X-\overline X_i,t_i-t)</script></span></script></span>在这种情况下，<span><span class="MathJax_Preview">t_i-t</span><script type="math/tex">t_i-t</script></span>被用于参数而不是<span><span class="MathJax_Preview">t-t_i</span><script type="math/tex">t-t_i</script></span>。因此，反向时间片区间<span><span class="MathJax_Preview">（t，t + h_t）</span><script type="math/tex">（t，t + h_t）</script></span>中的密度与前向时间片密度完全相同，如果时间相反，并且数据流以相反的顺序到达，则从<span><span class="MathJax_Preview">t + h_t</span><script type="math/tex">t + h_t</script></span>开始在t结束。</p>
+<p>空间位置X和时间T处的速度密度<span><span class="MathJax_Preview">V_{(h_s，h_t)}(X，T)</span><script type="math/tex">V_{(h_s，h_t)}(X，T)</script></span>定义如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">V_{(h_s，h_t)}(X，T)=\frac {F_{(h_s，h_t)}(X，T)-R_{(h_s，h_t)}(\overline X，T-h_t)}{h_t}</span><script type="math/tex">V_{(h_s，h_t)}(X，T)=\frac {F_{(h_s，h_t)}(X，T)-R_{(h_s，h_t)}(\overline X，T-h_t)}{h_t}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">V_{(h_s，h_t)}(X，T)=\frac {F_{(h_s，h_t)}(X，T)-R_{(h_s，h_t)}(\overline X，T-h_t)}{h_t}</span><script type="math/tex">V_{(h_s，h_t)}(X，T)=\frac {F_{(h_s，h_t)}(X，T)-R_{(h_s，h_t)}(\overline X，T-h_t)}{h_t}</script></span></script></span>请注意，逆时间片密度估计是用时间参数定义的<span><span class="MathJax_Preview">（T - h_t）</span><script type="math/tex">（T - h_t）</script></span>，因此相对于<span><span class="MathJax_Preview">（T - h_t）</span><script type="math/tex">（T - h_t）</script></span>的未来点在时间T是已知的。 速度密度的正值对应于a处数据密度的增加给定点。 速度密度的负值对应于数据的减少在给定点的密度。 一般来说，当时空内核已经被证明函数的定义如下，则速度密度与速率成正比在给定点的数据密度的变化。<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">K_{(h_s，h_t)}(X,t)=(1-t/h_t)·K^,_{h_{s}}(X)</span><script type="math/tex">K_{(h_s，h_t)}(X,t)=(1-t/h_t)·K^,_{h_{s}}(X)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">K_{(h_s，h_t)}(X,t)=(1-t/h_t)·K^,_{h_{s}}(X)</span><script type="math/tex">K_{(h_s，h_t)}(X,t)=(1-t/h_t)·K^,_{h_{s}}(X)</script></span></script></span>此内核函数仅在范围<span><span class="MathJax_Preview">（0，h_t）</span><script type="math/tex">（0，h_t）</script></span>中的t值中定义。 高斯空间内核函数<span><span class="MathJax_Preview">K^,_{h_{s}}（·）</span><script type="math/tex">K^,_{h_{s}}（·）</script></span>因其众所周知的有效性而被使用。 具体来说，<span><span class="MathJax_Preview">K^,_{h_{s}}（·）</span><script type="math/tex">K^,_{h_{s}}（·）</script></span>是d个相同高斯核函数的乘积，<span><span class="MathJax_Preview">h_s =（h^1_s，... h^d_s）</span><script type="math/tex">h_s =（h^1_s，... h^d_s）</script></span>，其中<span><span class="MathJax_Preview">h^i_s</span><script type="math/tex">h^i_s</script></span>是第i个维度的平滑参数。</p>
+<p>速度密度与数据点以及时间点相关联，并且因此该定义允许将数据点和时刻标记为异常值。然而，在总体变化的情况下，将数据点解释为异常值分析与本节中以前的定义略有不同。 异常值被定义总的来说，而不是以某种特定的方式。 因为异常值是数据点发生突变的地区，异常值被定义为数据点<span><span class="MathJax_Preview">\overline X</span><script type="math/tex">\overline X</script></span>在时刻t与局部速度密度的绝对值非常大。 如果期望的，可以使用正态分布来确定极值之间的极值绝对速度密度值。 因此，速度密度方法能够转换多维数据分布转化为可以一起使用的量化通过极值分析。</p>
+<p>值得注意的是，数据点<span><span class="MathJax_Preview">\overline X</span><script type="math/tex">\overline X</script></span>只是在聚合的情况下才是异常值在其所在地发生变化，而不是作为异常值的自身属性。 在上下文中的新闻报道的例子，这对应于属于特定突发事件的新闻报道相关文章。 因此，这种方法可以检测到本地集群的突然出现在数据中，及时报告相应的数据点。 此外，它是也可以计算出现的总体绝对变化水平（在所有地区）在底层数据流中。 这是通过计算平均绝对速度来实现的通过对空间中采样点的变化进行求和来计算整个数据空间的密度。具有较大聚合速度密度值的时刻可能被声明为异常值。</p>
+<h2 id="126">12.6 流分类</h2>
+<p>由于影响，流式分类的问题尤其具有挑战性的概念漂移。 一个简单的方法是使用水库样本来创建一个简洁的训练数据的表示。 这个简洁的表示可以用来创建一个脱机模式。 如果需要，可以使用基于衰变的油藏样本来处理概念漂移。 这种方法具有任何传统分类算法的优点可以使用，因为与流式范例相关的挑战已经存在在采样阶段处理。 还提出了一些专用方法用于流式分类。</p>
+<h3 id="1261-vfdt">12.6.1 VFDT族</h3>
+<p>非常快的决策树（VFDT）基于Hoeffding树的原则。 基础的想法是决策树可以构建在一个非常大的数据集的样本上，使用a经过精心设计的方法，使得生成的树与原始数据集以高概率获得的结果相同。 Hoeffding界限用于估计这个概率，因此设计了该方法的中间步骤考虑到这一点。 这就是这种树被称为Hoeffding树的原因。</p>
+<p>Hoeffding树可以通过同时增长树来增量构建与流到达。 一个重要的假设是流不会发展，并且因此当前到达的一组点可被视为全流的一个样本。足够的时候，树的较高层被构建在流的早期阶段已收集元组以量化相应拆分标准的准确性。该较低级别的节点稍后会构建，因为关于较低级别节点的统计信息可以是只有在构建了更高层次的节点之后才收集。 因此，连续的水平随着更多的例子流入并且树继续增长，树被构建。该Hoeffding树算法的关键是量化统计上足够的点为了执行拆分，已经收集了元组，以便拆分大约是与完整流的知识所完成的相同。</p>
+<p>将在当前流样本和全部样本上构建相同的决策树流，只要在每个阶段使用相同的分割。 因此，该方法的目标是为了确保样本上的分割与完整流上的分割相同。 为了方便在讨论中，考虑每个属性6都是二进制的情况。 在这种情况下，两种算法将生成完全相同的树，只要在每个树中选择相同的拆分属性即可点。 使用诸如基尼指数之类的度量来选择拆分属性。 考虑一个在原始数据上构建的树中的特定节点以及构建的相同节点在采样数据上。 相同属性将被选择的概率是多少？整个流的流样本？</p>
+<p>考虑分割的最佳和次佳属性，分别由<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>和<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>索引，在采样数据中。让<span><span class="MathJax_Preview">G_i</span><script type="math/tex">G_i</script></span>和<span><span class="MathJax_Preview">G_i^,</span><script type="math/tex">G_i^,</script></span>我是分裂属性i的基尼指数值，如在全部流上计算，以及采样数据。因为属性我被选中用于抽样数据中的分裂，显然<span><span class="MathJax_Preview">G_i^,&lt;G_j^,</span><script type="math/tex">G_i^,<G_j^,</script></span>学家问题在于采样可能会导致错误。换句话说，对于原始数据，它可能是<span><span class="MathJax_Preview">G_i^,&lt;G_j^,</span><script type="math/tex">G_i^,<G_j^,</script></span>的情况。差异<span><span class="MathJax_Preview">G_j -G_i</span><script type="math/tex">G_j -G_i</script></span>在<span><span class="MathJax_Preview">G_j^,</span><script type="math/tex">G_j^,</script></span>和<span><span class="MathJax_Preview">G_i^,</span><script type="math/tex">G_i^,</script></span>之间是<span><span class="MathJax_Preview">\epsilon &lt;0</span><script type="math/tex">\epsilon <0</script></span>。如果数字用于评估分割的样本n足够大，则可以使用Hoeffding限制了<span><span class="MathJax_Preview">G_j &lt;G_i</span><script type="math/tex">G_j <G_i</script></span>不会出现的不良情况，至少出现一次用户定义的概率<span><span class="MathJax_Preview">1-δ</span><script type="math/tex">1-δ</script></span>。 n的所需值将是<span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>和<span><span class="MathJax_Preview">δ</span><script type="math/tex">δ</script></span>的函数。在里面数据流的上下文不断积累样本，关键是要等待一个样本在执行分割之前足够大的样本大小n。在Hoeffding树，Hoeffdingbound是用来确定<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的值的方式<span><span class="MathJax_Preview">\epsilon <span><span class="MathJax_Preview">和</span><script type="math/tex">和</script></span>δδ</span><script type="math/tex">\epsilon <span><span class="MathJax_Preview">和</span><script type="math/tex">和</script></span>δδ</script></span>如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">n=\frac{R^2·ln(1/\delta)}{2\epsilon ^2}\tag{12.32}</span><script type="math/tex">n=\frac{R^2·ln(1/\delta)}{2\epsilon ^2}\tag{12.32}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">n=\frac{R^2·ln(1/\delta)}{2\epsilon ^2}\tag{12.32}</span><script type="math/tex">n=\frac{R^2·ln(1/\delta)}{2\epsilon ^2}\tag{12.32}</script></span></script></span></p>
+<p>R的值表示分割标准的范围。 对于基尼指数，R的值是1，并且对于熵标准，值是<span><span class="MathJax_Preview">log（k）</span><script type="math/tex">log（k）</script></span>，其中k是类的数量。 近分裂标准中的关系对应于<span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>的小值。 根据公式 12.32，这样的关系将导致大样本量的要求，并因此等待更长的时间直到一个可以充分确信可用可用的流样本执行分割。</p>
+<p>Hoeffding树方法确定目前吉尼指数中的差异至少是最好的还是次佳的分割属性<span><span class="MathJax_Preview">\sqrt \frac{R^2·ln(1/\delta)}{2n ^2}</span><script type="math/tex">\sqrt \frac{R^2·ln(1/\delta)}{2n ^2}</script></span>以启动分裂。 这为特定节点的分割质量提供了保证。在这种情况下，在分裂质量接近的情况下（非常小的值），算法将需要等待n的较大值，直到满足上述分离条件。 它可以可以看出，Hoeffding树在该分类上的分类概率作为用无限数据构造的树的实例至少由<span><span class="MathJax_Preview">1-δ/ p</span><script type="math/tex">1-δ/ p</script></span>给出，其中p是实例将被分配给特定叶子的概率。 内存需求是适度的，因为只有属性的不同离散值的计数（结束）不同类别）需要在各个节点进行维护以做出分裂决策。</p>
+<p>Hoeffding树算法的主要理论意义是没有需要所有数据的增长与由潜在的无限数据流构建的树完全相同。 相反，所需要的元组总数一旦被限制概率确定性水平δ是固定的。 该方法的主要瓶颈是，在树建设过程中，由于附近的关系，一些节点的建设被推迟。 最的时间花费在打破附近的关系上。 在Hoeffding树算法中，一旦做出决定是关于分裂（这是一个糟糕的），它不能被扭转。 增量过程Hoeffding树的结构如图12.8所示。 值得注意的是测试实例分类可以在流进行过程中的任何一点进行，但是分类的大小随着时间的推移树会随着分类准确性而增加。</p>
+<p>VFDT方法通过更多地打破关系而改进了Hoeffding树算法积极地并通过去激活不太有前途的叶节点。 它也有一个数字为了提高准确性而进行的优化，如不良分割属性的丢弃等在多个数据点上分配中间计算。 但是，它不是为了设计处理概念漂移。 CVFDT方法随后被设计来解决概念漂移。 CVFDT结合了两个主要思想来解决漂移带来的额外挑战：</p>
+<p>1.培训项目的滑动窗口用于限制历史行为的影响。
+2.在每个内部节点i处的替代子树被构造来说明这一事实由于流，最佳分割属性可能不再是最佳选择进化论。</p>
+<p>备用子树与用于分类的主树一起生长。 这些交替定期使用树来在最佳分割属性具有时执行替换改变。 实验结果表明，CVFDT方法通常达到更高概念漂移数据流的准确性。</p>
+<h3 id="1262">12.6.2 监督微群集方法</h3>
+<p>受监督的微簇基本上是一种基于实例的分类方法。 在这模型，假设训练和测试流同时被接收时间。 由于概念漂移，随着时间的推移动态调整模型非常重要。</p>
+<p>在最近邻分类方法中，最近邻居之间的主导类别标签被报告为相关结果。 在流媒体场景中，这很困难为了有效地计算特定测试实例的k个最近邻居，增加流的大小。 但是，可以使用细粒度的微群集来创建数据流的固定大小汇总不随流进展而增加。 一个使用受监督的微聚类变体，其中不同类别的数据点不是允许在群集内混合。 维护这样的微型群集相对容易改变CluStream算法。 主要区别是数据点被分配到集群更新过程中属于同一类的微集群。 因此，标签与微集群而不是单个数据点相关联。 主导标签最近k个最近的microclusters报告为相关标签。</p>
+<p>但是，这并不能解释需要对算法进行的更改作为概念漂移的结果。 由于概念漂移，流中的趋势将发生变化。因此，使用特定时间范围内的微型群集来增加更为重要准确性。 虽然最近的视野往往可能是相关的，但有时候可能不会当流中的趋势突然回复到较早的趋势时就是这种情况。 因此，训练流的一部分被分离出来作为验证流。 最近的部分验证流被用作测试用例来评估不同时间的精度视野。 选择最佳水平线。 k-最近邻的方法适用于在这个最佳选择的地平线上测试实例。</p>
+<h3 id="1263">12.6.3 集合方法</h3>
+<p>还提出了一种强大的集成方法来分类数据流。该方法也被设计来处理概念漂移，因为它可以有效地解释底层数据的演变。数据流被分成块和多个分类器在这些块中的每一块上进行训练。最终的分类分数计算为这些块的每一个上的分数的函数。特别是分类合奏模型被评分，如C4.5，RIPPER，朴素贝叶斯，从连续的块数据流。集合中的分类器根据时间演变环境下的预期分类准确度进行加权。这确保了这种方法能够达到更高的准确度，因为分类器是动态调整的以优化该部分数据流的准确性。有人表示，一个合奏如果所有分类器的权重都是，则分类器产生比单个分类器更小的误差根据他们预期的分类准确性分配。</p>
+<h3 id="1264">12.6.4 大规模流媒体分类</h3>
+<p>许多流式应用程序包含非常高的多维离散属性基数。在这种情况下，因为使用传统分类器变得困难内存限制。计数 - 分钟草图可以用来解决这些挑战。每类与用于跟踪项目的频繁r组合的草图相关联在训练数据中，r的上界由一个小数k组成。对于每个传入训练数据点，所有可能的r组合（对于r≤k）被视为伪项目被添加到相关课程的草图中。不同的课程将有不同的相关伪项目将显示在属于草图的单元的变化频率中不同的班级。这些差异可以用来确定最有鉴别力的细胞在不同的草图中。频繁的判别性伪项决定创建隐式规则将伪项目与不同类别相关联。这些规则是隐含的因为它们实际上并未实现，但隐含地存储在草图中。他们是仅在测试实例分类时检索。对于给定的测试实例，确定哪些伪项目对应于它们内部的项目的组合。其中的区别性人物是通过检索他们的统计数据来确定的特定类别的草图。然后这些被用来执行测试实例的分类，使用与基于规则的分类器相同的通用方法。书目注释包含指向大量域分类工作的细节。</p>
+<h2 id="127">12.7 总结</h2>
+<p>本章介绍了流挖掘算法。 Streams提出了与大容量，概念漂移，数据项的大量域性质有关的几个挑战资源限制。在这种情况下，简介构建是流媒体场景中最根本的问题之一。只要高质量的流概要可以构建，它可以用于流挖掘算法。与主要问题使用简介方法是不同的简介结构适合于不同的应用。数据流使用的最常见的概要结构是油藏样本和草图。水库样本提供最大的灵活性，应该在哪里使用可能。</p>
+<p>流式场景中也解决了频繁模式挖掘，聚类，异常值检测和分类的核心问题。大多数这些问题都可以有效地处理油藏采样，需要大致的解决方案。在异常值检测的特殊情况，问题定义的多种变化在流式场景中可能。</p>
+<h2 id="128">12.8 书目注释</h2>
+<p>流媒体算法的详细讨论可以在[40]中找到。 油藏采样方法最初是在[498]中提出的。 带有衰减的偏置油藏采样方法在[35]中提出。 计数—分钟草图在[165]中描述。 计数 —分钟草图的许多其他应用程序将在同一工作中讨论。 AMS素描是在[72]中提出。 [208]中提出了用于不同元素计数的Flajolet-Martin数据结构。 提供了对数据流中提要构建算法的调查在[40]中。 有些这些数据结构的功能的详细讨论也可能被发现在同一件作品中。</p>
+<p>有损频繁项集计算算法在[376]中提出。 有关流式频繁模式挖掘的调查可以在[34,40]中找到。STREAM算法被提出在[240]中。 在[36]中解决了流聚类的大规模场景。 一项调查在线聚类算法可以在[32]中找到。 在[67]中讨论了用于点异常检测的STORM算法，以及LOF算法对数据流的扩展在[426]中被提出。 总体变化检测算法在[21]中提出。数据流中异常值检测的方法在[5]中讨论。 VFDT和CVFDT算法在[176,279]中提出。 基于微簇的分类方法是在[20]中进行了讨论，集合方法在[503]中进行了讨论。 大量的域名流式分类的场景在[47]中讨论过。 流分类调查方法可以在[33]中找到。</p>
+<h2 id="129">12.9 练习</h2>
+<p>1.设X是[0，1]中的随机变量，平均值为0.5。 证明P（X&gt; 0.9）≤5/9。
+2.假设随机变量X的标准差是其平均值的r倍。 在这里，r可以是任何常数。演示如何结合Chebychev不等式和Chernoff势必要显示重复的i.i.d. 样本可以用来创建一个有界的估计X.换句话说，我们想创建另一个随机变量Z.（使用多个i.i.d.样本）与X的预期值相同，这样对于小δ，我们想表明：$$P (|Z − E[Z]) &gt; α · E[Z]) $$3.讨论Hoeffding不等式和Chernoff约束都可以的情景使用。哪一个更普遍适用？
+4.假设你有一个大小为k = 1000的容器，并且你有一个流的样本包含两个类完全平等的分布。使用上尾Chernoff必然会确定水库含有600多个样本的概率的两个类别之一。可以使用较低的尾部？
+5.（困难）找出偏置油藏采样算法的完整证明。
+6.（困难）找出获得的点积估计的正确性证明使用count-min草图。
+7.讨论不同概要构造方法对各种流的一般性采矿问题。为什么将这些方法应用于异常值分析很困难？
+8.实现CluStream算法。
+9.将上一个练习的实施扩大到分类问题采用微群集方法。
+10.为不同的元素计数实现Flajolet-Martin算法。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../11/" title="第11章 数据分类：高级概念" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第11章 数据分类：高级概念
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../13/" title="第13章 挖掘文本数据" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第13章 挖掘文本数据
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2018 NUDT DM-Trans Group
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

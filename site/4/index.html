@@ -1,0 +1,1738 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/4/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第4章 关联模式挖掘 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#4" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第4章 关联模式挖掘
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第4章 关联模式挖掘
+      </label>
+    
+    <a href="./" title="第4章 关联模式挖掘" class="md-nav__link md-nav__link--active">
+      第4章 关联模式挖掘
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41" title="4.1 介绍" class="md-nav__link">
+    4.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" title="4.2 频繁模式挖掘模型" class="md-nav__link">
+    4.2 频繁模式挖掘模型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" title="4.3 关联规则生成框架" class="md-nav__link">
+    4.3 关联规则生成框架
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" title="4.4 频繁项集挖掘算法" class="md-nav__link">
+    4.4 频繁项集挖掘算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441" title="4.4.1 暴力算法" class="md-nav__link">
+    4.4.1 暴力算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-apriori" title="4.4.2 Apriori算法" class="md-nav__link">
+    4.4.2 Apriori算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4421" title="4.4.2.1 有效的支持计数" class="md-nav__link">
+    4.4.2.1 有效的支持计数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443" title="4.4.3 枚举树算法" class="md-nav__link">
+    4.4.3 枚举树算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44_1" title="4.4 频繁项目挖掘算法" class="md-nav__link">
+    4.4 频繁项目挖掘算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4431-apriori" title="4.4.3.1 Apriori的枚举树解释" class="md-nav__link">
+    4.4.3.1 Apriori的枚举树解释
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4432-treeprojectiondepthproject" title="4.4.3.2 TreeProjection和DepthProject" class="md-nav__link">
+    4.4.3.2 TreeProjection和DepthProject
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4433" title="4.4.3.3垂直计数方法" class="md-nav__link">
+    4.4.3.3垂直计数方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#444" title="4.4.4基于递归后缀的模式增长方法" class="md-nav__link">
+    4.4.4基于递归后缀的模式增长方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4441" title="4.4.4.1使用数组但不指向的实现" class="md-nav__link">
+    4.4.4.1使用数组但不指向的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4442fp-tree" title="4.4.4.2使用指针实现而不使用FP-Tree" class="md-nav__link">
+    4.4.4.2使用指针实现而不使用FP-Tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4443fp-tree" title="4.4.4.3使用指针和FP-Tree实现" class="md-nav__link">
+    4.4.4.3使用指针和FP-Tree实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4444" title="4.4.4.4具有不同数据结构的权衡" class="md-nav__link">
+    4.4.4.4具有不同数据结构的权衡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4445-fp-" title="4.4.4.5 FP-生长和枚举树方法之间的关系" class="md-nav__link">
+    4.4.4.5 FP-生长和枚举树方法之间的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45" title="4.5 替代模式：有趣的模式" class="md-nav__link">
+    4.5 替代模式：有趣的模式
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451" title="4.5.1 相关统计系数" class="md-nav__link">
+    4.5.1 相关统计系数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#452-92292" title="4.5.2 \(χ^2\)度量" class="md-nav__link">
+    4.5.2 \(χ^2\)度量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#453" title="4.5.3利率" class="md-nav__link">
+    4.5.3利率
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#454" title="4.5.4对称置信度量度" class="md-nav__link">
+    4.5.4对称置信度量度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#455" title="4.5.5列上的余弦系数" class="md-nav__link">
+    4.5.5列上的余弦系数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#456-jaccardmin-hash" title="4.5.6 Jaccard系数和Min-Hash技巧" class="md-nav__link">
+    4.5.6 Jaccard系数和Min-Hash技巧
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#457" title="4.5.7 集体力量" class="md-nav__link">
+    4.5.7 集体力量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#458" title="4.5.8与负向模式挖掘的关系" class="md-nav__link">
+    4.5.8与负向模式挖掘的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46" title="4.6有用的元算法" class="md-nav__link">
+    4.6有用的元算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#461" title="4.6.1抽样方法" class="md-nav__link">
+    4.6.1抽样方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#462" title="4.6.2数据分区集成" class="md-nav__link">
+    4.6.2数据分区集成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#463" title="4.6.3泛化到其他数据类型" class="md-nav__link">
+    4.6.3泛化到其他数据类型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4631" title="4.6.3.1定量数据" class="md-nav__link">
+    4.6.3.1定量数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4632" title="4.6.3.2分类数据" class="md-nav__link">
+    4.6.3.2分类数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47" title="4.7 总结" class="md-nav__link">
+    4.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48" title="4.8 书目注释" class="md-nav__link">
+    4.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49" title="4.9 练习" class="md-nav__link">
+    4.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../9/" title="第9章 异常值分析：高级概念" class="md-nav__link">
+      第9章 异常值分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41" title="4.1 介绍" class="md-nav__link">
+    4.1 介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" title="4.2 频繁模式挖掘模型" class="md-nav__link">
+    4.2 频繁模式挖掘模型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" title="4.3 关联规则生成框架" class="md-nav__link">
+    4.3 关联规则生成框架
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" title="4.4 频繁项集挖掘算法" class="md-nav__link">
+    4.4 频繁项集挖掘算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441" title="4.4.1 暴力算法" class="md-nav__link">
+    4.4.1 暴力算法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-apriori" title="4.4.2 Apriori算法" class="md-nav__link">
+    4.4.2 Apriori算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4421" title="4.4.2.1 有效的支持计数" class="md-nav__link">
+    4.4.2.1 有效的支持计数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443" title="4.4.3 枚举树算法" class="md-nav__link">
+    4.4.3 枚举树算法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44_1" title="4.4 频繁项目挖掘算法" class="md-nav__link">
+    4.4 频繁项目挖掘算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4431-apriori" title="4.4.3.1 Apriori的枚举树解释" class="md-nav__link">
+    4.4.3.1 Apriori的枚举树解释
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4432-treeprojectiondepthproject" title="4.4.3.2 TreeProjection和DepthProject" class="md-nav__link">
+    4.4.3.2 TreeProjection和DepthProject
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4433" title="4.4.3.3垂直计数方法" class="md-nav__link">
+    4.4.3.3垂直计数方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#444" title="4.4.4基于递归后缀的模式增长方法" class="md-nav__link">
+    4.4.4基于递归后缀的模式增长方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4441" title="4.4.4.1使用数组但不指向的实现" class="md-nav__link">
+    4.4.4.1使用数组但不指向的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4442fp-tree" title="4.4.4.2使用指针实现而不使用FP-Tree" class="md-nav__link">
+    4.4.4.2使用指针实现而不使用FP-Tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4443fp-tree" title="4.4.4.3使用指针和FP-Tree实现" class="md-nav__link">
+    4.4.4.3使用指针和FP-Tree实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4444" title="4.4.4.4具有不同数据结构的权衡" class="md-nav__link">
+    4.4.4.4具有不同数据结构的权衡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4445-fp-" title="4.4.4.5 FP-生长和枚举树方法之间的关系" class="md-nav__link">
+    4.4.4.5 FP-生长和枚举树方法之间的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45" title="4.5 替代模式：有趣的模式" class="md-nav__link">
+    4.5 替代模式：有趣的模式
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451" title="4.5.1 相关统计系数" class="md-nav__link">
+    4.5.1 相关统计系数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#452-92292" title="4.5.2 \(χ^2\)度量" class="md-nav__link">
+    4.5.2 \(χ^2\)度量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#453" title="4.5.3利率" class="md-nav__link">
+    4.5.3利率
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#454" title="4.5.4对称置信度量度" class="md-nav__link">
+    4.5.4对称置信度量度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#455" title="4.5.5列上的余弦系数" class="md-nav__link">
+    4.5.5列上的余弦系数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#456-jaccardmin-hash" title="4.5.6 Jaccard系数和Min-Hash技巧" class="md-nav__link">
+    4.5.6 Jaccard系数和Min-Hash技巧
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#457" title="4.5.7 集体力量" class="md-nav__link">
+    4.5.7 集体力量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#458" title="4.5.8与负向模式挖掘的关系" class="md-nav__link">
+    4.5.8与负向模式挖掘的关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46" title="4.6有用的元算法" class="md-nav__link">
+    4.6有用的元算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#461" title="4.6.1抽样方法" class="md-nav__link">
+    4.6.1抽样方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#462" title="4.6.2数据分区集成" class="md-nav__link">
+    4.6.2数据分区集成
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#463" title="4.6.3泛化到其他数据类型" class="md-nav__link">
+    4.6.3泛化到其他数据类型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4631" title="4.6.3.1定量数据" class="md-nav__link">
+    4.6.3.1定量数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4632" title="4.6.3.2分类数据" class="md-nav__link">
+    4.6.3.2分类数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47" title="4.7 总结" class="md-nav__link">
+    4.7 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48" title="4.8 书目注释" class="md-nav__link">
+    4.8 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49" title="4.9 练习" class="md-nav__link">
+    4.9 练习
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/4.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="4">4 关联模式挖掘</h1>
+<!--本章由曹春、张巍烨翻译-->
+
+<h2 id="41">4.1 介绍</h2>
+<p>关联模式挖掘的经典问题是在超市数据的上下文中定义的，该超市数据包含由顾客购买的一系列商品，这些商品被称为交易。 目标是确定顾客购买的物品组之间的关联，可以直观地将其视为物品之间的k-路相关性。 最流行的关联模式挖掘模型使用项目集合的频率作为关联级别的量化。 发现的项目组被称为大项目集，频繁项目集或频繁模式。 关联模式挖掘问题有多种应用：</p>
+<ol>
+<li>
+<p>超市数据：超市应用程序是提出关联模式挖掘问题的最初动机场景。这也是“项目集”这个术语用来指顾客购买的超市物品背景下的频繁模式的原因。频繁项目集的确定提供了关于项目的目标营销和货架放置的有用见解。</p>
+</li>
+<li>
+<p>文本挖掘：由于文本数据通常用词袋模型表示，因此频繁模式挖掘有助于识别共现词语和关键词。这种共同出现的术语有许多文本挖掘应用程序。</p>
+</li>
+<li>
+<p>面向依赖性数据类型的推广：原始频繁模式挖掘模型已经推广到许多依赖性数据类型，如时间序列数据，顺序数据，空间数据和图形数据，并进行了一些修改。这些模型在Web日志分析，软件缺陷检测和时空事件检测等应用中非常有用。</p>
+</li>
+<li>
+<p>其他主要的数据挖掘问题：频繁模式挖掘可以用作子例程，为许多数据挖掘问题提供有效的解决方案，如聚类，分类和异常值分析。</p>
+</li>
+</ol>
+<p>由于频繁模式挖掘问题最初是在市场购物篮数据的背景下提出的，因此用于描述数据（例如交易）和输出（例如项目集）的大量术语是从超市类比中借用的。 从应用中立的角度来看，频繁模式可能被定义为一个频繁的子集，在所有可能的集合的宇宙中定义。</p>
+<p>尽管如此，由于市场篮子的术语已被广泛使用，本章将与其相符。
+频繁项目集可用于生成X⇒Y形式的关联规则，其中X和Y是项目集合。 现在已经成为数据挖掘民间传说的一部分的关联规则的一个着名例子是{啤酒}⇒{尿布}。 这条规则表明，购买啤酒使尿布更可能被购买。 因此，作为条件概率量化的含义存在一定的方向性。关联规则对于各种目标市场应用特别有用。例如，如果超市老板发现{鸡蛋，牛奶}⇒{酸奶}是一种关联规则，他或她可以向经常购买鸡蛋和牛奶的顾客推销酸奶。 或者，超市老板可以将酸奶放在靠近鸡蛋和牛奶的货架上
+基于频率的关联模式挖掘模型由于其简单性而非常流行。然而，一个模式的原始频率与底层相关性的统计显着性并不完全相同。因此，已经提出了许多基于统计显着性的用于频繁模式挖掘的模型。本章还将探讨一些这些替代模型，这些模型也被称为有趣模式。本章安排如下。4.2节介绍关联模式挖掘的基本模型。关于频繁项目集的关联规则的生成在第4.3节中讨论。有关频繁模式挖掘的各种算法在第4.4节中讨论。这包括Apriori算法，许多枚举树算法以及基于后缀的递归方法。有关发现有趣的频繁模式的方法将在4.5节中讨论。用于频繁模式挖掘的元算法在第4.6和第4.7节讨论结论和总结。</p>
+<h2 id="42">4.2 频繁模式挖掘模型</h2>
+<p>关联模式挖掘的问题自然被定义在无序的数据集合上。 假定数据库<span><span class="MathJax_Preview">\mathcal{T}</span><script type="math/tex">\mathcal{T}</script></span>包含了<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个交易，定义为<span><span class="MathJax_Preview">T_1,...,T_n。</span><script type="math/tex">T_1,...,T_n。</script></span> 每个事务<span><span class="MathJax_Preview">T_i</span><script type="math/tex">T_i</script></span>都在项目<span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span>的宇宙上绘制，也可以表示为维度的多维记录，<span><span class="MathJax_Preview">d = | U |</span><script type="math/tex">d = | U |</script></span>，仅包含二进制属性。 此记录中的每个二元属性都表示一个特定的项目。 如果该项目存在于该事务中，则此记录中的属性值为1，否则为0。 在实际设置中，与每个事务Ti中的典型项目数量相比，项目<span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span>的范围非常大。 例如，一个超市数据库可能拥有数以万计的项目，而单个交易通常会包含少于50个项目。 频繁模式挖掘算法的设计常常利用此属性。</p>
+<p>项目集是一组项目。 k-itemset是一个包含k个项目的项目集。 换句话说，k项目集是基数k的一组项目。<span><span class="MathJax_Preview">T_1,...,T_n</span><script type="math/tex">T_1,...,T_n</script></span>的交易部分。其中一个项目集发生，因为一个子集提供了一个清晰的量化频率，这个频率也被称为支持。
+<center>
+表4.1：市场购物篮数据集的快照示例
+<img alt="表4.1：市场购物篮数据集的快照示例" src="http://p6atp7tts.bkt.clouddn.com/表4.1：市场购物篮数据集的快照示例.JPG" /></center></p>
+<p>定义4.2.1（支持）项目集<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>的支持被定义为数据库<span><span class="MathJax_Preview">\mathcal{T} =\{T_1,...,T_n\}</span><script type="math/tex">\mathcal{T} =\{T_1,...,T_n\}</script></span>中的一小部分包含I作为子集。
+项目集I的支持由<span><span class="MathJax_Preview">sup\left(I\right)</span><script type="math/tex">sup\left(I\right)</script></span>表示。 显然，相互关联的项目在交易中经常会一起出现。 这样的项目集会得到很高的支持。 因此，频繁模式挖掘问题是确定具有必要的最低支持水平的项目集。</p>
+<p>定义4.2.2（频繁项集挖掘）给定一组事务<span><span class="MathJax_Preview">T = {T_1,..., Tn}</span><script type="math/tex">T = {T_1,..., Tn}</script></span>，其中每个事务<span><span class="MathJax_Preview">T_i</span><script type="math/tex">T_i</script></span>是来自U的项的子集，确定作为T中事务的至少预定义分数minsup的子集而出现的所有项集I.</p>
+<p>交易的一小部分预定义分数minsup被称为最小支持。 虽然本书中的默认约定是假定minsup指的是分数相对值，但它有时也会根据原始事务数指定为绝对整数值。 除非另有规定，否则本章将始终假定相对价值的约定。 频繁模式也被称为频繁项目集或大项目集。 本书将互换使用这些术语。
+交易的唯一标识符被称为交易标识符，简称tid。 频繁项集挖掘问题也可以以集合形式更一般地陈述。
+**定义4.2.3（频繁项集挖掘：集合定义）**给定一组集合<span><span class="MathJax_Preview">\mathcal{T}</span><script type="math/tex">\mathcal{T}</script></span> ={<span><span class="MathJax_Preview">T_1,...,T_n</span><script type="math/tex">T_1,...,T_n</script></span>}，其中集合Ti的每个元素被绘制在元素<span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span>的全域上，确定作为<span><span class="MathJax_Preview">T</span><script type="math/tex">T</script></span>中的集合的至少预定义分数minsup的子集而出现的所有集合<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>。
+正如第一章所述，二进制多维数据和设置数据是等价的。 这种等价性是因为每个多维属性都可以表示一个集合元素（或项目）。 对于多维属性，值为1对应于包含在集合（或事务）中。 因此，交易数据集（或集合集合）也可以表示为多维二进制数据库，其维数等于项目数。</p>
+<p>考虑表4.1所示的交易。 每个交易都与最左列中的唯一交易标识符相关联，并且包含同时购买的一批商品。 表4.1中的右列包含相应篮子的二进制多维表示。 这个二进制表示的属性按照{面包，黄油，奶酪，鸡蛋，牛奶，牛奶}的顺序排列。在这个5笔交易的数据库中，{面包，牛奶}的支持为&#8534; = 0.4，因为这个篮子中的这两个项目都发生在总共5笔交易中的2笔。 同样，{奶酪，酸奶}的支持是0.2，因为它只出现在最后的交易中。 因此，如果最小支持设置为0.3，则会报告项目集{面包，牛奶}，但不会报道项目集{奶酪，酸奶}。</p>
+<p>频繁项目集的数量通常对最低支持水平非常敏感。考虑使用0.3的最低支持水平的情况。每件面包，牛奶，鸡蛋，奶酪和咕咕声都发生在两次以上的交易中，因此可以视为频繁项目，最低支持水平为0.3。这些项目是频繁的1项目集。事实上，支持水平为0.3的唯一项目是Butter。此外，最低支持水平为0.3的频繁2项目集是{面包，牛奶}，{鸡蛋，牛奶}，{奶酪，牛奶}，{鸡蛋，Y酸奶}和{牛奶，酸奶}。在0.3的支持水平上报告的唯一3项产品是{鸡蛋，牛奶，黄豆}。另一方面，如果最低支持水平设置为0.2，则它对应于仅为1的绝对支持值。在这种情况下，每个交易的每个子集都将被报告。因此，使用较低的最低支持水平会产生更多的频繁模式。另一方面，如果支持水平过高，则不会发现频繁模式。因此，适当选择支持级别对于发现具有有意义大小的一组频繁模式至关重要。</p>
+<p>当一个项目集I包含在一个事务中时，它的所有子集也将包含在事务中。 因此，我对任何子集J的支持将总是至少等于I.这个属性被称为支持单调性属性。
+**属性4.2.1（支持单调性属性）**对I的每个子集J的支持至少等于项目集I的支持。
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">sup(J)\geqslant sup(I),\forall J \subseteq I\tag{4.1}</span><script type="math/tex">sup(J)\geqslant sup(I),\forall J \subseteq I\tag{4.1}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">sup(J)\geqslant sup(I),\forall J \subseteq I\tag{4.1}</span><script type="math/tex">sup(J)\geqslant sup(I),\forall J \subseteq I\tag{4.1}</script></span></script></span>
+支持的单调性意味着频繁项集的每个子集也会频繁出现。 这被称为向下关闭属性。
+**属性4.2.2（向下关闭属性）**频繁项目集的每个子集也很频繁。
+频繁模式的向下关闭特性在算法上非常方便，因为它为频繁模式的固有结构提供了重要的约束。 频繁模式挖掘算法经常利用这个约束来修剪搜索过程并获得更高的效率。 此外，可以使用向下关闭属性来创建频繁模式的简洁表示，其中仅保留最大频繁子集。</p>
+<p>**定义4.2.4（最大频繁项集）**频繁项集在给定的最小支持度minsup下最大，如果频繁，并且没有频繁项集的超集。在表4.1的例子中，项目集{牛奶，鸡蛋，酸奶}是最小支持度为0.3的最大频繁项目集。但是，项目集{鸡蛋，牛奶}不是最大的，因为它具有也是频繁的超集。此外，最低支持水平为0.3的最大频繁模式集合为{面包，牛奶}，{奶酪，牛奶}和{鸡蛋，牛奶，酱油}。因此，只有3个最大频繁项集，而整个事务数据库中频繁项集的数量是11个。所有频繁项集可以通过枚举最大频繁模式的子集来从最大模式导出。因此，最大模式可以被认为是频繁模式的浓缩表示。但是，这种精简表示不保留关于子集的支持值的信息。例如，{鸡蛋，牛奶，玉米}的支持度为0.4，但它没有提供任何有关{蛋，牛奶}支持的信息，即0.6。称为闭合频繁项集的不同精简表示也能够保留支持信息。第6章将详细研究闭频繁项目集的概念。
+<center>
+<img alt="图4.1：项目集格" src="http://p6atp7tts.bkt.clouddn.com/图4.1：项目集格.JPG" />
+图4.1：项目集格</center></p>
+<p>项目集的一个有趣属性是它们可以在概念上以项目集格的形式排列。 该格包含<span><span class="MathJax_Preview">2^{|U|}</span><script type="math/tex">2^{|U|}</script></span>中的每一个的一个节点从项目U的宇宙中绘制的集合。如果相应的集合恰好相差一个项目，则边缘存在于一对节点之间。 图4.1说明了一个大小为<span><span class="MathJax_Preview">2^5=32</span><script type="math/tex">2^5=32</script></span>的项目集网格的例子，格表示频繁模式的搜索空间。所有频繁模式挖掘算法隐式或显式地遍历搜索空间以确定频繁模式。</p>
+<p>格子被一个边界分成频繁和不频繁的项目集，如图4.1中的虚线所示。 这个边界之上的所有项目集都是频繁的，而边界之下的项目集很少。 请注意，所有最大频繁项目集都与这个项目集的边界相邻。 此外，表示频繁项目集和频繁项目集之间真正划分的任何有效边界将始终尊重向下关闭属性。</p>
+<h2 id="43">4.3 关联规则生成框架</h2>
+<p>频繁项目集可用于生成关联规则，并使用称为置信度的度量。 规则X⇒Y的置信度是事务包含项集Y的条件概率，因为它包含集合X.通过将项集X∪Y的支持与项集X的支持相除来估计此概率。</p>
+<p>**定义4.3.1（置信度）**设X和Y为两组项。 规则X∪Y的置信度conf（X∪Y）是事务中发生的X∪Y的条件概率，因为事务中包含X.因此置信度conf（X⇒Y）定义如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">conf(X ⇒ Y ) = \frac{sup(X ∪ Y )}{sup(X)}\tag{4.2}</span><script type="math/tex">conf(X ⇒ Y ) = \frac{sup(X ∪ Y )}{sup(X)}\tag{4.2}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">conf(X ⇒ Y ) = \frac{sup(X ∪ Y )}{sup(X)}\tag{4.2}</span><script type="math/tex">conf(X ⇒ Y ) = \frac{sup(X ∪ Y )}{sup(X)}\tag{4.2}</script></span></script></span>
+项目集X和Y分别被认为是规则的前提和结果。 在表4.1的情况下，{鸡蛋，牛奶}的支持为0.6，而{鸡蛋，牛奶，玉米}的支持为0.4。 因此，规则{鸡蛋，牛奶}⇒{酸奶}的可信度为（0.4 / 0.6）= &#8532;。</p>
+<p>与支持情况一样，可以使用最小置信度阈值minconf来生成最相关的关联规则。 关联规则使用支持和置信度标准来定义。</p>
+<p>**定义4.3.2（关联规则）**令X和Y为两组项。 然后，如果满足以下两个条件，则规则X⇒Y被认为是最小支持minins和minconf最小置信度的关联规则：
+1.项目集X∪Y的支持度至少为minsup。
+2.规则X⇒Y的置信度至少为minconf。
+第一条标准确保足够数量的交易与规则相关; 因此，它具有所需的临界质量，因为它被认为与手头的应用相关。 第二个标准确保规则在条件概率方面具有足够的强度。 因此，这两个量度关联规则的不同方面。
+关联规则生成的整体框架使用两个阶段。 这些阶段对应于定义4.3.2中的两个标准，表示支持和置信度约束。
+1.在第一阶段，所有频繁项目集都是在最小支持minsup的情况下生成的。
+2.在第二阶段中，关联规则是在minconf的最低置信度下从频繁项目集生成的。
+第一阶段计算量更大，因此，这个过程中更有趣的部分。 第二阶段比较简单。 因此，对第一阶段的讨论将推迟到本章的其余部分，并在此处提供（更直接的）第二阶段的快速讨论。</p>
+<p>假设提供了一组频繁项目集F. 对于每个项集I∈F，生成规则的一种简单方法是将集合I划分为集合X和Y = I-X的所有可能组合，使得I =X∪Y。 然后可以确定每个规则X⇒Y的置信度，如果它满足最小置信度要求，则可以保留它。 关联规则也满足置信单调性.</p>
+<p>**性质4.3.1（置信单调性）**令X1，X2和I为项集，使得<span><span class="MathJax_Preview">X_1⊂X_2⊂I.</span><script type="math/tex">X_1⊂X_2⊂I.</script></span>那么<span><span class="MathJax_Preview">X_2⇒I - X_2</span><script type="math/tex">X_2⇒I - X_2</script></span>的置信度至少是<span><span class="MathJax_Preview">X_1⇒I - X_1</span><script type="math/tex">X_1⇒I - X_1</script></span>的置信度。  <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">conf（X2⇒I-X2）≥conf（X1⇒I-X1）\tag{4.3}</span><script type="math/tex">conf（X2⇒I-X2）≥conf（X1⇒I-X1）\tag{4.3}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">conf（X2⇒I-X2）≥conf（X1⇒I-X1）\tag{4.3}</span><script type="math/tex">conf（X2⇒I-X2）≥conf（X1⇒I-X1）\tag{4.3}</script></span></script></span>
+该性质直接来自置信度的定义和支持单调性的属性。 考虑规则{面包}⇒{黄油，牛奶}和{面包，黄油}⇒{牛奶}。 第二条规则对于第一条规则是多余的，因为它具有相同的支持，但是信心不低于第一条。 由于信心单调性，只能报告非冗余规则。 这个问题在下一章中详细讨论。</p>
+<h2 id="44">4.4 频繁项集挖掘算法</h2>
+<p>在本节中，将讨论用于频繁项目集生成的一些常用算法。 由于有大量的频繁项集挖掘算法，本章的重点将是详细讨论特定算法，以向读者介绍算法设计中的关键技巧。 这些技巧通常可以跨不同的算法重用，因为几乎所有的频繁模式挖掘算法都使用相同的枚举树框架。</p>
+<h3 id="441">4.4.1 暴力算法</h3>
+<p>对于<span><span class="MathJax_Preview">U</span><script type="math/tex">U</script></span>的一个宇宙，总共有<span><span class="MathJax_Preview">2 | U |-1</span><script type="math/tex">2 | U |-1</script></span>个不同的子集，不包括空集。图4.1说明了5个项目的全部25个子集。因此，一种可能性是生成所有这些候选项目集，并将其支持与事务数据库T进行计数。在频繁项集挖掘文献中，术语候选项集通常用于指可能频繁（或频繁候选）的项目集。这些候选人需要通过支持计数对照交易数据库进行验证。为了计算项目集的支持，我们需要检查给定项集I是否是每个事务Ti∈T的子集。当物品U的宇宙很大时，这种彻底的方法可能是不切实际的。考虑其中<span><span class="MathJax_Preview">d = | U |= 1000</span><script type="math/tex">d = | U |= 1000</script></span>的情况.在这种情况下，总共有<span><span class="MathJax_Preview">2^{1000}&gt; 10^{300}</span><script type="math/tex">2^{1000}> 10^{300}</script></span>个候选人。从这个角度来看，如果今天最快的计算机能够在一个基本机器周期内处理一个候选人，那么处理所有候选人所需的时间将比宇宙年龄高出数百个数量级。因此，这不是一个实际的解决方案。</p>
+<p>当然，通过观察如果没有k-模式频繁的情况下没有<span><span class="MathJax_Preview">（k + 1）</span><script type="math/tex">（k + 1）</script></span>个模式频繁的话，可以使暴力方法更快。这种观察直接来自向下关闭属性。因此，可以列举并统计所有模式的支持，并且长度越来越长。换句话说，我们可以列举和计算对包含一个项目，两个项目等的所有模式的支持，直到一定长度l，没有一个长度为l的候选者变得频繁。对于稀疏事务数据库，与<span><span class="MathJax_Preview">| U |</span><script type="math/tex">| U |</script></span>相比，l的值通常非常小。在这一点上，可以终止。这比以前的方法有了显着的改进，因为它需要枚举<span><span class="MathJax_Preview">\sum_{i=1}^{l} (\begin{matrix}
+{|U|}\\i\end{matrix})\ll2^{|U|}</span><script type="math/tex">\sum_{i=1}^{l} (\begin{matrix}
+{|U|}\\i\end{matrix})\ll2^{|U|}</script></span>个候选人？因为最长的频繁项目集长度比<span><span class="MathJax_Preview">| U |</span><script type="math/tex">| U |</script></span>小得多在稀疏事务数据库中，这种方法的速度要快几个数量级。</p>
+<p>但是，由此产生的计算复杂性仍然不能满足U的大值。例如，当<span><span class="MathJax_Preview">| U |= 1000</span><script type="math/tex">| U |= 1000</script></span>且<span><span class="MathJax_Preview">l = 10</span><script type="math/tex">l = 10</script></span>，则<span><span class="MathJax_Preview">\sum_{i=1}^{10} (\begin{matrix}
+{|U|}\\i\end{matrix})</span><script type="math/tex">\sum_{i=1}^{10} (\begin{matrix}
+{|U|}\\i\end{matrix})</script></span>大约是<span><span class="MathJax_Preview">10^{23}</span><script type="math/tex">10^{23}</script></span>的数量级。这个值仍然相当大，并且超出了今天可用的合理计算能力。</p>
+<p>一个观察结果是，即使是一个非常小而且非常钝的应用程序，使得该算法的算法速度提高了几百个数量级。</p>
+<p>许多用于itemset生成的快速算法以更精细的方式使用向下闭合属性，既可以生成候选项，也可以在计数之前修剪它们。 算法100第4章关联模式挖掘频繁模式挖掘搜索频繁模式（见图4.1）的可能性（或候选者）的网格，并使用事务数据库来计算候选在这个网格中的支持度。 通过使用以下一种或多种方法，可以在频繁模式挖掘算法中实现更高的效率：</p>
+<p>1.通过使用技巧修剪候选项目集（格子节点），例如向下关闭属性，减小探索搜索空间的大小（图4.1的网格）。</p>
+<p>2.通过修剪已知与计算候选项目集不相关的交易来更有效地计算每位候选人的支持。</p>
+<p>3.使用紧凑型数据结构来表示支持高效计数的候选数据库或事务数据库。</p>
+<p>Apriori算法是第一种使用向下闭合属性对搜索空间进行有效修剪的算法。</p>
+<h3 id="442-apriori">4.4.2 Apriori算法</h3>
+<p>Apriori算法使用向下关闭属性来修剪候选搜索空间。向下关闭属性在频繁模式集上建立了清晰的结构。特别是，可以利用有关项目组频率的信息来更仔细地生成超集候选项。因此，如果一个项目集很少，那么计算其超集候选人的支持就没有意义了。这对于避免浪费地计数已知不频繁的项目集的支持级别非常有用。</p>
+<p>Apriori算法首先生成较小长度k的候选项，并在生成候选长度<span><span class="MathJax_Preview">（k +1）</span><script type="math/tex">（k +1）</script></span>之前对其支持度进行计数。由此产生的频繁k-项目集用于限制具有向下关闭属性的$（k + 1) $候选项的数量。候选生成和支持长度增加的模式计数在Apriori中交织。由于候选人支持计数是频繁模式生成过程中最昂贵的部分，因此保持候选人数较低非常重要。</p>
+<p>为了便于描述该算法，将假设U中的项目具有词典排序，并且因此项目集{a，b，c，d}可以被视为项目的（按字典顺序排序的）字符串abcd。 这可用于在项目集（模式）之间施加排序，这与相应字符串在字典中出现的顺序相同。</p>
+<p>Apriori算法首先计算单个项目的支持，以生成频繁的1项目集。将1个项目集合起来创建候选2项目集，其支持计数。频繁的2项目集被保留。通常，使用长度为k的频繁项目集来生成用于增加k值的长度（k + 1）的候选项。计算候选者对长度增加的支持的算法被称为级别算法。设<span><span class="MathJax_Preview">\mathcal{F}_k</span><script type="math/tex">\mathcal{F}_k</script></span>表示频繁k项集的集合，<span><span class="MathJax_Preview">C_k</span><script type="math/tex">C_k</script></span>表示候选k项集的集合。该方法的核心是迭代地从算法中已经找到的Fk中的频繁k项集合中生成第（k + 1） 候选项<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>。这些第（k + 1）个 候选的频率相对于交易数据库进行计数。在生成（k + 1） 候选时，可以通过检查<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>的所有k个子集是否包含在Fk中来修剪搜索空间。那么，如何从Fk中的频繁k-模式生成<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中的相关<span><span class="MathJax_Preview">（k + 1） <span><span class="MathJax_Preview">候选？
+如果</span><script type="math/tex">候选？
+如果</script></span>\mathcal{F}_k\mathcal{F}_k</span><script type="math/tex">（k + 1） <span><span class="MathJax_Preview">候选？
+如果</span><script type="math/tex">候选？
+如果</script></span>\mathcal{F}_k\mathcal{F}_k</script></span>中的一对项目集X和Y共有（k-1）个项目，则使用（k-1）个共同项目在它们之间建立一个连接将创建一个大小为（k + 1）的候选项目集。 例如，两个3项集{a，b，c}（简称abc）和{a，b，d}（简称abd），当</p>
+<blockquote>
+<p>Algorithm Apriori(Transactions: T , Minimum Support: minsup)
+begin
+k = 1;
+F1 = { All Frequent 1-itemsets };
+while Fk is not empty do begin
+Generate Ck+1 by joining itemset-pairs in Fk;
+Prune itemsets from Ck+1 that violate downward closure;
+Determine Fk+1 by support counting on (Ck+1, T ) and retaining
+itemsets from Ck+1 with support at least minsup;
+k = k + 1;
+end;
+return(∪k i=1Fi);
+end</p>
+</blockquote>
+<p>两个共同的项目a和b加在一起，将产生候选4项集abcd。当然，有可能加入其他频繁的模式来创建相同的候选人。也可以加入abc和bcd来达到相同的效果。假设abcd的3个子集中的所有4个都出现在频繁3项集的集合中。可以创建<span><span class="MathJax_Preview">\left(\begin{matrix}4\\2\end{matrix}\right)=6</span><script type="math/tex">\left(\begin{matrix}4\\2\end{matrix}\right)=6</script></span>种不同方式的4项目候选集。为了避免候选人产生冗余，惯例是对项目强加一个词典顺序，并使用项目集中的第<span><span class="MathJax_Preview">（k-1）</span><script type="math/tex">（k-1）</script></span>项进行连接。因此，在这种情况下，生成abcd的唯一方法是使用前两个项目a和b。因此，项目集abc和abd需要加入才能创建abcd。请注意，如果abc和abd中的任何一个不常出现，那么将不会使用此连接方法将abcd作为候选生成。此外，在这种情况下，由于频繁项目集的向下关闭属性，可以保证abcd不会频繁出现。因此，向下关闭属性确保使用此方法生成的候选集不会错过任何真正频繁的项集。正如我们后面将会看到的那样，这种产生候选的非重复和穷举的方式可以在被称为枚举树的模式的概念层次的上下文中解释。另一点需要注意的是，连接通常可以非常有效地执行。这个效率是因为，如果集合Fk按照词典（字典）顺序排序，那么在前k-1个位置上具有一组共同项目的所有项目集将连续出现，从而可以很容易地定位它们。
+可以使用逐级修剪技巧来进一步减小第<span><span class="MathJax_Preview">（k + 1）</span><script type="math/tex">（k + 1）</script></span>f候选的大小。可以使用逐级修剪技巧来进一步减小第<span><span class="MathJax_Preview">（k + 1） <span><span class="MathJax_Preview">候选集合的大小。 由于向下关闭特性，项集</span><script type="math/tex">候选集合的大小。 由于向下关闭特性，项集</script></span>I∈C_k + 1I∈C_k + 1</span><script type="math/tex">（k + 1） <span><span class="MathJax_Preview">候选集合的大小。 由于向下关闭特性，项集</span><script type="math/tex">候选集合的大小。 由于向下关闭特性，项集</script></span>I∈C_k + 1I∈C_k + 1</script></span>的所有k子集（即基数k的子集）需要存在于中<span><span class="MathJax_Preview">\mathcal{F}_k</span><script type="math/tex">\mathcal{F}_k</script></span>。 否则，保证项目集<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>不频繁。 因此，检查每个项集<span><span class="MathJax_Preview">I∈C_k + 1</span><script type="math/tex">I∈C_k + 1</script></span>的所有<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>子集是否存在于<span><span class="MathJax_Preview">\mathcal{F}_k</span><script type="math/tex">\mathcal{F}_k</script></span>中。 如果情况并非如此，那么这些项目集将从<span><span class="MathJax_Preview">C_k + 1</span><script type="math/tex">C_k + 1</script></span>中移除。 在已经生成大小<span><span class="MathJax_Preview">（k + 1）</span><script type="math/tex">（k + 1）</script></span>的候选项目集<span><span class="MathJax_Preview">C_k + 1</span><script type="math/tex">C_k + 1</script></span>之后，可以通过计算交易数据库T中的每个候选项的出现次数来确定它们的支持。 只保留具有所需最小支持度候选项的目集以创建第<span><span class="MathJax_Preview">（k + 1）</span><script type="math/tex">（k + 1）</script></span> 项频繁项集<span><span class="MathJax_Preview">\mathcal{F}_{k +1}⊆C_{k+ 1}</span><script type="math/tex">\mathcal{F}_{k +1}⊆C_{k+ 1}</script></span>的集合。 如果集合为空，算法终止。 在终止时，不同大小频繁模式的联合<span><span class="MathJax_Preview">\cup_{i=1}^{k}= \mathcal{F}_i</span><script type="math/tex">\cup_{i=1}^{k}= \mathcal{F}_i</script></span>被报告为<span><span class="MathJax_Preview">\mathcal{F}_{k +1}</span><script type="math/tex">\mathcal{F}_{k +1}</script></span>算法的最终输出。
+生成，修剪和支持计数。 其中，支持计数过程是最昂贵的一个，因为它取决于事务数据库<span><span class="MathJax_Preview">\mathcal{T}</span><script type="math/tex">\mathcal{T}</script></span>的大小。 levelwise方法确保算法至少从磁盘访问成本的角度来看相对有效。 这是因为<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中的每个候选集都可以统计数据而不需要随机访问磁盘。 因此，数据传递的次数等于数据中最长频繁项目集的基数。 尽管如此，计数过程仍然相当昂贵，特别是如果使用幼稚的方法检查每个项目集是否是交易的子集。 因此，有效的支持计数程序是必要的。</p>
+<h4 id="4421">4.4.2.1 有效的支持计数</h4>
+<p>为了执行支持计数，Apriori需要有效地检查每个候选项目集是否存在于一个事务中。这是通过使用称为哈希树的数据结构实现的。哈希树用于仔细组织<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中的候选模式以进行更有效的计数。假设交易中的项目和候选项目集按照字典顺序排序。散列树是具有固定程度的内部节点的树。每个内部节点都与一个随机散列函数相关联，该函数映射到树中该节点的不同子元素的索引。哈希树的叶节点包含按字典排序的项目集列表，而内部节点包含哈希表。 <span><span class="MathJax_Preview">C_{k +1}</span><script type="math/tex">C_{k +1}</script></span>中的每个项目集恰好包含在散列树的一个叶节点中。内部节点中的散列函数用于使用下面描述的方法来确定哪个候选项目集属于哪个叶节点。</p>
+<p>可以假定所有的内部节点都使用<span><span class="MathJax_Preview">[0...h-1]</span><script type="math/tex">[0...h-1]</script></span>的相同的散列函数映射<span><span class="MathJax_Preview">f\left(.\right)</span><script type="math/tex">f\left(.\right)</script></span>的值也是散列树的分支程度。通过在内部节点处使用这些散列函数来定义从根节点到叶节点的路径，将<span><span class="MathJax_Preview">C_{k+1}</span><script type="math/tex">C_{k+1}</script></span>中的候选项目集映射到树的叶节点。假设哈希树的根是1级，并且它下面的所有连续级别都增加1.与之前一样，假定候选和事务中的项目按照字典顺序排列。在级别i的内部节点处，将散列函数应用于候选项目集<span><span class="MathJax_Preview">I∈C_{k + 1}</span><script type="math/tex">I∈C_{k + 1}</script></span>的第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个项目以决定对候选项目集合遵循散列树的哪个分支。该树以自顶向下的方式递归构造，并且叶子节点中的候选数目被设定为最小阈值以决定在何处终止散列树扩展。叶节点中的候选项目集按照排序顺序存储。</p>
+<p>为了执行计数，<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中的所有可能的候选k项集合（在事务<span><span class="MathJax_Preview">T_j∈\mathcal{T}</span><script type="math/tex">T_j∈\mathcal{T}</script></span>集合中）都是在散列树的单个探索中发现的。为了实现这个目标，散列树中所有可能的路径，其叶子可能包含事务<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>的子集项集，都是使用递归遍历发现的。相关叶节点的选择通过递归遍历如下进行。在根节点上，遵循所有分支，使得事务<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>中的任何项目都散列到其中一个分支。在给定的内部节点上，如果事务<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>的第i项最后被散列（在父节点处），则在事务之后的所有项都被散列以确定可能要跟随的子项。因此，通过遵循所有这些路径，树中的相关叶节点被确定。叶节点中的候选者按排序顺序存储，并可以与事务<span><span class="MathJax_Preview">T_j</span><script type="math/tex">T_j</script></span>有效地进行比较以确定它们是否相关。对每个交易重复该过程以确定<span><span class="MathJax_Preview">C_{k + 1}</span><script type="math/tex">C_{k + 1}</script></span>中每个项目集的最终支持计数。</p>
+<p><center>
+<img alt="图4.3：频繁项目集的词典或枚举树" src="http://p6atp7tts.bkt.clouddn.com/图4.3：频繁项目集的词典或枚举树.JPG" />
+图4.3：频繁项目集的词典或枚举树
+</center></p>
+<h3 id="443">4.4.3 枚举树算法</h3>
+<p>这些算法基于集合枚举概念，其中不同的候选项目集合被称为枚举树，它是图4.1中引入的项目集的格子的子图。这种树状结构也被称为词典树，因为它依赖于项目之间的前期词典排序。候选模式是通过生成这个词典树来生成的。这种树可以用各种不同的策略发展，以实现存储，磁盘访问成本和计算效率之间的不同折衷。由于本节中的大部分讨论将使用此结构作为算法开发的基础，因此此处将详细讨论此概念。枚举树（或词典树）的主要特征是它提供了项集的抽象层次表示。频繁模式挖掘算法利用这种表示，以非重复的方式对候选模式进行系统探索。这些算法的最终输出也可以看作仅在频繁项目集上定义的枚举树结构。枚举树按以下方式在频繁项目集上定义：</p>
+<p>1.每个频繁项目集对应的树中存在一个节点。 树的根对应于空项目集。
+2.让<span><span class="MathJax_Preview">I= \{i_1,...,i_k\}</span><script type="math/tex">I= \{i_1,...,i_k\}</script></span>是一个频繁的项目集，其中<span><span class="MathJax_Preview">i_1,i_2,..., i_k</span><script type="math/tex">i_1,i_2,..., i_k</script></span>按字典顺序列出。 节点<span><span class="MathJax_Preview">I</span><script type="math/tex">I</script></span>的父节点是项目集$ {i_1,...,i_{k-1}}$。 因此，节点的孩子只能在该节点中出现的所有项目后按照字典顺序进行扩展。 枚举树也可以被看作项目集的按字典顺序排列的字符串表示形式的前缀树。</p>
+<p>这种祖先关系的定义自然会在节点上创建一个树状结构，树状结构植根于空节点。枚举树的频繁部分的一个例子如图4.3所示。在枚举树中用于将节点扩展到其（频繁）子元素的项称为频繁树扩展，或简单地称为树扩展。在图4.3的例子中，节点a的频繁树扩展是b，c，d和f，因为这些项将节点a分别扩展到频繁项集ab，ac，ad和af。网格提供了很多路径来将空项目集扩展到一个节点，而枚举树只提供一条路径。例如，项目集 ab可以按照a→ab的顺序或格子中的b→ab顺序进行扩展。但是，在词典排序被修正之后，枚举树中只有前者是可能的。因此，词典排序对项目集施加严格的分层结构。该分层结构使得能够通过一次一个项目地扩展频繁项目集而生成候选项的算法来对项目集搜索空间进行系统的和非冗余的探索。枚举树可以用多种不同的项目词典排序顺序构造。这种排序的影响将在稍后讨论。</p>
+<p>大多数枚举树算法通过使用预定义策略生成频繁项集的枚举树来工作。首先，通过查找频繁的1项来扩展树的根节点。然后，可以扩展这些节点以创建候选人。这些将根据交易数据库进行检查以确定频繁的交易数据库。枚举树框架为频繁的项目集发现提供了一个顺序和结构，可以利用它来改善候选者的计数和修剪过程。在下面的讨论中，术语“节点”和“项目集”将互换使用。因此，符号P将用于表示枚举树中的项目集及其对应的节点。
+　　那么，候选节点如何从枚举树中已经被发现的频繁节点以系统的方式生成呢？对于一个项目i被认为是将频繁节点P扩展到P∪{i}的候选者，它也必须是父节点Q的一个扩展节点。这是因为向下关闭属性，并且它可以用于在其父节点Q的频繁扩展已经确定之后系统地定义节点P的候选扩展。设F(Q)表示节点Q的频繁词典树扩展。设i∈F(Q）为为频繁扩展项，将频繁节点Q扩展到频繁节点P =Q∪{i}。令C(P)表示在用于将节点Q延伸到节点P的项目之后按字典顺序出现的来自F(Q)的项目的子集。集合C(P)定义了节点P的候选扩展项目，它们被定义为可以在P的末尾附加以创建候选项目集的项目。这提供了一种系统的方法来生成节点P的候选子节点。 正如我们在第4.4.3.1节中看到的那样。由此产生的候选节点与Apriori节点一致。注意关系F(P)⊆C(P)⊆F(Q)总是成立的。当P = ab时，图4.3中F(P)的值为{c，d}。 P = ab的C(P)的值是{c，d，f}，因为这些是项目b之后按照字典顺序出现的P的父项集Q = {a}的频繁扩展。这种不频繁的项目扩展对应于所有枚举树算法中失败的候选测试。 请注意，频繁项目集abf不包含在图4.3的频繁项目集树中。也可以在候选项目集上创建一个枚举树结构，其中包含图4.3中节点的一个额外的偶然候选扩展层。这样d的树包含abf。
+　　枚举树算法迭代增长频繁模式的枚举树ετ。这个迭代步骤的非常一般的描述，重复执行以扩展枚举树ετ，如下所示：
+　　在ετ中选择一个或多个节点P；
+　　对每个P ∈ Ρ，决定其候选集C(P)；
+　　计算生成的候选集；
+　　将候选集的频率加入到ετ中（使用树生长算法）；
+　　</p>
+<h2 id="44_1">4.4 频繁项目挖掘算法</h2>
+<p><img alt="图4.4：未指定增长策略和计数方法的泛型枚举树增长" src="http://p6atp7tts.bkt.clouddn.com/图4.4：未指定增长策略和计数方法的泛型枚举树增长.png" /></p>
+<p><center>图4.4：未指定增长策略和计数方法的泛型枚举树增长</center></p>
+<p>这种方法一直持续到没有节点可以进一步扩展。此时，算法终止。图4.4提供了更详细的描述。有趣的是，几乎所有的频繁模式挖掘算法都可以看作是这种简单的枚举树框架的变体和扩展。在这个更广泛的框架内，树的增长策略和用于支持计数的特定数据结构都存在很大的变化。因此，图4.4的描述是非常通用的，因为这些方面都没有被指定。增长战略和计数方法的不同选择在效率，空间要求和磁盘访问成本之间提供了不同的取舍。例如，在广度优先策略中，在图4.4的迭代中选择的节点集合P对应于树的一个级别上的所有节点。这种方法可能与磁盘驻留数据库更相关，因为可以在单个级别上的事务数据库的一次计数传递期间扩展树的所有节点。采用深度优先策略选择最深层次的单个节点来创建P。这些策略可能会有更好的能力深入探索树并早期发现长时间的频繁模式。较长模式的早期发现对于最大模式挖掘中的计算效率以及对于某些基于投影的算法中更好的存储器管理特别有用。
+　　由于计数方法是最耗时的部分，不同的技术试图使用增长策略来优化计数期间完成的工作。 此外，计数数据结构的高效性至关重要。本节将探讨在计数过程中利用枚举树结构的一些常见算法，数据结构和修剪策略。有趣的是，枚举树框架是如此普遍，以至于Apriori算法都可以在这个框架内解释，尽管当Apriori被使用时枚举树的概念并未被建议使用。
+　　</p>
+<h3 id="4431-apriori">4.4.3.1 Apriori的枚举树解释</h3>
+<p>Apriori算法可以被看作枚举树的广度优先构造。 用于生成候选（k + 1)-集合的Apriori join通过仅使用来自两个频繁k-项集合的第（k-1）个项目以非冗余方式执行。这相当于在枚举树的第k级连接所有兄弟节点。例如，图4.3中ab的子节点可以通过将ab与其所有频繁的兄弟节点（节点a的其他子节点）按照词典方式出现的时间相比较而获得。换句话说，节点P与其字典上后来频繁的兄弟节点的连接操作产生对应于P的扩展与其每个候选树扩展C(P)的候选。实际上，通过使用该级别的所有频繁兄弟节点对之间的连接，树中给定级别处的所有节点P的候选扩展C(P)可以是穷举且不重复地生成的。通过Apriori修剪技巧，放弃一些枚举树节点，因为它们一定不会频繁出现。通过交易数据库的单一通道来计算这些候选扩展的支持，并为扩展级别中的每个节点P生成频繁扩展F(P)⊆C(P)。当树无法在数据库上进一步增长时，该方法终止。因此，Apriori的连接操作在枚举树方面具有直接解释枚举树的作用，并且Apriori算法通过使用连接以平面方式隐式地扩展枚举树。
+　　</p>
+<h3 id="4432-treeprojectiondepthproject">4.4.3.2 TreeProjection和DepthProject</h3>
+<p>TreeProjection是一组方法，它使用枚举树结构下的事务递归投影。这些递归投影的目标是重用已在枚举树的给定节点的后代节点处完成计数工作。这将整体计数工作量减少了数量级的个数。TreeProjection是一个通用框架，显示了如何在构造枚举树的各种不同策略的上下文中使用数据库投影，例如广度优先，深度优先或两者的组合。DepthProject方法是深度优先策略的具体实例。不同的策略在内存要求和磁盘访问成本之间有不同的折衷。
+　　观察基于投影的方法，如果事务不包含与枚举树节点相对应的项目集，则该事务对于在该节点的任何子代（超集项目集）进行计数无关。因此，当在枚举树节点处进行计数时，关于不相关事务的信息应以某种方式保留下来，以便在其后代节点处进行计数。这是通过计划数据库的概念实现的。每个投影事务数据库都是对应于特定的枚举树节点的。不包含项目集P的事务不包含在节点P及其后代的投影数据库中。这导致预计交易的数量显着减少。此外，只有P的候选扩展项（由C(P)表示）与以节点P为根节点的任意子树计数相关。因此，节点P上的投影数据库只能用C(P)中的项来表示。C(P)的大小比项目的范围小得多，因此投影数据库每个事务包含的项目数量越少，P的大小越大。我们用T(P)来表示节点P上的投影数据库。例如，考虑图4.3中的节点P = ab，其中扩展ab的候选项是C(P)= {c，d，f}。然后，交易abcfg映射到T(P)中的预计交易cf。另一方面，事务acfg甚至不存在于T(P)中，因为P = ab不是acfg的子集。特殊情况T(Null)=T对应于枚举树的顶层，并且等于完整事务数据库。事实上，在事务数据库T(P)的节点P处的子问题在结构上与顶层问题相同，除了它是一个小得多的问题，这个小问题集中确定具有P的前缀的频繁模式。因此，枚举树中的频繁节点P可以通过使用相对较小的数据库T(P)对C(P)中的各项进行C(P)支持计数来进一步扩展。这导致了候选单项扩展而不是项目集的简化和高效计数过程。
+<img alt="图4.5：未指定增长策略和数据库预测的泛型枚举树增长" src="http://p6atp7tts.bkt.clouddn.com/图4.5：未指定增长策略和数据库预测的泛型枚举树增长.png" /></p>
+<p><center>图4.5：未指定增长策略和数据库预测的泛型枚举树增长</center></p>
+<p>枚举树可以通过各种策略来生长，例如广度优先策略或深度优先策略。在每个节点上，使用投影数据库而不是整个交易数据库来执行计数，将进一步缩减将预计的交易数据库数据传播给P的子节点。在枚举树下的层级投影的每个级别，投影数据库中的项目数量和事务数量都减少了。基本思想是Ｔ(P)包含事务数据库的最小部分，它与计算基于P的子树相关，基于已经在更高级别的计算过程中执行的计数过程删除不相关的事务和项目树。
+　　图4.5说明了具有分层投影的泛型枚举树算法。这种通用算法并不采用任何特定的探索策略，而且与图4.4所示的泛型枚举树伪代码非常相似。这两种伪代码有两个区别。
+　　1.为了简化符号，我们在图4.5中一次展示了单个节点P的探索，而不是一组节点P（如图4.4所示）。但是，图4.5所示的伪代码可以很容易地针对一组节点P重写。因此，这个差异并不显著。
+　　2.关键区别在于投影数据库T(P)用于计算节点P处的支持计数。枚举树中的每个节点现在由项目集和投影数据库对(P, T(P))表示。这是一个非常重要的差异，因为T(P)远小于原始数据库。因此，通过计算节点P的祖节点的支持计数，将获得的大量信息被保存在T(P)中。此外，只需要计算T(P)（而不是整个项目集）中节点P的单个项目扩展的支持，以便进一步增大P处的子树。根据项目的词典排序，枚举树可以用许多不同的方式构建。 这些物品应该如何订购？枚举树的结构对于创建不平衡树的内在偏见，其中词典上较小的项具有更多的后代。例如，在图4.3中，节点a比节点f有更多的后代。 因此，从最少支持到最大支持的顺序确保枚举树计算量更大的分支具有更少的相关事务。 这有助于最大化投影的选择性并确保更高的效率。
+　　用于选择节点P的策略定义了枚举树的节点实现的顺序。该策略对内存管理有直接影响，因为可以删除未来计算不再需要的预计数据库。在深度优先策略中，词典上最小的未经检验的节点P被选择用于扩展。 在这种情况下，只需要维护正在探索的枚举树当前路径上的投影数据库。 在广度优先策略中，首先生成对应于特定大小的所有模式的整组节点P. 在这种情况下，计划数据库需要同时在整个增长过程所涉及的两个当前层次上沿着列举树ετ的全部范围进行维护。 尽管对于较小的事务数据库可以在如此大量的节点上执行投影，但对于较大数据库的一般情况，需要对图4.5的基本框架进行一些修改。
+　　具体来说，TreeProjection框架的广度优先变体在从其祖先节点计数期间执行分层投影。 TreeProjection的深度优先变体（例如DepthProject）实现了基于投影的完全重用，因为预计的事务可以在从根节点到当前节点的枚举树的相对较小的路径上的每个物化节点处保持一致。这个breadthfirst变种的优点在于，它们可以优化任意大型数据库的磁盘访问成本，但会损失部分基于投影的重用功能。正如后面将讨论的，随着数据库规模的增加，所有（完整）基于投影的重用方法都面临内存管理难题。这些额外的内存需求可以被视为持续存储在早期迭代中以预计数据库的间接形式完成的相关工作的代价。在各种策略中，磁盘访问成本与内存/计算需求之间通常有不同的折衷，TreeProjection框架可以利用这些折衷。书目注释包含指向TreeProjection的这些优化变体的特定细节的指针。
+<em>在更深层次的节点进行优化计数：*基于投影的方法可在枚举树叶子附近更深层次的节点上实现专门的计数技术。这些专门的计数方法可以提供扫描投影数据库所需时间内较低级别子树中所有项目集的计数。 由于这些节点数量更多，这可能会导致大量的计算改进。
+　　这种计数方法可用于什么点？当节点P的频繁扩展F(P)的数量低于阈值t以使得\(2<sup>t\)适合于存储器时，可以使用被称为分段的方法。为了获得最好的计算结果，所使用的t值应该使得\(2</sup>t\)远小于投影数据库中的事务数量。只有在投影数据库中有许多重复事务时才会发生这种情况。采用两阶段方法。在第一阶段，确定投影数据库中每个不同交易的计数。 这可以通过维护\(2^{|F(P)|}\)轻松实现桶或计数器，逐个扫描交易，并向桶中添加计数。这一阶段可以通过简单扫描小型（预测）的交易数据库来完成。 当然，这个过程只提供交易计数而不提供项目集计数。
+　　在第二阶段，交易频率计数可以通过系统的方式进一步汇总以创建项目组频率计数。 从概念上讲，汇总预计交易数量的过程与排列所有\(2^{|F(P)|}\)类似如图4.1所示，网格形式的可能性。 在第一阶段计算的晶格节点的计数通过将直接超集的计数添加到它们的子集而聚合在晶格结构上。对于|F(P)|的小值，比如10，这个阶段不是限制性计算因子，总体时间主要是在第一阶段扫描投影数据库所需的时间。下面详细讨论第二阶段的有效实施。
+　　考虑一个由0,1和*组成的字符串，它是指一个项目集，其中0和1的位置固定为这些值（对应于项目的存在或不存在），而具有*的位置是“Don't care”。因此，所有事务都可以用0和1的二进制表示来表示。另一方面，所有项目集都可以用1和*来表示，因为项目集传统上是根据项目的存在以及关于缺勤的模糊性来定义的。 例如，考虑|F(P)|的情况 = 4，并且有四个项目，编号为{1,2,3,4}。包含项目2和项目4的项目集由*1*1表示。我们从\(2^4\) = 16位串组成的信息开始，它们由0和1组成。这些代表所有可能的不同事务。 该算法汇总|F(P)|中的计数迭代。具有“</em>”的字符串在特定位置的计数可以通过在这些位置上添加具有0和1的字符串的计数来获得。例如，字符串*1*1的计数可以表示为字符串01*1和11*1的计数之和。职位可以按任何顺序处理，但最简单的方法是将他们从最不重要到最重要的方式进行汇总。
+　　下面描述了执行聚合的简单伪代码。在这个伪代码中，bucket[i]的初始值等于对应于整数i的位串表示的事务的计数。bucket[i]的最终值是事务计数已通过连续聚合转换为项目集计数的值。换句话说，位串中的0被替换为“不关心”。
+<strong>for</strong> i:=1 <strong>to</strong> k <strong>do begin</strong> 
+　　<strong>for</strong> j:=1 <strong>to</strong> \(2^k\) <strong>do begin</strong>
+　　　　<strong>if</strong> j的比特字符串的第i个比特为0
+　　　　<strong>then</strong> bucket[j] = bucket[j] + bucket[j + \(2^{i−1}\)]
+　　<strong>endfor</strong>
+<strong>endfor</strong>
+　　以|F(P)|=4的分段示例在图4.6中说明。分段技巧通常在树的较低节点执行，因为|F(P)|的值 在较低的水平急剧下降。由于较低级别的节点支配枚举树结构中的节点总数，因此分段的影响可能非常显着。
+*针对最大模式挖掘的优化：*DepthProject方法是该方法的深度优先变体，特别适用于最大模式发现。 在这种情况下，枚举树按照深度优先的顺序进行探索，以最大化修剪仅包含非最大模式的区域的搜索空间的优势。枚举树的构造顺序在最大频繁模式挖掘的特定情况下很重要，因为某些种类的非最大搜索空间修剪是用深度优先顺序优化的。lookaheads的概念就是这样一种优化。设C(P)是节点P的候选项目扩展集合。在支持计数之前，测试P∪C(P)是否是已经发现的频繁模式的子集。如果确实如此，那么模式P∪C(P)一个非最大频繁模式，并且可以修剪以P为根的整个子树（枚举树的根）。这种修剪被称为基于超集的修剪。 当P不能被修剪时，需要确定候选扩展的支持。在此支持计数期间，P∪C(P)的支持 P的单个项目扩展一起计数。如果发现P∪C(P)是频繁的，那么它消除了任何进一步计算以节点P为根的子树中（非最大）节点的支持的工作。
+![图4.6 执行分组的第二阶段](<a href="http://p6atp7tts.bkt.clouddn.com/图4.6">http://p6atp7tts.bkt.clouddn.com/图4.6</a> 执行分组的第二阶段.png)</p>
+<p>图4.6：执行分组的第二阶段</p>
+<p>尽管前视也可以用于广度优先算法，但它们在深度优先策略下更有效。在深度优先的方法中，较长的模式往往首先被发现，并且因此已经在频繁集合中用于基于超集的修剪。 例如，考虑使用\(2^{20}\)个子集的长度为20的频繁模式。在深度优先策略中，可以发现长度为20的模式将在探索其仅有的19个直接前缀之后被发现。另一方面，宽度优先的方法可能会因发现更短的模式而陷入困境。因此，较早的模式在深度优先的方法（例如DepthProject）中很早就可以使用，以便使用基于超集的修剪来修剪大部分枚举树。</p>
+<h3 id="4433">4.4.3.3垂直计数方法</h3>
+<p>Partition[446]和Monet[273]的方法率先提出了交易数据库T的垂直数据库表示的概念。 在垂直表示中，每个项目都与其事务标识符（tids）的列表关联。它也可以被认为是使用表示事务的二进制事务数据矩阵的转置，以便将列转换为行。这些行被用作新的“记录”。因此，每个项目都有一个包含它的交易标识符的tid列表。例如，表4.1中数据库的垂直表示如表4.2所示。请注意，表4.2中的二进制矩阵是表4.1中的转置矩阵。
+<center>表4.2：购物车数据集的垂直表示</center>
+<table>
+    <tr>
+        <td><b>Item</b></td>
+        <td><b>Set of tids</b></td>
+        <td><b>Binary representation</b></td>
+    </tr>
+    <tr>
+        <td>Bread</td>
+        <td>{1, 3}</td>
+        <td>10100</td>
+    </tr>
+    <tr>
+        <td>Butter</td>
+        <td>{1}</td>
+        <td>10000</td>
+    </tr>
+    <tr>
+        <td>Cheese</td>
+        <td>{3, 5}</td>
+        <td>00101</td>
+    </tr>
+    <tr>
+        <td>Eggs</td>
+        <td>{2, 3, 4}</td>
+        <td>01110</td>
+    </tr>
+    <tr>
+        <td>Milk</td>
+        <td>{1, 2, 3, 4, 5}</td>
+        <td>11111</td>
+    </tr>
+    <tr>
+        <td>Yogurt</td>
+        <td>{2, 4, 5}</td>
+        <td>01011</td>
+    </tr>
+</table>
+　　两个项目tid列表的交集产生一个新的tid列表，其长度等于该2项目集的支持。进一步将得到的tid列表与另一个项目的交集得到3项目集的支持。 例如，Milk和Yogurt的tid列表的长度为3，得到{2,4,5}。{Milk，Y ogurt}的tid列表与Eggs的列表的进一步交叉产生tid列表{2,4 }长度为2。{Milk，Yogurt}为&#8535; = 0.6，{Milk，egg，Yogurt}为&#8534; = 0.4。请注意，也可以将{Milk，Yogurt}和{Milk，Eggs}中较小的tid列表相交以获得相同的结果。 对于加入以创建(k + 1)-itemset的一对k项集，可以将k项项集的tid列表相交以获得结果(k + 1)-itemset的tid列表。相交k-项集的tid列表优于相交1-项集的tid列表，因为k-项集的tid列表通常小于1--项集的tid列表，这使得交集更快。这种方法被称为递归tid列表交集。 Monet[273]和Partition [446]算法引入了这种递归tid列表交集的深刻理解。 Partition框架[446]提出了带有tid列表交集的Apriori算法的垂直版本。图4.7说明了Apriori算法的垂直版本的伪代码。与水平Apriori算法唯一的区别在于使用递归tid列表交集进行计数。虽然垂直Apriori算法在计算上比水平Apriori算法更有效，但由于需要在每个项目集中存储tid列表，所以它是内存密集型的。使用分区集成可以减少内存需求，其中数据库被分割为独立处理的较小块。这种方法以后期处理的运行时间开销为代价减少了内存需求，并在章节中进行了讨论。 4.6.2。对于较小的数据库，不需要应用分区。在这种情况下，图4.7的垂直Apriori算法也被称为Partition-1，它是所有现代垂直模式挖掘算法的祖先。
+　　实际上，垂直数据库表示法可以用于几乎任何枚举树算法，其算法的增长策略与宽度优先方法不同。与垂直Apriori算法的情况一样，tid列表可以在树的增长期间与项目集（节点）一起存储。如果任何节点P的tid列表是已知的，则它可以与兄弟节点的tid列表相交以确定P的对应扩展的支持计数（和tid列表）。这提供了执行计数的有效方式。通过改变增长树的策略，可以减少存储tid列表的内存开销，但不能减少操作次数。例如，虽然广度优先策略和深度优先策略都需要特定节点对的完全相同的tid列表交集，但深度优先策略将具有更小的内存占用量，因为tid列表仅需要存储在正在探索的树路径上的节点及其直接的兄弟节点。尽管如此，减少内存占用却很重要，因为它增加了可以完全在内核中处理的数据库的大小。
+　　随后，许多算法（例如Eclat和VIPER）采用了Partition的递归tid列表交集方法。Eclat是一种格子分区记忆优化算法，随后，许多算法（例如Eclat和VIPER）采用了Partition的递归tid列表交集方法。 Eclat是图4.7中算法的格分区内存优化。 在Eclat [537]中，在具有共同前缀的项集的每个子格上使用独立的Apriori样宽度优先策略。 这些项目组被称为等价类。这种方法可以通过将候选空间划分为独立处理的组并结合其前缀的相关垂直列表来减少内存需求。 这种候选分区类似于Apriori的并行版本，例如候选分布算法[54]。 Eclat方法不是使用候选分区来将不同的子阵分配到不同的处理器，而是依次处理子阵列以减少峰值存储需求。因此，Eclat可以避免与Savasere等人的数据分区方法相关的后处理开销，如果数据库太大而无法在Partition-1中进行内核处理，但却足够小以便Eclat在内核中处理。 在这种情况下，Eclat比分区快。 请注意，Partition-1中用于支持计数的计算操作的数量基本上与Eclat没有不同，因为任何一对项目集之间的tid列表交集保持不变。 此外，Eclat隐含地假定数据库大小的上限。这是因为它假设多个tid列表，每个大小至少是数据库记录数量的一小部分，适合主内存。 多个tid列表的累积内存开销始终与数据库大小成比例地增长，而基于集成的分区算法的内存开销与数据库大小无关。
+　　
+![图4.7 Savasere等[446]的垂直Apriori算法](<a href="http://p6atp7tts.bkt.clouddn.com/图4.7">http://p6atp7tts.bkt.clouddn.com/图4.7</a> Savasere等[446]的垂直Apriori算法.png)
+<center>图4.7 Savasere等[446]的垂直Apriori算法</center></p>
+<h3 id="444">4.4.4基于递归后缀的模式增长方法</h3>
+<p>枚举树通过扩展以词典顺序表示的项集的前缀来构造。也可以用基于后缀的探索递归地表达一些类别的项目集探索方法。 虽然递归模式增长通常被理解为完全不同的一类方法，但它可以被看作是上一节中介绍的泛型枚举树算法的特例。 递归模式增长方法和枚举树方法之间的这种关系将在4.4.4.5节中更详细地讨论。
+　　基于递归后缀的模式增长方法通常可以在众所周知的FP-Tree数据结构的上下文中理解。 虽然FP-Tree提供了一种实现递归模式探索的空间和时间有效的方法，但这些方法也可以使用数组和指针来实现。 本节将以简单的方式介绍递归模式增长方法，而不引入任何特定的数据结构。 我们还用各种数据结构提出了一些简化的实现3，以促进更好的理解。 这个想法是通过提供自顶向下的数据结构不可知的表示，而不是与常用的FP-Tree数据结构紧密集成的表示，从简单到复杂。 这种方法提供了对如何探索模式的搜索空间以及与传统枚举树算法的关系的清晰理解。基于递归后缀的模式增长方法通常可以在众所周知的FP-Tree数据结构的上下文中理解。 虽然FP-Tree提供了一种实现递归模式探索的空间和时间有效的方法，但这些方法也可以使用数组和指针来实现。 本节将以简单的方式介绍递归模式增长方法，而不引入任何特定的数据结构。 我们还用各种数据结构提出了一些简化的实现<sub>3</sub>，以促进更好的理解。 这个想法是通过提供自顶向下的数据结构不可知的表示，而不是与常用的FP-Tree数据结构紧密集成的表示，从简单到复杂。 这种方法提供了对如何探索模式的搜索空间以及与传统枚举树算法的关系的清晰理解。
+　　考虑交易数据库T，它仅用频繁的1项表示。假设已经在T上执行了计数通行证以移除不频繁的项目并计数项目的支持。因此，这里描述的递归过程的输入与本章中讨论的本数据库传递尚未执行的其他算法略有不同。数据库中的项目是在减少支持的情况下订购的。这个词典排序用于定义项目集和事务中项目的排序。此排序也用于定义项目集和事务的前缀和后缀的概念。该算法的输入是事务数据库T（以频繁1项表示），当前频繁项目集后缀P和最小支持度minsup。递归调用算法的目标是确定所有具有后缀P的频繁模式。因此，在算法的顶级递归调用中，后缀P是空的。在更深层次的递归调用中，后缀P不是空的。深层调用的假设是T仅包含来自原始数据库的那些包含项目集P的事务。此外，T中的每个交易仅使用那些按字典顺序小于P的所有项目的P的频繁扩展项目来表示。因此T是一个有条件的交易集，或者是关于后缀P的投影数据库。这种基于后缀的投影类似于TreeProjection和DepthProject中基于前缀的投影。
+　　在任何给定的递归调用中，第一步是通过将事务数据库T中的每个项目i连接到后缀P的开头来构造项集P<sub>i</sub> = {i}∪P，并将其报告为频繁的。项目集P<sub>i</sub>是频繁的，因为T是根据后缀P的投影数据库的频繁项目来定义的。对于每个项目i，期望通过使用递归调用与（新扩展的）频繁项目的投影数据库进一步扩展P<sub>i</sub>后缀P<sub>i</sub>。扩展后缀P<sub>i</sub>的投影数据库用T<sub>i</sub>表示，并按以下方式创建。第一步是从T中提取包含项目i的所有事务。因为希望向后扩展后缀P<sub>i</sub>，所以按字典顺序大于或等于i的所有项从T<sub>i</sub>中提取的事务中移除。换句话说，在（包括）i之后以字典顺序发生的交易部分与计算以P<sub>i</sub>结尾的频繁模式无关。计算T<sub>i</sub>中每个项目的频率，并删除不频繁的项目。
+　　很容易看出事务集合T<sub>i</sub>足以生成所有以P<sub>i</sub>为后缀的频繁模式。使用事务集合T<sub>i</sub>查找以P<sub>i</sub>结尾的所有频繁模式的问题与T上的原始问题相同但较小。因此，原始程序被递归地称为较小的投影数据库T<sub>i</sub>和扩展后缀P<sub>i</sub>。对于T中的每个项目i重复该过程。
+　　
+<img alt="图4.8：事务数据库的一般递归后缀增长，用频繁的1项表示" src="http://p6atp7tts.bkt.clouddn.com/图4.8：事务数据库的一般递归后缀增长，用频繁的1项表示.png" /></p>
+<p><center>图4.8：事务数据库的一般递归后缀增长，用频繁的1项表示</center></p>
+<p>根据项目数和交易次数，预计的交易集合T<sub>i</sub>在递归的更深层次上将逐渐变小。 随着交易数量的减少，其中的所有项目最终都会低于最低支持水平，并且生成的预计数据库（仅在频繁项目上构建）将为空。 在这种情况下，与T<sub>i</sub>的递归调用不会启动; 因此，递归的这个分支没有被探索。 对于某些数据结构，例如FP-Tree，可以强加更强的边界条件来更早地终止递归。 这个边界条件将在后面的章节中讨论。整个递归方法如图4.8所示。 虽然参数minsup在本章中一直被认为是（相对）小数值，但它在本节和图4.8中被假定为绝对整数支持值。 与常规约定的这种偏差确保了条件事务数据库的大小减少的不同递归调用的最小支持值的一致性。</p>
+<h3 id="4441">4.4.4.1使用数组但不指向的实现</h3>
+<p>那么，如何将投影数据库T分解为条件事务集T<sub>1</sub>...T<sub>d</sub>，对应于d个不同的1项后缀？最简单的解决方案是使用数组。在此解决方案中，原始事务数据库T和有条件事务集T<sub>1</sub>...T<sub>d</sub>可以用数组表示。可以在图4.8的“for”循环内扫描交易数据库T，并且从T创建集合T<sub>i</sub>。来自T<sub>i</sub>的罕见项目在循环内被移除。但是，在“for”循环中重复扫描数据库T会造成代价昂贵和浪费。一种替代方法是在“for”循环启动之前，在数据库的单次扫描中同时提取与不同后缀项目对应的T的所有投影T<sub>i</sub>。另一方面，同时创建许多这种特定于项目的投影数据集可能需要大量的内存。在计算和存储需求之间取得很好的折衷的一种方法是使用指针。这个方法在下一节讨论。</p>
+<h3 id="4442fp-tree">4.4.4.2使用指针实现而不使用FP-Tree</h3>
+<p>基于阵列的解决方案要么需要重复扫描数据库T，要么一次性创建许多较小的特定于项目的数据库。通常情况下，后者实现了更高的效率，但需要更多的内存。解决这个难题的一个简单方法是在第一遍中以指针的形式建立一个数据结构，以较低的内存成本将T分解隐式存储到不同的特定于项目的数据集中。这个数据结构是在不常用的项目从事务数据库T中被移除的时候建立起来的，然后被用来从T中提取不同的条件事务集合T<sub>i</sub>。对于T中的每个项目，指针按字典顺序排列包含该项目的事务。换句话说，在按照字典顺序排列数据库T之后，每个事务中的每个项目i都有一个指向包含它的下一个事务中的相同项目i的指针。由于每个事务中的每个项目都需要一个指针，因此这种情况下的存储开销与原始事务数据库T的成本成比例。另一个优化是整合重复的交易并将它们存储起来。图4.9说明了五个项目{a，b，c，d，e}上有九个交易的样本数据库示例。从图中可以清楚地看到，有五组指针，数据库中的每个项目都有一组指针。
+　　
+　　![图4.9 递归模式增长与指针和没有FP树的插图](<a href="http://p6atp7tts.bkt.clouddn.com/图4.9">http://p6atp7tts.bkt.clouddn.com/图4.9</a> 递归模式增长与指针和没有FP树的插图.png)</p>
+<p><center>图4.9 递归模式增长与指针和没有FP树的插图</center></p>
+<p>指针设置完成后，通过“追踪”项目i的指针线程来提取T<sub>i</sub>。这样做的时间与Ti中的事务数量成正比。 T<sub>i</sub>中的不频繁项被删除，并且需要重构条件事务数据的指针以创建条件指针基，该条件指针基本上是用指针增加的条件事务集。使用指针修改后的伪代码如图4.10所示。请注意，图1和图2的伪码之间的唯一区别在于，4.8和4.10是在提取条件事务集并使用这些指针有效地提取条件事务数据集T<sub>i</sub>之后建立指针。递归调用在下一级开始，具有扩展后缀P<sub>i</sub> = {i}∪P和条件数据库T<sub>i</sub>。
+　　为了说明如何提取T<sub>i</sub>，图4.9说明了一个包含5个项目和9个事务的事务数据库的例子。为了简单起见，我们使用（原始）最小支持值为1.提取与项目c相对应的事务，并且为了进一步递归调用而去除包括项目c和后面的无关后缀。请注意，这导致更短的交易，其中一些重复。因此，T<sub>i</sub>的条件数据库在合并后仅包含两个不同的事务。需要删除此条件数据库中的不频繁项目。在至少支持1的情况下不会移除任何项目。请注意，如果最小支持为3，则项目b将被移除。新的条件事务集的指针需要再次设置，因为它们对于有条件的事务数据库而言将不同于原始事务。与图4.8的伪代码不同，设置指针的附加步骤包含在图4.10的伪代码中。
+　　<img alt="图4.10：带指针的泛型递归后缀增长" src="http://p6atp7tts.bkt.clouddn.com/图4.10：带指针的泛型递归后缀增长.png" /></p>
+<p><center>图4.10：带指针的泛型递归后缀增长</center></p>
+<p>这些指针提供了一种有效的方式来提取有条件的事务数据库。 当然，这样做的代价是指针是空间开销，大小与原始事务数据库T成正比。巩固重复事务确实节省了一些空间。 将在下一节中讨论的FP-Tree通过合并不仅重复的事务而且通过使用trie数据结构重复事务的前缀来进一步采用这种方法。 此表示法通过合并事务数据库的前缀来减少空间开销</p>
+<h3 id="4443fp-tree">4.4.4.3使用指针和FP-Tree实现</h3>
+<p>FP-Tree的设计主要针对投影数据库的空间效率。FP-Tree是通过整合前缀而成为条件事务数据库的trie数据结构表示。这个特里替换了前几节的基于数组的实现，但它保留了指针。从trie中的根到叶子的路径表示数据库中的一个（可能重复的）事务。从根节点到内部节点的路径可能表示事务或数据库中事务的前缀。每个内部节点都与一个计数相关联，该计数表示原始数据库中包含与从根节点到该节点的路径相对应的前缀的事务数。叶子上的计数表示从根到该叶子的路径定义的事务重复实例的数量。因此，FP-Tree维护数据库中所有重复事务的所有计数以及它们的前缀。在标准特里数据结构中，前缀按字典顺序排序。项目的字典顺序从最频繁到最不频繁，以最大化基于前缀压缩的优点。这种排序还提供了很好的选择性，以平衡的方式减少各种条件事务集的大小。在相同的数据库中的FP-Tree数据结构的一个例子（如图4.9的前面的例子）图4.11。在本例中，与FPTree中最左边的项目c相关联的数字“2”表示前缀路径abc的计数，如图4.11所示。
+　　<img alt="图4.11：使用指针和FP-Tree进行递归模式增长的示例" src="http://p6atp7tts.bkt.clouddn.com/图4.11：使用指针和FP-Tree进行递归模式增长的示例.png" /></p>
+<p><center>图4.11：使用指针和FP-Tree进行递归模式增长的示例</center></p>
+<p>最初的FP-Tree FPT可以构造如下。 首先删除数据库中的不频繁项目。 结果事务然后被连续插入到树中。 当插入的事务的前缀与trie中的现有路径重叠时，重叠节点上的计数会加1。对于事务的非重叠部分，需要创建包含此部分的新路径。 新创建的节点分配的计数为1.此插入过程与创建特里的过程相同，只是计数也与节点关联。 生成的树是压缩表示，因为多个事务的前缀中的公共项由单个节点表示。指针可以用类似于前一节中较简单的数组数据结构的方式来构造。每个项目的指针指向树中相同项目的下一个出现位置。由于一个trie以字典顺序存储事务，所以很容易创建线程化每个项目的指针。但是，指针数量较小，因为许多节点已经合并。作为一个说明性的例子，可以检查图4.9中基于数组的数据结构和图4.11中的FP-Tree之间的关系。区别在于图4.9中数组的前缀被合并并压缩成图4.11中的一个trie。
+　　需要针对每个项目i∈FPT提取和重组条件FP-Tree FPT<sub>i</sub>（表示条件数据库T<sub>i</sub>）。这个提取需要用条件FP-Trees启动递归调用。 如前一节简单的基于指针结构的情况一样，可以使用项目的指针来提取包含该项目的投影数据库的子集。 为了提取项目i的条件FP-Tree，需要执行以下步骤：
+1.项目i的指针被追踪以提取项目的条件前缀路径树。 这些是从项目到根的路径。 其余的分支被修剪。
+2.调整前缀路径树中节点的计数以考虑被剪枝的分支。 计数可以通过汇总树叶上的计数来调整。
+3.通过在前缀路径树中聚合该项目的所有出现次数来统计每个项目的频率。不符合最低支持要求的项目将从前缀路径中删除。 此外，最后一项i也从每个前缀路径中移除。由于删除了不频繁的项目，所得到的条件FP-Tree可能与提取的前缀路径树有完全不同的组织。因此，可能需要通过重新插入删除不频繁项目后获得的条件前缀路径来重新创建条件FP-Tree。 有条件的FP-Tree的指针也需要重建。
+　　考虑图4.11中的例子，它与图4.9中的数据集相同。如图4.9所示，可以按照图4.11中项目c的指针来提取条件前缀路径的树（如图4.11所示）。由于许多来自原始FP-Tree（不包含项目c）的分支未包括在内，因此需要减少条件前缀路径树中许多节点上的计数。这些减少的计数可以通过汇总叶上的计数来确定。在移除项目c和不频繁项目之后，获得两个经频率注释的条件前缀路径ab(2)和a(2)，其与图4.9的两个投影和合并事务相同。然后通过将这两个条件前缀路径重新插入到一个新的条件FP-Tree中，为项目c构建条件FP-树。同样，这个有条件的FP-Tree是图4.9的条件指针基的一个trie表示。在这种情况下，由于使用最小支持1，因此不存在罕见项目。如果已经使用了最小支持3，那么物品b将不得不被移除。生成的条件FP-Tree用于下一级递归调用。在提取有条件的FP-Tree FPT<sub>i</sub>之后，检查它是否为空。当提取的条件前缀路径树中没有频繁项目时，可能会出现空的条件FP-Tree。如果树不为空，则下一级递归调用以后缀P<sub>i</sub> = {i}∪P和有条件的FP-Tree FPT <sub>i</sub>开始。
+　　FP-Tree的使用允许以边界条件的形式进行附加优化，以便在递归的更深层次快速提取频繁模式。具体来说，检查FP-Tree的所有节点是否位于单个路径上。在这种情况下，可以通过提取此路径上的所有节点组合以及聚合支持计数，从该路径直接提取频繁模式。例如，在图4.11的情况下，条件FP-Tree上的所有节点位于单个路径上。 因此，在下一次递归调用中，递归的底部将达到。FP-growth的伪代码如图4.12所示。这个伪代码类似于图4.10中基于指针的伪代码，只是使用了一个压缩的FP-Tree。</p>
+<h3 id="4444">4.4.4.4具有不同数据结构的权衡</h3>
+<p>FP-Tree比基于指针的实现的主要优点是空间压缩。由于基于树的压缩，FP-Tree比基于指针的实现需要更少的空间，但由于指针开销，它可能需要比基于数组的实现更多的空间。精确的空间要求取决于特定数据集的类似于树状结构的FP-Tree结构中更高级别节点的合并级别。 不同的数据结构可能更适合不同的数据集。
+　　由于投影数据库在递归调用期间重复构建和扫描，因此将它们保存在主内存中至关重要。否则，大量的磁盘访问成本将由潜在的指数递归调用数引起。投影数据库的大小随原始数据库大小而增加。对于某些重复交易数量有限合并的数据库，计划数据库中不同交易的数量总是与原始数据库中的交易数量大致成比例，其中比例因子f等于（最小）支持。对于大于主存储器可用性因子1/f的数据库，预计数据库可能不适合主存储器。因此，使用该方法的限制因素是原始交易数据库的大小。这个问题特定于几乎所有基于投影的方法和垂直计数方法。内存在这些方法中总是非常重要，因此对于预计的事务数据结构尽可能紧凑地进行设计至关重要。我们将在后面讨论，Savasere等人的Partition framework等[446]以牺牲运行时间为代价来解决这个问题。
+　　
+　　![图4-12 FP-growth算法用FP-Tree表示事务数据库，用频繁的1项表示](<a href="http://p6atp7tts.bkt.clouddn.com/图4-12">http://p6atp7tts.bkt.clouddn.com/图4-12</a> FP-growth算法用FP-Tree表示事务数据库，用频繁的1项表示.png)</p>
+<p><center>图4-12 FP-growth算法用FP-Tree表示事务数据库，用频繁的1项表示</center></p>
+<h3 id="4445-fp-">4.4.4.5 FP-生长和枚举树方法之间的关系</h3>
+<p>普遍认为FP-增长与枚举树方法完全不同。这部分是因为FP增长最初是作为一种提取频繁模式而不产生候选者的方法提出的。 然而，这样的阐述提供了对如何探索模式的搜索空间的不完全理解。 FP-growth是一个枚举树方法的实例。 所有的枚举树方法都会生成扩展树的候选扩展。 在下文中，我们将展示枚举树方法和FP增长之间的等价关系。
+　　<img alt="图4.13：枚举树与逆向词典排序的FP生长递归树相同" src="http://p6atp7tts.bkt.clouddn.com/图4.13：枚举树与逆向词典排序的FP生长递归树相同.png" /></p>
+<p><center>图4.13：枚举树与逆向词典排序的FP生长递归树相同</center></p>
+<p>FP-growth是一种递归算法，可以扩展频繁模式的后缀。任何递归方法都有一个与它相关的树结构，它被称为递归树，以及一个动态递归栈，它在执行期间将递归变量存储在递归树的当前路径中。因此，检查由FP增长算法创建的基于后缀的递归树并将其与枚举树算法使用的经典基于前缀的枚举树进行比较是有益的。
+　　在图4.13a中，来自图4.3前面例子的枚举树已被复制。这种频繁模式树由所有枚举树算法以及对应于失败的候选测试的此树的偶然候选扩展的单层计数。FP增长的每次调用都会发现一组频繁模式，用于扩展项目的特定后缀，就像枚举树的每个分支探索特定前缀的项目集一样。那么，探索条件模式基础的后缀之间的递归递归关系是什么？首先，我们需要决定项目的排序。由于递归是在后缀上执行的，而枚举树是在前缀上构造的，所以假定相反的顺序{f，e，d，c，b，a}针对两种方法中的不同约定进行调整。事实上，大多数枚举树方法都是从最不频繁到最频繁的项目，而FP-增长恰恰相反。如图4.13b所示，当1-项目集按照字典顺序从左到右排序时，FP-growth的相应递归树被示出。图4.13a和4.13b中的树是相同的，唯一的区别是它们的绘制方式不同，以解释相反的词典顺序。逆向字典顺序上的FP增长递归树具有与前缀上的传统枚举树相同的结构。在任何给定的FP增长递归调用期间，当前（递归）后缀项目堆栈是当前正在探索的枚举树中的路径。这枚枚举树由于其递归性质而被FP-growth深入优先探索。
+　　传统的枚举树方法通常将枚举树中频繁模式的单层次的支持作为（失败的）候选者计算出来。因此，探讨FP增长是否避免计算这些不常见的候选人是有益的。请注意，当创建条件事务数据库FPT<sub>i</sub>时（参见图4.12），必须从中删除不频繁的项目。这需要计算这些（隐式失败的）候选扩展的支持。在传统候选生成和测试算法中，频繁候选扩展将在计数步骤之后立即报告为成功的候选测试。然而，在FP增长中，这些频繁的扩展被重新编码回有条件的事务数据库FPT<sub>i</sub>中，并且报告被延迟到下一级递归调用。在下一级递归调用中，这些频繁的扩展然后从FPT<sub>i</sub>中提取并报告。从有条件的交易集计数和去除不频繁的项目是一个隐含的候选评估和测试步骤。FP增长中失败的候选测试<sup>4</sup>的数量与枚举树算法的数量完全相同，如Apriori（没有逐级修剪步骤）。这种平等直接来自于所有这些算法的关系，以及他们如何探索枚举树并排除不常见的部分。所有模式增长方法，包括FP增长，都应该被视为枚举树方法，Apriori也应该如此。传统枚举树是在前缀上构建的，而（隐式）FP-growth枚举树是使用后缀构造的。这只是在物品订购惯例中的区别。
+　　深度优先策略是数据库投影方法中选择的方法，因为它可以更有效地保持条件事务集沿枚举（递归）树的深度（相对较小），而不是沿着（更大）宽度枚举树。正如前一节所讨论的，即使深度优先策略超出特定数据库大小，内存管理也会成为问题。然而，用于树探索的特定策略对于在整个算法执行过程中探索的枚举树（或候选）的大小没有任何影响。唯一的区别在于，广度优先方法根据模式大小处理大批量的候选项，而深度优先方法在枚举树中处理较小批次的直接兄弟中的候选项。从这个角度来看，FP增长无法避免枚举树方法（如Apriori）所需的指数候选搜索空间探索。
+　　然而，像Apriori这样的方法也可以解释为在与FP增长的递归树大小完全相同的枚举树上进行计数的方法，因此在枚举树的较高级别上完成的计数工作将丢失。这是因为在Apriori的每个级别都用整个事务数据库从头开始计数，而不是记录和重用在树的更高级别完成的工作的预计数据库。Savasere等人的垂直计数方法[446]和DepthProject也使用基于投影的重复使用。FP-growth与其他基于投影的方法的主要区别在于，用于预测事务表示的指针 - 特征组合数据结构的使用。在深度优先探索的背景下，这些方法可以理解为分而治之策略或基于投影的重用策略。基于投影的重用概念更为一般，因为它适用于算法的宽度优先和深度优先两种版本，并且通过避免浪费和重复计数，可以更清楚地了解如何实现计算节省。基于投影的重用使得能够在数据库的受限制部分中高效地测试候选项目扩展，而不是在完整数据库中测试候选项目集。因此，FP增长的效率是每个候选人更有效计算的结果，而不是因为候选人更少。各种方法之间搜索空间大小的唯一差异是临时修剪优化的结果，例如Apriori中的逐级修剪，DepthProject算法中的分段以及FP-growth的单路径边界条件。
+　　计划事务集的簿记可以通过使用不同的数据结构（例如数组，指针或指针-树结合）来完成。在不同的投影算法中探索了许多不同的数据结构变化，如TreeProjection，DepthProject，FP-growth和H-Mine[419]。每个数据结构都与一组不同的效率和开销相关联。
+　　总之，枚举树<sup>5</sup>是描述所有以前的频繁模式挖掘算法的最通用的框架。 这是因为枚举树是格子（候选空间）的子图，它提供了一种以系统和非冗余方式探索候选模式的方法。 枚举树的频繁部分的支持测试以及这些节点的偶尔候选扩展的单层是所有频繁项集挖掘算法的基础，用于排除和排除可能（或候选）频繁模式。任何算法，例如使用枚举树来规则和排除频繁模式的支持计数的可能扩展的FP增长，是候选生成和测试算法。</p>
+<h2 id="45">4.5 替代模式：有趣的模式</h2>
+<p>频繁项目集生成的传统模型由于其简单性而被广泛普及和接受。对支持使用原始频率计数的简单性，以及对置信度使用条件概率的简单性非常有吸引力。此外，频繁项集的向下闭包性质使得能够设计用于频繁项集挖掘的高效算法。 然而，这种算法的便利性并不意味着从特定应用的角度来看，发现的模式总是显着的。项目组的原始频率并不总是对应于最有趣的模式。
+　　例如，考虑图4.1所示的交易数据库。在这个数据库中，所有交易都包含项目Milk。因此，该项目milk可以附加到任何一组项目，而不会改变其频率。但是，这并不意味着milk与任何一套物品真正相关。此外，对于任何一组项目X，关联规则X⇒{milk}具有100％的置信度。然而，超市商人认为一揽子商品X有区别地表示milk是没有意义的。 这就是传统支持-置信模型的局限性。
+　　有时候，设计可以适应个别项目支持值偏差的措施也是可取的。这种调整对负面模式挖掘尤为重要。例如，这对物品{Milk，Butter}的支持与{¬Milk，¬Butter}的支持非常不同。这里，¬表示否定。另一方面，可以认为两种情况下的统计相关系数完全相同。因此，该措施应以完全相同的方式量化两对之间的关联。显然，这些措施对于负面模式挖掘非常重要。据说满足这个性质的度量满足比特对称性，因为二进制矩阵中0的值以类似于1的值的方式处理。
+　　虽然有可能以统计上比支持信任框架更强大的方式来量化项目集合的亲和性，但是大多数这种基于兴趣度的模型面临的主要计算问题是向下关闭属性通常不被满足。这使得模式的指数级大型搜索空间的算法开发变得相当困难。 在某些情况下，该度量仅针对2个项目集的特殊情况进行定义。在其他情况下，可以设计更高效的算法。 以下内容讨论了其中一些模型。</p>
+<h3 id="451">4.5.1 相关统计系数</h3>
+<p>自然统计量度是一对项目之间的Pearson相关系数。 一对随机变量X和Y之间的Pearson相关系数定义如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">ρ=\frac{E[X·Y]-E[X]·E[Y]}{σ(X)·σ(Y)}　　　　　　　　　(4.4)</span><script type="math/tex">ρ=\frac{E[X·Y]-E[X]·E[Y]}{σ(X)·σ(Y)}　　　　　　　　　(4.4)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">ρ=\frac{E[X·Y]-E[X]·E[Y]}{σ(X)·σ(Y)}　　　　　　　　　(4.4)</span><script type="math/tex">ρ=\frac{E[X·Y]-E[X]·E[Y]}{σ(X)·σ(Y)}　　　　　　　　　(4.4)</script></span></script></span>
+　　根据购物车数据的情况，X和Y是二值变量，其值反映物品是否存在。E[X]表示X的期望值，σ(X)表示X的标准差。那么，如果sup(i)和sup(j)是单个项的相对支持度，则sup({i,j}是项集{i,j}的相对支持度，则可以根据数据估计整体相关性如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">ρ_{ij}=\frac{sup({i,j})-sup(i)·sup(j)}{\sqrt{sup(i)\cdot sup(j)\cdot (1-sup(i))\cdot (1-sup(j))}}　　　(4.5)</span><script type="math/tex">ρ_{ij}=\frac{sup({i,j})-sup(i)·sup(j)}{\sqrt{sup(i)\cdot sup(j)\cdot (1-sup(i))\cdot (1-sup(j))}}　　　(4.5)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">ρ_{ij}=\frac{sup({i,j})-sup(i)·sup(j)}{\sqrt{sup(i)\cdot sup(j)\cdot (1-sup(i))\cdot (1-sup(j))}}　　　(4.5)</span><script type="math/tex">ρ_{ij}=\frac{sup({i,j})-sup(i)·sup(j)}{\sqrt{sup(i)\cdot sup(j)\cdot (1-sup(i))\cdot (1-sup(j))}}　　　(4.5)</script></span></script></span>
+　　相关系数总是在[-1,1]的范围内，其中+1的值表示完美的正相关，-1的值表示完美的负相关。接近0的值表示弱相关数据。 该度量满足位对称性。尽管相关系数在统计上被认为是衡量相关性的最稳健的方法，但在处理不同但支持度较低的项目时，通常很难理解。</p>
+<h3 id="452-92292">4.5.2 \(χ^2\)度量</h3>
+<p>\(χ<sup>2\)度量是另一种以对称方式处理项目存在和不存在的位对称度量。请注意，对于由X表示的一组k个二元随机变量（项目），有\(2</sup>k\)个可能的状态表示交易中存在或不存在不同X项目。例如，对于k = 2个项目{Bread，Butter}，\(2<sup>2\)个州是{Bread，Butter}，{Bread，¬Butter}，{¬Bread，Butter}和{¬Bread，¬Butter}。这些组合中的每一个的预期分数存在可以被量化为各个项目的状态支持（存在或不存在）的乘积。对于一个给定的数据集，一个国家的支持的观察值可能与支持的预期值有显着差异。让O<sub>i</sub>和E<sub>i</sub>成为国家i绝对支持的观察和期望值。例如，{Bread，¬Butter}的期望支持E<sub>i</sub>分别由交易总数乘以Bread和¬Butter的每个分数支持得到。然后，项目X集合的\(χ</sup>2\)度量定义如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">χ^2(X)=\sum_{i=1}^{2^{|X|}} \frac{(O_i-E_i)^2}{E_i}　　　　　4.6</span><script type="math/tex">χ^2(X)=\sum_{i=1}^{2^{|X|}} \frac{(O_i-E_i)^2}{E_i}　　　　　4.6</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">χ^2(X)=\sum_{i=1}^{2^{|X|}} \frac{(O_i-E_i)^2}{E_i}　　　　　4.6</span><script type="math/tex">χ^2(X)=\sum_{i=1}^{2^{|X|}} \frac{(O_i-E_i)^2}{E_i}　　　　　4.6</script></span></script></span>
+　　例如，当X = {Bread，Butter}时，需要执行方程式中的求和。4.6对应于{Bread，Butter}，{Bread，←，Butter}，{¬Bread，Butter}和{¬Bread，¬Butter}的\(2^2\) = 4个状态。 接近0的值表示项目之间的统计独立性。这个数值越大，表明变量之间的依赖性越大。然而，大的χ<sub>2</sub>值不能揭示项目之间的依赖关系是正面还是负面的。这是因为χ<sub>2</sub>检验测量变量之间的依赖关系，而不是这些变量特定状态之间相关性的性质。
+　　\(χ<sup>2\)度量是位对称的，因为它以相似的方式处理项目的存在和不存在。\(χ</sup>2\)检验满足向上闭合特性，因为可以设计一个有效的算法来发现有趣的k-模式。 另一方面，方程的计算复杂度等式 4.6以|X|指数增加。</p>
+<h3 id="453">4.5.3利率</h3>
+<p>利率是一个简单而直观的可解释的措施。一组项目的利率比率{i<sub>1</sub>...i<sub>k</sub>}表示为I（{i1，...，i<sub>k</sub>}），并且定义如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">I({i_1...i_k})=\frac{sup({i_1...i_k})}{\prod_{j=1}^ksup(i_j)}　　　　(4.7)</span><script type="math/tex">I({i_1...i_k})=\frac{sup({i_1...i_k})}{\prod_{j=1}^ksup(i_j)}　　　　(4.7)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">I({i_1...i_k})=\frac{sup({i_1...i_k})}{\prod_{j=1}^ksup(i_j)}　　　　(4.7)</span><script type="math/tex">I({i_1...i_k})=\frac{sup({i_1...i_k})}{\prod_{j=1}^ksup(i_j)}　　　　(4.7)</script></span></script></span>
+　　当项目在统计上独立时，分子中的联合支持将等于分母中支持的乘积。 因此，1的利率是盈亏平衡点。 大于1的值表示变量正相关，而小于1的比率表示负相关。
+　　当某些项目非常少见时，利率可能会产生误导。例如，如果某个项目仅出现在大型交易数据库中的单个交易中，则该交易中与其共同出现的每个项目都可以与其配对以创建具有非常高兴趣比率的2项目集。这在统计上具有误导性。 此外，由于利率不满足向下关闭特性，因此很难设计出高效的算法来计算它。</p>
+<h3 id="454">4.5.4对称置信度量度</h3>
+<p>传统的信心度量在前因和后果之间是不对称的。但是，支持措施是对称的。可以使用对称置信度度量来用单一度量替换支持度置信度框架。让X和Y是两个1项目集。对称置信度可以作为X⇒Y的置信度和Y⇒X的置信度的函数来导出。各种对称置信度可以是这两个置信度值的最小值，平均值或最大值中的任意一个。当X或Y非常罕见时，最小值是不可取的，导致组合量度太低。当X或Y非常频繁时，最大值是不可取的，导致组合量度过高。在许多情况下，平均值提供了最稳健的折衷。通过使用随后的所有k个可能的单个项目进行计算，这些度量可以推广到k项集。有趣的是，两个置信度的几何平均值评估为余弦测度，这将在下面讨论。对称置信度度量的计算问题是满足度量上特定阈值的相关项目集不满足向下关闭属性。</p>
+<h3 id="455">4.5.5列上的余弦系数</h3>
+<p>余弦系数通常应用于行以确定事务之间的相似性。 但是，它也可以应用于列，以确定项目之间的相似性。 余弦系数最好使用相应二元向量上的垂直tid列表表示法进行计算。 二进制向量的余弦值计算如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">cosine(i,j)=\frac{sup({i,j})}{\sqrt{sup(i)}\cdot\sqrt{sup(j)}}　　　　　(4.8)</span><script type="math/tex">cosine(i,j)=\frac{sup({i,j})}{\sqrt{sup(i)}\cdot\sqrt{sup(j)}}　　　　　(4.8)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">cosine(i,j)=\frac{sup({i,j})}{\sqrt{sup(i)}\cdot\sqrt{sup(j)}}　　　　　(4.8)</span><script type="math/tex">cosine(i,j)=\frac{sup({i,j})}{\sqrt{sup(i)}\cdot\sqrt{sup(j)}}　　　　　(4.8)</script></span></script></span>
+　　分子可以被评估为项目i和j的tid列表的交集长度。余弦测度可以看作是规则{i}⇒{j}和{j}⇒{i}的置信度的几何平均值。 因此，余弦是一种对称置信度量度。</p>
+<h3 id="456-jaccardmin-hash">4.5.6 Jaccard系数和Min-Hash技巧</h3>
+<p>Jaccard系数在Chap.3中引入来度量集合之间的相似度。列上的tid列表可以被视为一个集合，并且可以使用两个tid列表之间的Jaccard系数来计算相似度。让S<sub>1</sub>和S<sub>2</sub>是两组。正如在Chap.3所示，两组之间的Jaccard系数J(S<sub>1</sub>，S<sub>2</sub>）可如下计算：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">J(S_1,S_2)=\frac{|S_1∩S_2|}{|S_1∪S_2|}　　　　　　(4.9)</span><script type="math/tex">J(S_1,S_2)=\frac{|S_1∩S_2|}{|S_1∪S_2|}　　　　　　(4.9)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">J(S_1,S_2)=\frac{|S_1∩S_2|}{|S_1∪S_2|}　　　　　　(4.9)</span><script type="math/tex">J(S_1,S_2)=\frac{|S_1∩S_2|}{|S_1∪S_2|}　　　　　　(4.9)</script></span></script></span>
+　　Jaccard系数可以很容易地推广到多路集合，如下所示：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">J(S_1...S_k)=\frac{|∩S_i|}{|∪ S_i}|</span><script type="math/tex">J(S_1...S_k)=\frac{|∩S_i|}{|∪ S_i}|</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">J(S_1...S_k)=\frac{|∩S_i|}{|∪ S_i}|</span><script type="math/tex">J(S_1...S_k)=\frac{|∩S_i|}{|∪ S_i}|</script></span></script></span>
+　　当集S<sub>1</sub>...S<sub>k</sub>对应于k个项目的tid列表，可以使用tid列表的交集和联合来确定上述表达式的分子和分母。 这为该k-itemset提供了基于Jaccard的重要性。可以使用Jaccard系数的最小阈值来确定所有相关的项目集。
+　　基于Jaccard的重要性质是它满足了集合单调性。k-way Jaccard系数J(S<sub>1</sub>...S<sub>k</sub>）总是不小于(k+1)路Jaccard系数J(S<sub>1</sub>...S<sub>k</sub>+1)。这是因为Jaccard系数的分子随着k值的增加（类似于支持）而单调不增加，而分母是单调不减少的。 因此，Jaccard系数不能随着k值的增加而增加。因此，当一个项目集的基于Jaccard的重要性使用最小阈值时，结果项目集也满足向下关闭属性。这意味着大多数传统算法（如Apriori和枚举树方法）可以很容易地推广到Jaccard系数。
+　　有可能使用采样来加速Jaccard系数的计算，并将其转化为标准的频繁模式挖掘问题。这种采样使用散列函数来模拟数据的排序样本。 那么，如何使用排序抽样来计算Jaccard系数呢？设D是代表n行和d列的n×d二进制数据矩阵。 不失一般性，考虑Jaccard系数需要在前k列上计算的情况。假设一个人对D中的行进行排序，并选取第一行，其中此列中前k列中至少有一列的值为1。
+　　然后，很容易看出，所有k列的值为1的事件的概率等于k路Jaccard系数。如果多次对行进行排序，则有可能将该概率估计为发生所有k列的事件发生在单位值上的排序的分数。当然，以这种方式进行效率相当低，因为每种排序都需要通过数据库。此外，这种方法只能估计一组特定k列的Jaccard系数，并且它不能发现满足Jaccard系数最小标准的所有k项集。min-hash技巧可用于以隐式方式高效地执行排序并转换为简明的采样表示，其上可以应用传统的频繁模式挖掘算法来发现满足Jaccard阈值的组合。基本思路如下。随机哈希函数h(·)应用于每个tid。对于每列二进制值，具有最小散列函数值的tid在具有该列中的单位值的所有条目中选择。这导致d个不同tid的向量。前k列中的tid相同的概率是多少？很容易看出，这与Jaccard系数相等，因为散列过程模拟排序，并报告二进制矩阵中第一个非零元素的索引。因此，通过使用独立的散列函数来创建多个样本，可以估计Jaccard系数。可以用r个不同的散列函数重复这个过程来创建r个不同的样本。请注意，可以在事务数据库上同时应用r个散列函数。这创建了一个r×d分类的tid分类数据矩阵。通过确定tid值与支持度等于最小支持值的相同列的子集，可以估计其Jaccard系数至少等于最小支持值的所有k个项目组。这是一个标准的频繁模式挖掘问题，除了它是在分类值而不是二进制数据矩阵上定义的。
+　　将这个r×d分类数据矩阵转换为二进制矩阵的一种方法是从每行中提取出相同的列标识符，并创建列标识符“项目”的新事务。因此，从 r×d矩阵将映射到多个事务。 所得到的交易数据集可以用新的二进制矩阵D'表示。 任何现成的频繁模式挖掘算法都可以应用于这个二进制矩阵来发现相关的列标识符组合。现成的方法的优点是可以使用传统频繁模式挖掘模型的许多有效算法。可以看出，该方法的准确性随着数据样本的数量呈指数快速增长。</p>
+<h3 id="457">4.5.7 集体力量</h3>
+<p>项目集的集体优势是根据其违规率来定义的。据说一个项目集I违反了交易，如果某些项目出现在交易中，而另一些则不是。 项目集I的违规率v(I)是所有事务中违反项目集I的比例。项目集I的集体强度C(I)根据违规率定义如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">C(I)=\frac{1-υ(I)}{1-E[υ(I)]}\cdot\frac{E[υ(I)]}{υ(I)}　　　　(4.11)</span><script type="math/tex">C(I)=\frac{1-υ(I)}{1-E[υ(I)]}\cdot\frac{E[υ(I)]}{υ(I)}　　　　(4.11)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">C(I)=\frac{1-υ(I)}{1-E[υ(I)]}\cdot\frac{E[υ(I)]}{υ(I)}　　　　(4.11)</span><script type="math/tex">C(I)=\frac{1-υ(I)}{1-E[υ(I)]}\cdot\frac{E[υ(I)]}{υ(I)}　　　　(4.11)</script></span></script></span>
+　　集体力量是一个介于0到∞之间的数字。值为0表示完美的负相关，而值为∞表示完全正相关。1的值是盈亏平衡点。 计算v(I)的预期值，假设各项的统计独立性。当I中的所有项目都包含在交易中，或者I中没有项目包含在交易中时，不会发生违规行为。因此，如果p<sub>i</sub>是项目i发生的交易的一小部分，我们有：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">E[υ(I)]=1-\prod_{i∈I}p_i-\prod_{i∈I}(1-p_i)  　　　　　(4.12)</span><script type="math/tex">E[υ(I)]=1-\prod_{i∈I}p_i-\prod_{i∈I}(1-p_i)  　　　　　(4.12)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">E[υ(I)]=1-\prod_{i∈I}p_i-\prod_{i∈I}(1-p_i)  　　　　　(4.12)</span><script type="math/tex">E[υ(I)]=1-\prod_{i∈I}p_i-\prod_{i∈I}(1-p_i)  　　　　　(4.12)</script></span></script></span>
+　　直观地说，如果从试图在项目间建立高度相关性的角度来看，事务中的项目集违反是“坏事件”，那么υ(I)是坏事件的一部分，并且(1-v(I))是“好事件”的一小部分。因此，集体力量可以理解如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">C(I)=\frac{Good Events}{E[Good Events]}\cdot\frac{E[Bad Events]}{Bad Events}　　　　(4.13)</span><script type="math/tex">C(I)=\frac{Good Events}{E[Good Events]}\cdot\frac{E[Bad Events]}{Bad Events}　　　　(4.13)</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">C(I)=\frac{Good Events}{E[Good Events]}\cdot\frac{E[Bad Events]}{Bad Events}　　　　(4.13)</span><script type="math/tex">C(I)=\frac{Good Events}{E[Good Events]}\cdot\frac{E[Bad Events]}{Bad Events}　　　　(4.13)</script></span></script></span>
+　　集体力量的概念可以加强到强有力的集体项目集。
+　　定义4.5.1如果一个项目集I满足以下属性，则它被表示为在级别s上强烈集合：
+　　1.项目集I的集体强度C（I）至少是s。
+　　2.关闭性质：I的每个子集J的集体强度C(J)至少是s。
+　　有必要强制闭包属性以确保项目集中不存在不相关的项目。例如，考虑项目集I<sub>1</sub>是{Milk，Bread}并且项目集I<sub>2</sub>是{Diaper，Beer}的情况。如果I<sub>1</sub>和I<sub>2</sub>各自具有较高的集体力量，那么通常情况下，即使诸如Milk和Beer等物品可能是独立的，项目集I<sub>1</sub>∪I<sub>2</sub>也可能具有较高的集体强度。 由于这个定义的闭包性质，有可能为这个问题设计一个类Apriori算法。</p>
+<h3 id="458">4.5.8与负向模式挖掘的关系</h3>
+<p>在许多应用中，需要确定项目之间的模式或不存在。否定模式挖掘需要使用位对称度量来平均处理项目的存在或不存在。 传统的支持-置信度度量不是为了找到这样的模式而设计的。诸如统计相关系数，χ<sup>2</sup>度量和集体强度等措施更适合于找出项目之间的这种正面或负面的相关性。但是，这些措施中的很多在实践中很难使用，因为它们不能满足向下关闭的财产。多向Jaccard系数和集体强度是满足向下关闭属性的少数措施之一。</p>
+<h2 id="46">4.6有用的元算法</h2>
+<p>许多元算法可以用来从模式挖掘中获得不同的见解。元算法被定义为使用特定算法作为子例程的算法，以使原始算法更高效（例如，通过采样）或获得新的见解。两种元算法在模式挖掘中最为常见。第一种类型使用抽样来提高关联模式挖掘算法的效率。第二个使用预处理和后处理子程序将算法应用于其他场景。例如，在使用这些包装器之后，可以将标准频繁模式挖掘算法应用于定量或分类数据。</p>
+<h3 id="461">4.6.1抽样方法</h3>
+<p>当事务数据库非常大时，它不能存储在主内存中。这使得频繁模式挖掘算法的应用更具挑战性。这是因为这些数据库通常存储在磁盘上，并且只能使用级别明智的算法。枚举树上的许多深度优先算法可能会受到这些场景的挑战，因为它们需要随机访问事务。这对于磁盘驻留数据来说效率不高。如前所述，这种深度优先算法对内存驻留数据通常是最有效的。通过采样，有可能以有效的方式应用这些算法中的许多算法，但精度损失有限。 将标准项集挖掘算法应用于采样数据时，将遇到两个主要挑战：
+　　1. False positives：这些模式符合样本的支持阈值，但不符合基准数据。
+　　2. False negatives: 这些模式不符合样本的支持阈值，但符合数据的阈值。
+　　错误肯定比错误否定更容易解决，因为前者可以通过仅扫描一次磁盘驻留数据库来移除。但是，为了解决假阴性问题，需要减少支持阈值。通过减少支持门槛，可以概率性地保证特定门槛的损失水平。这些概率保证的指针可以在书目注释中找到。减少支持阈值会导致很多虚假项目集，并增加后处理阶段的工作量。通常，假阳性的数量会随着支持水平的小幅变化而迅速增加。</p>
+<h3 id="462">4.6.2数据分区集成</h3>
+<p>一种可以保证不出现假阳性而没有假阴性的方法是通过Partition算法[446]使用分区集合。这种方法既可以用于降低磁盘访问成本，也可以用于减少基于投影算法的内存需求。在分区集合中，事务数据库被分割为k个不相交的段，每个段都是主存驻留。频繁项目集挖掘算法独立地应用于这k个不同的分段中的每一个并具有所需的最小支持水平。一个重要的属性是每个频繁模式必须至少出现在其中一个分段中。否则，其在不同部门的累积支持将不能满足最低支持要求。因此，从不同部分生成的频繁项目集的联合提供了频繁模式的超集。换句话说，工会包含误报，但没有错误的否定。支持计数的后处理阶段可应用于此超集以消除误报。当投影数据库不适合主内存时，此方法对于内存密集型基于投影的算法特别有用。在原始分区算法中，用于执行基于投影的重用的数据结构是垂直tid列表。虽然对于任意大型数据库中基于映射的算法的基于内存的实现，分区几乎总是必需的，但后处理开销的成本有时可能很大。因此，应根据可用内存使用最小数量的分区。虽然Partition主要以其整体方法而闻名，但该方法的一个更重要但未被认识的贡献是提出垂直列表的概念。该方法用于识别递归tid列表交集的基于投影的重用属性。</p>
+<h3 id="463">4.6.3泛化到其他数据类型</h3>
+<p>对其他数据类型的推广，使用Chap.2讨论的类型转换方法非常简单。</p>
+<h4 id="4631">4.6.3.1定量数据</h4>
+<p>在许多应用中，当某些属性具有量化值时，需要发现量化关联规则。许多在线商家收集包含数字值的年龄等个人资料信息。 例如，在超市应用程序中，可能希望将人口统计信息与数据中的项目属性相关联。这种规则的一个例子如下：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">(Age = 90) ⇒ Checkers</span><script type="math/tex">(Age = 90) ⇒ Checkers</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">(Age = 90) ⇒ Checkers</span><script type="math/tex">(Age = 90) ⇒ Checkers</script></span></script></span>
+　　如果交易不包含足够的年龄的个体，则此规则可能得不到足够的支持。但是，这个规则可能与更广泛的年龄组有关。 因此，有一种可能性是创建一个将不同年龄段分成一个范围的规则：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">Age[85, 95] ⇒ Checkers</span><script type="math/tex">Age[85, 95] ⇒ Checkers</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">Age[85, 95] ⇒ Checkers</span><script type="math/tex">Age[85, 95] ⇒ Checkers</script></span></script></span>
+　　该规则将具有所需的最低支持水平。一般来说，对于定量关联规则挖掘，量化属性被离散化并转换为二进制形式。 因此，整个数据集（包括项目属性）可以表示为二进制矩阵。使用这种方法的一个挑战是适当的离散化水平往往难以事先知道。 标准关联规则挖掘算法可以应用于这种表示。此外，可以合并相邻范围的规则以在更大的范围上创建总结规则。</p>
+<h4 id="4632">4.6.3.2分类数据</h4>
+<p>分类数据在许多应用领域中很常见。例如，诸如性别和邮政编码等属性是典型的分类。在其他情况下，定量和分类数据可能会混杂在一起。 具有混合属性的规则示例如下所示：
+<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">(Gender = Male), Age[20, 30] ⇒ Basketball</span><script type="math/tex">(Gender = Male), Age[20, 30] ⇒ Basketball</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">(Gender = Male), Age[20, 30] ⇒ Basketball</span><script type="math/tex">(Gender = Male), Age[20, 30] ⇒ Basketball</script></span></script></span>
+　　分类数据可以通过使用第二章中讨论的二值化方法转换为二进制值。对于每个分类属性值，使用单个二进制值来指示项目的存在或不存在。这可以用来确定关联规则。在某些情况下，当领域知识可用时，关于分类值的聚类可以用作二进制属性。例如，邮政编码可以按地理区域聚类为k个聚类，然后可以将这些k个聚类视为二元属性。
+　　</p>
+<h2 id="47">4.7 总结</h2>
+<p>关联规则挖掘问题用于识别不同属性之间的关系。关联规则通常使用两阶段框架生成。在第一阶段，确定满足最低支持要求的所有模式。 在第二阶段，满足最低置信度要求的规则是从模式中产生的。
+Apriori算法是用于频繁模式挖掘的最早和最知名的方法之一。在这个算法中，候选模式是使用频繁模式之间的连接生成的。 随后，为频繁模式挖掘技术提出了许多枚举树算法。这些方法中的很多都使用预测来更有效地计算数据库中事务的支持。传统的支持自信框架有一个缺点，即它不是基于强有力的统计方法。许多生成的模式并不令人感兴趣。 因此，已经提出了一些利益措施来确定更多相关的模式。
+为了提高频繁模式挖掘的效率，设计了许多抽样方法。抽样方法会导致假阳性和假阴性，尽管前者可以通过后处理来解决。 分区样本集合也能够避免误报。关联规则可以通过使用类型转换在定量和分类数据中确定。</p>
+<h2 id="48">4.8 书目注释</h2>
+<p>频繁模式挖掘的问题首先在[55]中提出。本章讨论的Apriori算法首先在[56]中提出，并且在[57]中提出了该方法的增强变体。 最大和非最大频繁模式挖掘算法通常彼此不同，主要是前者中的附加修剪步骤。MaxMiner算法使用基于超集的非最大修剪[82]来进行更高效的计数。然而，探索是在广度优先的，以减少数据通过的次数。 DepthProject算法认识到基于超集的非最大性修剪在深度优先方法中更加有效。
+FP-growth [252]和DepthProject[3,4]方法独立地提出了水平数据库布局中基于投影的重用的概念。不同的基于投影的重用算法如TreeProjection [3]，DepthProject [4]，FP-growth [252]和H-Mine [419]使用了各种不同的数据结构。一种称为机会项目[361]的方法，在基于阵列和基于树的结构之间选择机会来表示预计事务。 TreeProjection框架还认识到，广度优先策略和深度优先策略具有不同的权衡。TreeProjection的广度优先变体牺牲了基于投影的重用的一些功能，从而在任意大的数据集上启用更少的基于磁盘的传递。 TreeProjection的深度优先变体（如DepthProject）实现了基于投影的完全重用，但投影数据库需要在主内存中保持一致。有关频繁模式挖掘方法的书籍和调查可分别在[34]和[253]中找到。
+Holsheimer等人独立开创了垂直表示法用于频繁模式挖掘。[273]和Savasere等人[446]。这些成果引入了巧妙的见解，即递归tid列表交集在支持计数方面提供了显着的计算节省，因为k-项集具有比(k-1)-集或单个项短的tid列表。垂直Apriori算法基于Partition Framework的集成组件[446]。尽管在最早的垂直模式挖掘论文中提到了这种算法使用垂直列表[537,534,465]，但分区算法的一些贡献及其与后续工作的关系似乎仍未被研究群体所认识这些年来。Savasere等人的Apriorilike算法实际上形成了所有垂直算法的基础，如Eclat [534]和VIPER [465]。 Han等人[250]在书中将Eclat描述为广度优先算法，并且作为Zaki等人[536]的书中的深度优先算法。
+对Eclat论文[537]的仔细研究表明，这是Savasere等人[446]在广度优先方法中的记忆优化。 Eclat的主要贡献是Savasere等人用格分割（而不是数据分割）算法的单个集成组件的存储器优化，从而增加了可以在存储器中处理的数据库的最大大小而没有计算开销数据分区后处理。分区的单个组件版本中支持计数的计算操作数与Eclat的基本没有不同。 Eclat算法根据公共前缀对网格进行划分，将它们称为等价类，然后在主存中的每个较小子网格上使用宽度优先方法[537]。这种类型的网格划分是从Apriori的并行版本采用的，例如候选分布算法[54]，其中网格划分和数据划分之间存在类似的选择。由于在每个子格上使用广度优先方法进行搜索，因此这种方法比纯粹的深度优先方法具有更高的内存需求。如[534]所述，Eclat明确地将模式分解阶段与模式搜索阶段分开。这与纯粹的深度优先策略不同，在这种策略中，两者紧密结合。深度优先算法不需要明确的解耦方法来减少内存需求。因此，由Candidate Distribution算法驱动的Eclat中的晶格划分似乎是在第二个（模式搜索）阶段考虑宽度优先的方法而专门设计的。 Eclat算法的会议[537]和期刊版本[534]都声明在所有实验的第二阶段中使用了宽度优先（自下而上）的程序。 FP-growth [252]和DepthProject [4]独立地被提议为第一种用于频繁模式挖掘的深度优先算法。 MAFIA是第一个使用纯深度优先方法的垂直方法[123]。垂直算法的其他后期变体，如GenMax和dEclat [233,538]也包含了深度优先方法。在这些算法中也提出了diffsets [538,233]的概念，它使用了枚举树层次结构中的增量垂直列表。该方法为某些类型的数据集提供了内存和效率优势。
+已经提出了许多用于发现有趣的频繁模式的措施。 χ2测量是第一次这样的测试之一，并在[113]中进行了讨论。这一措施满足了向上的封闭性。因此，可以设计出高效的模式挖掘算法。在[180]中讨论了使用最小哈希技术来确定没有支持计数的有趣模式。 [517]中已经解决了支持个别项目中的偏斜的影响。在相同的工作中已经提出了一种基于亲和度的算法来挖掘具有倾斜的数据中的有趣模式。支持分布存在显着偏差的一种常见情景是挖掘负关联规则[447]。在[16]中提出了集体强度模型，并且在同一工作中讨论了用于查找所有强集合项目集的级别明智的算法。集体力量模型也可以从数据中发现负面关联。 [486]中的工作解决了选择正确的度量来寻找有趣的关联规则的问题。
+采样是以高效方式寻找频繁模式的流行方法内存驻留算法。第一种抽样方法在[493]中进行了讨论，并给出了理论界限。 [446]中的工作使基于内存的应用成为可能通过在数据分区上使用合集来对大数据集进行频繁模式挖掘算法。定量关联规则的问题，以及来自不同类型的模式定量数据在[476]中讨论。CLIQUE算法也可以被认为是定量数据关联模式挖掘算法[58]</p>
+<h2 id="49">4.9 练习</h2>
+<p>1.考虑下表中的交易数据库：
+<table>
+    <tr>
+        <td><b>tid</b></td>
+        <td><b>Items</b></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>a,b,c,d</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>b,c,e,f</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>a,d,e,f</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>a,e,f</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>b,d,f</td>
+    </tr>
+</table>
+确定项目集{a，e，f}和{d，f}的绝对支持度。 将绝对支持转换为相对支持。
+2.对于练习1中的数据库，计算绝对最小支持值2,3和4的所有频繁模式。
+3.对于练习1中的数据库，确定绝对最小支持值为2,3和4的所有最大频繁模式。
+4.以垂直格式表示练习1的数据库。
+5.考虑下表中的交易数据库：
+<table>
+    <tr>
+        <td><b>tid</b></td>
+        <td><b>Items</b></td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>a,c,d,e</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>a,d,e,f</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>b,c,d,e,f</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>b,d,e,f</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>b,e,f</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>c,d,e</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>c,e,f</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>d,e,f</td>
+    </tr>
+</table>
+　　确定支持级别为3,4和5的所有频繁模式和最大模式。
+6.以垂直格式表示练习5的交易数据库。
+7.确定练习1中交易数据库的规则{a}⇒{f}和{a，e}⇒{f}的置信度。
+8.确定练习5中交易数据库的规则{a}⇒{f}和{a，e}⇒{f}的置信度。
+9.在练习1中，在Apriori算法的每个级别上通过显示候选项目集和频繁项目集。假设绝对最小支持级别为2。
+10.在练习5中，在Apriori算法的每个级别上传递候选项目集和频繁项目集。假设绝对最小支持级别为3。
+11.为绝对最小支持度为2的练习1的数据集显示频繁项目集的基于前缀的枚举树。假定a，b，c，d，e，f的词典排序。 为反向词典排序构建树。
+12.对于练习（5）中的数据集，显示频繁项目集的基于前缀的枚举树，绝对最小支持为3.假设a，b，c，d，e，f的词典排序。 为反向词典排序构建树。
+13.在练习9中显示数据集和支持级别的通用模式增长方法的递归树中生成的频繁后缀。假设a，b，c，d，e，f和f，e， d，c，b，a。 这些树如何与练习11中生成的树相比较？
+14.在习题10中显示在通用模式增长方法的递归树中为数据集和支持级别生成的频繁后缀。假设a，b，c，d，e，f和f，e， d，c，b，a。 这些树如何与练习12中生成的树相比较？
+15.为练习1中的数据集创建一个基于前缀的FP-Tree，用于词典排序a，b，c，d，e，f。为反向词典排序创建相同的树。
+16.为练习5中的数据集创建一个基于前缀的FP-Tree，用于词典排序a，b，c，d，e，f。为反向词典排序创建相同的树。
+17.Apriori中的修剪方法本质上是为广度优先策略设计的，因为所有频繁k项集合都是在(k+1） - )-集合之前生成的。 讨论如何用深度优先算法实现这种修剪策略。
+18.使用(a)基于阵列的数据结构，(b)不具有FP-Tree的基于指针的数据结构，以及&copy;具有FP-Tree的基于指针的数据结构。
+19.通过增加来自前缀的模式和后缀上的FP-Tree来实现练习18&copy;。
+20.对于项目集{d,f}和练习1的数据集，计算(a)统计相关系数，(b)兴趣比率，&copy;余弦系数和(d)Jaccard系数。
+21.对于项目集{d,f}和练习1的数据集，计算统计相关系数，(b)兴趣比率，&copy;余弦系数和(d)Jaccard系数。
+22.讨论TreeProjection，DepthProject，VerticalApriori和FP-growth之间的异同。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../3/" title="第3章 相似度和距离" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第3章 相似度和距离
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第5章 关联模式挖掘高级概念
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2018 NUDT DM-Trans Group
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

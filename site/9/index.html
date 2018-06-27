@@ -1,0 +1,1435 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="《Data Mining》中文版">
+      
+      
+        <link rel="canonical" href="https://DM-trans.github.io/DM-trans/9/">
+      
+      
+        <meta name="author" content="NUDT DM-trans group">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+    
+    
+      
+        <title>第9章 异常值分析：高级概念 - 《Data Mining》中文版</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,700|Fira+Mono">
+        <style>body,input{font-family:"Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../_static/css/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#9" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://DM-trans.github.io/DM-trans/" title="《Data Mining》中文版" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                《Data Mining》中文版
+              </span>
+              <span class="md-header-nav__topic">
+                第9章 异常值分析：高级概念
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="首页" class="md-tabs__link md-tabs__link--active">
+        首页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </span>
+    《Data Mining》中文版
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/DM-trans/DM-trans/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      DM-trans/DM-trans
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="首页" class="md-nav__link">
+      首页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../1/" title="第1章 绪论" class="md-nav__link">
+      第1章 绪论
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../2/" title="第2章 数据预处理" class="md-nav__link">
+      第2章 数据预处理
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../3/" title="第3章 相似度和距离" class="md-nav__link">
+      第3章 相似度和距离
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../4/" title="第4章 关联模式挖掘" class="md-nav__link">
+      第4章 关联模式挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../5/" title="第5章 关联模式挖掘高级概念" class="md-nav__link">
+      第5章 关联模式挖掘高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../6/" title="第6章 聚类分析" class="md-nav__link">
+      第6章 聚类分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../7/" title="第7章 聚类分析：高级概念" class="md-nav__link">
+      第7章 聚类分析：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../8/" title="第8章 异常值分析" class="md-nav__link">
+      第8章 异常值分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        第9章 异常值分析：高级概念
+      </label>
+    
+    <a href="./" title="第9章 异常值分析：高级概念" class="md-nav__link md-nav__link--active">
+      第9章 异常值分析：高级概念
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#91" title="9.1 简介" class="md-nav__link">
+    9.1 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92" title="9.2 使用分类数据的异常值检测" class="md-nav__link">
+    9.2 使用分类数据的异常值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#921" title="9.2.1 概率模型" class="md-nav__link">
+    9.2.1 概率模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#922" title="9.2.2 聚类和基于距离的方法" class="md-nav__link">
+    9.2.2 聚类和基于距离的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#923" title="9.2.3 二进制和设定值数据" class="md-nav__link">
+    9.2.3 二进制和设定值数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93" title="9.3 高维离群值检测" class="md-nav__link">
+    9.3 高维离群值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#931" title="9.3.1 基于网格的稀有子空间探索" class="md-nav__link">
+    9.3.1 基于网格的稀有子空间探索
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9311" title="9.3.1.1 建模异常的下维投影" class="md-nav__link">
+    9.3.1.1 建模异常的下维投影
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9312" title="9.3.1.2 网格搜索子空间异常值" class="md-nav__link">
+    9.3.1.2 网格搜索子空间异常值
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#932" title="9.3.2 随机子空间采样" class="md-nav__link">
+    9.3.2 随机子空间采样
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94" title="9.4 异常合奏" class="md-nav__link">
+    9.4 异常合奏
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#941" title="9.4.1 按组件独立分类" class="md-nav__link">
+    9.4.1 按组件独立分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9411" title="9.4.1.1 顺序合奏" class="md-nav__link">
+    9.4.1.1 顺序合奏
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9412" title="9.4.1.2 独立合奏" class="md-nav__link">
+    9.4.1.2 独立合奏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#942" title="9.4.2 按组成部分分类" class="md-nav__link">
+    9.4.2 按组成部分分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9421" title="9.4.2.1 以模型为中心的集合" class="md-nav__link">
+    9.4.2.1 以模型为中心的集合
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9422" title="9.4.2.2 以数据为中心的集成" class="md-nav__link">
+    9.4.2.2 以数据为中心的集成
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#943" title="9.4.3 规范化和组合" class="md-nav__link">
+    9.4.3 规范化和组合
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95" title="9.5 异常工作：应用程序" class="md-nav__link">
+    9.5 异常工作：应用程序
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#951" title="9.5.1 质量控制和故障检测" class="md-nav__link">
+    9.5.1 质量控制和故障检测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#952" title="9.5.2 金融诈骗和异常事件" class="md-nav__link">
+    9.5.2 金融诈骗和异常事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#953" title="9.5.3 网络日志分析" class="md-nav__link">
+    9.5.3 网络日志分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#954" title="9.5.4 入侵检测应用程序" class="md-nav__link">
+    9.5.4 入侵检测应用程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#955" title="9.5.5 生物和医疗应用" class="md-nav__link">
+    9.5.5 生物和医疗应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#956" title="9.5.6 地球科学应用" class="md-nav__link">
+    9.5.6 地球科学应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96" title="9.6 总结" class="md-nav__link">
+    9.6 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#97" title="9.7 书目注释" class="md-nav__link">
+    9.7 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#98" title="9.8 习题" class="md-nav__link">
+    9.8 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10/" title="第10章 数据分类" class="md-nav__link">
+      第10章 数据分类
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../11/" title="第11章 数据分类：高级概念" class="md-nav__link">
+      第11章 数据分类：高级概念
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../12/" title="第12章 数据流挖掘" class="md-nav__link">
+      第12章 数据流挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../13/" title="第13章 挖掘文本数据" class="md-nav__link">
+      第13章 挖掘文本数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../14/" title="第14章 挖掘时间序列数据" class="md-nav__link">
+      第14章 挖掘时间序列数据
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../15/" title="第15章 离散序列挖掘" class="md-nav__link">
+      第15章 离散序列挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../16/" title="第16章 空间数据挖掘" class="md-nav__link">
+      第16章 空间数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../17/" title="第17章 图数据挖掘" class="md-nav__link">
+      第17章 图数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../18/" title="第18章 Web数据挖掘" class="md-nav__link">
+      第18章 Web数据挖掘
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../19/" title="第19章 社交网络分析" class="md-nav__link">
+      第19章 社交网络分析
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../20/" title="第20章 数据挖掘中的隐私保护" class="md-nav__link">
+      第20章 数据挖掘中的隐私保护
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#91" title="9.1 简介" class="md-nav__link">
+    9.1 简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92" title="9.2 使用分类数据的异常值检测" class="md-nav__link">
+    9.2 使用分类数据的异常值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#921" title="9.2.1 概率模型" class="md-nav__link">
+    9.2.1 概率模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#922" title="9.2.2 聚类和基于距离的方法" class="md-nav__link">
+    9.2.2 聚类和基于距离的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#923" title="9.2.3 二进制和设定值数据" class="md-nav__link">
+    9.2.3 二进制和设定值数据
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93" title="9.3 高维离群值检测" class="md-nav__link">
+    9.3 高维离群值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#931" title="9.3.1 基于网格的稀有子空间探索" class="md-nav__link">
+    9.3.1 基于网格的稀有子空间探索
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9311" title="9.3.1.1 建模异常的下维投影" class="md-nav__link">
+    9.3.1.1 建模异常的下维投影
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9312" title="9.3.1.2 网格搜索子空间异常值" class="md-nav__link">
+    9.3.1.2 网格搜索子空间异常值
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#932" title="9.3.2 随机子空间采样" class="md-nav__link">
+    9.3.2 随机子空间采样
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94" title="9.4 异常合奏" class="md-nav__link">
+    9.4 异常合奏
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#941" title="9.4.1 按组件独立分类" class="md-nav__link">
+    9.4.1 按组件独立分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9411" title="9.4.1.1 顺序合奏" class="md-nav__link">
+    9.4.1.1 顺序合奏
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9412" title="9.4.1.2 独立合奏" class="md-nav__link">
+    9.4.1.2 独立合奏
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#942" title="9.4.2 按组成部分分类" class="md-nav__link">
+    9.4.2 按组成部分分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9421" title="9.4.2.1 以模型为中心的集合" class="md-nav__link">
+    9.4.2.1 以模型为中心的集合
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9422" title="9.4.2.2 以数据为中心的集成" class="md-nav__link">
+    9.4.2.2 以数据为中心的集成
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#943" title="9.4.3 规范化和组合" class="md-nav__link">
+    9.4.3 规范化和组合
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95" title="9.5 异常工作：应用程序" class="md-nav__link">
+    9.5 异常工作：应用程序
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#951" title="9.5.1 质量控制和故障检测" class="md-nav__link">
+    9.5.1 质量控制和故障检测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#952" title="9.5.2 金融诈骗和异常事件" class="md-nav__link">
+    9.5.2 金融诈骗和异常事件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#953" title="9.5.3 网络日志分析" class="md-nav__link">
+    9.5.3 网络日志分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#954" title="9.5.4 入侵检测应用程序" class="md-nav__link">
+    9.5.4 入侵检测应用程序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#955" title="9.5.5 生物和医疗应用" class="md-nav__link">
+    9.5.5 生物和医疗应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#956" title="9.5.6 地球科学应用" class="md-nav__link">
+    9.5.6 地球科学应用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96" title="9.6 总结" class="md-nav__link">
+    9.6 总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#97" title="9.7 书目注释" class="md-nav__link">
+    9.7 书目注释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#98" title="9.8 习题" class="md-nav__link">
+    9.8 习题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/DM-trans/DM-trans/blob/master/docs/9.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="9">9 异常值分析：高级概念</h1>
+<!--本章由王俊翻译-->
+
+<blockquote>
+<p>“如果每个人都有同样的想法，那么有人就没有想过。” - 乔治·S·巴顿</p>
+</blockquote>
+<h2 id="91">9.1 简介</h2>
+<p>使用前一章讨论的技术无法解决许多用于异常值分析的场景。例如，数据类型对异常值检测算法有重要影响。为了对分类数据使用异常值检测算法，可能需要更改距离函数或期望最大化（EM）算法中使用的分布族。在许多情况下，这些变化与聚类问题中所需的变化完全相似。</p>
+<p>其他案例更具挑战性。例如，当数据维数很高时，由于噪声和不相关维度的掩蔽行为，应用离群分析通常很困难。在这种情况下，需要使用一类新的方法，称为子空间方法。在这些方法中，异常值分析是在数据的低维投影中执行的。在很多情况下，很难发现这些预测，因此可能需要合并多个子空间的结果以获得更好的鲁棒性。</p>
+<p>来自多个模型的结果的组合通常被称为集合分析。集合分析也用于其他数据挖掘问题，如聚类和分类。原则上，异常值检测中的集合分析类似于数据聚类或分类中的集合分析。但是，在异常值检测的情况下，集合分析尤其具有挑战性。本章将在离群分析中研究以下三类具有挑战性的问题：</p>
+<ol>
+<li>
+<p>分类数据中的异常值检测：由于异常值模型使用诸如最近邻居计算和聚类等概念，因此需要根据当前的数据类型对这些模型进行调整。本章将介绍处理分类数据类型所需的更改。</p>
+</li>
+<li>
+<p>高维数据：由于“维数灾难”，对于异常值检测来说，这是一个非常具有挑战性的场景。许多属性都是无关紧要的，并且导致模型构建中的错误。解决这些问题的常用方法是子空间异常值检测。</p>
+</li>
+<li>
+<p>异常值集合：在许多情况下，集合分析可以提高异常值检测算法的鲁棒性。本章将研究离群值检测的集成分析的基本原理。</p>
+</li>
+</ol>
+<p>异常值分析在数据清理，欺诈检测，金融市场，入侵检测和执法等诸多领域都有很多应用。本章还将研究异常值分析的一些更常见的应用。</p>
+<p>本章组织如下：第9.2节讨论分类数据的异常值检测模型。高维数据的困难情况在第9.3节中讨论。在9.4节中研究了异常组合。第9.5节讨论了异常值检测的各种应用。9.6节提供了总结。</p>
+<h2 id="92">9.2 使用分类数据的异常值检测</h2>
+<p>与数据挖掘中的其他问题一样，基础数据的类型对用于解决该问题的算法的细节有重大影响。离群分析也不例外。然而，在异常值检测的情况下，所需的变化相对较小，因为与聚类不同，许多异常值检测算法（如基于距离的算法）使用非常简单的异常值定义。通常可以修改这些定义，以便通过小修改来处理分类数据。在本节中，前一章中讨论的一些模型将重新用于分类数据。</p>
+<h3 id="921">9.2.1 概率模型</h3>
+<p>概率模型可以很容易地修改以处理分类数据。概率模型将数据表示为群集组件的混合。因此，混合物的每个组成部分都需要反映一组离散属性而不是数字属性。换句话说，需要设计分类数据的生成混合模型。不适合这种混合模型的数据点被报告为异常值。</p>
+<p>混合模型的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个分量用<span><span class="MathJax_Preview">{\cal{G}}_1\cdots{\cal{G}}_k</span><script type="math/tex">{\cal{G}}_1\cdots{\cal{G}}_k</script></span>表示。生成过程使用以下两个步骤生成<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维数据集<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中的每个点：</p>
+<ol>
+<li>选择具有先验概率<span><span class="MathJax_Preview">\alpha_i</span><script type="math/tex">\alpha_i</script></span>的混合分量，其中<span><span class="MathJax_Preview">i\in\lbrace1\cdots k\rbrace</span><script type="math/tex">i\in\lbrace1\cdots k\rbrace</script></span>。</li>
+<li>如果在第一步中选择了混合物的第<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>个成分，那么从<span><span class="MathJax_Preview">{\cal{G}}_r</span><script type="math/tex">{\cal{G}}_r</script></span>生成一个数据点。</li>
+</ol>
+<p><span><span class="MathJax_Preview">\alpha_i</span><script type="math/tex">\alpha_i</script></span>的值表示先验概率。混合组件模型的一个例子是其中第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个属性的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个值由具有概率<span><span class="MathJax_Preview">p_{ijm}</span><script type="math/tex">p_{ijm}</script></span>的簇<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>生成。所有模型参数的集合由符号<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>共同表示。</p>
+<p>考虑包含属性值索引<span><span class="MathJax_Preview">j_1\cdots j_d</span><script type="math/tex">j_1\cdots j_d</script></span>的数据点<span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span>，其中第<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>个属性取值<span><span class="MathJax_Preview">j_r</span><script type="math/tex">j_r</script></span>。然后，来自簇<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>的数据点的生成概率<span><span class="MathJax_Preview">g^{m,\Theta}(\bar{X})</span><script type="math/tex">g^{m,\Theta}(\bar{X})</script></span>的值由以下表达式给出：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">g^{m,\Theta}(\bar{X})=\prod_{r=1}^dp_{ij_rm}\tag{9.1}</span><script type="math/tex">g^{m,\Theta}(\bar{X})=\prod_{r=1}^dp_{ij_rm}\tag{9.1}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">g^{m,\Theta}(\bar{X})=\prod_{r=1}^dp_{ij_rm}\tag{9.1}</span><script type="math/tex">g^{m,\Theta}(\bar{X})=\prod_{r=1}^dp_{ij_rm}\tag{9.1}</script></span></script></span>
+数据点与第<span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span>个分量的拟合概率由<span><span class="MathJax_Preview">\alpha_r\cdot g^{r,\Theta}(\bar{X})</span><script type="math/tex">\alpha_r\cdot g^{r,\Theta}(\bar{X})</script></span>给出。因此，对所有分量的拟合总和由下式给出:<span><span class="MathJax_Preview">\sum_{r=1}^k\alpha_r\cdot g^{r,\Theta}(\bar{X})</span><script type="math/tex">\sum_{r=1}^k\alpha_r\cdot g^{r,\Theta}(\bar{X})</script></span>。这个拟合表示数据点由模型生成的可能性。因此，它被用作异常值分数。但是，为了计算这个拟合值，需要估计参数<span><span class="MathJax_Preview">\Theta</span><script type="math/tex">\Theta</script></span>。这是通过EM算法实现的。</p>
+<p>第<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>簇的赋值（或后验）概率<span><span class="MathJax_Preview">P({\cal{G}}_m|\bar{X},\Theta)</span><script type="math/tex">P({\cal{G}}_m|\bar{X},\Theta)</script></span>可以估计如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">P({\cal{G}}_m|\bar{X},\Theta)=\frac{\alpha_m\cdot g^{m,\Theta}(\bar{X})}{\sum_{r=1}^k\alpha_r\cdot g^{r,\Theta}(\bar{X})} \tag{9.2}</span><script type="math/tex">P({\cal{G}}_m|\bar{X},\Theta)=\frac{\alpha_m\cdot g^{m,\Theta}(\bar{X})}{\sum_{r=1}^k\alpha_r\cdot g^{r,\Theta}(\bar{X})} \tag{9.2}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">P({\cal{G}}_m|\bar{X},\Theta)=\frac{\alpha_m\cdot g^{m,\Theta}(\bar{X})}{\sum_{r=1}^k\alpha_r\cdot g^{r,\Theta}(\bar{X})} \tag{9.2}</span><script type="math/tex">P({\cal{G}}_m|\bar{X},\Theta)=\frac{\alpha_m\cdot g^{m,\Theta}(\bar{X})}{\sum_{r=1}^k\alpha_r\cdot g^{r,\Theta}(\bar{X})} \tag{9.2}</script></span></script></span>
+这一步提供了数据点到一个簇的软分配概率，并且它对应于E步骤。</p>
+<p>软分配概率用于估计概率<span><span class="MathJax_Preview">p_{ijm}</span><script type="math/tex">p_{ijm}</script></span>。在估计簇m的参数时，假定数据点的权重等于簇m的赋值概率<span><span class="MathJax_Preview">P({\cal{G}}_m|\bar{X},\Theta)</span><script type="math/tex">P({\cal{G}}_m|\bar{X},\Theta)</script></span>。估计值<span><span class="MathJax_Preview">\alpha_m</span><script type="math/tex">\alpha_m</script></span>是在所有数据点上聚类<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>的平均分配概率。对于每个簇<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>，估计第<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个属性在簇<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>中的第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个可能离散值的记录的加权数<span><span class="MathJax_Preview">\cal{w}_{ijm}</span><script type="math/tex">\cal{w}_{ijm}</script></span>。<span><span class="MathJax_Preview">\cal{w}_{ijm}</span><script type="math/tex">\cal{w}_{ijm}</script></span>的值被估计为第<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>个属性在第<span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>个值中所有记录<span><span class="MathJax_Preview">\bar{X}</span><script type="math/tex">\bar{X}</script></span>的后验概率<span><span class="MathJax_Preview">P({\cal{G}}_m|\bar{X},\Theta)</span><script type="math/tex">P({\cal{G}}_m|\bar{X},\Theta)</script></span>的总和。然后，可以如下估计概率<span><span class="MathJax_Preview">p_{ijm}</span><script type="math/tex">p_{ijm}</script></span>的值：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">p_{ijm}=\frac{\cal{w}_{ijm}}{\sum_{\bar{X}\in D}P({\cal{G}}_m|\bar{X},\Theta)}\tag{9.3}</span><script type="math/tex">p_{ijm}=\frac{\cal{w}_{ijm}}{\sum_{\bar{X}\in D}P({\cal{G}}_m|\bar{X},\Theta)}\tag{9.3}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">p_{ijm}=\frac{\cal{w}_{ijm}}{\sum_{\bar{X}\in D}P({\cal{G}}_m|\bar{X},\Theta)}\tag{9.3}</span><script type="math/tex">p_{ijm}=\frac{\cal{w}_{ijm}}{\sum_{\bar{X}\in D}P({\cal{G}}_m|\bar{X},\Theta)}\tag{9.3}</script></span></script></span></p>
+<p>当数据点的数量很小时，方程9.3在实践中可能很难执行。在这种情况下，某些属性值可能不会出现在群集中（或<span><span class="MathJax_Preview">\cal{w}_{ijm}\approx0</span><script type="math/tex">\cal{w}_{ijm}\approx0</script></span>)。这种情况可能会导致参数估计不足或过度拟合。拉普拉斯平滑法通常用于解决这种病态概率。设<span><span class="MathJax_Preview">m_i</span><script type="math/tex">m_i</script></span>为分类属性<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>的不同属性值的数量。在拉普拉斯平滑中，将一个小值<span><span class="MathJax_Preview">\beta</span><script type="math/tex">\beta</script></span>加到分子上，将<span><span class="MathJax_Preview">m_i\cdot\beta</span><script type="math/tex">m_i\cdot\beta</script></span>加到公式9.3的分母上。这里，<span><span class="MathJax_Preview">\beta</span><script type="math/tex">\beta</script></span>是控制平滑程度的参数。当数据集非常小时，这种形式的平滑有时也用于估计先验概率<span><span class="MathJax_Preview">\alpha_i</span><script type="math/tex">\alpha_i</script></span>。这完成了对M步骤的描述。就数值数据而言，E步骤和M步骤重复收敛。将最大似然拟合值报告为离群值。</p>
+<h3 id="922">9.2.2 聚类和基于距离的方法</h3>
+<p>大多数基于聚类和距离的方法可以很容易地从数值到分类数据进行概括。需要进行两项主要修改如下：</p>
+<ol>
+<li>分类数据需要专门的聚类方法，这些方法通常与数值数据不同。这在第7章详细讨论。任何这些模型都可以用来创建初始集群。如果使用基于距离或相似性的聚类算法，则应该使用相同的距离或相似度函数来计算候选点与聚类质心的距离（相似度）。</li>
+<li>相似性函数的选择在分类数据的情况下是重要的，无论是使用基于质心的算法还是使用基于距离的原始算法。第3章第3.2.2节中的距离函数对于此任务非常有用。基于距离算法的修剪技巧对于距离函数的选择是不可知的，因此可以推广到这种情况。许多本地方法，如LOF，也可以推广到这种情况，以及使用这种修改后的距离定义。</li>
+</ol>
+<p>因此，基于聚类和基于距离的方法可以推广到分类数据的情况下，并进行相对适中的修改。</p>
+<h3 id="923">9.2.3 二进制和设定值数据</h3>
+<p>二进制数据是一种特殊的分类数据，在许多真实场景中发生频率很高。频繁模式挖掘的章节基于这些数据。此外，分类和数字数据总是可以转换为二进制数据。这个域的一个共同特征是，尽管属性的数量很大，但属性的非零值的数量在典型的事务中很小。</p>
+<p>在这些情况下，频繁模式挖掘被用作异常检测问题的子程序。基本思想是在异常事务处理中频繁出现的模式不太可能发生。因此，一种可能的措施是使用在特定交易中出现的所有频繁模式支持的总和。总和通过除以频繁模式的数量来标准化。这为模式提供了异常值。严格地说，规范化可以从最终得分中省略，因为它在所有交易中都是相同的。</p>
+<p>设<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>是包含由<span><span class="MathJax_Preview">T_1\cdots T_N</span><script type="math/tex">T_1\cdots T_N</script></span>表示的交易的交易数据库。设<span><span class="MathJax_Preview">s(X,D)</span><script type="math/tex">s(X,D)</script></span>表示<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中项目集X的支持度。因此，如果<span><span class="MathJax_Preview">FPS(D,s_m)</span><script type="math/tex">FPS(D,s_m)</script></span>表示最小支持度<span><span class="MathJax_Preview">s_m</span><script type="math/tex">s_m</script></span>处数据库<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>中的频繁模式集合，则最小支持度<span><span class="MathJax_Preview">s_m</span><script type="math/tex">s_m</script></span>处的事务<span><span class="MathJax_Preview">T_i\in D</span><script type="math/tex">T_i\in D</script></span>的频繁模式异常因子<span><span class="MathJax_Preview">FPOF(T_i)</span><script type="math/tex">FPOF(T_i)</script></span>被定义为如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">FPOF(T_i)=\frac{\sum_{X\in FPS(D,s_m),X\subseteq T_i}s(X,D)}{|FPS(D,s_m)|}\tag{9.4}</span><script type="math/tex">FPOF(T_i)=\frac{\sum_{X\in FPS(D,s_m),X\subseteq T_i}s(X,D)}{|FPS(D,s_m)|}\tag{9.4}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">FPOF(T_i)=\frac{\sum_{X\in FPS(D,s_m),X\subseteq T_i}s(X,D)}{|FPS(D,s_m)|}\tag{9.4}</span><script type="math/tex">FPOF(T_i)=\frac{\sum_{X\in FPS(D,s_m),X\subseteq T_i}s(X,D)}{|FPS(D,s_m)|}\tag{9.4}</script></span></script></span>直观地说，包含大量高支持频繁模式的交易将具有较高的<span><span class="MathJax_Preview">FPOF(T_i)</span><script type="math/tex">FPOF(T_i)</script></span>值。这样的交易不太可能是异常的，因为它反映了数据中的主要模式。因此，较低的分数表示更大的异常倾向。</p>
+<p>这种方法类似于集群中非成员数据点来定义异常值，而不是以更直接的方式确定事务的偏差或稀疏度。这种方法的问题是它可能无法区分真正隔离的数据点和环境噪声。这是因为这些类型的数据点都不可能包含许多频繁模式。因此，这种方法有时可能无法有效地确定数据中最强烈的异常情况。</p>
+<h2 id="93">9.3 高维离群值检测</h2>
+<p>高维异常检测可能特别具有挑战性，因为不同属性与数据局部性的重要性不同。这个想法是，异常的因果关系通常只能在维度的一小部分中被感知。其余的维度是不相关的，只会给异常检测过程增加噪音。此外，不同的维度子集可能与不同的异常有关。因此，全维分析往往不能正确揭示高维数据中的异常值。</p>
+<p>以一个激励性的例子来最好地理解这个概念。在图9.1中，已经说明了假设数据集的四个不同的二维视图。这些视图中的每一个对应于不相交的一组维度。因此，这些观点看起来彼此非常不同。数据点A在数据集的第一个视图中作为异常值公开，而点B在数据集的第四个视图中作为异常值公开。但是，数据点A和B在数据集的第二个和第三个视图中不作为异常值公开。因此，从测量A或B的异常值的角度来看，这些视图并不是非常有用。此外，从任何特定数据点（例如A点）的角度来看，四个视图中的三个视图是不相关的。因此，当以完全维度执行距离测量时，异常值在这些视图内的随机分布中丢失。在许多情况下，不相关视图（特征）的比例可能会随着维度而增加。在这种情况下，由于不相关的属性，异常值在数据的低维子空间中丢失。</p>
+<p><img alt="avatar" src="https://i.loli.net/2018/04/24/5adf02391d8d3.png" />
+<center> 图9.1：不相关属性对异常值分析的影响</center></p>
+<p>这种情况的物理解释在很多特定应用场景中都很清楚。例如，考虑信用卡欺诈应用程序，其中随着时间的推移跟踪客户的购买位置，购买频率和购买规模等不同功能。在一个特定客户的情况下，可以通过检查位置和购买频率属性来追踪异常情况。在另一个异常客户中，购买的规模和时间可能是相关的。因此，从全局角度来看，所有功能都很有用，但从本地角度来看，只有一小部分功能是有用的。</p>
+<p>这里的主要问题是大量“正常噪声”维度的稀释效应将使得检测异常值变得困难。换句话说，当使用全维分析时，由于全维计算中噪声的掩蔽和稀释效应，在低维子空间中会丢失异常值。在数据聚类的背景下，第7章也讨论了类似的问题。</p>
+<p>在数据聚类的情况下，通过定义子空间特定的聚类或投影聚类来解决该问题。这种方法也为高维异常分析提供了自然的途径。换句话说，现在可以通过将异常值与特定于该异常值的一个或多个子空间相关联来定义异常值。尽管在子空间聚类和子空间异常值检测问题之间存在明确的类比，但这两个问题的难度水平甚至不是很相似。</p>
+<p>毕竟，聚类是关于确定频繁的数据点组，而异常点是关于确定罕见的数据点组。通常，统计学习方法发现比数据集的罕见特征更容易确定频繁特征。这个问题在高维方面进一步放大。d维数据点的可能子空间数为<span><span class="MathJax_Preview">2^d</span><script type="math/tex">2^d</script></span>。其中，只有一小部分会暴露个别数据点的异常行为。在聚类的情况下，密集的子空间可以通过对数据点进行汇总统计分析而容易地确定。异常值检测并非如此，其中子空间需要以特定于各个数据点的方式进行明确探索。</p>
+<p>有效的异常值检测方法需要以综合方式搜索数据点和维度，以揭示最相关的异常值。这是因为维度的不同子集可能与不同的异常值有关，如图9.1所示。点和子空间探索的整合导致需要检查异常值分析的可能性进一步扩大。本章将探讨子空间探索的两种方法，尽管在书目注释中指出了其他许多方法。这些方法如下：</p>
+<ol>
+<li>基于网格的罕见子空间探索：在这种情况下，数据的稀少子空间在将数据离散化为网格状结构之后进行探索。</li>
+<li>随机子空间采样：在这种情况下，数据的子空间被采样以发现最相关的离群值。</li>
+</ol>
+<p>以下小节将详细讨论这些方法中的每一个。</p>
+<h3 id="931">9.3.1 基于网格的稀有子空间探索</h3>
+<p>预测异常值是通过在低维空间中发现具有异常低密度的局部数据区域来确定的。因为这是一种基于密度的方法，所以选择一种基于网格的技术。为此，需要识别非空网格的子空间，其密度非常低。这与用于子空间聚类方法（如CLIQUE）的定义是互补的。在这些情况下，报告了频繁的子空间。应该指出，频繁子空间的确定比确定罕见子空间要简单得多，因为在典型数据集中有更多的稀有子空间比密集子空间要多。这导致了可能性数量的组合式爆炸，并且诸如在CLIQUE中使用的那些级别算法不再是寻找罕见子空间的实际途径。所有这些模型的第一步是确定罕见的较低维度投影的适当统计定义。</p>
+<h4 id="9311">9.3.1.1 建模异常的下维投影</h4>
+<p>一个异常的低维投影是其中数据的密度特别低于平均值的投影。前一章中介绍的Z数的概念在这方面非常方便。第一步是离散数据。数据的每个属性被分成<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>个范围。这些范围是以等深度为基础构建的。换句话说，每个范围都包含记录的分数<span><span class="MathJax_Preview">f=\frac{1}{p}</span><script type="math/tex">f=\frac{1}{p}</script></span>。</p>
+<p>当选择不同维度的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>个不同间隔时，它创建维度为<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的网格单元。如果属性在统计上是独立的，那么这个网格单元格中数据记录的预期分数等于<span><span class="MathJax_Preview">f^k</span><script type="math/tex">f^k</script></span>。在实践中，数据不是统计独立的，因此，立方体中点的分布与期望值有很大不同。与数据中罕见区域相对应的偏差特别令人感兴趣。</p>
+<p>设<span><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span>是具有<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个记录的数据库，并且维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>。在前面提到的独立性假设下，<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维立方体中任何点的存在或不存在都是具有概率<span><span class="MathJax_Preview">f^k</span><script type="math/tex">f^k</script></span>的伯努利随机变量。
+在<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维立方体中点的期望数和标准偏差由<span><span class="MathJax_Preview">n\cdot f^k</span><script type="math/tex">n\cdot f^k</script></span>和<span><span class="MathJax_Preview">\sqrt{n\cdot f^k\cdot (1-f^k)}</span><script type="math/tex">\sqrt{n\cdot f^k\cdot (1-f^k)}</script></span>给出。当<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>的值很大时，立方体中数据点的数量是一个随机变量，用一个正态分布近似，具有上述平均值和标准偏差。</p>
+<p>设<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>表示<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>维空间中的立方体，<span><span class="MathJax_Preview">n_R</span><script type="math/tex">n_R</script></span>表示此立方体内的数据点数。那么，立方体<span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span>的稀疏系数<span><span class="MathJax_Preview">S(R)</span><script type="math/tex">S(R)</script></span>可以计算如下：<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">S(R)=\frac{n_R-n\cdot f^k}{\sqrt{n\cdot f^k\cdot (1-f^k)}}\tag{9.5}</span><script type="math/tex">S(R)=\frac{n_R-n\cdot f^k}{\sqrt{n\cdot f^k\cdot (1-f^k)}}\tag{9.5}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">S(R)=\frac{n_R-n\cdot f^k}{\sqrt{n\cdot f^k\cdot (1-f^k)}}\tag{9.5}</span><script type="math/tex">S(R)=\frac{n_R-n\cdot f^k}{\sqrt{n\cdot f^k\cdot (1-f^k)}}\tag{9.5}</script></span></script></span></p>
+<p>稀疏系数的负值表示立方体中数据点的存在显着低于预期。因为假设<span><span class="MathJax_Preview">n_R</span><script type="math/tex">n_R</script></span>符合正态分布，所以正态分布可以用来量化偏差的概率水平。这只是一种启发式近似，因为正态分布的假设在实践中通常是不正确的。</p>
+<h4 id="9312">9.3.1.2 网格搜索子空间异常值</h4>
+<p>如前所述，对于罕见的子空间发现而言，级别明智的算法并不实用。另一个挑战是低维预测没有提供关于维度组合的统计行为的信息，特别是在子空间分析的情况下。</p>
+<p>例如，考虑在考试中包含学生成绩的数据集。每个属性代表特定主题中的分数。某些科目的分数可能高度相关。例如，一个在概率论课程中取得好成绩的学生在统计学课程中可能也会取得好成绩。然而，找到一个在一个中取得好成绩的学生而不是另一个取得好成绩的学生是非常罕见的。这里的问题在于单个尺寸没有提供关于尺寸组合的信息。异常值的稀有性质使得这种不可预测的情况很普遍。缺乏对维度组合行为的可预测性，需要使用进化（遗传）算法来探索搜索空间。</p>
+<p>遗传算法模仿生物进化过程来解决优化问题。毕竟，进化是自然界最优化的实验，只有最适合的个体才能生存下来，从而导致更多的“最佳”生物体。相应地，优化问题的每个解决方案都可以伪装成演化系统中的个体。这个“个体”的适应性度量等于相应解的目标函数值。与个体竞争的人群是优化问题的其他解决方案组。一般来说，钳工生物更可能在人群中存活和繁殖。这对应于选择操作符。其他两种常用的操作符是交叉和变异。每个可行的解决方案都以字符串的形式编码，并被认为是解决方案的染色体表示。这也被称为编码。</p>
+<p>因此，每个字符串都是与特定目标函数值相关联的解决方案。在遗传算法中，这个目标函数值也被称为适应度函数。这里的想法是选择运算符应该偏好具有更好适应度的字符串（目标函数值）。这与爬山算法类似，不同之处在于遗传算法使用一组解决方案而不是单一解决方案。此外，遗传算法不是仅仅检查邻域（如爬山方法），而是使用交叉和变异算子来探索一个更复杂的邻域概念。</p>
+<p>因此，进化算法被设置为重复选择，交叉和变异的过程来改善适应度（目标）函数值。随着进化过程的进展，人群中的所有个体的健康状况通常都会有所改善，并且也会变得更加相似。串中特定位置的收敛定义为种群的预定义部分对该基因具有相同值的阶段。据说当字符串表示中的所有位置已经收敛时，人口已经收敛。</p>
+<p>那么，所有这些如何映射到寻找罕见模式呢？相关的局部子空间模式可以很容易地表示为长度为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>的字符串，其中<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>表示数据的维数。字符串中的每个位置表示等深度范围的索引。因此，字符串中的每个位置可以具有从1到<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>的任何值，其中<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>是离散化的粒度。它也可以取值为*（“不关心”），这表示该维未包含在与该字符串对应的子空间中。字符串的适合度基于前面讨论的稀疏系数。目标函数（稀疏系数）的高负值表示更大的适应性，因为正在寻找稀疏子空间。唯一需要注意的是子空间必须是非空的才能被认为是合适的。这是因为空子空间对于查找异常数据点没有用处。</p>
+<p>考虑一个四维问题，其中数据已经离散化为十个范围。然后，字符串的长度为4，每个位置可以取11个可能值中的一个（包括“*”）。因此，总共有114个字符串，每个字符串对应一个子空间。例如，字符串*2*6是第二维和第四维上的二维子空间。</p>
+<p>演化算法使用投影<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的维度作为输入参数。因此，对于<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维数据集，长度为<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>的字符串将包含k个指定的位置和<span><span class="MathJax_Preview">（d-k）</span><script type="math/tex">（d-k）</script></span>个“不关心”位置。可以使用前面讨论的稀疏系数来计算相应解的适应度。进化搜索技术从<span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>个随机解的总体开始，并迭代地使用选择，交叉和变异的过程在可能的投影空间上执行爬山，解重组和随机搜索的组合。根据上面讨论的标准，这个过程一直持续到人口聚集。</p>
+<p>在算法的每个阶段，<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>个最佳投影解决方案（大多数负稀疏系数）都会跟踪。在算法结束时，这些解决方案被报告为数据中的最佳投影 为选择，交叉和变异定义了以下运算符：</p>
+<ol>
+<li>
+<p>选择：该步骤实现了该方法所需的爬山，但与传统的爬山方法完全不同。一个解决方案的副本按照排名排列并在群体中偏向于更高等级的解决方案。这被称为等级选择。这导致偏向于更优化的解决方案。</p>
+</li>
+<li>
+<p>交叉：交叉技术是该算法成功的关键，因为它隐含地定义了子空间探索过程。一个解决方案是使用统一的两点交叉来创建重组儿童字符串。它可以被看作是结合两种解决方案的特性来创建两种新的重组解决方案的过程。传统的爬山方法只能测试相邻解决方案的单个字符串。重组交叉方法通过结合两个不同字符串的特征来检查更复杂的邻域，以产生两个新的邻域点。
+两点交叉机制的工作原理是随机确定一个字符串中的一个点，称为交叉点，并将这些段交换到该点的右侧。这相当于通过对来自两个解决方案的子空间进行抽样并将它们组合来创建两个新子空间。然而，这种盲目的重组过程可能会经常导致糟糕的解决方案。因此，定义了优化的交叉机制。在这个机制中，保证两个孩子的解决方案都对应一个可行的k维投影，并且孩子通常具有较高的适应度值。这是通过检查重组的不同可能性的子集并挑选其中的最佳组合来实现的。</p>
+</li>
+<li>
+<p>突变：在这种情况下，字符串中的随机位置以预定义的突变概率翻转。必须注意确保投影的维度在翻转过程之后不会改变。这与传统的爬山算法完全类似，只不过它是为了确保鲁棒性而对一群解决方案进行的。因此，尽管遗传算法试图达到与爬山相同的目标，但它们以不同的方式实现更好的解决方案。</p>
+</li>
+</ol>
+<p>终止时，该算法后跟一个后处理阶段。在后处理阶段，所有包含异常投影的数据点都被算法报告为异常值。该方法还提供相关预测，为数据点的异常行为提供因果关系（或内涵知识）。因此，这种方法在提供数据点应该被视为异常值的原因方面也具有高度的可解释性。</p>
+<h3 id="932">9.3.2 随机子空间采样</h3>
+<p>罕见子空间的确定是一项非常困难的任务，从前面讨论的不寻常遗传算法中可以明显看出。解决同一问题的另一种方法是探索许多可能的子空间并检查是否至少有一个包含异常值。一种这样众所周知的方法是特征装袋。广泛的方法是重复应用以下两个步骤：</p>
+<ol>
+<li>
+<p>随机地，在迭代<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>中从底层数据集中选择<span><span class="MathJax_Preview">(d/2)</span><script type="math/tex">(d/2)</script></span>和<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>特征以在第<span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>次迭代中创建数据集<span><span class="MathJax_Preview">D_t</span><script type="math/tex">D_t</script></span>。</p>
+</li>
+<li>
+<p>在数据集<span><span class="MathJax_Preview">D_t</span><script type="math/tex">D_t</script></span>上应用异常值检测算法<span><span class="MathJax_Preview">D_t</span><script type="math/tex">D_t</script></span>以创建得分向量<span><span class="MathJax_Preview">S_t</span><script type="math/tex">S_t</script></span>。</p>
+</li>
+</ol>
+<p>实际上，只要跨不同实例的分数具有可比性，任何算法<span><span class="MathJax_Preview">O_t</span><script type="math/tex">O_t</script></span>都可用于确定离群值分数。从这个角度来看，<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>算法是使用归因于其归一化分数的理想算法。在这个过程结束时，来自不同算法的异常值得分需要合并。两种不同的方法用于组合不同的子空间：</p>
+<ol>
+<li>
+<p>广度优先方法：由不同算法返回的数据点的排名被用于组合目的。在所有不同的算法执行中排名靠前的异常值排在第一位，其次是排名第二的异常值（重复删除）等等。由于特定等级内的异常点之间的平局打破，可能存在较小的变化。这相当于将所有执行过程中每个数据点的最佳排名用作最终异常值得分。</p>
+</li>
+<li>
+<p>累计和方法：总结不同算法执行中的异常值。在此基础上报告排名靠前的异常值。</p>
+</li>
+</ol>
+<p>乍一看，似乎随机子空间抽样方法并不试图优化子空间的发现以找到罕见的实例。然而，这里的想法是，即使使用启发式优化方法，也很难发现罕见的子空间。多个子空间抽样导致的鲁棒性显然是该方法非常理想的质量。这种方法在高维分析中很常见，其中对多个子空间进行采样以提高鲁棒性。这与集合分析领域有关，将在下一节讨论。</p>
+<h2 id="94">9.4 异常合奏</h2>
+<p>异常值分析中的几种算法（例如上一节讨论的高维方法）结合了异常值检测算法的不同执行得分。这些算法可以被看作不同形式的集合分析。下面列举了一些例子：</p>
+<ol>
+<li>
+<p><span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>中的参数调整：<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>算法中的参数调整（参见第8章第8.5.2.1节）可被视为一种集成分析的形式。这是因为该算法在邻域大小<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>的不同值上执行，并且选择每个数据点上的最高<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>得分。结果，构建了一个更强大的集合模型。实际上，异常值分析中的许多参数调整算法都可以看作集成方法。</p>
+</li>
+<li>
+<p>随机子空间抽样：随机子空间抽样方法将该方法应用于数据的多个随机子空间，以将离群值分数确定为原始分数的组合函数。即使是演化高维异常值检测算法也可以表示为具有最大化组合函数的系综。</p>
+</li>
+</ol>
+<p>集合分析是许多数据挖掘问题中的流行方法，例如聚类，分类和异常值检测。另一方面，集合分析在异常值分析的背景下并没有得到很好的研究。此外，集合分析在异常值分析的背景下尤为重要，因为异常值很罕见，并且可能出现过度拟合。一个典型的离群综合体包含许多不同的组成部分：</p>
+<ol>
+<li>
+<p>模型组件：这些是为了创建一个集合而集成的单个方法或算法。例如，随机子空间抽样方法结合了许多LOF算法，每个LOF算法应用于不同的子空间投影。</p>
+</li>
+<li>
+<p>标准化：不同的方法可能会在非常不同的尺度上创建异常值。在某些情况下，分数可能按升序排列。在其他情况下，分数可能会降序排列。在这种情况下，归一化对于有意义地组合分数很重要，因此来自不同分量的分数大致相当。</p>
+</li>
+<li>
+<p>模型组合：组合过程是指用于整合来自不同组件的异常值得分的方法。例如，在随机子空间采样中，报告不同总体分量的累积异常值分数。其他组合功能包括使用最高分或所有合唱团中得分最高的等级。据推测，较高的职位意味着更大的异常倾向。因此，最高排名与最高离群分数相似，只不过使用排名而不是原始分数。随机子空间采样也使用最高等级组合函数。</p>
+</li>
+</ol>
+<p>异常值集合方法可以分为不同类型，取决于不同部件之间的依赖关系和选择特定模型的过程。以下部分将研究一些常用方法。</p>
+<h3 id="941">9.4.1 按组件独立分类</h3>
+<p>这个分类检查组件是否独立开发。</p>
+<ol>
+<li>
+<p>在顺序集合中，一个给定的算法或一组算法被顺序地应用，以便该算法的未来应用受到以前的应用的影响。这种影响可以通过修改用于分析的基础数据或者根据算法的具体选择来实现。最终结果是异常算法组件的最后一个应用程序的加权组合或最终结果。顺序集合的典型场景是模型细化，其中连续的迭代继续改进特定的基础模型。</p>
+</li>
+<li>
+<p>在独立的合奏中，不同的算法或相同算法的不同实例化独立地应用于完整数据或部分数据。换句话说，各种集合组件独立于彼此执行的结果。</p>
+</li>
+</ol>
+<p>在本节中，将详细研究这两种类型的合奏。</p>
+<h4 id="9411">9.4.1.1 顺序合奏</h4>
+<p>在顺序集合中，将一个或多个异常值检测算法按顺序应用于全部或部分数据。这个想法是，特定算法执行的结果可能提供有助于改进未来执行的见解。因此，取决于方法，可以在顺序执行中改变数据集或算法。例如，考虑为离群检测创建聚类模型的情况。由于异常值会干扰强健的群集生成，因此可以将该方法应用于连续精化的数据集，然后通过在集成的早期迭代中获得的见解消除明显的异常值。通常，以后迭代中的异常值的质量会更好。这也有利于更强大的异常值检测模型。因此，该方法的顺序特性被用于连续细化。如果需要，这种方法可以应用固定次数或用于收敛到更强大的解决方案。图9.2提供了顺序集成方法的广泛框架。</p>
+<p><img alt="avatar" src="https://i.loli.net/2018/04/25/5ae07976e2fb0.png" />
+<center> 图9.2：顺序整体框架</center></p>
+<p>仔细检查图9.2中算法的执行情况是很有益的。在每次迭代中，基于先前执行的结果，可以在精炼的数据集上使用连续改进的算法。函数<span><span class="MathJax_Preview">f_j(\cdot)</span><script type="math/tex">f_j(\cdot)</script></span>用于创建数据的细化，这可能与数据子集选择，属性子集选择或通用数据转换方法相对应。上述描述的一般性确保了该方法的许多自然变化可以通过使用该集合来探索。例如，尽管图9.2的算法假设有许多不同的算法<span><span class="MathJax_Preview">A_1\cdots A_r</span><script type="math/tex">A_1\cdots A_r</script></span>是可用的，可以只选择其中的一个，并在连续修改数据时使用它。由于在解释中间结果方面缺乏可用的基础真值，所以序列集合在异常值分析中往往难以有效使用。在许多情况下，异常值分数的分布被用作这些见解的代表。</p>
+<h4 id="9412">9.4.1.2 独立合奏</h4>
+<p>在独立合奏中，算法的不同实例或数据的不同部分独立执行以用于异常值分析。或者，可以应用相同的算法，但是在随机算法的情况下可以使用不同的初始化，参数集或者甚至是随机种子。<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>方法，高维进化探索方法和前面讨论的随机子空间抽样方法都是独立合奏的例子。独立合奏组在离群分析中比连续合奏更常见。在这种情况下，组合功能需要仔细的标准化，特别是如果集合的不同组件是异构的。在图9.3的伪代码描述中提供了独立集成算法的通用描述。</p>
+<p><img alt="avatar" src="https://i.loli.net/2018/04/25/5ae07c16e99fd.png" />
+<center> 图9.3：独立的整体框架</center></p>
+<p>独立合奏的宽泛原则是，查看相同问题的不同方式提供更强大的结果，而不依赖于特定算法或数据集的特定假象。独立合奏通常用于离群值检测算法的参数调整。另一个应用是探索多个子空间的异常值分数，然后提供最佳结果。</p>
+<h3 id="942">9.4.2 按组成部分分类</h3>
+<p>集成分析算法的第二种分类方法是基于它们的组成部分。一般而言，这两种分类方法彼此正交，并且集合算法可以是由这两种分类形式创建的四种组合中的任何一种。</p>
+<p>考虑<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>参数调整的情况以及特征装袋方法中子空间采样的情况。在第一种情况下，每个模型都是具有不同参数选择的<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>模型的应用。因此，每个组件本身都可以被视为异常值分析模型。另一方面，在随机子空间方法中，相同的算法被应用于数据的不同选择（投影）。原则上，可以用这两种类型的组件创建一个集合，尽管这在实践中很少实现。因此，按组件独立性进行分类会导致以模型为中心的集合或以数据为中心的集合。</p>
+<h4 id="9421">9.4.2.1 以模型为中心的集合</h4>
+<p>以模型为中心的集合将来自构建在相同数据集上的不同模型的离群分数相结合。<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>参数调整的例子可以被认为是一个以模型为中心的整体。因此，它是基于一种形式或分类的独立集合，以另一种为基础的以模型为中心的集合。</p>
+<p>在集成算法中使用<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>的一个优点是分数大致可以相互比较。这对于任意算法可能不是这样。例如，如果使用原始<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>最近邻距离，则在使用选择离群值分数的最大值的组合函数时，参数调谐集合将总是倾向于较大的<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>值。这是因为不同部件之间的分数不能相互比较。因此，在组合过程中使用规范化至关重要。这是一个将在第9.4.3节中详细讨论的问题。</p>
+<h4 id="9422">9.4.2.2 以数据为中心的集成</h4>
+<p>在以数据为中心的整体中，探索数据的不同部分，样本或功能来执行分析。数据的功能可以包括数据样本（水平样本）或相关子空间（垂直样本）。前面部分的随机子空间抽样方法是以数据为中心的整体的一个例子。数据的更一般的功能也是可能的，尽管很少使用。数据的每个功能都可以提供关于数据的特定部分的不同见解。这是该方法成功的关键。应该指出的是，一个以数据为中心的集合也可以被认为是一个以模型为中心的集合，其中包含一个预处理阶段，该阶段将数据的特定功能作为模型的一部分。</p>
+<h3 id="943">9.4.3 规范化和组合</h3>
+<p>集合分析的最后阶段是将来自不同模型的分数汇总在一起。模型组合中的主要挑战来自不同模型之间的分数不可比较的情况。例如，在以模型为中心的集合中，如果模型的不同组件是异构的，则分数将不会彼此可比。<span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>最近邻居离群点分数与<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>分数无法比较。因此，规范化非常重要。在这种情况下，需要单变量极值分析将分数转换为标准化值。两种不同程度的复杂性的方法是可能的：</p>
+<ol>
+<li>
+<p>可以使用第8章第8.2.1节中的单变量极值分析方法。在这种情况下，可以为每个数据点计算Z值。虽然这样的模型使得正态分布近似，但它仍然比使用原始数值提供更好的分数。</p>
+</li>
+<li>
+<p>如果需要更精细的分数，并且关于离群点分数的“典型”分布有一些见解，那么可以使用第6章第5.6节中的混合模型来产生可概率解释的拟合值。书目注释提供了一种这样的方法的具体例子。</p>
+</li>
+</ol>
+<p>另一个问题是异常值分数的排序可能随着异常值检测算法（整体分量）的变化而变化。在一些算法中，高分表示更大的异常值，而其他算法则相反。在前一种情况下，计算离群值得分的Z值，而在后一种情况下，计算Z值的负值。这两个值是相同的规模，更容易比较。</p>
+<p>最后一步是组合来自不同合奏组件的分数。一般而言，组合的方法可能取决于集合的组成。例如，在顺序合奏中，最后的离群值可能是最后一次执行合奏的得分。然而，一般来说，来自不同组件的分数通过使用组合函数组合在一起。在下文中，假设的惯例是更高的（正常化的）分数表示更大的异常。两种组合功能特别常见。</p>
+<ol>
+<li>
+<p>最大功能：分数是来自不同组件的离群值分数的最大值。</p>
+</li>
+<li>
+<p>平均功能：得分是来自不同组件的离群值分数的平均值。</p>
+</li>
+</ol>
+<p><span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>方法和随机子空间抽样方法都使用最大函数，无论是离群值分数还是离群值分数的等级，以避免稀释不相关模型的分数。<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>研究论文[109]提供了一个有说服力的论点，说明为什么最大组合函数具有某些优点。虽然平均组合函数在发现许多集合组件中可发现的许多“简单”异常值时会更好，但最大函数在找到隐藏的异常值时会更好。虽然在给定的数据集中隐藏的离群值可能相对较少，但在异常值分析中，它们通常是最有趣的。一个常见的误解是，最大函数可能会高估绝对异常值分数，或者它可能会将正常点声明为异常值，因为它计算了许多总体组件的最大分数。这不是问题，因为离群分数是相对的，关键是要确保在每个数据点的相同数量的总体组分上计算最大值。绝对分数无关紧要，因为异常值分数仅在固定数据集的相对基础上可比，而不跨越多个数据集。如果需要，可以将组合分数标准化为零均值和单位方差。随机子空间集成方法已经实施[334]，具有基本的（基于秩序的）最大化和基于平均的组合功能。实验结果表明，最大和平均组合函数的相对性能是数据特定的。因此，取决于数据集，最大或平均分数可以取得更好的性能，但是在发现隐藏的离群值时，最大组合函数将始终更好。这是许多方法（如<span><span class="MathJax_Preview">LOF</span><script type="math/tex">LOF</script></span>）主张使用最大组合函数的原因。</p>
+<h2 id="95">9.5 异常工作：应用程序</h2>
+<p>异常值分析的应用非常多样化，并扩展到各种领域，如故障检测，入侵检测，财务欺诈和Web日志分析。这些应用程序中的许多应用程序都是针对复杂数据类型定义的，并且无法用本章介绍的方法完全解决。尽管如此，从后面几章的讨论中可以明显看出，可以为复杂的数据类型定义类似的方法。在许多情况下，其他数据类型可以转换为多维数据进行分析。</p>
+<h3 id="951">9.5.1 质量控制和故障检测</h3>
+<p>在质量控制和故障检测方面，异常值分析中出现了许多应用。其中一些应用通常需要简单的单变量极值分析，而其他应用则需要更复杂的方法。例如，制造过程中的异常可以通过评估每台机器每天产生的缺陷单元的数量来检测。当缺陷单元的数量太大时，它可能表示异常。单变量极值分析在这种情况下很有用。</p>
+<p>其他应用包括检测机器发动机中的故障，其中发动机测量被跟踪以确定故障。该系统可以连续监测各种参数，如转速，温度，压力，性能等。希望在发动机系统发生故障时立即检测到故障。这种应用通常是暂时的，异常值检测方法需要适应时间数据类型。这些方法将在第14章和第15章中详细讨论。</p>
+<h3 id="952">9.5.2 金融诈骗和异常事件</h3>
+<p>金融欺诈是异常值分析更常见的应用之一。在信用卡欺诈，保险交易和内幕交易的背景下，这种异常值可能会出现。信用卡公司维护与不同用户的卡交易相对应的数据。每个交易包含一组与用户标识符相对应的属性，花费的金额，地理位置等。从数据中确定欺诈交易是可取的。通常，欺诈交易通常显示为不寻常的属性组合。例如，特定地点的高频交易可能更具有欺诈意味。在这种情况下，子空间分析可能非常有用，因为跟踪的属性数量非常大，并且只有特定的属性子集可能与特定用户有关。类似的论点适用于相关申请的情况，例如保险欺诈。</p>
+<p>使用时间序列数据流可以捕捉更复杂的时间情景。一个例子就是金融市场的情况，即股票市值与不同股票的走势相对应。使用瞬时异常值检测方法可以检测突然移动或异常崩溃。或者，可以使用第2章讨论的数据可移植性方法将时间序列数据转换为多维数据。一个特殊的例子是小波变换。本章讨论的多维异常值检测技术可以应用于转换后的数据。</p>
+<h3 id="953">9.5.3 网络日志分析</h3>
+<p>通常以自动方式跟踪不同网站上的用户行为。这些行为中的异常可以通过使用Web日志分析来确定。例如，考虑用户试图进入受密码保护的网站。与大多数正常用户的操作相比，用户执行的操作顺序不同寻常。用于异常值检测的最有效方法是针对序列数据优化模型（请参阅第15章）。或者，可以使用小波方法的变体将序列数据转换为多维数据，如第2章所述。可以在转换后的多维数据上检测异常。</p>
+<h3 id="954">9.5.4 入侵检测应用程序</h3>
+<p>入侵对应于网络或计算机系统上的各种恶意安全违规。两种常见的情况是基于主机的入侵和基于网络的入侵。在基于主机的入侵中，分析计算机系统的操作系统调用日志以确定异常。这些应用程序通常是离散序列挖掘应用程序，与Web日志分析并无太大差别。在基于网络的入侵中，数据值之间的时间关系要弱得多，并且可以将数据视为多维数据记录流。这样的应用程序需要串流异常值检测方法，详见第12章。</p>
+<h3 id="955">9.5.5 生物和医疗应用</h3>
+<p>生物数据中产生的大多数数据类型都是复杂的数据类型。这些数据类型将在后面的章节中讨论。许多诊断工具（如传感器数据和医疗成像）产生一种或多种复杂的数据类型。一些例子如下：</p>
+<ol>
+<li>
+<p>许多常用于急诊室的诊断工具，例如心电图（ECG），都是时间传感器数据。这些读数中不寻常的形状可以用来做出预测。</p>
+</li>
+<li>
+<p>医学成像应用程序能够存储各种组织的二维和三维空间表示。例子包括磁共振成像（MRI）和计算机化轴向断层扫描（CAT）扫描。这些表示可用于确定异常情况。</p>
+</li>
+<li>
+<p>遗传数据以离散序列的形式表示。不寻常的突变是特定疾病的指征，其确定可用于诊断和研究目的。</p>
+</li>
+</ol>
+<p>上述大多数应用都涉及复杂的数据类型，本书后面会详细讨论。</p>
+<h3 id="956">9.5.6 地球科学应用</h3>
+<p>异常检测可用于检测地球科学应用中的异常情况，例如环境中温度和压力的异常变化。这些变化可以用来探测气候的异常变化，或者重要事件，例如飓风的探测。另一个有趣的应用是确定土地覆盖异常，即利用异常值分析方法确定森林覆盖格局中有趣的变化。这种应用通常需要使用空间离群值检测方法，这在第16章中讨论。</p>
+<h2 id="96">9.6 总结</h2>
+<p>异常值检测方法可以通过使用类似的用于聚类分析的方法来推广到分类数据。通常，它需要改变概率模型的混合模型，以及基于距离模型的距离函数的改变。高维异常检测是一种特别困难的情况，因为大量不相关的属性会干扰异常检测过程。因此需要设计子空间方法。许多子空间探索方法使用来自多个数据视图的洞察来确定离群值。大多数高维方法是集合方法。集成方法可以应用于高维场景以外的应用，如参数调整。异常值分析在不同领域有很多应用，例如故障检测，财务欺诈，网络日志分析，医疗应用和地球科学。这些应用程序中的许多应用程序都基于复杂的数据类型，这些将在后面的章节中讨论。</p>
+<h2 id="97">9.7 书目注释</h2>
+<p>[518]中提出了分类数据异常值检测的混合模型算法。该算法还能够使用定量和分类属性之间的联合混合模型来处理混合数据类型。在第一章讨论的任何分类数据聚类方法。7也可以应用于异常值分析。流行的聚类算法包括k模式[135,278]，<span><span class="MathJax_Preview">ROCK</span><script type="math/tex">ROCK</script></span> [238]，<span><span class="MathJax_Preview">CACTUS</span><script type="math/tex">CACTUS</script></span> [220]，<span><span class="MathJax_Preview">LIMBO</span><script type="math/tex">LIMBO</script></span> [75]和<span><span class="MathJax_Preview">STIRR</span><script type="math/tex">STIRR</script></span> [229]。基于距离的异常值检测方法需要重新设计距离函数。分类数据的距离函数在[104，182]中讨论。特别是，[104]中的工作在异常值检测问题的范围内探讨了分类距离函数。关于分类数据的异常值检测算法的详细描述可以在[5]中找到。</p>
+<p>子空间孤立点检测探索异常值分析的有效性问题，并在[46]中首次提出。在高维数据的背景下，有两个不同的研究线，其中一个研究高维异常值检测的效率[66,501]，另一个研究高维度有效性的更基本问题异常值检测[46]。Aggarwal和Yu [46]讨论了噪声和不相关维度的掩蔽行为。基于效率的方法通常设计更有效的索引，这些索引调整为确定最近的邻居，并更有效地修剪基于距离的算法。本书讨论的随机子空间抽样方法在[334]中提出。[365]中提出了隔离林方法。[396，397]中提出了许多子空间异常值探测的排序方法。在这些方法中，异常值是在数据的多个子空间中确定的。不同的子空间可以提供关于不同异常值或相同异常值的信息。因此，目标是以强大的方式组合来自这些不同子空间的信息，以报告最终的异常值集合。在[396]中提出的OUTRES算法使用递归子空间探索来确定与特定数据点相关的所有子空间。来自这些不同子空间的异常值得分被组合以提供最终值。[397]中提出了一种更近期的用于子空间异常值检测的多个数据视图的方法。</p>
+<p>最近，在动态数据和数据流的情况下也研究了异常值检测问题。<span><span class="MathJax_Preview">SPOT</span><script type="math/tex">SPOT</script></span>方法是在[546]中提出的，它能够从高维数据流中确定预测的异常值。此方法采用基于窗口的时间模型和衰减单元格摘要来捕获数据流中的统计数据。一组顶部稀疏子空间通过各种有监督和无监督的学习过程获得。这些用于检测预测的异常值。采用多目标遗传算法从训练数据中找出外部子空间。高维异常值检测问题也已扩展到其他应用特定场景，如天文数据[265]和交易数据[264]。[5]中可以找到关于离群值检测的高维情况的详细描述。</p>
+<p>在异常值分析的背景下，异常值集合的问题一般较少发展，而不是诸如聚类和分类等问题。许多异常集合方法，如%LOF%方法[109]，没有在其算法中明确陈述集成组件。得分归一化的问题已经在[223]中进行了研究，并且可以用于组合集合。最近的立场文件已经将异常值合奏的概念正式化，并定义了不同类别的异常值合奏[24]。由于异常值检测问题的评估方式类似于分类问题，因此大多数分类集成算法（例如袋装/二次采样的不同变体）至少可以从基准角度改进异常值检测。尽管结果在许多情况下确实反映了异常值的改善，但应谨慎解读。许多最近的子空间异常值检测方法[46,396,397]也可以被认为是整体方法。关于高维异常值检测[46]的第一个算法也可以被认为是一个集合方法。有关异常值分析的不同应用的详细描述可以在[5]的最后一章中找到。</p>
+<h2 id="98">9.8 习题</h2>
+<p>1.假设算法A设计用于数字数据中的异常值检测，而算法B设计用于分类数据中的异常值检测。说明如何使用这些算法在混合属性数据集中执行异常值检测。</p>
+<p>2.使用Mahalanobis距离设计用于分类异常值检测的算法。这种方法的优点是什么？</p>
+<p>3.使用基于匹配的相似度实现基于距离的离群值检测算法。</p>
+<p>4.设计一种使用数据的任意子空间而不是轴平行数据的特征装袋方法。显示如何以数据分布敏感的方式有效地采样任意子空间。</p>
+<p>5.在离群值检测中比较和比较多视图聚类与子空间合奏。</p>
+<p>6.实施您选择的任何两种异常值检测算法。将分数转换为Z数字。使用最大函数组合分数。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../8/" title="第8章 异常值分析" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                第8章 异常值分析
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../10/" title="第10章 数据分类" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                第10章 数据分类
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2018 NUDT DM-Trans Group
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      
+        
+        
+          
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../assets/javascripts/lunr/lunr.jp.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
