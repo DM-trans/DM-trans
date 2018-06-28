@@ -1111,7 +1111,7 @@
                 
                 
                 <h1 id="16">16 空间数据挖掘</h1>
-<!--本章由张宇翻译-->
+<!--本章由张宇翻译，徐樱笑修改-->
 
 <blockquote>
 <p>“时间和空间是我们思考的模式，而不是我们生活的条件。” - 艾尔伯特爱因斯坦</p>
@@ -1180,7 +1180,7 @@
 <h3 id="1622">16.2.2 小波空间到多维变换</h3>
 <p>对于其中行为属性值在整个空间域内变化的气象数据等数据类型，基于轮廓的形状可能无法用于分析。 因此，在这些情况下，时间序列转换的形状是不合适的。
 小波是将时间序列数据转换为多维数据的流行方法。 空间数据与时间序列数据有许多相似之处。时间序列数据具有单个上下文属性（时间），沿着该上下文属性（时间），行为属性（例如，温度）可以呈现平滑变化。相应地，空间数据具有两个上下文属性（空间坐标），沿着该上下文属性（空间坐标），行为属性（例如，海面温度）可以呈现平滑变化。由于这种类比，有可能通过适当修改将基于小波的方法概括为多个上下文属性的情况。
-假设空间数据以尺寸为q×q的二维网格的形式表示。因此，网格的每个坐标都包含行为属性的一个实例，例如温度。正如在第三节中讨论的时间序列案例。章节2.4.4.1。如图2所示，差分操作通过以时间序列以分层方式连续分割而在时间序列的连续分段上应用。相应的基向量在相关位置处具有+1和-1。二维情况是完全类似的，其中空间网格的连续区域被用于连续的划分。这些分区沿着不同的轴交替进行。相应的基本向量是尺寸为q×q的二维矩阵，用于调节差分运算的执行方式。图16.5提供了一个空间数据集中海面温度如何转换为多维表示的例子。这将导致总共q2小波系数，尽管只有大系数需要保留用于分析。有关空间小波系数生成的更详细描述可参见第2章的2.4.4.1小节上述描述是针对单个行为属性和多个上下文属性（空间坐标）的情况。多个行为属性也可以通过分别为每个行为属性执行分解来解决，并且为每个行为属性创建一组单独的维度。</p>
+假设空间数据以尺寸为<span><span class="MathJax_Preview">q×q</span><script type="math/tex">q×q</script></span>的二维网格的形式表示。因此，网格的每个坐标都包含行为属性的一个实例，例如温度。正如在第三节中讨论的时间序列案例。章节2.4.4.1。如图2所示，差分操作通过以时间序列以分层方式连续分割而在时间序列的连续分段上应用。相应的基向量在相关位置处具有+1和-1。二维情况是完全类似的，其中空间网格的连续区域被用于连续的划分。这些分区沿着不同的轴交替进行。相应的基本向量是尺寸为q×q的二维矩阵，用于调节差分运算的执行方式。图16.5提供了一个空间数据集中海面温度如何转换为多维表示的例子。这将导致总共<span><span class="MathJax_Preview">q^2</span><script type="math/tex">q^2</script></span>小波系数，尽管只有大系数需要保留用于分析。有关空间小波系数生成的更详细描述可参见第2章的2.4.4.1小节上述描述是针对单个行为属性和多个上下文属性（空间坐标）的情况。多个行为属性也可以通过分别为每个行为属性执行分解来解决，并且为每个行为属性创建一组单独的维度。</p>
 <p>像时间序列小波一样，空间小波是一个多分辨率表示。系数表示不同空间粒度级别的趋势。高层次系数代表较大空间区域的趋势，而较低层次系数代表较小空间区域的趋势。因此，这种方法非常强大，并且对于许多空间应用具有广泛的可用性。空间小波可以有效地用于许多图像聚类和分类应用，其中（上下文）空间数据可以被转换为（非上下文）多维数据。一旦转换完成，几乎所有在Chaps中讨论的多维方法。这种表示可以使用4到11。这种方法打开了使用各种多维数据挖掘方法的大门。</p>
 <p><center>
 <img alt="16.5" src="http://p6atp7tts.bkt.clouddn.com/16.5.gif" />
@@ -1220,10 +1220,24 @@
 </ol>
 <p>前述的聚类算法仅取决于距离函数的选择。 第三节讨论的任何时间系列措施。 3.4.1小节中的理论可以被使用，取决于匹配中允许的误差容限或失真（变形）的期望程度。 另一个重要问题是通过不同形状的旋转来调整距离函数。下面以欧几里得距离为例，虽然一般原则可以应用于任何距离函数。
 从图16.4的例子中可以明显看出，形状的旋转导致了通过使用形状的质心到形状的轮廓的距离而产生的时间序列的线性循环移位。对于由<span><span class="MathJax_Preview">a_1a_2...a_n</span><script type="math/tex">a_1a_2...a_n</script></span>表示的长度为n的时间序列，由<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>单位进行的循环翻译导致时间序列<span><span class="MathJax_Preview">a_{i+1} a_{i+2}...a_n a_1 a_2...a_i</span><script type="math/tex">a_{i+1} a_{i+2}...a_n a_1 a_2...a_i</script></span>。 然后，两个时间序列<span><span class="MathJax_Preview">T_1=a_1...a_n</span><script type="math/tex">T_1=a_1...a_n</script></span>和<span><span class="MathJax_Preview">T_2=b_1...b_n</span><script type="math/tex">T_2=b_1...b_n</script></span>之间的旋转不变欧几里得距离<span><span class="MathJax_Preview">RIDist（T_1，T_2）</span><script type="math/tex">RIDist（T_1，T_2）</script></span>由<span><span class="MathJax_Preview">T_1</span><script type="math/tex">T_1</script></span>与<span><span class="MathJax_Preview">T_2</span><script type="math/tex">T_2</script></span>的所有可能的旋转平移之间的最小距离给出（反之亦然）。因此，旋转不变距离表示如下：</p>
-<p><span><span class="MathJax_Preview"><span><span class="MathJax_Preview">RIDist（T_1，T_2）=min^n_{i=1}\Sigma^n_{j=1} (a_j-b_{1+(j+1)mod_n})^2</span><script type="math/tex">RIDist（T_1，T_2）=min^n_{i=1}\Sigma^n_{j=1} (a_j-b_{1+(j+1)mod_n})^2</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">RIDist（T_1，T_2）=min^n_{i=1}\Sigma^n_{j=1} (a_j-b_{1+(j+1)mod_n})^2</span><script type="math/tex">RIDist（T_1，T_2）=min^n_{i=1}\Sigma^n_{j=1} (a_j-b_{1+(j+1)mod_n})^2</script></span></script></span>
-通常，如果时间序列T2以i为单位的循环移位由T2i表示，则使用任何距离函数<span><span class="MathJax_Preview">Dist（T_1，T_2）</span><script type="math/tex">Dist（T_1，T_2）</script></span>的旋转不变距离可以表示如下：
-<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">RIDist（T_1，T_2）=min^n_{i=1}Dist（T_1，T^i_2）\tag{16.1}</span><script type="math/tex">RIDist（T_1，T_2）=min^n_{i=1}Dist（T_1，T^i_2）\tag{16.1}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">RIDist（T_1，T_2）=min^n_{i=1}Dist（T_1，T^i_2）\tag{16.1}</span><script type="math/tex">RIDist（T_1，T_2）=min^n_{i=1}Dist（T_1，T^i_2）\tag{16.1}</script></span></script></span>
-需要注意的是，时间序列的反转对应于底层形状的镜像。因此，通过将距离函数中的序列逆转（及其旋转）并入，也可以使用这种方法来处理镜像。这将使计算增加2倍。所使用的距离函数的精确选择是高度专用的，取决于是需要旋转还是镜像转换。</p>
+<div>
+<div class="MathJax_Preview">
+RIDist（T_1，T_2）=min^n_{i=1}\Sigma^n_{j=1} (a_j-b_{1+(j+1)mod_n})^2
+</div>
+<script type="math/tex; mode=display">
+RIDist（T_1，T_2）=min^n_{i=1}\Sigma^n_{j=1} (a_j-b_{1+(j+1)mod_n})^2
+</script>
+</div>
+<p>通常，如果时间序列T2以i为单位的循环移位由T2i表示，则使用任何距离函数<span><span class="MathJax_Preview">Dist（T_1，T_2）</span><script type="math/tex">Dist（T_1，T_2）</script></span>的旋转不变距离可以表示如下：</p>
+<div>
+<div class="MathJax_Preview">
+RIDist（T_1，T_2）=min^n_{i=1}Dist（T_1，T^i_2）\tag{16.1}
+</div>
+<script type="math/tex; mode=display">
+RIDist（T_1，T_2）=min^n_{i=1}Dist（T_1，T^i_2）\tag{16.1}
+</script>
+</div>
+<p>需要注意的是，时间序列的反转对应于底层形状的镜像。因此，通过将距离函数中的序列逆转（及其旋转）并入，也可以使用这种方法来处理镜像。这将使计算增加2倍。所使用的距离函数的精确选择是高度专用的，取决于是需要旋转还是镜像转换。</p>
 <h3 id="1625">16.2.5 离群值检测</h3>
 <p>在空间数据的情况下，异常值可以是点异常值和异常值。这两种异常值也会在时间序列数据中遇到，并且会以离散序列出现。 在空间数据的情况下，这两种异常值定义如下：</p>
 <ol>
@@ -1254,8 +1268,10 @@
 或者，可以将<span><span class="MathJax_Preview">g(o)</span><script type="math/tex">g(o)</script></span>计算为<span><span class="MathJax_Preview">f(o_i)</span><script type="math/tex">f(o_i)</script></span>的周围值的中值，以减小极值的影响。然后，对于每个数据对象<span><span class="MathJax_Preview">o</span><script type="math/tex">o</script></span>，<span><span class="MathJax_Preview">f(o)</span><script type="math/tex">f(o)</script></span>,<span><span class="MathJax_Preview">-g(o)</span><script type="math/tex">-g(o)</script></span>的值表示与预测值的偏差。这些偏差中的极值可以使用多种方法计算单变量极值分析。这些在第8章讨论。由此法产生的极值将被报告为异常值。</p>
 <p><strong>基于图形的方法</strong>
 在基于图的方法中，空间邻近度利用空间区域的图表表示中的节点之间的链接来建模。因此，节点与行为属性相关联，并且相邻节点之间的行为属性的强烈变化被识别为异常值。当单个节点不与点特定坐标相关联时，基于图形的方法特别有用，但它们可能对应于任意形状的区域。在这种情况下，节点之间的链接对应于不同区域之间的邻域关系。基于图的方法以更一般的方式定义空间关系，因为语义关系也可以用来定义邻域。例如，如果两个对象位于相同的语义位置（如建筑物，餐馆或办公室），则可以通过边连接两个对象。在许多应用中，可以基于邻近关系的强度对链路进行加权。例如，考虑一种疾病暴发应用，其中空间对象对应于县区域。在这种情况下，链接的强度可以对应于两个区域之间的边界的长度。多维数据是一种特殊情况，其中链接对应于基于距离的邻近度。因此，图表示允许对上下文属性进行更一般的解释。
-设S是给定节点i的邻居集合。然后，可以使用空间连续性的概念来创建基于其（空间）邻居的预测值的行为属性的预测值。我和它的邻居之间的联系的强度也可以用来计算预测，作为k个最近空间邻居的行为属性的加权平均值或中间值。对于具有行为属性值<span><span class="MathJax_Preview">f(o)</span><script type="math/tex">f(o)</script></span>的给定空间对象<span><span class="MathJax_Preview">o</span><script type="math/tex">o</script></span>，让<span><span class="MathJax_Preview">o_1...o_k</span><script type="math/tex">o_1...o_k</script></span>可以是它的k个链接的邻居根据关系图。令链接<span><span class="MathJax_Preview">(o，oi)</span><script type="math/tex">(o，oi)</script></span>的权重为<span><span class="MathJax_Preview">w(o，oi)</span><script type="math/tex">w(o，oi)</script></span>。然后，可以使用基于联动的加权平均值来计算对象<span><span class="MathJax_Preview">o</span><script type="math/tex">o</script></span>的预测值<span><span class="MathJax_Preview">g(o)</span><script type="math/tex">g(o)</script></span>。
-<span><span class="MathJax_Preview"><span><span class="MathJax_Preview">g_{(o)}=\frac{\sum^k_{i=1}w(o，oi)\cdot f(o_i)}{\sum^k_{i=1}w(o，oi)}</span><script type="math/tex">g_{(o)}=\frac{\sum^k_{i=1}w(o，oi)\cdot f(o_i)}{\sum^k_{i=1}w(o，oi)}</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">g_{(o)}=\frac{\sum^k_{i=1}w(o，oi)\cdot f(o_i)}{\sum^k_{i=1}w(o，oi)}</span><script type="math/tex">g_{(o)}=\frac{\sum^k_{i=1}w(o，oi)\cdot f(o_i)}{\sum^k_{i=1}w(o，oi)}</script></span></script></span>
+设S是给定节点i的邻居集合。然后，可以使用空间连续性的概念来创建基于其（空间）邻居的预测值的行为属性的预测值。我和它的邻居之间的联系的强度也可以用来计算预测，作为k个最近空间邻居的行为属性的加权平均值或中间值。对于具有行为属性值<span><span class="MathJax_Preview">f(o)</span><script type="math/tex">f(o)</script></span>的给定空间对象<span><span class="MathJax_Preview">o</span><script type="math/tex">o</script></span>，让<span><span class="MathJax_Preview">o_1...o_k</span><script type="math/tex">o_1...o_k</script></span>可以是它的k个链接的邻居根据关系图。令链接<span><span class="MathJax_Preview">(o，oi)</span><script type="math/tex">(o，oi)</script></span>的权重为<span><span class="MathJax_Preview">w(o，oi)</span><script type="math/tex">w(o，oi)</script></span>。然后，可以使用基于联动的加权平均值来计算对象<span><span class="MathJax_Preview">o</span><script type="math/tex">o</script></span>的预测值<span><span class="MathJax_Preview">g(o)</span><script type="math/tex">g(o)</script></span>。</p>
+<p>$$
+g_{(o)}=\frac{\sum^k_{i=1}w(o，oi)\cdot f(o_i)}{\sum^k_{i=1}w(o，oi)}
+$$
 或者，可以将相邻值的加权中值用于预测目的。由于行为属性的真实值是已知的，因此可以用它来模拟行为属性与其预测值的偏差。与多维方法一样，<span><span class="MathJax_Preview">f(o)-g(o)</span><script type="math/tex">f(o)-g(o)</script></span>的值表示与预测值的偏差。 极值分析可用于这些偏差以确定空间异常值。这个过程与多维情况下的过程相同。 具有高标准化偏差值的节点可能被报告为异常值。</p>
 <h4 id="16252">16.2.5.2 异常形状</h4>
 <p>基于形状的异常值在空间数据中相对容易确定，使用在16.2.1小节多次讨论的从空间数据到时间序列的转换。转换完成后，可以将 k-近邻 居离群值检测器应用于所得到的时间序列。到第k个最近的邻居的距离可以被报告为异常值分数。在计算异常值时，需要记住一些关键问题。</p>
@@ -1303,7 +1319,7 @@
 <p>轨迹数据中的两种分析类似于时间序列数据。这并不奇怪，因为轨迹数据是时间序列数据的一种形式。</p>
 <h3 id="1631">16.3.1轨迹的等价性和多元时间序列</h3>
 <p>轨迹数据是多元时间序列数据的一种形式。对于二维轨迹来说，轨迹的X坐标和Y坐标构成了多元系列的两个分量。三维轨迹将导致三元系列。由于多变量时间序列和轨迹数据之间的等价性，可以在任一方向执行转换以便于使用为每个域设计的方法。例如，轨迹挖掘方法可以用于非空间应用。特别是，任何n维多变量时间序列都可以转换为轨迹数据。在多变量时间数据中，通常使用多个传感器同时测量不同的行为属性。考虑英特尔研究伯克利传感器数据[556]的例子，该数据在英特尔伯克利实验室随着时间的推移测量不同的行为属性，例如温度，压力和电压。例如，温度和电压传感器在同一段时间内的行为如图16.7a，b所示。 
-通过消除公共时间属性或创建包含时间和其他两个行为属性的三维轨迹，可以显示两个行为属性的变化。 这些轨迹的例子分别在图16.7c，d中示出。图16.7d说明了这些轨迹中最通用的轨迹。 该图显示了所有三个属性的同时变化。通常，具有n个行为属性的多变量时间序列可以映射到<span><span class="MathJax_Preview">(n+1)</span><script type="math/tex">(n+1)</script></span>维的轨迹。大多数轨迹分析方法都是在2维或3维的假设下设计的，尽管在需要时它们可以推广到n维。</p>
+通过消除公共时间属性或创建包含时间和其他两个行为属性的三维轨迹，可以显示两个行为属性的变化。 这些轨迹的例子分别在图16.7c，d中示出。图16.7d说明了这些轨迹中最通用的轨迹。 该图显示了所有三个属性的同时变化。通常，具有<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>个行为属性的多变量时间序列可以映射到<span><span class="MathJax_Preview">(n+1)</span><script type="math/tex">(n+1)</script></span>维的轨迹。大多数轨迹分析方法都是在2维或3维的假设下设计的，尽管在需要时它们可以推广到<span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span>维。</p>
 <h3 id="1632">16.3.2 将轨迹转换为多维数据</h3>
 <p>由于轨迹和多变量时间序列之间的等价性，轨迹也可以转换为多维数据。这是通过对轨迹的时间序列表示使用小波变换来实现的。时间序列的小波变换在2.4.4.1小节介绍过，在这种情况下，时间序列是多变量的，因此有两个行为属性。每个这些行为属性的小波表示都是独立提取的。换句话说，X坐标上的时间序列被转换成小波表示，Y坐标上的时间序列也被转换成小波表示。这产生了两个多维表示，其中一个表示X坐标，另一个表示Y坐标。将这两个表示中的维度组合起来，为轨迹创建单个更高维表示。如果需要，只有较大的小波系数可以被保留以降低维度。将轨迹数据转换为多维数据是使用大量多维方法进行轨迹分析的有效方法。</p>
 <p><center>
@@ -1343,20 +1359,26 @@
 <h3 id="1634">16.3.4 轨迹聚类</h3>
 <p>在下文中，将提供对不同种类的轨迹聚类算法的详细讨论。 由于两个问题之间的密切关系，轨迹聚类算法自然与轨迹模式挖掘相关。 轨迹聚类方法有两种类型。</p>
 <ol>
-<li>第一种类型的方法使用传统的聚类算法，使用轨迹之间的距离函数。一旦设计了距离函数，就可以使用许多不同类型的算法，例如k-中位数或基于图形的方法。</li>
+<li>第一种类型的方法使用传统的聚类算法，使用轨迹之间的距离函数。一旦设计了距离函数，就可以使用许多不同类型的算法，例如 k-medoids或基于图形的方法。</li>
 <li>第二种类型的方法使用数据转换和离散将轨迹转换为离散符号序列。可以将不同类型的转换应用于轨迹，例如分段提取或基于网格的离散化。转换之后，将模式挖掘算法应用于所提取的符号序列。</li>
 </ol>
 <p>另外，还为轨迹聚类设计了许多其他临时方法。 本节将只关注系统技术。 书目注释包含指向特定方法的指针。</p>
 <h4 id="16341">16.3.4.1 计算轨迹之间的相似性</h4>
 <p>轨迹聚类的一个关键方面是能够计算不同轨迹之间的相似性。乍一看，由于轨迹分析的空间和时间方面，相似函数计算似乎是一项艰巨的任务。然而，在实践中，轨迹之间的相似性计算与时间序列数据的相似性计算没有很大不同。正如在16.3节中所讨论的那样，轨迹数据相当于多元时间序列数据。第3章中讨论了几种动态编程算法。用于单变量时间序列数据中的相似性计算。这些算法可以推广到多变量的情况。在下文中，将讨论动态时间规整算法到多变量情况的扩展。类似的方法可以用于其他动态编程方法。建议读者重读第3章3.4.1.3小节在进一步阅读之前动态时间翘曲。
 首先，简要回顾关于单变量时间序列距离的讨论。令<span><span class="MathJax_Preview">DTW(i，j)</span><script type="math/tex">DTW(i，j)</script></span>分别为两个单变量时间序列<span><span class="MathJax_Preview">\overline{X} =(x_1 ... x_m)</span><script type="math/tex">\overline{X} =(x_1 ... x_m)</script></span>和<span><span class="MathJax_Preview">\overline{Y} =(y_1 ... y_n)</span><script type="math/tex">\overline{Y} =(y_1 ... y_n)</script></span>的第一个和第一个j元素之间的最佳距离。然后，递归地定义<span><span class="MathJax_Preview">DT W(i，j)</span><script type="math/tex">DT W(i，j)</script></span>的值如下：</p>
+<p>$$
+ DTW(i, j)= distance(x_i, y_j)+min \begin{cases} DT W (i, j − 1), &amp; \text {repeat <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>} \ DT W (i − 1, j), &amp; \text{repeat <span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>} \ DT W (i − 1, j-1), &amp; \text{otherwise} \end{cases} \tag{16.2} 
+$$
+在二维轨迹的情况下，每个轨迹都有一个多变量时间序列，对应于每个轨迹的两个坐标。 因此，第一轨迹具有对应于<span><span class="MathJax_Preview">\overline{X1} =（x1_1 ... x1_m）和\overline{X2} =(x2_1 ... x2_m)</span><script type="math/tex">\overline{X1} =（x1_1 ... x1_m）和\overline{X2} =(x2_1 ... x2_m)</script></span>的两个坐标。第二轨迹具有两个坐标，相对应的<span><span class="MathJax_Preview">\overline{Y1} =(y1_1 ... y1_m)</span><script type="math/tex">\overline{Y1} =(y1_1 ... y1_m)</script></span>和<span><span class="MathJax_Preview">\overline{Y2} =（y2_1 ... y2_m）</span><script type="math/tex">\overline{Y2} =（y2_1 ... y2_m）</script></span>令<span><span class="MathJax_Preview">\overline{Xi} =(x1_i，x2_i)</span><script type="math/tex">\overline{Xi} =(x1_i，x2_i)</script></span>表示第i个时间戳处的第一个轨迹的二维位置，并且令<span><span class="MathJax_Preview">\overline{Y_j} =(y1_j，y2)</span><script type="math/tex">\overline{Y_j} =(y1_j，y2)</script></span>表示第j个时间戳处的第二个轨迹的二维位置。然后，与单变量时间序列数据的唯一区别在于用二维距离代替递归中的一维距离。 因此，修改后的多维<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>递归$ MDTW(i，j)$如下：</p>
 <div>
-<div class="MathJax_Preview"> DTW(i, j)= distance(x_i, y_j)+min \begin{cases} DT W (i, j − 1), &amp; \text {repeat $x_i$} \\ DT W (i − 1, j), &amp; \text{repeat $y_i$} \\ DT W (i − 1, j-1), &amp; \text{otherwise} \end{cases} \tag{16.2} </div>
-<script type="math/tex; mode=display"> DTW(i, j)= distance(x_i, y_j)+min \begin{cases} DT W (i, j − 1), & \text {repeat $x_i$} \\ DT W (i − 1, j), & \text{repeat $y_i$} \\ DT W (i − 1, j-1), & \text{otherwise} \end{cases} \tag{16.2} </script>
+<div class="MathJax_Preview">
+ M DTW(i, j)= distance(\overline{X_i}, \overline{Y_j})+min \begin{cases} M DTW (i, j − 1), &amp; \text {repeat $\overline{X_i}$} \\ M DTW (i − 1, j), &amp; \text{repeat $\overline{Y_i}$} \\ M DTW (i − 1, j-1), &amp; \text{otherwise} \end{cases} \tag{16.3} 
 </div>
-<p>在二维轨迹的情况下，每个轨迹都有一个多变量时间序列，对应于每个轨迹的两个坐标。 因此，第一轨迹具有对应于<span><span class="MathJax_Preview">\overline{X1} =（x1_1 ... x1_m）和\overline{X2} =(x2_1 ... x2_m)</span><script type="math/tex">\overline{X1} =（x1_1 ... x1_m）和\overline{X2} =(x2_1 ... x2_m)</script></span>的两个坐标。第二轨迹具有两个坐标，相对应的<span><span class="MathJax_Preview">\overline{Y1} =(y1_1 ... y1_m)</span><script type="math/tex">\overline{Y1} =(y1_1 ... y1_m)</script></span>和<span><span class="MathJax_Preview">\overline{Y2} =（y2_1 ... y2_m）</span><script type="math/tex">\overline{Y2} =（y2_1 ... y2_m）</script></span>令<span><span class="MathJax_Preview">\overline{Xi} =(x1_i，x2_i)</span><script type="math/tex">\overline{Xi} =(x1_i，x2_i)</script></span>表示第i个时间戳处的第一个轨迹的二维位置，并且令<span><span class="MathJax_Preview">\overline{Y_j} =(y1_j，y2)</span><script type="math/tex">\overline{Y_j} =(y1_j，y2)</script></span>表示第j个时间戳处的第二个轨迹的二维位置。然后，与单变量时间序列数据的唯一区别在于用二维距离代替递归中的一维距离。 因此，修改后的多维<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>递归$ MDTW(i，j)$如下：</p>
-<p>$$ M DTW(i, j)= distance(\overline{X_i}, \overline{Y_j})+min \begin{cases} M DTW (i, j − 1), &amp; \text {repeat <span><span class="MathJax_Preview">\overline{X_i}</span><script type="math/tex">\overline{X_i}</script></span>} \ M DTW (i − 1, j), &amp; \text{repeat <span><span class="MathJax_Preview">\overline{Y_i}</span><script type="math/tex">\overline{Y_i}</script></span>} \ M DTW (i − 1, j-1), &amp; \text{otherwise} \end{cases} \tag{16.3} $$
-请注意，多维<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>递归实际上与单变量情况相同，除了术语距离<span><span class="MathJax_Preview">\overline{X_i}, \overline{Y_j}</span><script type="math/tex">\overline{X_i}, \overline{Y_j}</script></span>，现在是空间坐标之间的多维距离。 例如，可以使用欧几里德距离。 泛化的简单性是由于时间扭曲与时间序列的维数无关。 时间序列中的所有维度都以完全相同的方式进行扭曲。 因此，递归中的一维距离可以用多维距离代替。 还应该指出的是，这个一般原理适用于大部分用于计算时间序列和序列之间的距离的动态编程方法。</p>
+<script type="math/tex; mode=display">
+ M DTW(i, j)= distance(\overline{X_i}, \overline{Y_j})+min \begin{cases} M DTW (i, j − 1), & \text {repeat $\overline{X_i}$} \\ M DTW (i − 1, j), & \text{repeat $\overline{Y_i}$} \\ M DTW (i − 1, j-1), & \text{otherwise} \end{cases} \tag{16.3} 
+</script>
+</div>
+<p>请注意，多维<span><span class="MathJax_Preview">DTW</span><script type="math/tex">DTW</script></span>递归实际上与单变量情况相同，除了术语距离<span><span class="MathJax_Preview">\overline{X_i}, \overline{Y_j}</span><script type="math/tex">\overline{X_i}, \overline{Y_j}</script></span>，现在是空间坐标之间的多维距离。 例如，可以使用欧几里德距离。 泛化的简单性是由于时间扭曲与时间序列的维数无关。 时间序列中的所有维度都以完全相同的方式进行扭曲。 因此，递归中的一维距离可以用多维距离代替。 还应该指出的是，这个一般原理适用于大部分用于计算时间序列和序列之间的距离的动态编程方法。</p>
 <h4 id="16342">16.3.4.2 基于相似性的聚类方法</h4>
 <p>许多传统的聚类方法（如k-中位数和基于图的方法）都基于数据对象之间的相似性。因此，一旦定义了相似性函数，这些方法可以直接用于任何数据类型。应该指出，这些方法在不同的数据领域非常流行，如时间序列数据或离散序列数据。如14和15章所说，这些方法如何分别用于时间序列和离散序列数据。这里使用的方法与这些章节中的描述完全类似，只是在这种情况下使用多元时间序列相似性度量来进行计算。读者可以参考第6章用于基本描述k-medoids和基于图的方法，适用于多维数据。基于相似性的方法存在的主要问题是，只有当轨迹段相对较短时才能发挥最佳效果。对于更长的轨迹，计算物体对之间的相似性变得更加困难，因为轨迹的很多部分可能是嘈杂的。因此，相似函数的选择变得更加重要。部分讨论的一些相似性函数。第3章3.4.1小节，考虑到相似度计算中的空白。然而，这些方法对多元时间序列和轨迹的有效性具有高度的数据特异性。一般来说，这些相似函数最适用于较短长度的轨迹。</p>
 <h4 id="16343">16.3.4.3 作为序列聚类问题的轨迹聚类</h4>
