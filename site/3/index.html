@@ -1249,10 +1249,10 @@ Dist(\overline{O},\overline{X})=\displaystyle\sum_{i=1}^d(Y_i-0)\tag{3.3}
 <p>结果是一个均值为<span><span class="MathJax_Preview">\mu=d/2</span><script type="math/tex">\mu=d/2</script></span>，标准差为<span><span class="MathJax_Preview">\sigma=\sqrt{d/12}</span><script type="math/tex">\sigma=\sqrt{d/12}</script></span>的随机变量。当<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>比较大时，由大数定理可知，立方体中绝大多数数据点将会位于区间<span><span class="MathJax_Preview">[D_{min},D_{max}]=[\mu-3\sigma,\mu+3\sigma]</span><script type="math/tex">[D_{min},D_{max}]=[\mu-3\sigma,\mu+3\sigma]</script></span>之内。因此，立方体中大多数点的距离会落在一段长为<span><span class="MathJax_Preview">D_{max}-D_{min}=6\sigma=\sqrt{3d}</span><script type="math/tex">D_{max}-D_{min}=6\sigma=\sqrt{3d}</script></span>的距离区间内。注意，曼哈顿距离的期望是随着维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>按线性比率增长的。因此，距离的变化值和绝对值之间的比率，记为<span><span class="MathJax_Preview">Contrast(d)</span><script type="math/tex">Contrast(d)</script></span>，如下所示：</p>
 <div>
 <div class="MathJax_Preview">
-Constrast(d)={{D_{max}-D_{min}}\over\mu}=\sqrt{12/d}.\displaystyle\tag{3.4}
+Constrast(d)={\frac{ D_{max}- D_{min}}{\mu}}=\sqrt{12/d}.\displaystyle\tag{3.4}
 </div>
 <script type="math/tex; mode=display">
-Constrast(d)={{D_{max}-D_{min}}\over\mu}=\sqrt{12/d}.\displaystyle\tag{3.4}
+Constrast(d)={\frac{ D_{max}- D_{min}}{\mu}}=\sqrt{12/d}.\displaystyle\tag{3.4}
 </script>
 </div>
 <p>这个比率可以解释为不同数据点之间的距离对比<span><span class="MathJax_Preview">(contrast)</span><script type="math/tex">(contrast)</script></span>，它反映从原点出发的最大距离和最小距离之间差异的程度。因为“对比”按照<span><span class="MathJax_Preview">\sqrt d</span><script type="math/tex">\sqrt d</script></span>的速率降低，这意味着不同数据点的距离实际上几乎不受维度增加的影响。低对比度显然不是我们想要的，因为这意味着数据挖掘算法会将以近似相同的方式在所有对数据点之间的距离进行评分，并且不会在不同的语义关系级别的对象对之间进行区分。当维度增加时，对比的方差的变化情况如图3.1a所示。实际上，所有不同<span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>参数的<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数都有这种现象，只不过严重程度不同。这里严重程度的差异将会在后面的章节中研究。很清楚的是，当维度增加时，直接使用<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数可能不是有效的。</p>
@@ -1268,25 +1268,7 @@ Constrast(d)={{D_{max}-D_{min}}\over\mu}=\sqrt{12/d}.\displaystyle\tag{3.4}
 <p>由于希望为距离计算选择局部相关特征，因此会出现一个问题，即如何以数据挖掘应用的有意义和实用的方式实现这一点。 在许多情况下，简单的基于匹配多个属性值的累积证据的方法已经被证明是有效的。这种方法也相对容易高效实施。</p>
 <p>似乎适用于高维数据的一个更广泛的原则是，在计算多个维度上的累积匹配时，需要忽略沿着各个属性的噪声变化的影响。 当然，这种方法对低维度数据提出了挑战，因为匹配的累积影响在低维数据上不能以一种统计上可靠的方式计算。 因此，需要一种能够自动适应数据维度的方法。</p>
 <p>随着维度的增加，记录可能包含相关和不相关的特征。由于不相关特征的噪声变化，一对语义相似的对象可能包含不相似的特征值（在沿着该维度的一个标准偏差的水平）。相反，一对对象不可能偶然地在许多属性中具有相似的值，除非这些属性是相关的。有趣的是，欧几里德度量（通常是<span><span class="MathJax_Preview">L_p-</span><script type="math/tex">L_p-</script></span>范数）通过使用属性值差异的平方和来达到完全相反的效果。结果，来自不相关属性的“噪声”分量主宰了计算并掩盖了大量相关属性的相似效应。<span><span class="MathJax_Preview">L_\infty-</span><script type="math/tex">L_\infty-</script></span>范数提供了使用具有最大距离值的维度的这种效果的极端示例。在像文本这样的高维领域，相似度函数（如3.3节中讨论的余弦度量）倾向于强调匹配对许多属性值的累积效应，而不是沿着单个属性的较大距离。这个一般原则也可以用于定量数据。</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-一种不重视精确水平的差异的方法是以维度敏感的方式使用 <em>邻近阈值</em>。 为了执行邻近阈值处理，数据被离散化为等距桶。 每个维度被分成<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>个 等深度桶，每个桶包含总记录的<span><span class="MathJax_Preview">1/k_d</span><script type="math/tex">1/k_d</script></span>。 桶的数量<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>取决于数据维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>。
-=======
-一种不强调精确水平的差异的方法是以维度敏感的方式使用*邻近阈值*。 为了执行邻近阈值处理，数据被离散化为等深度桶。 每个维度被分成<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>个 等深度桶，每个桶包含总记录的<span><span class="MathJax_Preview">1/k_d</span><script type="math/tex">1/k_d</script></span>。 桶的数量<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>取决于数据维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>a585dacfed84947947ae87dc08690f6a2f51aec1</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>一种不重视精确水平的差异的方法是以维度敏感的方式使用 <em>邻近阈值</em>。 为了执行邻近阈值处理，数据被离散化为等距桶。 每个维度被分成<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>个 等深度桶，每个桶包含总记录的<span><span class="MathJax_Preview">1/k_d</span><script type="math/tex">1/k_d</script></span>。 桶的数量<span><span class="MathJax_Preview">k_d</span><script type="math/tex">k_d</script></span>取决于数据维度<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>。</p>
 <p>令<span><span class="MathJax_Preview">\overline{X} =(x_1\dots x_d)</span><script type="math/tex">\overline{X} =(x_1\dots x_d)</script></span>和<span><span class="MathJax_Preview">\overline{Y} =(y_1\dots y_d)</span><script type="math/tex">\overline{Y} =(y_1\dots y_d)</script></span>为两个<span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span>维记录。 然后，对于维度<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>，如果<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>和<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span>都属于同一个桶，则这两个记录被认为在维度<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>上接近。<span><span class="MathJax_Preview">\overline{X}</span><script type="math/tex">\overline{X}</script></span>和<span><span class="MathJax_Preview">\overline{Y}</span><script type="math/tex">\overline{Y}</script></span>映射到同一个桶的维度的子集称为邻近集合，它由<span><span class="MathJax_Preview">S(\overline{X},\overline{Y},k_d)</span><script type="math/tex">S(\overline{X},\overline{Y},k_d)</script></span>表示。 此外，对于每个维度<span><span class="MathJax_Preview">i\in S(\overline{X},\overline{Y},k_d)</span><script type="math/tex">i\in S(\overline{X},\overline{Y},k_d)</script></span>，令<span><span class="MathJax_Preview">m_i</span><script type="math/tex">m_i</script></span>和<span><span class="MathJax_Preview">n_i</span><script type="math/tex">n_i</script></span>为维度<span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span>中桶的上下界，其中两个记录彼此靠近。 然后，相似度<span><span class="MathJax_Preview">PSelect(\overline{X},\overline{Y},k_d)</span><script type="math/tex">PSelect(\overline{X},\overline{Y},k_d)</script></span>被定义如下：</p>
 <div>
 <div class="MathJax_Preview">
@@ -1456,10 +1438,10 @@ h(x_i)=f(x_i)\cdot id_i.\tag{3.12}
 <p>然后，余弦测量定义如公式 3.10，除了使用单词的标准化频率：</p>
 <div>
 <div class="MathJax_Preview">
-cos(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d h(x_i) \cdot h(y_i)}\over{\sqrt{\textstyle \sum_{i=1}^d h(x_i)^2}\cdot \sqrt{\sum_{i=1}^d h(y_i)^2}}} \tag{3.13}
+cos(\overline{X},\overline{Y})=\frac {\sum_{i=1}^d h(x_i) \cdot h(y_i)}{{\sqrt{\textstyle \sum_{i=1}^d h(x_i)^2}\cdot \sqrt{\sum_{i=1}^d h(y_i)^2}}} \tag{3.13}
 </div>
 <script type="math/tex; mode=display">
-cos(\overline{X},\overline{Y})={{\textstyle\sum_{i=1}^d h(x_i) \cdot h(y_i)}\over{\sqrt{\textstyle \sum_{i=1}^d h(x_i)^2}\cdot \sqrt{\sum_{i=1}^d h(y_i)^2}}} \tag{3.13}
+cos(\overline{X},\overline{Y})=\frac {\sum_{i=1}^d h(x_i) \cdot h(y_i)}{{\sqrt{\textstyle \sum_{i=1}^d h(x_i)^2}\cdot \sqrt{\sum_{i=1}^d h(y_i)^2}}} \tag{3.13}
 </script>
 </div>
 <p><em>$ Jaccard$系数</em> <span><span class="MathJax_Preview">J(\overline{X},\overline{Y})</span><script type="math/tex">J(\overline{X},\overline{Y})</script></span>是另一种不常用于文本的方法：</p>
